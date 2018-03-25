@@ -20,7 +20,7 @@ URxvt.internalBorder:	3
 URxvt.lineSpace:		1
 
 URxvt.allow_bold:		true
-URxvt*font:			    xft:Meslo LG M for Powerline:pixelsize=13
+URxvt*font:			    xft:Fira Code:pixelsize=16
 
 URxvt*letterSpace: 		-1
 
