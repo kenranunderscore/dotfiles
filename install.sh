@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-ln -s .Xresources ~/.Xresources
-ln -s .zshrc ~/.zshrc
+dotfile_dir=~/dotfiles
+
+ln -s $dotfile_dir/.Xresources ~/.Xresources
+ln -s $dotfile_dir/.zshrc ~/.zshrc
