@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 dotfile_dir=~/dotfiles
-backup_dir=~/dotfiles_backup
-targets=".zshrc .Xresources"
+backup_dir=~/backup_dotfiles
+targets=".zshrc .Xresources .vimrc .vim"
 
 echo "Creating $backup_dir..."
 mkdir -p $backup_dir
@@ -15,3 +15,5 @@ for target in $targets; do
     ln -s $dotfile_dir/$target ~/$target
 done
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
