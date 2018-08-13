@@ -20,7 +20,7 @@ URxvt.internalBorder:	3
 URxvt.lineSpace:		1
 
 URxvt.allow_bold:		true
-URxvt*font:			    xft:Fira Code:pixelsize=16
+URxvt*font:			    xft:Fira Code:pixelsize=15
 
 URxvt*letterSpace: 		-1
 

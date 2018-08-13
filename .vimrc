@@ -14,7 +14,7 @@ if has("gui_running")
     set guifont=Fira\ Code\ 11
 endif
 
-" Vundle config
+" vim-plug config
 
 filetype off
 
@@ -25,13 +25,12 @@ Plug 'vim-scripts/conque-gdb'
 Plug 'jiangmiao/auto-pairs'
 Plug 'morhetz/gruvbox'
 Plug 'kien/ctrlp.vim'
-Plug 'valloric/youcompleteme'
-Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'lukerandall/haskellmode-vim'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'scrooloose/syntastic'
 Plug 'ujihisa/neco-ghc'
+Plug 'kovisoft/slimv'
 Plug 'shougo/vimproc', {'do' : 'make'}
 
 call plug#end()
@@ -64,9 +63,10 @@ set showmode
 set showcmd
 set number
 
-" Different command mode shortcut
+" Different command mode shortcuts
 
 inoremap jk <ESC>
+inoremap ht <ESC>
 
 " Different mapleader
 
