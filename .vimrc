@@ -14,39 +14,70 @@ if has("gui_running")
     set guifont=Fira\ Code\ 11
 endif
 
-" vim-plug config
+" Vundle config
 
 filetype off
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/conque-gdb'
-Plug 'jiangmiao/auto-pairs'
+" Color schemes
 Plug 'morhetz/gruvbox'
-Plug 'kien/ctrlp.vim'
+Plug 'nightsense/snow'
+Plug 'lifepillar/vim-solarized8'
+Plug 'kadekillary/subtle_solo'
+Plug 'ayu-theme/ayu-vim'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'joshdick/onedark.vim'
+
+" NerdTree
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+
+" Clojure
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'tpope/vim-surround'
+
+" Rust
 Plug 'rust-lang/rust.vim'
-Plug 'lukerandall/haskellmode-vim'
-Plug 'eagletmt/ghcmod-vim'
+
+" Haskell
+Plug 'neovimhaskell/haskell-vim'
+
+" General
 Plug 'scrooloose/syntastic'
-Plug 'ujihisa/neco-ghc'
-Plug 'kovisoft/slimv'
+Plug 'tomtom/tlib_vim'
+Plug 'marcweber/vim-addon-mw-utils'
+Plug 'godlygeek/tabular'
+Plug 'ervandew/supertab'
+Plug 'shougo/neocomplete.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'shougo/vimproc', {'do' : 'make'}
 
 call plug#end()
 
 " Custom config
 
-set termguicolors
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
-syntax on
+syntax enable
 
-set colorcolumn=80
+"set colorcolumn=80
 
-colorscheme gruvbox
 set background=dark
+colorscheme onedark
 
 set encoding=utf-8
 set nowrap
@@ -63,10 +94,9 @@ set showmode
 set showcmd
 set number
 
-" Different command mode shortcuts
+" Different command mode shortcut
 
 inoremap jk <ESC>
-inoremap ht <ESC>
 
 " Different mapleader
 
@@ -90,3 +120,15 @@ au BufRead,BufNewFile *.des set syntax=levdes
 " Haskell
 
 let g:haddock_browser="google-chrome-stable"
+
+let g:haskell_tabular = 1
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+
+autocmd VimEnter * RainbowParenthesesToggle
+autocmd Syntax   clojure RainbowParenthesesLoadRound
+autocmd Syntax   clojure RainbowParenthesesLoadSquare
+autocmd Syntax   clojure RainbowParenthesesLoadBraces
+
+autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
