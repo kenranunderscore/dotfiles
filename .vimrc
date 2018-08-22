@@ -23,8 +23,6 @@ call plug#begin('~/.vim/plugged')
 " Color schemes
 Plug 'morhetz/gruvbox'
 Plug 'nightsense/snow'
-Plug 'lifepillar/vim-solarized8'
-Plug 'kadekillary/subtle_solo'
 Plug 'ayu-theme/ayu-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'mhartington/oceanic-next'
