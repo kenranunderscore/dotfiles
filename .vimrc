@@ -59,6 +59,7 @@ Plug 'ervandew/supertab'
 Plug 'shougo/neocomplete.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'shougo/vimproc', {'do' : 'make'}
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 call plug#end()
 
@@ -91,6 +92,7 @@ set backspace=indent,eol,start
 set showmode
 set showcmd
 set number
+set relativenumber
 
 " Different command mode shortcut
 
@@ -130,3 +132,4 @@ autocmd Syntax   clojure RainbowParenthesesLoadSquare
 autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
 autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
+
