@@ -1,1 +1,0 @@
-/home/jo/projects/emacs-setup/.emacs
