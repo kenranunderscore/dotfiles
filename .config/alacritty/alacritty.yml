@@ -85,8 +85,6 @@ font:
 # Should display the render timer
 render_timer: false
 
-# Use custom cursor colors. If true, display the cursor in the cursor.foreground
-# and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
 # Colors (onedark)
@@ -98,8 +96,8 @@ colors:
 
   # Cursor colors
   cursor:
-    background: '0xabb2bf'
-    foreground: '0x282c34'
+    cursor: '0xabb2bf'
+    text:   '0x282c34'
 
   # Normal colors
   normal:
@@ -215,10 +213,10 @@ live_config_reload: true
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 #
-shell:
-  program: login
-  args: ["-fp", "maier"]
-
+# shell:
+# program: login
+# args: ["-fp", "maier"]
+# 
 # Key bindings
 #
 # Each binding is defined as an object with some properties. Most of the

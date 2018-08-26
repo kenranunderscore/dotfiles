@@ -2,7 +2,7 @@
 
 dotfile_dir=~/dotfiles
 backup_dir=~/backup_dotfiles
-targets=".zshrc .Xresources .vimrc .vim .emacs"
+targets=".zshrc .Xresources .vimrc .config/alacritty/alacritty.yml"
 
 echo "Creating $backup_dir..."
 mkdir -p $backup_dir
