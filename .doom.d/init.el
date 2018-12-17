@@ -14,7 +14,8 @@
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
-       company           ; the ultimate code completion backend
+       (company
+        +auto)           ; the ultimate code completion backend
        (helm              ; the *other* search engine for love and life
         +fuzzy)
        ;;ido              ; the other *other* search engine...
@@ -47,7 +48,7 @@
        ;;(format +onsave)  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
-       ;;parinfer          ; turn lisp into python, sort of
+       parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
 
        :emacs

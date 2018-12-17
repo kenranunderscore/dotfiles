@@ -18,8 +18,13 @@
 
    ;; projectile
    (:desc "project" :prefix "p"
-     :desc "Find file in project" :nv "f" #'projectile-find-file
-     :desc "Kill project buffers" :nv "k" #'projectile-kill-buffers)
+     :desc "Find file in project" :n "f" #'projectile-find-file
+     :desc "Kill project buffers" :n "k" #'projectile-kill-buffers
+     :n "/" nil)
+
+   ;; file
+   (:desc "file" :prefix "f"
+     :n "/" nil)
 
    ;; git / magit
    (:desc "git" :prefix "g"
