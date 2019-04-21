@@ -1,15 +1,14 @@
 #!/usr/bin/env zsh
 
-ANTIGEN_REPO=$HOME/.antigen
-
-if [[ ! -a $ANTIGEN_REPO ]]; then
-	git clone https://github.com/zsh-users/antigen.git $ANTIGEN_REPO
+ANTIGEN=$HOME/.antigen
+if [[ ! -a $ANTIGEN ]]; then
+	git clone https://github.com/zsh-users/antigen.git $ANTIGEN
 fi
 
-source $ANTIGEN_REPO/antigen.zsh
+source $ANTIGEN/antigen.zsh
 
 antigen use oh-my-zsh
-antigen theme candy
+antigen theme tobyjamesthomas/pi
 
 antigen bundle git
 antigen bundle zsh-users/zsh-autosuggestions
