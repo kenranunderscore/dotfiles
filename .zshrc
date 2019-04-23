@@ -20,3 +20,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 antigen apply
+
+export GPG_TTY=$(tty)
