@@ -14,41 +14,27 @@ if has("gui_running")
     set guifont=Fira\ Code\ 11
 endif
 
-" Vundle config
+" Plugins
 
 filetype off
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+    echo "hi"
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+           \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 
 " Color schemes
 Plug 'morhetz/gruvbox'
-Plug 'nightsense/snow'
-Plug 'ayu-theme/ayu-vim'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
 
 " NerdTree
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-
-" Clojure
-Plug 'tpope/vim-salve'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fireplace'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
-Plug 'tpope/vim-surround'
-
-" Rust
-Plug 'rust-lang/rust.vim'
-
-" Haskell
-Plug 'neovimhaskell/haskell-vim'
 
 " General
 Plug 'scrooloose/syntastic'
@@ -76,7 +62,7 @@ syntax enable
 "set colorcolumn=80
 
 set background=dark
-colorscheme onedark
+colorscheme OceanicNext
 
 set encoding=utf-8
 set nowrap
@@ -112,24 +98,3 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-
-" DCSS level design syntax highlighting
-
-au BufRead,BufNewFile *.des set syntax=levdes
-
-" Haskell
-
-let g:haddock_browser="google-chrome-stable"
-
-let g:haskell_tabular = 1
-vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
-
-autocmd VimEnter * RainbowParenthesesToggle
-autocmd Syntax   clojure RainbowParenthesesLoadRound
-autocmd Syntax   clojure RainbowParenthesesLoadSquare
-autocmd Syntax   clojure RainbowParenthesesLoadBraces
-
-autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
-
