@@ -6,86 +6,40 @@ Xft.rgba:			    rgb
 Xft.hinting:			true
 Xft.hintstyle:			hintfull
 
-! URxvt settings
+! Custom colorscheme
+! special
+*.foreground:   #fcfcfc
+*.background:   #313133
+*.cursorColor:  #fcfcfc
 
-URxvt.termName:			rxvt-unicode-256color
+! black
+*.color0:       #181819
+*.color8:       #77747f
 
-URxvt.depth:			32
-URxvt.geometry:			90x25
-URxvt.transparent:		false
-URxvt.fading:			0
-URxvt.loginShell:		false
-URxvt.saveLines:		50
-URxvt.internalBorder:	3
-URxvt.lineSpace:		1
+! red
+*.color1:       #ef2917
+*.color9:       #ef2917
 
-URxvt.allow_bold:		true
-URxvt*font:			    xft:Fira Code:pixelsize=15
+! green
+*.color2:       #97cc04
+*.color10:      #97cc04
 
-URxvt*letterSpace: 		-1
+! yellow
+*.color3:       #ffad05
+*.color11:      #ffad05
 
-URxvt.scrollStyle:		rxvt         
-URxvt.scrollBar:		false
+! blue
+*.color4:       #2d7dd2
+*.color12:      #2d7dd2
 
-URxvt.cursorBlink:		true
-URxvt.cursorUnderline:	false
-URxvt.pointerBlank:		true
+! magenta
+*.color5:       #f230aa
+*.color13:      #f230aa
 
-*background: #282828
-*foreground: #ebdbb2
-! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
-! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
-! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
-! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
-! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
-! DarkMagenta + Magenta
-*color5:  #b16286
-*color13: #d3869b
-! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
-! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
+! cyan
+*.color6:       #5fbff9
+*.color14:      #5fbff9
 
-! Roguelike colors for xterm
-
-XTerm*font:	    xft:DejaVu Sans Mono:pixelsize=20
-
-XTerm*background: #000000
-XTerm*foreground: #DEDEDE
-
-!black/darkgrey
-XTerm*color0 : #000000
-XTerm*color8 : #555555
-!red/lightred
-XTerm*color1 : #AA0000
-XTerm*color9 : #EF2929
-!green/lightgreen
-XTerm*color2 : #1C8E1C
-XTerm*color10 : #55FF55
-!brown/yellow
-XTerm*color3 : #EDD400
-XTerm*color11 : #FFFF55
-!blue/lightblue
-XTerm*color4 : #3C3CB6
-XTerm*color12 : #6D8AFF
-!magenta
-XTerm*color5 : #AA00AA
-XTerm*color13 : #FF55FF
-!cyan/lightcyan
-XTerm*color6 : #00AAAA
-XTerm*color14 : #55FFFF
-!lighgrey/white
-XTerm*color7 : #D3D7CF
-XTerm*color15 : #FFFFFF
+! white
+*.color7:       #94949f
+*.color15:      #fcfcfc
