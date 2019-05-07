@@ -22,3 +22,5 @@ fi
 antigen apply
 
 export GPG_TTY=$(tty)
+
+source $HOME/.nix-profile/etc/profile.d/nix.sh
