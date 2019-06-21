@@ -22,5 +22,6 @@ fi
 antigen apply
 
 export GPG_TTY=$(tty)
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 source $HOME/.nix-profile/etc/profile.d/nix.sh
