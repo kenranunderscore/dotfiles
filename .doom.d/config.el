@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(setq doom-font (font-spec :family "Hack" :size 15))
+(setq doom-font (font-spec :family "Input" :size 16))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -23,12 +23,16 @@
      :n "/" nil)
 
    ;; file
-   (:desc "file" :prefix "f"
+   (:prefix "f"
      :n "/" nil)
 
    ;; code
-   (:desc "Comment line" :prefix "c"
+   (:prefix "c"
      :n "l" #'comment-line)
+
+   ;; window
+   (:prefix "w"
+     :n "d" #'evil-window-delete)
 
    ;; git / magit
    (:desc "git" :prefix "g"
