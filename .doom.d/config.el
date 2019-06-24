@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (setq doom-font (font-spec :family "Input" :size 15))
-(setq doom-theme 'doom-one)
+(setq doom-theme 'kaolin-temple)
 
 (setq confirm-kill-emacs nil)
 
@@ -20,10 +20,15 @@
    :desc "M-x" :nv "SPC" #'helm-M-x
 
    ;; projectile
-   (:desc "project" :prefix "p"
+   (:prefix "p"
      :desc "Find file in project" :n "f" #'projectile-find-file
      :desc "Kill project buffers" :n "k" #'projectile-kill-buffers
      :n "/" nil)
+
+   ;; buffer
+   (:prefix "b"
+     :desc "Kill this buffer" :nv "d" #'kill-current-buffer
+     :nv "k" nil)
 
    ;; file
    (:prefix "f"
@@ -38,7 +43,7 @@
      :n "d" #'evil-window-delete)
 
    ;; git / magit
-   (:desc "git" :prefix "g"
+   (:prefix "g"
      :desc "Git status"     :nv "s" #'magit-status
      :desc "Git stage hunk" :n  "g" #'git-gutter:stage-hunk))
 
