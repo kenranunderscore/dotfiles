@@ -67,7 +67,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(base16-theme nix-mode)
+   dotspacemacs-additional-packages '(base16-theme nix-mode emidje)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -484,6 +484,9 @@ before packages are loaded."
         evil-normal-state-cursor  `(,(plist-get my/base16-colors :base0B) box)
         evil-replace-state-cursor `(,(plist-get my/base16-colors :base08) bar)
         evil-visual-state-cursor  `(,(plist-get my/base16-colors :base09) box))
+  (global-linum-mode)
+  (eval-after-load 'cider
+    #'emidje-setup)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
