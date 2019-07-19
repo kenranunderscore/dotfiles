@@ -468,9 +468,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
-  (add-hook 'common-lisp-mode-hook #'evil-cleverparens-mode)
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
   (defvar my/base16-colors
     (symbol-value
      (intern-soft
