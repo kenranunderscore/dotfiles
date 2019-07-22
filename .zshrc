@@ -15,10 +15,9 @@ setopt promptsubst
 zplugin light willghatch/zsh-saneopt
 
 zplugin snippet OMZ::lib/theme-and-appearance.zsh
-zplugin snippet OMZ::lib/completion.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
 
-zplugin ice wait"1" atload"_zsh_autosuggest_start"
+zplugin ice wait"0" atload"_zsh_autosuggest_start"
 zplugin light zsh-users/zsh-autosuggestions
 
 zplugin ice wait"1" lucid
@@ -27,11 +26,10 @@ zplugin load psprint/zsh-navigation-tools
 zplugin ice blockf
 zplugin light zsh-users/zsh-completions
 
-zplugin light rupa/z
-
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light sindresorhus/pure
 
+zplugin ice wait"0" atinit"zpcompinit"
 zplugin light zdharma/fast-syntax-highlighting
 
 export GPG_TTY=$(tty)
