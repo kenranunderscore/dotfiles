@@ -29,6 +29,14 @@ zplugin light zsh-users/zsh-completions
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light sindresorhus/pure
 
+zplugin ice wait"1" lucid as"program" make"!PREFIX=$ZPFX install" \
+    atclone"cp contrib/fzy-* $ZPFX/bin/" \
+    pick"$ZPFX/bin/fzy*"
+zplugin light jhawthorn/fzy
+
+zplugin ice wait lucid
+zplugin load hlissner/zsh-autopair
+
 zplugin ice wait"0" atinit"zpcompinit"
 zplugin light zdharma/fast-syntax-highlighting
 
