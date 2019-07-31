@@ -38,6 +38,9 @@ This function should only modify configuration layer settings."
               clojure-enable-clj-refactor t
               clojure-enable-fancify-symbols t)
      common-lisp
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-backend 'lsp-ccls)
      csv
      dap
      docker
@@ -485,6 +488,7 @@ before packages are loaded."
   (global-linum-mode)
   (eval-after-load 'cider
     #'emidje-setup)
+  (setq c-default-style "k&r")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
