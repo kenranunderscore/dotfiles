@@ -57,3 +57,7 @@ fi
 if [ -d $HOME/.nvm ]; then
     source $HOME/.nvm/nvm.sh
 fi
+
+if (( $+commands[opam] )) then
+    eval `opam env`
+fi
