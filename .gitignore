@@ -1,2 +1,17 @@
-.vim/autoload/
-.vim/plugged/
+# Ignore everything:
+
+*
+
+# Exceptions:
+
+!.config/kitty/kitty.conf
+!.config/alacritty/alacritty.yml
+!.config/fish/config.fish
+!.config/fish/nix.fish
+!.doom.d/*.el
+!.spacemacs
+!.tmux.conf
+!.vimrc
+!.Xresources
+!.zshrc
+!README.md
