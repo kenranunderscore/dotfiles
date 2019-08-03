@@ -54,3 +54,6 @@ if (( $+commands[rustc] )) then
     export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
 
+if [ -d $HOME/.nvm ]; then
+    source $HOME/.nvm/nvm.sh
+fi
