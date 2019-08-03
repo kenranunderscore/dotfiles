@@ -28,9 +28,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Color schemes
-Plug 'morhetz/gruvbox'
-Plug 'mhartington/oceanic-next'
-Plug 'joshdick/onedark.vim'
+Plug 'chriskempson/base16-vim'
 
 " NerdTree
 Plug 'scrooloose/nerdtree'
@@ -62,7 +60,7 @@ syntax enable
 "set colorcolumn=80
 
 set background=dark
-colorscheme OceanicNext
+colorscheme base16-atelier-estuary
 
 set encoding=utf-8
 set nowrap
