@@ -363,7 +363,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -485,9 +485,9 @@ before packages are loaded."
         evil-normal-state-cursor  `(,(plist-get my/base16-colors :base0B) box)
         evil-replace-state-cursor `(,(plist-get my/base16-colors :base08) bar)
         evil-visual-state-cursor  `(,(plist-get my/base16-colors :base09) box))
-  (global-linum-mode)
-  (eval-after-load 'cider
-    #'emidje-setup)
+  (eval-after-load 'cider #'emidje-setup)
+  (setq org-default-notes-file "todos.org")
+  (setq org-agenda-files '("~/org"))
   (setq c-default-style "k&r")
   )
 
