@@ -47,7 +47,8 @@ This function should only modify configuration layer settings."
      elm
      emacs-lisp
      git
-     haskell
+     (haskell :variables
+              haskell-process-type 'cabal-new-repl)
      (helm :variables
            helm-use-fuzzy 'always)
      html
