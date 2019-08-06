@@ -50,3 +50,7 @@ export GPG_TTY=$(tty)
 if [ -d $HOME/.nix-profile ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
+
+if (( $+commands[opam] )) then
+    eval `opam env`
+fi
