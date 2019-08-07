@@ -51,18 +51,6 @@ if [ -d $HOME/.nix-profile ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh
 fi
 
-if [ -d $HOME/.ghcup ]; then
-    source $HOME/.ghcup/env
-fi
-
-if (( $+commands[rustc] )) then
-    export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-fi
-
-if [ -d $HOME/.nvm ]; then
-    source $HOME/.nvm/nvm.sh
-fi
-
 if (( $+commands[opam] )) then
     eval `opam env`
 fi
