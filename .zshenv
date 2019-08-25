@@ -3,6 +3,7 @@ path=(
     $HOME/.cargo/bin
     $HOME/.cabal/bin
     $HOME/.ghcup/bin
+    $HOME/.local/bin
     /usr/local/bin
     /usr/bin
     /bin
