@@ -5,8 +5,11 @@ path=(
     $HOME/.ghcup/bin
     $HOME/.local/bin
     /usr/local/bin
+    /usr/local/sbin
     /usr/bin
+    /usr/sbin
     /bin
+    /sbin
 )
 
 [[ -f /bin/zsh ]] && export SHELL=/bin/zsh
