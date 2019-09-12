@@ -38,9 +38,6 @@ This function should only modify configuration layer settings."
               clojure-enable-clj-refactor t
               clojure-enable-fancify-symbols t)
      common-lisp
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
-            c-c++-backend 'lsp-ccls)
      csv
      dap
      docker
