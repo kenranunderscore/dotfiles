@@ -35,8 +35,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(auto-completion
      (clojure :variables
-              clojure-enable-clj-refactor t
-              clojure-enable-fancify-symbols t)
+              clojure-enable-clj-refactor t)
      common-lisp
      csv
      dap
