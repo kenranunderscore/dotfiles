@@ -1,7 +1,7 @@
-;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-(setq doom-font (font-spec :family "Input" :size 15))
-(setq doom-theme 'kaolin-temple)
+;;(setq doom-font (font-spec :family "Source Code Pro" :size 14))
+;;(setq doom-theme 'doom-one)
 
 (setq confirm-kill-emacs nil)
 
@@ -17,7 +17,7 @@
 
  (:leader
    ;; I'm used to doing SPC SPC for M-x
-   :desc "M-x" :nv "SPC" #'helm-M-x
+   :desc "M-x" :nv "SPC" #'counsel-M-x
 
    ;; projectile
    (:prefix "p"
