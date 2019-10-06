@@ -51,3 +51,12 @@
    :map haskell-mode-map
    :localleader
    :n "F" #'haskell-mode-stylish-buffer))
+
+;; org-mode
+(setq org-default-notes-file "todos.org")
+;;(setq org-agenda-files '("~/org"))
+
+;; Elm 0.19 no longer uses "elm-package.json"
+(setq elm-package-json "elm.json")
+(setq elm-indent-offset 2)
+(set-popup-rule! "^\\*elm-make\\*" :select nil)
