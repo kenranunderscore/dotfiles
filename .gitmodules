@@ -1,4 +1,8 @@
-[submodule ".emacs.d"]
-	path = .emacs.d
+[submodule "spacemacs"]
+	path = .spacemacs.d
 	url = https://github.com/syl20bnr/spacemacs
+	branch = develop
+[submodule "doom-emacs"]
+	path = .emacs.d
+	url = https://github.com/hlissner/doom-emacs
 	branch = develop
