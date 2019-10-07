@@ -31,6 +31,8 @@ alias lk="la -l"
 alias sl="ln -sf"
 alias md="mkdir -p"
 
+alias pdflatex="TEXINPUTS=\"$HOME/active-group/howto/tex:\" pdflatex"
+
 function mc () {
     md $1
     cd $1
