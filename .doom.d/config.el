@@ -1,7 +1,7 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
 ;;(setq doom-font (font-spec :family "Source Code Pro" :size 14))
-;;(setq doom-theme 'doom-one)
+;; (setq doom-theme 'base16-greenscreen)
 
 (setq confirm-kill-emacs nil)
 
@@ -58,5 +58,4 @@
 
 ;; Elm 0.19 no longer uses "elm-package.json"
 (setq elm-package-json "elm.json")
-(setq elm-indent-offset 2)
 (set-popup-rule! "^\\*elm-make\\*" :select nil)
