@@ -59,3 +59,7 @@
 ;; Elm 0.19 no longer uses "elm-package.json"
 (setq elm-package-json "elm.json")
 (set-popup-rule! "^\\*elm-make\\*" :select nil)
+
+;; Prevent closing the C-c C-l popup from asking
+;; for Haskell process termination
+(setq-hook! 'haskell-interactive-mode-hook +popup--inhibit-transient t)
