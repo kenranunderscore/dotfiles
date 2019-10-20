@@ -1,5 +1,6 @@
 typeset -U path
 path=(
+    $HOME/.yarn/bin
     $HOME/.cargo/bin
     $HOME/.cabal/bin
     $HOME/.ghcup/bin
