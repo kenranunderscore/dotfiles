@@ -52,14 +52,16 @@
    :localleader
    :n "F" #'haskell-mode-stylish-buffer))
 
-;; org-mode
-(setq org-default-notes-file "todos.org")
-;;(setq org-agenda-files '("~/org"))
-
-;; Elm 0.19 no longer uses "elm-package.json"
-(setq elm-package-json "elm.json")
-(set-popup-rule! "^\\*elm-make\\*" :select nil)
-
 ;; Prevent closing the C-c C-l popup from asking
 ;; for Haskell process termination
 (setq-hook! 'haskell-interactive-mode-hook +popup--inhibit-transient t)
+
+;; Elm 0.19 no longer uses "elm-package.json"
+(after! elm-mode
+  (setq elm-package-json "elm.json")
+  (set-popup-rule! "^\\*elm-make\\*" :select nil))
+
+;; org-mode config
+(after! org
+  (setq org-log-done 'time)
+  (setq org-agenda-files '("~/org")))
