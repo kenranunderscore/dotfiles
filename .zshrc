@@ -20,6 +20,7 @@ setopt promptsubst
 zplugin light willghatch/zsh-saneopt
 
 zplugin snippet OMZ::lib/theme-and-appearance.zsh
+zplugin snippet OMZ::lib/completion.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
 
 zplugin ice wait"0" atload"_zsh_autosuggest_start"
