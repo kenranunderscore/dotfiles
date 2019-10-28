@@ -21,10 +21,11 @@ zplugin light willghatch/zsh-saneopt
 
 zplugin snippet OMZ::lib/theme-and-appearance.zsh
 zplugin snippet OMZ::lib/completion.zsh
+zplugin snippet OMZ::lib/key-bindings.zsh
 zplugin snippet OMZ::plugins/git/git.plugin.zsh
 
-zplugin ice wait"0" atload"_zsh_autosuggest_start"
-zplugin light zsh-users/zsh-autosuggestions
+# zplugin ice wait"0" atload"_zsh_autosuggest_start"
+# zplugin light zsh-users/zsh-autosuggestions
 
 zplugin ice wait"1" lucid
 zplugin load psprint/zsh-navigation-tools
