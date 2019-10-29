@@ -1,7 +1,7 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-;;(setq doom-font (font-spec :family "Source Code Pro" :size 14))
-;; (setq doom-theme 'base16-greenscreen)
+;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 15))
+(setq doom-font (font-spec :family "SF Mono" :size 16))
 
 (setq confirm-kill-emacs nil)
 
@@ -65,3 +65,19 @@
 (after! org
   (setq org-log-done 'time)
   (setq org-agenda-files '("~/org")))
+
+;; mu4e
+(setq +mu4e-backend 'offlineimap)
+(set-email-account!
+ "ag"
+ '((mu4e-sent-folder . "/ag/sent")
+   (mu4e-drafts-folder . "/ag/drafts")
+   (mu4e-trash-folder . "/ag/trash")
+   (mu4e-refile-folder . "/ag/all_mail")
+   (smtpmail-smtp-user . "maier")
+   (smtpmail-default-smtp-server . "mx.active-group.de")
+   (smtpmail-smtp-server . "mx.active-group.de")
+   (smtpmail-smtp-service . 587)
+   (user-mail-address . "johannes.maier@active-group.de")
+   (mu4e-compose-signature . "Johannes Maier\n\nActive Group GmbH"))
+ t)
