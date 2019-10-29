@@ -5,6 +5,7 @@ path=(
     $HOME/.cabal/bin
     $HOME/.ghcup/bin
     $HOME/.local/bin
+    $HOME/.nix-profile/bin
     /usr/local/bin
     /usr/local/sbin
     /usr/bin
