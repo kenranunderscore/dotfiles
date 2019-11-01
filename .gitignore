@@ -6,11 +6,8 @@
 
 !.config/kitty/kitty.conf
 !.config/alacritty/alacritty.yml
-!.config/fish/config.fish
-!.config/fish/nix.fish
 !.doom.d/*.el
 !.emacs.d
-!.spacemacs
 !.tmux.conf
 !.vimrc
 !.Xresources
