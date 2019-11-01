@@ -4,9 +4,9 @@
 
 # Exceptions:
 
+!.config/doom/
 !.config/kitty/kitty.conf
 !.config/alacritty/alacritty.yml
-!.doom.d/*.el
 !.emacs.d
 !.tmux.conf
 !.vimrc
