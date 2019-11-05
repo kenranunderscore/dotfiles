@@ -1,0 +1,10 @@
+# Ignore everything:
+
+/*
+
+# Exceptions:
+
+!.gitignore
+!alacritty/
+!doom/
+!kitty/

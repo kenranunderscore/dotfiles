@@ -1,13 +1,12 @@
 # Ignore everything:
 
-*
+/*
 
 # Exceptions:
 
-!.config/doom/
-!.config/kitty/kitty.conf
-!.config/alacritty/alacritty.yml
-!.emacs.d
+!.config/
+!.emacs.d/
+!.irssi/
 !.tmux.conf
 !.vimrc
 !.Xresources
