@@ -25,6 +25,7 @@ alias mv="command mv -i"
 
 alias l="ls -GFAtr --color"
 alias la="ls -AF --color"
+alias ls="ls -G --color"
 alias ll="l -l"
 alias lh="l -H"
 alias lr="l -R"
