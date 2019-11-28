@@ -1,5 +1,8 @@
+GOPATH=$HOME/go
+
 typeset -U path
 path=(
+    $GOPATH/bin
     $HOME/.yarn/bin
     $HOME/.cargo/bin
     $HOME/.cabal/bin
