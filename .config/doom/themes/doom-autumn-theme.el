@@ -17,8 +17,8 @@ determine the exact padding."
   "A dark theme inspired by Atom One Dark"
 
   ;; name        default   256       16
-  ((bg         '("#110c00" nil       nil            ))
-   (bg-alt     '("#110c00" nil       nil            ))
+  ((bg         '("#191000" nil       nil            ))
+   (bg-alt     '("#191000" nil       nil            ))
    (base0      '("#1B2229" "black"   "black"        ))
    (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
    (base2      '("#202328" "#2e2e2e" "brightblack"  ))
@@ -47,7 +47,7 @@ determine the exact padding."
    ;; face categories -- required for all themes
    (highlight      yellow)
    (vertical-bar   (doom-darken dark-cyan 0.5))
-   (selection      vertical-bar)
+   (selection      orange)
    (builtin        yellow)
    (comments       dark-cyan)
    (doc-comments   dark-cyan)
@@ -56,11 +56,11 @@ determine the exact padding."
    (keywords       yellow)
    (methods        orange)
    (operators      yellow)
-   (type           yellow)
+   (type           green)
    (strings        teal)
-   (variables      (doom-lighten fg 0.3)) ;; use fg? or something else?
+   (variables      fg)
    (numbers        teal)
-   (region         (doom-darken yellow 0.7))
+   (region         (doom-darken yellow 0.6))
    (error          red)
    (warning        yellow)
    (success        green)
@@ -70,23 +70,15 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright nil)
    (-modeline-pad nil)
 
    (modeline-fg     nil)
-   (modeline-fg-alt base5)
+   (modeline-fg-alt vertical-bar)
 
-   (modeline-bg
-    (if -modeline-bright
-        (doom-darken blue 0.475)
-      `(,(doom-darken (car bg-alt) 0.15) ,@(cdr base0))))
-   (modeline-bg-l
-    (if -modeline-bright
-        (doom-darken blue 0.45)
-      `(,(doom-darken (car bg-alt) 0.1) ,@(cdr base0))))
-   (modeline-bg-inactive   `(,(doom-darken (car bg-alt) 0.1) ,@(cdr bg-alt)))
-   (modeline-bg-inactive-l `(,(car bg-alt) ,@(cdr base1))))
-
+   (modeline-bg `(,(car (doom-darken green 0.85)) ,@(cdr base0)))
+   (modeline-bg-l `(,(car (doom-darken green 0.85)) ,@(cdr base0)))
+   (modeline-bg-inactive   `(,(doom-darken (car bg) 0.2) ,@(cdr base0)))
+   (modeline-bg-inactive-l `(,(doom-darken (car bg) 0.2) ,@(cdr base0))))
 
   ;; --- extra faces ------------------------
   ((elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
@@ -109,8 +101,7 @@ determine the exact padding."
    (mode-line-inactive
     :background modeline-bg-inactive :foreground modeline-fg-alt
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
-   (mode-line-emphasis
-    :foreground (if -modeline-bright base8 highlight))
+   (mode-line-emphasis :foreground highlight)
 
    (solaire-mode-line-face
     :inherit 'mode-line
@@ -122,7 +113,7 @@ determine the exact padding."
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive-l)))
 
    ;; Doom modeline
-   (doom-modeline-bar :background (if -modeline-bright modeline-bg highlight))
+   (doom-modeline-bar :background highlight)
    (doom-modeline-buffer-file :inherit 'mode-line-buffer-id :weight 'bold)
    (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-project-root :foreground green :weight 'bold)
@@ -142,17 +133,30 @@ determine the exact padding."
    (which-key-group-description-face :foreground yellow)
    (which-key-local-map-description-face :foreground yellow)
 
+   ;; rainbow-delimiters
+   (rainbow-delimiters-depth-1-face :foreground green)
+   (rainbow-delimiters-depth-2-face :foreground yellow)
+   (rainbow-delimiters-depth-3-face :foreground teal)
+   (rainbow-delimiters-depth-4-face :foreground blue)
+   (rainbow-delimiters-depth-5-face :foreground magenta)
+   (rainbow-delimiters-depth-6-face :foreground green)
+   (rainbow-delimiters-depth-7-face :foreground yellow)
+
    ;; magit
    (magit-branch-current :foreground teal)
-   (magit-section-heading :foreground yellow :weight 'bold)
+   (magit-section-heading :foreground green :weight 'bold)
    (magit-section-heading-selection :foreground yellow :weight 'bold)
    (magit-section-secondary-heading :foreground green)
    (magit-filename :foreground green)
    (magit-diff-hunk-heading-highlight :foreground bg :background fg)
+   (magit-branch-local :foreground green)
+   (magit-diff-file-heading :weight 'regular)
 
    ;; company
    (company-tooltip :background region)
+   (company-tooltip-search-selection :foreground yellow :background dark-cyan)
    (company-tooltip-mouse :inherit 'company-tooltip-search-selection)
+   (company-tooltip-selection :inherit 'company-tooltip-search-selection)
 
    ;; --- major-mode faces -------------------
    ;; css-mode / scss-mode
@@ -183,13 +187,18 @@ determine the exact padding."
    (diredfl-dir-priv :foreground teal)
    (diredfl-number :foreground red)
 
+   ;; lsp
+   (lsp-face-highlight-read :background dark-cyan)
+   (lsp-face-highlight-write :background dark-cyan)
+   (lsp-face-highlight-textual :background dark-cyan)
+
    ;; org-mode
    (org-level-1 :foreground magenta :bold bold)
    (org-level-2 :foreground blue :bold bold)
    (org-level-3 :foreground green :bold bold)
    (org-level-4 :inherit 'org-level-3 :foreground yellow)
-   (org-level-5 :inherit 'org-level-3)
-   (org-level-6 :inherit 'org-level-3)
+   (org-level-5 :inherit 'org-level-3 :foreground teal)
+   (org-level-6 :inherit 'org-level-5)
    (org-hide :foreground hidden)
    (org-todo :foreground yellow :bold 'inherit)
    (solaire-org-hide-face :foreground hidden))
