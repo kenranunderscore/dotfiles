@@ -65,3 +65,8 @@
 (after! org
   (setq org-log-done 'time)
   (setq org-agenda-files '("~/org")))
+
+;; glsl-mode
+(add-to-list
+ 'auto-mode-alist
+ '("\\.\\(vs\\|vert\\|fs\\|frag\\|gs\\|geom\\|glsl\\|tesc\\|tese\\|comp\\)\\'" . glsl-mode))

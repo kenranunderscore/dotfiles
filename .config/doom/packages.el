@@ -6,4 +6,5 @@
 ;; (package! another-package :recipe (:host github :repo "username/repo"))
 ;; (package! builtin-package :disable t)
 
+(package! glsl-mode)
 (package! mu4e-alert)
