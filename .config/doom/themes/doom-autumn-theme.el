@@ -17,8 +17,8 @@ determine the exact padding."
   "A dark theme inspired by Atom One Dark"
 
   ;; name        default   256       16
-  ((bg         '("#191000" nil       nil            ))
-   (bg-alt     '("#191000" nil       nil            ))
+  ((bg         '("#191005" nil       nil            ))
+   (bg-alt     '("#191005" nil       nil            ))
    (base0      '("#1B2229" "black"   "black"        ))
    (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
    (base2      '("#202328" "#2e2e2e" "brightblack"  ))
@@ -28,39 +28,39 @@ determine the exact padding."
    (base6      '("#73797e" "#6b6b6b" "brightblack"  ))
    (base7      '("#9ca0a4" "#979797" "brightblack"  ))
    (base8      '("#DFDFDF" "#dfdfdf" "white"        ))
-   (fg         '("#ff7000" "#ff7000" "brightwhite"  ))
-   (fg-alt     '("#ff7000" "#ff7000" "white"        ))
+   (fg         '("#4f7410" "#ff7000" "brightwhite"  ))
+   (fg-alt     '("#4f7410" "#ff7000" "white"        ))
 
-   (grey       base4)
-   (red        '("#f34213" "#f34213" "red"          ))
-   (orange     '("#ff4e00" "#ff4e00" "brightred"    ))
+   (grey       '("#707a6a" "#505a4a" "brightblack"  ))
+   (red        '("#ff4e00" "#ff4e00" "red"          ))
+   (orange     '("#ff7000" "#ff7000" "brightred"    ))
    (green      '("#7cb518" "#7cb518" "green"        ))
    (teal       '("#dbc077" "#dbc077" "brightgreen"  ))
    (yellow     '("#ffbf00" "#ffbf00" "yellow"       ))
    (blue       '("#0075c4" "#0075c4" "brightblue"   ))
    (dark-blue  '("#0075c4" "#0075c4" "blue"         ))
-   (magenta    '("#bf1a2f" "#bf1a2f" "brightmagenta"))
-   (violet     '("#420039" "#420039" "magenta"      ))
+   (magenta    '("#d72638" "#d72638" "brightmagenta"))
+   (violet     '("#76597b" "#76597b" "magenta"      ))
    (cyan       '("#898989" "#898989" "brightcyan"   ))
    (dark-cyan  '("#4f7410" "#4f7410" "cyan"         ))
 
    ;; face categories -- required for all themes
    (highlight      yellow)
-   (vertical-bar   (doom-darken dark-cyan 0.5))
+   (vertical-bar   (doom-darken grey 0.4))
    (selection      orange)
    (builtin        yellow)
-   (comments       dark-cyan)
-   (doc-comments   dark-cyan)
-   (constants      yellow)
+   (comments       grey)
+   (doc-comments   grey)
+   (constants      orange)
    (functions      orange)
-   (keywords       yellow)
-   (methods        orange)
+   (keywords       red)
+   (methods        red)
    (operators      yellow)
    (type           green)
-   (strings        teal)
-   (variables      fg)
+   (strings        (doom-darken teal 0.1))
+   (variables      green)
    (numbers        teal)
-   (region         (doom-darken yellow 0.6))
+   (region         (doom-darken dark-cyan 0.7))
    (error          red)
    (warning        yellow)
    (success        green)
@@ -72,11 +72,11 @@ determine the exact padding."
    (hidden     `(,(car bg) "black" "black"))
    (-modeline-pad nil)
 
-   (modeline-fg     nil)
+   (modeline-fg     green)
    (modeline-fg-alt vertical-bar)
 
-   (modeline-bg `(,(car (doom-darken green 0.85)) ,@(cdr base0)))
-   (modeline-bg-l `(,(car (doom-darken green 0.85)) ,@(cdr base0)))
+   (modeline-bg `(,(car (doom-darken green 0.80)) ,@(cdr base0)))
+   (modeline-bg-l `(,(car (doom-darken green 0.80)) ,@(cdr base0)))
    (modeline-bg-inactive   `(,(doom-darken (car bg) 0.2) ,@(cdr base0)))
    (modeline-bg-inactive-l `(,(doom-darken (car bg) 0.2) ,@(cdr base0))))
 
@@ -117,15 +117,15 @@ determine the exact padding."
    (doom-modeline-buffer-file :inherit 'mode-line-buffer-id :weight 'bold)
    (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-project-root :foreground green :weight 'bold)
-   (doom-modeline-project-dir :bold t :foreground green)
+   (doom-modeline-project-dir :bold t :foreground orange)
 
    ;; ivy
    (ivy-current-match :background region :distant-foreground teal :weight 'normal)
    (ivy-minibuffer-match-highlight :foreground yellow)
    (ivy-minibuffer-match-face-2 :inherit 'ivy-minibuffer-match-face-1 :foreground yellow :background nil)
-   (ivy-minibuffer-match-face-3 :inherit 'ivy-minibuffer-match-face-2 :foreground green)
-   (ivy-minibuffer-match-face-4 :inherit 'ivy-minibuffer-match-face-2 :foreground strings)
-   (ivy-highlight-face :foreground orange)
+   (ivy-minibuffer-match-face-3 :inherit 'ivy-minibuffer-match-face-2 :foreground orange)
+   (ivy-minibuffer-match-face-4 :inherit 'ivy-minibuffer-match-face-2 :foreground magenta)
+   (ivy-highlight-face :foreground green)
 
    ;; which-key
    (which-func :foreground green)
@@ -143,20 +143,26 @@ determine the exact padding."
    (rainbow-delimiters-depth-7-face :foreground yellow)
 
    ;; magit
-   (magit-branch-current :foreground teal)
-   (magit-section-heading :foreground green :weight 'bold)
+   (magit-branch-current :foreground yellow)
+   (magit-branch-remote :foreground orange)
+   (magit-section-heading :foreground blue :weight 'bold)
    (magit-section-heading-selection :foreground yellow :weight 'bold)
    (magit-section-secondary-heading :foreground green)
    (magit-filename :foreground green)
    (magit-diff-hunk-heading-highlight :foreground bg :background fg)
-   (magit-branch-local :foreground green)
+   (magit-branch-local :foreground yellow)
    (magit-diff-file-heading :weight 'regular)
 
    ;; company
-   (company-tooltip :background region)
-   (company-tooltip-search-selection :foreground yellow :background dark-cyan)
+   (company-tooltip :background (doom-darken region 0.1))
+   (company-tooltip-search-selection :foreground yellow)
    (company-tooltip-mouse :inherit 'company-tooltip-search-selection)
    (company-tooltip-selection :inherit 'company-tooltip-search-selection)
+   (company-tooltip-annotation :foreground (doom-darken blue 0.2))
+   (company-tooltip-annotation-selection :foreground blue)
+
+   ;; navigation
+   (nav-flash-face :background fg :foreground yellow)
 
    ;; --- major-mode faces -------------------
    ;; css-mode / scss-mode
@@ -174,8 +180,8 @@ determine the exact padding."
    (custom-button :foreground teal :bold t :underline t :background bg)
 
    ;; evil
-   (evil-ex-search :background (doom-darken region 0.3) :foreground yellow)
-   (evil-ex-lazy-highlight :background (doom-darken region 0.3) :foreground yellow)
+   (evil-ex-search :background fg :foreground bg)
+   (evil-ex-lazy-highlight :background fg :foreground bg)
 
    ;; isearch
    (isearch :foreground bg :background fg :weight 'bold)
@@ -188,19 +194,19 @@ determine the exact padding."
    (diredfl-number :foreground red)
 
    ;; lsp
-   (lsp-face-highlight-read :background dark-cyan)
-   (lsp-face-highlight-write :background dark-cyan)
-   (lsp-face-highlight-textual :background dark-cyan)
+   (lsp-face-highlight-read :background (doom-darken blue 0.6))
+   (lsp-face-highlight-write :background (doom-darken blue 0.6))
+   (lsp-face-highlight-textual :background (doom-darken blue 0.6))
 
    ;; org-mode
-   (org-level-1 :foreground magenta :bold bold)
-   (org-level-2 :foreground blue :bold bold)
-   (org-level-3 :foreground green :bold bold)
-   (org-level-4 :inherit 'org-level-3 :foreground yellow)
-   (org-level-5 :inherit 'org-level-3 :foreground teal)
-   (org-level-6 :inherit 'org-level-5)
+   (org-level-1 :foreground blue :bold t)
+   (org-level-2 :foreground yellow :bold t)
+   (org-level-3 :foreground magenta :bold t)
+   (org-level-4 :foreground red :bold t)
+   (org-level-5 :foreground orange :bold t)
+   (org-level-6 :foreground violet :bold t)
    (org-hide :foreground hidden)
-   (org-todo :foreground yellow :bold 'inherit)
+   (org-todo :foreground strings :bold 'inherit)
    (solaire-org-hide-face :foreground hidden))
 
   ;; --- extra variables ---------------------
