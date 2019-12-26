@@ -1,24 +1,24 @@
-;;; doom-autumn-theme.el --- inspired by Atom One Dark
+;;; doom-autumn-leaves-theme.el
 (require 'doom-themes)
 
 ;;
-(defgroup doom-autumn-theme nil
+(defgroup doom-autumn-leaves-theme nil
   "Options for doom-themes"
   :group 'doom-themes)
 
-(defcustom doom-autumn-padded-modeline doom-themes-padded-modeline
+(defcustom doom-autumn-leaves-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-autumn-theme
+  :group 'doom-autumn-leaves-theme
   :type '(choice integer boolean))
 
 ;;
-(def-doom-theme doom-autumn
+(def-doom-theme doom-autumn-leaves
   "A dark theme inspired by Atom One Dark"
 
   ;; name        default   256       16
-  ((bg         '("#191005" nil       nil            ))
-   (bg-alt     '("#191005" nil       nil            ))
+  ((bg         '("#1c1408" nil       nil            ))
+   (bg-alt     '("#1c1308" nil       nil            ))
    (base0      '("#1B2229" "black"   "black"        ))
    (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
    (base2      '("#202328" "#2e2e2e" "brightblack"  ))
@@ -28,7 +28,7 @@ determine the exact padding."
    (base6      '("#73797e" "#6b6b6b" "brightblack"  ))
    (base7      '("#9ca0a4" "#979797" "brightblack"  ))
    (base8      '("#DFDFDF" "#dfdfdf" "white"        ))
-   (fg         '("#4f7410" "#ff7000" "brightwhite"  ))
+   (fg         '("#5b8512" "#ff7000" "brightwhite"  ))
    (fg-alt     '("#4f7410" "#ff7000" "white"        ))
 
    (grey       '("#707a6a" "#505a4a" "brightblack"  ))
@@ -124,7 +124,7 @@ determine the exact padding."
    (ivy-minibuffer-match-highlight :foreground yellow)
    (ivy-minibuffer-match-face-2 :inherit 'ivy-minibuffer-match-face-1 :foreground yellow :background nil)
    (ivy-minibuffer-match-face-3 :inherit 'ivy-minibuffer-match-face-2 :foreground orange)
-   (ivy-minibuffer-match-face-4 :inherit 'ivy-minibuffer-match-face-2 :foreground magenta)
+   (ivy-minibuffer-match-face-4 :inherit 'ivy-minibuffer-match-face-2 :foreground blue)
    (ivy-highlight-face :foreground green)
 
    ;; which-key
@@ -152,6 +152,7 @@ determine the exact padding."
    (magit-diff-hunk-heading-highlight :foreground bg :background fg)
    (magit-branch-local :foreground yellow)
    (magit-diff-file-heading :weight 'regular)
+   (magit-header-line :background nil :foreground blue :weight 'bold)
 
    ;; company
    (company-tooltip :background (doom-darken region 0.1))
@@ -194,17 +195,17 @@ determine the exact padding."
    (diredfl-number :foreground red)
 
    ;; lsp
-   (lsp-face-highlight-read :background (doom-darken blue 0.6))
-   (lsp-face-highlight-write :background (doom-darken blue 0.6))
-   (lsp-face-highlight-textual :background (doom-darken blue 0.6))
+   (lsp-face-highlight-read :background (doom-darken blue 0.5) :foreground yellow)
+   (lsp-face-highlight-write :inherit 'lsp-face-highlight-read)
+   (lsp-face-highlight-textual :inherit 'lsp-face-highlight-read)
 
    ;; org-mode
    (org-level-1 :foreground blue :bold t)
-   (org-level-2 :foreground yellow :bold t)
-   (org-level-3 :foreground magenta :bold t)
-   (org-level-4 :foreground red :bold t)
-   (org-level-5 :foreground orange :bold t)
-   (org-level-6 :foreground violet :bold t)
+   (org-level-2 :foreground magenta :bold t)
+   (org-level-3 :foreground red :bold t)
+   (org-level-4 :foreground orange :bold t)
+   (org-level-5 :foreground violet :bold t)
+   (org-level-6 :foreground yellow :bold t)
    (org-hide :foreground hidden)
    (org-todo :foreground strings :bold 'inherit)
    (solaire-org-hide-face :foreground hidden))
@@ -213,4 +214,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-autumn-theme.el ends here
+;;; doom-autumn-leaves-theme.el ends here
