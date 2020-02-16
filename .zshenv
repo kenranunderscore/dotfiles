@@ -26,6 +26,24 @@ alias s="sudo"
 alias cp="command cp -i"
 alias mv="command mv -i"
 
+# Aliases to manage emacs clients:
+#
+# Create a new graphical emacs frame, not tied to the shell.
+# This should be the command to run for the first and 'main'
+# emacs instance.
+alias ee="emacsclient -a '' -c -n"
+#
+# Create a new graphical emacs frame that returns control
+# to the shell after finishing. Meant as a replacement
+# for use of 'vi'/'vim'.
+alias e="emacsclient -a '' -c"
+#
+# Open a file inside an existing emacs frame.
+alias em="emacsclient -a '' -n"
+#
+# Softly kill the emacs daemon.
+alias ekill="emacsclient -e '(save-buffers-kill-emacs)'"
+
 alias l="ls -GFAtr --color"
 alias la="ls -AF --color"
 alias ls="ls -G --color"
