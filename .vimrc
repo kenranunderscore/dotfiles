@@ -27,13 +27,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Color schemes
-Plug 'chriskempson/base16-vim'
-
-" NerdTree
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-
 " General
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tlib_vim'
@@ -44,6 +37,7 @@ Plug 'shougo/neocomplete.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'shougo/vimproc', {'do' : 'make'}
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jnurmine/zenburn'
 
 call plug#end()
 
@@ -60,7 +54,7 @@ syntax enable
 "set colorcolumn=80
 
 set background=dark
-colorscheme base16-atelier-estuary
+colorscheme zenburn
 
 set encoding=utf-8
 set nowrap
@@ -76,7 +70,6 @@ set backspace=indent,eol,start
 set showmode
 set showcmd
 set number
-set relativenumber
 
 " Different command mode shortcut
 
