@@ -33,6 +33,7 @@ zplugin load psprint/zsh-navigation-tools
 zplugin ice blockf
 zplugin light zsh-users/zsh-completions
 
+export PURE_PROMPT_SYMBOL="λ"
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light sindresorhus/pure
 
