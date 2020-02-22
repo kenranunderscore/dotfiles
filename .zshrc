@@ -33,9 +33,10 @@ zplugin load psprint/zsh-navigation-tools
 zplugin ice blockf
 zplugin light zsh-users/zsh-completions
 
-export PURE_PROMPT_SYMBOL="λ"
+PURE_PROMPT_SYMBOL="λ"
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light sindresorhus/pure
+zstyle ':prompt:pure:prompt:success' color yellow
 
 zplugin ice wait"1" lucid as"program" make"!PREFIX=$ZPFX install" \
     atclone"cp contrib/fzy-* $ZPFX/bin/" \
