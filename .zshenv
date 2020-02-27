@@ -43,6 +43,9 @@ alias em="emacsclient -a '' -n"
 #
 # Softly kill the emacs daemon.
 alias ekill="emacsclient -e '(save-buffers-kill-emacs)'"
+#
+# Open a magit-status popup to handle git commands
+alias eg="emacsclient -e -c '(magit-status)'"
 
 alias l="ls -GFAtr --color"
 alias la="ls -AF --color"
