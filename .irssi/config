@@ -15,7 +15,8 @@ chatnets = { freenode = { type = "IRC"; }; };
 channels = (
   { name = "#haskell"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#nixos"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "##crawl"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "##crawl"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
