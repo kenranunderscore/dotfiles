@@ -8,6 +8,7 @@ path=(
     $HOME/.ghcup/bin
     $HOME/.local/bin
     $HOME/.nix-profile/bin
+    /run/current-system/sw/bin
     /usr/local/bin
     /usr/local/sbin
     /usr/bin
