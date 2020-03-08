@@ -46,7 +46,7 @@ zinit ice wait lucid
 zinit load hlissner/zsh-autopair
 
 zinit ice wait"0" atinit"zpcompinit"
-zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma/fast-syntax-highlighting
 
 export GPG_TTY=$(tty)
 
