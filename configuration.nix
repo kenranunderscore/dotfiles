@@ -16,18 +16,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "nixos"; # Define your hostname.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp3s0.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
   # i18n = {
@@ -42,10 +37,23 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim git emacs firefox-bin xorg.xrandr alacritty tmux irssi nim
+    alacritty            # Terminal emulator
+    emacs
+    firefox-bin
+    git
+    irssi                # IRC client
+    nim                  # The Nim programming language
+    tmux                 # Terminal multiplexer
+    tree                 # File system as a tree
+    unzip
+    vim
+    wget
+    xorg.xrandr
   ];
+
   environment.pathsToLink = [ "/libexec" ];
 
+  # Some fonts I like
   fonts.fonts = with pkgs; [
     source-code-pro
     hack-font
@@ -57,6 +65,8 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+
+  # Needed to enable using `zsh` as main shell
   programs.zsh.enable = true;
 
   # List services that you want to enable:
@@ -69,9 +79,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
