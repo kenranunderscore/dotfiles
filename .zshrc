@@ -3,51 +3,50 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-ZPLUGIN_HOME=$HOME/.zplugin
+ZPLUGIN_HOME=$HOME/.zinit
 
-if [[ ! -f $ZPLUGIN_HOME/bin/zplugin.zsh ]]; then
-    git clone https://github.com/psprint/zplugin $ZPLUGIN_HOME/bin
-    zcompile $ZPLUGIN_HOME/bin/zplugin/zsh
+if [[ ! -f $ZPLUGIN_HOME/bin/zinit.zsh ]]; then
+    git clone https://github.com/zdharma/zinit $ZPLUGIN_HOME/bin
 fi
 
-source $ZPLUGIN_HOME/bin/zplugin.zsh
+source $ZPLUGIN_HOME/bin/zinit.zsh
 
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 setopt promptsubst
 
-zplugin light willghatch/zsh-saneopt
+zinit light willghatch/zsh-saneopt
 
-zplugin snippet OMZ::lib/theme-and-appearance.zsh
-zplugin snippet OMZ::lib/completion.zsh
-zplugin snippet OMZ::lib/key-bindings.zsh
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::lib/theme-and-appearance.zsh
+zinit snippet OMZ::lib/completion.zsh
+zinit snippet OMZ::lib/key-bindings.zsh
+zinit snippet OMZ::plugins/git/git.plugin.zsh
 
-# zplugin ice wait"0" atload"_zsh_autosuggest_start"
-# zplugin light zsh-users/zsh-autosuggestions
+# zinit ice wait"0" atload"_zsh_autosuggest_start"
+# zinit light zsh-users/zsh-autosuggestions
 
-zplugin ice wait"1" lucid
-zplugin load psprint/zsh-navigation-tools
+zinit ice wait"1" lucid
+zinit load psprint/zsh-navigation-tools
 
-zplugin ice blockf
-zplugin light zsh-users/zsh-completions
+zinit ice blockf
+zinit light zsh-users/zsh-completions
 
 PURE_PROMPT_SYMBOL="λ"
-zplugin ice pick"async.zsh" src"pure.zsh"
-zplugin light sindresorhus/pure
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
 zstyle ':prompt:pure:prompt:success' color yellow
 
-zplugin ice wait"1" lucid as"program" make"!PREFIX=$ZPFX install" \
+zinit ice wait"1" lucid as"program" make"!PREFIX=$ZPFX install" \
     atclone"cp contrib/fzy-* $ZPFX/bin/" \
     pick"$ZPFX/bin/fzy*"
-zplugin light jhawthorn/fzy
+zinit light jhawthorn/fzy
 
-zplugin ice wait lucid
-zplugin load hlissner/zsh-autopair
+zinit ice wait lucid
+zinit load hlissner/zsh-autopair
 
-zplugin ice wait"0" atinit"zpcompinit"
-zplugin light zdharma/fast-syntax-highlighting
+zinit ice wait"0" atinit"zpcompinit"
+zinit light zsh-users/zsh-syntax-highlighting
 
 export GPG_TTY=$(tty)
 
@@ -55,6 +54,6 @@ if (( $+commands[opam] )) then
     eval `opam env`
 fi
 
-if [ -d $HOME/.nix-profile ]; then
-    source $HOME/.nix-profile/etc/profile.d/nix.sh
-fi
+# if [ -d $HOME/.nix-profile ]; then
+    # source $HOME/.nix-profile/etc/profile.d/nix.sh
+# fi
