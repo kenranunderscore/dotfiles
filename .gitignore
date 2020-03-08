@@ -13,4 +13,5 @@
 !.Xresources
 !.zshenv
 !.zshrc
+!configuration.nix
 !README.md
