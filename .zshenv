@@ -2,6 +2,7 @@ GOPATH=$HOME/go
 
 typeset -U path
 path=(
+    /run/wrappers/bin
     $HOME/.yarn/bin
     $HOME/.cargo/bin
     $HOME/.cabal/bin
