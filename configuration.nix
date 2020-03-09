@@ -39,6 +39,7 @@
   environment.systemPackages = with pkgs; [
     alacritty            # Terminal emulator
     emacs
+    feh                  # Set the background image
     firefox-bin
     git
     irssi                # IRC client
