@@ -8,3 +8,4 @@
 
 (package! glsl-mode)
 (package! mu4e-alert)
+(package! kaolin-themes)
