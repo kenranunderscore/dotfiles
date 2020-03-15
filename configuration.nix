@@ -38,11 +38,14 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty            # Terminal emulator
+    cacert
     emacs
     feh                  # Set the background image
     firefox-bin
     git
     irssi                # IRC client
+    SDL2
+    SDL2_image
     tmux                 # Terminal multiplexer
     tree                 # File system as a tree
     unzip
