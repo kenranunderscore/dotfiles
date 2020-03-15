@@ -43,13 +43,17 @@
     firefox-bin
     git
     irssi                # IRC client
-    nim                  # The Nim programming language
     tmux                 # Terminal multiplexer
     tree                 # File system as a tree
     unzip
     vim
     wget
     xorg.xrandr
+
+    # Programming languages
+    cargo                # Rust's package manager
+    nim
+    rustc
   ];
 
   environment.pathsToLink = [ "/libexec" ];
