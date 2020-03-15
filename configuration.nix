@@ -51,9 +51,9 @@
     xorg.xrandr
 
     # Programming languages
-    cargo                # Rust's package manager
+    clang                # C/C++/.. compiler (LLVM-frontend)
     nim
-    rustc
+    rustup
   ];
 
   environment.pathsToLink = [ "/libexec" ];
