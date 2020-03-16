@@ -44,6 +44,7 @@
     firefox-bin
     git
     irssi                # IRC client
+    manpages             # We want that documentation!
     SDL2
     SDL2_image
     tmux                 # Terminal multiplexer
