@@ -54,6 +54,6 @@ if (( $+commands[opam] )) then
     eval `opam env`
 fi
 
-# if [ -d $HOME/.nix-profile ]; then
-    # source $HOME/.nix-profile/etc/profile.d/nix.sh
-# fi
+if [ ! -f $HOME/.nix-profile/etc/profile.de/nix.sh ]; then
+    source $HOME/.nix-profile/etc/profile.d/nix.sh
+fi
