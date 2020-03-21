@@ -37,7 +37,7 @@ Plug 'shougo/neocomplete.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'shougo/vimproc', {'do' : 'make'}
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'jnurmine/zenburn'
+Plug 'rigellute/rigel'
 
 call plug#end()
 
@@ -53,8 +53,8 @@ syntax enable
 
 "set colorcolumn=80
 
-set background=dark
-colorscheme zenburn
+"set background=dark
+colorscheme rigel
 
 set encoding=utf-8
 set nowrap
