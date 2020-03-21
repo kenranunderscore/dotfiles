@@ -64,10 +64,14 @@
 
   # Some fonts I like
   fonts.fonts = with pkgs; [
-    source-code-pro
-    hack-font
-    monoid
     anonymousPro
+    go-font
+    hack-font
+    ibm-plex
+    monoid
+    noto-fonts
+    overpass
+    source-code-pro
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
