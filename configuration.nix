@@ -44,6 +44,7 @@
     firefox-bin
     git
     irssi                # IRC client
+    lsof                 # List open files and PTYs
     manpages             # We want that documentation!
     SDL2
     SDL2_image
