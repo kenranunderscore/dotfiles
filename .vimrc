@@ -53,7 +53,7 @@ syntax enable
 
 "set colorcolumn=80
 
-"set background=dark
+set background=dark
 colorscheme rigel
 
 set encoding=utf-8
@@ -70,10 +70,6 @@ set backspace=indent,eol,start
 set showmode
 set showcmd
 set number
-
-" Different command mode shortcut
-
-inoremap jk <ESC>
 
 " Different mapleader
 
