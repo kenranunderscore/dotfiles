@@ -52,6 +52,11 @@
    :localleader
    :n "F" #'haskell-mode-stylish-buffer))
 
+;; Use Haskell LSP (ghcide)
+(after! lsp-haskell
+  (setq lsp-haskell-process-path-hie "ghcide")
+  (setq lsp-haskell-process-args-hie '()))
+
 ;; Prevent closing the C-c C-l popup from asking
 ;; for Haskell process termination
 (setq-hook! 'haskell-interactive-mode-hook +popup--inhibit-transient t)
