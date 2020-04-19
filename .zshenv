@@ -29,24 +29,19 @@ alias mv="command mv -i"
 
 # Aliases to manage emacs clients:
 #
+# Open an emacs frame in the current terminal.
+alias e="TERM=xterm-24bit emacsclient -a '' -t"
+#
 # Create a new graphical emacs frame, not tied to the shell.
-# This should be the command to run for the first and 'main'
-# emacs instance.
 alias ee="emacsclient -a '' -c -n"
 #
-# Create a new graphical emacs frame that returns control
-# to the shell after finishing. Meant as a replacement
-# for use of 'vi'/'vim'.
-alias e="emacsclient -a '' -c"
+alias ec="emacsclient -a '' -c"
 #
-# Open a file inside an existing emacs frame.
-alias em="emacsclient -a '' -n"
+# Kill the emacs daemon.
+alias ekill="emacsclient -e '(kill-emacs)'"
 #
-# Softly kill the emacs daemon.
-alias ekill="emacsclient -e '(save-buffers-kill-emacs)'"
-#
-# Open a magit-status popup to handle git commands
-alias eg="emacsclient -a '' -e -c '(magit-status)'"
+# Open a magit-status terminal frame to handle git commands.
+alias eg="e -e '(magit-status)'"
 
 alias l="ls -GFAtr --color"
 alias la="ls -AF --color"
