@@ -48,9 +48,6 @@ alias ekill="emacsclient -e '(save-buffers-kill-emacs)'"
 # Open a magit-status popup to handle git commands
 alias eg="emacsclient -a '' -e -c '(magit-status)'"
 
-# Force tmux to assume it supports 256 colors
-alias tmux="tmux -2"
-
 alias l="ls -GFAtr --color"
 alias la="ls -AF --color"
 alias ls="ls -G --color"
