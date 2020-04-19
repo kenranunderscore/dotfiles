@@ -13,6 +13,7 @@
 !.Xresources
 !.zshenv
 !.zshrc
+!bootstrap.sh
 !configuration.nix
 !xterm-24bit.terminfo
 !README.md
