@@ -10,6 +10,16 @@
 
 (add-to-list 'load-path "/usr/local/Cellar/mu/1.2.0_1/share/emacs/site-lisp/mu/mu4e")
 
+;; These two changes try to fix slow startup time when used via `emacsclient`
+;; and the --daemon running.
+(eval-after-load "xterm" ;; term/xterm.el does not provide 'xterm
+  '(defadvice xterm--query (around tweak-for-gnu-screen (query handlers) activate)
+     ;; GNU screen does not support this sequence
+     (unless (string= query "\e]11;?\e\\")
+       ad-do-it)))
+;; This scrapes off another half second.
+(setq-default xterm-query-timeout nil)
+
 (doom! :input
        ;;chinese
        ;;japanese
