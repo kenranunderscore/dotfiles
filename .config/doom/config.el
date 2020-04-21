@@ -71,6 +71,12 @@
   (setq org-log-done 'time)
   (setq org-agenda-files '("~/org")))
 
+;; lsp-mode needs another leader key due to i3
+(after! lsp-mode
+  (map! :leader
+        (:prefix "c"
+          :desc "LSP" "l" lsp-command-map)))
+
 ;; glsl-mode
 (add-to-list
  'auto-mode-alist
