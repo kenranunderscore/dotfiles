@@ -47,11 +47,6 @@
      :desc "Git status"     :nv "s" #'magit-status
      :desc "Git stage hunk" :n  "g" #'git-gutter:stage-hunk))
 
- (:after haskell-mode
-   :map haskell-mode-map
-   :localleader
-   :n "F" #'haskell-mode-stylish-buffer))
-
 ;; Use Haskell LSP (ghcide)
 (after! lsp-haskell
   (setq lsp-haskell-process-path-hie "ghcide")
