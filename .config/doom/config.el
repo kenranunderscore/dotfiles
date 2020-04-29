@@ -10,11 +10,6 @@
 (setq doom-localleader-key ",")
 
 (map!
- ;; text scaling
- "M-+"     (λ! (text-scale-set 0))
- "M-="     #'text-scale-increase
- "M--"     #'text-scale-decrease
-
  (:leader
    ;; I'm used to doing SPC SPC for M-x
    :desc "M-x" :nv "SPC" #'counsel-M-x
@@ -45,12 +40,7 @@
    ;; git / magit
    (:prefix "g"
      :desc "Git status"     :nv "s" #'magit-status
-     :desc "Git stage hunk" :n  "g" #'git-gutter:stage-hunk))
-
-;; Use Haskell LSP (ghcide)
-(after! lsp-haskell
-  (setq lsp-haskell-process-path-hie "ghcide")
-  (setq lsp-haskell-process-args-hie '()))
+     :desc "Git stage hunk" :n  "g" #'git-gutter:stage-hunk)))
 
 ;; Prevent closing the C-c C-l popup from asking
 ;; for Haskell process termination
