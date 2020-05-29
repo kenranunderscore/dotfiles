@@ -83,11 +83,10 @@
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
        direnv
-       ;;docker
+       docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
-       flycheck          ; tasing you for every semicolon you forget
        ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
@@ -136,7 +135,7 @@
        markdown          ; writing docs for people to ignore
        nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
-       ocaml             ; an objective camel
+       ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         ;;+dragndrop       ; drag & drop files/images into org buffers
         ;;+ipython         ; ipython/jupyter support for babel
@@ -148,10 +147,10 @@
        purescript        ; javascript, but functional
        ;;python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
-       racket            ; a DSL for DSLs
+       ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client
        ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;(rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor
@@ -162,9 +161,12 @@
        ;;vala              ; GObjective-C
 
        :email
-       mu4e       ; WIP
+       ;;mu4e       ; WIP
        ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
+
+       :checkers
+       syntax
 
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and
