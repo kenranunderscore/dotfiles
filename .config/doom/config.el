@@ -35,12 +35,7 @@
 
    ;; window
    (:prefix "w"
-     :n "d" #'evil-window-delete)
-
-   ;; git / magit
-   (:prefix "g"
-     :desc "Git status"     :nv "s" #'magit-status
-     :desc "Git stage hunk" :n  "g" #'git-gutter:stage-hunk)))
+     :n "d" #'evil-window-delete)))
 
 ;; Prevent closing the C-c C-l popup from asking
 ;; for Haskell process termination
