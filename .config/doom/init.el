@@ -8,8 +8,6 @@
 ;; More information about these modules (and what flags they support) can be
 ;; found in modules/README.org.
 
-(add-to-list 'load-path "/usr/local/Cellar/mu/1.2.0_1/share/emacs/site-lisp/mu/mu4e")
-
 ;; These two changes try to fix slow startup time when used via `emacsclient`
 ;; and the --daemon running.
 (eval-after-load "xterm" ;; term/xterm.el does not provide 'xterm
@@ -162,7 +160,7 @@
        yaml
 
        :email
-       ;;mu4e       ; WIP
+       mu4e       ; WIP
        ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 
