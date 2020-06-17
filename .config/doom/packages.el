@@ -10,3 +10,4 @@
 (package! mu4e-alert)
 (package! kaolin-themes)
 (package! spacemacs-theme)
+(package! dhall-mode)
