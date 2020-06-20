@@ -16,18 +16,7 @@
 
    ;; projectile
    (:prefix "p"
-     :desc "Find file in project" :n "f" #'projectile-find-file
-     :desc "Kill project buffers" :n "k" #'projectile-kill-buffers
-     :n "/" nil)
-
-   ;; buffer
-   (:prefix "b"
-     :desc "Kill this buffer" :nv "d" #'kill-current-buffer
-     :nv "k" nil)
-
-   ;; file
-   (:prefix "f"
-     :n "/" nil)
+     :desc "Kill project buffers" :n "k" #'projectile-kill-buffers)
 
    ;; code
    (:prefix "c"
@@ -54,7 +43,7 @@
 ;; lsp-mode needs another leader key due to i3
 (after! lsp-mode
   (map! :leader
-        (:prefix "c"
+        (:prefix "l"
           :desc "LSP" "l" lsp-command-map)))
 
 ;; glsl-mode
