@@ -13,6 +13,21 @@ in
 
   nixpkgs.config.firefox.enableFlash = false;
 
+  programs.git = {
+    package = pkgs.gitAndTools.gitFull;
+    enable = true;
+    userName = "Johannes Maier";
+    userEmail =
+      if isDarwin
+      then "johannes.maier@active-group.de"
+      else "johb.maier@gmail.com";
+    ignores = [];
+    extraConfig = {
+      pull.rebase = "false";
+      core.editor = "vim";
+    };
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -25,9 +40,6 @@ in
 
   home.packages = with pkgs; [
     direnv
-    firefox
-    git
-    irssi
     lorri
     ripgrep
     vim
