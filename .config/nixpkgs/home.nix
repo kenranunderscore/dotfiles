@@ -55,6 +55,7 @@ set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
 
   home.packages = with pkgs; [
     direnv
+    emacs
     lorri
     ripgrep
     vim
