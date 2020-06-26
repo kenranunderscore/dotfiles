@@ -7,7 +7,6 @@
 !.config/
 !.emacs.d/
 !.irssi/
-!.tmux.conf
 !.vimrc
 !.xinitrc
 !.Xresources

@@ -30,6 +30,19 @@ in
     };
   };
 
+  programs.tmux = {
+    enable = true;
+    escapeTime = 0;
+    historyLimit = 50000;
+    newSession = true;
+    terminal = "xterm-24bit";
+    resizeAmount = 10;
+    extraConfig = ''
+set-option -g renumber-windows on
+set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
+    '';
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
