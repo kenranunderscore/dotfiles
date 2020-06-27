@@ -94,27 +94,30 @@ set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
 
   programs.irssi = {
     enable = true;
-    networks = {
-      freenode = {
-        server = {
+    extraConfig = ''
+      servers = (
+        {
           address = "chat.freenode.net";
-          port = 6697;
-          autoConnect = true;
-          ssl = {
-            enable = true;
-            verify = false;
-          };
-        };
-        nick = "kenran";
-        channels = {
-          nixos.autoJoin = true;
-          haskell.autoJoin = true;
-          zsh.autoJoin = true;
-          nim.autoJoin = true;
-          "##crawl".autoJoin = true;
-        };
-      };
-    };
+          chatnet = "freenode";
+          port = "6697";
+          use_tls = "yes";
+          tls_cert = "${private/irssi.pem}";
+          tls_verify = "no";
+          autoconnect = "yes";
+        }
+      );
+
+      chatnets = { freenode = { type = "IRC"; }; };
+
+      channels = (
+        { name = "#linux"; chatnet = "freenode"; autojoin = "yes"; },
+        { name = "#haskell"; chatnet = "freenode"; autojoin = "yes"; },
+        { name = "#nixos"; chatnet = "freenode"; autojoin = "yes"; },
+        { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
+        { name = "#nim"; chatnet = "freenode"; autojoin = "yes"; },
+        { name = "##crawl"; chatnet = "freenode"; autojoin = "yes"; }
+      );
+    '';
   };
 
   home.packages = with pkgs; [
