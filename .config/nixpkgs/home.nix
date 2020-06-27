@@ -92,21 +92,37 @@ set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
     '';
   };
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "20.09";
+  programs.irssi = {
+    enable = true;
+    networks = {
+      freenode = {
+        server = {
+          address = "chat.freenode.net";
+          port = 6697;
+          autoConnect = true;
+          ssl = {
+            enable = true;
+            verify = false;
+          };
+        };
+        nick = "kenran";
+        channels = {
+          nixos.autoJoin = true;
+          haskell.autoJoin = true;
+          zsh.autoJoin = true;
+          nim.autoJoin = true;
+          "##crawl".autoJoin = true;
+        };
+      };
+    };
+  };
 
   home.packages = with pkgs; [
     direnv
     emacs
     lorri
     ripgrep
-    vim
   ];
+
+  home.stateVersion = "20.09";
 }
