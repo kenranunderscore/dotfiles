@@ -5,6 +5,5 @@
 # Exceptions:
 
 !.gitignore
-!alacritty/
 !doom/
 !nixpkgs/
