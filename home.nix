@@ -5,6 +5,7 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   username = if isDarwin then "maier" else "kenran";
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
+  osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
 in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -157,12 +158,24 @@ in {
     nixfmt
     nix-prefetch-git
     ripgrep
+    xorg.xkbcomp
   ];
 
   xdg.configFile."doom" = {
     source = ./config-files/doom;
     recursive = true;
   };
+
+  programs.ssh.enable = true;
+
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+  };
+
+  home.file.".ssh/id_rsa".source = osPrivatePath + "/id_rsa";
+  home.file.".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
 
   home.file.".vimrc".source = ./config-files/vimrc;
   home.file.".xinitrc".source = ./config-files/xinitrc;
@@ -171,15 +184,23 @@ in {
 
   # We symlink our git submodule to circumvent a nix store directory being
   # read-only. Maybe there's a way to still use fetchFromGitHub...
-  home.activation.createAdditionalSymlinks =
-    dagEntryAfter [ "writeBoundary" ] ''
+  home.activation = {
+    createAdditionalSymlinks = dagEntryAfter [ "writeBoundary" ] ''
       ln -sf $HOME/dotfiles/config-files/doom-emacs $HOME/.emacs.d
     '';
 
-  home.activation.addXterm24bitTerminfo =
-    dagEntryAfter [ "writeBoundary" ] ''
+    addXterm24bitTerminfo = dagEntryAfter [ "writeBoundary" ] ''
       tic -x -o ~/.terminfo ${./config-files/xterm-24bit.terminfo}
     '';
+
+    addSshKey = dagEntryAfter [ "writeBoundary" ] ''
+      ssh-add ~/.ssh/id_rsa
+    '';
+
+    importGpgKey = dagEntryAfter [ "writeBoundary" ] ''
+      gpg --import ${osPrivatePath + "/gpg.key"}
+    '';
+  };
 
   home.stateVersion = "20.09";
 }
