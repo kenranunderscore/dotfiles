@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 
+with import <home-manager/modules/lib/dag.nix> { lib = pkgs.lib; };
 let
   isDarwin = pkgs.stdenv.isDarwin;
   username = if isDarwin then "maier" else "kenran";
@@ -126,6 +127,17 @@ in
     lorri
     ripgrep
   ];
+
+  xdg.configFile."doom" = {
+    source = ./doom;
+    recursive = true;
+  };
+
+  # We symlink our git submodule to circumvent a nix store directory being
+  # read-only. Maybe there's a way to still use fetchFromGitHub...
+  home.activation.createAdditionalSymlinks = dagEntryAfter [ "writeBoundary" ] ''
+    ln -sf $HOME/.config/nixpkgs/doom-emacs $HOME/.emacs.d
+  '';
 
   home.stateVersion = "20.09";
 }
