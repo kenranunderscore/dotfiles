@@ -133,6 +133,11 @@ in
     recursive = true;
   };
 
+  home.file.".vimrc".source = ./config-files/vimrc;
+  home.file.".xinitrc".source = ./config-files/xinitrc;
+  home.file.".zshrc".source = ./config-files/zshrc;
+  home.file.".zshenv".source = ./config-files/zshenv;
+
   # We symlink our git submodule to circumvent a nix store directory being
   # read-only. Maybe there's a way to still use fetchFromGitHub...
   home.activation.createAdditionalSymlinks = dagEntryAfter [ "writeBoundary" ] ''
