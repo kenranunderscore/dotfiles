@@ -5,8 +5,7 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   username = if isDarwin then "maier" else "kenran";
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
-in
-{
+in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -18,11 +17,11 @@ in
     package = pkgs.gitAndTools.gitFull;
     enable = true;
     userName = "Johannes Maier";
-    userEmail =
-      if isDarwin
-      then "johannes.maier@active-group.de"
-      else "johb.maier@gmail.com";
-    ignores = [];
+    userEmail = if isDarwin then
+      "johannes.maier@active-group.de"
+    else
+      "johb.maier@gmail.com";
+    ignores = [ ];
     signing.signByDefault = true;
     signing.key = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
     extraConfig = {
@@ -129,33 +128,28 @@ in
     "Xft.hintstyle" = "hintfull";
 
     # A basic default colorscheme; useful for roguelike games for instance.
-    "*.foreground"= "#fcfcfc";
+    "*.foreground" = "#fcfcfc";
     "*.background" = "#313133";
     "*.cursorColor" = "#cfcfc";
-    "*.color0" =     "#181819";
-    "*.color8" =     "#77747f";
-    "*.color1" =     "#ef2917";
-    "*.color9" =     "#ef2917";
-    "*.color2" =     "#97cc04";
-    "*.color10" =    "#97cc04";
-    "*.color3" =     "#ffad05";
-    "*.color11" =    "#ffad05";
-    "*.color4" =     "#2d7dd2";
-    "*.color12" =    "#2d7dd2";
-    "*.color5" =     "#f230aa";
-    "*.color13" =    "#f230aa";
-    "*.color6" =     "#5fbff9";
-    "*.color14" =    "#5fbff9";
-    "*.color7" =     "#94949f";
-    "*.color15" =    "#fcfcfc";
+    "*.color0" = "#181819";
+    "*.color8" = "#77747f";
+    "*.color1" = "#ef2917";
+    "*.color9" = "#ef2917";
+    "*.color2" = "#97cc04";
+    "*.color10" = "#97cc04";
+    "*.color3" = "#ffad05";
+    "*.color11" = "#ffad05";
+    "*.color4" = "#2d7dd2";
+    "*.color12" = "#2d7dd2";
+    "*.color5" = "#f230aa";
+    "*.color13" = "#f230aa";
+    "*.color6" = "#5fbff9";
+    "*.color14" = "#5fbff9";
+    "*.color7" = "#94949f";
+    "*.color15" = "#fcfcfc";
   };
 
-  home.packages = with pkgs; [
-    direnv
-    emacs
-    lorri
-    ripgrep
-  ];
+  home.packages = with pkgs; [ direnv emacs lorri ripgrep ];
 
   xdg.configFile."doom" = {
     source = ./doom;
@@ -169,9 +163,10 @@ in
 
   # We symlink our git submodule to circumvent a nix store directory being
   # read-only. Maybe there's a way to still use fetchFromGitHub...
-  home.activation.createAdditionalSymlinks = dagEntryAfter [ "writeBoundary" ] ''
-    ln -sf $HOME/.config/nixpkgs/doom-emacs $HOME/.emacs.d
-  '';
+  home.activation.createAdditionalSymlinks =
+    dagEntryAfter [ "writeBoundary" ] ''
+      ln -sf $HOME/.config/nixpkgs/doom-emacs $HOME/.emacs.d
+    '';
 
   home.stateVersion = "20.09";
 }
