@@ -7,5 +7,4 @@ bootstrap:
 	nix-shell '<home-manager>' -A install
 	mkdir -p $(NIX_CFG_HOME)
 	ln -sf $(PWD)/home.nix $(NIX_CFG_HOME)/home.nix
-	ln -sf $(PWD)/config.nix $(NIX_CFG_HOME)/config.nix # TODO unnecessary later on
 	home-manager switch

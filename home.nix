@@ -7,12 +7,14 @@ let
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
 in {
+  nixpkgs.config = import ./config-files/nixpkgs-config.nix;
+  xdg.configFile."nixpkgs/config.nix".source =
+    ./config-files/nixpkgs-config.nix;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home = { inherit username homeDirectory; };
-
-  nixpkgs.config.firefox.enableFlash = false;
 
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
