@@ -149,7 +149,15 @@ in {
     "*.color15" = "#fcfcfc";
   };
 
-  home.packages = with pkgs; [ direnv emacs lorri ripgrep ];
+  home.packages = with pkgs; [
+    direnv
+    emacs
+    gnumake
+    lorri
+    nixfmt
+    nix-prefetch-git
+    ripgrep
+  ];
 
   xdg.configFile."doom" = {
     source = ./doom;
