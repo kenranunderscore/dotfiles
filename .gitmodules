@@ -1,4 +1,4 @@
-[submodule ".config/nixpkgs/doom-emacs"]
-	path = .config/nixpkgs/doom-emacs
-	url = https://github.com/hlissner/doom-emacs.git
+[submodule "config-files/doom-emacs"]
+	path = config-files/doom-emacs
+	url = https://github.com/hlissner/doom-emacs
 	branch = develop

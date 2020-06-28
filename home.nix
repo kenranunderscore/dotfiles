@@ -160,7 +160,7 @@ in {
   ];
 
   xdg.configFile."doom" = {
-    source = ./doom;
+    source = ./config-files/doom;
     recursive = true;
   };
 
@@ -173,7 +173,7 @@ in {
   # read-only. Maybe there's a way to still use fetchFromGitHub...
   home.activation.createAdditionalSymlinks =
     dagEntryAfter [ "writeBoundary" ] ''
-      ln -sf $HOME/.config/nixpkgs/doom-emacs $HOME/.emacs.d
+      ln -sf $HOME/dotfiles/config-files/doom-emacs $HOME/.emacs.d
     '';
 
   home.activation.addXterm24bitTerminfo =
