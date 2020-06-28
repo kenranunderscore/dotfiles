@@ -16,95 +16,40 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
+  networking.hostName = "roke";
   networking.useDHCP = false;
   networking.interfaces.enp3s0.useDHCP = true;
 
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "us";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+  };
 
-  # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alacritty            # Terminal emulator
-    cacert
-    emacs
-    feh                  # Set the background image
-    firefox-bin
-    git
-    irssi                # IRC client
-    lsof                 # List open files and PTYs
-    manpages             # We want that documentation!
-    SDL2
-    SDL2_image
-    tmux                 # Terminal multiplexer
-    tree                 # File system as a tree
-    unzip
-    vim
+    curl
     wget
-    xorg.xrandr
-
-    # Programming languages
-    clang                # C/C++/.. compiler (LLVM-frontend)
-    nim
-    rustup
   ];
-
-  environment.pathsToLink = [ "/libexec" ];
 
   # Some fonts I like
   fonts.fonts = with pkgs; [
-    anonymousPro
-    go-font
-    hack-font
     ibm-plex
-    monoid
-    noto-fonts
-    overpass
     source-code-pro
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs.ssh.startAgent = true;
 
-  # Needed to enable using `zsh` as main shell
-  programs.zsh.enable = true;
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     displayManager.startx.enable = true;
     libinput.naturalScrolling = true;
+    libinput.enable = true;
     desktopManager = {
-      default = "none";
       xterm.enable = false;
     };
     windowManager.i3 = {
@@ -116,11 +61,9 @@
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kenran = {
     isNormalUser = true;
     home = "/home/kenran";
-    shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
@@ -128,7 +71,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
-
+  system.stateVersion = "20.09"; # Did you read the comment?
 }
 
