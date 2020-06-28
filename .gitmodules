@@ -2,3 +2,6 @@
 	path = config-files/doom-emacs
 	url = https://github.com/hlissner/doom-emacs
 	branch = develop
+[submodule "private"]
+	path = private
+	url = git@github.com:kenranunderscore/private-config.git
