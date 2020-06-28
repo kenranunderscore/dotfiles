@@ -176,5 +176,10 @@ in {
       ln -sf $HOME/.config/nixpkgs/doom-emacs $HOME/.emacs.d
     '';
 
+  home.activation.addXterm24bitTerminfo =
+    dagEntryAfter [ "writeBoundary" ] ''
+      tic -x -o ~/.terminfo ${./config-files/xterm-24bit.terminfo}
+    '';
+
   home.stateVersion = "20.09";
 }
