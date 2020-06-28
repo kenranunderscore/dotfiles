@@ -118,6 +118,12 @@ in {
         { name = "#nim"; chatnet = "freenode"; autojoin = "yes"; },
         { name = "##crawl"; chatnet = "freenode"; autojoin = "yes"; }
       );
+
+      settings = {
+        "fe-common/core" = {
+          theme = "h3rbz";
+        };
+      };
     '';
   };
 
@@ -181,6 +187,8 @@ in {
   home.file.".xinitrc".source = ./config-files/xinitrc;
   home.file.".zshrc".source = ./config-files/zshrc;
   home.file.".zshenv".source = ./config-files/zshenv;
+
+  home.file.".irssi/h3rbz.theme".source = ./config-files/h3rbz.theme;
 
   # We symlink our git submodule to circumvent a nix store directory being
   # read-only. Maybe there's a way to still use fetchFromGitHub...
