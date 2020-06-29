@@ -1,7 +1,3 @@
-[submodule "config-files/doom-emacs"]
-	path = config/doom-emacs
-	url = https://github.com/hlissner/doom-emacs
-	branch = develop
 [submodule "private"]
 	path = private
 	url = https://github.com/kenranunderscore/private-config
