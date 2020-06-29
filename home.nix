@@ -9,132 +9,134 @@ let
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
   shellPath = "${pkgs.zsh}/bin/zsh";
 in {
+  # Config for nixpkgs when used by home-manager.
   nixpkgs.config = import ./config-files/nixpkgs-config.nix;
-  xdg.configFile."nixpkgs/config.nix".source =
-    ./config-files/nixpkgs-config.nix;
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
 
-  home = { inherit username homeDirectory; };
-
-  programs.git = {
-    package = pkgs.gitAndTools.gitFull;
-    enable = true;
-    userName = "Johannes Maier";
-    userEmail = if isDarwin then
-      "johannes.maier@active-group.de"
-    else
-      "johb.maier@gmail.com";
-    ignores = [ ];
-    signing.signByDefault = true;
-    signing.key = if isDarwin then
-      "0x4DC80C3B727DC1EE"
-    else
-      "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
-    extraConfig = {
-      pull.rebase = "false";
-      core.editor = "vim";
-    };
-  };
-
-  programs.kitty = {
-    enable = true;
-    font = {
-      package = pkgs.hack-font;
-      name = "Hack";
-    };
-    settings = {
-      shell = shellPath;
-      font_size = "12.0";
-      adjust_line_height = 1;
-      scrollback_lines = 50000;
-      hide_window_decorations = true;
-      remember_window_size = false;
-      initial_window_width = 800;
-      initial_window_height = 520;
-      enable_audio_bell = false;
-      # Base16 Atelier Estuary - kitty color config
-      # Scheme by Bram de Haan (http://atelierbramdehaan.nl)
-      background = "#22221b";
-      foreground = "#929181";
-      selection_background = "#929181";
-      selection_foreground = "#22221b";
-      url_color = "#878573";
-      cursor = "#929181";
-      active_border_color = "#6c6b5a";
-      inactive_border_color = "#302f27";
-      active_tab_background = "#22221b";
-      active_tab_foreground = "#929181";
-      inactive_tab_background = "#302f27";
-      inactive_tab_foreground = "#878573";
-      tab_bar_background = "#302f27";
-      color0 = "#22221b";
-      color1 = "#ba6236";
-      color2 = "#7d9726";
-      color3 = "#a5980d";
-      color4 = "#36a166";
-      color5 = "#5f9182";
-      color6 = "#5b9d48";
-      color7 = "#929181";
-      color8 = "#6c6b5a";
-      color9 = "#ae7313";
-      color10 = "#302f27";
-      color11 = "#5f5e4e";
-      color12 = "#878573";
-      color13 = "#e7e6df";
-      color14 = "#9d6c7c";
-      color15 = "#f4f3ec";
-    };
-  };
-
-  programs.tmux = {
-    enable = true;
-    escapeTime = 0;
-    historyLimit = 50000;
-    newSession = true;
-    terminal = "xterm-24bit";
-    resizeAmount = 10;
-    extraConfig = ''
-      set-option -g renumber-windows on
-      set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
-      set -g default-shell ${shellPath}
-    '';
-  };
-
-  programs.irssi = {
-    enable = true;
-    extraConfig = ''
-      servers = (
-        {
-          address = "chat.freenode.net";
-          chatnet = "freenode";
-          port = "6697";
-          use_tls = "yes";
-          tls_cert = "${private/irssi.pem}";
-          tls_verify = "no";
-          autoconnect = "yes";
-        }
-      );
-
-      chatnets = { freenode = { type = "IRC"; }; };
-
-      channels = (
-        { name = "#linux"; chatnet = "freenode"; autojoin = "yes"; },
-        { name = "#haskell"; chatnet = "freenode"; autojoin = "yes"; },
-        { name = "#nixos"; chatnet = "freenode"; autojoin = "yes"; },
-        { name = "#home-manager"; chatnet = "freenode"; autojoin = "yes"; },
-        { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
-        { name = "#nim"; chatnet = "freenode"; autojoin = "yes"; },
-        { name = "##crawl"; chatnet = "freenode"; autojoin = "yes"; }
-      );
-
-      settings = {
-        "fe-common/core" = {
-          theme = "h3rbz";
-        };
+    git = {
+      package = pkgs.gitAndTools.gitFull;
+      enable = true;
+      userName = "Johannes Maier";
+      userEmail = if isDarwin then
+        "johannes.maier@active-group.de"
+      else
+        "johb.maier@gmail.com";
+      ignores = [ ];
+      signing.signByDefault = true;
+      signing.key = if isDarwin then
+        "0x4DC80C3B727DC1EE"
+      else
+        "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
+      extraConfig = {
+        pull.rebase = "false";
+        core.editor = "vim";
       };
-    '';
+    };
+
+    kitty = {
+      enable = true;
+      font = {
+        package = pkgs.hack-font;
+        name = "Hack";
+      };
+      settings = {
+        shell = shellPath;
+        font_size = "12.0";
+        adjust_line_height = 1;
+        scrollback_lines = 50000;
+        hide_window_decorations = true;
+        remember_window_size = false;
+        initial_window_width = 800;
+        initial_window_height = 520;
+        enable_audio_bell = false;
+        # Base16 Atelier Estuary - kitty color config
+        # Scheme by Bram de Haan (http://atelierbramdehaan.nl)
+        background = "#22221b";
+        foreground = "#929181";
+        selection_background = "#929181";
+        selection_foreground = "#22221b";
+        url_color = "#878573";
+        cursor = "#929181";
+        active_border_color = "#6c6b5a";
+        inactive_border_color = "#302f27";
+        active_tab_background = "#22221b";
+        active_tab_foreground = "#929181";
+        inactive_tab_background = "#302f27";
+        inactive_tab_foreground = "#878573";
+        tab_bar_background = "#302f27";
+        color0 = "#22221b";
+        color1 = "#ba6236";
+        color2 = "#7d9726";
+        color3 = "#a5980d";
+        color4 = "#36a166";
+        color5 = "#5f9182";
+        color6 = "#5b9d48";
+        color7 = "#929181";
+        color8 = "#6c6b5a";
+        color9 = "#ae7313";
+        color10 = "#302f27";
+        color11 = "#5f5e4e";
+        color12 = "#878573";
+        color13 = "#e7e6df";
+        color14 = "#9d6c7c";
+        color15 = "#f4f3ec";
+      };
+    };
+
+    tmux = {
+      enable = true;
+      escapeTime = 0;
+      historyLimit = 50000;
+      newSession = true;
+      terminal = "xterm-24bit";
+      resizeAmount = 10;
+      extraConfig = ''
+        set-option -g renumber-windows on
+        set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
+        set -g default-shell ${shellPath}
+      '';
+    };
+
+    irssi = {
+      enable = true;
+      extraConfig = ''
+        servers = (
+          {
+            address = "chat.freenode.net";
+            chatnet = "freenode";
+            port = "6697";
+            use_tls = "yes";
+            tls_cert = "${private/irssi.pem}";
+            tls_verify = "no";
+            autoconnect = "yes";
+          }
+        );
+
+        chatnets = { freenode = { type = "IRC"; }; };
+
+        channels = (
+          { name = "#linux"; chatnet = "freenode"; autojoin = "yes"; },
+          { name = "#haskell"; chatnet = "freenode"; autojoin = "yes"; },
+          { name = "#nixos"; chatnet = "freenode"; autojoin = "yes"; },
+          { name = "#home-manager"; chatnet = "freenode"; autojoin = "yes"; },
+          { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
+          { name = "#nim"; chatnet = "freenode"; autojoin = "yes"; },
+          { name = "##crawl"; chatnet = "freenode"; autojoin = "yes"; }
+        );
+
+        settings = {
+          "fe-common/core" = {
+            theme = "h3rbz";
+          };
+        };
+      '';
+    };
+
+    ssh.enable = true;
+    gpg.enable = true;
+    zsh.enable = true;
   };
 
   xresources.properties = {
@@ -166,74 +168,78 @@ in {
     "*.color15" = "#fcfcfc";
   };
 
-  home.packages = with pkgs; [
-    direnv
-    emacs
-    gnumake
-    lorri
-    nixfmt
-    nix-prefetch-git
-    ripgrep
-    xorg.xkbcomp
-  ];
-
-  xdg.configFile."doom" = {
-    source = ./config-files/doom;
-    recursive = true;
+  xdg.configFile = {
+    "doom" = {
+      source = ./config-files/doom;
+      recursive = true;
+    };
+    "nixpkgs/config.nix".source = ./config-files/nixpkgs-config.nix;
   };
 
-  programs.ssh.enable = true;
-
-  programs.gpg.enable = true;
   services.gpg-agent = {
     enable = !isDarwin;
     enableSshSupport = true;
   };
 
-  programs.zsh.enable = true;
+  home = {
+    stateVersion = "20.09";
 
-  # The private key file is linked to directly during activation.
-  home.file.".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
+    inherit username homeDirectory;
 
-  home.file.".vimrc".source = ./config-files/vimrc;
-  home.file.".xinitrc".source = ./config-files/xinitrc;
-  home.file.".zshrc".source = ./config-files/zshrc;
-  home.file.".zshenv".source = ./config-files/zshenv;
+    packages = with pkgs; [
+      direnv
+      emacs
+      gnumake
+      lorri
+      nixfmt
+      nix-prefetch-git
+      ripgrep
+      xorg.xkbcomp
+    ];
 
-  home.file.".irssi/h3rbz.theme".source = ./config-files/h3rbz.theme;
+    file = {
+      # The private key file is linked to directly during activation.
+      ".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
 
-  # We symlink our git submodule to circumvent a nix store directory being
-  # read-only. Maybe there's a way to still use fetchFromGitHub...
-  home.activation = {
-    symlinkDoomDir = dagEntryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ln -snf ${pwd}/config-files/doom-emacs $HOME/.emacs.d
-    '';
+      ".vimrc".source = ./config-files/vimrc;
+      ".xinitrc".source = ./config-files/xinitrc;
+      ".zshrc".source = ./config-files/zshrc;
+      ".zshenv".source = ./config-files/zshenv;
 
-    correctKeyPermissions = dagEntryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD cd ${pwd}/private && \
-      $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa*
-    '';
+      ".irssi/h3rbz.theme".source = ./config-files/h3rbz.theme;
+    };
 
-    addXterm24bitTerminfo =
-      let tic = if isDarwin then "/usr/bin/tic" else "tic";
-      in dagEntryAfter [ "writeBoundary" ] ''
-        $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${
-          ./config-files/xterm-24bit.terminfo
-        }
+    # We symlink our git submodule to circumvent a nix store directory being
+    # read-only. Maybe there's a way to still use fetchFromGitHub...
+    activation = {
+      symlinkDoomDir = dagEntryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ln -snf ${pwd}/config-files/doom-emacs $HOME/.emacs.d
       '';
 
-    addSshKey = let privateKeyPath = osPrivatePath + "/id_rsa";
-    in dagEntryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ln -sf ${
-        builtins.toPath privateKeyPath
-      } $HOME/.ssh/id_rsa && \
-      $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa
-    '';
+      correctKeyPermissions = dagEntryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD cd ${pwd}/private && \
+        $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa*
+      '';
 
-    importGpgKey = dagEntryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD gpg --import ${osPrivatePath + "/gpg.key"}
-    '';
+      addXterm24bitTerminfo =
+        let tic = if isDarwin then "/usr/bin/tic" else "tic";
+        in dagEntryAfter [ "writeBoundary" ] ''
+          $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${
+            ./config-files/xterm-24bit.terminfo
+          }
+        '';
+
+      addSshKey = let privateKeyPath = osPrivatePath + "/id_rsa";
+      in dagEntryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ln -sf ${
+          builtins.toPath privateKeyPath
+        } $HOME/.ssh/id_rsa && \
+        $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa
+      '';
+
+      importGpgKey = dagEntryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD gpg --import ${osPrivatePath + "/gpg.key"}
+      '';
+    };
   };
-
-  home.stateVersion = "20.09";
 }
