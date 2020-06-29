@@ -23,9 +23,6 @@ zinit snippet OMZ::lib/completion.zsh
 zinit snippet OMZ::lib/key-bindings.zsh
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 
-# zinit ice wait"0" atload"_zsh_autosuggest_start"
-# zinit light zsh-users/zsh-autosuggestions
-
 zinit ice wait"1" lucid
 zinit load psprint/zsh-navigation-tools
 
@@ -49,10 +46,6 @@ zinit ice wait"0" atinit"zpcompinit"
 zinit light zdharma/fast-syntax-highlighting
 
 export GPG_TTY=$(tty)
-
-if (( $+commands[opam] )) then
-    eval `opam env`
-fi
 
 if [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh
