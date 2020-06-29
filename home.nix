@@ -7,6 +7,7 @@ let
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
   pwd = builtins.toPath ./.;
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
+  shellPath = "${pkgs.zsh}/bin/zsh";
 in {
   nixpkgs.config = import ./config-files/nixpkgs-config.nix;
   xdg.configFile."nixpkgs/config.nix".source =
@@ -44,6 +45,7 @@ in {
       name = "Hack";
     };
     settings = {
+      shell = shellPath;
       font_size = "12.0";
       adjust_line_height = 1;
       scrollback_lines = 50000;
@@ -96,6 +98,7 @@ in {
     extraConfig = ''
       set-option -g renumber-windows on
       set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
+      set -g default-shell ${shellPath}
     '';
   };
 
@@ -186,6 +189,8 @@ in {
     enable = !isDarwin;
     enableSshSupport = true;
   };
+
+  programs.zsh.enable = true;
 
   # The private key file is linked to directly during activation.
   home.file.".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
