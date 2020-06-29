@@ -26,7 +26,10 @@ in {
       "johb.maier@gmail.com";
     ignores = [ ];
     signing.signByDefault = true;
-    signing.key = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
+    signing.key = if isDarwin then
+      "0x4DC80C3B727DC1EE"
+    else
+      "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
     extraConfig = {
       pull.rebase = "false";
       core.editor = "vim";
@@ -178,11 +181,11 @@ in {
 
   programs.gpg.enable = true;
   services.gpg-agent = {
-    enable = true;
+    enable = !isDarwin;
     enableSshSupport = true;
   };
 
-  home.file.".ssh/id_rsa".source = osPrivatePath + "/id_rsa";
+  # The private key file is linked to directly during activation.
   home.file.".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
 
   home.file.".vimrc".source = ./config-files/vimrc;
@@ -192,23 +195,38 @@ in {
 
   home.file.".irssi/h3rbz.theme".source = ./config-files/h3rbz.theme;
 
+  # TODO possible to replace absolute path to =dotfiles= with PWD?
+
   # We symlink our git submodule to circumvent a nix store directory being
   # read-only. Maybe there's a way to still use fetchFromGitHub...
   home.activation = {
-    createAdditionalSymlinks = dagEntryAfter [ "writeBoundary" ] ''
-      ln -sf $HOME/dotfiles/config-files/doom-emacs $HOME/.emacs.d
+    symlinkDoomDir = dagEntryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD ln -snf $HOME/dotfiles/config-files/doom-emacs $HOME/.emacs.d
     '';
 
-    addXterm24bitTerminfo = dagEntryAfter [ "writeBoundary" ] ''
-      tic -x -o ~/.terminfo ${./config-files/xterm-24bit.terminfo}
+    correctKeyPermissions = dagEntryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD cd $HOME/dotfiles/private && \
+      $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa*
     '';
 
-    addSshKey = dagEntryAfter [ "writeBoundary" ] ''
-      ssh-add ~/.ssh/id_rsa
+    addXterm24bitTerminfo =
+      let tic = if isDarwin then "/usr/bin/tic" else "tic";
+      in dagEntryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${
+          ./config-files/xterm-24bit.terminfo
+        }
+      '';
+
+    addSshKey = let privateKeyPath = osPrivatePath + "/id_rsa";
+    in dagEntryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD ln -sf ${
+        builtins.toPath privateKeyPath
+      } $HOME/.ssh/id_rsa && \
+      $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa
     '';
 
     importGpgKey = dagEntryAfter [ "writeBoundary" ] ''
-      gpg --import ${osPrivatePath + "/gpg.key"}
+      $DRY_RUN_CMD gpg --import ${osPrivatePath + "/gpg.key"}
     '';
   };
 
