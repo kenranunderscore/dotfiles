@@ -10,7 +10,7 @@ let
   shellPath = "${pkgs.zsh}/bin/zsh";
 in {
   # Config for nixpkgs when used by home-manager.
-  nixpkgs.config = import ./config-files/nixpkgs-config.nix;
+  nixpkgs.config = import ./config/nixpkgs-config.nix;
 
   programs = {
     home-manager.enable = true;
@@ -170,10 +170,10 @@ in {
 
   xdg.configFile = {
     "doom" = {
-      source = ./config-files/doom;
+      source = ./config/doom;
       recursive = true;
     };
-    "nixpkgs/config.nix".source = ./config-files/nixpkgs-config.nix;
+    "nixpkgs/config.nix".source = ./config/nixpkgs-config.nix;
   };
 
   services.gpg-agent = {
@@ -201,19 +201,19 @@ in {
       # The private key file is linked to directly during activation.
       ".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
 
-      ".vimrc".source = ./config-files/vimrc;
-      ".xinitrc".source = ./config-files/xinitrc;
-      ".zshrc".source = ./config-files/zshrc;
-      ".zshenv".source = ./config-files/zshenv;
+      ".vimrc".source = ./config/vimrc;
+      ".xinitrc".source = ./config/xinitrc;
+      ".zshrc".source = ./config/zshrc;
+      ".zshenv".source = ./config/zshenv;
 
-      ".irssi/h3rbz.theme".source = ./config-files/h3rbz.theme;
+      ".irssi/h3rbz.theme".source = ./config/h3rbz.theme;
     };
 
     # We symlink our git submodule to circumvent a nix store directory being
     # read-only. Maybe there's a way to still use fetchFromGitHub...
     activation = {
       symlinkDoomDir = dagEntryAfter [ "writeBoundary" ] ''
-        $DRY_RUN_CMD ln -snf ${pwd}/config-files/doom-emacs $HOME/.emacs.d
+        $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d
       '';
 
       correctKeyPermissions = dagEntryAfter [ "writeBoundary" ] ''
@@ -225,7 +225,7 @@ in {
         let tic = if isDarwin then "/usr/bin/tic" else "tic";
         in dagEntryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${
-            ./config-files/xterm-24bit.terminfo
+            ./config/xterm-24bit.terminfo
           }
         '';
 

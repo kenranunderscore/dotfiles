@@ -1,5 +1,5 @@
 [submodule "config-files/doom-emacs"]
-	path = config-files/doom-emacs
+	path = config/doom-emacs
 	url = https://github.com/hlissner/doom-emacs
 	branch = develop
 [submodule "private"]
