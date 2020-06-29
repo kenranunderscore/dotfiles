@@ -7,6 +7,7 @@
 (mu4e-alert-set-default-style 'notifier)
 (add-hook! mu4e-main-mode #'mu4e-alert-enable-notifications)
 (add-hook! mu4e-main-mode #'mu4e-alert-enable-mode-line-display)
+(remove-hook! mu4e-compose-mode #'org-mu4e-compose-org-mode)
 (setq doom-modeline-mu4e t)
 (set-email-account!
  "ag"
