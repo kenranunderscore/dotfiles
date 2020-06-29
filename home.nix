@@ -23,7 +23,7 @@ in {
         "johannes.maier@active-group.de"
       else
         "johb.maier@gmail.com";
-      ignores = [ ];
+      ignores = [ "*.swp" ];
       signing.signByDefault = true;
       signing.key = if isDarwin then
         "0x4DC80C3B727DC1EE"
