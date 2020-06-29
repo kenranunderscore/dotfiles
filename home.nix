@@ -5,6 +5,7 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   username = if isDarwin then "maier" else "kenran";
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
+  pwd = builtins.toPath ./.;
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
 in {
   nixpkgs.config = import ./config-files/nixpkgs-config.nix;
@@ -196,17 +197,15 @@ in {
 
   home.file.".irssi/h3rbz.theme".source = ./config-files/h3rbz.theme;
 
-  # TODO possible to replace absolute path to =dotfiles= with PWD?
-
   # We symlink our git submodule to circumvent a nix store directory being
   # read-only. Maybe there's a way to still use fetchFromGitHub...
   home.activation = {
     symlinkDoomDir = dagEntryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ln -snf $HOME/dotfiles/config-files/doom-emacs $HOME/.emacs.d
+      $DRY_RUN_CMD ln -snf ${pwd}/config-files/doom-emacs $HOME/.emacs.d
     '';
 
     correctKeyPermissions = dagEntryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD cd $HOME/dotfiles/private && \
+      $DRY_RUN_CMD cd ${pwd}/private && \
       $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa*
     '';
 
