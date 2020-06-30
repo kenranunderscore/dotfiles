@@ -198,6 +198,13 @@ in {
         $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d
       '';
 
+      symlinkMacOSApps = let
+        action = if isDarwin then
+          "$DRY_RUN_CMD ln -snf $HOME/.nix-profile/Applications/*.app ~/Applications/"
+        else
+          "";
+      in dagEntryAfter [ "writeBoundary" ] action;
+
       addXterm24bitTerminfo =
         let tic = if isDarwin then "/usr/bin/tic" else "tic";
         in dagEntryAfter [ "writeBoundary" ] ''
