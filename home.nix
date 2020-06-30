@@ -198,26 +198,20 @@ in {
         $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d
       '';
 
-      correctKeyPermissions = dagEntryAfter [ "writeBoundary" ] ''
-        $DRY_RUN_CMD cd ${pwd}/private && \
-        $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa*
-      '';
-
       addXterm24bitTerminfo =
         let tic = if isDarwin then "/usr/bin/tic" else "tic";
         in dagEntryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${./config/xterm-24bit.terminfo}
         '';
 
-      addSshKey = let privateKeyPath = osPrivatePath + "/id_rsa";
+      handlePrivateKeys = let privateKeyPath = osPrivatePath + "/id_rsa";
       in dagEntryAfter [ "writeBoundary" ] ''
         $DRY_RUN_CMD ln -sf ${
           builtins.toPath privateKeyPath
         } $HOME/.ssh/id_rsa && \
-        $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa
-      '';
-
-      importGpgKey = dagEntryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD cd ${pwd}/private && \
+        $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa* && \
+        $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa && \
         $DRY_RUN_CMD gpg --import ${osPrivatePath + "/gpg.key"}
       '';
     };
