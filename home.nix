@@ -10,7 +10,10 @@ let
   shellPath = "${pkgs.zsh}/bin/zsh";
 in {
   # Config for nixpkgs when used by home-manager.
-  nixpkgs.config = import ./config/nixpkgs-config.nix;
+  nixpkgs = {
+    config = import ./config/nixpkgs-config.nix;
+    overlays = [ (import ./config/emacs-overlay.nix) ];
+  };
 
   programs = {
     home-manager.enable = true;
@@ -171,7 +174,8 @@ in {
 
     packages = with pkgs; [
       direnv
-      emacs
+      # emacsGcc doesn't work on darwin at the moment.
+      (if isDarwin then emacsUnstable else emacsGcc)
       gnumake
       lorri
       nixfmt
