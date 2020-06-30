@@ -1,6 +1,6 @@
 ;;; ~/.config/doom/lisp/macos.el -*- lexical-binding: t; -*-
 
-(setq doom-font (font-spec :family "SF Mono" :size 17))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 20))
 
 ;; mu4e
 (setq +mu4e-backend 'offlineimap)
