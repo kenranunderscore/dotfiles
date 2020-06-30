@@ -25,6 +25,7 @@ in {
       };
       settings = {
         shell = shellPath + (if isDarwin then " --login" else "");
+        macos_option_as_alt = true;
         font_size = if isDarwin then "20.0" else "12.0";
         adjust_line_height = 1;
         scrollback_lines = 50000;
