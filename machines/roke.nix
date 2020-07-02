@@ -29,8 +29,6 @@
   time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
-    curl
-    wget
   ];
 
   # Some fonts I like
@@ -46,19 +44,15 @@
 
   services.xserver = {
     enable = true;
-    displayManager.startx.enable = true;
     libinput.naturalScrolling = true;
     libinput.enable = true;
-    desktopManager = {
-      xterm.enable = false;
+    displayManager = {
+      defaultSession = "none+bspwm";
+      lightdm.enable = true;
+      lightdm.greeters.mini.enable = true;
+      lightdm.greeters.mini.user = "kenran";
     };
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-      ];
-    };
+    windowManager.bspwm.enable = true;
   };
 
   users.users.kenran = {

@@ -155,11 +155,13 @@ in {
   };
 
   xdg.configFile = {
+    "bspwm/bspwmrc".source = ./config/bspwmrc;
     "doom" = {
       source = ./config/doom;
       recursive = true;
     };
     "nixpkgs/config.nix".source = ./config/nixpkgs-config.nix;
+    "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
   };
 
   services.gpg-agent = {
@@ -173,6 +175,7 @@ in {
     inherit username homeDirectory;
 
     packages = with pkgs; [
+      curl
       direnv
       # emacsGcc doesn't work on darwin at the moment.
       (if isDarwin then emacsUnstable else emacsGcc)
@@ -181,19 +184,17 @@ in {
       nixfmt
       nix-prefetch-git
       ripgrep
+      wget
       xorg.xkbcomp
     ];
 
     file = {
+      ".irssi/h3rbz.theme".source = ./config/h3rbz.theme;
       # The private key file is linked to directly during activation.
       ".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
-
       ".vimrc".source = ./config/vimrc;
-      ".xinitrc".source = ./config/xinitrc;
       ".zshrc".source = ./config/zshrc;
       ".zshenv".source = ./config/zshenv;
-
-      ".irssi/h3rbz.theme".source = ./config/h3rbz.theme;
     };
 
     # We symlink our git submodule to circumvent a nix store directory being
