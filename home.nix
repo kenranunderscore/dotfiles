@@ -71,6 +71,10 @@ in {
       };
     };
 
+    rofi = {
+      enable = !isDarwin;
+    };
+
     tmux = {
       enable = true;
       escapeTime = 0;
@@ -164,9 +168,24 @@ in {
     "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
   };
 
-  services.gpg-agent = {
-    enable = !isDarwin;
-    enableSshSupport = true;
+  services = {
+    gpg-agent = {
+      enable = !isDarwin;
+      enableSshSupport = true;
+    };
+    polybar = {
+      enable = !isDarwin;
+      config = {
+        "bar/top" = {
+          #monitor = "\${env:MONITOR:DVI-I-1}";
+          width = "100%";
+          height = "3%";
+          radius = 0;
+          modules-center = "date";
+        };
+      };
+      script = "polybar bar &";
+    };
   };
 
   home = {

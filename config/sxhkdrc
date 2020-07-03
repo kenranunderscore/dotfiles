@@ -7,8 +7,8 @@ super + Return
 	kitty
 
 # program launcher
-super + @space
-	dmenu_run
+super + space
+	rofi -show drun -modi drun,run -show-icons
 
 # make sxhkd reload its configuration files:
 super + Escape
