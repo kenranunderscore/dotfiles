@@ -165,6 +165,7 @@ in {
       recursive = true;
     };
     "nixpkgs/config.nix".source = ./config/nixpkgs-config.nix;
+    "polybar/config".source = ./config/polybar;
     "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
   };
 
@@ -172,19 +173,6 @@ in {
     gpg-agent = {
       enable = !isDarwin;
       enableSshSupport = true;
-    };
-    polybar = {
-      enable = !isDarwin;
-      config = {
-        "bar/top" = {
-          #monitor = "\${env:MONITOR:DVI-I-1}";
-          width = "100%";
-          height = "3%";
-          radius = 0;
-          modules-center = "date";
-        };
-      };
-      script = "polybar bar &";
     };
   };
 
@@ -202,6 +190,7 @@ in {
       lorri
       nixfmt
       nix-prefetch-git
+      polybar
       ripgrep
       wget
       xorg.xkbcomp

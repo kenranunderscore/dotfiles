@@ -1,8 +1,9 @@
 #!/nix/store/5hplxs3kprdp6v62qk3di6a1m1s1paiq-bash-4.4-p23/bin/sh
 
 sxhkd &
-xrandr --output DVI-D-1 --left-of DVI-I-1 & \
+xrandr --output DVI-D-1 --left-of DVI-I-1 &
 xkbcomp ~/dhm.xkb $DISPLAY &
+polybar main &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
