@@ -192,6 +192,7 @@ in {
       nix-prefetch-git
       polybar
       ripgrep
+      vim
       wget
       xorg.xkbcomp
     ];
