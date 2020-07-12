@@ -1,3 +1,30 @@
+[colors]
+black = ${xrdb:color0}
+bblack = ${xrdb:color8}
+red = ${xrdb:color1}
+bred = ${xrdb:color9}
+green = ${xrdb:color2}
+bgreen = ${xrdb:color10}
+yellow = ${xrdb:color3}
+byellow = ${xrdb:color11}
+blue = ${xrdb:color4}
+bblue = ${xrdb:color12}
+magenta = ${xrdb:color5}
+bmagenta = ${xrdb:color13}
+cyan = ${xrdb:color6}
+bcyan = ${xrdb:color14}
+white = ${xrdb:color7}
+bwhite = ${xrdb:color15}
+
+bg = ${xrdb:background}
+fg = ${colors.magenta}
+bg-alt = #1E2029
+fg-alt = #373844
+bg-dark = #181a23
+
+alert = ${colors.yellow}
+accent = #604c7e
+
 [bar/left]
 monitor = DVI-I-1
 monitor-strict = true
@@ -10,6 +37,8 @@ modules-right = bspwm
 font-0 = "DejaVu Sans Mono:pixelsize=9;2"
 padding-left = 2
 padding-right = 2
+background = ${colors.bg}
+foreground = ${colors.fg}
 
 [bar/right]
 monitor = DVI-D-1
@@ -23,6 +52,8 @@ modules-right =
 font-0 = "DejaVu Sans Mono:pixelsize=9;2"
 padding-left = 2
 padding-right = 2
+background = ${colors.bg}
+foreground = ${colors.fg}
 
 [module/date]
 type = internal/date
@@ -34,3 +65,23 @@ label = %time%  %date%
 [module/bspwm]
 type = internal/bspwm
 pin-workspaces = true
+label-focused = %icon%
+label-focused-background = ${colors.bg-dark}
+label-focused-foreground = ${colors.fg}
+label-focused-padding = 1
+label-occupied = %icon%
+label-occupied-foreground = ${colors.alert}
+label-occupied-padding = 1
+label-empty = %icon%
+label-empty-foreground = ${colors.fg-alt}
+label-empty-padding = 1
+format = <label-state> <label-mode>
+label-padding = 1
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
