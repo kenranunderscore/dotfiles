@@ -161,7 +161,7 @@
 
        :email
        mu4e       ; WIP
-       ;;notmuch             ; WIP
+       notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 
        :checkers

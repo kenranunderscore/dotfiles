@@ -127,6 +127,31 @@ in {
     ssh.enable = true;
     gpg.enable = true;
     zsh.enable = true;
+    mbsync.enable = true;
+    msmtp.enable = true;
+    notmuch = {
+      enable = true;
+      hooks = {
+        preNew = "mbsync --all";
+      };
+    };
+    password-store.enable = true;
+  };
+
+  accounts.email = {
+    accounts.gmail = {
+      address = "johb.maier@gmail.com";
+      flavor = "gmail.com";
+      primary = true;
+      mbsync = {
+        enable = true;
+        create = "maildir";
+      };
+      notmuch.enable = true;
+      msmtp.enable = true;
+      realName = "Johannes Maier";
+      passwordCommand = "pass email/johb.maier@gmail.com";
+    };
   };
 
   xresources.properties = {
