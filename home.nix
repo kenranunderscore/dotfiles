@@ -215,6 +215,7 @@ in {
       lorri
       nixfmt
       nix-prefetch-git
+      plantuml
       polybar
       ripgrep
       sxhkd
