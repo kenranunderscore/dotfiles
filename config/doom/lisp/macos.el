@@ -1,13 +1,16 @@
 ;;; ~/.config/doom/lisp/macos.el -*- lexical-binding: t; -*-
 
-(setq doom-font (font-spec :family "IBM Plex Mono" :size 20))
+(setq doom-font (font-spec :family "Hack" :size 20))
 
 ;; mu4e
 (setq +mu4e-backend 'offlineimap)
 (mu4e-alert-set-default-style 'notifier)
-(add-hook! mu4e-main-mode #'mu4e-alert-enable-notifications)
-(add-hook! mu4e-main-mode #'mu4e-alert-enable-mode-line-display)
+
+(mu4e-alert-enable-notifications)
+(mu4e-alert-enable-mode-line-display)
+
 (remove-hook! mu4e-compose-mode #'org-mu4e-compose-org-mode)
+
 (setq doom-modeline-mu4e t)
 (set-email-account!
  "ag"
