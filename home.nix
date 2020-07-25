@@ -170,10 +170,6 @@ in {
         msmtp.enable = true;
         realName = "Johannes Maier";
         passwordCommand = "pass show email/johannes.maier@active-group.de";
-        signature = {
-          text = "foo bar\nwftien\n\nwftyun";
-          showSignature = "append";
-        };
         imap = {
           host = "imap.active-group.de";
           port = null;
@@ -185,10 +181,6 @@ in {
         smtp = {
           host = "smtp.active-group.de";
           port = null;
-          tls = {
-            enable = true;
-            useStartTls = true;
-          };
         };
       };
     };
