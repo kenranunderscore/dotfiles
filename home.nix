@@ -139,18 +139,58 @@ in {
   };
 
   accounts.email = {
-    accounts.gmail = {
-      address = "johb.maier@gmail.com";
-      flavor = "gmail.com";
-      primary = true;
-      mbsync = {
-        enable = true;
-        create = "maildir";
+    maildirBasePath = ".maildir";
+    certificatesFile =
+      if isDarwin
+      then "/usr/local/etc/openssl/cert.pem"
+      else "/etc/ssl/certs/ca-certificates.crt";
+    accounts = {
+      gmail = {
+        address = "johb.maier@gmail.com";
+        flavor = "gmail.com";
+        primary = !isDarwin;
+        mbsync = {
+          enable = true;
+          create = "maildir";
+        };
+        notmuch.enable = true;
+        msmtp.enable = true;
+        realName = "Johannes Maier";
+        passwordCommand = "pass show email/johb.maier@gmail.com";
       };
-      notmuch.enable = true;
-      msmtp.enable = true;
-      realName = "Johannes Maier";
-      passwordCommand = "pass email/johb.maier@gmail.com";
+      activeGroup = {
+        address = "johannes.maier@active-group.de";
+        userName = "maier";
+        primary = isDarwin;
+        mbsync = {
+          enable = true;
+          create = "maildir";
+        };
+        notmuch.enable = true;
+        msmtp.enable = true;
+        realName = "Johannes Maier";
+        passwordCommand = "pass show email/johannes.maier@active-group.de";
+        signature = {
+          text = "foo bar\nwftien\n\nwftyun";
+          showSignature = "append";
+        };
+        imap = {
+          host = "imap.active-group.de";
+          port = null;
+          tls = {
+            enable = true;
+            useStartTls = true;
+          };
+        };
+        smtp = {
+          host = "smtp.active-group.de";
+          port = null;
+          tls = {
+            enable = true;
+            useStartTls = true;
+          };
+        };
+      };
     };
   };
 
