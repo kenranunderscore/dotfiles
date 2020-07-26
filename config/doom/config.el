@@ -50,3 +50,31 @@
 (add-to-list
  'auto-mode-alist
  '("\\.\\(vs\\|vert\\|fs\\|frag\\|gs\\|geom\\|glsl\\|tesc\\|tese\\|comp\\)\\'" . glsl-mode))
+
+(autoload 'gnus-alias-determine-identity "gnus-alias" "" t)
+(setq gnus-alias-identity-alist
+      '(("home"
+         nil
+         "Johannes Maier <johb.maier@gmail.com>"
+         nil
+         nil
+         nil
+         nil)
+        ("work"
+         nil
+         "Johannes Maier <johannes.maier@active-group.de>"
+         "Active Group GmbH"
+         nil
+         nil
+         "Johannes Maier\njohannes.maier@active-group.de\n\n+49 (7071) 70896-67\n\nActive Group GmbH\nHechinger Str. 12/1\n72072 Tübingen\nRegistergericht: Amtsgericht Stuttgart, HRB 224404\nGeschäftsführer: Dr. Michael Sperber")))
+(setq gnus-alias-default-identity "home")
+(setq gnus-alias-identity-rules
+      '(("@active-group.de" ("any" "@active-group\\.de" both) "work")
+        ("@gmail.com" ("any" "@gmail\\.com" both) "home")))
+(add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+
+(setq send-mail-function 'sendmail-send-it
+      sendmail-program "~/.nix-profile/bin/msmtp"
+      mail-specify-envelope-from t
+      message-sendmail-envelope-from 'header
+      mail-envelope-from 'header)

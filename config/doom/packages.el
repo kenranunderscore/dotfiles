@@ -11,3 +11,4 @@
 (package! kaolin-themes)
 (package! spacemacs-theme)
 (package! dhall-mode)
+(package! gnus-alias)
