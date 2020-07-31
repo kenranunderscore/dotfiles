@@ -51,6 +51,8 @@
  'auto-mode-alist
  '("\\.\\(vs\\|vert\\|fs\\|frag\\|gs\\|geom\\|glsl\\|tesc\\|tese\\|comp\\)\\'" . glsl-mode))
 
+(setq notmuch-message-headers-visible t)
+
 (autoload 'gnus-alias-determine-identity "gnus-alias" "" t)
 (setq gnus-alias-identity-alist
       '(("home"
