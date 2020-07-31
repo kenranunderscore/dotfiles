@@ -73,7 +73,7 @@
 (setq gnus-alias-identity-rules
       '(("@active-group.de" ("any" "@active-group\\.de" both) "work")
         ("@gmail.com" ("any" "@gmail\\.com" both) "home")))
-(add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+(add-hook 'message-setup-hook 'gnus-alias-select-identity)
 
 (setq send-mail-function 'sendmail-send-it
       sendmail-program "~/.nix-profile/bin/msmtp"
