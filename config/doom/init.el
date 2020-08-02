@@ -160,8 +160,8 @@
        yaml
 
        :email
-       ;;mu4e       ; WIP
-       notmuch             ; WIP
+       mu4e       ; WIP
+       ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 
        :checkers

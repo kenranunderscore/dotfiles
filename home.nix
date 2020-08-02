@@ -8,6 +8,7 @@ let
   pwd = builtins.toPath ./.;
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
   shellPath = "${pkgs.zsh}/bin/zsh";
+  maildir = ".mail";
 in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
@@ -131,44 +132,38 @@ in {
     zsh.enable = true;
     mbsync.enable = true;
     msmtp.enable = true;
-    notmuch = {
-      enable = true;
-      hooks = {
-        preNew = "mbsync --all";
-      };
-    };
     password-store.enable = true;
   };
 
   accounts.email = {
-    maildirBasePath = ".maildir";
+    maildirBasePath = maildir;
     certificatesFile =
       if isDarwin
       then "/usr/local/etc/openssl/cert.pem"
       else "/etc/ssl/certs/ca-certificates.crt";
     accounts = {
-      gmail = {
+      private = {
         address = "johb.maier@gmail.com";
         flavor = "gmail.com";
         primary = !isDarwin;
         mbsync = {
           enable = true;
           create = "maildir";
+          expunge = "both";
         };
-        notmuch.enable = true;
         msmtp.enable = true;
         realName = "Johannes Maier";
         passwordCommand = "pass show email/johb.maier@gmail.com";
       };
-      activeGroup = {
+      ag = {
         address = "johannes.maier@active-group.de";
         userName = "maier";
         primary = isDarwin;
         mbsync = {
           enable = true;
           create = "maildir";
+          expunge = "both";
         };
-        notmuch.enable = true;
         msmtp.enable = true;
         realName = "Johannes Maier";
         passwordCommand = "pass show email/johannes.maier@active-group.de";
@@ -247,6 +242,7 @@ in {
       (if isDarwin then emacsUnstable else emacsGcc)
       gnumake
       lorri
+      mu
       nixfmt
       nix-prefetch-git
       plantuml
@@ -287,6 +283,8 @@ in {
         in dagEntryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${./config/xterm-24bit.terminfo}
         '';
+
+      createMaildirIfNecessary = dagEntryAfter [ "writeBoundary" ] "$DRY_RUN_CMD mkdir -p ~/${maildir}";
 
       handlePrivateKeys = let privateKeyPath = osPrivatePath + "/id_rsa";
       in dagEntryAfter [ "writeBoundary" ] ''
