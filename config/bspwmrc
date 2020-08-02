@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sxhkd &
-xkbcomp ~/dhm.xkb $DISPLAY &
+#xkbcomp ~/dhm.xkb $DISPLAY &
 polybar right &
 polybar left &
 
