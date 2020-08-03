@@ -26,8 +26,8 @@
    (mu4e-trash-folder      . "/private/[Google Mail]/Trash")
    (mu4e-refile-folder     . "/private/[Google Mail]/All Mail")
    (user-mail-address      . "johb.maier@gmail.com")
-   (mu4e-compose-signature . ""))
- t)
+   (mu4e-compose-signature . nil))
+ )
 
 (after! mu4e
   ;; Make accidentally quitting mu4e harder.
