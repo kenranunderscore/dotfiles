@@ -150,6 +150,16 @@ in {
           enable = true;
           create = "maildir";
           expunge = "both";
+          patterns = [
+            "*"
+            # "!INBOX"
+            "![Google Mail]*"
+            "[Google Mail]/All Mail"
+            "[Google Mail]/Trash"
+            "[Google Mail]/Drafts"
+            "[Google Mail]/Spam"
+          ];
+          flatten = ".";
         };
         msmtp.enable = true;
         realName = "Johannes Maier";

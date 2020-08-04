@@ -21,10 +21,10 @@
 
 (set-email-account!
  "private"
- '((mu4e-sent-folder       . "/private/[Google Mail]/Sent Mail")
-   (mu4e-drafts-folder     . "/private/[Google Mail]/Drafts")
-   (mu4e-trash-folder      . "/private/[Google Mail]/Trash")
-   (mu4e-refile-folder     . "/private/[Google Mail]/All Mail")
+ '((mu4e-sent-folder       . "/private/[Google Mail].All Mail")
+   (mu4e-drafts-folder     . "/private/[Google Mail].Drafts")
+   (mu4e-trash-folder      . "/private/[Google Mail].Trash")
+   (mu4e-refile-folder     . "/private/[Google Mail].All Mail")
    (user-mail-address      . "johb.maier@gmail.com")
    (mu4e-compose-signature . nil))
  )
