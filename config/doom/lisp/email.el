@@ -16,18 +16,17 @@
                               "Hechinger Str. 12/1\n"
                               "72072 Tübingen\n"
                               "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-                              "Geschäftsführer: Dr. Michael Sperber")))
- t)
+                              "Geschäftsführer: Dr. Michael Sperber"))))
 
 (set-email-account!
  "private"
- '((mu4e-sent-folder       . "/private/[Google Mail].All Mail")
+ '((user-mail-address      . "johb.maier@gmail.com")
+   (mu4e-sent-folder       . "/private/[Google Mail].All Mail")
+   (mu4e-compose-signature . nil)
    (mu4e-drafts-folder     . "/private/[Google Mail].Drafts")
    (mu4e-trash-folder      . "/private/[Google Mail].Trash")
-   (mu4e-refile-folder     . "/private/[Google Mail].All Mail")
-   (user-mail-address      . "johb.maier@gmail.com")
-   (mu4e-compose-signature . nil))
- )
+   (mu4e-refile-folder     . "/private/[Google Mail].All Mail"))
+ t)
 
 (after! mu4e
   ;; Make accidentally quitting mu4e harder.
