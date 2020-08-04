@@ -160,6 +160,9 @@ in {
             "[Google Mail]/Spam"
           ];
           flatten = ".";
+          extraConfig = {
+            account.PipelineDepth = 50;
+          };
         };
         msmtp.enable = true;
         realName = "Johannes Maier";
