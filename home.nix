@@ -152,7 +152,7 @@ in {
           expunge = "both";
           patterns = [
             "*"
-            # "!INBOX"
+            "!INBOX"
             "![Google Mail]*"
             "[Google Mail]/All Mail"
             "[Google Mail]/Trash"
