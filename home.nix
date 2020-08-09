@@ -256,6 +256,7 @@ in {
       gnumake
       lorri
       mu
+      nextcloud-client
       nixfmt
       nix-prefetch-git
       plantuml
