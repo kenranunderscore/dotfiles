@@ -6,6 +6,11 @@
   ;; Make accidentally quitting mu4e harder.
   (setq mu4e-confirm-quit t)
 
+  ;; Remove the space in front of mu4e's main buffer
+  ;; name. This way we can keep it open in the background
+  ;; and more easily switch to it.
+  (setq mu4e-main-buffer-name "*mu4e-main*")
+
   ;; Ask once initially, and when composing all
   ;; should work. In any case, ask if it doesn't.
   (setq mu4e-context-policy 'ask-if-none)
