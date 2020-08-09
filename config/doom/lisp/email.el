@@ -36,6 +36,24 @@
   ;; Auto-sync and update index every 5 minutes.
   (setq mu4e-update-interval 300)
 
+  ;; Save the original/default mu4e-marks.
+  (setq my-default-mu4e-marks (copy-tree mu4e-marks))
+
+  ;; Create the gmail-specific set of marks.
+  (setq my-gmail-mu4e-marks (copy-tree mu4e-marks))
+  (delq! 'delete my-gmail-mu4e-marks #'assq)
+  (setf (alist-get 'trash my-gmail-mu4e-marks)
+        (list :char '("d" . "▼")
+              :prompt "dtrash"
+              :dyn-target (lambda (_target msg) (mu4e-get-trash-folder msg))
+              :action #'+mu4e--mark-seen)
+        ;; Refile will be my "archive" function.
+        (alist-get 'refile my-gmail-mu4e-marks)
+        (list :char '("r" . "▼")
+              :prompt "rrefile"
+              :dyn-target (lambda (_target msg) (mu4e-get-refile-folder msg))
+              :action #'+mu4e--mark-seen))
+
   ;; Try removing gmail's Inbox tag.
   (add-hook! 'mu4e-mark-execute-pre-hook
     (defun +mu4e-gmail-fix-flags-h (mark msg)
