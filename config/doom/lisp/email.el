@@ -21,6 +21,13 @@
   (setq message-sendmail-envelope-from 'header)
   (setq mail-envelope-from 'header)
 
+  ;; We don't need an alert, but want info about new mails
+  ;; in doom's modeline at least.
+  (mu4e-alert-enable-mode-line-display)
+  (setq doom-modeline-mu4e t)
+  (mu4e-alert-enable-notifications)
+  (mu4e-alert-set-default-style 'log)
+
   ;; Try removing gmail's Inbox tag.
   (add-hook! 'mu4e-mark-execute-pre-hook
     (defun +mu4e-gmail-fix-flags-h (mark msg)
