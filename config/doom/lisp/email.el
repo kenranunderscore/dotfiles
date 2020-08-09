@@ -24,7 +24,7 @@
   ;; Try removing gmail's Inbox tag.
   (add-hook! 'mu4e-mark-execute-pre-hook
     (defun +mu4e-gmail-fix-flags-h (mark msg)
-      ;; Only do something special for my gmail account
+      ;; Only do something special for my gmail account.
       (let* ((maildir (plist-get msg :maildir))
              (gmail-dir-prefix (concat "/" my-mu4e-gmail-account-name))
              (is-gmail? (string-prefix-p gmail-dir-prefix maildir)))
