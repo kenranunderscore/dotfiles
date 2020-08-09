@@ -43,8 +43,8 @@
  "ag"
  '((mu4e-sent-folder       . "/ag/Sent Messages")
    (mu4e-drafts-folder     . "/ag/Drafts")
-   (mu4e-trash-folder      . "/ag/trash")
-   (mu4e-refile-folder     . "/ag/all")
+   (mu4e-trash-folder      . "/ag/Deleted Messages")
+   (mu4e-refile-folder     . "/ag/Archive")
    (user-mail-address      . "johannes.maier@active-group.de")
    (mu4e-compose-signature . (concat
                               "Johannes Maier\n"
