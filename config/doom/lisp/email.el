@@ -33,6 +33,9 @@
   (mu4e-alert-enable-notifications)
   (mu4e-alert-set-default-style 'log)
 
+  ;; Auto-sync and update index every 5 minutes.
+  (setq mu4e-update-interval 300)
+
   ;; Try removing gmail's Inbox tag.
   (add-hook! 'mu4e-mark-execute-pre-hook
     (defun +mu4e-gmail-fix-flags-h (mark msg)
