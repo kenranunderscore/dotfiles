@@ -8,7 +8,6 @@ let
   pwd = builtins.toPath ./.;
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
   shellPath = "${pkgs.zsh}/bin/zsh";
-  maildir = ".mail";
 in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
@@ -16,10 +15,11 @@ in {
     overlays = [ (import ./config/emacs-overlay.nix) ];
   };
 
+  imports =
+    [ (import ./nix/email.nix isDarwin) (import ./nix/git.nix isDarwin) ];
+
   programs = {
     home-manager.enable = true;
-
-    git = import ./config/git.nix pkgs isDarwin;
 
     kitty = {
       enable = true;
@@ -72,9 +72,7 @@ in {
       };
     };
 
-    rofi = {
-      enable = !isDarwin;
-    };
+    rofi = { enable = !isDarwin; };
 
     tmux = {
       enable = true;
@@ -133,67 +131,6 @@ in {
     mbsync.enable = true;
     msmtp.enable = true;
     password-store.enable = true;
-  };
-
-  accounts.email = {
-    maildirBasePath = maildir;
-    certificatesFile =
-      if isDarwin
-      then "/usr/local/etc/openssl/cert.pem"
-      else "/etc/ssl/certs/ca-certificates.crt";
-    accounts = {
-      private = {
-        address = "johb.maier@gmail.com";
-        flavor = "gmail.com";
-        primary = !isDarwin;
-        mbsync = {
-          enable = true;
-          create = "maildir";
-          expunge = "both";
-          patterns = [
-            "*"
-            "INBOX"
-            "![Google Mail]*"
-            "[Google Mail]/All Mail"
-            "[Google Mail]/Trash"
-            "[Google Mail]/Drafts"
-            "[Google Mail]/Spam"
-          ];
-          flatten = ".";
-          extraConfig = {
-            account.PipelineDepth = 50;
-          };
-        };
-        msmtp.enable = true;
-        realName = "Johannes Maier";
-        passwordCommand = "pass show email/johb.maier@gmail.com";
-      };
-      ag = {
-        address = "johannes.maier@active-group.de";
-        userName = "maier";
-        primary = isDarwin;
-        mbsync = {
-          enable = true;
-          create = "maildir";
-          expunge = "both";
-        };
-        msmtp.enable = true;
-        realName = "Johannes Maier";
-        passwordCommand = "pass show email/johannes.maier@active-group.de";
-        imap = {
-          host = "imap.active-group.de";
-          port = null;
-          tls = {
-            enable = true;
-            useStartTls = true;
-          };
-        };
-        smtp = {
-          host = "smtp.active-group.de";
-          port = null;
-        };
-      };
-    };
   };
 
   xresources.properties = {
@@ -297,8 +234,6 @@ in {
         in dagEntryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${./config/xterm-24bit.terminfo}
         '';
-
-      createMaildirIfNecessary = dagEntryAfter [ "writeBoundary" ] "$DRY_RUN_CMD mkdir -p ~/${maildir}";
 
       handlePrivateKeys = let privateKeyPath = osPrivatePath + "/id_rsa";
       in dagEntryAfter [ "writeBoundary" ] ''
