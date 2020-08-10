@@ -137,25 +137,25 @@ in {
 
     inherit username homeDirectory;
 
-    packages = with pkgs; [
-      curl
-      direnv
-      # emacsGcc doesn't work on darwin at the moment.
-      (if isDarwin then emacsUnstable else emacsGcc)
-      gnumake
-      lorri
-      mu
-      nextcloud-client
-      nixfmt
-      nix-prefetch-git
-      plantuml
-      polybar
-      ripgrep
-      sxhkd
-      vim
-      wget
-      xorg.xkbcomp
-    ];
+    packages = let
+      basePackages = with pkgs; [
+        curl
+        direnv
+        gnumake
+        lorri
+        mu
+        nixfmt
+        nix-prefetch-git
+        plantuml
+        ripgrep
+        vim
+        wget
+        xorg.xkbcomp
+      ];
+      darwinPackages = [ pkgs.emacsUnstable ];
+      linuxPackages = with pkgs; [ emacsGcc polybar sxhkd nextcloud-client ];
+    in basePackages ++ (if isDarwin then [ ] else linuxPackages)
+    ++ (if isDarwin then darwinPackages else [ ]);
 
     file = {
       ".irssi/h3rbz.theme".source = ./config/h3rbz.theme;
