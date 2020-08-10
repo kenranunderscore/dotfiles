@@ -19,26 +19,13 @@ in {
     (import ./nix/email.nix isDarwin)
     (import ./nix/git.nix isDarwin)
     (import ./nix/kitty.nix isDarwin shellPath)
+    (import ./nix/tmux.nix shellPath)
   ];
 
   programs = {
     home-manager.enable = true;
 
     rofi = { enable = !isDarwin; };
-
-    tmux = {
-      enable = true;
-      escapeTime = 0;
-      historyLimit = 50000;
-      newSession = true;
-      terminal = "xterm-24bit";
-      resizeAmount = 10;
-      extraConfig = ''
-        set-option -g renumber-windows on
-        set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
-        set -g default-shell ${shellPath}
-      '';
-    };
 
     irssi = {
       enable = true;
