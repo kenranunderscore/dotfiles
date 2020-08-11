@@ -97,6 +97,7 @@ in {
         nix-prefetch-git
         plantuml
         ripgrep
+        rsync
         vim
         wget
         xorg.xkbcomp
