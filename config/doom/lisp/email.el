@@ -94,6 +94,19 @@
    (cons 'mu4e-marks my-default-mu4e-marks)))
 
 (set-email-account!
+ "mailbox"
+ '((mu4e-sent-folder       . "/mailbox/Sent")
+   (mu4e-drafts-folder     . "/mailbox/Drafts")
+   (mu4e-trash-folder      . "/mailbox/Trash")
+   (mu4e-refile-folder     . "/mailbox/Archive")
+   (user-mail-address      . "johannes.maier@mailbox.org")
+   (mu4e-compose-signature . nil)
+   (mu4e-sent-messages-behavior . sent)
+   (mu4e-index-cleanup . t)
+   (mu4e-index-lazy-check . nil)
+   (cons 'mu4e-marks my-default-mu4e-marks)))
+
+(set-email-account!
  my-mu4e-gmail-account-name
  '((user-mail-address      . "johb.maier@gmail.com")
    (mu4e-sent-folder       . "/private/[Google Mail].All Mail")

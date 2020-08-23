@@ -1,7 +1,9 @@
 isDarwin:
 { lib, ... }:
 
-let maildir = ".mail";
+let
+  maildir = ".mail";
+  realName = "Johannes Maier";
 in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
   accounts.email = {
     maildirBasePath = maildir;
@@ -10,10 +12,33 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
     else
       "/etc/ssl/certs/ca-certificates.crt";
     accounts = {
-      private = {
+      mailbox = rec {
+        address = "johannes.maier@mailbox.org";
+        userName = address;
+        primary = !isDarwin;
+        mbsync = {
+          enable = true;
+          create = "maildir";
+          expunge = "both";
+        };
+        msmtp.enable = true;
+        inherit realName;
+        passwordCommand = "pass show email/johannes.maier@mailbox.org";
+        imap = {
+          host = "imap.mailbox.org";
+          port = 993;
+          tls.enable = true;
+        };
+        smtp = {
+          host = "smtp.mailbox.org";
+          port = 465;
+          tls.enable = true;
+        };
+      };
+      gmail = {
         address = "johb.maier@gmail.com";
         flavor = "gmail.com";
-        primary = !isDarwin;
+        primary = false;
         mbsync = {
           enable = true;
           create = "maildir";
@@ -31,7 +56,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           extraConfig = { account.PipelineDepth = 50; };
         };
         msmtp.enable = true;
-        realName = "Johannes Maier";
+        inherit realName;
         passwordCommand = "pass show email/johb.maier@gmail.com";
       };
       ag = {
