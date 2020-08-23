@@ -35,30 +35,6 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           tls.enable = true;
         };
       };
-      gmail = {
-        address = "johb.maier@gmail.com";
-        flavor = "gmail.com";
-        primary = false;
-        mbsync = {
-          enable = true;
-          create = "maildir";
-          expunge = "both";
-          patterns = [
-            "*"
-            "INBOX"
-            "![Google Mail]*"
-            "[Google Mail]/All Mail"
-            "[Google Mail]/Trash"
-            "[Google Mail]/Drafts"
-            "[Google Mail]/Spam"
-          ];
-          flatten = ".";
-          extraConfig = { account.PipelineDepth = 50; };
-        };
-        msmtp.enable = true;
-        inherit realName;
-        passwordCommand = "pass show email/johb.maier@gmail.com";
-      };
       ag = {
         address = "johannes.maier@active-group.de";
         userName = "maier";
