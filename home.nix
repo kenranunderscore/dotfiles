@@ -104,7 +104,7 @@ in {
         xorg.xkbcomp
       ];
       darwinPackages = [ pkgs.emacsUnstable ];
-      linuxPackages = with pkgs; [ emacsGcc polybar sxhkd nextcloud-client ];
+      linuxPackages = with pkgs; [ emacsUnstable polybar sxhkd nextcloud-client ];
     in basePackages ++ (if isDarwin then [ ] else linuxPackages)
     ++ (if isDarwin then darwinPackages else [ ]);
 
