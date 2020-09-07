@@ -37,24 +37,14 @@ Plug 'shougo/neocomplete.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'shougo/vimproc', {'do' : 'make'}
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'rigellute/rigel'
 
 call plug#end()
 
 " Custom config
 
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
-
 syntax enable
 
 "set colorcolumn=80
-
-set background=dark
-colorscheme rigel
 
 set encoding=utf-8
 set nowrap
