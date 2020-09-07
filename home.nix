@@ -95,6 +95,7 @@ in {
         mu
         nixfmt
         nix-prefetch-git
+        pijul
         plantuml
         ripgrep
         rsync
