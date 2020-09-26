@@ -93,6 +93,7 @@ in {
         curl
         direnv
         gnumake
+        jetbrains-mono
         lorri
         mu
         nixfmt
