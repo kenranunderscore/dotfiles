@@ -23,6 +23,8 @@ in {
     ./nix/irssi.nix
   ];
 
+  fonts.fontconfig.enable = true;
+
   programs = {
     home-manager.enable = true;
     rofi.enable = !isDarwin;
