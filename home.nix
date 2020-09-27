@@ -90,6 +90,7 @@ in {
 
     packages = let
       basePackages = with pkgs; [
+        bat
         curl
         direnv
         gnumake
