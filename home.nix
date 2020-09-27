@@ -107,8 +107,16 @@ in {
         wget
         xorg.xkbcomp
       ];
-      darwinPackages = [ pkgs.emacsUnstable ];
-      linuxPackages = with pkgs; [ emacsUnstable polybar sxhkd nextcloud-client ];
+      darwinPackages = with pkgs; [
+        pkgs.emacsUnstable
+      ];
+      linuxPackages = with pkgs; [
+        emacsUnstable
+        firefox-bin
+        nextcloud-client
+        polybar
+        sxhkd
+      ];
     in basePackages ++ (if isDarwin then [ ] else linuxPackages)
     ++ (if isDarwin then darwinPackages else [ ]);
 
