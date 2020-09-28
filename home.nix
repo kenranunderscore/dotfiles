@@ -11,8 +11,8 @@ let
 in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
-    config = import ./config/nixpkgs-config.nix;
-    overlays = [ (import ./config/emacs-overlay.nix) ];
+    config = import ./nix/nixpkgs-config.nix;
+    overlays = [ (import ./nix/emacs-overlay.nix) ];
   };
 
   imports = [
@@ -71,7 +71,7 @@ in {
       source = ./config/doom;
       recursive = true;
     };
-    "nixpkgs/config.nix".source = ./config/nixpkgs-config.nix;
+    "nixpkgs/config.nix".source = ./nix/nixpkgs-config.nix;
     "polybar/config".source = ./config/polybar;
     "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
   };
