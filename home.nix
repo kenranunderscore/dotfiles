@@ -113,6 +113,7 @@ in {
       linuxPackages = with pkgs; [
         emacsUnstable
         firefox-bin
+        htop
         nextcloud-client
         polybar
         sxhkd
