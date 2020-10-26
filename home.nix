@@ -112,7 +112,7 @@ in {
         pkgs.emacsUnstable
       ];
       linuxPackages = with pkgs; [
-        emacsUnstable
+        emacsGcc
         firefox-bin
         htop
         nextcloud-client
