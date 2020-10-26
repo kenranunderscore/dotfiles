@@ -103,6 +103,7 @@ in {
         plantuml
         ripgrep
         rsync
+        unzip
         vim
         wget
         xorg.xkbcomp
