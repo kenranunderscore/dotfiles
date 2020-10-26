@@ -10,3 +10,4 @@
 (package! mu4e-alert)
 (package! kaolin-themes)
 (package! dhall-mode)
+(package! zig-mode)
