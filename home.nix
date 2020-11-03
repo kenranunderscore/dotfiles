@@ -46,7 +46,7 @@ in {
     # A basic default colorscheme; useful for roguelike games for instance.
     "*.foreground" = "#fcfcfc";
     "*.background" = "#313133";
-    "*.cursorColor" = "#cfcfc";
+    "*.cursorColor" = "#fcfcfc";
     "*.color0" = "#181819";
     "*.color8" = "#77747f";
     "*.color1" = "#ef2917";
