@@ -103,6 +103,7 @@ in {
         plantuml
         ripgrep
         rsync
+        tree
         unzip
         vim
         wget
