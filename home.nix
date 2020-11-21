@@ -26,6 +26,17 @@ in {
   fonts.fontconfig.enable = true;
 
   programs = {
+    bash = {
+      enable = true;
+      historyIgnore = [ "ls" "cd" "exit" ];
+      shellAliases = {
+        ga = "git add";
+        gc = "git commit";
+        gd = "git diff";
+        gp = "git push";
+        gst = "git status";
+      };
+    };
     gpg.enable = true;
     home-manager.enable = true;
     mbsync.enable = true;
