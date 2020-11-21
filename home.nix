@@ -26,14 +26,14 @@ in {
   fonts.fontconfig.enable = true;
 
   programs = {
-    home-manager.enable = true;
-    rofi.enable = !isDarwin;
-    ssh.enable = true;
     gpg.enable = true;
-    zsh.enable = true;
+    home-manager.enable = true;
     mbsync.enable = true;
     msmtp.enable = true;
     password-store.enable = true;
+    rofi.enable = !isDarwin;
+    ssh.enable = true;
+    zsh.enable = true;
   };
 
   xresources.properties = {
