@@ -19,6 +19,7 @@ isDarwin:
     extraConfig = {
       pull.rebase = "false";
       core.editor = "vim";
+      init.defaultBranch = "main";
     };
   };
 }
