@@ -127,6 +127,7 @@ in {
         emacsGcc
         firefox-bin
         htop
+        manpages
         nextcloud-client
         polybar
         sxhkd

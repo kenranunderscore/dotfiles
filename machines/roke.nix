@@ -57,6 +57,13 @@
   };
 
   virtualisation.docker.enable = true;
+
+  documentation = {
+    enable = true;
+    man.enable = true;
+    dev.enable = true;
+  };
+
   users.users.kenran = {
     isNormalUser = true;
     home = "/home/kenran";
