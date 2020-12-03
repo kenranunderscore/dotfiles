@@ -56,10 +56,11 @@
     windowManager.bspwm.enable = true;
   };
 
+  virtualisation.docker.enable = true;
   users.users.kenran = {
     isNormalUser = true;
     home = "/home/kenran";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
   # This value determines the NixOS release with which your system is to be
