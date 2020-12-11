@@ -109,6 +109,7 @@ in {
         lorri
         mu
         nixfmt
+        nix-index
         nix-prefetch-git
         pijul
         plantuml
