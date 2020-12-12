@@ -111,7 +111,9 @@ in {
         pijul
         plantuml
         ripgrep
+        rlwrap
         rsync
+        sbcl
         tree
         unzip
         vim
