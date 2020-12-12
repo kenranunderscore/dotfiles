@@ -100,6 +100,7 @@ in {
         bat
         curl
         direnv
+        emacsGcc
         gnumake
         jetbrains-mono
         lorri
@@ -118,10 +119,10 @@ in {
         xorg.xkbcomp
       ];
       darwinPackages = with pkgs; [
-        pkgs.emacsUnstable
+        # For when emacsGcc stops working on macOS again:
+        # pkgs.emacsUnstable
       ];
       linuxPackages = with pkgs; [
-        emacsGcc
         firefox-bin
         htop
         manpages
