@@ -78,10 +78,6 @@ in {
 
   xdg.configFile = {
     "bspwm/bspwmrc".source = ./config/bspwmrc;
-    "doom" = {
-      source = ./config/doom;
-      recursive = true;
-    };
     "nixpkgs/config.nix".source = ./nix/nixpkgs-config.nix;
     "polybar/config".source = ./config/polybar;
     "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
@@ -149,6 +145,8 @@ in {
     # read-only. Maybe there's a way to still use fetchFromGitHub...
     activation = {
       symlinkAndSyncDoom = dagEntryAfter [ "writeBoundary" ] ''
+	# FIXME Check for existence of ~/.emacs.d
+	$DRY_RUN_CMD ln -snf ${pwd}/config/doom $HOME/.config/doom && \
         $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d && \
         $DRY_RUN_CMD ~/.emacs.d/bin/doom sync
       '';
