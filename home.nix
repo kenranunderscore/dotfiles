@@ -110,6 +110,7 @@ in {
         nix-prefetch-git
         pijul
         plantuml
+        racket
         ripgrep
         rlwrap
         rsync
