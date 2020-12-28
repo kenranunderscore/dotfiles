@@ -11,3 +11,4 @@
 (package! kaolin-themes)
 (package! dhall-mode)
 (package! zig-mode)
+(package! sly-asdf)
