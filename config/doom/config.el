@@ -52,3 +52,12 @@
 (add-to-list
  'auto-mode-alist
  '("\\.\\(vs\\|vert\\|fs\\|frag\\|gs\\|geom\\|glsl\\|tesc\\|tese\\|comp\\)\\'" . glsl-mode))
+
+;; Workaround for when both the scheme and racket modules are enabled. For some
+;; reason, scheme-mode has the higher position in the 'auto-mode-alist and thus
+;; overrides racket-mode for .rkt files.
+(setf auto-mode-alist
+      (assoc-delete-all "\\.rkt\\'" auto-mode-alist))
+(add-to-list
+ 'auto-mode-alist
+ '("\\.rkt\\'" . racket-mode))
