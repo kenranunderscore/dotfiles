@@ -98,11 +98,13 @@ in {
     packages = let
       basePackages = with pkgs; [
         bat
+        cascadia-code
         curl
         direnv
         emacsGcc
         gnumake
         jetbrains-mono
+        julia-mono
         lorri
         mu
         nixfmt
