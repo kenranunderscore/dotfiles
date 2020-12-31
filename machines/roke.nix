@@ -55,6 +55,10 @@
     };
     windowManager.bspwm.enable = true;
   };
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.samsungUnifiedLinuxDriver ];
+  };
 
   virtualisation.docker.enable = true;
 
