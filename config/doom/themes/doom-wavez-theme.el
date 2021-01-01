@@ -1,0 +1,1 @@
+/home/kenran/doom-themes/doom-wavez-theme.el
