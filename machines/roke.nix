@@ -41,7 +41,10 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
 
   services.xserver = {
     enable = true;
