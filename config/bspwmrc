@@ -5,8 +5,8 @@ sxhkd &
 polybar right &
 polybar left &
 
-bspc monitor DVI-I-1 -d 1 2 3 4 5
-bspc monitor DVI-D-1 -d 6 7 8 9 0
+bspc monitor HDMI-0  -d 1 2 3 4 5
+bspc monitor DVI-D-0 -d 6 7 8 9 0
 
 bspc config border_width         1
 bspc config window_gap          15
