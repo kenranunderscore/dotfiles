@@ -1,0 +1,4 @@
+* Improve machine-specific configuration [/]
+- Introduce modules. For instance, we might thus make a module consisting of
+  =polybar= and =bspwm= and could define configuration options that take monitor
+  names into account.
