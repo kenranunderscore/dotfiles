@@ -102,6 +102,7 @@ in {
         curl
         direnv
         emacsGcc
+        fd
         gnumake
         jetbrains-mono
         julia-mono
