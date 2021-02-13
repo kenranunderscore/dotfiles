@@ -22,6 +22,7 @@
         { name = "#linux"; chatnet = "freenode"; autojoin = "yes"; },
         { name = "#nixos"; chatnet = "freenode"; autojoin = "yes"; },
         { name = "#emacs"; chatnet = "freenode"; autojoin = "yes"; },
+        { name = "#neovim"; chatnet = "freenode"; autojoin = "yes"; },
         { name = "#org-mode"; chatnet = "freenode"; autojoin = "yes"; },
         { name = "#home-manager"; chatnet = "freenode"; autojoin = "yes"; },
         { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
