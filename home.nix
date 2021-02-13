@@ -12,7 +12,10 @@ in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
     config = import ./nix/nixpkgs-config.nix;
-    overlays = [ (import ./nix/emacs-overlay.nix) ];
+    overlays = [
+      (import ./nix/emacs-overlay.nix)
+      (import ./nix/neovim-overlay.nix)
+    ];
   };
 
   imports = [
@@ -79,6 +82,10 @@ in {
   xdg.configFile = {
     "bspwm/bspwmrc".source = ./config/bspwmrc;
     "nixpkgs/config.nix".source = ./nix/nixpkgs-config.nix;
+    "nvim" = {
+      source = ./config/nvim;
+      recursive = true;
+    };
     "polybar/config".source = ./config/polybar;
     "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
   };
@@ -108,6 +115,7 @@ in {
         julia-mono
         lorri
         mu
+        neovim-nightly
         nixfmt
         nix-index
         nix-prefetch-git
