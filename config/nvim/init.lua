@@ -69,6 +69,9 @@ end)
 vim.o.autoindent = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.expandtab = true
+vim.o.autoindent = true
+vim.wo.number = true
 
 -- space as leader key
 vim.api.nvim_set_keymap('', '<space>', '<nop>', { noremap = true, silent = true })
