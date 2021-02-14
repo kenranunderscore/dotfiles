@@ -60,6 +60,9 @@ require('packer').startup(function()
 
   -- less hassle with tab/indentation size
   use 'tpope/vim-sleuth'
+
+  -- code formatter
+  use 'sbdchd/neoformat'
 end)
 
 -- options
@@ -105,3 +108,11 @@ require('nvim-treesitter.configs').setup {
     enable = true
   },
 }
+
+-- code formatting
+vim.api.nvim_exec([[
+  augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+  augroup end
+]], false)
