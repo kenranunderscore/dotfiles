@@ -86,8 +86,9 @@ require('compe').setup {
 }
 
 -- telescope
-vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require('telescope.builtin').git_files()<cr>]], { noremap = true, silent = true })
 
 -- treesitter
 require('nvim-treesitter.configs').setup {
