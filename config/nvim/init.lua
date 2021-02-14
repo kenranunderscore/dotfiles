@@ -54,6 +54,12 @@ require('packer').startup(function()
 
   -- beautiful icons
   use 'kyazdani42/nvim-web-devicons'
+
+  -- better shell commands
+  use 'tpope/vim-eunuch'
+
+  -- less hassle with tab/indentation size
+  use 'tpope/vim-sleuth'
 end)
 
 -- options
