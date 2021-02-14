@@ -38,6 +38,7 @@ require('packer').startup(function()
 
   -- color theme
   use 'joshdick/onedark.vim'
+  use 'morhetz/gruvbox'
 
   -- status bar
   use 'vim-airline/vim-airline'
@@ -58,9 +59,15 @@ vim.o.smartcase = true
 vim.api.nvim_set_keymap('', '<space>', '<nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 
+-- colorscheme configuration
 vim.o.termguicolors = true
-vim.g.onedark_terminal_italics = 2
-vim.cmd[[colorscheme onedark]]
+-- onedark
+-- vim.g.onedark_terminal_italics = 2
+-- vim.cmd[[colorscheme onedark]]
+--
+-- gruvbox
+vim.g.gruvbox_contrast_dark = 'hard'
+vim.cmd[[colorscheme gruvbox]]
 
 -- compe
 vim.o.completeopt = "menu,menuone,noselect"
