@@ -48,6 +48,9 @@ require('packer').startup(function()
 
   -- gl and gL to align text by characters
   use 'tommcdo/vim-lion'
+
+  -- treesitter for better syntax highlighting
+  use 'nvim-treesitter/nvim-treesitter'
 end)
 
 -- options
@@ -77,10 +80,18 @@ require('compe').setup {
     path = true,
     buffer = true,
     nvim_lsp = true,
-    nvim_lua = true
+    nvim_lua = true,
+    treesitter = true
   }
 }
 
 -- telescope
 vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
+
+-- treesitter
+require('nvim-treesitter.configs').setup {
+  highlight = {
+    enable = true
+  },
+}
