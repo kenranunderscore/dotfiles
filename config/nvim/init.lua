@@ -54,6 +54,10 @@ vim.o.autoindent = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- space as leader key
+vim.api.nvim_set_keymap('', '<space>', '<nop>', { noremap = true, silent = true })
+vim.g.mapleader = ' '
+
 vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
 vim.cmd[[colorscheme onedark]]
@@ -69,3 +73,7 @@ require('compe').setup {
     nvim_lua = true
   }
 }
+
+-- telescope
+vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
