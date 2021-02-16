@@ -110,6 +110,7 @@ in {
         direnv
         emacsGcc
         fd
+        gcc
         gnumake
         jetbrains-mono
         julia-mono

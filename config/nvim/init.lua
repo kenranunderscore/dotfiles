@@ -14,8 +14,8 @@ vim.api.nvim_exec([[
   augroup end
 ]], false)
 
-local use = require('packer').use
-require('packer').startup(function()
+local use = require'packer'.use
+require'packer'.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   -- git/github
@@ -51,6 +51,7 @@ require('packer').startup(function()
 
   -- treesitter for better syntax highlighting
   use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/treesitter-playground'
 
   -- beautiful icons
   use 'kyazdani42/nvim-web-devicons'
@@ -89,7 +90,7 @@ vim.cmd[[colorscheme gruvbox]]
 
 -- compe
 vim.o.completeopt = "menu,menuone,noselect"
-require('compe').setup {
+require'compe'.setup {
   min_length = 3,
   source = {
     path = true,
@@ -101,12 +102,18 @@ require('compe').setup {
 }
 
 -- telescope
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require('telescope.builtin').git_files()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require'telescope.builtin'.find_files()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope.builtin'.buffers()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require'telescope.builtin'.git_files()<cr>]], { noremap = true, silent = true })
 
 -- treesitter
-require('nvim-treesitter.configs').setup {
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {
+    bash,
+    html,
+    json,
+    lua
+  },
   highlight = {
     enable = true
   },
