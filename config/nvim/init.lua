@@ -51,7 +51,7 @@ require'packer'.startup(function()
 
   -- treesitter for better syntax highlighting
   use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/treesitter-playground'
+  use 'nvim-treesitter/playground'
 
   -- beautiful icons
   use 'kyazdani42/nvim-web-devicons'
