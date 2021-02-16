@@ -69,6 +69,9 @@ require'packer'.startup(function()
   -- language-specific highlighting
   -- (Haskell does not work well with treesitter yet, for instance)
   use 'sheerun/vim-polyglot'
+
+  -- automatically close parens
+  use 'jiangmiao/auto-pairs'
 end)
 
 -- options
