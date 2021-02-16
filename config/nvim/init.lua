@@ -74,6 +74,11 @@ require'packer'.startup(function()
 
   -- automatically close parens
   use 'jiangmiao/auto-pairs'
+
+  -- LSP
+  use 'neovim/nvim-lspconfig'
+  use 'nvim-lua/lsp_extensions.nvim'
+  use 'kosayoda/nvim-lightbulb'
 end)
 
 -- options
@@ -93,20 +98,20 @@ vim.o.termguicolors = true
 
 -- onedark
 vim.g.onedark_terminal_italics = 2
--- vim.cmd[[colorscheme onedark]]
+-- vim.cmd [[colorscheme onedark]]
 
 -- sonokai
 vim.g.sonokai_style = 'maia'
--- vim.cmd[[colorscheme sonokai]]
+-- vim.cmd [[colorscheme sonokai]]
 
 -- monokai
--- vim.cmd[[colorscheme monokai]]
+-- vim.cmd [[colorscheme monokai]]
 
 -- dracula
-vim.cmd[[colorscheme dracula]]
+vim.cmd [[colorscheme dracula]]
 
 -- palenight
--- vim.cmd[[colorscheme palenight]]
+-- vim.cmd [[colorscheme palenight]]
 
 -- airline
 -- vim.g.airline_theme = "palenight"
@@ -128,6 +133,7 @@ require'compe'.setup {
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require'telescope.builtin'.find_files()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope.builtin'.buffers()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require'telescope.builtin'.git_files()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require'telescope.builtin'.lsp_code_actions()<cr>]], { noremap = true, silent = true })
 
 -- treesitter
 require'nvim-treesitter.configs'.setup {
@@ -149,3 +155,11 @@ vim.api.nvim_exec([[
     autocmd BufWritePre * undojoin | Neoformat
   augroup end
 ]], false)
+
+-- LSP
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+local lspconfig = require'lspconfig'
+lspconfig.hls.setup {
+  cmd = {"haskell-language-server", "--lsp"};
+  root_dir = lspconfig.util.root_pattern("cabal.project");
+}
