@@ -38,7 +38,8 @@ require'packer'.startup(function()
 
   -- color theme
   use 'joshdick/onedark.vim'
-  use 'morhetz/gruvbox'
+  use 'sainnhe/sonokai'
+  use 'crusoexia/vim-monokai'
 
   -- status bar
   use 'vim-airline/vim-airline'
@@ -64,6 +65,10 @@ require'packer'.startup(function()
 
   -- code formatter
   use 'sbdchd/neoformat'
+
+  -- language-specific highlighting
+  -- (Haskell does not work well with treesitter yet, for instance)
+  use 'sheerun/vim-polyglot'
 end)
 
 -- options
@@ -80,13 +85,17 @@ vim.g.mapleader = ' '
 
 -- colorscheme configuration
 vim.o.termguicolors = true
+
 -- onedark
--- vim.g.onedark_terminal_italics = 2
--- vim.cmd[[colorscheme onedark]]
---
--- gruvbox
-vim.g.gruvbox_contrast_dark = 'hard'
-vim.cmd[[colorscheme gruvbox]]
+vim.g.onedark_terminal_italics = 2
+vim.cmd[[colorscheme onedark]]
+
+-- sonokai
+vim.g.sonokai_style = 'maia'
+-- vim.cmd[[colorscheme sonokai]]
+
+-- monokai
+-- vim.cmd[[colorscheme monokai]]
 
 -- compe
 vim.o.completeopt = "menu,menuone,noselect"
