@@ -36,10 +36,12 @@ require'packer'.startup(function()
   -- nix expressions
   use 'LnL7/vim-nix'
 
-  -- color theme
+  -- colorschemes
   use 'joshdick/onedark.vim'
   use 'sainnhe/sonokai'
   use 'crusoexia/vim-monokai'
+  use 'dracula/vim'
+  use 'drewtempelmeyer/palenight.vim'
 
   -- status bar
   use 'vim-airline/vim-airline'
@@ -91,7 +93,7 @@ vim.o.termguicolors = true
 
 -- onedark
 vim.g.onedark_terminal_italics = 2
-vim.cmd[[colorscheme onedark]]
+-- vim.cmd[[colorscheme onedark]]
 
 -- sonokai
 vim.g.sonokai_style = 'maia'
@@ -99,6 +101,15 @@ vim.g.sonokai_style = 'maia'
 
 -- monokai
 -- vim.cmd[[colorscheme monokai]]
+
+-- dracula
+vim.cmd[[colorscheme dracula]]
+
+-- palenight
+-- vim.cmd[[colorscheme palenight]]
+
+-- airline
+-- vim.g.airline_theme = "palenight"
 
 -- compe
 vim.o.completeopt = "menu,menuone,noselect"
