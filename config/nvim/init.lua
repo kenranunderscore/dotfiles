@@ -38,13 +38,11 @@ require'packer'.startup(function()
 
   -- colorschemes
   use 'joshdick/onedark.vim'
+  use 'srcery-colors/srcery-vim'
   use 'sainnhe/sonokai'
-  use 'crusoexia/vim-monokai'
-  use 'dracula/vim'
-  use 'drewtempelmeyer/palenight.vim'
 
   -- status bar
-  use 'vim-airline/vim-airline'
+  use 'itchyny/lightline.vim'
 
   -- smooth scrolling for ^D, ^U, ...
   use 'psliwka/vim-smoothie'
@@ -104,17 +102,13 @@ vim.g.onedark_terminal_italics = 2
 vim.g.sonokai_style = 'maia'
 -- vim.cmd [[colorscheme sonokai]]
 
--- monokai
--- vim.cmd [[colorscheme monokai]]
+-- srcery-dark
+vim.cmd[[colorscheme srcery]]
 
--- dracula
-vim.cmd [[colorscheme dracula]]
-
--- palenight
--- vim.cmd [[colorscheme palenight]]
-
--- airline
--- vim.g.airline_theme = "palenight"
+-- lightline
+vim.g.lightline = {
+  colorscheme = 'srcery_drk';
+}
 
 -- compe
 vim.o.completeopt = "menu,menuone,noselect"
