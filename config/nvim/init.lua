@@ -135,6 +135,16 @@ vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require'telescope.builtin'
 vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require'telescope.builtin'.git_files()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require'telescope.builtin'.lsp_code_actions()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require'telescope.builtin'.oldfiles()<cr>]], { noremap = true, silent = true })
+-- exit telescope via <esc>
+require'telescope'.setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = require'telescope.actions'.close
+      }
+    }
+  }
+}
 
 -- treesitter
 require'nvim-treesitter.configs'.setup {
