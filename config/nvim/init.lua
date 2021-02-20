@@ -66,9 +66,20 @@ require'packer'.startup(function()
   -- code formatter
   use 'sbdchd/neoformat'
 
-  -- language-specific highlighting
-  -- (Haskell does not work well with treesitter yet, for instance)
-  use 'sheerun/vim-polyglot'
+  -- Haskell does not work well with treesitter yet
+  use 'neovimhaskell/haskell-vim'
+
+  -- Dhall
+  use 'vmchale/dhall-vim'
+
+  -- fish
+  use 'blankname/vim-fish'
+
+  -- Nim
+  use 'zah/nim.vim'
+
+  -- plantuml
+  use 'aklt/plantuml-syntax'
 
   -- automatically close parens
   use 'jiangmiao/auto-pairs'
