@@ -47,9 +47,6 @@ require'packer'.startup(function()
   -- status bar
   use 'itchyny/lightline.vim'
 
-  -- smooth scrolling for ^D, ^U, ...
-  use 'psliwka/vim-smoothie'
-
   -- gl and gL to align text by characters
   use 'tommcdo/vim-lion'
 
