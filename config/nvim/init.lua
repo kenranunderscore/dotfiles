@@ -97,6 +97,9 @@ require'packer'.startup(function()
 
   -- :cd to project root automatically on opening buffers
   use 'airblade/vim-rooter'
+
+  -- indent level indicators
+  use 'Yggdroot/indentLine'
 end)
 
 -- options
