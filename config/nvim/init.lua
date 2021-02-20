@@ -88,6 +88,12 @@ require'packer'.startup(function()
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/lsp_extensions.nvim'
   use 'kosayoda/nvim-lightbulb'
+
+  -- Doom's "s" motion
+  use 'justinmk/vim-sneak'
+
+  -- :cd to project root automatically on opening buffers
+  use 'airblade/vim-rooter'
 end)
 
 -- options
