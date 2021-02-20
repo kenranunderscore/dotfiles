@@ -26,9 +26,12 @@ require'packer'.startup(function()
   use 'tpope/vim-surround'
 
   -- fuzzy searching; still needs to be configured
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-lua/popup.nvim'
+  use  { 'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'}
+    }
+  }
 
   -- completion framework
   use 'hrsh7th/nvim-compe'
