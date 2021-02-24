@@ -44,6 +44,9 @@ alias ekill="emacsclient -e '(kill-emacs)'"
 # Open a magit-status terminal frame to handle git commands.
 alias eg="e -e '(magit-status)'"
 
+# gs is not a default alias in the git plugin
+alias gs="git status --short"
+
 alias l="ls -GFAtr --color"
 alias la="ls -AF --color"
 alias ls="ls -G --color"
