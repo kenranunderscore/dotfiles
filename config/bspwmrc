@@ -4,6 +4,7 @@ sxhkd &
 #xkbcomp ~/dhm.xkb $DISPLAY &
 polybar right &
 polybar left &
+xinput set-prop 'Logitech Gaming Mouse G502' 292 1
 
 bspc monitor HDMI-0  -d 1 2 3 4 5
 bspc monitor DVI-D-0 -d 6 7 8 9 0
