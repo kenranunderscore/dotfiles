@@ -20,6 +20,7 @@ in {
 
   imports = [
     (import ./nix/email.nix isDarwin)
+    ./nix/fish.nix
     (import ./nix/git.nix isDarwin)
     (import ./nix/kitty.nix isDarwin shellPath)
     (import ./nix/tmux.nix shellPath)
@@ -32,23 +33,7 @@ in {
     bash = {
       enable = true;
       historyIgnore = [ "ls" "cd" "exit" ];
-      shellAliases = {
-        g = "git";
-        ga = "git add";
-        gc = "git commit";
-        gd = "git diff";
-        gds = "git diff --staged";
-        gf = "git fetch";
-        gl = "git pull";
-        glog = "git log --oneline --decorate --graph";
-        glo = "git log --oneline --decorate";
-        gm = "git merge";
-        gp = "git push";
-        grb = "git rebase";
-        gs = "git status --short";
-        gst = "git status";
-        gupa = "git pull -r --autostash";
-      };
+      shellAliases = import ./nix/shell-aliases.nix;
     };
     gpg.enable = true;
     home-manager.enable = true;
@@ -120,6 +105,7 @@ in {
         direnv
         emacsGcc
         fd
+        fish
         gcc
         gnumake
         jetbrains-mono
