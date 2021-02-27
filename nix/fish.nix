@@ -16,6 +16,15 @@
     };
     plugins = [
       {
+        name = "fish-fastdir";
+        src = pkgs.fetchFromGitHub {
+          owner = "danhper";
+          repo = "fish-fastdir";
+          rev = "4f616a6071f05ae89d5f72c20216f6f851e6ca1d";
+          sha256 = "1kr90b03pry7k74g80wnmmlw2d6pvp3637cifywqpkwdyizys6va";
+        };
+      }
+      {
         name = "spacefish";
         src = pkgs.fetchFromGitHub {
           owner = "matchai";
