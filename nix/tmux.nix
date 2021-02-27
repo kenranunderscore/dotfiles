@@ -9,10 +9,10 @@ shellPath:
     newSession = true;
     terminal = "xterm-24bit";
     resizeAmount = 10;
+    shell = "${shellPath}";
     extraConfig = ''
       set-option -g renumber-windows on
       set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"
-      set -g default-shell ${shellPath}
     '';
   };
 }

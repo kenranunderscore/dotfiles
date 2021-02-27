@@ -7,7 +7,7 @@ let
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
   pwd = builtins.toPath ./.;
   osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
-  shellPath = "${pkgs.zsh}/bin/zsh";
+  shellPath = "${pkgs.fish}/bin/fish";
 in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
