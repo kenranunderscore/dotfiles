@@ -6,8 +6,7 @@ polybar right &
 polybar left &
 xinput set-prop 'Logitech Gaming Mouse G502' 292 1
 
-bspc monitor HDMI-0  -d 1 2 3 4 5
-bspc monitor DVI-D-0 -d 6 7 8 9 0
+bspc monitor DP-0  -d 1 2 3 4 5
 
 bspc config border_width         1
 bspc config window_gap          15
