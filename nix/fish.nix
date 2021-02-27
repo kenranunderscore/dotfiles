@@ -22,6 +22,15 @@
           sha256 = "19i59145lsjmidqlgk2dmvs3vg2m3zlz2rcms2kyyk1m3y63q8xi";
         };
       }
+      {
+        name = "autopair.fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "jorgebucaran";
+          repo = "autopair.fish";
+          rev = "1222311994a0730e53d8e922a759eeda815fcb62";
+          sha256 = "0lxfy17r087q1lhaz5rivnklb74ky448llniagkz8fy393d8k9cp";
+        };
+      }
     ];
     shellAbbrs = import ./shell-aliases.nix;
   };
