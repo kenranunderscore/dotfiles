@@ -12,10 +12,8 @@ in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
     config = import ./nix/nixpkgs-config.nix;
-    overlays = [
-      (import ./nix/emacs-overlay.nix)
-      (import ./nix/neovim-overlay.nix)
-    ];
+    overlays =
+      [ (import ./nix/emacs-overlay.nix) (import ./nix/neovim-overlay.nix) ];
   };
 
   imports = [
@@ -129,10 +127,11 @@ in {
         wget
         xorg.xkbcomp
       ];
-      darwinPackages = with pkgs; [
-        # For when emacsGcc stops working on macOS again:
-        # pkgs.emacsUnstable
-      ];
+      darwinPackages = with pkgs;
+        [
+          # For when emacsGcc stops working on macOS again:
+          # pkgs.emacsUnstable
+        ];
       linuxPackages = with pkgs; [
         firefox-bin
         htop
@@ -158,11 +157,11 @@ in {
     # read-only. Maybe there's a way to still use fetchFromGitHub...
     activation = {
       symlinkAndSyncDoom = dagEntryAfter [ "writeBoundary" ] ''
-	# FIXME Check for existence of ~/.emacs.d
-	$DRY_RUN_CMD ln -snf ${pwd}/config/doom $HOME/.config/doom && \
-        $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d && \
-        $DRY_RUN_CMD ~/.emacs.d/bin/doom sync
-      '';
+        	# FIXME Check for existence of ~/.emacs.d
+        	$DRY_RUN_CMD ln -snf ${pwd}/config/doom $HOME/.config/doom && \
+                $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d && \
+                $DRY_RUN_CMD ~/.emacs.d/bin/doom sync
+              '';
 
       symlinkMacOSApps = let
         action = if isDarwin then
