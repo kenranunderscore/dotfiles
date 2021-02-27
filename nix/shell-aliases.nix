@@ -1,4 +1,5 @@
 {
+  # git aliases
   g = "git";
   ga = "git add";
   gc = "git commit -v";
@@ -15,4 +16,7 @@
   gs = "git status --short";
   gst = "git status";
   gupa = "git pull -r --autostash";
+
+  # misc
+  md = "mkdir -p";
 }

@@ -3,6 +3,17 @@
 {
   programs.fish = {
     enable = true;
+    functions = {
+      mc = {
+        description = "Create directory and cd into it";
+        body = ''
+          command mkdir -p $argv
+          if test $status = 0
+            cd $argv[(count $argv)]
+          end
+        '';
+      };
+    };
     plugins = [
       {
         name = "spacefish";
