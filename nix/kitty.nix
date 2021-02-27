@@ -11,7 +11,7 @@ isDarwin: shellPath: # TODO make this a module so we can configure from the outs
     settings = {
       shell = shellPath + (if isDarwin then " --login" else "");
       macos_option_as_alt = true;
-      font_size = if isDarwin then "17.0" else "10.0";
+      font_size = if isDarwin then "17.0" else "12.0";
       adjust_line_height = 1;
       scrollback_lines = 50000;
       hide_window_decorations = true;
