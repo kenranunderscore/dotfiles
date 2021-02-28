@@ -26,13 +26,21 @@ in {
       enable = true;
       userName = "Johannes Maier";
       userEmail = cfg.email;
-      ignores = [ "*.swp" ];
+      ignores = [ "*.swp" ".envrc" ".DS_Store" ];
       signing.signByDefault = !(isNull cfg.gpgKey);
       signing.key = cfg.gpgKey;
       extraConfig = {
-        pull.rebase = "false";
-        core.editor = "vim";
+        core = {
+          editor = "vim";
+          askPass = "";
+        };
         init.defaultBranch = "main";
+        pull.rebase = "true";
+        url = {
+          "https://github.com/" = { insteadOf = "gh:"; };
+          "git@github.com:kenranunderscore/" = { insteadOf = "gh:/"; };
+          "https://gitlab.com/" = { insteadOf = "gl:"; };
+        };
       };
     };
   };
