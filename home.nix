@@ -18,21 +18,25 @@ in {
 
   imports = [
     (import ./nix/email.nix isDarwin)
-    ./nix/fish.nix
     (import ./nix/kitty.nix isDarwin shellPath)
     (import ./nix/tmux.nix shellPath)
     ./nix/irssi.nix
     ./modules
   ];
 
-  modules.shell.git = {
-    enable = true;
-    gpgKey = if isDarwin then
-      "0x4DC80C3B727DC1EE"
-    else
-      "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
-    email =
-      if isDarwin then "johannes.maier@mailbox.org" else "johb.maier@gmail.com";
+  modules.shell = {
+    fish.enable = true;
+    git = {
+      enable = true;
+      gpgKey = if isDarwin then
+        "0x4DC80C3B727DC1EE"
+      else
+        "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
+      email = if isDarwin then
+        "johannes.maier@mailbox.org"
+      else
+        "johb.maier@gmail.com";
+    };
   };
 
   fonts.fontconfig.enable = true;

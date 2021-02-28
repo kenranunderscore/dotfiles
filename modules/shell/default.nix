@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./git.nix ];
+  imports = [ ./fish.nix ./git.nix ];
 }
