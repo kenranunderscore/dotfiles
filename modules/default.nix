@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./programs ./shell ];
+  imports = [ ./email.nix ./programs ./shell ];
 }

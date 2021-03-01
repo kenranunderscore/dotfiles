@@ -16,9 +16,17 @@ in {
       [ (import ./nix/emacs-overlay.nix) (import ./nix/neovim-overlay.nix) ];
   };
 
-  imports = [ (import ./nix/email.nix isDarwin) ./modules ];
+  imports = [ ./modules ];
 
   modules = {
+    email = {
+      enable = true;
+      certificatesFile = if isDarwin then
+        "/usr/local/etc/openssl/cert.pem"
+      else
+        "/etc/ssl/certs/ca-certificates.crt";
+      primaryAccount = if isDarwin then "ag" else "mailbox";
+    };
     programs = {
       irssi.enable = true;
       kitty = {
