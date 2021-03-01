@@ -16,14 +16,18 @@ in {
       [ (import ./nix/emacs-overlay.nix) (import ./nix/neovim-overlay.nix) ];
   };
 
-  imports = [
-    (import ./nix/email.nix isDarwin)
-    (import ./nix/kitty.nix isDarwin shellPath)
-    ./modules
-  ];
+  imports = [ (import ./nix/email.nix isDarwin) ./modules ];
 
   modules = {
-    programs = { irssi.enable = true; };
+    programs = {
+      irssi.enable = true;
+      kitty = {
+        enable = true;
+        fontSize = if isDarwin then "17.0" else "13.0";
+        inherit shellPath;
+        useLoginShell = isDarwin;
+      };
+    };
     shell = {
       bash.enable = true;
       fish.enable = true;

@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./irssi.nix ];
+  imports = [ ./irssi.nix ./kitty.nix ];
 }
