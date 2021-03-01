@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./fish.nix ./git.nix ];
+  imports = [ ./fish.nix ./git.nix ./tmux.nix ];
 }

@@ -19,7 +19,6 @@ in {
   imports = [
     (import ./nix/email.nix isDarwin)
     (import ./nix/kitty.nix isDarwin shellPath)
-    (import ./nix/tmux.nix shellPath)
     ./nix/irssi.nix
     ./modules
   ];
@@ -36,6 +35,10 @@ in {
         "johannes.maier@mailbox.org"
       else
         "johb.maier@gmail.com";
+    };
+    tmux = {
+      enable = true;
+      inherit shellPath;
     };
   };
 
