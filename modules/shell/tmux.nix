@@ -4,16 +4,14 @@ with lib;
 let cfg = config.modules.shell.tmux;
 in {
   options.modules.shell.tmux = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
+    enable = mkEnableOption "tmux";
 
     shellPath = mkOption {
       type = types.nullOr types.str;
       default = null;
     };
   };
+
   config = mkIf cfg.enable {
     programs.tmux = {
       enable = true;

@@ -2,12 +2,8 @@
 
 let cfg = config.modules.shell.fish;
 in with lib; {
-  options.modules.shell.fish = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+  options.modules.shell.fish = { enable = mkEnableOption "fish"; };
+
   config = mkIf cfg.enable {
     programs.fish = {
       enable = true;

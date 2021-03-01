@@ -3,12 +3,7 @@
 with lib;
 let cfg = config.modules.programs.neovim;
 in {
-  options.modules.programs.neovim = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+  options.modules.programs.neovim = { enable = mkEnableOption "neovim"; };
 
   config = mkIf cfg.enable {
     home.packages = [ pkgs.neovim-nightly ];

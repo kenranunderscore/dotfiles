@@ -3,12 +3,7 @@
 with lib;
 let cfg = config.modules.programs.irssi;
 in {
-  options.modules.programs.irssi = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+  options.modules.programs.irssi = { enable = mkEnableOption "irssi"; };
 
   config = mkIf cfg.enable {
     programs.irssi = {

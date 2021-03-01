@@ -3,12 +3,7 @@
 with lib;
 let cfg = config.modules.shell.zsh;
 in {
-  options.modules.shell.zsh = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+  options.modules.shell.zsh = { enable = mkEnableOption "zsh"; };
 
   config = mkIf cfg.enable {
     home.file = {

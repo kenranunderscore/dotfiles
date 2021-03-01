@@ -3,12 +3,8 @@
 with lib;
 let cfg = config.modules.shell.bash;
 in {
-  options.modules.shell.bash = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
-  };
+  options.modules.shell.bash = { enable = mkEnableOption "bash"; };
+
   config = mkIf cfg.enable {
     programs.bash = {
       enable = true;

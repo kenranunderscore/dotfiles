@@ -4,10 +4,7 @@ with lib;
 let cfg = config.modules.shell.git;
 in {
   options.modules.shell.git = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
+    enable = mkEnableOption "git";
 
     email = mkOption {
       type = types.str;

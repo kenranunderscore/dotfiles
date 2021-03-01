@@ -6,10 +6,7 @@ let
   cfg = config.modules.email;
 in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
   options.modules.email = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
+    enable = mkEnableOption "email module";
 
     maildir = mkOption {
       type = types.str;

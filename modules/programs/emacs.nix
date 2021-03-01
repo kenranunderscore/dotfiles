@@ -7,10 +7,7 @@ let
   configPath = builtins.toPath ../../config;
 in {
   options.modules.programs.emacs = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
+    enable = mkEnableOption "emacs";
 
     version = mkOption {
       type = types.enum [ "gcc" "unstable" "stable" ];

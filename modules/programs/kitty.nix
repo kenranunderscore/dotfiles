@@ -4,10 +4,7 @@ with lib;
 let cfg = config.modules.programs.kitty;
 in {
   options.modules.programs.kitty = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-    };
+    enable = mkEnableOption "kitty";
 
     shellPath = mkOption {
       type = types.str;
