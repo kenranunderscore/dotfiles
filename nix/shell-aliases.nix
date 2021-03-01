@@ -1,8 +1,14 @@
 {
+  # create a new graphical emacs frame, not tied to a shell
+  e = "emacsclient --alternate-editor '' --create-frame --no-wait";
+  # kill the emacs daemon
+  ekill = "emacsclient --eval '(kill-emacs)'";
+
   # git aliases
   g = "git";
   ga = "git add";
   gc = "git commit -v";
+  gcm = "git commit -v -m";
   gd = "git diff";
   gds = "git diff --staged";
   gf = "git fetch";
