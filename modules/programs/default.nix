@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./irssi.nix ./kitty.nix ];
+  imports = [ ./emacs.nix ./irssi.nix ./kitty.nix ];
 }

@@ -12,8 +12,7 @@ in {
   # Config for nixpkgs when used by home-manager.
   nixpkgs = {
     config = import ./nix/nixpkgs-config.nix;
-    overlays =
-      [ (import ./nix/emacs-overlay.nix) (import ./nix/neovim-overlay.nix) ];
+    overlays = [ (import ./nix/neovim-overlay.nix) ];
   };
 
   imports = [ ./modules ];
@@ -28,6 +27,10 @@ in {
       primaryAccount = if isDarwin then "ag" else "mailbox";
     };
     programs = {
+      emacs = {
+        enable = true;
+        version = "gcc";
+      };
       irssi.enable = true;
       kitty = {
         enable = true;
@@ -128,7 +131,6 @@ in {
         cascadia-code
         curl
         direnv
-        emacsGcc
         fd
         fish
         gcc
@@ -154,11 +156,6 @@ in {
         wget
         xorg.xkbcomp
       ];
-      darwinPackages = with pkgs;
-        [
-          # For when emacsGcc stops working on macOS again:
-          # pkgs.emacsUnstable
-        ];
       linuxPackages = with pkgs; [
         firefox-bin
         htop
