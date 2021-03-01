@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./shell ];
+  imports = [ ./programs ./shell ];
 }
