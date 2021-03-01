@@ -36,6 +36,7 @@ in {
         useLoginShell = isDarwin;
       };
       neovim.enable = true;
+      qutebrowser.enable = true;
     };
     shell = {
       bash.enable = true;

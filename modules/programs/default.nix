@@ -1,5 +1,6 @@
 { ... }:
 
 {
-  imports = [ ./emacs.nix ./irssi.nix ./kitty.nix ./neovim.nix ];
+  imports =
+    [ ./emacs.nix ./irssi.nix ./kitty.nix ./neovim.nix ./qutebrowser.nix ];
 }
