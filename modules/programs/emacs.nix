@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.programs.emacs;
+with import <home-manager/modules/lib/dag.nix> { inherit lib; };
+let
+  cfg = config.modules.programs.emacs;
+  configPath = builtins.toPath ../../config;
 in {
   options.modules.programs.emacs = {
     enable = mkOption {
@@ -16,12 +19,22 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      (if cfg.version == "gcc" then
-        pkgs.emacsGcc
-      else
-        (if cfg.version == unstable then emacsUnstable else emacs))
-    ];
+    home = {
+      activation = {
+        symlinkAndSyncDoom = dagEntryAfter [ "writeBoundary" ] ''
+          # FIXME Check for existence of ~/.emacs.d
+          $DRY_RUN_CMD ln -snf ${configPath}/doom $HOME/.config/doom && \
+          $DRY_RUN_CMD ln -snf ${configPath}/doom-emacs $HOME/.emacs.d && \
+          $DRY_RUN_CMD ~/.emacs.d/bin/doom sync
+        '';
+      };
+      packages = [
+        (if cfg.version == "gcc" then
+          pkgs.emacsGcc
+        else
+          (if cfg.version == unstable then emacsUnstable else emacs))
+      ];
+    };
     nixpkgs.overlays = let
       rev = "208c2bd388eee9b58dd56dd4ba1db863fee1dcba";
       emacsOverlay = (import (builtins.fetchTarball {

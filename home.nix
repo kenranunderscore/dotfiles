@@ -180,13 +180,6 @@ in {
     # We symlink our git submodule to circumvent a nix store directory being
     # read-only. Maybe there's a way to still use fetchFromGitHub...
     activation = {
-      symlinkAndSyncDoom = dagEntryAfter [ "writeBoundary" ] ''
-        	# FIXME Check for existence of ~/.emacs.d
-        	$DRY_RUN_CMD ln -snf ${pwd}/config/doom $HOME/.config/doom && \
-                $DRY_RUN_CMD ln -snf ${pwd}/config/doom-emacs $HOME/.emacs.d && \
-                $DRY_RUN_CMD ~/.emacs.d/bin/doom sync
-              '';
-
       symlinkMacOSApps = let
         action = if isDarwin then
           "$DRY_RUN_CMD ln -snf $HOME/.nix-profile/Applications/*.app ~/Applications/"
