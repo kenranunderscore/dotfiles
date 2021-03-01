@@ -39,6 +39,7 @@ in {
     };
     shell = {
       bash.enable = true;
+      bat.enable = true;
       fish.enable = true;
       git = {
         enable = true;
@@ -121,7 +122,6 @@ in {
 
     packages = let
       basePackages = with pkgs; [
-        bat
         cascadia-code
         curl
         direnv
