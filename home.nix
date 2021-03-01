@@ -10,10 +10,7 @@ let
   shellPath = "${pkgs.fish}/bin/fish";
 in {
   # Config for nixpkgs when used by home-manager.
-  nixpkgs = {
-    config = import ./nix/nixpkgs-config.nix;
-    overlays = [ (import ./nix/neovim-overlay.nix) ];
-  };
+  nixpkgs = { config = import ./nix/nixpkgs-config.nix; };
 
   imports = [ ./modules ];
 
@@ -38,6 +35,7 @@ in {
         inherit shellPath;
         useLoginShell = isDarwin;
       };
+      neovim.enable = true;
     };
     shell = {
       bash.enable = true;
@@ -105,10 +103,6 @@ in {
   xdg.configFile = {
     "bspwm/bspwmrc".source = ./config/bspwmrc;
     "nixpkgs/config.nix".source = ./nix/nixpkgs-config.nix;
-    "nvim" = {
-      source = ./config/nvim;
-      recursive = true;
-    };
     "polybar/config".source = ./config/polybar;
     "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
   };
@@ -139,7 +133,6 @@ in {
         julia-mono
         lorri
         mu
-        neovim-nightly
         nixfmt
         nix-index
         nix-prefetch-git
