@@ -60,7 +60,7 @@ in with lib; {
           };
         }
       ];
-      shellAbbrs = import ../../nix/shell-aliases.nix;
+      shellAbbrs = import ./shell-aliases.nix;
     };
   };
 }

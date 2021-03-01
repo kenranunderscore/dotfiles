@@ -24,6 +24,7 @@ in {
   ];
 
   modules.shell = {
+    bash.enable = true;
     fish.enable = true;
     git = {
       enable = true;
@@ -45,11 +46,6 @@ in {
   fonts.fontconfig.enable = true;
 
   programs = {
-    bash = {
-      enable = true;
-      historyIgnore = [ "ls" "cd" "exit" ];
-      shellAliases = import ./nix/shell-aliases.nix;
-    };
     gpg.enable = true;
     home-manager.enable = true;
     mbsync.enable = true;
