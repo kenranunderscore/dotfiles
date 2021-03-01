@@ -55,6 +55,7 @@ in {
         enable = true;
         inherit shellPath;
       };
+      zsh.enable = true;
     };
   };
 
@@ -68,7 +69,6 @@ in {
     password-store.enable = true;
     rofi.enable = !isDarwin;
     ssh.enable = true;
-    zsh.enable = true;
   };
 
   xresources.properties = {
@@ -166,8 +166,6 @@ in {
       # The private key file is linked to directly during activation.
       ".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
       ".vimrc".source = ./config/vimrc;
-      ".zshrc".source = ./config/zshrc;
-      ".zshenv".source = ./config/zshenv;
     };
 
     # We symlink our git submodule to circumvent a nix store directory being
