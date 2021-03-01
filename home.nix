@@ -40,6 +40,7 @@ in {
     shell = {
       bash.enable = true;
       bat.enable = true;
+      direnv.enable = true;
       fish.enable = true;
       git = {
         enable = true;
@@ -124,7 +125,6 @@ in {
       basePackages = with pkgs; [
         cascadia-code
         curl
-        direnv
         fd
         fish
         gcc

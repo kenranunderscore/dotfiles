@@ -1,5 +1,13 @@
 { ... }:
 
 {
-  imports = [ ./bash.nix ./bat.nix ./fish.nix ./git.nix ./tmux.nix ./zsh.nix ];
+  imports = [
+    ./bash.nix
+    ./bat.nix
+    ./direnv.nix
+    ./fish.nix
+    ./git.nix
+    ./tmux.nix
+    ./zsh.nix
+  ];
 }
