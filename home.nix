@@ -127,17 +127,14 @@ in {
         cascadia-code
         curl
         fd
-        fish
         gcc
         gnumake
         jetbrains-mono
-        julia-mono
         lorri
         mu
         nixfmt
         nix-index
         nix-prefetch-git
-        pijul
         plantuml
         racket
         ripgrep
@@ -148,7 +145,6 @@ in {
         unzip
         vim
         wget
-        xorg.xkbcomp
       ];
       linuxPackages = with pkgs; [
         firefox-bin
@@ -157,9 +153,9 @@ in {
         nextcloud-client
         polybar
         sxhkd
+        xorg.xkbcomp
       ];
-    in basePackages ++ (if isDarwin then [ ] else linuxPackages)
-    ++ (if isDarwin then darwinPackages else [ ]);
+    in basePackages ++ (if isDarwin then [ ] else linuxPackages);
 
     file = {
       ".irssi/h3rbz.theme".source = ./config/h3rbz.theme;
