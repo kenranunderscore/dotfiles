@@ -158,7 +158,6 @@ in {
     in basePackages ++ (if isDarwin then [ ] else linuxPackages);
 
     file = {
-      ".irssi/h3rbz.theme".source = ./config/h3rbz.theme;
       ".sbclrc".source = ./config/sbclrc;
       # The private key file is linked to directly during activation.
       ".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";

@@ -6,6 +6,7 @@ in {
   options.modules.programs.irssi = { enable = mkEnableOption "irssi"; };
 
   config = mkIf cfg.enable {
+    home.file.".irssi/h3rbz.theme".source = ../../config/h3rbz.theme;
     programs.irssi = {
       enable = true;
       # TODO make cert part of options
