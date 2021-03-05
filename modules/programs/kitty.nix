@@ -31,6 +31,7 @@ in {
         name = "Hack";
       };
       settings = {
+        term = "xterm-256color";
         shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
         macos_option_as_alt = true;
         font_size = cfg.fontSize;
