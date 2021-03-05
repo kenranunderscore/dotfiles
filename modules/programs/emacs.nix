@@ -29,7 +29,7 @@ in {
         (if cfg.version == "gcc" then
           pkgs.emacsGcc
         else
-          (if cfg.version == unstable then emacsUnstable else emacs))
+          (if cfg.version == "unstable" then pkgs.emacsUnstable else pkgs.emacs))
       ];
     };
     nixpkgs.overlays = let
