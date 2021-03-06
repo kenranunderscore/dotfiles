@@ -105,7 +105,7 @@ in {
       username = cfg.username;
       homeDirectory = cfg.homeDirectory;
 
-      stateVersion = "21.05";
+      stateVersion = "21.03";
 
       packages = with pkgs; [
         cascadia-code
