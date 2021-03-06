@@ -9,6 +9,8 @@ in {
     programs.bash = {
       enable = true;
       historyIgnore = [ "ls" "cd" "exit" ];
+      initExtra = "source $HOME/.nix-profile/etc/profile.d/nix.sh";
+      profileExtra = "source $HOME/.nix-profile/etc/profile.d/nix.sh";
       shellAliases = import ./shell-aliases.nix;
     };
   };
