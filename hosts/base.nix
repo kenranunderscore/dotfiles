@@ -1,18 +1,18 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
-with import <home-manager/modules/lib/dag.nix> { lib = pkgs.lib; };
+with import <home-manager/modules/lib/dag.nix> { inherit lib; };
 let
   isDarwin = pkgs.stdenv.isDarwin;
   username = if isDarwin then "maier" else "kenran";
   homeDirectory = if isDarwin then "/Users/maier" else "/home/kenran";
-  pwd = builtins.toPath ./.;
-  osPrivatePath = if isDarwin then ./private/macos else ./private/linux;
+  pwd = builtins.toPath ../.;
+  osPrivatePath = if isDarwin then ../private/macos else ../private/linux;
   shellPath = "${pkgs.fish}/bin/fish";
 in {
   # Config for nixpkgs when used by home-manager.
-  nixpkgs = { config = import ./nix/nixpkgs-config.nix; };
+  nixpkgs = { config = import ../nix/nixpkgs-config.nix; };
 
-  imports = [ ./modules ];
+  imports = [ ../modules ];
 
   modules = {
     email = {
@@ -104,10 +104,10 @@ in {
   };
 
   xdg.configFile = {
-    "bspwm/bspwmrc".source = ./config/bspwmrc;
-    "nixpkgs/config.nix".source = ./nix/nixpkgs-config.nix;
-    "polybar/config".source = ./config/polybar;
-    "sxhkd/sxhkdrc".source = ./config/sxhkdrc;
+    "bspwm/bspwmrc".source = ../config/bspwmrc;
+    "nixpkgs/config.nix".source = ../nix/nixpkgs-config.nix;
+    "polybar/config".source = ../config/polybar;
+    "sxhkd/sxhkdrc".source = ../config/sxhkdrc;
   };
 
   services = {
@@ -158,10 +158,10 @@ in {
     in basePackages ++ (if isDarwin then [ ] else linuxPackages);
 
     file = {
-      ".sbclrc".source = ./config/sbclrc;
+      ".sbclrc".source = ../config/sbclrc;
       # The private key file is linked to directly during activation.
       ".ssh/id_rsa.pub".source = osPrivatePath + "/id_rsa.pub";
-      ".vimrc".source = ./config/vimrc;
+      ".vimrc".source = ../config/vimrc;
     };
 
     # We symlink our git submodule to circumvent a nix store directory being
@@ -177,7 +177,9 @@ in {
       addXterm24bitTerminfo =
         let tic = if isDarwin then "/usr/bin/tic" else "tic";
         in dagEntryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${./config/xterm-24bit.terminfo}
+          $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${
+            ../config/xterm-24bit.terminfo
+          }
         '';
 
       handlePrivateKeys = let privateKeyPath = osPrivatePath + "/id_rsa";
