@@ -4,7 +4,12 @@ let dag = import <home-manager/modules/lib/dag.nix> { inherit lib; };
 in {
   imports = [ ./base.nix ../modules ];
 
-  hosts.base.username = "maier";
+  hosts.base = {
+    username = "maier";
+    homeDirectory = "/Users/maier";
+    privateDir = ../private/macos;
+    shellPath = "${pkgs.fish}/bin/fish";
+  };
 
   modules = {
     email = {
@@ -12,6 +17,7 @@ in {
       primaryAccount = "ag";
     };
     programs = {
+      emacs = { version = lib.mkForce "stable"; };
       kitty = {
         useLoginShell = true;
         fontSize = "17.0";
