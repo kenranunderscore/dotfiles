@@ -3,6 +3,8 @@
 {
   imports = [ ./base.nix ../modules ];
 
+  targets.genericLinux = { enable = true; };
+
   hosts.base = {
     username = "johannes";
     privateDir = ../private/linux;
