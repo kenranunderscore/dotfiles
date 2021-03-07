@@ -24,7 +24,7 @@ in {
       userName = "Johannes Maier";
       userEmail = cfg.email;
       ignores = [ "*.swp" ".envrc" ".DS_Store" ];
-      signing.signByDefault = !(isNull cfg.gpgKey);
+      signing.signByDefault = cfg.gpgKey != null;
       signing.key = cfg.gpgKey;
       extraConfig = {
         core = {
