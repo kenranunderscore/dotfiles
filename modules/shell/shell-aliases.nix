@@ -21,8 +21,9 @@
   grs = "git restore";
   gs = "git status --short";
   gst = "git status";
-  gupa = "git pull -r --autostash";
+  gupa = "git pull --rebase --autostash";
 
   # misc
   md = "mkdir -p";
+  s = "sudo";
 }
