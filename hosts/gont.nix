@@ -7,7 +7,7 @@ let
     sha256 = "02y38zmdplk7a9ihsxvnrzhhv7324mmf5g8hmxqizaid5k5ydpr3";
   };
   nixGL = (pkgs.callPackage "${nixGLSource}/nixGL.nix" { }).nixGLNvidia;
-in {
+in rec {
   imports = [ ./base.nix ../modules ];
 
   targets.genericLinux = { enable = true; };
@@ -25,8 +25,9 @@ in {
     };
     programs = {
       kitty = {
+        enable = true;
         useLoginShell = false;
-        fontSize = "12.0";
+        fontSize = "10.0";
       };
       qutebrowser = {
         package = pkgs.writeShellScriptBin "qb" ''
@@ -54,10 +55,21 @@ in {
 
   home.packages = with pkgs; [
     htop
+    kittyWrapped
     manpages
     nextcloud-client
     polybar
     sxhkd
     xorg.xkbcomp
+  ];
+
+  # wrap kitty with nixGL, since it does not expose a 'package' option
+  nixpkgs.overlays = [
+    (_: super: {
+      kittyWrapped = pkgs.writeShellScriptBin "ky" ''
+        #!/usr/bin/env sh
+        ${nixGL}/bin/nixGLNvidia ${super.kitty}/bin/kitty "$@"
+      '';
+    })
   ];
 }
