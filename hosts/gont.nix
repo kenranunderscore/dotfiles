@@ -1,6 +1,13 @@
 { config, lib, pkgs, ... }:
 
-{
+let
+  nixGLSource = let rev = "7d6bc1b21316bab6cf4a6520c2639a11c25a220e";
+  in builtins.fetchTarball {
+    url = "https://github.com/guibou/nixGL/archive/${rev}.tar.gz";
+    sha256 = "02y38zmdplk7a9ihsxvnrzhhv7324mmf5g8hmxqizaid5k5ydpr3";
+  };
+  nixGL = (pkgs.callPackage "${nixGLSource}/nixGL.nix" { }).nixGLNvidia;
+in {
   imports = [ ./base.nix ../modules ];
 
   targets.genericLinux = { enable = true; };
@@ -20,6 +27,12 @@
       kitty = {
         useLoginShell = false;
         fontSize = "12.0";
+      };
+      qutebrowser = {
+        package = pkgs.writeShellScriptBin "qb" ''
+          #!/usr/bin/env sh
+          ${nixGL}/bin/nixGLNvidia ${pkgs.qutebrowser}/bin/qutebrowser "$@"
+        '';
       };
     };
     shell = {
