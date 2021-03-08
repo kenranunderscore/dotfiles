@@ -61,6 +61,7 @@ in rec {
     feh
     htop
     kittyWrapped
+    leiningen
     manpages
     nextcloud-client
     polybar
