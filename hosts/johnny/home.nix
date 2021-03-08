@@ -2,12 +2,12 @@
 
 let dag = import <home-manager/modules/lib/dag.nix> { inherit lib; };
 in {
-  imports = [ ./base.nix ../modules ];
+  imports = [ ../base.nix ../../modules ];
 
   hosts.base = {
     username = "maier";
     homeDirectory = "/Users/maier";
-    privateDir = ../private/macos;
+    privateDir = ../../private/macos;
     shellPath = "${pkgs.fish}/bin/fish";
   };
 

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+sxhkd &
+#xkbcomp ~/dhm.xkb $DISPLAY &
+#polybar right &
+polybar left &
+xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Natural Scrolling Enabled' 1 &
+xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Tapping Enabled' 1 &
+ky &
+
+bspc monitor DP-2 -d 1 2 3 4 5
+
+bspc config border_width         2
+bspc config window_gap          20
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+#bspc desktop --focus 1

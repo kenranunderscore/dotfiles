@@ -1,6 +1,12 @@
 { ... }:
 
 {
-  imports =
-    [ ./emacs.nix ./irssi.nix ./kitty.nix ./neovim.nix ./qutebrowser.nix ];
+  imports = [
+    ./bspwm.nix
+    ./emacs.nix
+    ./irssi.nix
+    ./kitty.nix
+    ./neovim.nix
+    ./qutebrowser.nix
+  ];
 }

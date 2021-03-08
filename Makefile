@@ -8,5 +8,5 @@ bootstrap:
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
 	mkdir -p $(NIX_CFG_HOME)
-	ln -sf $(PWD)/hosts/$(HOST).nix $(NIX_CFG_HOME)/home.nix
+	ln -sf $(PWD)/hosts/$(HOST)/home.nix $(NIX_CFG_HOME)/home.nix
 	home-manager switch

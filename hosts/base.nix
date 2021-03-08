@@ -67,10 +67,7 @@ in {
     };
 
     xdg.configFile = {
-      "bspwm/bspwmrc".source = ../config/bspwmrc;
       "nixpkgs/config.nix".source = ../nix/nixpkgs-config.nix;
-      "polybar/config".source = ../config/polybar;
-      "sxhkd/sxhkdrc".source = ../config/sxhkdrc;
     };
 
     xresources.properties = {

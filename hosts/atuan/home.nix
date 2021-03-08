@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./base.nix ../modules ];
+  imports = [ ../base.nix ../../modules ];
 
   hosts.base = {
     username = "kenran";
-    privateDir = ../private/linux;
+    privateDir = ../../private/linux;
     shellPath = "${pkgs.fish}/bin/fish";
   };
 
@@ -15,6 +15,10 @@
       primaryAccount = "mailbox";
     };
     programs = {
+      bspwm = {
+        enable = true;
+        configDir = ./bspwm;
+      };
       kitty = {
         useLoginShell = false;
         fontSize = "12.0";

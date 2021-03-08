@@ -8,13 +8,13 @@ let
   };
   nixGL = (pkgs.callPackage "${nixGLSource}/nixGL.nix" { }).nixGLNvidia;
 in rec {
-  imports = [ ./base.nix ../modules ];
+  imports = [ ../base.nix ../../modules ];
 
   targets.genericLinux = { enable = true; };
 
   hosts.base = {
     username = "johannes";
-    privateDir = ../private/linux;
+    privateDir = ../../private/linux;
     shellPath = "${pkgs.fish}/bin/fish";
   };
 
@@ -24,6 +24,10 @@ in rec {
       primaryAccount = "mailbox";
     };
     programs = {
+      bspwm = {
+        enable = true;
+        configDir = ./bspwm;
+      };
       kitty = {
         enable = true;
         useLoginShell = false;
