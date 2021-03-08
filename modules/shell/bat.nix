@@ -8,7 +8,7 @@ in {
   config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
-      config.theme = "ansi-dark";
+      config.theme = "ansi";
     };
   };
 }
