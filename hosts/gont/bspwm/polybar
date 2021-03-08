@@ -40,6 +40,21 @@ padding-right = 2
 background = ${colors.bg}
 foreground = ${colors.fg}
 
+[bar/right]
+monitor = HDMI-0
+monitor-strict = true
+width = 100%
+height = 25
+radius = 0
+modules-left =
+modules-center = date
+modules-right = bspwm
+font-0 = "DejaVu Sans Mono:pixelsize=12;2"
+padding-left = 2
+padding-right = 2
+background = ${colors.bg}
+foreground = ${colors.fg}
+
 [module/date]
 type = internal/date
 interval = 5

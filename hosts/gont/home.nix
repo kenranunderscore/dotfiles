@@ -58,6 +58,7 @@ in rec {
   };
 
   home.packages = with pkgs; [
+    feh
     htop
     kittyWrapped
     manpages
