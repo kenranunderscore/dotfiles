@@ -42,7 +42,7 @@ in rec {
     };
     shell = {
       git = {
-        email = "johb.maier@gmail.com";
+        email = "johannes.maier@active-group.de";
         gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
       };
     };
