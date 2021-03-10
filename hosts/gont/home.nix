@@ -62,9 +62,12 @@ in rec {
     htop
     kittyWrapped
     leiningen
+    linphone
     manpages
+    mercurial
     nextcloud-client
     polybar
+    subversion
     sxhkd
     xorg.xkbcomp
   ];
