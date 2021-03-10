@@ -66,9 +66,7 @@ in rec {
     manpages
     mercurial
     nextcloud-client
-    polybar
     subversion
-    sxhkd
     xorg.xkbcomp
   ];
 

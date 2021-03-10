@@ -41,12 +41,5 @@
     };
   };
 
-  home.packages = with pkgs; [
-    htop
-    manpages
-    nextcloud-client
-    polybar
-    sxhkd
-    xorg.xkbcomp
-  ];
+  home.packages = with pkgs; [ htop manpages nextcloud-client xorg.xkbcomp ];
 }

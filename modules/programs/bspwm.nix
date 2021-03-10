@@ -13,6 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.polybar pkgs.sxhkd ];
     xdg.configFile = {
       "bspwm/bspwmrc".source = "${cfg.configDir}/bspwmrc";
       "polybar/config".source = "${cfg.configDir}/polybar";

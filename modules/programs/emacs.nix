@@ -29,11 +29,14 @@ in {
         (if cfg.version == "gcc" then
           pkgs.emacsGcc
         else
-          (if cfg.version == "unstable" then pkgs.emacsUnstable else pkgs.emacs))
+          (if cfg.version == "unstable" then
+            pkgs.emacsUnstable
+          else
+            pkgs.emacs))
       ];
     };
     nixpkgs.overlays = let
-      rev = "360f24a1de8fcc3ea31c89d64b5ab6269037064a";
+      rev = "e35ed9bf10b46e533e52add965926d00122c0620";
       emacsOverlay = (import (builtins.fetchTarball {
         url =
           "https://github.com/nix-community/emacs-overlay/archive/${rev}.tar.gz";
