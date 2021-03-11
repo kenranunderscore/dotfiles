@@ -2,6 +2,9 @@
 (setq user-full-name "Johannes Maier")
 
 (after! mu4e
+  ;; I don't use org-msg-mode.
+  (remove-hook! 'mu4e-compose-pre-hook #'org-msg-mode)
+
   ;; Make accidentally quitting mu4e harder.
   (setq mu4e-confirm-quit t)
 
