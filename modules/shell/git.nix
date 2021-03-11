@@ -25,7 +25,7 @@ in {
       userEmail = cfg.email;
       ignores = [ "*.swp" ".envrc" ".DS_Store" ];
       signing.signByDefault = cfg.gpgKey != null;
-      signing.key = cfg.gpgKey;
+      signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
       extraConfig = {
         core = {
           editor = "vim";
