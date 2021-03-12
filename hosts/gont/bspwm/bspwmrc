@@ -8,6 +8,7 @@ polybar right &
 xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Natural Scrolling Enabled' 1 &
 xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Tapping Enabled' 1 &
 xinput set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Natural Scrolling Enabled' 1 &
+xinput set-prop 'Razer  Razer Abyssus' 'libinput Natural Scrolling Enabled' 1 &
 
 bspc monitor DP-2 -d 1 2 3 4 5
 bspc monitor HDMI-0 -d 6 7 8 9 0
