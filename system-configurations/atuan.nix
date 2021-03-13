@@ -7,10 +7,9 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -82,8 +81,9 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
-  environment.systemPackages = with pkgs; [ 
-  ];
+  nix.trustedUsers = [ "root" "kenran" ];
+
+  environment.systemPackages = with pkgs; [ ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -113,4 +113,3 @@
   system.stateVersion = "21.03"; # Did you read the comment?
 
 }
-
