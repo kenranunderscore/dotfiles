@@ -1,7 +1,6 @@
 ;; TODO:
 ;; - leader key
 ;; - org!!
-;; - ivy / selectrum
 ;; - projectile
 ;; - company
 ;; - which-key
@@ -57,3 +56,8 @@
 
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+(use-package selectrum
+  :ensure t
+  :config
+  (selectrum-mode +1))

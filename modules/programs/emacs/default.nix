@@ -31,6 +31,7 @@ in {
             evil-collection
             magit
             nix-mode
+            selectrum
             use-package
           ]);
       in [ myEmacs ];
