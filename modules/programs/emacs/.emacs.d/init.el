@@ -54,3 +54,6 @@
   ;(evil-collection-init 'ripgrep)
   ;(evil-collection-init 'which-key) ;; TODO
   )
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
