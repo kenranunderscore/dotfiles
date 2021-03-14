@@ -3,7 +3,7 @@
 {
   imports = [
     ./bspwm.nix
-    ./emacs.nix
+    ./doom-emacs
     ./irssi.nix
     ./kitty.nix
     ./neovim.nix

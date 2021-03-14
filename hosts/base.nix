@@ -29,9 +29,9 @@ in {
     modules = {
       email.enable = true;
       programs = {
-        emacs = {
+        doomEmacs = {
           enable = true;
-          version = "gcc";
+          emacsVersion = "gcc";
         };
         irssi.enable = true;
         kitty = {

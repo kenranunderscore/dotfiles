@@ -17,7 +17,7 @@ in {
       primaryAccount = "ag";
     };
     programs = {
-      emacs = { version = lib.mkForce "stable"; };
+      doomEmacs = { version = lib.mkForce "stable"; };
       kitty = {
         useLoginShell = true;
         fontSize = "17.0";

@@ -3,13 +3,13 @@
 with lib;
 with import <home-manager/modules/lib/dag.nix> { inherit lib; };
 let
-  cfg = config.modules.programs.emacs;
-  configPath = builtins.toPath ../../config;
+  cfg = config.modules.programs.doomEmacs;
+  configPath = builtins.toPath ./.;
 in {
-  options.modules.programs.emacs = {
-    enable = mkEnableOption "emacs";
+  options.modules.programs.doomEmacs = {
+    enable = mkEnableOption "doomEmacs";
 
-    version = mkOption {
+    emacsVersion = mkOption {
       type = types.enum [ "gcc" "unstable" "stable" ];
       default = "stable";
     };
@@ -18,18 +18,18 @@ in {
   config = mkIf cfg.enable {
     home = {
       activation = {
+        # FIXME Check for existence of ~/.emacs.d
         symlinkAndSyncDoom = dagEntryAfter [ "writeBoundary" ] ''
-          # FIXME Check for existence of ~/.emacs.d
           $DRY_RUN_CMD ln -snf ${configPath}/doom $HOME/.config/doom && \
-          $DRY_RUN_CMD ln -snf ${configPath}/doom-emacs $HOME/.emacs.d && \
+          $DRY_RUN_CMD ln -snf ${configPath}/.emacs.d $HOME/.emacs.d && \
           $DRY_RUN_CMD ~/.emacs.d/bin/doom sync
         '';
       };
       packages = [
-        (if cfg.version == "gcc" then
+        (if cfg.emacsVersion == "gcc" then
           pkgs.emacsGcc
         else
-          (if cfg.version == "unstable" then
+          (if cfg.emacsVersion == "unstable" then
             pkgs.emacsUnstable
           else
             pkgs.emacs))
