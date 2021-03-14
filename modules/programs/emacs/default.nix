@@ -26,7 +26,7 @@ in {
         #emacsWithPackages =
         #(pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
         myEmacs = pkgs.emacsWithPackages
-          (epkgs: with epkgs.melpaPackages; [ evil evil-collection magit ]);
+          (epkgs: with epkgs.melpaPackages; [ evil evil-collection magit use-package ]);
       in [ myEmacs ];
     };
 

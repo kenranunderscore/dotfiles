@@ -9,7 +9,6 @@
 ;; - ibuffer
 ;; - dired+
 ;; - lsp
-;; - haskell-mode
 ;; - ripgrep
 ;; - smartparens/paredit/...
 ;; - magit-todos
@@ -17,25 +16,41 @@
 ;; - doom-themes
 ;; - doom-modeline
 ;; - windows/avy
+;; - format on save
+;; - auto-close parens (smartparens)
 
-(setq evil-want-keybinding nil)
+;; languages:
+;; - nix
+;; - haskell
+;; - data formats
+;; - haskell-mode
 
-;; Enable evil-mode
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
 
-;; Register all bindings in evil-collection
-;(evil-collection-init 'apropos) ;; TODO
-;(evil-collection-init 'cider) ;; TODO
-;(evil-collection-init 'company) ;; TODO check
-(evil-collection-init 'dired) ;; TODO check
-;(evil-collection-init 'dired-sidebar) ;; TODO check
-;(evil-collection-init 'ediff) ;; TODO
-(evil-collection-init 'elisp-mode)
-;(evil-collection-init 'flycheck) ;; TODO
-;(evil-collection-init 'ibuffer) ;; TODO
-;(evil-collection-init 'ivy) ;; TODO
-(evil-collection-init 'magit)
-;(evil-collection-init 'magit-todos) ;; TODO
-;(evil-collection-init 'pass)
-;(evil-collection-init 'ripgrep)
-;(evil-collection-init 'which-key) ;; TODO
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  ;; Register all bindings in evil-collection
+  ;(evil-collection-init 'apropos) ;; TODO
+  ;(evil-collection-init 'cider) ;; TODO
+  ;(evil-collection-init 'company) ;; TODO check
+  (evil-collection-init 'dired) ;; TODO check
+  ;(evil-collection-init 'dired-sidebar) ;; TODO check
+  ;(evil-collection-init 'ediff) ;; TODO
+  (evil-collection-init 'elisp-mode)
+  ;(evil-collection-init 'flycheck) ;; TODO
+  ;(evil-collection-init 'ibuffer) ;; TODO
+  ;(evil-collection-init 'ivy) ;; TODO
+  (evil-collection-init 'magit)
+  ;(evil-collection-init 'magit-todos) ;; TODO
+  ;(evil-collection-init 'pass)
+  ;(evil-collection-init 'ripgrep)
+  ;(evil-collection-init 'which-key) ;; TODO
+  )
