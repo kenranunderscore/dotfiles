@@ -19,6 +19,11 @@
         enable = true;
         configDir = ./bspwm;
       };
+      doomEmacs = { enable = lib.mkForce false; };
+      emacs = {
+        enable = true;
+        emacsVersion = "stable";
+      };
       kitty = {
         useLoginShell = false;
         fontSize = "12.0";
