@@ -27,12 +27,17 @@ in {
         #(pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
         myEmacs = pkgs.emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
+            # Core
             evil
             evil-collection
+            general
             magit
-            nix-mode
             selectrum
+            smartparens
             use-package
+
+            # Language-specific
+            nix-mode
           ]);
       in [ myEmacs ];
     };

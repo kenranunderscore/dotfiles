@@ -1,6 +1,10 @@
 ;; TODO:
+;; - orderless?
+;; - consult
+;; - embark??
 ;; - leader key
 ;; - org!!
+;; - more evil stuff: https://github.com/hlissner/doom-emacs/blob/develop/modules/editor/evil/packages.el
 ;; - projectile
 ;; - company
 ;; - which-key
@@ -61,3 +65,8 @@
   :ensure t
   :config
   (selectrum-mode +1))
+
+(use-package smartparens
+  :ensure t
+  :config
+  (smartparens-global-mode 1))
