@@ -27,6 +27,10 @@
 ;; - data formats
 ;; - haskell-mode
 
+;; Put =customize= code into a separate file.
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file 'no-error)
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
