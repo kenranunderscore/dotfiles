@@ -37,7 +37,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -46,7 +45,6 @@
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   ;; Register all bindings in evil-collection
   ;(evil-collection-init 'apropos) ;; TODO
@@ -70,26 +68,21 @@
   :mode "\\.nix\\'")
 
 (use-package selectrum
-  :ensure t
   :config
   (selectrum-mode +1))
 
 (use-package smartparens
-  :ensure t
   :config
   (smartparens-global-mode 1))
 
 (use-package orderless
-  :ensure t
   ;; TODO customize?
   :custom (completion-styles '(orderless)))
 
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 
 (use-package company
-  :ensure t
   :init
   (add-hook 'after-init-hook 'global-company-mode))
