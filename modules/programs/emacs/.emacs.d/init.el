@@ -31,7 +31,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-(load-theme 'modus-vivendi)
+(load-theme 'modus-vivendi t)
 
 ;; 'y' or 'n' should always suffice.
 (fset 'yes-or-no-p 'y-or-n-p)
