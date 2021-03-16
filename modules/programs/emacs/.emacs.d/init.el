@@ -23,7 +23,6 @@
 ;; - auto-close parens (smartparens)
 
 ;; languages:
-;; - nix
 ;; - haskell
 ;; - data formats
 ;; - haskell-mode

@@ -27,11 +27,12 @@ in {
         #(pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
         myEmacs = pkgs.emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
-            # Core
+            # Essential
             evil
             evil-collection
             general
             magit
+            projectile
             selectrum
             smartparens
             use-package
