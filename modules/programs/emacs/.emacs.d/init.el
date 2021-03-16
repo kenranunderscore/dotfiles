@@ -27,6 +27,15 @@
 ;; - data formats
 ;; - haskell-mode
 
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
+(load-theme 'modus-vivendi)
+
+;; 'y' or 'n' should always suffice.
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (use-package evil
   :ensure t
   :init

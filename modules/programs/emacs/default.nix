@@ -41,6 +41,9 @@ in {
 
             # Language-specific
             nix-mode
+
+            # Themes
+            epkgs.elpaPackages.modus-vivendi-theme
           ]);
       in [ myEmacs ];
     };
