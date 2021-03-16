@@ -30,6 +30,7 @@ in {
             # Essential
             evil
             evil-collection
+            evil-surround
             general
             magit
             orderless
