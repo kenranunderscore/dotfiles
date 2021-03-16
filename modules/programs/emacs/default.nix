@@ -28,6 +28,7 @@ in {
         myEmacs = pkgs.emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
             # Essential
+            company
             evil
             evil-collection
             evil-surround
