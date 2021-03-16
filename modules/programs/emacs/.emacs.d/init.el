@@ -69,3 +69,8 @@
   :ensure t
   :config
   (smartparens-global-mode 1))
+
+(use-package orderless
+  :ensure t
+  ;; TODO customize?
+  :custom (completion-styles '(orderless)))

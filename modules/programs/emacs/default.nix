@@ -32,6 +32,7 @@ in {
             evil-collection
             general
             magit
+            orderless
             projectile
             selectrum
             smartparens
