@@ -45,6 +45,9 @@ in {
 
             # Themes
             epkgs.elpaPackages.modus-vivendi-theme
+
+            # Utility
+            hl-todo
           ]);
       in [ myEmacs ];
     };

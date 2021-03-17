@@ -90,3 +90,8 @@
 (use-package company
   :init
   (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package hl-todo
+  ;; TODO customize keybindings (previous/next/...)
+  :init
+  (add-hook 'after-init-hook 'global-hl-todo-mode))
