@@ -1,5 +1,8 @@
 *~
+*.eld
+history
 auto-save-list/
 elpa/
+eshell/
 transient/
 custom.el
