@@ -47,6 +47,33 @@
   :config
   (evil-mode 1))
 
+;; Use general to define keymaps.
+(use-package general)
+
+;; Use SPC as leader key, like in Doom and neovim.
+(general-create-definer my-leader-def
+  :prefix "SPC")
+
+;; Might use something else like , later, but SPC m should
+;; suffice for now.
+(general-create-definer my-local-leader-def
+  :prefix "SPC m")
+
+(use-package projectile
+  :config
+  (projectile-mode +1))
+
+(my-leader-def
+  :keymaps 'normal
+  ;; SPC SPC as M-x alias
+  "SPC" 'execute-extended-command
+  ;; Buffer commands
+  "b b" 'ibuffer
+  "b q" 'evil-delete-buffer
+  ;; Projectile commands
+  "p f" 'projectile-find-file
+  "p p" 'projectile-switch-project)
+
 (use-package evil-collection
   :after evil
   :config
