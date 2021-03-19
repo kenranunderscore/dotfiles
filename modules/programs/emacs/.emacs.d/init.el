@@ -40,13 +40,6 @@
 ;; 'y' or 'n' should always suffice.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
 ;; Use general to define keymaps.
 (use-package general)
 
@@ -59,9 +52,31 @@
 (general-create-definer my-local-leader-def
   :prefix "SPC m")
 
+(use-package evil
+  :config
+  (evil-mode 1)
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (general-define-key
+   :states 'normal
+   :keymap 'evil-window-map
+   ;; Normal mode keybindings for evil commands
+   "C-w C-h" 'evil-window-left
+   "C-w C-j" 'evil-window-down
+   "C-w C-k" 'evil-window-up
+   "C-w C-l" 'evil-window-right
+   "C-w d" 'evil-window-delete
+   "C-w C-d" 'evil-window-delete)
+  (my-leader-def
+    :keymaps 'normal
+    "b q"))
+
 (use-package projectile
   :config
   (projectile-mode +1))
+
+;; FIXME: define keys in :init sections
 
 (my-leader-def
   :keymaps 'normal
@@ -69,7 +84,6 @@
   "SPC" 'execute-extended-command
   ;; Buffer commands
   "b b" 'ibuffer
-  "b q" 'evil-delete-buffer
   ;; Projectile commands
   "p f" 'projectile-find-file
   "p p" 'projectile-switch-project)
