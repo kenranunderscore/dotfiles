@@ -93,17 +93,19 @@
 
 (use-package projectile
   :config
-  (projectile-mode +1))
+  (projectile-mode +1)
+  (my-leader-def
+    :keymaps '(normal visual)
+    "p f" 'projectile-find-file
+    "p k" 'projectile-kill-buffers
+    "p p" 'projectile-switch-project))
 
 (my-leader-def
   :keymaps '(normal visual)
   ;; SPC SPC as M-x alias
   "SPC" 'execute-extended-command
   ;; Buffer commands
-  "b b" 'ibuffer
-  ;; Projectile commands
-  "p f" 'projectile-find-file
-  "p p" 'projectile-switch-project)
+  "b b" 'ibuffer)
 
 (use-package magit
   :config
