@@ -27,6 +27,8 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
+(setq help-window-select t)
+
 (load-theme 'modus-vivendi t)
 
 ;; 'y' or 'n' should always suffice.
