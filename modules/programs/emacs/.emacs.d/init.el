@@ -44,6 +44,14 @@
 (general-create-definer my-local-leader-def
   :prefix "SPC m")
 
+(my-leader-def
+  :keymaps '(normal visual)
+  ;; SPC SPC as M-x alias
+  "SPC" 'execute-extended-command
+  ;; Buffer commands
+  "b b" 'ibuffer
+  "b q" 'kill-this-buffer)
+
 (use-package evil
   :config
   (evil-mode 1)
@@ -59,10 +67,7 @@
    "C-w C-k" 'evil-window-up
    "C-w C-l" 'evil-window-right
    "C-w d" 'evil-window-delete
-   "C-w C-d" 'evil-window-delete)
-  (my-leader-def
-    :keymaps 'normal
-    "b q"))
+   "C-w C-d" 'evil-window-delete))
 
 (use-package evil-collection
   :after evil
@@ -97,13 +102,6 @@
     "p f" 'projectile-find-file
     "p k" 'projectile-kill-buffers
     "p p" 'projectile-switch-project))
-
-(my-leader-def
-  :keymaps '(normal visual)
-  ;; SPC SPC as M-x alias
-  "SPC" 'execute-extended-command
-  ;; Buffer commands
-  "b b" 'ibuffer)
 
 (use-package magit
   :config
