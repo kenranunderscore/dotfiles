@@ -66,22 +66,6 @@
     :keymaps 'normal
     "b q"))
 
-(use-package projectile
-  :config
-  (projectile-mode +1))
-
-;; FIXME: define keys in :init sections
-
-(my-leader-def
-  :keymaps 'normal
-  ;; SPC SPC as M-x alias
-  "SPC" 'execute-extended-command
-  ;; Buffer commands
-  "b b" 'ibuffer
-  ;; Projectile commands
-  "p f" 'projectile-find-file
-  "p p" 'projectile-switch-project)
-
 (use-package evil-collection
   :after evil
   :config
@@ -103,6 +87,31 @@
   ;(evil-collection-init 'which-key) ;; TODO
   )
 
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode))
+
+(use-package projectile
+  :config
+  (projectile-mode +1))
+
+(my-leader-def
+  :keymaps '(normal visual)
+  ;; SPC SPC as M-x alias
+  "SPC" 'execute-extended-command
+  ;; Buffer commands
+  "b b" 'ibuffer
+  ;; Projectile commands
+  "p f" 'projectile-find-file
+  "p p" 'projectile-switch-project)
+
+(use-package magit
+  :config
+  (my-leader-def
+    :keymaps '(normal visual)
+    ;; TODO learn about magit-dispatch
+    "g g" 'magit-status))
+
 (use-package nix-mode
   :mode "\\.nix\\'")
 
@@ -117,10 +126,6 @@
 (use-package orderless
   ;; TODO customize?
   :custom (completion-styles '(orderless)))
-
-(use-package evil-surround
-  :config
-  (global-evil-surround-mode 1))
 
 (use-package company
   :init
