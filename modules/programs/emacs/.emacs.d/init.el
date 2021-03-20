@@ -1,31 +1,25 @@
 ;; TODO:
-;; - orderless?
-;; - consult
-;; - embark??
+;; - embark?
+;; - marginalia?
 ;; - leader key
-;; - org!!
 ;; - more evil stuff: https://github.com/hlissner/doom-emacs/blob/develop/modules/editor/evil/packages.el
-;; - projectile
-;; - company
 ;; - which-key
-;; - mu4e
+;; - mu4e/notmuch
 ;; - ibuffer
 ;; - dired+
 ;; - lsp
 ;; - ripgrep
-;; - smartparens/paredit/...
 ;; - magit-todos
 ;; - pass
-;; - doom-themes
 ;; - doom-modeline
 ;; - windows/avy
 ;; - format on save
-;; - auto-close parens (smartparens)
 
 ;; languages:
+;; - org!!
 ;; - haskell
 ;; - data formats
-;; - haskell-mode
+;; - markdown
 
 ;; Put =customize= code into a separate file.
 (setq custom-file (concat user-emacs-directory "custom.el"))
