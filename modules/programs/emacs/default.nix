@@ -48,6 +48,7 @@ in {
 
             # Utility
             hl-todo
+            which-key
           ]);
       in [ myEmacs ];
     };

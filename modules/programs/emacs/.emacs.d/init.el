@@ -3,9 +3,7 @@
 ;; - marginalia?
 ;; - leader key
 ;; - more evil stuff: https://github.com/hlissner/doom-emacs/blob/develop/modules/editor/evil/packages.el
-;; - which-key
 ;; - mu4e/notmuch
-;; - ibuffer
 ;; - dired+
 ;; - lsp
 ;; - ripgrep
@@ -78,7 +76,7 @@
   ;(evil-collection-init 'ediff) ;; TODO
   (evil-collection-init 'elisp-mode)
   ;(evil-collection-init 'flycheck) ;; TODO
-  ;(evil-collection-init 'ibuffer) ;; TODO
+  (evil-collection-init 'ibuffer) ;; TODO
   ;(evil-collection-init 'ivy) ;; TODO
   (evil-collection-init 'magit)
   ;(evil-collection-init 'magit-todos) ;; TODO
@@ -134,6 +132,8 @@
   (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package hl-todo
-  ;; TODO customize keybindings (previous/next/...)
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
+(use-package :which-key
+  :init
+  (add-hook 'after-init-hook 'which-key-mode))
