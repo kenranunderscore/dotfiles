@@ -1,7 +1,6 @@
 ;; TODO:
 ;; - embark?
 ;; - marginalia?
-;; - leader key
 ;; - more evil stuff: https://github.com/hlissner/doom-emacs/blob/develop/modules/editor/evil/packages.el
 ;; - mu4e/notmuch
 ;; - dired+
@@ -15,9 +14,16 @@
 
 ;; languages:
 ;; - org!!
+;;   * org-dotemacs
+;;   * org-notmuch
+;;   * org-caldav
+;;   * org-evil
 ;; - haskell
 ;; - data formats
 ;; - markdown
+
+;; other:
+;; - delayed init with newer emacs?
 
 ;; Put =customize= code into a separate file.
 (setq custom-file (concat user-emacs-directory "custom.el"))
