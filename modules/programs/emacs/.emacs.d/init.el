@@ -91,12 +91,11 @@
   (evil-collection-init 'elisp-mode)
   ;(evil-collection-init 'flycheck) ;; TODO
   (evil-collection-init 'ibuffer) ;; TODO
-  ;(evil-collection-init 'ivy) ;; TODO
   (evil-collection-init 'magit)
   ;(evil-collection-init 'magit-todos) ;; TODO
   ;(evil-collection-init 'pass)
   ;(evil-collection-init 'ripgrep)
-  ;(evil-collection-init 'which-key) ;; TODO
+  (evil-collection-init 'which-key) ;; TODO
   )
 
 (use-package evil-surround
@@ -141,6 +140,6 @@
 (use-package hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
-(use-package :which-key
+(use-package which-key
   :init
   (add-hook 'after-init-hook 'which-key-mode))
