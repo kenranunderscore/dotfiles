@@ -48,6 +48,7 @@ in {
 
             # Utility
             hl-todo
+            switch-window
             which-key
           ]);
       in [ myEmacs ];

@@ -140,6 +140,10 @@
 (use-package hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
+
+;; TODO is this necessary? configure?
+(use-package switch-window)
+
 (use-package which-key
   :init
   (add-hook 'after-init-hook 'which-key-mode))
