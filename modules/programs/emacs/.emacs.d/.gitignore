@@ -1,6 +1,8 @@
 *~
 \#*\#
+*.elc
 *.eld
+config.el
 history
 auto-save-list/
 elpa/
