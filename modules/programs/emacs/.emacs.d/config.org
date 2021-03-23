@@ -89,7 +89,7 @@ General keybindings.
 Normally I use vim emulation via =evil-mode=. This mode also comes
 with vim-inspired window handling.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package evil
   :config
   (evil-mode 1)
@@ -112,7 +112,7 @@ with vim-inspired window handling.
 This package contains lots of utility functions with the goal to
 provide a unified vim-like interface to a lot of packages.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package evil-collection
   :after evil
   :config
@@ -142,7 +142,7 @@ things like:
 + =cd[{= to change surrounding brackets to curly braces with
   whitespace padding.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (use-package evil-surround
   :config
   (global-evil-surround-mode))
