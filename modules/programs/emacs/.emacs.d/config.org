@@ -21,6 +21,7 @@
 - [ ] markdown
 
 * Config
+** General settings
 Put customizations code into a separate file. We do not want to append
 it to our =init.el=.
 
@@ -56,23 +57,23 @@ Answering a question with =yes= instead of just =y= is just annoying.
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+** Package-specific configuration
+*** =general=
 The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings. In
 =evil-mode= we are using =SPC= as leader key, and =SPC m= as local
 leader.
 
 #+BEGIN_SRC emacs-lisp
-;; Use general to define keymaps.
 (use-package general)
 
-;; Use SPC as leader key, like in Doom and neovim.
 (general-create-definer my-leader-def
   :prefix "SPC")
 
-;; Might use something else like , later, but SPC m should
-;; suffice for now.
 (general-create-definer my-local-leader-def
   :prefix "SPC m")
 #+END_SRC
+
+General keybindings.
 
 #+BEGIN_SRC emacs-lisp
 (my-leader-def
@@ -82,7 +83,13 @@ leader.
   ;; Buffer commands
   "b b" 'ibuffer
   "b q" 'kill-this-buffer)
+#+END_SRC
 
+*** =evil-mode= and keybindings
+Normally I use vim emulation via =evil-mode=. This mode also comes
+with vim-inspired window handling.
+
+#+BEGIN_SRC emacs-lisp
 (use-package evil
   :config
   (evil-mode 1)
@@ -99,7 +106,13 @@ leader.
    "C-w C-l" 'evil-window-right
    "C-w d" 'evil-window-delete
    "C-w C-d" 'evil-window-delete))
+#+END_SRC
 
+**** =evil-collection=
+This package contains lots of utility functions with the goal to
+provide a unified vim-like interface to a lot of packages.
+
+#+BEGIN_SRC emacs-lisp
 (use-package evil-collection
   :after evil
   :config
@@ -119,11 +132,24 @@ leader.
   ;(evil-collection-init 'ripgrep)
   (evil-collection-init 'which-key) ;; TODO
   )
+#+END_SRC
 
+**** =evil-surround=
+The analogue of [[https://github.com/tpope/vim-surround][Tim Pope's vim-surround plugin]] in Emacs. Now I can use
+things like:
++ =ysiw)= to surround an inner word with non-padded normal parentheses,
++ =ds]= to delete surrounding brackets, or
++ =cd[{= to change surrounding brackets to curly braces with
+  whitespace padding.
+
+#+BEGIN_SRC emacs-lisp
 (use-package evil-surround
   :config
   (global-evil-surround-mode))
+#+END_SRC
 
+*** =projectile=
+#+BEGIN_SRC emacs-lisp
 (use-package projectile
   :config
   (projectile-mode +1)
@@ -132,41 +158,91 @@ leader.
     "p f" 'projectile-find-file
     "p k" 'projectile-kill-buffers
     "p p" 'projectile-switch-project))
+#+END_SRC
 
+*** =magit=
+/The/ Git frontend.
+
+#+BEGIN_SRC emacs-lisp
 (use-package magit
   :config
   (my-leader-def
     :keymaps '(normal visual)
     ;; TODO learn about magit-dispatch
     "g g" 'magit-status))
+#+END_SRC
 
-(use-package nix-mode
-  :mode "\\.nix\\'")
+*** =smartparens=
+Auto-closing parentheses, sexp motions, and more for any mode.
 
-(use-package selectrum
-  :config
-  (selectrum-mode +1))
-
+#+BEGIN_SRC emacs-lisp
 (use-package smartparens
   :config
   (smartparens-global-mode 1))
+#+END_SRC
 
+*** Incremental narrowing/completion UI in Emacs
+I started with =helm= in Spacemacs, then later switched to Doom Emacs
+where after a while I tried out =ivy= and loved it. Now I want to try
+out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package selectrum
+  :config
+  (selectrum-mode +1))
+#+END_SRC
+
+[[https://github.com/oantolin/orderless][orderless]] is a completion style that fits in very well with
+=selectrum=. I still have to learn how to specify/request different
+types of completion in a query, like matching the first word as
+initialism, the second as regexp, and so forth.
+
+#+BEGIN_SRC emacs-lisp
 (use-package orderless
   ;; TODO customize?
   :custom (completion-styles '(orderless)))
+#+END_SRC
 
+*** Completion framework
+I use [[https://company-mode.github.io/][company-mode]] for (global) auto-completion.
+
+#+BEGIN_SRC emacs-lisp
 (use-package company
   :init
   (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
 
+*** =hl-todo=
+Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
+
+#+BEGIN_SRC emacs-lisp
 (use-package hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
+#+END_SRC
 
-;; TODO is this necessary? configure?
+**** TODO configure the possible states, probably after finishing GTD
+
+*** TODO =switch-window= or =ace-window=?
+#+BEGIN_SRC emacs-lisp
 (use-package switch-window)
+#+END_SRC
 
+*** =which-key=
+When pressing the first key in a hotkey chain, show a popup that
+displays the possible completions and associated functions.
+
+#+BEGIN_SRC emacs-lisp
 (use-package which-key
   :init
   (add-hook 'after-init-hook 'which-key-mode))
+#+END_SRC
+
+*** Language-specific modes
+**** =nix-mode=
+Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.
+
+#+BEGIN_SRC emacs-lisp
+(use-package nix-mode
+  :mode "\\.nix\\'")
 #+END_SRC
