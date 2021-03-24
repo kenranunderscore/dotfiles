@@ -47,6 +47,7 @@ in {
             epkgs.elpaPackages.modus-vivendi-theme
 
             # Utility
+            helpful
             hl-todo
             switch-window
             which-key

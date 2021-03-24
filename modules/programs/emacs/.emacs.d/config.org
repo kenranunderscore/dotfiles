@@ -58,6 +58,16 @@ Answering a question with =yes= instead of just =y= is just annoying.
 #+END_SRC
 
 ** Package-specific configuration
+*** =helpful=
+This gives us better and more readable help pages. We also replace
+some built-in =C-h= keybings with =helpful-*= functions.
+
+#+BEGIN_SRC emacs-lisp
+(use-package helpful
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)))
+#+END_SRC
 *** =general=
 The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings. In
 =evil-mode= we are using =SPC= as leader key, and =SPC m= as local
