@@ -105,12 +105,10 @@ in {
       stateVersion = "21.03";
 
       packages = with pkgs; [
-        cascadia-code
         curl
         fd
         gcc
         gnumake
-        jetbrains-mono
         lorri
         mu
         nixfmt
@@ -126,6 +124,17 @@ in {
         unzip
         vim
         wget
+
+        # Fonts
+        camingo-code
+        cascadia-code
+        fira-code
+        gohufont
+        hermit
+        inconsolata
+        jetbrains-mono
+        ubuntu_font_family
+        source-code-pro
       ];
 
       file = {
