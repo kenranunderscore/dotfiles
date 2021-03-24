@@ -60,7 +60,6 @@ in rec {
     linphone
     manpages
     mercurial
-    nextcloud-client
     subversion
     xorg.xkbcomp
   ];
