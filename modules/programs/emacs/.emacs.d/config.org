@@ -30,16 +30,20 @@ it to our =init.el=.
 (load custom-file 'no-error)
 #+END_SRC
 
-Disable the graphical GUI things like the menu bar and others.
+Disable the graphical GUI things like the menu bar, the splash screen,
+and others.
 
 #+BEGIN_SRC emacs-lisp
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tooltip-mode -1)
+
+(setq inhibit-splash-screen t)
 #+END_SRC
 
-We want point to be inside newly opening help windows so may quickly close them with =q=.
+We want point to be inside newly opening help windows so may quickly
+close them with =q=.
 
 #+BEGIN_SRC emacs-lisp
 (setq help-window-select t)
