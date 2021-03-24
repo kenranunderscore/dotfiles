@@ -46,5 +46,11 @@
     };
   };
 
-  home.packages = with pkgs; [ htop manpages nextcloud-client xorg.xkbcomp ];
+  home.packages = with pkgs; [
+    htop
+    manpages
+    nextcloud-client
+    pandoc
+    xorg.xkbcomp
+  ];
 }

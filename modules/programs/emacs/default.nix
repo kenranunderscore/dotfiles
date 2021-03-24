@@ -41,6 +41,7 @@ in {
             use-package
 
             # Language-specific
+            markdown-mode
             nix-mode
 
             # Themes

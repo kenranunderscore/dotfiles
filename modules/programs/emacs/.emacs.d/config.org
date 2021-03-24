@@ -256,3 +256,16 @@ Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/in
 (use-package nix-mode
   :mode "\\.nix\\'")
 #+END_SRC
+
+**** Markdown
+Enable GitHub-flavored markdown mode for =README= files, and regular
+=markdown-mode= for all other markdown files.
+
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+
+	 ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc"))
+#+END_SRC
