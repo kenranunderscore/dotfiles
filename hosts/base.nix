@@ -105,14 +105,18 @@ in {
       stateVersion = "21.03";
 
       packages = with pkgs; [
+        cacert
         curl
+        darcs
         fd
         gcc
         gnumake
         lorri
+        mercurial
         mu
         nixfmt
         nix-index
+        nix-output-monitor
         nix-prefetch-git
         plantuml
         racket
