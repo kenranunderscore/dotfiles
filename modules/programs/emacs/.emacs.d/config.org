@@ -61,6 +61,14 @@ Answering a question with =yes= instead of just =y= is just annoying.
 (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+Set font properties.
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'default nil :font "Cascadia Code-13")
+(set-face-attribute 'fixed-pitch nil :font "Cascadia Code-13")
+(set-face-attribute 'variable-pitch nil :font "Cascadia Code-15")
+#+END_SRC
+
 ** Package-specific configuration
 *** =helpful=
 This gives us better and more readable help pages. We also replace
