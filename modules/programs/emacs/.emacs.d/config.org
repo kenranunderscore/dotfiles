@@ -274,6 +274,25 @@ displays the possible completions and associated functions.
   (add-hook 'after-init-hook 'which-key-mode))
 #+END_SRC
 
+*** =all-the-icons=
+Attach beautiful symbols to, for instance, file names in a =dired= or
+=ibuffer= buffer.
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :ensure nil)
+
+(use-package all-the-icons-dired
+  :ensure nil
+  :init
+  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
+
+(use-package all-the-icons-ibuffer
+  :ensure nil
+  :init
+  (all-the-icons-ibuffer-mode 1))
+#+END_SRC
+
 *** Language-specific modes
 **** =nix-mode=
 Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.

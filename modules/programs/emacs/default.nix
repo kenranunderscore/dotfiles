@@ -48,6 +48,9 @@ in {
             epkgs.elpaPackages.modus-vivendi-theme
 
             # Utility
+            all-the-icons
+            all-the-icons-dired
+            all-the-icons-ibuffer
             helpful
             hl-todo
             switch-window
