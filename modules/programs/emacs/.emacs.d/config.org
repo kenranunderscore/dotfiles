@@ -1,5 +1,5 @@
 * TODOs
-** General [0/12]
+** General [0/14]
 - [ ] embark?
 - [ ] marginalia?
 - [ ] mu4e/notmuch
@@ -13,12 +13,13 @@
 - [ ] format on save
 - [ ] delayed init with new emacs version?
 - [ ] snippets, for instance for org src blocks
+- [ ] hydra for certain keymaps
+- [ ] flycheck
 
-** Languages [0/4]
+** Languages [0/3]
 - [ ] more org
 - [ ] haskell
 - [ ] data formats (json, yaml, csv, ...)
-- [ ] markdown
 
 * Config
 ** General settings
