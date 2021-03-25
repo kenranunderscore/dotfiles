@@ -27,47 +27,59 @@ Put customizations code into a separate file. We do not want to append
 it to our =init.el=.
 
 #+BEGIN_SRC emacs-lisp
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file 'no-error)
+
+  (setq custom-file (concat user-emacs-directory "custom.el"))
+  (load custom-file 'no-error)
+
 #+END_SRC
 
 Disable the graphical GUI things like the menu bar, the splash screen,
 and others.
 
 #+BEGIN_SRC emacs-lisp
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tooltip-mode -1)
 
-(setq inhibit-splash-screen t)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (tooltip-mode -1)
+
+  (setq inhibit-splash-screen t)
+
 #+END_SRC
 
 We want point to be inside newly opening help windows so we may
 quickly close them with =q=.
 
 #+BEGIN_SRC emacs-lisp
-(setq help-window-select t)
+
+  (setq help-window-select t)
+
 #+END_SRC
 
 Use the great [[https://protesilaos.com/modus-themes/][Modus Vivendi theme by Protesilaos Stavrou]].
 
 #+BEGIN_SRC emacs-lisp
-(load-theme 'modus-vivendi t)
+
+  (load-theme 'modus-vivendi t)
+
 #+END_SRC
 
 Answering a question with =yes= instead of just =y= is just annoying.
 
 #+BEGIN_SRC emacs-lisp
-(fset 'yes-or-no-p 'y-or-n-p)
+
+  (fset 'yes-or-no-p 'y-or-n-p)
+
 #+END_SRC
 
 Set font properties.
 
 #+BEGIN_SRC emacs-lisp
-(set-face-attribute 'default nil :font "Cascadia Code-13")
-(set-face-attribute 'fixed-pitch nil :font "Cascadia Code-13")
-(set-face-attribute 'variable-pitch nil :font "Cascadia Code-15")
+
+  (set-face-attribute 'default nil :font "Cascadia Code-13")
+  (set-face-attribute 'fixed-pitch nil :font "Cascadia Code-13")
+  (set-face-attribute 'variable-pitch nil :font "Cascadia Code-15")
+
 #+END_SRC
 
 ** Package-specific configuration
@@ -76,11 +88,13 @@ This gives us better and more readable help pages. We also replace
 some built-in =C-h= keybings with =helpful-*= functions.
 
 #+BEGIN_SRC emacs-lisp
-(use-package helpful
-  :ensure nil
-  :bind (("C-h f" . helpful-callable)
-         ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key)))
+
+  (use-package helpful
+    :ensure nil
+    :bind (("C-h f" . helpful-callable)
+	   ("C-h v" . helpful-variable)
+	   ("C-h k" . helpful-key)))
+
 #+END_SRC
 *** =general=
 The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings. In
@@ -88,26 +102,30 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
 leader.
 
 #+BEGIN_SRC emacs-lisp
-(use-package general
-  :ensure nil)
 
-(general-create-definer my-leader-def
-  :prefix "SPC")
+  (use-package general
+    :ensure nil)
 
-(general-create-definer my-local-leader-def
-  :prefix "SPC m")
+  (general-create-definer my-leader-def
+    :prefix "SPC")
+
+  (general-create-definer my-local-leader-def
+    :prefix "SPC m")
+
 #+END_SRC
 
 General keybindings.
 
 #+BEGIN_SRC emacs-lisp
-(my-leader-def
-  :keymaps '(normal visual)
-  ;; SPC SPC as M-x alias
-  "SPC" 'execute-extended-command
-  ;; Buffer commands
-  "b b" 'ibuffer
-  "b q" 'kill-this-buffer)
+
+  (my-leader-def
+    :keymaps '(normal visual)
+    ;; SPC SPC as M-x alias
+    "SPC" 'execute-extended-command
+    ;; Buffer commands
+    "b b" 'ibuffer
+    "b q" 'kill-this-buffer)
+
 #+END_SRC
 
 *** =evil-mode= and keybindings
@@ -115,23 +133,25 @@ Normally I use vim emulation via =evil-mode=. This mode also comes
 with vim-inspired window handling.
 
 #+BEGIN_SRC emacs-lisp :tangle no
-(use-package evil
-  :ensure nil
-  :config
-  (evil-mode 1)
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (general-define-key
-   :states 'normal
-   :keymap 'evil-window-map
-   ;; Normal mode keybindings for evil commands
-   "C-w C-h" 'evil-window-left
-   "C-w C-j" 'evil-window-down
-   "C-w C-k" 'evil-window-up
-   "C-w C-l" 'evil-window-right
-   "C-w d" 'evil-window-delete
-   "C-w C-d" 'evil-window-delete))
+
+  (use-package evil
+    :ensure nil
+    :config
+    (evil-mode 1)
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (general-define-key
+     :states 'normal
+     :keymap 'evil-window-map
+     ;; Normal mode keybindings for evil commands
+     "C-w C-h" 'evil-window-left
+     "C-w C-j" 'evil-window-down
+     "C-w C-k" 'evil-window-up
+     "C-w C-l" 'evil-window-right
+     "C-w d" 'evil-window-delete
+     "C-w C-d" 'evil-window-delete))
+
 #+END_SRC
 
 **** =evil-collection=
@@ -139,26 +159,28 @@ This package contains lots of utility functions with the goal to
 provide a unified vim-like interface to a lot of packages.
 
 #+BEGIN_SRC emacs-lisp :tangle no
-(use-package evil-collection
-  :ensure nil
-  :after evil
-  :config
-  ;; Register all bindings in evil-collection
-  ;(evil-collection-init 'apropos) ;; TODO
-  ;(evil-collection-init 'cider) ;; TODO
-  ;(evil-collection-init 'company) ;; TODO check
-  (evil-collection-init 'dired) ;; TODO check
-  ;(evil-collection-init 'dired-sidebar) ;; TODO check
-  ;(evil-collection-init 'ediff) ;; TODO
-  (evil-collection-init 'elisp-mode)
-  ;(evil-collection-init 'flycheck) ;; TODO
-  (evil-collection-init 'ibuffer) ;; TODO
-  (evil-collection-init 'magit)
-  ;(evil-collection-init 'magit-todos) ;; TODO
-  ;(evil-collection-init 'pass)
-  ;(evil-collection-init 'ripgrep)
-  (evil-collection-init 'which-key) ;; TODO
-  )
+
+  (use-package evil-collection
+    :ensure nil
+    :after evil
+    :config
+    ;; Register all bindings in evil-collection
+    ;(evil-collection-init 'apropos) ;; TODO
+    ;(evil-collection-init 'cider) ;; TODO
+    ;(evil-collection-init 'company) ;; TODO check
+    (evil-collection-init 'dired) ;; TODO check
+    ;(evil-collection-init 'dired-sidebar) ;; TODO check
+    ;(evil-collection-init 'ediff) ;; TODO
+    (evil-collection-init 'elisp-mode)
+    ;(evil-collection-init 'flycheck) ;; TODO
+    (evil-collection-init 'ibuffer) ;; TODO
+    (evil-collection-init 'magit)
+    ;(evil-collection-init 'magit-todos) ;; TODO
+    ;(evil-collection-init 'pass)
+    ;(evil-collection-init 'ripgrep)
+    (evil-collection-init 'which-key) ;; TODO
+    )
+
 #+END_SRC
 
 **** =evil-surround=
@@ -170,46 +192,54 @@ things like:
   whitespace padding.
 
 #+BEGIN_SRC emacs-lisp :tangle no
-(use-package evil-surround
-  :ensure nil
-  :config
-  (global-evil-surround-mode))
+
+  (use-package evil-surround
+    :ensure nil
+    :config
+    (global-evil-surround-mode))
+
 #+END_SRC
 
 *** =projectile=
 #+BEGIN_SRC emacs-lisp
-(use-package projectile
-  :ensure nil
-  :config
-  (projectile-mode +1)
-  (my-leader-def
-    :keymaps '(normal visual)
-    "p f" 'projectile-find-file
-    "p k" 'projectile-kill-buffers
-    "p p" 'projectile-switch-project))
+
+  (use-package projectile
+    :ensure nil
+    :config
+    (projectile-mode +1)
+    (my-leader-def
+      :keymaps '(normal visual)
+      "p f" 'projectile-find-file
+      "p k" 'projectile-kill-buffers
+      "p p" 'projectile-switch-project))
+
 #+END_SRC
 
 *** =magit=
 /The/ Git frontend.
 
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-  :ensure nil
-  :config
-  (my-leader-def
-    :keymaps '(normal visual)
-    ;; TODO learn about magit-dispatch
-    "g g" 'magit-status))
+
+  (use-package magit
+    :ensure nil
+    :config
+    (my-leader-def
+      :keymaps '(normal visual)
+      ;; TODO learn about magit-dispatch
+      "g g" 'magit-status))
+
 #+END_SRC
 
 *** =smartparens=
 Auto-closing parentheses, sexp motions, and more for any mode.
 
 #+BEGIN_SRC emacs-lisp
-(use-package smartparens
-  :ensure nil
-  :config
-  (smartparens-global-mode 1))
+
+  (use-package smartparens
+    :ensure nil
+    :config
+    (smartparens-global-mode 1))
+
 #+END_SRC
 
 *** Incremental narrowing/completion UI in Emacs
@@ -218,10 +248,12 @@ where after a while I tried out =ivy= and loved it. Now I want to try
 out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]].
 
 #+BEGIN_SRC emacs-lisp
-(use-package selectrum
-  :ensure nil
-  :init
-  (selectrum-mode +1))
+
+  (use-package selectrum
+    :ensure nil
+    :init
+    (selectrum-mode +1))
+
 #+END_SRC
 
 [[https://github.com/oantolin/orderless][orderless]] is a completion style that fits in very well with
@@ -230,38 +262,46 @@ types of completion in a query, like matching the first word as
 initialism, the second as regexp, and so forth.
 
 #+BEGIN_SRC emacs-lisp
-(use-package orderless
-  :ensure nil
-  ;; TODO customize?
-  :custom (completion-styles '(orderless)))
+
+  (use-package orderless
+    :ensure nil
+    ;; TODO customize?
+    :custom (completion-styles '(orderless)))
+
 #+END_SRC
 
 *** Completion framework
 I use [[https://company-mode.github.io/][company-mode]] for (global) auto-completion.
 
 #+BEGIN_SRC emacs-lisp
-(use-package company
-  :ensure nil
-  :init
-  (add-hook 'after-init-hook 'global-company-mode))
+
+  (use-package company
+    :ensure nil
+    :init
+    (add-hook 'after-init-hook 'global-company-mode))
+
 #+END_SRC
 
 *** =hl-todo=
 Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+BEGIN_SRC emacs-lisp
-(use-package hl-todo
-  :ensure nil
-  :init
-  (add-hook 'after-init-hook 'global-hl-todo-mode))
+
+  (use-package hl-todo
+    :ensure nil
+    :init
+    (add-hook 'after-init-hook 'global-hl-todo-mode))
+
 #+END_SRC
 
 **** TODO configure the possible states, probably after finishing GTD
 
 *** TODO =switch-window= or =ace-window=?
 #+BEGIN_SRC emacs-lisp
-(use-package switch-window
-  :ensure nil)
+
+  (use-package switch-window
+    :ensure nil)
+
 #+END_SRC
 
 *** =which-key=
@@ -269,10 +309,12 @@ When pressing the first key in a hotkey chain, show a popup that
 displays the possible completions and associated functions.
 
 #+BEGIN_SRC emacs-lisp
-(use-package which-key
-  :ensure nil
-  :init
-  (add-hook 'after-init-hook 'which-key-mode))
+
+  (use-package which-key
+    :ensure nil
+    :init
+    (add-hook 'after-init-hook 'which-key-mode))
+
 #+END_SRC
 
 *** =all-the-icons=
@@ -280,18 +322,20 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 =ibuffer= buffer.
 
 #+BEGIN_SRC emacs-lisp
-(use-package all-the-icons
-  :ensure nil)
 
-(use-package all-the-icons-dired
-  :ensure nil
-  :init
-  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
+  (use-package all-the-icons
+    :ensure nil)
 
-(use-package all-the-icons-ibuffer
-  :ensure nil
-  :init
-  (all-the-icons-ibuffer-mode 1))
+  (use-package all-the-icons-dired
+    :ensure nil
+    :init
+    (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
+
+  (use-package all-the-icons-ibuffer
+    :ensure nil
+    :init
+    (all-the-icons-ibuffer-mode 1))
+
 #+END_SRC
 
 *** Language-specific modes
@@ -299,9 +343,11 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.
 
 #+BEGIN_SRC emacs-lisp
-(use-package nix-mode
-  :ensure nil
-  :mode "\\.nix\\'")
+
+  (use-package nix-mode
+    :ensure nil
+    :mode "\\.nix\\'")
+
 #+END_SRC
 
 **** Markdown
@@ -309,17 +355,20 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
 =markdown-mode= for all other markdown files.
 
 #+BEGIN_SRC emacs-lisp
-(use-package markdown-mode
-  :ensure nil
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
 
-	 ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc"))
+  (use-package markdown-mode
+    :ensure nil
+    :mode (("README\\.md\\'" . gfm-mode)
+	   ("\\.md\\'" . markdown-mode)
+	   ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "pandoc"))
+
 #+END_SRC
 **** =org-mode=
 ***** FIXME still needs to be loaded and configured
 
 #+BEGIN_SRC emacs-lisp
-(setq org-src-tab-acts-natively t)
+
+  (setq org-src-tab-acts-natively t)
+
 #+END_SRC
