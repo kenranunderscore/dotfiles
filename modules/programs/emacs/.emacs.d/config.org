@@ -317,3 +317,9 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
 	 ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc"))
 #+END_SRC
+**** =org-mode=
+***** FIXME still needs to be loaded and configured
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-tab-acts-natively t)
+#+END_SRC
