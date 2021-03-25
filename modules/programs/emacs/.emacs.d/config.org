@@ -219,7 +219,7 @@ out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]]
 #+BEGIN_SRC emacs-lisp
 (use-package selectrum
   :ensure nil
-  :config
+  :init
   (selectrum-mode +1))
 #+END_SRC
 
