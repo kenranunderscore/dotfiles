@@ -42,8 +42,8 @@ and others.
 (setq inhibit-splash-screen t)
 #+END_SRC
 
-We want point to be inside newly opening help windows so may quickly
-close them with =q=.
+We want point to be inside newly opening help windows so we may
+quickly close them with =q=.
 
 #+BEGIN_SRC emacs-lisp
 (setq help-window-select t)
