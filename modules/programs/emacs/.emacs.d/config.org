@@ -76,6 +76,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+BEGIN_SRC emacs-lisp
 (use-package helpful
+  :ensure nil
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)))
@@ -86,7 +87,8 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
 leader.
 
 #+BEGIN_SRC emacs-lisp
-(use-package general)
+(use-package general
+  :ensure nil)
 
 (general-create-definer my-leader-def
   :prefix "SPC")
@@ -113,6 +115,7 @@ with vim-inspired window handling.
 
 #+BEGIN_SRC emacs-lisp :tangle no
 (use-package evil
+  :ensure nil
   :config
   (evil-mode 1)
   :init
@@ -136,6 +139,7 @@ provide a unified vim-like interface to a lot of packages.
 
 #+BEGIN_SRC emacs-lisp :tangle no
 (use-package evil-collection
+  :ensure nil
   :after evil
   :config
   ;; Register all bindings in evil-collection
@@ -166,6 +170,7 @@ things like:
 
 #+BEGIN_SRC emacs-lisp :tangle no
 (use-package evil-surround
+  :ensure nil
   :config
   (global-evil-surround-mode))
 #+END_SRC
@@ -173,6 +178,7 @@ things like:
 *** =projectile=
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
+  :ensure nil
   :config
   (projectile-mode +1)
   (my-leader-def
@@ -187,6 +193,7 @@ things like:
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit
+  :ensure nil
   :config
   (my-leader-def
     :keymaps '(normal visual)
@@ -199,6 +206,7 @@ Auto-closing parentheses, sexp motions, and more for any mode.
 
 #+BEGIN_SRC emacs-lisp
 (use-package smartparens
+  :ensure nil
   :config
   (smartparens-global-mode 1))
 #+END_SRC
@@ -210,6 +218,7 @@ out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]]
 
 #+BEGIN_SRC emacs-lisp
 (use-package selectrum
+  :ensure nil
   :config
   (selectrum-mode +1))
 #+END_SRC
@@ -221,6 +230,7 @@ initialism, the second as regexp, and so forth.
 
 #+BEGIN_SRC emacs-lisp
 (use-package orderless
+  :ensure nil
   ;; TODO customize?
   :custom (completion-styles '(orderless)))
 #+END_SRC
@@ -230,6 +240,7 @@ I use [[https://company-mode.github.io/][company-mode]] for (global) auto-comple
 
 #+BEGIN_SRC emacs-lisp
 (use-package company
+  :ensure nil
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
@@ -239,6 +250,7 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+BEGIN_SRC emacs-lisp
 (use-package hl-todo
+  :ensure nil
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
 #+END_SRC
@@ -247,7 +259,8 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 *** TODO =switch-window= or =ace-window=?
 #+BEGIN_SRC emacs-lisp
-(use-package switch-window)
+(use-package switch-window
+  :ensure nil)
 #+END_SRC
 
 *** =which-key=
@@ -256,6 +269,7 @@ displays the possible completions and associated functions.
 
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
+  :ensure nil
   :init
   (add-hook 'after-init-hook 'which-key-mode))
 #+END_SRC
@@ -266,6 +280,7 @@ Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/in
 
 #+BEGIN_SRC emacs-lisp
 (use-package nix-mode
+  :ensure nil
   :mode "\\.nix\\'")
 #+END_SRC
 
@@ -275,6 +290,7 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
 
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
+  :ensure nil
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
 
