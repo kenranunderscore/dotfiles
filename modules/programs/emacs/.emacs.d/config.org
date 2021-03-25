@@ -338,6 +338,26 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 
 #+END_SRC
 
+*** =marginalia=
+Annotate minibuffer completions, like showing the bound keys and
+docstrings for commands in =M-x=, variable values in "C-h v", file
+sizes and permissions in "C-x C-f", and much more.
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package marginalia
+    :init
+    (marginalia-mode)
+    (advice-add #'marginalia-cycle :after
+		(lambda () (when (bound-and-true-p selectrum-mode)
+			     (selectrum-exhibit 'keep-selected))))
+    :config
+    (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    :bind
+    (:map minibuffer-local-map
+	  ("M-A" . marginalia-cycle)))
+
+#+END_SRC
 *** Language-specific modes
 **** =nix-mode=
 Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.

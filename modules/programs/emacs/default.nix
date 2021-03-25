@@ -53,6 +53,7 @@ in {
             all-the-icons-ibuffer
             helpful
             hl-todo
+            marginalia
             switch-window
             which-key
           ]);
