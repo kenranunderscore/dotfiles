@@ -29,9 +29,6 @@ in {
           with epkgs.melpaPackages; [
             # Essential
             company
-            evil
-            evil-collection
-            evil-surround
             general
             magit
             orderless

@@ -97,106 +97,14 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+END_SRC
 *** =general=
-The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings. In
-=evil-mode= we are using =SPC= as leader key, and =SPC m= as local
-leader.
+The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings.
+
+**** TODO find out whether I still need general without evil-mode
 
 #+BEGIN_SRC emacs-lisp
 
   (use-package general
     :ensure nil)
-
-  (general-create-definer my-leader-def
-    :prefix "SPC")
-
-  (general-create-definer my-local-leader-def
-    :prefix "SPC m")
-
-#+END_SRC
-
-General keybindings.
-
-#+BEGIN_SRC emacs-lisp
-
-  (my-leader-def
-    :keymaps '(normal visual)
-    ;; SPC SPC as M-x alias
-    "SPC" 'execute-extended-command
-    ;; Buffer commands
-    "b b" 'ibuffer
-    "b q" 'kill-this-buffer)
-
-#+END_SRC
-
-*** =evil-mode= and keybindings
-Normally I use vim emulation via =evil-mode=. This mode also comes
-with vim-inspired window handling.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-
-  (use-package evil
-    :ensure nil
-    :config
-    (evil-mode 1)
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    (general-define-key
-     :states 'normal
-     :keymap 'evil-window-map
-     ;; Normal mode keybindings for evil commands
-     "C-w C-h" 'evil-window-left
-     "C-w C-j" 'evil-window-down
-     "C-w C-k" 'evil-window-up
-     "C-w C-l" 'evil-window-right
-     "C-w d" 'evil-window-delete
-     "C-w C-d" 'evil-window-delete))
-
-#+END_SRC
-
-**** =evil-collection=
-This package contains lots of utility functions with the goal to
-provide a unified vim-like interface to a lot of packages.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-
-  (use-package evil-collection
-    :ensure nil
-    :after evil
-    :config
-    ;; Register all bindings in evil-collection
-    ;(evil-collection-init 'apropos) ;; TODO
-    ;(evil-collection-init 'cider) ;; TODO
-    ;(evil-collection-init 'company) ;; TODO check
-    (evil-collection-init 'dired) ;; TODO check
-    ;(evil-collection-init 'dired-sidebar) ;; TODO check
-    ;(evil-collection-init 'ediff) ;; TODO
-    (evil-collection-init 'elisp-mode)
-    ;(evil-collection-init 'flycheck) ;; TODO
-    (evil-collection-init 'ibuffer) ;; TODO
-    (evil-collection-init 'magit)
-    ;(evil-collection-init 'magit-todos) ;; TODO
-    ;(evil-collection-init 'pass)
-    ;(evil-collection-init 'ripgrep)
-    (evil-collection-init 'which-key) ;; TODO
-    )
-
-#+END_SRC
-
-**** =evil-surround=
-The analogue of [[https://github.com/tpope/vim-surround][Tim Pope's vim-surround plugin]] in Emacs. Now I can use
-things like:
-+ =ysiw)= to surround an inner word with non-padded normal parentheses,
-+ =ds]= to delete surrounding brackets, or
-+ =cd[{= to change surrounding brackets to curly braces with
-  whitespace padding.
-
-#+BEGIN_SRC emacs-lisp :tangle no
-
-  (use-package evil-surround
-    :ensure nil
-    :config
-    (global-evil-surround-mode))
 
 #+END_SRC
 
@@ -205,28 +113,20 @@ things like:
 
   (use-package projectile
     :ensure nil
-    :config
-    (projectile-mode +1)
-    (my-leader-def
-      :keymaps '(normal visual)
-      "p f" 'projectile-find-file
-      "p k" 'projectile-kill-buffers
-      "p p" 'projectile-switch-project))
+    :init
+    (projectile-mode +1))
 
 #+END_SRC
 
 *** =magit=
 /The/ Git frontend.
 
+**** TODO learn about magit-dispatch
+
 #+BEGIN_SRC emacs-lisp
 
   (use-package magit
-    :ensure nil
-    :config
-    (my-leader-def
-      :keymaps '(normal visual)
-      ;; TODO learn about magit-dispatch
-      "g g" 'magit-status))
+    :ensure nil)
 
 #+END_SRC
 
@@ -237,7 +137,7 @@ Auto-closing parentheses, sexp motions, and more for any mode.
 
   (use-package smartparens
     :ensure nil
-    :config
+    :init
     (smartparens-global-mode 1))
 
 #+END_SRC
