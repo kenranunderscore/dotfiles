@@ -130,15 +130,17 @@ in {
         wget
 
         # Fonts
+        anonymousPro
         camingo-code
         cascadia-code
         fira-code
-        gohufont
         hermit
         inconsolata
         jetbrains-mono
         ubuntu_font_family
         source-code-pro
+        terminus_font
+        terminus_font_ttf
       ];
 
       file = {
