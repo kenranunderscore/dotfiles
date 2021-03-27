@@ -47,6 +47,15 @@ and others.
 
 #+END_SRC
 
+The default cursor is black, which interferes with mostly using a dark
+theme. Thus we brighten it up a bit.
+
+#+BEGIN_SRC emacs-lisp
+
+  (set-mouse-color "white")
+
+#+END_SRC
+
 We want point to be inside newly opening help windows so we may
 quickly close them with =q=.
 
