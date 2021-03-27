@@ -109,8 +109,8 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+BEGIN_SRC emacs-lisp
 
-  (setq my/monospace-font "Anonymous Pro")
-  (setq my/variable-font "Cantarell")
+  (defvar my/monospace-font "Anonymous Pro")
+  (defvar my/variable-font "Cantarell")
   (set-face-attribute 'default nil :font my/monospace-font :height 140)
   (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 140)
   (set-face-attribute 'variable-pitch nil :font my/variable-font :height 150)
