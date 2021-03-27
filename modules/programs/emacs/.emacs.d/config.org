@@ -408,3 +408,14 @@ bullet points in org headers.
     :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 #+END_SRC
+
+Render unordered list bullet points as dots instead of minus/plus.
+
+#+BEGIN_SRC emacs-lisp
+
+  (font-lock-add-keywords
+   'org-mode
+   '(("^ *\\([-+]\\) "
+      (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+#+END_SRC
