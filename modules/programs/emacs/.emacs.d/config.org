@@ -435,6 +435,9 @@ larger than the default text.
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font my/variable-font :height (cdr face)))
+    (set-face-attribute (car face) nil
+                        :font my/variable-font
+                        :height (cdr face)
+                        :weight 'regular))
 
 #+END_SRC
