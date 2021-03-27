@@ -1,7 +1,6 @@
 * TODOs
 ** General [0/14]
 - [ ] embark?
-- [ ] marginalia?
 - [ ] mu4e/notmuch
 - [ ] dired+
 - [ ] lsp
@@ -23,8 +22,9 @@
 
 * Config
 ** General settings
-Put customizations code into a separate file. We do not want to append
-it to our =init.el=.
+*** Separate file for customizations
+
+We do not want to append it to our =init.el=.
 
 #+BEGIN_SRC emacs-lisp
 
@@ -32,6 +32,8 @@ it to our =init.el=.
   (load custom-file 'no-error)
 
 #+END_SRC
+
+*** Disable any bars and the splash screen
 
 Disable the graphical GUI things like the menu bar, the splash screen,
 and others.
@@ -47,6 +49,8 @@ and others.
 
 #+END_SRC
 
+*** More visible cursor
+
 The default cursor is black, which interferes with mostly using a dark
 theme. Thus we brighten it up a bit.
 
@@ -56,7 +60,9 @@ theme. Thus we brighten it up a bit.
 
 #+END_SRC
 
-We want point to be inside newly opening help windows so we may
+*** Focus help buffers
+
+We want point to be inside newly opening help buffers so we may
 quickly close them with =q=.
 
 #+BEGIN_SRC emacs-lisp
@@ -64,6 +70,8 @@ quickly close them with =q=.
   (setq help-window-select t)
 
 #+END_SRC
+
+*** Theme(s)
 
 Since I cannot ever decide which theme I like best, there are a few
 themes installed in my nix configuration:
@@ -87,6 +95,8 @@ themes installed in my nix configuration:
 
 #+END_SRC
 
+*** Shorter yes/no question answers
+
 Answering a question with =yes= instead of just =y= is just annoying.
 
 #+BEGIN_SRC emacs-lisp
@@ -95,7 +105,7 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+END_SRC
 
-Set font properties.
+*** Font faces
 
 #+BEGIN_SRC emacs-lisp
 
@@ -105,8 +115,20 @@ Set font properties.
 
 #+END_SRC
 
+**** Line numbers in programming modes
+
+#+BEGIN_SRC
+
+(use-package display-line-numbers
+  :ensure nil
+  :hook ((prog-mode . display-line-numbers-mode))
+         (conf-mode . display-line-numbers-mode))
+
+#+END_SRC
+
 ** Package-specific configuration
-*** =helpful=
+*** Better help pages (helpful)
+
 This gives us better and more readable help pages. We also replace
 some built-in =C-h= keybings with =helpful-*= functions.
 
@@ -120,10 +142,9 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+END_SRC
 
-*** =general=
-The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings.
+*** Keybinding management (general)
 
-**** TODO find out whether I still need general without evil-mode
+The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings.
 
 #+BEGIN_SRC emacs-lisp
 
@@ -132,7 +153,10 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
 
 #+END_SRC
 
-*** =projectile=
+**** TODO find out whether I still need general without evil-mode
+
+*** Project-wide searches, movement, etc. (projectile)
+
 #+BEGIN_SRC emacs-lisp
 
   (use-package projectile
@@ -142,10 +166,9 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
 
 #+END_SRC
 
-*** =magit=
-/The/ Git frontend.
+*** Magit
 
-**** TODO learn about magit-dispatch
+/The/ Git frontend.
 
 #+BEGIN_SRC emacs-lisp
 
@@ -154,8 +177,9 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
 
 #+END_SRC
 
-*** =smartparens=
-Auto-closing parentheses, sexp motions, and more for any mode.
+**** TODO learn about magit-dispatch
+
+*** Auto-closing parentheses and sexp motions (smartparens)
 
 #+BEGIN_SRC emacs-lisp
 
@@ -166,7 +190,8 @@ Auto-closing parentheses, sexp motions, and more for any mode.
 
 #+END_SRC
 
-*** Incremental narrowing/completion UI in Emacs
+*** Incremental narrowing/completion UI in Emacs (selectrum & orderless)
+
 I started with =helm= in Spacemacs, then later switched to Doom Emacs
 where after a while I tried out =ivy= and loved it. Now I want to try
 out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]].
@@ -194,7 +219,8 @@ initialism, the second as regexp, and so forth.
 
 #+END_SRC
 
-*** Completion framework
+*** Completion framework (company)
+
 I use [[https://company-mode.github.io/][company-mode]] for (global) auto-completion.
 
 #+BEGIN_SRC emacs-lisp
@@ -206,7 +232,8 @@ I use [[https://company-mode.github.io/][company-mode]] for (global) auto-comple
 
 #+END_SRC
 
-*** =hl-todo=
+*** Highlight TODO items and others (hl-todo-mode)
+
 Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+BEGIN_SRC emacs-lisp
@@ -220,7 +247,9 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 **** TODO configure the possible states, probably after finishing GTD
 
-*** TODO =switch-window= or =ace-window=?
+*** Window switching
+**** TODO switch-window or ace-window?
+
 #+BEGIN_SRC emacs-lisp
 
   (use-package switch-window
@@ -228,7 +257,8 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+END_SRC
 
-*** =which-key=
+*** Show the bound keys (which-key)
+
 When pressing the first key in a hotkey chain, show a popup that
 displays the possible completions and associated functions.
 
@@ -241,7 +271,8 @@ displays the possible completions and associated functions.
 
 #+END_SRC
 
-*** =all-the-icons=
+*** Symbols (all-the-icons)
+
 Attach beautiful symbols to, for instance, file names in a =dired= or
 =ibuffer= buffer.
 
@@ -262,7 +293,8 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 
 #+END_SRC
 
-*** =marginalia=
+*** Informative annotations (marginalia)
+
 Annotate minibuffer completions, like showing the bound keys and
 docstrings for commands in =M-x=, variable values in "C-h v", file
 sizes and permissions in "C-x C-f", and much more.
@@ -284,7 +316,8 @@ sizes and permissions in "C-x C-f", and much more.
 #+END_SRC
 
 *** Language-specific modes
-**** =nix-mode=
+**** Nix (nix-mode)
+
 Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.
 
 #+BEGIN_SRC emacs-lisp
@@ -295,7 +328,8 @@ Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/in
 
 #+END_SRC
 
-**** Markdown
+**** Markdown (markdown-mode, gfm-mode)
+
 Enable GitHub-flavored markdown mode for =README= files, and regular
 =markdown-mode= for all other markdown files.
 
@@ -310,7 +344,7 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
 
 #+END_SRC
 
-**** =org-mode=
+**** Org (org-mode)
 
 When using variable-pitch-mode, all the faces are using the configured
 font face. But inside code blocks, verbatim text, meta lines, etc. a
