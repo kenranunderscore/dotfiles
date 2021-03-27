@@ -119,7 +119,7 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 **** Line numbers in programming modes
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
 
 (use-package display-line-numbers
   :ensure nil
