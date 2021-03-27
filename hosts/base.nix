@@ -132,6 +132,7 @@ in {
         # Fonts
         anonymousPro
         camingo-code
+        cantarell_fonts
         cascadia-code
         fira-code
         hermit

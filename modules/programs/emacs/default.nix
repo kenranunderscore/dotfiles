@@ -40,6 +40,8 @@ in {
             # Language-specific
             markdown-mode
             nix-mode
+            epkgs.elpaPackages.org
+            org-bullets
 
             # Themes
             epkgs.elpaPackages.modus-vivendi-theme

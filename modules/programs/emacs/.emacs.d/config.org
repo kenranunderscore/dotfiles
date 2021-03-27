@@ -91,8 +91,8 @@ Set font properties.
 #+BEGIN_SRC emacs-lisp
 
   (set-face-attribute 'default nil :font "Anonymous Pro-14")
-  (set-face-attribute 'fixed-pitch nil :font "Cascadia Code-13")
-  (set-face-attribute 'variable-pitch nil :font "Cascadia Code-15")
+  (set-face-attribute 'fixed-pitch nil :font "Anonymous Pro-14")
+  (set-face-attribute 'variable-pitch nil :font "Cantarell-15")
 
 #+END_SRC
 
@@ -273,6 +273,7 @@ sizes and permissions in "C-x C-f", and much more.
 	  ("M-A" . marginalia-cycle)))
 
 #+END_SRC
+
 *** Language-specific modes
 **** =nix-mode=
 Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.
@@ -299,11 +300,68 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
     :init (setq markdown-command "pandoc"))
 
 #+END_SRC
+
 **** =org-mode=
-***** FIXME still needs to be loaded and configured
+
+When using variable-pitch-mode, all the faces are using the configured
+font face. But inside code blocks, verbatim text, meta lines, etc. a
+fixed-pitch face is what we want to be using.
 
 #+BEGIN_SRC emacs-lisp
 
-  (setq org-src-tab-acts-natively t)
+  (defun my/setup-org-fonts ()
+    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch)))
+
+#+END_SRC
+
+To fix =org-indent-mode= not indenting variable-pitch fonts nicely,
+we'd like to use the fixed-pitch font for that as well. Unfortunately
+setting the face attribute as above didn't work as expected and it
+seems necessary to do it like this.
+
+#+BEGIN_SRC emacs-lisp
+
+  (with-eval-after-load 'org-indent
+    (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
+
+#+END_SRC
+
+When writing text in org-mode, auto-fill-mode should be enable to
+automatically break overly long lines into smaller pieces when
+typing. We may still use =M-q= to re-fill paragraph when editing text.
+
+In code blocks, =TAB= should be usable to re-indent/-format code.
+
+After loading org-mode, we then run our custom font setup.
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package org
+    :ensure nil
+    :hook ((org-mode . org-indent-mode)
+           (org-mode . variable-pitch-mode)
+           (org-mode . auto-fill-mode))
+    :config
+    (setq org-src-tab-acts-natively t
+          org-ellipsis " ▾")
+    (my/setup-org-fonts))
+
+#+END_SRC
+
+The =org-bullets= packages enables us to use UTF-8 characters for the
+bullet points in org headers.
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package org-bullets
+    :ensure nil
+    :hook (org-mode . org-bullets-mode)
+    :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 #+END_SRC
