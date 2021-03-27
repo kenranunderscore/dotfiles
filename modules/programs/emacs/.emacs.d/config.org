@@ -109,9 +109,11 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+BEGIN_SRC emacs-lisp
 
-  (set-face-attribute 'default nil :font "Anonymous Pro-14")
-  (set-face-attribute 'fixed-pitch nil :font "Anonymous Pro-14")
-  (set-face-attribute 'variable-pitch nil :font "Cantarell-15")
+  (setq my/monospace-font "Anonymous Pro")
+  (setq my/variable-font "Cantarell")
+  (set-face-attribute 'default nil :font my/monospace-font :height 140)
+  (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 140)
+  (set-face-attribute 'variable-pitch nil :font my/variable-font :height 150)
 
 #+END_SRC
 
@@ -417,5 +419,22 @@ Render unordered list bullet points as dots instead of minus/plus.
    'org-mode
    '(("^ *\\([-+]\\) "
       (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+#+END_SRC
+
+The first few levels of org headers should be scaled to be a bit
+larger than the default text.
+
+#+BEGIN_SRC emacs-lisp
+
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.15)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.05)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
+    (set-face-attribute (car face) nil :font my/variable-font :height (cdr face)))
 
 #+END_SRC
