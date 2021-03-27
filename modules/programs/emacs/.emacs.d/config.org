@@ -56,11 +56,25 @@ quickly close them with =q=.
 
 #+END_SRC
 
-Use the great [[https://protesilaos.com/modus-themes/][Modus Vivendi theme by Protesilaos Stavrou]].
+Since I cannot ever decide which theme I like best, there are a few
+themes installed in my nix configuration:
+- [[https://github.com/belak/base16-emacs][base16 themes for Emacs]]
+- [[https://protesilaos.com/modus-themes/][Modus Vivendi by Protesilaos Stavrou]]
+- [[https://gitlab.com/ideasman42/emacs-inkpot-theme][InkPot theme for Emacs]]
 
 #+BEGIN_SRC emacs-lisp
 
-  (load-theme 'modus-vivendi t)
+  ;; (use-package base16-theme
+  ;;   :ensure nil
+  ;;   :config (load-theme 'base16-atelier-forest t))
+
+  (use-package inkpot-theme
+    :ensure nil
+    :config (load-theme 'inkpot t))
+
+  ;; (use-package modus-vivendi-theme
+  ;;   :ensure nil
+  ;;   :config (load-theme 'modus-vivendi t))
 
 #+END_SRC
 
@@ -76,7 +90,7 @@ Set font properties.
 
 #+BEGIN_SRC emacs-lisp
 
-  (set-face-attribute 'default nil :font "Cascadia Code-13")
+  (set-face-attribute 'default nil :font "Anonymous Pro-14")
   (set-face-attribute 'fixed-pitch nil :font "Cascadia Code-13")
   (set-face-attribute 'variable-pitch nil :font "Cascadia Code-15")
 
@@ -96,6 +110,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 	   ("C-h k" . helpful-key)))
 
 #+END_SRC
+
 *** =general=
 The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings.
 

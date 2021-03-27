@@ -43,6 +43,8 @@ in {
 
             # Themes
             epkgs.elpaPackages.modus-vivendi-theme
+            base16-theme
+            inkpot-theme
 
             # Utility
             all-the-icons
