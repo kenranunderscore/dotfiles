@@ -394,6 +394,8 @@ displays the possible completions and associated functions.
 
   (use-package which-key
     :ensure nil
+    :custom
+    (which-key-idle-delay 0.5)
     :init
     (add-hook 'after-init-hook 'which-key-mode))
 
