@@ -129,6 +129,131 @@ Answering a question with =yes= instead of just =y= is just annoying.
 #+end_src
 
 ** Package-specific configuration
+*** Language-specific modes
+**** Nix (nix-mode)
+
+Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.
+
+#+begin_src emacs-lisp
+
+  (use-package nix-mode
+    :ensure nil
+    :mode "\\.nix\\'")
+
+#+end_src
+
+**** Markdown (markdown-mode, gfm-mode)
+
+Enable GitHub-flavored markdown mode for =README= files, and regular
+=markdown-mode= for all other markdown files.
+
+#+begin_src emacs-lisp
+
+  (use-package markdown-mode
+    :ensure nil
+    :mode (("README\\.md\\'" . gfm-mode)
+	   ("\\.md\\'" . markdown-mode)
+	   ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "pandoc"))
+
+#+end_src
+
+**** Org (org-mode)
+
+When using variable-pitch-mode, all the faces are using the configured
+font face. But inside code blocks, verbatim text, meta lines, etc. a
+fixed-pitch face is what we want to be using.
+
+#+begin_src emacs-lisp
+
+  (defun my/setup-org-fonts ()
+    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch)))
+
+#+end_src
+
+To fix =org-indent-mode= not indenting variable-pitch fonts nicely,
+we'd like to use the fixed-pitch font for that as well. Unfortunately
+setting the face attribute as above didn't work as expected and it
+seems necessary to do it like this.
+
+#+begin_src emacs-lisp
+
+  (with-eval-after-load 'org-indent
+    (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
+
+#+end_src
+
+When writing text in org-mode, auto-fill-mode should be enable to
+automatically break overly long lines into smaller pieces when
+typing. We may still use =M-q= to re-fill paragraph when editing text.
+
+In code blocks, =TAB= should be usable to re-indent/-format code.
+
+After loading org-mode, we then run our custom font setup.
+
+#+begin_src emacs-lisp
+
+  (use-package org
+    :ensure nil
+    :hook ((org-mode . org-indent-mode)
+           (org-mode . variable-pitch-mode)
+           (org-mode . auto-fill-mode))
+    :config
+    (setq org-src-tab-acts-natively t
+          org-ellipsis " ▾")
+    (my/setup-org-fonts))
+
+#+end_src
+
+The =org-bullets= packages enables us to use UTF-8 characters for the
+bullet points in org headers.
+
+#+begin_src emacs-lisp
+
+  (use-package org-bullets
+    :ensure nil
+    :hook (org-mode . org-bullets-mode)
+    :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+#+end_src
+
+Render unordered list bullet points as dots instead of minus/plus.
+
+#+begin_src emacs-lisp
+
+  (font-lock-add-keywords
+   'org-mode
+   '(("^ *\\([-+]\\) "
+      (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+#+end_src
+
+The first few levels of org headers should be scaled to be a bit
+larger than the default text.
+
+#+begin_src emacs-lisp
+
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.15)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.05)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
+    (set-face-attribute (car face) nil
+                        :font my/variable-font
+                        :height (cdr face)
+                        :weight 'regular))
+
+#+end_src
+
 *** Better help pages (helpful)
 
 This gives us better and more readable help pages. We also replace
@@ -320,136 +445,15 @@ sizes and permissions in "C-x C-f", and much more.
 *** Buffer-local direnv variables (envrc)
 
 Let's try out [[https://github.com/purcell/envrc][Steve Purcell's envrc package]] as an alternative to
-direnv-mode.
+direnv-mode. Note: this should probably be one of the last modes to
+load, as the hook function is then placed before the other modes to
+ensure direnv integration is working as expected.
 
 #+begin_src emacs-lisp
 
-  (use-package envrc
-    :ensure nil)
+    (use-package envrc
+      :ensure nil
+      :init (envrc-global-mode))
 
 #+end_src
 
-*** Language-specific modes
-**** Nix (nix-mode)
-
-Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/install-nix.html][Nix]] expressions.
-
-#+begin_src emacs-lisp
-
-  (use-package nix-mode
-    :ensure nil
-    :mode "\\.nix\\'")
-
-#+end_src
-
-**** Markdown (markdown-mode, gfm-mode)
-
-Enable GitHub-flavored markdown mode for =README= files, and regular
-=markdown-mode= for all other markdown files.
-
-#+begin_src emacs-lisp
-
-  (use-package markdown-mode
-    :ensure nil
-    :mode (("README\\.md\\'" . gfm-mode)
-	   ("\\.md\\'" . markdown-mode)
-	   ("\\.markdown\\'" . markdown-mode))
-    :init (setq markdown-command "pandoc"))
-
-#+end_src
-
-**** Org (org-mode)
-
-When using variable-pitch-mode, all the faces are using the configured
-font face. But inside code blocks, verbatim text, meta lines, etc. a
-fixed-pitch face is what we want to be using.
-
-#+begin_src emacs-lisp
-
-  (defun my/setup-org-fonts ()
-    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch)))
-
-#+end_src
-
-To fix =org-indent-mode= not indenting variable-pitch fonts nicely,
-we'd like to use the fixed-pitch font for that as well. Unfortunately
-setting the face attribute as above didn't work as expected and it
-seems necessary to do it like this.
-
-#+begin_src emacs-lisp
-
-  (with-eval-after-load 'org-indent
-    (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
-
-#+end_src
-
-When writing text in org-mode, auto-fill-mode should be enable to
-automatically break overly long lines into smaller pieces when
-typing. We may still use =M-q= to re-fill paragraph when editing text.
-
-In code blocks, =TAB= should be usable to re-indent/-format code.
-
-After loading org-mode, we then run our custom font setup.
-
-#+begin_src emacs-lisp
-
-  (use-package org
-    :ensure nil
-    :hook ((org-mode . org-indent-mode)
-           (org-mode . variable-pitch-mode)
-           (org-mode . auto-fill-mode))
-    :config
-    (setq org-src-tab-acts-natively t
-          org-ellipsis " ▾")
-    (my/setup-org-fonts))
-
-#+end_src
-
-The =org-bullets= packages enables us to use UTF-8 characters for the
-bullet points in org headers.
-
-#+begin_src emacs-lisp
-
-  (use-package org-bullets
-    :ensure nil
-    :hook (org-mode . org-bullets-mode)
-    :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-#+end_src
-
-Render unordered list bullet points as dots instead of minus/plus.
-
-#+begin_src emacs-lisp
-
-  (font-lock-add-keywords
-   'org-mode
-   '(("^ *\\([-+]\\) "
-      (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-#+end_src
-
-The first few levels of org headers should be scaled to be a bit
-larger than the default text.
-
-#+begin_src emacs-lisp
-
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.15)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.05)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil
-                        :font my/variable-font
-                        :height (cdr face)
-                        :weight 'regular))
-
-#+end_src
