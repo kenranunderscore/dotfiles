@@ -139,8 +139,8 @@ some built-in =C-h= keybings with =helpful-*= functions.
   (use-package helpful
     :ensure nil
     :bind (("C-h f" . helpful-callable)
-	   ("C-h v" . helpful-variable)
-	   ("C-h k" . helpful-key)))
+           ("C-h v" . helpful-variable)
+           ("C-h k" . helpful-key)))
 
 #+END_SRC
 
@@ -307,13 +307,13 @@ sizes and permissions in "C-x C-f", and much more.
     :init
     (marginalia-mode)
     (advice-add #'marginalia-cycle :after
-		(lambda () (when (bound-and-true-p selectrum-mode)
-			     (selectrum-exhibit 'keep-selected))))
+                (lambda () (when (bound-and-true-p selectrum-mode)
+                             (selectrum-exhibit 'keep-selected))))
     :config
     (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
     :bind
     (:map minibuffer-local-map
-	  ("M-A" . marginalia-cycle)))
+          ("M-A" . marginalia-cycle)))
 
 #+END_SRC
 
