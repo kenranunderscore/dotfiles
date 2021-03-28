@@ -289,7 +289,8 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
   (use-package projectile
     :ensure nil
     :init
-    (projectile-mode +1))
+    (projectile-mode +1)
+    :bind-keymap ("C-c p" . projectile-command-map))
 
 #+end_src
 
