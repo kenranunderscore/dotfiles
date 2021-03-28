@@ -52,6 +52,7 @@ in {
             all-the-icons
             all-the-icons-dired
             all-the-icons-ibuffer
+            envrc
             helpful
             hl-todo
             marginalia

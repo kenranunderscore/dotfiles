@@ -317,6 +317,18 @@ sizes and permissions in "C-x C-f", and much more.
 
 #+end_src
 
+*** Buffer-local direnv variables (envrc)
+
+Let's try out [[https://github.com/purcell/envrc][Steve Purcell's envrc package]] as an alternative to
+direnv-mode.
+
+#+begin_src emacs-lisp
+
+  (use-package envrc
+    :ensure nil)
+
+#+end_src
+
 *** Language-specific modes
 **** Nix (nix-mode)
 
