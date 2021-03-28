@@ -254,6 +254,20 @@ larger than the default text.
 
 #+end_src
 
+**** Haskell (haskell-mode)
+
+We use the standard haskell-mode for now. Might add LSP configuration
+later, but I'm not sure whether to take the lsp-mode route again or
+try out eglot.
+
+#+begin_src emacs-lisp
+
+    (use-package haskell-mode
+      :custom
+      (haskell-process-type 'cabal-repl))
+
+#+end_src
+
 *** Better help pages (helpful)
 
 This gives us better and more readable help pages. We also replace

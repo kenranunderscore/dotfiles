@@ -38,6 +38,7 @@ in {
             use-package
 
             # Language-specific
+            haskell-mode
             markdown-mode
             nix-mode
             epkgs.elpaPackages.org
