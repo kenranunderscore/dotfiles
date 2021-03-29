@@ -122,9 +122,14 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
   (defvar my/monospace-font "Anonymous Pro")
   (defvar my/variable-font "Cantarell")
-  (set-face-attribute 'default nil :font my/monospace-font :height 140)
-  (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 140)
-  (set-face-attribute 'variable-pitch nil :font my/variable-font :height 150)
+
+  (defun my/set-face-attributes ()
+    (set-face-attribute 'default nil :font my/monospace-font :height 150)
+    (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 150)
+    (set-face-attribute 'variable-pitch nil :font my/variable-font :height 150))
+
+  (my/set-face-attributes)
+  (add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
 
 #+end_src
 
