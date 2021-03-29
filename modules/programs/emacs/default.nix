@@ -41,13 +41,14 @@ in {
             haskell-mode
             markdown-mode
             nix-mode
-            epkgs.elpaPackages.org
+            epkgs.org
             org-bullets
+            org-present
 
             # Themes
-            epkgs.elpaPackages.modus-vivendi-theme
             base16-theme
             inkpot-theme
+            modus-themes
 
             # Utility
             all-the-icons
