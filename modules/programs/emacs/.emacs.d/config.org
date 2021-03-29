@@ -22,6 +22,17 @@
 
 * Config
 ** General settings
+** Load use-package
+
+When using byte-compiled config files, which I do, then loading
+use-package before using it is required.
+
+#+begin_src emacs-lisp
+
+  (require 'use-package)
+
+#+end_src
+
 *** Separate file for customizations
 
 We do not want to append it to our =init.el=.
