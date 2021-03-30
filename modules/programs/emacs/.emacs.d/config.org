@@ -181,6 +181,8 @@ fixed-pitch face is what we want to be using.
 
   (defun my/setup-org-fonts ()
     (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch)
     (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
     (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
     (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
