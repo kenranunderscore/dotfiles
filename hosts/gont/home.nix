@@ -55,6 +55,8 @@ in rec {
   home.packages = with pkgs; [
     feh
     htop
+    keepass
+    keepassx
     kittyWrapped
     leiningen
     linphone
