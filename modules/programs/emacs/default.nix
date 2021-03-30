@@ -46,9 +46,8 @@ in {
             org-present
 
             # Themes
-            base16-theme
-            inkpot-theme
             modus-themes
+            doom-themes
 
             # Utility
             all-the-icons

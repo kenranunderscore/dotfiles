@@ -93,17 +93,13 @@ themes installed in my nix configuration:
 
 #+begin_src emacs-lisp
 
-  ;; (use-package base16-theme
-  ;;   :ensure nil
-  ;;   :config (load-theme 'base16-atelier-forest t))
-
-  (use-package inkpot-theme
-    :ensure nil
-    :config (load-theme 'inkpot t))
-
   ;; (use-package modus-vivendi-theme
   ;;   :ensure nil
   ;;   :config (load-theme 'modus-vivendi t))
+
+  (use-package doom-themes
+    :ensure nil
+    :config (load-theme 'doom-sourcerer t))
 
 #+end_src
 
