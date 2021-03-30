@@ -22,7 +22,7 @@
 
 * Config
 ** General settings
-** Load use-package
+*** Load use-package
 
 When using byte-compiled config files, which I do, then loading
 use-package before using it is required.
