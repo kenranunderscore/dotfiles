@@ -361,8 +361,10 @@ The [[https://github.com/noctuid/general.el][general]] package allows us to easi
 
   (use-package smartparens
     :ensure nil
-    :init
-    (smartparens-global-mode 1))
+    :config
+    (smartparens-global-mode t)
+    (sp-with-modes sp-lisp-modes
+      (sp-local-pair "'" nil :actions nil)))
 
 #+end_src
 
