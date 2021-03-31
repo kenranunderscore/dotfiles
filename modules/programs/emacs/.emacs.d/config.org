@@ -334,9 +334,9 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-    (use-package haskell-mode
-      :custom
-      (haskell-process-type 'cabal-repl))
+  (use-package haskell-mode
+    :custom
+    (haskell-process-type 'cabal-repl))
 
 #+end_src
 
@@ -546,9 +546,10 @@ ensure direnv integration is working as expected.
 
 #+begin_src emacs-lisp
 
-    (use-package envrc
-      :ensure nil
-      :init (envrc-global-mode))
+  (use-package envrc
+    :ensure nil
+    :init (envrc-global-mode))
+
 #+end_src
 
 *** Built-in packages
