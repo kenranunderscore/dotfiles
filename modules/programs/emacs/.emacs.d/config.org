@@ -44,6 +44,23 @@ We do not want to append it to our =init.el=.
 
 #+end_src
 
+*** Measure the startup time
+
+I want to know how fast my emacs is starting. I'm not sure how to make
+use of all that =use-package= has to offer in that regard yet, but I
+want to at least see when I've made things worse.
+
+#+begin_src emacs-lisp
+
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (message "Emacs startup took %s with %d garbage collections"
+                       (format "%.2f seconds"
+                               (float-time (time-subtract after-init-time before-init-time)))
+                       gcs-done)))
+
+#+end_src
+
 *** Disable any bars and the splash screen
 
 Disable the graphical GUI things like the menu bar, the splash screen,
