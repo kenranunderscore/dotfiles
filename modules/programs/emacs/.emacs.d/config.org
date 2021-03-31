@@ -317,19 +317,6 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+end_src
 
-*** Keybinding management (general)
-
-The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings.
-
-#+begin_src emacs-lisp
-
-  (use-package general
-    :ensure nil)
-
-#+end_src
-
-**** TODO find out whether I still need general without evil-mode
-
 *** Project-wide searches, movement, etc. (projectile)
 
 #+begin_src emacs-lisp
