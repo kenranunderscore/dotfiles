@@ -21,6 +21,21 @@
 - [ ] data formats (json, yaml, csv, ...)
 
 * Config
+** Increase GC threshold
+
+Emacs startup can be significantly sped up by reducing the number of
+garbage collections that take place during initialization. The default
+=gc-cons-threshold= of 80 kilobytes is way too low for any more recent
+system. Still it's beneficial to reset this temporary value back to a
+lower number after initialization. That way the GC pause won't be as
+long when working within Emacs.
+
+#+begin_src emacs-lisp
+
+  (setq gc-cons-threshold (* 100 1000 1000))
+
+#+end_src
+
 ** General settings
 *** Load use-package
 
@@ -555,5 +570,13 @@ the =use-package= calls.
   (use-package simple
     :ensure nil
     :diminish auto-fill-function)
+
+#+end_src
+
+** Reduce GC threshold again
+
+#+begin_src emacs-lisp
+
+  (setq gc-cons-threshold (* 5 1000 1000))
 
 #+end_src
