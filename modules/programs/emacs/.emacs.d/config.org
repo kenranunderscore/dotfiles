@@ -236,9 +236,12 @@ After loading org-mode, we then run our custom font setup.
 
   (use-package org
     :ensure nil
-    :hook ((org-mode . org-indent-mode)
-           (org-mode . variable-pitch-mode)
+    :hook ((org-mode . variable-pitch-mode)
            (org-mode . auto-fill-mode))
+    :custom ((org-startup-indented t)
+             (org-startup-folded 'content)
+             (org-directory "~/org")
+             (org-log-done t))
     :config
     (setq org-src-tab-acts-natively t
           org-ellipsis " ▾")
