@@ -150,10 +150,10 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-(use-package display-line-numbers
-  :ensure nil
-  :hook ((prog-mode . display-line-numbers-mode))
-         (conf-mode . display-line-numbers-mode))
+  (use-package display-line-numbers
+    :ensure nil
+    :hook ((prog-mode . display-line-numbers-mode))
+    (conf-mode . display-line-numbers-mode))
 
 #+end_src
 
@@ -181,8 +181,8 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
   (use-package markdown-mode
     :ensure nil
     :mode (("README\\.md\\'" . gfm-mode)
-	   ("\\.md\\'" . markdown-mode)
-	   ("\\.markdown\\'" . markdown-mode))
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
     :init (setq markdown-command "pandoc"))
 
 #+end_src
