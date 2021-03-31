@@ -104,9 +104,8 @@ quickly close them with =q=.
 
 Since I cannot ever decide which theme I like best, there are a few
 themes installed in my nix configuration:
-- [[https://github.com/belak/base16-emacs][base16 themes for Emacs]]
 - [[https://protesilaos.com/modus-themes/][Modus Vivendi by Protesilaos Stavrou]]
-- [[https://gitlab.com/ideasman42/emacs-inkpot-theme][InkPot theme for Emacs]]
+- [[https://github.com/hlissner/emacs-doom-themes][doom-themes]]
 
 #+begin_src emacs-lisp
 
