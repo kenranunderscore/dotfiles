@@ -334,8 +334,6 @@ the =:diminish= keyword.
   (use-package diminish
     :ensure nil)
 
-  (diminish 'buffer-face-mode)
-
 #+end_src
 
 *** Better help pages (helpful)
@@ -384,6 +382,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
   (use-package smartparens
     :ensure nil
+    :diminish smartparens-mode
     :config
     (smartparens-global-mode t)
     (sp-with-modes sp-lisp-modes
@@ -532,5 +531,26 @@ ensure direnv integration is working as expected.
     (use-package envrc
       :ensure nil
       :init (envrc-global-mode))
+#+end_src
+
+*** Built-in packages
+
+This is mainly here to diminish some built-in minor modes, although
+it's of course possible to put some mode-specific configuration into
+the =use-package= calls.
+
+#+begin_src emacs-lisp
+
+  (use-package face-remap
+    :ensure nil
+    :diminish buffer-face-mode)
+
+  (use-package autorevert
+    :ensure nil
+    :diminish auto-revert-mode)
+
+  (use-package simple
+    :ensure nil
+    :diminish auto-fill-function)
 
 #+end_src
