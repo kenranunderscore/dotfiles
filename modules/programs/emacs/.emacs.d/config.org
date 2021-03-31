@@ -199,6 +199,10 @@ seems necessary to do it like this.
 
 #+begin_src emacs-lisp
 
+  (use-package org-indent
+    :ensure nil
+    :diminish org-indent-mode)
+
   (with-eval-after-load 'org-indent
     (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
 
@@ -302,6 +306,22 @@ try out eglot.
 
 #+end_src
 
+*** Hide modes in the mode line (diminish)
+
+The [[https://github.com/myrjola/diminish.el][diminish]] package enables us to hide minor modes from the mode
+line. It's especially useful for certain modes that are globally
+enabled anyway. Use-package has built-in support for it available with
+the =:diminish= keyword.
+
+#+begin_src emacs-lisp
+
+  (use-package diminish
+    :ensure nil)
+
+  (diminish 'buffer-face-mode)
+
+#+end_src
+
 *** Better help pages (helpful)
 
 This gives us better and more readable help pages. We also replace
@@ -392,6 +412,7 @@ I use [[https://company-mode.github.io/][company-mode]] for (global) auto-comple
 
   (use-package company
     :ensure nil
+    :diminish company-mode
     :init
     (add-hook 'after-init-hook 'global-company-mode))
 
@@ -433,6 +454,7 @@ displays the possible completions and associated functions.
     :ensure nil
     :custom
     (which-key-idle-delay 0.5)
+    :diminish which-key-mode
     :init
     (add-hook 'after-init-hook 'which-key-mode))
 
@@ -496,4 +518,3 @@ ensure direnv integration is working as expected.
       :init (envrc-global-mode))
 
 #+end_src
-

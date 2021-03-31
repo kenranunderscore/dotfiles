@@ -52,6 +52,7 @@ in {
             all-the-icons
             all-the-icons-dired
             all-the-icons-ibuffer
+            diminish
             envrc
             helpful
             hl-todo
