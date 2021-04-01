@@ -388,7 +388,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
     :ensure nil
     :init
     (projectile-mode +1)
-    :bind-keymap ("C-c p" . projectile-command-map))
+    :bind-keymap ("C-x p" . projectile-command-map))
 
 #+end_src
 
