@@ -38,6 +38,7 @@ in {
 
             # Language-specific
             dhall-mode
+            dockerfile-mode
             haskell-mode
             markdown-mode
             nix-mode

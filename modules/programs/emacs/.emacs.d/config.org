@@ -351,6 +351,17 @@ try out eglot.
 
 #+end_src
 
+**** Docker (dockerfile-mode)
+
+#+begin_src emacs-lisp
+
+  (use-package dockerfile-mode
+    :ensure nil)
+
+#+end_src
+
+***** TODO check out TRAMP and docker-tramp
+
 *** Hide modes in the mode line (diminish)
 
 The [[https://github.com/myrjola/diminish.el][diminish]] package enables us to hide minor modes from the mode
