@@ -45,6 +45,7 @@ in {
             epkgs.org
             org-bullets
             org-present
+            yaml-mode
 
             # Themes
             modus-themes
