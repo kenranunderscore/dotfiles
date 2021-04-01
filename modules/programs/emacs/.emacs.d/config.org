@@ -335,6 +335,7 @@ try out eglot.
 #+begin_src emacs-lisp
 
   (use-package haskell-mode
+    :ensure nil
     :custom
     (haskell-process-type 'cabal-repl))
 
