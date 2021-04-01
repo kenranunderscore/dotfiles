@@ -161,7 +161,7 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+end_src
 
-**** Line numbers in programming modes
+*** Line numbers in programming modes
 
 #+begin_src emacs-lisp
 
@@ -169,6 +169,15 @@ Answering a question with =yes= instead of just =y= is just annoying.
     :ensure nil
     :hook ((prog-mode . display-line-numbers-mode))
     (conf-mode . display-line-numbers-mode))
+
+#+end_src
+
+*** Insert newline at the end of files
+
+#+begin_src emacs-lisp
+
+  (setq require-final-newline t
+        mode-require-final-newline t)
 
 #+end_src
 
