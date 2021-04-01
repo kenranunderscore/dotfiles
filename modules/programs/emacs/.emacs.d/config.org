@@ -602,6 +602,7 @@ ensure direnv integration is working as expected.
 #+end_src
 
 *** Built-in packages
+**** Diminish some minor modes
 
 This is mainly here to diminish some built-in minor modes, although
 it's of course possible to put some mode-specific configuration into
@@ -620,6 +621,21 @@ the =use-package= calls.
   (use-package simple
     :ensure nil
     :diminish auto-fill-function)
+
+#+end_src
+
+**** Dired
+***** TODO dired itself
+***** diredfl
+
+[[https://github.com/purcell/diredfl][diredfl]] beautifies the dired buffers a bit by making things more
+colorful.
+
+#+begin_src emacs-lisp
+
+  (use-package diredfl
+    :ensure nil
+    :hook (dired-mode . diredfl-mode))
 
 #+end_src
 
