@@ -412,6 +412,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
   (use-package smartparens
     :ensure nil
     :diminish smartparens-mode
+    :config
     (sp-with-modes sp-lisp-modes
       (sp-local-pair "'" nil :actions nil))
     :init
