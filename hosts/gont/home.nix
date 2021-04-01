@@ -53,6 +53,7 @@ in rec {
   };
 
   home.packages = with pkgs; [
+    dhall
     feh
     htop
     keepass

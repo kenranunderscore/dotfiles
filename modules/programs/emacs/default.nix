@@ -37,6 +37,7 @@ in {
             use-package
 
             # Language-specific
+            dhall-mode
             haskell-mode
             markdown-mode
             nix-mode

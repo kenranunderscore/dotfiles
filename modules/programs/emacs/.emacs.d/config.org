@@ -341,6 +341,16 @@ try out eglot.
 
 #+end_src
 
+**** Dhall (dhall-mode)
+
+#+begin_src emacs-lisp
+
+  (use-package dhall-mode
+    :ensure nil
+    :mode "\\.dhall\\'")
+
+#+end_src
+
 *** Hide modes in the mode line (diminish)
 
 The [[https://github.com/myrjola/diminish.el][diminish]] package enables us to hide minor modes from the mode
