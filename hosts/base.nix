@@ -168,6 +168,7 @@ in {
           $DRY_RUN_CMD cd ${builtins.toPath ../.}/private && \
           $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa* && \
           $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa && \
+          $DRY_RUN_CMD eval "$(ssh-agent)" && \
           $DRY_RUN_CMD gpg --import ${cfg.privateDir + "/gpg.key"}
         '';
       };
