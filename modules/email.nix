@@ -93,7 +93,11 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     programs.notmuch = {
       enable = cfg.isSyncServer;
-      hooks = { preNew = "mbsync --all"; };
+      # FIXME parameterize this, or at least use existing vars
+      hooks = {
+        preNew =
+          "PASSWORD_STORE_DIR=/home/kenran/.local/share/password-store mbsync --all";
+      };
     };
 
     # TODO services.muchsync
