@@ -24,7 +24,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
     };
 
     isSyncServer = mkOption {
-      type = types.boolean;
+      type = types.bool;
       default = false;
     };
   };
@@ -88,7 +88,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       };
     };
 
-    home.packages = [ muchsync notmuch ];
+    home.packages = with pkgs; [ muchsync notmuch ];
 
     # TODO services.muchsync
     # TODO notmuch configuration
