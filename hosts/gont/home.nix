@@ -44,7 +44,10 @@ in rec {
     shell = { git = { email = "johannes.maier@active-group.de"; }; };
   };
 
-  programs = { rofi.enable = true; };
+  programs = {
+    rofi.enable = true;
+    msmtp.enable = true;
+  };
 
   services = {
     gpg-agent = {

@@ -60,8 +60,6 @@ in {
     programs = {
       gpg.enable = true;
       home-manager.enable = true;
-      mbsync.enable = true;
-      msmtp.enable = true;
       password-store.enable = true;
       ssh.enable = true;
     };

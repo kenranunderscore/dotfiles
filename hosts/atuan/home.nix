@@ -2,7 +2,6 @@
 
 {
   imports = [ ../base.nix ../../modules ];
-
   hosts.base = {
     username = "kenran";
     privateDir = ../../private/linux;
@@ -38,7 +37,10 @@
     };
   };
 
-  programs = { rofi.enable = true; };
+  programs = {
+    rofi.enable = true;
+    msmtp.enable = true;
+  };
 
   services = {
     gpg-agent = {
@@ -47,10 +49,5 @@
     };
   };
 
-  home.packages = with pkgs; [
-    htop
-    manpages
-    pandoc
-    xorg.xkbcomp
-  ];
+  home.packages = with pkgs; [ htop manpages pandoc xorg.xkbcomp ];
 }

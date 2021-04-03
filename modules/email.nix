@@ -45,7 +45,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
             expunge = "both";
           };
           msmtp.enable = !cfg.isSyncServer;
-          notmuch.enable = cfg.isSyncServer;
+          notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -69,7 +69,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
             expunge = "both";
           };
           msmtp.enable = !cfg.isSyncServer;
-          notmuch.enable = cfg.isSyncServer;
+          notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
@@ -88,7 +88,13 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       };
     };
 
-    home.packages = with pkgs; [ muchsync notmuch ];
+    home.packages = with pkgs;
+      [ muchsync ] ++ (if cfg.isSyncServer then [ ] else [ notmuch ]);
+
+    programs.notmuch = {
+      enable = cfg.isSyncServer;
+      hooks = { preNew = "mbsync --all"; };
+    };
 
     # TODO services.muchsync
     # TODO notmuch configuration
