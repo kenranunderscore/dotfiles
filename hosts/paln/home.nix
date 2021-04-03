@@ -32,6 +32,13 @@ in {
       ssh.enable = true;
     };
 
+    services = {
+      gpg-agent = {
+        enable = true;
+        enableSshSupport = true;
+      };
+    };
+
     home = {
       username = "kenran";
       homeDirectory = "/home/kenran";
