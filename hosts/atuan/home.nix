@@ -13,6 +13,7 @@
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
+      isSyncServer = false;
     };
     programs = {
       bspwm = {

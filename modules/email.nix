@@ -22,6 +22,11 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       type = types.enum [ "ag" "mailbox" ];
       default = "mailbox";
     };
+
+    isSyncServer = mkOption {
+      type = types.boolean;
+      default = false;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -35,11 +40,12 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           userName = address;
           primary = cfg.primaryAccount == "mailbox";
           mbsync = {
-            enable = true;
+            enable = cfg.isSyncServer;
             create = "maildir";
             expunge = "both";
           };
-          msmtp.enable = true;
+          msmtp.enable = !cfg.isSyncServer;
+          notmuch.enable = cfg.isSyncServer;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -58,12 +64,13 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           userName = "maier";
           primary = cfg.primaryAccount == "ag";
           mbsync = {
-            enable = true;
+            enable = cfg.isSyncServer;
             create = "maildir";
             expunge = "both";
           };
-          msmtp.enable = true;
-          realName = "Johannes Maier";
+          msmtp.enable = !cfg.isSyncServer;
+          notmuch.enable = cfg.isSyncServer;
+          inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
             host = "imap.active-group.de";
@@ -81,9 +88,9 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       };
     };
 
-    home.activation = {
-      createMaildirIfNecessary = dagEntryAfter [ "writeBoundary" ]
-        "$DRY_RUN_CMD mkdir -p ~/${cfg.maildir}";
-    };
+    home.packages = [ muchsync notmuch ];
+
+    # TODO services.muchsync
+    # TODO notmuch configuration
   };
 }
