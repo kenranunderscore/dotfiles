@@ -61,6 +61,7 @@ in {
             helpful
             hl-todo
             marginalia
+            notmuch
             switch-window
             which-key
           ]);

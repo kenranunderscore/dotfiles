@@ -380,6 +380,39 @@ try out eglot.
 
 #+end_src
 
+*** Emacs as email client (notmuch)
+
+I've tried and used mu4e in the past, but always liked the idea of
+notmuch better. I'll give notmuch a shot now that I have a working
+syncthing setup to sync my tag database.
+
+#+begin_src emacs-lisp
+
+  (setq user-full-name "Johannes Maier")
+
+  (use-package notmuch
+    :ensure nil
+    :defer t
+    :config
+    (setq user-mail-address "johannes.maier@mailbox.org")
+    :custom
+    (message-send-mail-function 'message-send-mail-with-sendmail)
+    (message-kill-buffer-on-exit t)
+    (message-sendmail-envelope-from 'header)
+    (mail-envelope-from 'header)
+    (mail-specify-envelope-from 'header)
+    (mail-user-agent 'message-user-agent)
+    (notmuch-show-all-multipart/alternative-parts t)
+    (notmuch-always-prompt-for-sender t))
+
+#+end_src
+
+**** TODO email todos [0/4]
+- [ ] document config
+- [ ] try on non-NixOS machine (msmtp working?)
+- [ ] how to integrate muchsync
+- [ ] configure muchsync server IP (pass?)
+
 *** Hide modes in the mode line (diminish)
 
 The [[https://github.com/myrjola/diminish.el][diminish]] package enables us to hide minor modes from the mode
