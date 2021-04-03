@@ -113,7 +113,6 @@ in {
         gnumake
         lorri
         mercurial
-        mu
         nixfmt
         nix-index
         nix-output-monitor
