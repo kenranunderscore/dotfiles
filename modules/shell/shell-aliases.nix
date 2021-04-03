@@ -26,4 +26,5 @@
   # misc
   md = "mkdir -p";
   s = "sudo";
+  hs = "home-manager switch";
 }
