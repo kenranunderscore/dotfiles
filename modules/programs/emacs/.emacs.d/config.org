@@ -402,7 +402,7 @@ syncthing setup to sync my tag database.
     (mail-envelope-from 'header)
     (mail-specify-envelope-from 'header)
     (mail-user-agent 'message-user-agent)
-    (notmuch-show-all-multipart/alternative-parts t)
+    (notmuch-show-all-multipart/alternative-parts nil)
     (notmuch-always-prompt-for-sender t))
 
 #+end_src
