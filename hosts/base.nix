@@ -57,11 +57,22 @@ in {
 
     fonts.fontconfig.enable = true;
 
+    # TODO move SSH into dedicated module
     programs = {
       gpg.enable = true;
       home-manager.enable = true;
       password-store.enable = true;
-      ssh.enable = true;
+      ssh = {
+        enable = true;
+        matchBlocks = {
+          "sync" = {
+            host = "sync";
+            hostname = "157.90.159.76";
+            user = "kenran";
+            compression = true;
+          };
+        };
+      };
     };
 
     xdg.configFile = {

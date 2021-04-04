@@ -105,10 +105,8 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     services.muchsync = mkIf (!cfg.isSyncServer) {
       remotes.syncRoot = {
-        remote.host = "157.90.159.76";
-        # TODO pass Paln's username
-        sshCommand = "ssh -l kenran -CTaxq";
-        frequency = "*:0/2"; # every 2 minutes
+        remote.host = "sync";
+        frequency = "*:0/5";
       };
     };
   };
