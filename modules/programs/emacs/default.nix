@@ -48,6 +48,7 @@ in {
             yaml-mode
 
             # Themes
+            color-theme-modern
             modus-themes
             doom-themes
 

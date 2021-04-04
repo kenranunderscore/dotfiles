@@ -118,19 +118,27 @@ quickly close them with =q=.
 *** Theme(s)
 
 Since I cannot ever decide which theme I like best, there are a few
-themes installed in my nix configuration:
-- [[https://protesilaos.com/modus-themes/][Modus Vivendi by Protesilaos Stavrou]]
-- [[https://github.com/hlissner/emacs-doom-themes][doom-themes]]
+themes, or collections thereof, installed in my nix configuration:
+
++ [[https://protesilaos.com/modus-themes/][Modus Vivendi by Protesilaos Stavrou]]
++ [[https://github.com/hlissner/emacs-doom-themes][doom-themes]]
++ [[https://github.com/emacs-jp/replace-colorthemes][color-theme-modern]]
 
 #+begin_src emacs-lisp
 
-  ;; (use-package modus-vivendi-theme
-  ;;   :ensure nil
-  ;;   :config (load-theme 'modus-vivendi t))
-
-  (use-package doom-themes
+  (use-package modus-vivendi-theme
     :ensure nil
-    :config (load-theme 'doom-sourcerer t))
+    :config (load-theme 'modus-vivendi t))
+
+  ;; (use-package doom-themes
+  ;;   :ensure nil
+  ;;   :config (load-theme 'doom-sourcerer t))
+
+  ;; (use-package color-theme-modern
+  ;;   :ensure nil
+  ;;   :config
+  ;;   (load-theme 'taming-mr-arneson t t)
+  ;;   (enable-theme 'taming-mr-arneson))
 
 #+end_src
 
