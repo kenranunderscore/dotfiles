@@ -29,7 +29,6 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
     };
   };
 
-  # TODO services.muchsync
   # TODO notmuch configuration
   # TODO afew?
 
@@ -96,11 +95,18 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       [ muchsync ] ++ lib.optionals (!cfg.isSyncServer) [ notmuch ];
 
     programs.notmuch = {
-      enable = cfg.isSyncServer;
+      enable = true;
       # FIXME parameterize this, or at least use existing vars
-      hooks = {
+      hooks = mkIf cfg.isSyncServer {
         preNew =
           "PASSWORD_STORE_DIR=/home/kenran/.local/share/password-store mbsync --all";
+      };
+    };
+
+    services.muchsync = mkIf (!cfg.isSyncServer) {
+      remotes.syncRoot = {
+        remote.host = "157.90.159.76";
+        frequency = "*:0/2"; # every 2 minutes
       };
     };
   };
