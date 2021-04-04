@@ -29,6 +29,10 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
     };
   };
 
+  # TODO services.muchsync
+  # TODO notmuch configuration
+  # TODO afew?
+
   config = mkIf cfg.enable {
     # TODO enable pass and automatically prompt for mail address entries
     accounts.email = {
@@ -89,7 +93,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
     };
 
     home.packages = with pkgs;
-      [ muchsync ] ++ (if cfg.isSyncServer then [ ] else [ notmuch ]);
+      [ muchsync ] ++ lib.optionals (!cfg.isSyncServer) [ notmuch ];
 
     programs.notmuch = {
       enable = cfg.isSyncServer;
@@ -99,8 +103,5 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           "PASSWORD_STORE_DIR=/home/kenran/.local/share/password-store mbsync --all";
       };
     };
-
-    # TODO services.muchsync
-    # TODO notmuch configuration
   };
 }
