@@ -59,13 +59,11 @@ in rec {
   home.packages = with pkgs; [
     dhall
     feh
-    htop
     keepass
     keepassx
     kittyWrapped
     leiningen
     linphone
-    manpages
     mercurial
     subversion
     xorg.xkbcomp

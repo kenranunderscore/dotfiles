@@ -117,7 +117,9 @@ in {
         fd
         gcc
         gnumake
+        htop
         lorri
+        manpages
         mercurial
         nixfmt
         nix-index
