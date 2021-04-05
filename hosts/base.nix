@@ -29,10 +29,7 @@ in {
     modules = {
       email.enable = true;
       programs = {
-        doomEmacs = {
-          enable = true;
-          emacsVersion = "gcc";
-        };
+        emacs.enable = true;
         irssi.enable = true;
         kitty = {
           enable = true;
