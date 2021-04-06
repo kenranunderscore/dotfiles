@@ -388,6 +388,15 @@ try out eglot.
 
 #+end_src
 
+**** Clojure (clojure-mode)
+
+#+begin_src emacs-lisp
+
+  (use-package clojure-mode
+    :ensure nil)
+
+#+end_src
+
 *** Emacs as email client (notmuch)
 
 I've tried and used mu4e in the past, but always liked the idea of

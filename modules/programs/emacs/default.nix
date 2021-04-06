@@ -37,6 +37,7 @@ in {
             use-package
 
             # Language-specific
+            clojure-mode
             dhall-mode
             dockerfile-mode
             haskell-mode
