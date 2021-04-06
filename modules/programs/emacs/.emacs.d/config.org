@@ -680,6 +680,19 @@ colorful.
 
 #+end_src
 
+*** Better, faster grepping (ripgrep)
+
+I've gotten used to [[https://github.com/BurntSushi/ripgrep][ripgrep (rg)]] for lightning-fast recursive
+searches/grepping over basically anything. This includes using the
+projectile integration to quickly grep over all of a project's files.
+
+#+begin_src emacs-lisp
+
+  (use-package ripgrep
+    :ensure nil)
+
+#+end_src
+
 ** Reduce GC threshold again
 
 #+begin_src emacs-lisp

@@ -63,6 +63,7 @@ in {
             hl-todo
             marginalia
             notmuch
+            ripgrep
             switch-window
             which-key
           ]);
