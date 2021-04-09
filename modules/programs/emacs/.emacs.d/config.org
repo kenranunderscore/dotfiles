@@ -424,6 +424,44 @@ syncthing setup to sync my tag database.
 
 #+end_src
 
+To switch identities (which I basically only use to set my work
+signature based on my From address), I use gnus-alias.
+
+#+begin_src emacs-lisp
+
+  (use-package gnus-alias
+    :ensure nil
+    :config
+    (setq gnus-alias-identity-alist
+          `(("mailbox"
+             nil
+             "Johannes Maier <johannes.maier@mailbox.org>"
+             nil
+             nil
+             nil
+             nil)
+            ("ag"
+             nil
+             "Johannes Maier <johannes.maier@active-group.de>"
+             "Active Group GmbH"
+             nil
+             nil
+             ,(concat "Johannes Maier\n"
+                      "johannes.maier@active-group.de\n\n"
+                      "+49 (7071) 70896-67\n\n"
+                      "Active Group GmbH\n"
+                      "Hechinger Str. 12/1\n"
+                      "72072 Tübingen\n"
+                      "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+                      "Geschäftsführer: Dr. Michael Sperber"))))
+    (setq gnus-alias-default-identity "mailbox")
+    (setq gnus-alias-identity-rules
+          '(("ag" ("any" "@active-group.de" both) "ag")))
+    :init
+    (add-hook 'message-setup-hook 'gnus-alias-determine-identity))
+
+#+end_src
+
 **** TODO email todos [0/4]
 - [ ] document config
 - [ ] try on non-NixOS machine (msmtp working?)

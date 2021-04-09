@@ -61,6 +61,7 @@ in {
             diminish
             diredfl
             envrc
+            gnus-alias
             helpful
             hl-todo
             marginalia
