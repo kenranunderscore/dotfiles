@@ -29,6 +29,7 @@ in {
           with epkgs.melpaPackages; [
             # Essential
             company
+            consult
             magit
             orderless
             projectile

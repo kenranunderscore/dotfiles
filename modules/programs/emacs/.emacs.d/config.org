@@ -559,6 +559,57 @@ initialism, the second as regexp, and so forth.
 
 #+end_src
 
+*** Completing-read improvements (consult)
+
+The [[https://github.com/minad/consult][consult]] package is the analogue of counsel, which I used for quite
+some time, though not in any extent close to full. This defines some
+basic bindings mostly taken from an example in its readme.
+
+#+begin_src emacs-lisp
+
+  (use-package consult
+    :ensure nil
+    :bind (;; C-x bindings
+           ("C-x b" . consult-buffer)                ;; was switch-to-buffer
+           ("C-x 4 b" . consult-buffer-other-window) ;; was switch-to-buffer-other-window
+           ("C-x 5 b" . consult-buffer-other-frame)  ;; was switch-to-buffer-other-frame
+           ;; C-h bindings (help)
+           ("C-h a" . consult-apropos)
+           ;; M-g bindings (goto)
+           ("M-g e" . consult-compile-error)
+           ("M-g g" . consult-goto-line)
+           ("M-g M-g" . consult-goto-line)           ;; easier to type
+           ("M-g o" . consult-outline)
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+           ("M-g i" . consult-imenu)
+           ("M-g I" . consult-project-imenu)
+           ;; M-s bindings (search)
+           ("M-s f" . consult-find)
+           ("M-s L" . consult-locate)
+           ("M-s g" . consult-grep)
+           ("M-s G" . consult-git-grep)
+           ("M-s r" . consult-ripgrep)
+           ("M-s l" . consult-line)
+           ("M-s m" . consult-multi-occur)
+           ("M-s k" . consult-keep-lines)
+           ("M-s u" . consult-focus-lines)
+           :map isearch-mode-map
+           ("M-e" . consult-isearch)))
+  ;; TODO other isearch integration?
+  ;; TODO :init narrowing, preview delay, project root
+
+#+end_src
+
+**** TODO check out more of consult's commands [0/7]
++ [ ] consult-register/-load/-store ?
++ [ ] consult-history
++ [ ] consult-mode-command
++ [ ] consult-kmacro
++ [ ] consult-bookmark
++ [ ] consult-complex-command
++ [ ] consult-yank-pop
+
 *** Completion framework (company)
 
 I use [[https://company-mode.github.io/][company-mode]] for (global) auto-completion.
