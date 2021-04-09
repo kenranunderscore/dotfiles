@@ -143,6 +143,7 @@ in {
         cascadia-code
         fira-code
         hermit
+        ibm-plex
         inconsolata
         jetbrains-mono
         ubuntu_font_family
