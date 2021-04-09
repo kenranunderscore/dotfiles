@@ -54,6 +54,7 @@ in rec {
       enable = true;
       enableSshSupport = true;
     };
+    syncthing.enable = true;
   };
 
   home.packages = with pkgs; [
