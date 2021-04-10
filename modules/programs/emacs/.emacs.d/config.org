@@ -1,24 +1,15 @@
 * TODOs
 ** General [0/14]
-- [ ] embark?
-- [ ] mu4e/notmuch
-- [ ] dired+
+- [ ] embark!
 - [ ] lsp
-- [ ] ripgrep
 - [ ] magit-todos
 - [ ] pass
 - [ ] doom-modeline?
 - [ ] windows/avy?
 - [ ] format on save
 - [ ] delayed init with new emacs version?
-- [ ] snippets, for instance for org src blocks
 - [ ] hydra for certain keymaps
 - [ ] flycheck
-
-** Languages [0/3]
-- [ ] more org
-- [ ] haskell
-- [ ] data formats (json, yaml, csv, ...)
 
 * Config
 ** Increase GC threshold
