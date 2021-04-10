@@ -264,7 +264,8 @@ After loading org-mode, we then run our custom font setup.
     :custom ((org-startup-indented t)
              (org-startup-folded 'content)
              (org-directory "~/org")
-             (org-log-done t))
+             (org-log-done t)
+             (org-agenda-files '("~/org")))
     :config
     (setq org-src-tab-acts-natively t
           org-ellipsis " ▾")
