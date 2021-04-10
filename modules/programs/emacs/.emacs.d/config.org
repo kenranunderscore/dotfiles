@@ -569,6 +569,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 #+end_src
 
 *** Incremental narrowing/completion UI in Emacs (selectrum & orderless)
+**** Selectrum
 
 I started with =helm= in Spacemacs, then later switched to Doom Emacs
 where after a while I tried out =ivy= and loved it. Now I want to try
@@ -583,17 +584,58 @@ out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]]
 
 #+end_src
 
+**** Orderless
+
 [[https://github.com/oantolin/orderless][orderless]] is a completion style that fits in very well with
-=selectrum=. I still have to learn how to specify/request different
-types of completion in a query, like matching the first word as
-initialism, the second as regexp, and so forth.
+=selectrum=. Parts of a search string may match according to several
+matching styles. We want to be able to specify which matching style to
+use by appending a suffix so a search string. Therefore we define
+/style dispatchers/ and use them to customize
+=orderless-style-dispatchers=.
+
+Appending a === to a search term will search for literal matches of
+the preceding string.
+
+#+begin_src emacs-lisp
+
+  (defun my/literal-if-= (pattern _index _total)
+    (when (string-suffix-p "=" pattern)
+      `(orderless-literal . ,(substring pattern 0 -1))))
+
+#+end_src
+
+An appended =!= discards everything that matches the preceding literal
+string.
+
+#+begin_src emacs-lisp
+
+  (defun my/without-if-! (pattern _index _total)
+    (when (string-suffix-p "!" pattern)
+      `(orderless-without-literal . ,(substring pattern 0 -1))))
+
+#+end_src
+
+The =~= sign gives me a way to have "fuzzy" search, if needed.
+
+#+begin_src emacs-lisp
+
+  (defun my/flex-if-~ (pattern _index _total)
+    (when (string-suffix-p "~" pattern)
+      `(orderless-flex . ,(substring pattern 0 -1))))
+
+#+end_src
+
+Load the package lazily and use the custom style dispatchers.
 
 #+begin_src emacs-lisp
 
   (use-package orderless
     :ensure nil
-    ;; TODO customize?
-    :custom (completion-styles '(orderless)))
+    :custom (completion-styles '(orderless))
+    (orderless-style-dispatchers
+     '(my/literal-if-=
+       my/without-if-!
+       my/flex-if-~)))
 
 #+end_src
 
