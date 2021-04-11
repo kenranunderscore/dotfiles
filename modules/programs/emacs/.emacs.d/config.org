@@ -251,8 +251,6 @@ When writing text in org-mode, auto-fill-mode should be enable to
 automatically break overly long lines into smaller pieces when
 typing. We may still use =M-q= to re-fill paragraph when editing text.
 
-In code blocks, =TAB= should be usable to re-indent/-format code.
-
 After loading org-mode, we then run our custom font setup.
 
 #+begin_src emacs-lisp
@@ -262,13 +260,18 @@ After loading org-mode, we then run our custom font setup.
     :hook ((org-mode . variable-pitch-mode)
            (org-mode . auto-fill-mode))
     :custom ((org-startup-indented t)
+             (org-ellipsis " ▾")
              (org-startup-folded 'content)
              (org-directory "~/org")
              (org-log-done t)
-             (org-agenda-files '("~/org")))
+             (org-default-notes-file "~/org/notes.org")
+             (org-agenda-files '("~/org/inbox.org"
+                                 "~/org/gtd.org"
+                                 "~/org/someday.org"))
+             (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
+                                   ("~/org/someday.org" :level . 1)))
+             (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))))
     :config
-    (setq org-src-tab-acts-natively t
-          org-ellipsis " ▾")
     (my/setup-org-fonts))
 
 #+end_src
