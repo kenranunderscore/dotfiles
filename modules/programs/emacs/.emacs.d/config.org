@@ -269,7 +269,20 @@ After loading org-mode, we then run our custom font setup.
                                  "~/org/someday.org"))
              (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
                                    ("~/org/someday.org" :level . 1)))
-             (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))))
+             (org-capture-templates '(("t" "Todo" entry
+                                       (file+headline "~/org/inbox.org" "Tasks")
+                                       "* TODO %i%?")
+                                      ("n" "Note" entry
+                                       (file+headline "~/org/notes.org" "Notes")
+                                       "* %?\n%a\nNote taken on %U")))
+             (org-todo-keywords '((sequence
+                                   "TODO(t)"
+                                   "WAITING(w)"
+                                   "|"
+                                   "DONE(d)"
+                                   "CANCELLED(c)"))))
+    :bind (("C-c c" . org-capture)
+           ("C-c l" . org-store-link))
     :config
     (my/setup-org-fonts))
 
