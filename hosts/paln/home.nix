@@ -16,6 +16,11 @@ in {
         bash.enable = true;
         fish.enable = true;
         git.enable = true;
+        pass = {
+          enable = true;
+          # FIXME customize GPG key in "user environment" module
+          gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
+        };
         tmux = {
           enable = true;
           shellPath = "${pkgs.fish}/bin/fish";
@@ -27,7 +32,6 @@ in {
       gpg.enable = true;
       home-manager.enable = true;
       mbsync.enable = true;
-      password-store.enable = true;
       ssh.enable = true;
     };
 

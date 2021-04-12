@@ -38,7 +38,7 @@ in {
         irssi.enable = true;
         kitty = {
           enable = true;
-          shellPath = cfg.shellPath;
+          inherit (cfg) shellPath;
         };
         neovim.enable = true;
         qutebrowser.enable = true;
@@ -50,11 +50,15 @@ in {
         fish.enable = true;
         git = {
           enable = true;
-          gpgKey = cfg.gpgKey;
+          inherit (cfg) gpgKey;
+        };
+        pass = {
+          enable = true;
+          inherit (cfg) gpgKey;
         };
         tmux = {
           enable = true;
-          shellPath = cfg.shellPath;
+          inherit (cfg) shellPath;
         };
         zsh.enable = true;
       };
@@ -66,16 +70,6 @@ in {
     programs = {
       gpg.enable = true;
       home-manager.enable = true;
-      password-store = {
-        enable = true;
-        package = pkgs.pass.withExtensions (e: [ e.pass-import ]);
-        settings = {
-          PASSWORD_STORE_DIR = "~/.password-store";
-          PASSWORD_STORE_CLIP_TIME = "30";
-          PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
-          PASSWORD_STORE_KEY = cfg.gpgKey;
-        };
-      };
       ssh = {
         enable = true;
         matchBlocks = {
