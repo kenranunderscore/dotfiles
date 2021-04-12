@@ -1,16 +1,3 @@
-* TODOs
-** General [0/14]
-- [ ] embark!
-- [ ] lsp
-- [ ] magit-todos
-- [ ] pass
-- [ ] doom-modeline?
-- [ ] windows/avy?
-- [ ] format on save
-- [ ] delayed init with new emacs version?
-- [ ] hydra for certain keymaps
-- [ ] flycheck
-
 * Config
 ** Increase GC threshold
 
@@ -469,12 +456,6 @@ signature based on my From address), I use gnus-alias.
     (add-hook 'message-setup-hook 'gnus-alias-determine-identity))
 
 #+end_src
-
-**** TODO email todos [0/4]
-- [ ] document config
-- [ ] try on non-NixOS machine (msmtp working?)
-- [ ] how to integrate muchsync
-- [ ] configure muchsync server IP (pass?)
 
 *** Hide modes in the mode line (diminish)
 
