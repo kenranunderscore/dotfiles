@@ -263,6 +263,7 @@ After loading org-mode, we then run our custom font setup.
              (org-startup-folded 'content)
              (org-directory "~/org")
              (org-log-done t)
+             (org-special-ctrl-a/e t)
              (org-default-notes-file "~/org/notes.org")
              (org-agenda-files '("~/org/inbox.org"
                                  "~/org/gtd.org"
