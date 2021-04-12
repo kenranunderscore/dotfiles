@@ -49,6 +49,8 @@
     };
   };
 
+  programs.ssh.startAgent = true;
+
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
