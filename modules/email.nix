@@ -96,9 +96,8 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     programs.notmuch = {
       enable = true;
-      # FIXME parameterize this, or at least use existing vars
       hooks = mkIf cfg.isSyncServer {
-        preNew = "PASSWORD_STORE_DIR=/home/kenran/.password-store mbsync --all";
+        preNew = "mbsync --all";
       };
     };
 
