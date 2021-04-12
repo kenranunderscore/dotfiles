@@ -6,6 +6,7 @@
     username = "kenran";
     privateDir = ../../private/linux;
     shellPath = "${pkgs.fish}/bin/fish";
+    gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
   };
 
   modules = {
@@ -24,12 +25,7 @@
         fontSize = "12.0";
       };
     };
-    shell = {
-      git = {
-        email = "johb.maier@gmail.com";
-        gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
-      };
-    };
+    shell = { git.email = "johb.maier@gmail.com"; };
   };
 
   programs = {

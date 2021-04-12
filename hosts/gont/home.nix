@@ -16,6 +16,7 @@ in rec {
     username = "johannes";
     privateDir = ../../private/linux;
     shellPath = "${pkgs.fish}/bin/fish";
+    gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
   };
 
   modules = {
