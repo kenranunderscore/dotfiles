@@ -350,7 +350,8 @@ try out eglot.
   (use-package haskell-mode
     :ensure nil
     :custom
-    (haskell-process-type 'cabal-repl))
+    (haskell-process-type 'cabal-repl)
+    :hook (haskell-mode . interactive-haskell-mode))
 
 #+end_src
 
