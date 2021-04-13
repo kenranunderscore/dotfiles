@@ -244,7 +244,8 @@ After loading org-mode, we then run our custom font setup.
   (use-package org
     :ensure nil
     :hook ((org-mode . variable-pitch-mode)
-           (org-mode . auto-fill-mode))
+           (org-mode . auto-fill-mode)
+           (org-trigger . save-buffer))
     :custom ((org-startup-indented t)
              (org-ellipsis " ▾")
              (org-startup-folded 'content)
