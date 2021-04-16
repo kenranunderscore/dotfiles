@@ -14,9 +14,9 @@ in rec {
 
   hosts.base = {
     username = "johannes";
-    privateDir = ../../private/linux;
+    privateDir = ../../private/gont;
     shellPath = "${pkgs.fish}/bin/fish";
-    gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
+    gpgKey = "DDB27C847E768551";
   };
 
   modules = {
