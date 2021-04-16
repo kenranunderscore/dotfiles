@@ -23,9 +23,16 @@ in {
       };
 
       packages = let
-        #emacsWithPackages =
-        #(pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages;
-        myEmacs = pkgs.emacsWithPackages (epkgs:
+        targetEmacs = if cfg.emacsVersion == "gcc" then
+          pkgs.emacsGcc
+        else
+          (if cfg.emacsVersion == "stable" then
+            pkgs.emacs
+          else
+            pkgs.emacsUnstable);
+        emacsWithPackages =
+          (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
+        myEmacs = emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
             # Essential
             company
@@ -75,7 +82,7 @@ in {
     };
 
     nixpkgs.overlays = let
-      rev = "e35ed9bf10b46e533e52add965926d00122c0620";
+      rev = "119b923e4da2b716e46dce7aeade32576a282427";
       emacsOverlay = (import (builtins.fetchTarball {
         url =
           "https://github.com/nix-community/emacs-overlay/archive/${rev}.tar.gz";
