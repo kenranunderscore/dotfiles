@@ -39,6 +39,7 @@ in {
 
             # Language-specific
             clojure-mode
+            epkgs.csv-mode
             dhall-mode
             dockerfile-mode
             haskell-mode

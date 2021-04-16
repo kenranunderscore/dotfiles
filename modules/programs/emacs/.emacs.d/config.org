@@ -394,6 +394,15 @@ try out eglot.
 
 #+end_src
 
+**** CSV files (csv-mode)
+
+#+begin_src emacs-lisp
+
+  (use-package csv-mode
+    :ensure nil)
+
+#+end_src
+
 *** Emacs as email client (notmuch)
 
 I've tried and used mu4e in the past, but always liked the idea of
