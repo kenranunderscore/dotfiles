@@ -68,6 +68,7 @@ in {
             all-the-icons-ibuffer
             diminish
             diredfl
+            eglot
             envrc
             gnus-alias
             helpful

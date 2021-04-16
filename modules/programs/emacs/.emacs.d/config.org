@@ -403,6 +403,21 @@ try out eglot.
 
 #+end_src
 
+**** LSP client (eglot)
+
+I've used =lsp-mode= in the past and while it's nice, I feel like it's
+more in line with the rest of this configuration to try out something
+more lightweight and closer to vanilla Emacs. This is where [[https://github.com/joaotavora/eglot][eglot]]
+comes into play.
+
+#+begin_src emacs-lisp
+
+  (use-package eglot
+    :ensure nil
+    :hook (haskell-mode . eglot-ensure))
+
+#+end_src
+
 *** Emacs as email client (notmuch)
 
 I've tried and used mu4e in the past, but always liked the idea of
