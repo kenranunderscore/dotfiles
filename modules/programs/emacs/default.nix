@@ -59,7 +59,7 @@ in {
 
             # Themes
             color-theme-modern
-            modus-themes
+            epkgs.elpaPackages.modus-themes
             doom-themes
 
             # Utility
