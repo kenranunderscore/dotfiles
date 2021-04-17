@@ -15,7 +15,7 @@ long when working within Emacs.
 #+end_src
 
 ** General settings
-*** Load use-package
+*** Use-package
 
 When using byte-compiled config files, which I do, then loading
 use-package before using it is required.
@@ -23,6 +23,26 @@ use-package before using it is required.
 #+begin_src emacs-lisp
 
 (require 'use-package)
+
+#+end_src
+
+Since I use [[https://github.com/nix-community/home-manager][home-manager]] to manage my dotfiles, user environment and
+in particular Emacs (including packages) I have the guarantee that
+those packages are coming from Nix instead of having to be
+downloaded. This is why I usually specify =:ensure nil= in my
+=use-package= calls.
+
+Maybe this is bad, but I'm sticking with it for now. Hence this little
+macro comes in handy:
+
+#+begin_src emacs-lisp
+
+(defmacro use-package! (package-name &rest args)
+  "Like use-package but prepends :ensure nil."
+  (declare (indent defun))
+  `(use-package ,package-name
+     :ensure nil
+     ,@args))
 
 #+end_src
 
@@ -104,16 +124,13 @@ themes, or collections thereof, installed in my nix configuration:
 
 #+begin_src emacs-lisp
 
-(use-package modus-vivendi-theme
-  :ensure nil
+(use-package! modus-vivendi-theme
   :config (load-theme 'modus-vivendi t))
 
-;; (use-package doom-themes
-;;   :ensure nil
+;; (use-package! doom-themes
 ;;   :config (load-theme 'doom-sourcerer t))
 
-;; (use-package color-theme-modern
-;;   :ensure nil
+;; (use-package! color-theme-modern
 ;;   :config
 ;;   (load-theme 'taming-mr-arneson t t)
 ;;   (enable-theme 'taming-mr-arneson))
@@ -151,8 +168,7 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-(use-package display-line-numbers
-  :ensure nil
+(use-package! display-line-numbers
   :hook ((prog-mode . display-line-numbers-mode))
   (conf-mode . display-line-numbers-mode))
 
@@ -197,8 +213,7 @@ Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/in
 
 #+begin_src emacs-lisp
 
-(use-package nix-mode
-  :ensure nil
+(use-package! nix-mode
   :mode "\\.nix\\'")
 
 #+end_src
@@ -210,8 +225,7 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
 
 #+begin_src emacs-lisp
 
-(use-package markdown-mode
-  :ensure nil
+(use-package! markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -246,8 +260,7 @@ seems necessary to do it like this.
 
 #+begin_src emacs-lisp
 
-(use-package org-indent
-  :ensure nil
+(use-package! org-indent
   :diminish org-indent-mode)
 
 (with-eval-after-load 'org-indent
@@ -263,8 +276,7 @@ After loading org-mode, we then run our custom font setup.
 
 #+begin_src emacs-lisp
 
-(use-package org
-  :ensure nil
+(use-package! org
   :hook ((org-mode . variable-pitch-mode)
          (org-mode . auto-fill-mode)
          (org-trigger . save-buffer))
@@ -307,8 +319,7 @@ bullet points in org headers.
 
 #+begin_src emacs-lisp
 
-(use-package org-bullets
-  :ensure nil
+(use-package! org-bullets
   :hook (org-mode . org-bullets-mode)
   :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
@@ -349,9 +360,8 @@ For short presentations, [[https://github.com/rlister/org-present][org-present]]
 
 #+begin_src emacs-lisp
 
-  (use-package org-present
-    :ensure nil
-    :hook ((org-present-mode . (lambda ()
+  (use-package! org-present
+      :hook ((org-present-mode . (lambda ()
                                  (org-present-big)
                                  (org-display-inline-images)
                                  (org-present-hide-cursor)
@@ -372,8 +382,7 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-(use-package haskell-mode
-  :ensure nil
+(use-package! haskell-mode
   :custom
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
@@ -384,8 +393,7 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-(use-package dhall-mode
-  :ensure nil
+(use-package! dhall-mode
   :mode "\\.dhall\\'")
 
 #+end_src
@@ -394,8 +402,7 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-(use-package dockerfile-mode
-  :ensure nil)
+(use-package! dockerfile-mode)
 
 #+end_src
 
@@ -405,8 +412,7 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-(use-package yaml-mode
-  :ensure nil)
+(use-package! yaml-mode)
 
 #+end_src
 
@@ -414,8 +420,7 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-(use-package clojure-mode
-  :ensure nil)
+(use-package! clojure-mode)
 
 #+end_src
 
@@ -423,8 +428,7 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-(use-package csv-mode
-  :ensure nil)
+(use-package! csv-mode)
 
 #+end_src
 
@@ -437,8 +441,7 @@ comes into play.
 
 #+begin_src emacs-lisp
 
-(use-package eglot
-  :ensure nil
+(use-package! eglot
   :hook (haskell-mode . eglot-ensure))
 
 #+end_src
@@ -453,8 +456,7 @@ syncthing setup to sync my tag database.
 
 (setq user-full-name "Johannes Maier")
 
-(use-package notmuch
-  :ensure nil
+(use-package! notmuch
   :defer t
   :config
   (setq user-mail-address "johannes.maier@mailbox.org")
@@ -475,8 +477,7 @@ signature based on my From address), I use gnus-alias.
 
 #+begin_src emacs-lisp
 
-(use-package gnus-alias
-  :ensure nil
+(use-package! gnus-alias
   :config
   (setq gnus-alias-identity-alist
         `(("mailbox"
@@ -517,8 +518,7 @@ the =:diminish= keyword.
 
 #+begin_src emacs-lisp
 
-(use-package diminish
-  :ensure nil)
+(use-package! diminish)
 
 #+end_src
 
@@ -529,8 +529,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-(use-package helpful
-  :ensure nil
+(use-package! helpful
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)))
@@ -541,8 +540,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-(use-package projectile
-  :ensure nil
+(use-package! projectile
   :init
   (projectile-mode +1)
   :bind-keymap ("C-x p" . projectile-command-map))
@@ -555,8 +553,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-(use-package magit
-  :ensure nil)
+(use-package! magit)
 
 #+end_src
 
@@ -566,8 +563,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-(use-package smartparens
-  :ensure nil
+(use-package! smartparens
   :diminish smartparens-mode
   :config
   (sp-pair "'" nil :actions nil)
@@ -616,8 +612,7 @@ out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]]
 
 #+begin_src emacs-lisp
 
-(use-package selectrum
-  :ensure nil
+(use-package! selectrum
   :init
   (selectrum-mode +1))
 
@@ -668,8 +663,7 @@ Load the package lazily and use the custom style dispatchers.
 
 #+begin_src emacs-lisp
 
-(use-package orderless
-  :ensure nil
+(use-package! orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
    '(my/literal-if-=
@@ -686,8 +680,7 @@ basic bindings mostly taken from an example in its readme.
 
 #+begin_src emacs-lisp
 
-(use-package consult
-  :ensure nil
+(use-package! consult
   :bind (;; C-x bindings
          ("C-x b" . consult-buffer)                ;; was switch-to-buffer
          ("C-x 4 b" . consult-buffer-other-window) ;; was switch-to-buffer-other-window
@@ -735,8 +728,7 @@ I use [[https://company-mode.github.io/][company-mode]] for (global) auto-comple
 
 #+begin_src emacs-lisp
 
-(use-package company
-  :ensure nil
+(use-package! company
   :diminish company-mode
   :init
   (add-hook 'after-init-hook 'global-company-mode))
@@ -749,8 +741,7 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+begin_src emacs-lisp
 
-(use-package hl-todo
-  :ensure nil
+(use-package! hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
 
@@ -763,8 +754,7 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+begin_src emacs-lisp
 
-(use-package switch-window
-  :ensure nil)
+(use-package! switch-window)
 
 #+end_src
 
@@ -775,8 +765,7 @@ displays the possible completions and associated functions.
 
 #+begin_src emacs-lisp
 
-(use-package which-key
-  :ensure nil
+(use-package! which-key
   :custom
   (which-key-idle-delay 0.5)
   :diminish which-key-mode
@@ -792,16 +781,13 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 
 #+begin_src emacs-lisp
 
-(use-package all-the-icons
-  :ensure nil)
+(use-package! all-the-icons)
 
-(use-package all-the-icons-dired
-  :ensure nil
+(use-package! all-the-icons-dired
   :init
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
 
-(use-package all-the-icons-ibuffer
-  :ensure nil
+(use-package! all-the-icons-ibuffer
   :init
   (all-the-icons-ibuffer-mode 1))
 
@@ -815,7 +801,7 @@ sizes and permissions in "C-x C-f", and much more.
 
 #+begin_src emacs-lisp
 
-(use-package marginalia
+(use-package! marginalia
   :init
   (marginalia-mode)
   (advice-add #'marginalia-cycle :after
@@ -838,8 +824,7 @@ ensure direnv integration is working as expected.
 
 #+begin_src emacs-lisp
 
-(use-package envrc
-  :ensure nil
+(use-package! envrc
   :init (envrc-global-mode))
 
 #+end_src
@@ -853,16 +838,13 @@ the =use-package= calls.
 
 #+begin_src emacs-lisp
 
-(use-package face-remap
-  :ensure nil
+(use-package! face-remap
   :diminish buffer-face-mode)
 
-(use-package autorevert
-  :ensure nil
+(use-package! autorevert
   :diminish auto-revert-mode)
 
-(use-package simple
-  :ensure nil
+(use-package! simple
   :diminish auto-fill-function)
 
 #+end_src
@@ -876,8 +858,7 @@ colorful.
 
 #+begin_src emacs-lisp
 
-(use-package diredfl
-  :ensure nil
+(use-package! diredfl
   :hook (dired-mode . diredfl-mode))
 
 #+end_src
@@ -890,8 +871,7 @@ projectile integration to quickly grep over all of a project's files.
 
 #+begin_src emacs-lisp
 
-(use-package ripgrep
-  :ensure nil)
+(use-package! ripgrep)
 
 #+end_src
 
