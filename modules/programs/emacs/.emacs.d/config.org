@@ -181,6 +181,14 @@ warnings for native compilation entirely like this:
 
 #+end_src
 
+*** Use spaces for indentation by default
+
+#+begin_src emacs-lisp
+
+(setq-default indent-tabs-mode nil)
+
+#+end_src
+
 ** Package-specific configuration
 *** Language-specific modes
 **** Nix (nix-mode)
