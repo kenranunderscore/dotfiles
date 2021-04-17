@@ -167,6 +167,20 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+end_src
 
+*** Hide warnings from asynchronous native compilation
+
+When using the =native-comp= branch that is soon to be merged into the
+main Emacs branch a lot of warnings show up during startup and
+changing modes. We could increase the minimum severity for logs to be
+shown by setting =warning-minimum-level= to =:error= or disable the
+warnings for native compilation entirely like this:
+
+#+begin_src emacs-lisp
+
+  (setq comp-async-report-warnings-errors nil)
+
+#+end_src
+
 ** Package-specific configuration
 *** Language-specific modes
 **** Nix (nix-mode)
