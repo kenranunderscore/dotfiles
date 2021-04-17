@@ -10,7 +10,7 @@ long when working within Emacs.
 
 #+begin_src emacs-lisp
 
-  (setq gc-cons-threshold (* 100 1000 1000))
+(setq gc-cons-threshold (* 100 1000 1000))
 
 #+end_src
 
@@ -22,7 +22,7 @@ use-package before using it is required.
 
 #+begin_src emacs-lisp
 
-  (require 'use-package)
+(require 'use-package)
 
 #+end_src
 
@@ -32,8 +32,8 @@ We do not want to append it to our =init.el=.
 
 #+begin_src emacs-lisp
 
-  (setq custom-file (concat user-emacs-directory "custom.el"))
-  (load custom-file 'no-error)
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file 'no-error)
 
 #+end_src
 
@@ -45,12 +45,12 @@ want to at least see when I've made things worse.
 
 #+begin_src emacs-lisp
 
-  (add-hook 'emacs-startup-hook
-            (lambda ()
-              (message "Emacs startup took %s with %d garbage collections"
-                       (format "%.2f seconds"
-                               (float-time (time-subtract after-init-time before-init-time)))
-                       gcs-done)))
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs startup took %s with %d garbage collections"
+                     (format "%.2f seconds"
+                             (float-time (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
 
 #+end_src
 
@@ -61,12 +61,12 @@ and others.
 
 #+begin_src emacs-lisp
 
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (tooltip-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tooltip-mode -1)
 
-  (setq inhibit-splash-screen t)
+(setq inhibit-splash-screen t)
 
 #+end_src
 
@@ -77,8 +77,8 @@ theme. Thus we brighten it up a bit.
 
 #+begin_src emacs-lisp
 
-  (set-mouse-color "white")
-  (add-hook 'server-after-make-frame-hook (lambda () (set-mouse-color "white")))
+(set-mouse-color "white")
+(add-hook 'server-after-make-frame-hook (lambda () (set-mouse-color "white")))
 
 #+end_src
 
@@ -89,7 +89,7 @@ quickly close them with =q=.
 
 #+begin_src emacs-lisp
 
-  (setq help-window-select t)
+(setq help-window-select t)
 
 #+end_src
 
@@ -104,19 +104,19 @@ themes, or collections thereof, installed in my nix configuration:
 
 #+begin_src emacs-lisp
 
-  (use-package modus-vivendi-theme
-    :ensure nil
-    :config (load-theme 'modus-vivendi t))
+(use-package modus-vivendi-theme
+  :ensure nil
+  :config (load-theme 'modus-vivendi t))
 
-  ;; (use-package doom-themes
-  ;;   :ensure nil
-  ;;   :config (load-theme 'doom-sourcerer t))
+;; (use-package doom-themes
+;;   :ensure nil
+;;   :config (load-theme 'doom-sourcerer t))
 
-  ;; (use-package color-theme-modern
-  ;;   :ensure nil
-  ;;   :config
-  ;;   (load-theme 'taming-mr-arneson t t)
-  ;;   (enable-theme 'taming-mr-arneson))
+;; (use-package color-theme-modern
+;;   :ensure nil
+;;   :config
+;;   (load-theme 'taming-mr-arneson t t)
+;;   (enable-theme 'taming-mr-arneson))
 
 #+end_src
 
@@ -126,7 +126,7 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-  (fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 #+end_src
 
@@ -134,16 +134,16 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-  (defvar my/monospace-font "IBM Plex Mono")
-  (defvar my/variable-font "Cantarell")
+(defvar my/monospace-font "IBM Plex Mono")
+(defvar my/variable-font "Cantarell")
 
-  (defun my/set-face-attributes ()
-    (set-face-attribute 'default nil :font my/monospace-font :height 130)
-    (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 0.8)
-    (set-face-attribute 'variable-pitch nil :font my/variable-font :height 1.2))
+(defun my/set-face-attributes ()
+  (set-face-attribute 'default nil :font my/monospace-font :height 130)
+  (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 0.8)
+  (set-face-attribute 'variable-pitch nil :font my/variable-font :height 1.2))
 
-  (my/set-face-attributes)
-  (add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
+(my/set-face-attributes)
+(add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
 
 #+end_src
 
@@ -151,10 +151,10 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-  (use-package display-line-numbers
-    :ensure nil
-    :hook ((prog-mode . display-line-numbers-mode))
-    (conf-mode . display-line-numbers-mode))
+(use-package display-line-numbers
+  :ensure nil
+  :hook ((prog-mode . display-line-numbers-mode))
+  (conf-mode . display-line-numbers-mode))
 
 #+end_src
 
@@ -162,8 +162,8 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-  (setq require-final-newline t
-        mode-require-final-newline t)
+(setq require-final-newline t
+      mode-require-final-newline t)
 
 #+end_src
 
@@ -177,7 +177,7 @@ warnings for native compilation entirely like this:
 
 #+begin_src emacs-lisp
 
-  (setq comp-async-report-warnings-errors nil)
+(setq comp-async-report-warnings-errors nil)
 
 #+end_src
 
@@ -189,9 +189,9 @@ Syntax highlighting, completion, and formatting of [[https://nixos.org/guides/in
 
 #+begin_src emacs-lisp
 
-  (use-package nix-mode
-    :ensure nil
-    :mode "\\.nix\\'")
+(use-package nix-mode
+  :ensure nil
+  :mode "\\.nix\\'")
 
 #+end_src
 
@@ -202,12 +202,12 @@ Enable GitHub-flavored markdown mode for =README= files, and regular
 
 #+begin_src emacs-lisp
 
-  (use-package markdown-mode
-    :ensure nil
-    :mode (("README\\.md\\'" . gfm-mode)
-           ("\\.md\\'" . markdown-mode)
-           ("\\.markdown\\'" . markdown-mode))
-    :init (setq markdown-command "pandoc"))
+(use-package markdown-mode
+  :ensure nil
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc"))
 
 #+end_src
 
@@ -219,15 +219,15 @@ fixed-pitch face is what we want to be using.
 
 #+begin_src emacs-lisp
 
-  (defun my/setup-org-fonts ()
-    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch)))
+(defun my/setup-org-fonts ()
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch)))
 
 #+end_src
 
@@ -238,12 +238,12 @@ seems necessary to do it like this.
 
 #+begin_src emacs-lisp
 
-  (use-package org-indent
-    :ensure nil
-    :diminish org-indent-mode)
+(use-package org-indent
+  :ensure nil
+  :diminish org-indent-mode)
 
-  (with-eval-after-load 'org-indent
-    (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
+(with-eval-after-load 'org-indent
+  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
 
 #+end_src
 
@@ -255,39 +255,42 @@ After loading org-mode, we then run our custom font setup.
 
 #+begin_src emacs-lisp
 
-  (use-package org
-    :ensure nil
-    :hook ((org-mode . variable-pitch-mode)
-           (org-mode . auto-fill-mode)
-           (org-trigger . save-buffer))
-    :custom ((org-startup-indented t)
-             (org-ellipsis " ▾")
-             (org-startup-folded 'content)
-             (org-directory "~/org")
-             (org-log-done t)
-             (org-special-ctrl-a/e t)
-             (org-default-notes-file "~/org/notes.org")
-             (org-agenda-files '("~/org/inbox.org"
-                                 "~/org/gtd.org"
-                                 "~/org/someday.org"))
-             (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
-                                   ("~/org/someday.org" :level . 1)))
-             (org-capture-templates '(("t" "Todo" entry
-                                       (file+headline "~/org/inbox.org" "Tasks")
-                                       "* TODO %i%?")
-                                      ("n" "Note" entry
-                                       (file+headline "~/org/notes.org" "Notes")
-                                       "* %?\n%a\nNote taken on %U")))
-             (org-todo-keywords '((sequence
-                                   "TODO(t)"
-                                   "WAITING(w)"
-                                   "|"
-                                   "DONE(d)"
-                                   "CANCELLED(c)"))))
-    :bind (("C-c c" . org-capture)
-           ("C-c l" . org-store-link))
-    :config
-    (my/setup-org-fonts))
+(use-package org
+  :ensure nil
+  :hook ((org-mode . variable-pitch-mode)
+         (org-mode . auto-fill-mode)
+         (org-trigger . save-buffer))
+  :custom ((org-startup-indented t)
+           (org-ellipsis " ▾")
+           (org-startup-folded 'content)
+           (org-directory "~/org")
+           (org-log-done t)
+           (org-special-ctrl-a/e t)
+           ;; If this has a value greater than 0, every RET press
+           ;; keeps indenting the source block further and further.
+           (org-edit-src-content-indentation 0)
+           (org-default-notes-file "~/org/notes.org")
+           (org-agenda-files '("~/org/inbox.org"
+                               "~/org/gtd.org"
+                               "~/org/someday.org"))
+           (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
+                                 ("~/org/someday.org" :level . 1)))
+           (org-capture-templates '(("t" "Todo" entry
+                                     (file+headline "~/org/inbox.org" "Tasks")
+                                     "* TODO %i%?")
+                                    ("n" "Note" entry
+                                     (file+headline "~/org/notes.org" "Notes")
+                                     "* %?\n%a\nNote taken on %U")))
+           (org-todo-keywords '((sequence
+                                 "TODO(t)"
+                                 "WAITING(w)"
+                                 "|"
+                                 "DONE(d)"
+                                 "CANCELLED(c)"))))
+  :bind (("C-c c" . org-capture)
+         ("C-c l" . org-store-link))
+  :config
+  (my/setup-org-fonts))
 
 #+end_src
 
@@ -296,10 +299,10 @@ bullet points in org headers.
 
 #+begin_src emacs-lisp
 
-  (use-package org-bullets
-    :ensure nil
-    :hook (org-mode . org-bullets-mode)
-    :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+(use-package org-bullets
+  :ensure nil
+  :hook (org-mode . org-bullets-mode)
+  :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 #+end_src
 
@@ -307,10 +310,10 @@ Render unordered list bullet points as dots instead of minus/plus.
 
 #+begin_src emacs-lisp
 
-  (font-lock-add-keywords
-   'org-mode
-   '(("^ *\\([-+]\\) "
-      (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ *\\([-+]\\) "
+    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 #+end_src
 
@@ -319,18 +322,18 @@ larger than the default text.
 
 #+begin_src emacs-lisp
 
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.15)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.05)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil
-                        :font my/variable-font
-                        :height (cdr face)
-                        :weight 'regular))
+(dolist (face '((org-level-1 . 1.2)
+                (org-level-2 . 1.15)
+                (org-level-3 . 1.1)
+                (org-level-4 . 1.05)
+                (org-level-5 . 1.0)
+                (org-level-6 . 1.0)
+                (org-level-7 . 1.0)
+                (org-level-8 . 1.0)))
+  (set-face-attribute (car face) nil
+                      :font my/variable-font
+                      :height (cdr face)
+                      :weight 'regular))
 
 #+end_src
 
@@ -361,11 +364,11 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-  (use-package haskell-mode
-    :ensure nil
-    :custom
-    (haskell-process-type 'cabal-repl)
-    :hook (haskell-mode . interactive-haskell-mode))
+(use-package haskell-mode
+  :ensure nil
+  :custom
+  (haskell-process-type 'cabal-repl)
+  :hook (haskell-mode . interactive-haskell-mode))
 
 #+end_src
 
@@ -373,9 +376,9 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-  (use-package dhall-mode
-    :ensure nil
-    :mode "\\.dhall\\'")
+(use-package dhall-mode
+  :ensure nil
+  :mode "\\.dhall\\'")
 
 #+end_src
 
@@ -383,8 +386,8 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-  (use-package dockerfile-mode
-    :ensure nil)
+(use-package dockerfile-mode
+  :ensure nil)
 
 #+end_src
 
@@ -394,8 +397,8 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-  (use-package yaml-mode
-    :ensure nil)
+(use-package yaml-mode
+  :ensure nil)
 
 #+end_src
 
@@ -403,8 +406,8 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-  (use-package clojure-mode
-    :ensure nil)
+(use-package clojure-mode
+  :ensure nil)
 
 #+end_src
 
@@ -412,8 +415,8 @@ try out eglot.
 
 #+begin_src emacs-lisp
 
-  (use-package csv-mode
-    :ensure nil)
+(use-package csv-mode
+  :ensure nil)
 
 #+end_src
 
@@ -426,9 +429,9 @@ comes into play.
 
 #+begin_src emacs-lisp
 
-  (use-package eglot
-    :ensure nil
-    :hook (haskell-mode . eglot-ensure))
+(use-package eglot
+  :ensure nil
+  :hook (haskell-mode . eglot-ensure))
 
 #+end_src
 
@@ -440,22 +443,22 @@ syncthing setup to sync my tag database.
 
 #+begin_src emacs-lisp
 
-  (setq user-full-name "Johannes Maier")
+(setq user-full-name "Johannes Maier")
 
-  (use-package notmuch
-    :ensure nil
-    :defer t
-    :config
-    (setq user-mail-address "johannes.maier@mailbox.org")
-    :custom
-    (message-send-mail-function 'message-send-mail-with-sendmail)
-    (message-kill-buffer-on-exit t)
-    (message-sendmail-envelope-from 'header)
-    (mail-envelope-from 'header)
-    (mail-specify-envelope-from 'header)
-    (mail-user-agent 'message-user-agent)
-    (notmuch-show-all-multipart/alternative-parts nil)
-    (notmuch-always-prompt-for-sender t))
+(use-package notmuch
+  :ensure nil
+  :defer t
+  :config
+  (setq user-mail-address "johannes.maier@mailbox.org")
+  :custom
+  (message-send-mail-function 'message-send-mail-with-sendmail)
+  (message-kill-buffer-on-exit t)
+  (message-sendmail-envelope-from 'header)
+  (mail-envelope-from 'header)
+  (mail-specify-envelope-from 'header)
+  (mail-user-agent 'message-user-agent)
+  (notmuch-show-all-multipart/alternative-parts nil)
+  (notmuch-always-prompt-for-sender t))
 
 #+end_src
 
@@ -464,36 +467,36 @@ signature based on my From address), I use gnus-alias.
 
 #+begin_src emacs-lisp
 
-  (use-package gnus-alias
-    :ensure nil
-    :config
-    (setq gnus-alias-identity-alist
-          `(("mailbox"
-             nil
-             "Johannes Maier <johannes.maier@mailbox.org>"
-             nil
-             nil
-             nil
-             nil)
-            ("ag"
-             nil
-             "Johannes Maier <johannes.maier@active-group.de>"
-             "Active Group GmbH"
-             nil
-             nil
-             ,(concat "Johannes Maier\n"
-                      "johannes.maier@active-group.de\n\n"
-                      "+49 (7071) 70896-67\n\n"
-                      "Active Group GmbH\n"
-                      "Hechinger Str. 12/1\n"
-                      "72072 Tübingen\n"
-                      "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-                      "Geschäftsführer: Dr. Michael Sperber"))))
-    (setq gnus-alias-default-identity "mailbox")
-    (setq gnus-alias-identity-rules
-          '(("ag" ("any" "@active-group.de" both) "ag")))
-    :init
-    (add-hook 'message-setup-hook 'gnus-alias-determine-identity))
+(use-package gnus-alias
+  :ensure nil
+  :config
+  (setq gnus-alias-identity-alist
+        `(("mailbox"
+           nil
+           "Johannes Maier <johannes.maier@mailbox.org>"
+           nil
+           nil
+           nil
+           nil)
+          ("ag"
+           nil
+           "Johannes Maier <johannes.maier@active-group.de>"
+           "Active Group GmbH"
+           nil
+           nil
+           ,(concat "Johannes Maier\n"
+                    "johannes.maier@active-group.de\n\n"
+                    "+49 (7071) 70896-67\n\n"
+                    "Active Group GmbH\n"
+                    "Hechinger Str. 12/1\n"
+                    "72072 Tübingen\n"
+                    "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+                    "Geschäftsführer: Dr. Michael Sperber"))))
+  (setq gnus-alias-default-identity "mailbox")
+  (setq gnus-alias-identity-rules
+        '(("ag" ("any" "@active-group.de" both) "ag")))
+  :init
+  (add-hook 'message-setup-hook 'gnus-alias-determine-identity))
 
 #+end_src
 
@@ -506,8 +509,8 @@ the =:diminish= keyword.
 
 #+begin_src emacs-lisp
 
-  (use-package diminish
-    :ensure nil)
+(use-package diminish
+  :ensure nil)
 
 #+end_src
 
@@ -518,11 +521,11 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-  (use-package helpful
-    :ensure nil
-    :bind (("C-h f" . helpful-callable)
-           ("C-h v" . helpful-variable)
-           ("C-h k" . helpful-key)))
+(use-package helpful
+  :ensure nil
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)))
 
 #+end_src
 
@@ -530,11 +533,11 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-  (use-package projectile
-    :ensure nil
-    :init
-    (projectile-mode +1)
-    :bind-keymap ("C-x p" . projectile-command-map))
+(use-package projectile
+  :ensure nil
+  :init
+  (projectile-mode +1)
+  :bind-keymap ("C-x p" . projectile-command-map))
 
 #+end_src
 
@@ -544,8 +547,8 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-  (use-package magit
-    :ensure nil)
+(use-package magit
+  :ensure nil)
 
 #+end_src
 
@@ -555,44 +558,44 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 
-  (use-package smartparens
-    :ensure nil
-    :diminish smartparens-mode
-    :config
-    (sp-pair "'" nil :actions nil)
-    :bind (("C-M-a" . sp-beginning-of-sexp)
-           ("C-M-e" . sp-end-of-sexp)
-           ("C-<down>" . sp-down-sexp)
-           ("C-<up>" . sp-up-sexp)
-           ("M-<down>" . sp-backward-down-sexp)
-           ("M-<up>" . sp-backward-up-sexp)
-           ("C-M-f" . sp-forward-sexp)
-           ("C-M-b" . sp-backward-sexp)
-           ("C-M-n" . sp-next-sexp)
-           ("C-M-p" . sp-previous-sexp)
-           ;; TODO forward/backward symbol?
-           ("C-<right>" . sp-forward-slurp-sexp)
-           ("C-<left>" . sp-backward-slurp-sexp)
-           ("M-<right>" . sp-forward-barf-sexp)
-           ("M-<left>" . sp-backward-barf-sexp)
-           ("C-M-t" . sp-transpose-sexp)
-           ("C-M-k" . sp-kill-sexp)
-           ("C-k" . sp-kill-hybrid-sexp)
-           ("M-k" . sp-backward-kill-sexp)
-           ("C-M-w" . sp-copy-sexp)
-           ("C-M-d" . sp-delete-sexp)
-           ;; TODO wrap with parens/brackets/braces/...
-           )
-    :init
-    (smartparens-global-mode t)
-    ;; Enable smartparens-strict-mode for all LISP modes listed in
-    ;; sp-lisp-modes.
-    (mapc
-     (lambda (mode)
-       (add-hook
-        (intern (format "%s-hook" (symbol-name mode)))
-        'smartparens-strict-mode))
-     sp-lisp-modes))
+(use-package smartparens
+  :ensure nil
+  :diminish smartparens-mode
+  :config
+  (sp-pair "'" nil :actions nil)
+  :bind (("C-M-a" . sp-beginning-of-sexp)
+         ("C-M-e" . sp-end-of-sexp)
+         ("C-<down>" . sp-down-sexp)
+         ("C-<up>" . sp-up-sexp)
+         ("M-<down>" . sp-backward-down-sexp)
+         ("M-<up>" . sp-backward-up-sexp)
+         ("C-M-f" . sp-forward-sexp)
+         ("C-M-b" . sp-backward-sexp)
+         ("C-M-n" . sp-next-sexp)
+         ("C-M-p" . sp-previous-sexp)
+         ;; TODO forward/backward symbol?
+         ("C-<right>" . sp-forward-slurp-sexp)
+         ("C-<left>" . sp-backward-slurp-sexp)
+         ("M-<right>" . sp-forward-barf-sexp)
+         ("M-<left>" . sp-backward-barf-sexp)
+         ("C-M-t" . sp-transpose-sexp)
+         ("C-M-k" . sp-kill-sexp)
+         ("C-k" . sp-kill-hybrid-sexp)
+         ("M-k" . sp-backward-kill-sexp)
+         ("C-M-w" . sp-copy-sexp)
+         ("C-M-d" . sp-delete-sexp)
+         ;; TODO wrap with parens/brackets/braces/...
+         )
+  :init
+  (smartparens-global-mode t)
+  ;; Enable smartparens-strict-mode for all LISP modes listed in
+  ;; sp-lisp-modes.
+  (mapc
+   (lambda (mode)
+     (add-hook
+      (intern (format "%s-hook" (symbol-name mode)))
+      'smartparens-strict-mode))
+   sp-lisp-modes))
 
 #+end_src
 
@@ -605,10 +608,10 @@ out the new, fast, and cool [[https://github.com/raxod502/selectrum][selectrum]]
 
 #+begin_src emacs-lisp
 
-  (use-package selectrum
-    :ensure nil
-    :init
-    (selectrum-mode +1))
+(use-package selectrum
+  :ensure nil
+  :init
+  (selectrum-mode +1))
 
 #+end_src
 
@@ -626,9 +629,9 @@ the preceding string.
 
 #+begin_src emacs-lisp
 
-  (defun my/literal-if-= (pattern _index _total)
-    (when (string-suffix-p "=" pattern)
-      `(orderless-literal . ,(substring pattern 0 -1))))
+(defun my/literal-if-= (pattern _index _total)
+  (when (string-suffix-p "=" pattern)
+    `(orderless-literal . ,(substring pattern 0 -1))))
 
 #+end_src
 
@@ -637,9 +640,9 @@ string.
 
 #+begin_src emacs-lisp
 
-  (defun my/without-if-! (pattern _index _total)
-    (when (string-suffix-p "!" pattern)
-      `(orderless-without-literal . ,(substring pattern 0 -1))))
+(defun my/without-if-! (pattern _index _total)
+  (when (string-suffix-p "!" pattern)
+    `(orderless-without-literal . ,(substring pattern 0 -1))))
 
 #+end_src
 
@@ -647,9 +650,9 @@ The =~= sign gives me a way to have "fuzzy" search, if needed.
 
 #+begin_src emacs-lisp
 
-  (defun my/flex-if-~ (pattern _index _total)
-    (when (string-suffix-p "~" pattern)
-      `(orderless-flex . ,(substring pattern 0 -1))))
+(defun my/flex-if-~ (pattern _index _total)
+  (when (string-suffix-p "~" pattern)
+    `(orderless-flex . ,(substring pattern 0 -1))))
 
 #+end_src
 
@@ -657,13 +660,13 @@ Load the package lazily and use the custom style dispatchers.
 
 #+begin_src emacs-lisp
 
-  (use-package orderless
-    :ensure nil
-    :custom (completion-styles '(orderless))
-    (orderless-style-dispatchers
-     '(my/literal-if-=
-       my/without-if-!
-       my/flex-if-~)))
+(use-package orderless
+  :ensure nil
+  :custom (completion-styles '(orderless))
+  (orderless-style-dispatchers
+   '(my/literal-if-=
+     my/without-if-!
+     my/flex-if-~)))
 
 #+end_src
 
@@ -675,37 +678,37 @@ basic bindings mostly taken from an example in its readme.
 
 #+begin_src emacs-lisp
 
-  (use-package consult
-    :ensure nil
-    :bind (;; C-x bindings
-           ("C-x b" . consult-buffer)                ;; was switch-to-buffer
-           ("C-x 4 b" . consult-buffer-other-window) ;; was switch-to-buffer-other-window
-           ("C-x 5 b" . consult-buffer-other-frame)  ;; was switch-to-buffer-other-frame
-           ;; C-h bindings (help)
-           ("C-h a" . consult-apropos)
-           ;; M-g bindings (goto)
-           ("M-g e" . consult-compile-error)
-           ("M-g g" . consult-goto-line)
-           ("M-g M-g" . consult-goto-line)           ;; easier to type
-           ("M-g o" . consult-outline)
-           ("M-g m" . consult-mark)
-           ("M-g k" . consult-global-mark)
-           ("M-g i" . consult-imenu)
-           ("M-g I" . consult-project-imenu)
-           ;; M-s bindings (search)
-           ("M-s f" . consult-find)
-           ("M-s L" . consult-locate)
-           ("M-s g" . consult-grep)
-           ("M-s G" . consult-git-grep)
-           ("M-s r" . consult-ripgrep)
-           ("M-s l" . consult-line)
-           ("M-s m" . consult-multi-occur)
-           ("M-s k" . consult-keep-lines)
-           ("M-s u" . consult-focus-lines)
-           :map isearch-mode-map
-           ("M-e" . consult-isearch)))
-  ;; TODO other isearch integration?
-  ;; TODO :init narrowing, preview delay, project root
+(use-package consult
+  :ensure nil
+  :bind (;; C-x bindings
+         ("C-x b" . consult-buffer)                ;; was switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ;; was switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; was switch-to-buffer-other-frame
+         ;; C-h bindings (help)
+         ("C-h a" . consult-apropos)
+         ;; M-g bindings (goto)
+         ("M-g e" . consult-compile-error)
+         ("M-g g" . consult-goto-line)
+         ("M-g M-g" . consult-goto-line)           ;; easier to type
+         ("M-g o" . consult-outline)
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-project-imenu)
+         ;; M-s bindings (search)
+         ("M-s f" . consult-find)
+         ("M-s L" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s m" . consult-multi-occur)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch)))
+;; TODO other isearch integration?
+;; TODO :init narrowing, preview delay, project root
 
 #+end_src
 
@@ -724,11 +727,11 @@ I use [[https://company-mode.github.io/][company-mode]] for (global) auto-comple
 
 #+begin_src emacs-lisp
 
-  (use-package company
-    :ensure nil
-    :diminish company-mode
-    :init
-    (add-hook 'after-init-hook 'global-company-mode))
+(use-package company
+  :ensure nil
+  :diminish company-mode
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
 
 #+end_src
 
@@ -738,10 +741,10 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+begin_src emacs-lisp
 
-  (use-package hl-todo
-    :ensure nil
-    :init
-    (add-hook 'after-init-hook 'global-hl-todo-mode))
+(use-package hl-todo
+  :ensure nil
+  :init
+  (add-hook 'after-init-hook 'global-hl-todo-mode))
 
 #+end_src
 
@@ -752,8 +755,8 @@ Highlight =TODO=, =FIXME=, etc. in basically every mode and buffer.
 
 #+begin_src emacs-lisp
 
-  (use-package switch-window
-    :ensure nil)
+(use-package switch-window
+  :ensure nil)
 
 #+end_src
 
@@ -764,13 +767,13 @@ displays the possible completions and associated functions.
 
 #+begin_src emacs-lisp
 
-  (use-package which-key
-    :ensure nil
-    :custom
-    (which-key-idle-delay 0.5)
-    :diminish which-key-mode
-    :init
-    (add-hook 'after-init-hook 'which-key-mode))
+(use-package which-key
+  :ensure nil
+  :custom
+  (which-key-idle-delay 0.5)
+  :diminish which-key-mode
+  :init
+  (add-hook 'after-init-hook 'which-key-mode))
 
 #+end_src
 
@@ -781,18 +784,18 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 
 #+begin_src emacs-lisp
 
-  (use-package all-the-icons
-    :ensure nil)
+(use-package all-the-icons
+  :ensure nil)
 
-  (use-package all-the-icons-dired
-    :ensure nil
-    :init
-    (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
+(use-package all-the-icons-dired
+  :ensure nil
+  :init
+  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
 
-  (use-package all-the-icons-ibuffer
-    :ensure nil
-    :init
-    (all-the-icons-ibuffer-mode 1))
+(use-package all-the-icons-ibuffer
+  :ensure nil
+  :init
+  (all-the-icons-ibuffer-mode 1))
 
 #+end_src
 
@@ -804,17 +807,17 @@ sizes and permissions in "C-x C-f", and much more.
 
 #+begin_src emacs-lisp
 
-  (use-package marginalia
-    :init
-    (marginalia-mode)
-    (advice-add #'marginalia-cycle :after
-                (lambda () (when (bound-and-true-p selectrum-mode)
-                             (selectrum-exhibit 'keep-selected))))
-    :config
-    (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-    :bind
-    (:map minibuffer-local-map
-          ("M-A" . marginalia-cycle)))
+(use-package marginalia
+  :init
+  (marginalia-mode)
+  (advice-add #'marginalia-cycle :after
+              (lambda () (when (bound-and-true-p selectrum-mode)
+                           (selectrum-exhibit 'keep-selected))))
+  :config
+  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :bind
+  (:map minibuffer-local-map
+        ("M-A" . marginalia-cycle)))
 
 #+end_src
 
@@ -827,9 +830,9 @@ ensure direnv integration is working as expected.
 
 #+begin_src emacs-lisp
 
-  (use-package envrc
-    :ensure nil
-    :init (envrc-global-mode))
+(use-package envrc
+  :ensure nil
+  :init (envrc-global-mode))
 
 #+end_src
 
@@ -842,17 +845,17 @@ the =use-package= calls.
 
 #+begin_src emacs-lisp
 
-  (use-package face-remap
-    :ensure nil
-    :diminish buffer-face-mode)
+(use-package face-remap
+  :ensure nil
+  :diminish buffer-face-mode)
 
-  (use-package autorevert
-    :ensure nil
-    :diminish auto-revert-mode)
+(use-package autorevert
+  :ensure nil
+  :diminish auto-revert-mode)
 
-  (use-package simple
-    :ensure nil
-    :diminish auto-fill-function)
+(use-package simple
+  :ensure nil
+  :diminish auto-fill-function)
 
 #+end_src
 
@@ -865,9 +868,9 @@ colorful.
 
 #+begin_src emacs-lisp
 
-  (use-package diredfl
-    :ensure nil
-    :hook (dired-mode . diredfl-mode))
+(use-package diredfl
+  :ensure nil
+  :hook (dired-mode . diredfl-mode))
 
 #+end_src
 
@@ -879,8 +882,8 @@ projectile integration to quickly grep over all of a project's files.
 
 #+begin_src emacs-lisp
 
-  (use-package ripgrep
-    :ensure nil)
+(use-package ripgrep
+  :ensure nil)
 
 #+end_src
 
@@ -888,6 +891,6 @@ projectile integration to quickly grep over all of a project's files.
 
 #+begin_src emacs-lisp
 
-  (setq gc-cons-threshold (* 5 1000 1000))
+(setq gc-cons-threshold (* 5 1000 1000))
 
 #+end_src
