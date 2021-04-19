@@ -23,7 +23,18 @@ in {
       enable = true;
       userName = "Johannes Maier";
       userEmail = cfg.email;
-      ignores = [ "*.swp" ".envrc" ".DS_Store" ];
+      ignores = [
+        # Vim
+        "*.swp"
+        # Direnv
+        ".envrc"
+        # macOS
+        ".DS_Store"
+        # Emacs: backup, auto-save, lock files
+        "*~"
+        "\\#*\\#"
+        ".\\#*"
+      ];
       signing.signByDefault = cfg.gpgKey != null;
       signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
       extraConfig = {
