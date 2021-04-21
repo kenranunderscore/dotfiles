@@ -456,6 +456,86 @@ comes into play.
   :hook (haskell-mode . eglot-ensure))
 
 #+end_src
+*** Vim emulation with evil
+**** Space as leader key
+
+Having a dedicated leader key (=SPC= in my case) is one of the most
+important things to me as it opens up a lot of possibilities for
+creating custom keymaps. The keybindings naturally do not clash with
+the default Emacs-style bindings many packages introduce. I will use
+this to try and create more vim-inspired mnemonic keybindings (say,
+=p= for project-specific commands, =g= for =git= etc.)
+
+#+begin_src emacs-lisp
+
+(general-create-definer with-leader
+  :prefix "SPC")
+
+#+end_src
+
+**** Evil
+
+The [[https://github.com/emacs-evil/evil][evil]] package offers a very complete vim experience inside of
+Emacs.
+
+#+begin_src emacs-lisp
+
+(use-package! evil
+  :config
+  (evil-mode 1)
+  :init
+  (setq evil-want-integration t
+        evil-want-keybinding nil))
+
+#+end_src
+
+**** Integrate evil with a lot of other modes (evil-collection)
+
+This package makes it possible to enable evil-mode (and therefore have
+a more vim-ish feel) in lots of (mostly minor) modes. I'm not sure
+whether I wish to use all of these (I think I don't need evil in
+shells and REPLs), but I'll give them a try.
+
+#+begin_src emacs-lisp
+
+(use-package! evil-collection
+  :after evil
+  :config
+  ;; Register the mode-specific bindings
+  ;; (evil-collection-init 'apropos) ;; TODO
+  ;; (evil-collection-init 'cider) ;; TODO
+  ;; (evil-collection-init 'company) ;; TODO
+  (evil-collection-init 'dired) ;; TODO
+  ;; (evil-collection-init 'dired-sidebar) ;; TODO
+  ;; (evil-collection-init 'ediff) ;; TODO
+  (evil-collection-init 'elisp-mode) ;; TODO
+  ;; (evil-collection-init 'flycheck) ;; TODO
+  (evil-collection-init 'ibuffer) ;; TODO
+  (evil-collection-init 'magit) ;; TODO
+  ;; (evil-collection-init 'magit-todos) ;; TODO
+  ;; (evil-collection-init 'pass) ;; TODO
+  ;; (evil-collection-init 'ripgrep) ;; TODO
+  (evil-collection-init 'which-key) ;; TODO check
+  )
+
+#+end_src
+
+**** Evil-surround
+
+The analogue of [[https://github.com/tpope/vim-surround][Tim Pope's vim-surround plugin]] in Emacs. Now I can use
+things like:
++ =ysiw)= to surround an inner word with non-padded normal parentheses,
++ =ds]= to delete surrounding brackets, or
++ =cd[{= to change surrounding brackets to curly braces with
+  whitespace padding.
+
+#+begin_src emacs-lisp
+
+(use-package! evil-surround
+  :config
+  (global-evil-surround-mode))
+
+#+end_src
 
 *** Emacs as email client (notmuch)
 

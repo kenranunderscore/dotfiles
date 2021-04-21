@@ -37,6 +37,7 @@ in {
             # Essential
             company
             consult
+            evil
             general
             magit
             orderless
@@ -71,6 +72,8 @@ in {
             diredfl
             eglot
             envrc
+            evil-collection
+            evil-surround
             gnus-alias
             helpful
             hl-todo
