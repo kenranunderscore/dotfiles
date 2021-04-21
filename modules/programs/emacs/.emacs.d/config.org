@@ -46,6 +46,17 @@ macro comes in handy:
 
 #+end_src
 
+*** Keybindings (general)
+
+The [[https://github.com/noctuid/general.el][general]] package allows us to easily define keybindings. This is
+especially useful for =evil-mode=.
+
+#+begin_src emacs-lisp
+
+(use-package! general)
+
+#+end_src
+
 *** Separate file for customizations
 
 We do not want to append it to our =init.el=.

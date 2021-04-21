@@ -37,6 +37,7 @@ in {
             # Essential
             company
             consult
+            general
             magit
             orderless
             projectile
