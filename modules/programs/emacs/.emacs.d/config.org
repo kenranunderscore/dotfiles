@@ -621,9 +621,12 @@ some built-in =C-h= keybings with =helpful-*= functions.
 #+begin_src emacs-lisp
 
 (use-package! helpful
+  :after evil
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key)))
+         ("C-h k" . helpful-key))
+  :config
+  (evil-set-initial-state 'helpful-mode 'motion))
 
 #+end_src
 
