@@ -638,6 +638,17 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+end_src
 
+I'll leave the original =C-x p= binding in for now, but I'm planning
+to use the leader key for this as it's a bit easier to type (quickly).
+
+#+begin_src emacs-lisp
+
+(with-leader
+  :states '(normal visual)
+  "p" 'projectile-command-map)
+
+#+end_src
+
 *** Magit
 
 /The/ Git frontend.
