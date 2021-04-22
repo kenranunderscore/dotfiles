@@ -659,6 +659,16 @@ to use the leader key for this as it's a bit easier to type (quickly).
 
 #+end_src
 
+**** Keybindings
+
+#+begin_src emacs-lisp
+
+(with-leader
+  :states '(normal visual)
+  "g g" 'magit-status)
+
+#+end_src
+
 **** TODO learn about magit-dispatch
 
 *** Auto-closing parentheses and sexp motions (smartparens)
