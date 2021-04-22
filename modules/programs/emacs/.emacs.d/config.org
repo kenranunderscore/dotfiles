@@ -793,6 +793,7 @@ basic bindings mostly taken from an example in its readme.
 #+begin_src emacs-lisp
 
 (use-package! consult
+  :after project
   :bind (;; C-x bindings
          ("C-x b" . consult-buffer)                ;; was switch-to-buffer
          ("C-x 4 b" . consult-buffer-other-window) ;; was switch-to-buffer-other-window
@@ -817,11 +818,14 @@ basic bindings mostly taken from an example in its readme.
          ("M-s l" . consult-line)
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)
-         :map isearch-mode-map
-         ("M-e" . consult-isearch)))
+         ("M-s u" . consult-focus-lines))
+  :custom
+  (consult-project-root-function
+   (lambda ()
+     (when-let (project (project-current))
+       (project-root project)))))
 ;; TODO other isearch integration?
-;; TODO :init narrowing, preview delay, project root
+;; TODO :init narrowing, preview delay
 
 #+end_src
 
