@@ -969,7 +969,19 @@ the =use-package= calls.
 #+end_src
 
 **** Dired
-***** TODO dired itself
+***** Dired itself
+
+Things I might want:
+- Sort directories to the top
+
+#+begin_src emacs-lisp
+
+(use-package! dired
+  :custom
+  (dired-listing-switches "-la --group-directories-first"))
+
+#+end_src
+
 ***** diredfl
 
 [[https://github.com/purcell/diredfl][diredfl]] beautifies the dired buffers a bit by making things more
