@@ -754,8 +754,8 @@ the preceding string.
 #+begin_src emacs-lisp
 
 (defun my/literal-if-= (pattern _index _total)
-  (when (string-suffix-p "=" pattern)
-    `(orderless-literal . ,(substring pattern 0 -1))))
+  (when (string-prefix-p "=" pattern)
+    `(orderless-literal . ,(substring pattern 1))))
 
 #+end_src
 
@@ -765,8 +765,8 @@ string.
 #+begin_src emacs-lisp
 
 (defun my/without-if-! (pattern _index _total)
-  (when (string-suffix-p "!" pattern)
-    `(orderless-without-literal . ,(substring pattern 0 -1))))
+  (when (string-prefix-p "!" pattern)
+    `(orderless-without-literal . ,(substring pattern 1))))
 
 #+end_src
 
@@ -775,8 +775,8 @@ The =~= sign gives me a way to have "fuzzy" search, if needed.
 #+begin_src emacs-lisp
 
 (defun my/flex-if-~ (pattern _index _total)
-  (when (string-suffix-p "~" pattern)
-    `(orderless-flex . ,(substring pattern 0 -1))))
+  (when (string-prefix-p "~" pattern)
+    `(orderless-flex . ,(substring pattern 1))))
 
 #+end_src
 
