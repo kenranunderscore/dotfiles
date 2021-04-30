@@ -189,8 +189,8 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-(setq require-final-newline t
-      mode-require-final-newline t)
+(setq require-final-newline t)
+(setq mode-require-final-newline t)
 
 #+end_src
 
@@ -490,8 +490,8 @@ Emacs.
    (evil-want-Y-yank-to-eol t)
    (evil-undo-system 'undo-redo))
   :init
-  (setq evil-want-integration t
-        evil-want-keybinding nil))
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil))
 
 #+end_src
 
