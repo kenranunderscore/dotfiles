@@ -507,22 +507,7 @@ shells and REPLs), but I'll give them a try.
 (use-package! evil-collection
   :after evil
   :config
-  ;; Register the mode-specific bindings
-  ;; (evil-collection-init 'apropos) ;; TODO
-  ;; (evil-collection-init 'cider) ;; TODO
-  ;; (evil-collection-init 'company) ;; TODO
-  (evil-collection-init 'dired) ;; TODO
-  ;; (evil-collection-init 'dired-sidebar) ;; TODO
-  ;; (evil-collection-init 'ediff) ;; TODO
-  (evil-collection-init 'elisp-mode) ;; TODO
-  ;; (evil-collection-init 'flycheck) ;; TODO
-  (evil-collection-init 'ibuffer) ;; TODO
-  (evil-collection-init 'magit) ;; TODO
-  ;; (evil-collection-init 'magit-todos) ;; TODO
-  ;; (evil-collection-init 'pass) ;; TODO
-  ;; (evil-collection-init 'ripgrep) ;; TODO
-  (evil-collection-init 'which-key) ;; TODO check
-  )
+  (evil-collection-init))
 
 #+end_src
 
@@ -983,8 +968,6 @@ Things I might want:
 #+begin_src emacs-lisp
 
 (use-package! dired
-  :config
-  (evil-set-initial-state 'dired-mode 'motion)
   :custom
   (dired-listing-switches "-la --group-directories-first"))
 
