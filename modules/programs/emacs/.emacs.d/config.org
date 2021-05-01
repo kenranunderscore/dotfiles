@@ -538,6 +538,7 @@ things like:
 #+begin_src emacs-lisp
 
 (use-package! evil-surround
+  :after evil
   :config
   (global-evil-surround-mode))
 
