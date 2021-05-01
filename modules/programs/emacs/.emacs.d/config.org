@@ -674,14 +674,11 @@ to use the leader key for this as it's a bit easier to type (quickly).
 
 (with-leader
   :states '(normal visual)
-  "g s" 'magit-status
-  "g g" 'magit-status)
+  "g s" 'magit-status)
 
 #+end_src
 
 **** TODO learn about magit-dispatch
-**** TODO zap =SPC g g= after having gotten used to =SPC g s=
-
 *** Auto-closing parentheses and sexp motions (smartparens)
 
 #+begin_src emacs-lisp
