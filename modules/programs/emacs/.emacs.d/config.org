@@ -321,7 +321,8 @@ After loading org-mode, we then run our custom font setup.
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link))
   :config
-  (my/setup-org-fonts))
+  (my/setup-org-fonts)
+  (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers))))
 
 #+end_src
 
