@@ -968,6 +968,8 @@ Things I might want:
 #+begin_src emacs-lisp
 
 (use-package! dired
+  :config
+  (put 'dired-find-alternate-file 'disabled nil)
   :custom
   (dired-listing-switches "-la --group-directories-first"))
 
