@@ -55,12 +55,15 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        defaultSession = "none+bspwm";
+        defaultSession = "none+i3";
         lightdm.enable = true;
         lightdm.greeters.mini.enable = true;
         lightdm.greeters.mini.user = "kenran";
       };
-      windowManager.bspwm.enable = true;
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+      };
     };
   };
 
