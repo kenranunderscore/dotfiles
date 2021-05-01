@@ -37,7 +37,7 @@ in {
         font_size = cfg.fontSize;
         adjust_line_height = 1;
         scrollback_lines = 50000;
-        hide_window_decorations = true;
+        hide_window_decorations = false;
         remember_window_size = false;
         initial_window_width = 800;
         initial_window_height = 520;
