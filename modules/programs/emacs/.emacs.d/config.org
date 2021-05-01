@@ -529,6 +529,24 @@ things like:
 
 #+end_src
 
+**** Evil-snipe
+
+Henrik Lissner's [[https://github.com/hlissner/evil-snipe][evil-snipe]] replaces the default vim =s= binding by
+enabling us to search forward/backward incrementally for 2-character
+sequences. In addition, =evil-snipe-override-mode= makes the =f=, =F=,
+=t=, =T= searches repeatable by pressing the respective key again to
+jump by one match. It also adds highlighting to those motions.
+
+#+begin_src emacs-lisp
+
+(use-package! evil-snipe
+  :after evil
+  :config
+  (evil-snipe-mode 1)
+  (evil-snipe-override-mode 1))
+
+#+end_src
+
 *** Emacs as email client (notmuch)
 
 I've tried and used mu4e in the past, but always liked the idea of

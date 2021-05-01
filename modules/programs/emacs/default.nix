@@ -73,6 +73,7 @@ in {
             eglot
             envrc
             evil-collection
+            evil-snipe
             evil-surround
             gnus-alias
             helpful
