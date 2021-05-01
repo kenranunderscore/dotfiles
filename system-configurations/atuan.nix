@@ -52,7 +52,7 @@
       videoDrivers = [ "nvidia" ];
       libinput = {
         enable = true;
-        naturalScrolling = true;
+        mouse.naturalScrolling = true;
       };
       displayManager = {
         defaultSession = "none+bspwm";
