@@ -121,6 +121,7 @@ in {
         lorri
         manpages
         mercurial
+        neofetch
         nixfmt
         nix-index
         nix-output-monitor
