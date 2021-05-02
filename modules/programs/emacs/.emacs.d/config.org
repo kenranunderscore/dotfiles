@@ -647,19 +647,17 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 (use-package! projectile
   :init
-  (projectile-mode +1)
-  :bind-keymap ("C-x p" . projectile-command-map))
+  (projectile-mode +1))
 
 #+end_src
 
-I'll leave the original =C-x p= binding in for now, but I'm planning
-to use the leader key for this as it's a bit easier to type (quickly).
+**** Keybindings
 
 #+begin_src emacs-lisp
 
 (with-leader
   :states '(normal visual)
-  "p" 'projectile-command-map)
+  "p" '(projectile-command-map :which-key "projectile"))
 
 #+end_src
 
