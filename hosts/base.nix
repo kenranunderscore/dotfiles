@@ -128,6 +128,7 @@ in {
         nix-prefetch-git
         plantuml
         racket
+        ranger
         ripgrep
         rlwrap
         rsync
