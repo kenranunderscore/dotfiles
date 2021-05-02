@@ -48,10 +48,24 @@
       config = rec {
         modifier = "Mod4";
         startup = [ ];
-        terminal = "${pkgs.kitty}/bin/kitty";
+        terminal = "kitty";
         keybindings =
           let mod = config.xsession.windowManager.i3.config.modifier;
           in lib.mkOptionDefault {
+            # I only really use 5 workspaces. This frees up the
+            # hotkeys for future use, maybe to control the
+            # gaps/layout/toggles.
+            "${mod}+6" = null;
+            "${mod}+7" = null;
+            "${mod}+8" = null;
+            "${mod}+9" = null;
+            "${mod}+0" = null;
+            "${mod}+Shift+6" = null;
+            "${mod}+Shift+7" = null;
+            "${mod}+Shift+8" = null;
+            "${mod}+Shift+9" = null;
+            "${mod}+Shift+0" = null;
+            # Use normal vim keys for moving between windows.
             "${mod}+h" = "focus left";
             "${mod}+l" = "focus right";
             "${mod}+j" = "focus down";
@@ -63,6 +77,9 @@
             "${mod}+v" = "split v";
             "${mod}+s" = "split h";
             "${mod}+t" = "exec ${terminal}";
+            "${mod}+space" = lib.mkForce ''
+              exec "rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
+            "${mod}+z" = "mode $mode_gaps";
           };
         bars = [{
           position = "top";
@@ -74,19 +91,53 @@
           workspaceNumbers = true;
           hiddenState = "hide";
         }];
-        gaps = let testGap = 15;
-        in {
+        gaps =
+        {
           smartGaps = false;
-          top = testGap;
-          right = testGap;
-          bottom = testGap;
-          left = testGap;
-          inner = testGap;
-          outer = testGap;
-          horizontal = testGap;
-          vertical = testGap;
+          # top = testGap;
+          # right = testGap;
+          # bottom = testGap;
+          # left = testGap;
+          inner = 15;
+          outer = 0;
+          # horizontal = testGap;
+          # vertical = testGap;
         };
       };
+      extraConfig = ''
+        set $mode_gaps: (o)uter, (i)nner
+        set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+        set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+        mode "$mode_gaps" {
+          bindsym o      mode "$mode_gaps_outer"
+          bindsym i      mode "$mode_gaps_inner"
+          bindsym Return mode "$mode_gaps"
+          bindsym Escape mode "default"
+        }
+
+        mode "$mode_gaps_outer" {
+          bindsym plus        gaps outer current plus 5
+          bindsym minus       gaps outer current minus 5
+          bindsym 0           gaps outer current set 0
+          bindsym Shift+plus  gaps outer all plus 5
+          bindsym Shift+minus gaps outer all minus 5
+          bindsym Shift+0     gaps outer all set 0
+          bindsym Return mode "$mode_gaps"
+          bindsym Escape mode "default"
+        }
+
+        mode "$mode_gaps_inner" {
+          bindsym plus        gaps inner current plus 5
+          bindsym minus       gaps inner current minus 5
+          bindsym 0           gaps inner current set 0
+          bindsym Shift+plus  gaps inner all plus 5
+          bindsym Shift+minus gaps inner all minus 5
+          bindsym Shift+0     gaps inner all set 0
+          bindsym Return mode "$mode_gaps"
+          bindsym Escape mode "default"
+        }
+      '';
     };
   };
 
