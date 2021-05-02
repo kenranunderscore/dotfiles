@@ -896,7 +896,7 @@ displays the possible completions and associated functions.
 
 (use-package! which-key
   :custom
-  (which-key-idle-delay 0.5)
+  (which-key-idle-delay 0.3)
   :diminish which-key-mode
   :init
   (add-hook 'after-init-hook 'which-key-mode))
