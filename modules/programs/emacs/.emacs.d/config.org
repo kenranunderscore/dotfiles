@@ -705,6 +705,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
   :states '(normal visual)
   "g" '(:ignore t :which-key "git")
   "g s" '(magit-status :which-key "status")
+  "g S" '(magit-status-here :which-key "status here")
   "g l" '(magit-log :which-key "log")
   "g f" '(magit-pull-from-upstream :which-key "pull")
   "g p" '(magit-push :which-key "pull")
