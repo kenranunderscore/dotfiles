@@ -162,11 +162,11 @@ Answering a question with =yes= instead of just =y= is just annoying.
 
 #+begin_src emacs-lisp
 
-(defvar my/monospace-font "IBM Plex Mono")
+(defvar my/monospace-font "Hack")
 (defvar my/variable-font "Cantarell")
 
 (defun my/set-face-attributes ()
-  (set-face-attribute 'default nil :font my/monospace-font :height 130)
+  (set-face-attribute 'default nil :font my/monospace-font :height 120)
   (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 0.8)
   (set-face-attribute 'variable-pitch nil :font my/variable-font :height 1.2))
 
