@@ -542,6 +542,7 @@ jump by one match. It also adds highlighting to those motions.
 
 (use-package! evil-snipe
   :after evil
+  :diminish evil-snipe-local-mode
   :config
   (evil-snipe-mode 1)
   (evil-snipe-override-mode 1))
