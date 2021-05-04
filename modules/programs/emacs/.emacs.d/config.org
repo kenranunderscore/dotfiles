@@ -557,6 +557,8 @@ jump by one match. It also adds highlighting to those motions.
 
 (with-leader
   :states '(normal visual)
+  ;; Give SPC SPC one more chance
+  "SPC" 'execute-extended-command
   ;; Different ways to quit Emacs
   "q" '(:ignore t :which-key "quit")
   "q f" 'evil-save-and-quit
@@ -573,7 +575,10 @@ jump by one match. It also adds highlighting to those motions.
   ;; Language-agnostic code-related commands
   "c" '(:ignore t :which-key "code")
   "c l" 'comment-line
-  "c r" 'comment-region)
+  "c r" 'comment-region
+  ;; Searching
+  "s g" 'consult-git-grep
+  "s p" 'consult-ripgrep)
 
 #+end_src
 
