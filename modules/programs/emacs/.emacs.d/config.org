@@ -38,10 +38,12 @@ macro comes in handy:
 #+begin_src emacs-lisp
 
 (defmacro use-package! (package-name &rest args)
-  "Like use-package but prepends :ensure nil."
+  "Like use-package but prepends an :ensure value of nil on systems
+   that I manage with Nix, and t otherwise (on Windows,
+   basically)."
   (declare (indent defun))
   `(use-package ,package-name
-     :ensure nil
+     :ensure ,(eq system-type 'windows-nt)
      ,@args))
 
 #+end_src
