@@ -755,6 +755,7 @@ some built-in =C-h= keybings with =helpful-*= functions.
          )
   :init
   (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
   ;; Enable smartparens-strict-mode for all LISP modes listed in
   ;; sp-lisp-modes.
   (mapc
