@@ -580,6 +580,13 @@ jump by one match. It also adds highlighting to those motions.
   "s g" 'consult-git-grep
   "s p" 'consult-ripgrep)
 
+(general-define-key
+ :states '(normal visual motion)
+ "C-w C-h" 'evil-window-left
+ "C-w C-k" 'evil-window-up
+ "C-w C-j" 'evil-window-down
+ "C-w C-l" 'evil-window-right)
+
 #+end_src
 
 *** Emacs as email client (notmuch)
