@@ -960,6 +960,7 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 (use-package! all-the-icons)
 
 (use-package! all-the-icons-dired
+  :diminish all-the-icons-dired-mode
   :init
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
 
