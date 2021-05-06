@@ -558,7 +558,7 @@ jump by one match. It also adds highlighting to those motions.
 (with-leader
   :states '(normal visual)
   ;; Give SPC SPC one more chance
-  "SPC" 'execute-extended-command
+  "SPC" '(execute-extended-command :which-key "M-x")
   ;; Different ways to quit Emacs
   "q" '(:ignore t :which-key "quit")
   "q f" 'evil-save-and-quit
