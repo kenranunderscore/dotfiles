@@ -585,7 +585,8 @@ jump by one match. It also adds highlighting to those motions.
  "C-w C-h" 'evil-window-left
  "C-w C-k" 'evil-window-up
  "C-w C-j" 'evil-window-down
- "C-w C-l" 'evil-window-right)
+ "C-w C-l" 'evil-window-right
+ "C-w C-d" 'evil-quit)
 
 #+end_src
 
