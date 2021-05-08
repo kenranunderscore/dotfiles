@@ -93,7 +93,7 @@ in {
     };
 
     nixpkgs.overlays = let
-      rev = "119b923e4da2b716e46dce7aeade32576a282427";
+      rev = "ea53ff1d30b005646f4efc086366e52d7fa23708";
       emacsOverlay = (import (builtins.fetchTarball {
         url =
           "https://github.com/nix-community/emacs-overlay/archive/${rev}.tar.gz";
