@@ -9,6 +9,7 @@
   # git aliases
   g = "git";
   ga = "git add";
+  gap = "git add -p";
   gc = "git commit -v";
   gca = "git commit -v --amend";
   gcm = "git commit -v -m";
