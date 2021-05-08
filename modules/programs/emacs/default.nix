@@ -8,8 +8,13 @@ in {
     enable = mkEnableOption "emacs";
 
     emacsVersion = mkOption {
-      type = types.enum [ "gcc" "unstable" "stable" ];
+      type = types.enum [ "unstable" "stable" "git" ];
       default = "stable";
+    };
+
+    nativeComp = mkOption {
+      type = types.bool;
+      default = false;
     };
   };
 
@@ -23,8 +28,8 @@ in {
       };
 
       packages = let
-        targetEmacs = if cfg.emacsVersion == "gcc" then
-          pkgs.emacsGcc
+        targetEmacs = if cfg.emacsVersion == "git" then
+          (pkgs.emacsGit.override { inherit (cfg) nativeComp; })
         else
           (if cfg.emacsVersion == "stable" then
             pkgs.emacs

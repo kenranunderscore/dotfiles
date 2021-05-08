@@ -16,7 +16,7 @@
       isSyncServer = false;
     };
     programs = {
-      emacs.emacsVersion = "gcc";
+      emacs.emacsVersion = "git";
       kitty = {
         useLoginShell = false;
         fontSize = "10.0";

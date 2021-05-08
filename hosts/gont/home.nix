@@ -30,7 +30,7 @@ in rec {
         enable = true;
         configDir = ./bspwm;
       };
-      emacs = { emacsVersion = "gcc"; };
+      emacs = { emacsVersion = "git"; };
       kitty = {
         enable = true;
         useLoginShell = false;
