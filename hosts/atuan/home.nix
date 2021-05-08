@@ -91,8 +91,7 @@
           workspaceNumbers = true;
           hiddenState = "hide";
         }];
-        gaps =
-        {
+        gaps = {
           smartGaps = false;
           # top = testGap;
           # right = testGap;
