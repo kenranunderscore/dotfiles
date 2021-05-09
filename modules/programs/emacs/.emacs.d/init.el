@@ -755,15 +755,18 @@
 ;;; Built-in packages
 
 ;; Diminish only.
-(use-package! face-remap
+(use-package face-remap
+  :ensure nil
   :diminish buffer-face-mode)
 
 ;; Diminish only.
-(use-package! autorevert
+(use-package autorevert
+  :ensure nil
   :diminish auto-revert-mode)
 
 ;; Diminish only.
-(use-package! simple
+(use-package simple
+  :ensure nil
   :diminish auto-fill-function)
 
 ;; Diminish only.
