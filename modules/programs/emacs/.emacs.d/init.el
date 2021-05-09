@@ -537,11 +537,12 @@
 
 ;; I started with helm in Spacemacs, then later switched to Doom Emacs
 ;; where after a while I tried out ivy and loved it.  Now I want to
-;; try out the new, fast, and cool selectrum.
+;; check out some of the new, more light-weight packages like
+;; selectrum and vertico.
 
-(use-package! selectrum
+(use-package! vertico
   :init
-  (selectrum-mode +1))
+  (vertico-mode +1))
 
 ;;; Orderless
 
@@ -618,12 +619,13 @@
 ;; TODO other isearch integration?
 ;; TODO :init narrowing, preview delay
 
-;;; Company
+;;; Corfu
 
-(use-package! company
-  :diminish company-mode
-  :init
-  (add-hook 'after-init-hook 'global-company-mode))
+(use-package! corfu
+  :config
+  (corfu-global-mode)
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
 
 ;;; hl-todo
 

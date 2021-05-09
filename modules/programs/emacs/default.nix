@@ -40,16 +40,16 @@ in {
         myEmacs = emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
             # Essential
-            company
             consult
+            epkgs.elpaPackages.corfu
             evil
             general
             magit
             orderless
             projectile
-            selectrum
             smartparens
             use-package
+            epkgs.elpaPackages.vertico
 
             # Language-specific
             clojure-mode
