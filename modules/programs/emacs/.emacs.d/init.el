@@ -212,7 +212,7 @@
   ;; Language-agnostic code-related commands
   "c" '(:ignore t :which-key "code")
   "c l" 'comment-line
-  "c r" 'comment-region
+  "c r" 'comment-or-uncomment-region
   ;; Searching
   "s" '(:ignore t :which-key "search/switch")
   "s g" 'consult-git-grep
