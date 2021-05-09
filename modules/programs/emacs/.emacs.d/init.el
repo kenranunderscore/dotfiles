@@ -39,12 +39,15 @@
 ;; make use of all that `use-package' has to offer in that regard yet,
 ;; but I want to at least see when I've made things worse.
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "Emacs startup took %s with %d garbage collections"
-                     (format "%.2f seconds"
-                             (float-time (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+(add-hook
+ 'emacs-startup-hook
+ (lambda ()
+   (message
+    "Emacs startup took %s with %d garbage collections"
+    (format
+     "%.2f seconds"
+     (float-time (time-subtract after-init-time before-init-time)))
+    gcs-done)))
 
 ;; Disable the graphical UI things like the menu bar, the splash
 ;; screen, and others.
@@ -60,7 +63,8 @@
 ;; dark theme.  Brighten it up a bit.
 
 (set-mouse-color "white")
-(add-hook 'server-after-make-frame-hook (lambda () (set-mouse-color "white")))
+(add-hook 'server-after-make-frame-hook
+          (lambda () (set-mouse-color "white")))
 
 ;; We want point to be inside newly opening help buffers so we may
 ;; quickly close them with q.
@@ -96,9 +100,18 @@
 (defvar my/variable-font "Cantarell")
 
 (defun my/set-face-attributes ()
-  (set-face-attribute 'default nil :font my/monospace-font :height 120)
-  (set-face-attribute 'fixed-pitch nil :font my/monospace-font :height 0.8)
-  (set-face-attribute 'variable-pitch nil :font my/variable-font :height 1.2))
+  (set-face-attribute
+   'default nil
+   :font my/monospace-font
+   :height 120)
+  (set-face-attribute
+   'fixed-pitch nil
+   :font my/monospace-font
+   :height 0.8)
+  (set-face-attribute
+   'variable-pitch nil
+   :font my/variable-font
+   :height 1.2))
 
 (my/set-face-attributes)
 (add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
@@ -249,14 +262,22 @@
 ;; lines, etc. a fixed-pitch face is what we want to be using.
 
 (defun my/setup-org-fonts ()
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch)))
+  (set-face-attribute 'org-block nil
+                      :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-block-begin-line nil
+                      :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil
+                      :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil
+                      :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil
+                      :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-checkbox nil
+                      :inherit 'fixed-pitch)
+  (set-face-attribute 'org-meta-line nil
+                      :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil
+                      :inherit '(font-lock-comment-face fixed-pitch)))
 
 ;; To fix org-indent-mode not indenting variable-pitch fonts nicely,
 ;; we'd like to use the fixed-pitch font for that as well.
@@ -275,41 +296,44 @@
 ;; text.  After loading org-mode, we then run our custom font setup.
 
 (use-package! org
-  :hook ((org-mode . variable-pitch-mode)
-         (org-mode . auto-fill-mode)
-         (org-trigger . save-buffer))
-  :custom ((org-startup-indented t)
-           (org-ellipsis " ▾")
-           (org-startup-folded 'content)
-           (org-directory "~/org")
-           (org-log-done t)
-           (org-special-ctrl-a/e t)
-           ;; If this has a value greater than 0, every RET press
-           ;; keeps indenting the source block further and further.
-           (org-edit-src-content-indentation 0)
-           (org-default-notes-file "~/org/notes.org")
-           (org-agenda-files '("~/org/inbox.org"
-                               "~/org/gtd.org"
-                               "~/org/someday.org"))
-           (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
-                                 ("~/org/someday.org" :level . 1)))
-           (org-capture-templates '(("t" "Todo" entry
-                                     (file+headline "~/org/inbox.org" "Tasks")
-                                     "* TODO %i%?")
-                                    ("n" "Note" entry
-                                     (file+headline "~/org/notes.org" "Notes")
-                                     "* %?\n%a\nNote taken on %U")))
-           (org-todo-keywords '((sequence
-                                 "TODO(t)"
-                                 "WAITING(w)"
-                                 "|"
-                                 "DONE(d)"
-                                 "CANCELLED(c)"))))
+  :hook
+  ((org-mode . variable-pitch-mode)
+   (org-mode . auto-fill-mode)
+   (org-trigger . save-buffer))
+  :custom
+  ((org-startup-indented t)
+   (org-ellipsis " ▾")
+   (org-startup-folded 'content)
+   (org-directory "~/org")
+   (org-log-done t)
+   (org-special-ctrl-a/e t)
+   ;; If this has a value greater than 0, every RET press
+   ;; keeps indenting the source block further and further.
+   (org-edit-src-content-indentation 0)
+   (org-default-notes-file "~/org/notes.org")
+   (org-agenda-files '("~/org/inbox.org"
+                       "~/org/gtd.org"
+                       "~/org/someday.org"))
+   (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
+                         ("~/org/someday.org" :level . 1)))
+   (org-capture-templates '(("t" "Todo" entry
+                             (file+headline "~/org/inbox.org" "Tasks")
+                             "* TODO %i%?")
+                            ("n" "Note" entry
+                             (file+headline "~/org/notes.org" "Notes")
+                             "* %?\n%a\nNote taken on %U")))
+   (org-todo-keywords '((sequence
+                         "TODO(t)"
+                         "WAITING(w)"
+                         "|"
+                         "DONE(d)"
+                         "CANCELLED(c)"))))
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link))
   :config
   (my/setup-org-fonts)
-  (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers))))
+  (advice-add 'org-refile
+              :after (lambda (&rest _) (org-save-all-org-buffers))))
 
 ;; Keybindings
 (with-leader
@@ -329,7 +353,8 @@
 (font-lock-add-keywords
  'org-mode
  '(("^ *\\([-+]\\) "
-    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+    (0 (prog1 ()
+         (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; The first few levels of org headers should be scaled to be a bit
 ;; larger than the default text.
@@ -393,7 +418,8 @@
 
 (use-package! plantuml-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.\\(plantuml\\|puml\\)\\'" . plantuml-mode))
+  (add-to-list 'auto-mode-alist
+               '("\\.\\(plantuml\\|puml\\)\\'" . plantuml-mode))
   :config
   (setq plantuml-default-exec-mode 'executable))
 
@@ -448,14 +474,15 @@
            "Active Group GmbH"
            nil
            nil
-           ,(concat "Johannes Maier\n"
-                    "johannes.maier@active-group.de\n\n"
-                    "+49 (7071) 70896-67\n\n"
-                    "Active Group GmbH\n"
-                    "Hechinger Str. 12/1\n"
-                    "72072 Tübingen\n"
-                    "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-                    "Geschäftsführer: Dr. Michael Sperber"))))
+           ,(concat
+             "Johannes Maier\n"
+             "johannes.maier@active-group.de\n\n"
+             "+49 (7071) 70896-67\n\n"
+             "Active Group GmbH\n"
+             "Hechinger Str. 12/1\n"
+             "72072 Tübingen\n"
+             "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+             "Geschäftsführer: Dr. Michael Sperber"))))
   (setq gnus-alias-default-identity "mailbox")
   (setq gnus-alias-identity-rules
         '(("ag" ("any" "@active-group.de" both) "ag")))
@@ -604,15 +631,15 @@
 (use-package! consult
   :after project
   :bind (;; C-x bindings
-         ("C-x b" . consult-buffer)                ;; was switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; was switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; was switch-to-buffer-other-frame
+         ("C-x b" . consult-buffer)
+         ("C-x 4 b" . consult-buffer-other-window)
+         ("C-x 5 b" . consult-buffer-other-frame)
          ;; C-h bindings (help)
          ("C-h a" . consult-apropos)
          ;; M-g bindings (goto)
          ("M-g e" . consult-compile-error)
          ("M-g g" . consult-goto-line)
-         ("M-g M-g" . consult-goto-line)           ;; easier to type
+         ("M-g M-g" . consult-goto-line)
          ("M-g o" . consult-outline)
          ("M-g m" . consult-mark)
          ("M-g k" . consult-global-mark)
@@ -691,7 +718,8 @@
               (lambda () (when (bound-and-true-p selectrum-mode)
                            (selectrum-exhibit 'keep-selected))))
   :config
-  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  (setq marginalia-annotators
+        '(marginalia-annotators-heavy marginalia-annotators-light nil))
   :bind
   (:map minibuffer-local-map
         ("M-A" . marginalia-cycle)))
