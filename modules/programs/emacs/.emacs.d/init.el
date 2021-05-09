@@ -676,7 +676,6 @@
 ;;; Corfu
 
 (use-package! corfu
-  :defer t
   :config
   (corfu-global-mode)
   (setq completion-cycle-threshold 3)
