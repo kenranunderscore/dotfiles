@@ -389,6 +389,14 @@
 
 (use-package! csv-mode)
 
+;;; PlantUML
+
+(use-package! plantuml-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.\\(plantuml\\|puml\\)\\'" . plantuml-mode))
+  :config
+  (setq plantuml-default-exec-mode 'executable))
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like

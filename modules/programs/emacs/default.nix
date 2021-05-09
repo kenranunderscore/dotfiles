@@ -62,6 +62,7 @@ in {
             epkgs.org
             org-bullets
             org-present
+            plantuml-mode
             yaml-mode
 
             # Themes
