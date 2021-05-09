@@ -126,6 +126,107 @@
 
 (setq-default indent-tabs-mode nil)
 
+;;; Vim emulation with evil-mode
+
+;; Having a dedicated leader key (SPC in my case) is one of the most
+;; important things to me as it opens up a lot of possibilities for
+;; creating custom keymaps.  The keybindings naturally do not clash
+;; with the default Emacs-style bindings many packages introduce.  I
+;; will use this to try and create more vim-inspired mnemonic
+;; keybindings (say, p for project-specific commands, g for git etc.)
+
+(general-create-definer with-leader
+  :prefix "SPC")
+
+;; The evil package offers a very complete vim experience inside of
+;; Emacs.
+
+(use-package! evil
+  :config
+  (evil-mode 1)
+  :custom
+  ((evil-want-C-u-scroll t)
+   (evil-want-C-u-delete nil)
+   (evil-want-C-w-delete t)
+   (evil-want-Y-yank-to-eol t)
+   (evil-undo-system 'undo-redo))
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil))
+
+;; This package makes it possible to enable evil-mode (and therefore
+;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not
+;; sure whether I wish to use all of these (I think I don't need evil
+;; in shells and REPLs), but I'll give them a try.
+
+(use-package! evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+;; The analogue of Tim Pope's vim-surround plugin in Emacs.  Now I can
+;; use things like ysiw) to surround an inner word with non-padded
+;; normal parentheses, ds] to delete surrounding brackets, or cd[{ to
+;; change surrounding brackets to curly braces with whitespace
+;; padding.
+
+(use-package! evil-surround
+  :after evil
+  :config
+  (global-evil-surround-mode))
+
+;; Henrik Lissner's evil-snipe replaces the default vim 's' binding by
+;; enabling us to search forward/backward incrementally for
+;; 2-character sequences.  In addition, evil-snipe-override-mode makes
+;; the 'f', 'F', 't', 'T' searches repeatable by pressing the
+;; respective key again to jump by one match.  It also adds
+;; highlighting to those motions.
+
+(use-package! evil-snipe
+  :after evil
+  :diminish evil-snipe-local-mode
+  :config
+  (evil-snipe-mode 1)
+  (evil-snipe-override-mode 1))
+
+;; Create nice custom mappings for normal mode (and others) that are
+;; accessed with the SPC key.
+
+(with-leader
+  :states '(normal visual)
+  ;; Give SPC SPC one more chance
+  "SPC" '(execute-extended-command :which-key "M-x")
+  ;; Different ways to quit Emacs
+  "q" '(:ignore t :which-key "quit")
+  "q f" 'evil-save-and-quit
+  "q k" 'save-buffers-kill-emacs
+  ;; Buffer-related commands
+  "b" '(:ignore t :which-key "buffer")
+  "b b" 'consult-buffer
+  "b q" 'kill-this-buffer
+  "b i" 'ibuffer
+  "b k" 'kill-buffer
+  ;; Toggles
+  "t" '(:ignore t :which-key "toggle")
+  "t l" '(display-line-numbers-mode :which-key "line numbers")
+  ;; Language-agnostic code-related commands
+  "c" '(:ignore t :which-key "code")
+  "c l" 'comment-line
+  "c r" 'comment-region
+  ;; Searching
+  "s" '(:ignore t :which-key "search/switch")
+  "s g" 'consult-git-grep
+  "s p" 'consult-ripgrep
+  "s t" 'load-theme)
+
+(general-define-key
+ :states '(normal visual motion)
+ "C-w C-h" 'evil-window-left
+ "C-w C-k" 'evil-window-up
+ "C-w C-j" 'evil-window-down
+ "C-w C-l" 'evil-window-right
+ "C-w C-d" 'evil-quit)
+
 ;;;; Package-specific configuration
 
 ;;; Nix expressions
@@ -291,105 +392,6 @@
 
 (use-package! eglot
   :hook (haskell-mode . eglot-ensure))
-
-;;; Vim emulation with evil-mode
-
-;; Having a dedicated leader key (SPC in my case) is one of the most
-;; important things to me as it opens up a lot of possibilities for
-;; creating custom keymaps.  The keybindings naturally do not clash
-;; with the default Emacs-style bindings many packages introduce.  I
-;; will use this to try and create more vim-inspired mnemonic
-;; keybindings (say, p for project-specific commands, g for git etc.)
-
-(general-create-definer with-leader
-  :prefix "SPC")
-
-;; The evil package offers a very complete vim experience inside of
-;; Emacs.
-
-(use-package! evil
-  :config
-  (evil-mode 1)
-  :custom
-  ((evil-want-C-u-scroll t)
-   (evil-want-C-u-delete nil)
-   (evil-want-C-w-delete t)
-   (evil-want-Y-yank-to-eol t)
-   (evil-undo-system 'undo-redo))
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil))
-
-;; This package makes it possible to enable evil-mode (and therefore
-;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not
-;; sure whether I wish to use all of these (I think I don't need evil
-;; in shells and REPLs), but I'll give them a try.
-
-(use-package! evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-
-;; The analogue of [[https://github.com/tpope/vim-surround][Tim Pope's
-;; vim-surround plugin]] in Emacs.  Now I can use things like ysiw) to
-;; surround an inner word with non-padded normal parentheses, ds] to
-;; delete surrounding brackets, or cd[{ to change surrounding brackets
-;; to curly braces with whitespace padding.
-
-(use-package! evil-surround
-  :after evil
-  :config
-  (global-evil-surround-mode))
-
-;; Henrik Lissner's evil-snipe replaces the default vim 's' binding by
-;; enabling us to search forward/backward incrementally for
-;; 2-character sequences.  In addition, evil-snipe-override-mode makes
-;; the 'f', 'F', 't', 'T' searches repeatable by pressing the
-;; respective key again to jump by one match.  It also adds
-;; highlighting to those motions.
-
-(use-package! evil-snipe
-  :after evil
-  :diminish evil-snipe-local-mode
-  :config
-  (evil-snipe-mode 1)
-  (evil-snipe-override-mode 1))
-
-;; Create nice custom mappings for normal mode (and others) that are
-;; accessed with the SPC key.
-
-(with-leader
-  :states '(normal visual)
-  ;; Give SPC SPC one more chance
-  "SPC" '(execute-extended-command :which-key "M-x")
-  ;; Different ways to quit Emacs
-  "q" '(:ignore t :which-key "quit")
-  "q f" 'evil-save-and-quit
-  "q k" 'save-buffers-kill-emacs
-  ;; Buffer-related commands
-  "b" '(:ignore t :which-key "buffer")
-  "b b" 'consult-buffer
-  "b q" 'kill-this-buffer
-  "b i" 'ibuffer
-  "b k" 'kill-buffer
-  ;; Toggles
-  "t" '(:ignore t :which-key "toggle")
-  "t l" '(display-line-numbers-mode :which-key "line numbers")
-  ;; Language-agnostic code-related commands
-  "c" '(:ignore t :which-key "code")
-  "c l" 'comment-line
-  "c r" 'comment-region
-  ;; Searching
-  "s g" 'consult-git-grep
-  "s p" 'consult-ripgrep)
-
-(general-define-key
- :states '(normal visual motion)
- "C-w C-h" 'evil-window-left
- "C-w C-k" 'evil-window-up
- "C-w C-j" 'evil-window-down
- "C-w C-l" 'evil-window-right
- "C-w C-d" 'evil-quit)
 
 ;;; Emacs as e-mail client
 
