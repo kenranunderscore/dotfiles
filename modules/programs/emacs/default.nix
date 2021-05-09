@@ -79,6 +79,7 @@ in {
             diredfl
             eglot
             envrc
+            evil-cleverparens
             evil-collection
             evil-snipe
             evil-surround

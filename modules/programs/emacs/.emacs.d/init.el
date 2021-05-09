@@ -587,6 +587,12 @@
       'smartparens-strict-mode))
    sp-lisp-modes))
 
+;;; evil-cleverparens
+
+(use-package! evil-cleverparens
+  :after smartparens
+  :init (add-hook 'smartparens-strict-mode-hook #'evil-cleverparens-mode))
+
 ;;; Incremental narrowing
 
 ;; I started with helm in Spacemacs, then later switched to Doom Emacs
