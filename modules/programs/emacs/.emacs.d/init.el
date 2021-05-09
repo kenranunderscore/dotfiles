@@ -211,6 +211,8 @@
   "b q" 'kill-this-buffer
   "b i" 'ibuffer
   "b k" 'kill-buffer
+  "b n" 'next-buffer
+  "b p" 'previous-buffer
   ;; Toggles
   "t" '(:ignore t :which-key "toggle")
   "t l" '(display-line-numbers-mode :which-key "line numbers")
