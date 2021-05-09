@@ -400,11 +400,13 @@
 
 ;;; Docker
 
-(use-package! dockerfile-mode)
+(use-package! dockerfile-mode
+  :defer t)
 
 ;;; YAML
 
-(use-package! yaml-mode)
+(use-package! yaml-mode
+  :defer t)
 
 ;;; Clojure with CIDER
 
@@ -417,11 +419,13 @@
 
 ;;; CSV
 
-(use-package! csv-mode)
+(use-package! csv-mode
+  :defer t)
 
 ;;; PlantUML
 
 (use-package! plantuml-mode
+  :defer t
   :init
   (add-to-list 'auto-mode-alist
                '("\\.\\(plantuml\\|puml\\)\\'" . plantuml-mode))
@@ -464,6 +468,7 @@
 ;; signature based on my From address), I use gnus-alias.
 
 (use-package! gnus-alias
+  :defer t
   :config
   (setq gnus-alias-identity-alist
         `(("mailbox"
@@ -671,6 +676,7 @@
 ;;; Corfu
 
 (use-package! corfu
+  :defer t
   :config
   (corfu-global-mode)
   (setq completion-cycle-threshold 3)
@@ -688,6 +694,7 @@
 ;; displays the possible completions and associated functions.
 
 (use-package! which-key
+  :defer t
   :custom
   (which-key-idle-delay 0.3)
   :diminish which-key-mode
@@ -702,11 +709,13 @@
 (use-package! all-the-icons)
 
 (use-package! all-the-icons-dired
+  :defer t
   :diminish all-the-icons-dired-mode
   :init
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
 
 (use-package! all-the-icons-ibuffer
+  :defer t
   :init
   (all-the-icons-ibuffer-mode 1))
 
@@ -737,11 +746,13 @@
 ;; to ensure direnv integration is working as expected.
 
 (use-package! envrc
+  :defer t
   :init (envrc-global-mode))
 
 ;;; ripgrep
 
-(use-package! ripgrep)
+(use-package! ripgrep
+  :defer t)
 
 ;;; Built-in packages
 
@@ -758,6 +769,7 @@
   :diminish auto-fill-function)
 
 (use-package! dired
+  :defer t
   :config
   (put 'dired-find-alternate-file 'disabled nil)
   :custom
@@ -766,6 +778,8 @@
 
 ;; Beautify dired a bit.
 (use-package! diredfl
+  :defer t
+  :after dired
   :hook (dired-mode . diredfl-mode))
 
 ;; Reduce the GC threshold again
