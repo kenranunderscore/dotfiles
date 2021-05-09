@@ -582,6 +582,7 @@
 ;;; evil-cleverparens
 
 (use-package! evil-cleverparens
+  :diminish evil-cleverparens-mode
   :after smartparens
   :init (add-hook 'smartparens-strict-mode-hook #'evil-cleverparens-mode))
 
@@ -764,6 +765,10 @@
 ;; Diminish only.
 (use-package! simple
   :diminish auto-fill-function)
+
+;; Diminish only.
+(use-package eldoc
+  :diminish eldoc-mode)
 
 (use-package! dired
   :defer t
