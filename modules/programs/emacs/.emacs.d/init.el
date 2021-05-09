@@ -311,6 +311,12 @@
   (my/setup-org-fonts)
   (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers))))
 
+;; Keybindings
+(with-leader
+  :states '(normal visual)
+  "o" '(:which-key "org-mode" :ignore t)
+  "o a" 'org-agenda)
+
 ;; The org-bullets packages enables us to use UTF-8 characters for the
 ;; bullet points in org headers.
 
