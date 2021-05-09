@@ -43,6 +43,7 @@ in {
             consult
             epkgs.elpaPackages.corfu
             evil
+            gcmh
             general
             magit
             orderless

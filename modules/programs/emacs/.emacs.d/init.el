@@ -1,11 +1,3 @@
-;; Emacs startup can be significantly sped up by reducing the number
-;; of garbage collections that take place during initialization.  The
-;; default `gc-cons-threshold' of 80 kilobytes is way too low for any
-;; more recent system.  Still it's beneficial to reset this temporary
-;; value back to a lower number after initialization.  That way the GC
-;; pause won't be as long when working within Emacs.
-(setq gc-cons-threshold (* 100 1000 1000))
-
 ;;;; General settings
 
 ;; Since I use home-manager to manage my dotfiles, user environment
@@ -787,5 +779,8 @@
   :after dired
   :hook (dired-mode . diredfl-mode))
 
-;; Reduce the GC threshold again
-(setq gc-cons-threshold (* 5 1000 1000))
+;; Start `gcmh-mode' for better GC behavior.
+(use-package! gcmh
+  :diminish gcmh-mode
+  :init
+  (gcmh-mode 1))
