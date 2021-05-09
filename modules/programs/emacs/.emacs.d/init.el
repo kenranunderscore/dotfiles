@@ -480,7 +480,8 @@
 
 ;;; Magit
 
-(use-package! magit)
+(use-package! magit
+  :hook (git-commit-mode . evil-insert-state))
 
 (with-leader
   :states '(normal visual)
