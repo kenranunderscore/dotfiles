@@ -52,6 +52,7 @@ in {
             epkgs.elpaPackages.vertico
 
             # Language-specific
+            cider
             clojure-mode
             epkgs.csv-mode
             dhall-mode

@@ -406,9 +406,14 @@
 
 (use-package! yaml-mode)
 
-;;; Clojure
+;;; Clojure with CIDER
 
-(use-package! clojure-mode)
+(use-package! clojure-mode
+  :defer t)
+
+(use-package! cider
+  :after clojure-mode
+  :defer t)
 
 ;;; CSV
 
