@@ -17,6 +17,7 @@
     };
     programs = {
       emacs.emacsVersion = "git";
+      emacs.nativeComp = true;
       kitty = {
         useLoginShell = false;
         fontSize = "10.0";
