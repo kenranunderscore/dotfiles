@@ -588,6 +588,14 @@
   :after smartparens
   :init
   (setq evil-cleverparens-use-s-and-S nil)
+  (with-eval-after-load 'evil-cleverparens
+    (general-define-key
+     :states '(normal operator visual)
+     :keymaps 'evil-cleverparens-mode-map
+     "}" 'evil-forward-paragraph
+     "{" 'evil-backward-paragraph
+     "M-<" 'evil-cp-next-opening
+     "M->" 'evil-cp-previous-closing))
   (add-hook 'smartparens-strict-mode-hook #'evil-cleverparens-mode))
 
 ;;; Incremental narrowing
