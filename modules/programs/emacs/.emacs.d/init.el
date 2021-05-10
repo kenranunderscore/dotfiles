@@ -586,7 +586,9 @@
 (use-package! evil-cleverparens
   :diminish evil-cleverparens-mode
   :after smartparens
-  :init (add-hook 'smartparens-strict-mode-hook #'evil-cleverparens-mode))
+  :init
+  (setq evil-cleverparens-use-s-and-S nil)
+  (add-hook 'smartparens-strict-mode-hook #'evil-cleverparens-mode))
 
 ;;; Incremental narrowing
 
