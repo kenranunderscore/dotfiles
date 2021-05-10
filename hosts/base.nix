@@ -148,6 +148,7 @@ in {
         inconsolata
         jetbrains-mono
         ubuntu_font_family
+        unifont
         source-code-pro
         terminus_font
         terminus_font_ttf
