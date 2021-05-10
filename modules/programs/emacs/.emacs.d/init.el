@@ -88,8 +88,8 @@
 
 ;; Font faces and setting.
 
-(defvar my/monospace-font "Hack")
-(defvar my/variable-font "Cantarell")
+(setq my/monospace-font "Hack")
+(setq my/variable-font "Cantarell")
 
 (defun my/set-face-attributes ()
   (set-face-attribute
