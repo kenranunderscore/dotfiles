@@ -88,18 +88,21 @@
 
 ;; Font faces and setting.
 
-(setq my/monospace-font "Hack")
+;; Good settings:
+;; - Terminus 160
+
+(setq my/monospace-font "Terminus")
 (setq my/variable-font "Cantarell")
 
 (defun my/set-face-attributes ()
   (set-face-attribute
    'default nil
    :font my/monospace-font
-   :height 120)
+   :height 160)
   (set-face-attribute
    'fixed-pitch nil
    :font my/monospace-font
-   :height 0.8)
+   :height 1.0)
   (set-face-attribute
    'variable-pitch nil
    :font my/variable-font
