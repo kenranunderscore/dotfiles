@@ -10,3 +10,4 @@ elpa/
 eshell/
 transient/
 custom.el
+projectile.cache
