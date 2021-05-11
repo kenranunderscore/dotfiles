@@ -128,7 +128,7 @@
 ;; be shown by setting warning-minimum-level to :error or disable the
 ;; warnings for native compilation entirely like this:
 
-(setq comp-async-report-warnings-errors nil)
+(setq native-comp-async-report-warnings-errors nil)
 
 ;; Use spaces for indentation by default.
 
