@@ -49,7 +49,7 @@
       config = rec {
         modifier = "Mod4";
         startup = [ ];
-        terminal = "kitty";
+        terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
         keybindings =
           let mod = config.xsession.windowManager.i3.config.modifier;
           in lib.mkOptionDefault {

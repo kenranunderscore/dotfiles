@@ -108,6 +108,7 @@ in {
         unzip
         vim
         wget
+        xst
 
         # Fonts
         anonymousPro
