@@ -56,3 +56,9 @@ st.cursorshape: 4
 *.color19:      base02
 *.color20:      base04
 *.color21:      base06
+
+Xft.antialias:  true
+Xft.dpi:        96
+Xft.hinting:    true
+Xft.hintstyle:  hintfull
+Xft.rgba:       rgb
