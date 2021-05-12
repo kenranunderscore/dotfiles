@@ -53,19 +53,6 @@
         keybindings =
           let mod = config.xsession.windowManager.i3.config.modifier;
           in lib.mkOptionDefault {
-            # I only really use 5 workspaces. This frees up the
-            # hotkeys for future use, maybe to control the
-            # gaps/layout/toggles.
-            "${mod}+6" = null;
-            "${mod}+7" = null;
-            "${mod}+8" = null;
-            "${mod}+9" = null;
-            "${mod}+0" = null;
-            "${mod}+Shift+6" = null;
-            "${mod}+Shift+7" = null;
-            "${mod}+Shift+8" = null;
-            "${mod}+Shift+9" = null;
-            "${mod}+Shift+0" = null;
             # Use normal vim keys for moving between windows.
             "${mod}+h" = "focus left";
             "${mod}+l" = "focus right";
