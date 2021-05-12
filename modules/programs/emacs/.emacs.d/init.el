@@ -653,7 +653,6 @@
 ;; readme.
 
 (use-package! consult
-  :after project
   :bind (;; C-x bindings
          ("C-x b" . consult-buffer)
          ("C-x 4 b" . consult-buffer-other-window)
