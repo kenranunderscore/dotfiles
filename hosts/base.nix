@@ -125,7 +125,6 @@ in {
         uw-ttyp0
         source-code-pro
         terminus_font
-        terminus_font_ttf
       ];
 
       file = {
