@@ -76,34 +76,6 @@ in {
       "nixpkgs/config.nix".source = ../nix/nixpkgs-config.nix;
     };
 
-    xresources.properties = {
-      "Xft.dpi" = 96;
-      "Xft.antialias" = true;
-      "Xft.rgba" = "rgb";
-      "Xft.hinting" = true;
-      "Xft.hintstyle" = "hintfull";
-      # A basic default colorscheme; useful for roguelike games for instance.
-      "*.foreground" = "#fcfcfc";
-      "*.background" = "#313133";
-      "*.cursorColor" = "#fcfcfc";
-      "*.color0" = "#181819";
-      "*.color8" = "#77747f";
-      "*.color1" = "#ef2917";
-      "*.color9" = "#ef2917";
-      "*.color2" = "#97cc04";
-      "*.color10" = "#97cc04";
-      "*.color3" = "#ffad05";
-      "*.color11" = "#ffad05";
-      "*.color4" = "#2d7dd2";
-      "*.color12" = "#2d7dd2";
-      "*.color5" = "#f230aa";
-      "*.color13" = "#f230aa";
-      "*.color6" = "#5fbff9";
-      "*.color14" = "#5fbff9";
-      "*.color7" = "#94949f";
-      "*.color15" = "#fcfcfc";
-    };
-
     home = {
       username = cfg.username;
       homeDirectory = cfg.homeDirectory;
@@ -160,6 +132,7 @@ in {
         # The private key file is linked to directly during activation.
         ".ssh/id_rsa.pub".source = cfg.privateDir + "/id_rsa.pub";
         ".vimrc".source = ../config/vimrc;
+        ".Xresources".source = ../config/Xresources;
       };
 
       activation = {
