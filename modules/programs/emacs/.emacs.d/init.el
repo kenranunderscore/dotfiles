@@ -106,7 +106,7 @@
   (set-face-attribute
    'variable-pitch nil
    :font my/variable-font
-   :height 1.2))
+   :height 1.0))
 
 (my/set-face-attributes)
 (add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
@@ -254,38 +254,11 @@
 
 ;;; Org-mode
 
-;; When using variable-pitch-mode, all the faces are using the
-;; configured font face.  But inside code blocks, verbatim text, meta
-;; lines, etc. a fixed-pitch face is what we want to be using.
-
-(defun my/setup-org-fonts ()
-  (set-face-attribute 'org-block nil
-                      :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block-begin-line nil
-                      :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil
-                      :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil
-                      :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil
-                      :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-checkbox nil
-                      :inherit 'fixed-pitch)
-  (set-face-attribute 'org-meta-line nil
-                      :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil
-                      :inherit '(font-lock-comment-face fixed-pitch)))
-
-;; To fix org-indent-mode not indenting variable-pitch fonts nicely,
-;; we'd like to use the fixed-pitch font for that as well.
-;; Unfortunately setting the face attribute as above didn't work as
-;; expected and it seems necessary to do it like this.
+;; I want my org files to have indentation corresponding to the header
+;; level.
 
 (use-package! org-indent
   :diminish org-indent-mode)
-
-(with-eval-after-load 'org-indent
-  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
 
 ;; When writing text in org-mode, auto-fill-mode should be enable to
 ;; automatically break overly long lines into smaller pieces when
@@ -294,12 +267,10 @@
 
 (use-package! org
   :hook
-  ((org-mode . variable-pitch-mode)
-   (org-mode . auto-fill-mode)
+  ((org-mode . auto-fill-mode)
    (org-trigger . save-buffer))
   :custom
   ((org-startup-indented t)
-   (org-ellipsis " ▾")
    (org-startup-folded 'content)
    (org-directory "~/org")
    (org-log-done t)
@@ -328,7 +299,6 @@
   :bind (("C-c c" . org-capture)
          ("C-c l" . org-store-link))
   :config
-  (my/setup-org-fonts)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers))))
 
@@ -352,22 +322,6 @@
  '(("^ *\\([-+]\\) "
     (0 (prog1 ()
          (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-;; The first few levels of org headers should be scaled to be a bit
-;; larger than the default text.
-
-(dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.15)
-                (org-level-3 . 1.1)
-                (org-level-4 . 1.05)
-                (org-level-5 . 1.0)
-                (org-level-6 . 1.0)
-                (org-level-7 . 1.0)
-                (org-level-8 . 1.0)))
-  (set-face-attribute (car face) nil
-                      :font my/variable-font
-                      :height (cdr face)
-                      :weight 'regular))
 
 ;; For short presentations org-present looks like it is a good option.
 
