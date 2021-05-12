@@ -104,6 +104,7 @@ in {
         rlwrap
         rsync
         sbcl
+        scrot
         tree
         unzip
         vim
