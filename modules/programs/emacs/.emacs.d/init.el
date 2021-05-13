@@ -640,6 +640,19 @@
 ;; TODO other isearch integration?
 ;; TODO :init narrowing, preview delay
 
+;;; Embark
+
+(use-package! embark
+  :bind (("C-," . embark-act)
+         ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package! embark-consult
+  :after (embark consult)
+  :demand t
+  :hook (embark-collect-mode . embark-consult-preview-minor-mode))
+
 ;;; Corfu
 
 (use-package! corfu

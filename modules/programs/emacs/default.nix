@@ -42,6 +42,8 @@ in {
             # Essential
             consult
             epkgs.elpaPackages.corfu
+            embark
+            embark-consult
             evil
             gcmh
             general
