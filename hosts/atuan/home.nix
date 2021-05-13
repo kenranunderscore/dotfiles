@@ -45,30 +45,27 @@
   xsession.windowManager = {
     i3 = {
       enable = true;
-      package = pkgs.i3-gaps;
       config = rec {
         modifier = "Mod4";
         startup = [ ];
         terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
-        keybindings =
-          let mod = config.xsession.windowManager.i3.config.modifier;
-          in lib.mkOptionDefault {
-            # Use normal vim keys for moving between windows.
-            "${mod}+h" = "focus left";
-            "${mod}+l" = "focus right";
-            "${mod}+j" = "focus down";
-            "${mod}+k" = "focus up";
-            "${mod}+Shift+h" = "move left";
-            "${mod}+Shift+l" = "move right";
-            "${mod}+Shift+j" = "move down";
-            "${mod}+Shift+k" = "move up";
-            "${mod}+v" = "split v";
-            "${mod}+s" = "split h";
-            "${mod}+t" = "exec ${terminal}";
-            "${mod}+space" = lib.mkForce ''
-              exec "rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
-            "${mod}+z" = "mode $mode_gaps";
-          };
+        window = { titlebar = false; };
+        keybindings = lib.mkOptionDefault {
+          # Use normal vim keys for moving between windows.
+          "${modifier}+h" = "focus left";
+          "${modifier}+l" = "focus right";
+          "${modifier}+j" = "focus down";
+          "${modifier}+k" = "focus up";
+          "${modifier}+Shift+h" = "move left";
+          "${modifier}+Shift+l" = "move right";
+          "${modifier}+Shift+j" = "move down";
+          "${modifier}+Shift+k" = "move up";
+          "${modifier}+v" = "split v";
+          "${modifier}+s" = "split h";
+          "${modifier}+t" = "exec ${terminal}";
+          "${modifier}+space" = lib.mkForce ''
+            exec "rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
+        };
         bars = [{
           position = "top";
           mode = "dock";
@@ -79,52 +76,7 @@
           workspaceNumbers = true;
           hiddenState = "hide";
         }];
-        gaps = {
-          smartGaps = false;
-          # top = testGap;
-          # right = testGap;
-          # bottom = testGap;
-          # left = testGap;
-          inner = 15;
-          outer = 0;
-          # horizontal = testGap;
-          # vertical = testGap;
-        };
       };
-      extraConfig = ''
-        set $mode_gaps: (o)uter, (i)nner
-        set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-        set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-
-        mode "$mode_gaps" {
-          bindsym o      mode "$mode_gaps_outer"
-          bindsym i      mode "$mode_gaps_inner"
-          bindsym Return mode "$mode_gaps"
-          bindsym Escape mode "default"
-        }
-
-        mode "$mode_gaps_outer" {
-          bindsym plus        gaps outer current plus 5
-          bindsym minus       gaps outer current minus 5
-          bindsym 0           gaps outer current set 0
-          bindsym Shift+plus  gaps outer all plus 5
-          bindsym Shift+minus gaps outer all minus 5
-          bindsym Shift+0     gaps outer all set 0
-          bindsym Return mode "$mode_gaps"
-          bindsym Escape mode "default"
-        }
-
-        mode "$mode_gaps_inner" {
-          bindsym plus        gaps inner current plus 5
-          bindsym minus       gaps inner current minus 5
-          bindsym 0           gaps inner current set 0
-          bindsym Shift+plus  gaps inner all plus 5
-          bindsym Shift+minus gaps inner all minus 5
-          bindsym Shift+0     gaps inner all set 0
-          bindsym Return mode "$mode_gaps"
-          bindsym Escape mode "default"
-        }
-      '';
     };
   };
 
