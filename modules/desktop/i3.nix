@@ -39,6 +39,10 @@ in {
           workspaceButtons = true;
           workspaceNumbers = true;
           hiddenState = "hide";
+          fonts = {
+            names = [ "Terminus" ];
+            size = 14.0;
+          };
         }];
       };
     };
