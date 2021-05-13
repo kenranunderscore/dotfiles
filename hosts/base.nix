@@ -41,6 +41,7 @@ in {
           inherit (cfg) shellPath;
         };
         neovim.enable = true;
+        toggleKeyboardLayout.enable = true;
         qutebrowser.enable = true;
       };
       shell = {

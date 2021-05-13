@@ -27,6 +27,9 @@ in {
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce ''
             exec "${pkgs.rofi}/bin/rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
+          # Switch between DE and US keyboard layouts
+          "${modifier}+g" =
+            "exec ${pkgs.toggleKeyboardLayout}/bin/toggle_de_us";
         };
         bars = [{
           position = "top";
