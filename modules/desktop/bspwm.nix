@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.programs.bspwm;
+let cfg = config.modules.desktop.bspwm;
 in {
-  options.modules.programs.bspwm = {
+  options.modules.desktop.bspwm = {
     enable = mkEnableOption "bspwm";
 
     configDir = mkOption {

@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./bspwm.nix
     ./doom-emacs
     ./emacs
     ./irssi.nix

@@ -20,6 +20,7 @@ in rec {
   };
 
   modules = {
+    desktop = { i3.enable = true; };
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
@@ -75,74 +76,37 @@ in rec {
     xorg.xkbcomp
   ];
 
-  xsession.windowManager = {
-    i3 = {
-      enable = true;
-      config = rec {
-        modifier = "Mod4";
-        startup = [
-          {
-            command = "xrandr --output DP-2 --rate 72.01 --right-of HDMI-0";
-            always = true;
-          }
-          {
-            command = "~/.fehbg";
-            always = true;
-          }
-          {
-            command =
-              "xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Natural Scrolling Enabled' 1";
-            always = true;
-          }
-          {
-            command =
-              "xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Tapping Enabled' 1";
-            always = true;
-          }
-          {
-            command =
-              "xinput set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Natural Scrolling Enabled' 1";
-            always = true;
-          }
-          {
-            command =
-              "xinput set-prop 'Razer  Razer Abyssus' 'libinput Natural Scrolling Enabled' 1";
-            always = true;
-          }
-        ];
-        terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
-        window.titlebar = false;
-        keybindings =
-          let mod = config.xsession.windowManager.i3.config.modifier;
-          in lib.mkOptionDefault {
-            # Use normal vim keys for moving between windows.
-            "${mod}+h" = "focus left";
-            "${mod}+l" = "focus right";
-            "${mod}+j" = "focus down";
-            "${mod}+k" = "focus up";
-            "${mod}+Shift+h" = "move left";
-            "${mod}+Shift+l" = "move right";
-            "${mod}+Shift+j" = "move down";
-            "${mod}+Shift+k" = "move up";
-            "${mod}+v" = "split v";
-            "${mod}+s" = "split h";
-            "${mod}+t" = "exec ${terminal}";
-            "${mod}+space" = lib.mkForce ''
-              exec "${pkgs.rofi}/bin/rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
-            "${mod}+z" = "mode $mode_gaps";
-          };
-        bars = [{
-          position = "top";
-          mode = "dock";
-          fonts = [ "Hack 10" ];
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-          trayOutput = null;
-          workspaceButtons = true;
-          workspaceNumbers = true;
-          hiddenState = "hide";
-        }];
-      };
-    };
+  xsession.windowManager.i3 = {
+    config.startup = [
+      {
+        command = "xrandr --output DP-2 --rate 72.01 --right-of HDMI-0";
+        always = true;
+      }
+      {
+        command = "~/.fehbg";
+        always = true;
+      }
+      {
+        command =
+          "xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Natural Scrolling Enabled' 1";
+        always = true;
+      }
+      {
+        command =
+          "xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Tapping Enabled' 1";
+        always = true;
+      }
+      {
+        command =
+          "xinput set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Natural Scrolling Enabled' 1";
+        always = true;
+      }
+      {
+        command =
+          "xinput set-prop 'Razer  Razer Abyssus' 'libinput Natural Scrolling Enabled' 1";
+        always = true;
+      }
+    ];
   };
 
   # wrap kitty with nixGL, since it does not expose a 'package' option
