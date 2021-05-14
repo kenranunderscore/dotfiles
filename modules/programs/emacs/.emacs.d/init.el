@@ -540,6 +540,10 @@
       'smartparens-strict-mode))
    sp-lisp-modes))
 
+(with-leader
+  :states '(normal visual)
+  "c f" 'sp-indent-defun)
+
 ;;; evil-cleverparens
 
 (use-package! evil-cleverparens
