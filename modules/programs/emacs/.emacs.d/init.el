@@ -291,6 +291,7 @@
                              (file+headline "~/org/notes.org" "Notes")
                              "* %?\n%a\nNote taken on %U")))
    (org-capture-bookmark nil)
+   (org-bookmark-names-plist nil)
    (org-todo-keywords '((sequence
                          "TODO(t)"
                          "WAITING(w)"
