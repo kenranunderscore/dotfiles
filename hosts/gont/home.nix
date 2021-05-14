@@ -27,10 +27,6 @@ in rec {
       isSyncServer = false;
     };
     programs = {
-      bspwm = {
-        enable = true;
-        configDir = ./bspwm;
-      };
       emacs = {
         emacsVersion = "git";
         nativeComp = true;
