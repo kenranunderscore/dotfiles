@@ -34,7 +34,7 @@ in {
         bars = [{
           position = "top";
           mode = "dock";
-          statusCommand = "i3status";
+          statusCommand = "${pkgs.i3status}/bin/i3status";
           trayOutput = null;
           workspaceButtons = true;
           workspaceNumbers = true;
