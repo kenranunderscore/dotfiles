@@ -308,7 +308,8 @@
 (with-leader
   :states '(normal visual)
   "o" '(:which-key "org-mode" :ignore t)
-  "o a" 'org-agenda)
+  "o a" 'org-agenda
+  "o f" 'org-cycle-agenda-files)
 
 ;; The org-bullets packages enables us to use UTF-8 characters for the
 ;; bullet points in org headers.
