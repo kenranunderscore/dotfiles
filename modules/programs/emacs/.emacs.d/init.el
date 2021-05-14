@@ -152,6 +152,10 @@
 (use-package! evil
   :config
   (evil-mode 1)
+  (dolist (mode '(eshell-mode
+                  shell-mode
+                  term-mode))
+    (evil-set-initial-state mode 'emacs))
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
