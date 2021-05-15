@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./doom-emacs
     ./emacs
     ./irssi.nix
     ./kitty.nix
