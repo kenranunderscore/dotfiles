@@ -67,6 +67,8 @@ in {
             org-bullets
             org-present
             plantuml-mode
+            sly
+            sly-asdf
             yaml-mode
 
             # Themes

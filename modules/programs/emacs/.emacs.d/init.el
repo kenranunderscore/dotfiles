@@ -391,6 +391,16 @@
   :config
   (setq plantuml-default-exec-mode 'executable))
 
+;;; Common Lisp
+
+(use-package! sly
+  :defer t
+  :config
+  (setq inferior-lisp-program "sbcl"))
+
+(use-package! sly-asdf
+  :defer t)
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like
