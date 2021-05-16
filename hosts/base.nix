@@ -118,15 +118,17 @@ in {
         cantarell_fonts
         cascadia-code
         fira-code
+        go-font
         hermit
         ibm-plex
         inconsolata
         jetbrains-mono
+        roboto-mono
+        source-code-pro
+        terminus_font
         ubuntu_font_family
         unifont
         uw-ttyp0
-        source-code-pro
-        terminus_font
       ];
 
       file = {
