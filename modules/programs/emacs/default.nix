@@ -78,6 +78,7 @@ in {
             doom-themes
 
             # Utility
+            ace-window
             all-the-icons
             all-the-icons-dired
             all-the-icons-ibuffer
@@ -95,7 +96,6 @@ in {
             marginalia
             notmuch
             ripgrep
-            switch-window
             which-key
           ]);
       in [ myEmacs ];

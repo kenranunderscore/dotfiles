@@ -766,6 +766,17 @@
 (use-package! ripgrep
   :defer t)
 
+;;; ace-window
+
+(use-package! ace-window
+  :defer t
+  :init
+  (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r)))
+
+(general-define-key
+ :states '(normal visual emacs operator motion)
+ "C-w C-w" 'ace-window)
+
 ;;; Built-in packages
 
 ;; Diminish only.
