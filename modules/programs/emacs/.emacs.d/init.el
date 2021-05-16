@@ -70,11 +70,11 @@
 ;; - https://github.com/hlissner/emacs-doom-themes
 ;; - https://github.com/emacs-jp/replace-colorthemes
 
-(use-package! modus-vivendi-theme
-  :config (load-theme 'modus-vivendi t))
+;; (use-package! modus-vivendi-theme
+;;   :config (load-theme 'modus-vivendi t))
 
-;; (use-package! doom-themes
-;;   :config (load-theme 'doom-sourcerer t))
+(use-package! doom-themes
+  :config (load-theme 'doom-homage-black t))
 
 ;; (use-package! color-theme-modern
 ;;   :config
@@ -90,15 +90,17 @@
 
 ;; Good settings:
 ;; - Terminus 160
+;; - Inconsolata 160
+;; - Camingo Code 140
 
-(setq my/monospace-font "Terminus")
+(setq my/monospace-font "Camingo Code")
 (setq my/variable-font "Cantarell")
 
 (defun my/set-face-attributes ()
   (set-face-attribute
    'default nil
    :font my/monospace-font
-   :height 160)
+   :height 140)
   (set-face-attribute
    'fixed-pitch nil
    :font my/monospace-font
