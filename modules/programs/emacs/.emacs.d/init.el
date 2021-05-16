@@ -114,8 +114,8 @@
 ;; Enable line numbers in programming modes.
 
 (use-package! display-line-numbers
-  :hook ((prog-mode . display-line-numbers-mode))
-  (conf-mode . display-line-numbers-mode))
+  :hook ((prog-mode . display-line-numbers-mode)
+         (conf-mode . display-line-numbers-mode)))
 
 ;; Insert newline at the end of files.
 
