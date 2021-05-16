@@ -401,6 +401,14 @@
 (use-package! sly-asdf
   :defer t)
 
+;;; Racket
+
+(use-package! racket-mode
+  :defer t
+  :hook ((racket-mode . racket-xp-mode)
+         (racket-mode . racket-unicode-input-method-enable)
+         (racket-repl-mode . racket-unicode-input-method-enable)))
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like

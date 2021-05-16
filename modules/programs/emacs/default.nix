@@ -67,6 +67,7 @@ in {
             org-bullets
             org-present
             plantuml-mode
+            racket-mode
             sly
             sly-asdf
             yaml-mode
