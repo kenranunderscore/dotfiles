@@ -156,6 +156,7 @@
                   shell-mode
                   term-mode))
     (evil-set-initial-state mode 'emacs))
+  (setq evil-insert-state-cursor '(hbar . 3))
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
