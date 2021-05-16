@@ -305,8 +305,6 @@
                          "|"
                          "DONE(d)"
                          "CANCELLED(c)"))))
-  :bind (("C-c c" . org-capture)
-         ("C-c l" . org-store-link))
   :config
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers))))
@@ -316,6 +314,8 @@
   :states '(normal visual)
   "o" '(:which-key "org-mode" :ignore t)
   "o a" 'org-agenda
+  "o c" 'org-capture
+  "o l" 'org-store-link
   "o f" 'org-cycle-agenda-files
   "o s" 'org-save-all-org-buffers)
 
