@@ -162,7 +162,7 @@
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
-   (evil-want-C-w-delete t)
+   (evil-want-C-w-delete nil)
    (evil-want-Y-yank-to-eol t)
    (evil-undo-system 'undo-redo))
   :init
@@ -237,7 +237,7 @@
   "s t" 'load-theme)
 
 (general-define-key
- :states '(normal visual motion)
+ :states '(normal visual motion emacs operator)
  "C-w C-h" 'evil-window-left
  "C-w C-k" 'evil-window-up
  "C-w C-j" 'evil-window-down
