@@ -151,12 +151,16 @@
 ;; The evil package offers a very complete vim experience inside of
 ;; Emacs.
 
+(setq my/holy-modes
+      '(eshell-mode
+        shell-mode
+        term-mode
+        notmuch-hello-mode))
+
 (use-package! evil
   :config
   (evil-mode 1)
-  (dolist (mode '(eshell-mode
-                  shell-mode
-                  term-mode))
+  (dolist (mode my/holy-modes)
     (evil-set-initial-state mode 'emacs))
   (setq evil-insert-state-cursor '(hbar . 3))
   :custom
