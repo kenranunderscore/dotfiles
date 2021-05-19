@@ -95,12 +95,13 @@
 
 (setq my/monospace-font "Camingo Code")
 (setq my/variable-font "Cantarell")
+(setq my/default-font-height 140)
 
 (defun my/set-face-attributes ()
   (set-face-attribute
    'default nil
    :font my/monospace-font
-   :height 140)
+   :height my/default-font-height)
   (set-face-attribute
    'fixed-pitch nil
    :font my/monospace-font
@@ -781,10 +782,35 @@
  :states '(normal visual emacs operator motion)
  "C-w C-w" 'ace-window)
 
+;;; hydra
+
+(use-package! hydra)
+
 ;;; default-text-scale
 
 (use-package! default-text-scale
-  :defer t)
+  :defer t
+  :after hydra)
+
+(defhydra hydra-global-zoom (:hint nil :timeout 3)
+  "
+  Change the font size globally.\n
+  _g_: increase
+  _l_: decrease\n
+  "
+  ("g" default-text-scale-increase)
+  ("l" default-text-scale-decrease)
+  ("r" (lambda ()
+         (interactive)
+         (setq default-text-scale--complement 0)
+         (set-face-attribute 'default nil
+                             :height my/default-font-height))
+   "reset" :color blue)
+  ("q" nil "exit"))
+
+(with-leader
+  :states '(normal visual)
+  "s s" '(hydra-global-zoom/body :which-key "font zoom"))
 
 ;;; Built-in packages
 

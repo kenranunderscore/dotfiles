@@ -94,6 +94,7 @@ in {
             gnus-alias
             helpful
             hl-todo
+            hydra
             marginalia
             notmuch
             ripgrep
