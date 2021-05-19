@@ -781,6 +781,11 @@
  :states '(normal visual emacs operator motion)
  "C-w C-w" 'ace-window)
 
+;;; default-text-scale
+
+(use-package! default-text-scale
+  :defer t)
+
 ;;; Built-in packages
 
 ;; Diminish only.

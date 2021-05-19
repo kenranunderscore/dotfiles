@@ -82,6 +82,7 @@ in {
             all-the-icons
             all-the-icons-dired
             all-the-icons-ibuffer
+            default-text-scale
             diminish
             diredfl
             eglot
