@@ -602,7 +602,13 @@
 
 (use-package! vertico
   :init
-  (vertico-mode +1))
+  (vertico-mode +1)
+  :custom
+  (vertico-cycle t)
+  :bind
+  (:map vertico-map
+        ("C-j" . vertico-next)
+        ("C-k" . vertico-previous)))
 
 ;;; Orderless
 
