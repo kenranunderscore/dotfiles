@@ -35,7 +35,6 @@ in {
       email.enable = true;
       programs = {
         emacs.enable = true;
-        irssi.enable = true;
         kitty = {
           enable = true;
           inherit (cfg) shellPath;
@@ -43,6 +42,7 @@ in {
         neovim.enable = true;
         toggleKeyboardLayout.enable = true;
         qutebrowser.enable = true;
+        weechat.enable = true;
       };
       shell = {
         bash.enable = true;
