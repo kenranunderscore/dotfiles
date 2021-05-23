@@ -99,6 +99,7 @@ in {
         nix-index
         nix-output-monitor
         nix-prefetch-git
+        openssl
         plantuml
         ranger
         ripgrep
