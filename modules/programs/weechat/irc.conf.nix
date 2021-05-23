@@ -191,7 +191,7 @@ certPath:
   liberachat.usermode
   liberachat.command
   liberachat.command_delay
-  liberachat.autojoin
+  liberachat.autojoin = "#racket,#linux,#emacs,#org-mode,#haskell"
   liberachat.autorejoin
   liberachat.autorejoin_delay
   liberachat.connection_timeout
