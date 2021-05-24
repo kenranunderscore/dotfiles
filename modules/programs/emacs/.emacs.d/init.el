@@ -251,6 +251,36 @@
 
 ;;;; Package-specific configuration
 
+;;; Doom modeline
+
+(use-package! doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-height 35)
+  (doom-modeline-persp-icon nil)
+  (doom-modeline-persp-name nil)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-percent-position nil)
+  (doom-modeline-icon t)
+  :config
+  (setq doom-modeline-percent-position nil))
+
+(defun my/toggle-modeline-minor-mode-display ()
+  "Sometimes it's useful to display those minor modes that I
+haven't diminished, like seeing what project type projectile
+inferred, or whether envrc-mode works as expected. This toggles
+the display."
+  (interactive)
+  (print doom-modeline-minor-modes)
+  (setq doom-modeline-minor-modes
+        (if doom-modeline-minor-modes nil t)))
+
+(with-leader
+  :states '(normal visual)
+  ;; Toggle minor mode display
+  "t m" '(my/toggle-modeline-minor-mode-display :which-key "minor mode display"))
+
 ;;; Nix expressions
 
 (use-package! nix-mode
