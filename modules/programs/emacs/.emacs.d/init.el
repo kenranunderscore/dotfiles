@@ -118,7 +118,10 @@
 
 (use-package! display-line-numbers
   :hook ((prog-mode . display-line-numbers-mode)
-         (conf-mode . display-line-numbers-mode)))
+         (conf-mode . display-line-numbers-mode))
+  :config
+  (line-number-mode -1)
+  (column-number-mode -1))
 
 ;; Insert newline at the end of files.
 
