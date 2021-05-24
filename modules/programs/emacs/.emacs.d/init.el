@@ -74,12 +74,10 @@
 ;;   :config (load-theme 'modus-vivendi t))
 
 (use-package! doom-themes
-  :config (load-theme 'doom-homage-black t))
-
-;; (use-package! color-theme-modern
-;;   :config
-;;   (load-theme 'taming-mr-arneson t t)
-;;   (enable-theme 'taming-mr-arneson))
+  :config
+  (load-theme 'doom-dracula t)
+  :custom
+  (doom-dracula-brighter-modeline t))
 
 ;; Answering a question with =yes= instead of just =y= is just
 ;; annoying.
@@ -92,10 +90,11 @@
 ;; - Terminus 160
 ;; - Inconsolata 160
 ;; - Camingo Code 140
+;; - Fira Code 130
 
-(setq my/monospace-font "Camingo Code")
+(setq my/monospace-font "Fira Code")
 (setq my/variable-font "Cantarell")
-(setq my/default-font-height 140)
+(setq my/default-font-height 130)
 
 (defun my/set-face-attributes ()
   (set-face-attribute
