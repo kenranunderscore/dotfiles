@@ -125,11 +125,11 @@
 (setq require-final-newline t)
 (setq mode-require-final-newline t)
 
-;; When using the native-comp branch that is soon to be merged into
-;; the main Emacs branch a lot of warnings show up during startup and
-;; changing modes.  We could increase the minimum severity for logs to
-;; be shown by setting warning-minimum-level to :error or disable the
-;; warnings for native compilation entirely like this:
+;; When using Emacs HEAD (with the merged native-comp branch) a lot of
+;; warnings show up during startup and when changing modes.  We could
+;; increase the minimum severity for logs to be shown by setting
+;; warning-minimum-level to :error or disable the warnings for native
+;; compilation entirely like this:
 
 (setq native-comp-async-report-warnings-errors nil)
 
