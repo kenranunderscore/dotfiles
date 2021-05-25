@@ -156,9 +156,11 @@
 
 (setq my/holy-modes
       '(eshell-mode
+        notmuch-hello-mode
+        racket-repl-mode
         shell-mode
-        term-mode
-        notmuch-hello-mode))
+        sly-mrepl-mode
+        term-mode))
 
 (use-package! evil
   :config
