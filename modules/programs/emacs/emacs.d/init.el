@@ -247,6 +247,8 @@
 
 (general-define-key
  :states '(normal visual motion emacs operator)
+ :keymaps 'override
+ "C-w" 'evil-window-map
  "C-w C-h" 'evil-window-left
  "C-w C-k" 'evil-window-up
  "C-w C-j" 'evil-window-down
