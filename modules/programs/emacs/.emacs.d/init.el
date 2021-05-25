@@ -258,7 +258,7 @@
 (use-package! doom-modeline
   :init (doom-modeline-mode 1)
   :custom
-  (doom-modeline-minor-modes nil)
+  (doom-modeline-minor-modes t)
   (doom-modeline-height 35)
   (doom-modeline-persp-icon nil)
   (doom-modeline-persp-name nil)
