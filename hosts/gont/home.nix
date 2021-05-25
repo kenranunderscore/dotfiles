@@ -68,6 +68,7 @@ in rec {
     leiningen
     linphone
     mercurial
+    sieve-connect
     subversion
     xorg.xkbcomp
   ];
