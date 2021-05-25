@@ -816,7 +816,9 @@ the display."
 (use-package! ace-window
   :defer t
   :init
-  (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r)))
+  (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r))
+  :config
+  (set-face-attribute 'aw-leading-char-face nil :height 2.5))
 
 (general-define-key
  :states '(normal visual emacs operator motion)
