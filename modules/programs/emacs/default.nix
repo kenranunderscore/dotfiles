@@ -23,7 +23,7 @@ in {
       activation = {
         # FIXME Check for existence of ~/.emacs.d
         symlinkDotEmacs = dagEntryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ln -snf ${builtins.toPath ./.}/.emacs.d $HOME/.emacs.d
+          $DRY_RUN_CMD ln -snf ${builtins.toPath ./.}/emacs.d $HOME/.emacs.d
         '';
       };
 
