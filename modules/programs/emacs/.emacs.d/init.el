@@ -818,6 +818,7 @@ the display."
 
 (general-define-key
  :states '(normal visual emacs operator motion)
+ :keymaps 'override
  "C-w C-w" 'ace-window)
 
 ;;; hydra
