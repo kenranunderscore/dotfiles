@@ -466,8 +466,7 @@ the display."
 ;;; Emacs as e-mail client
 
 ;; I've tried and used mu4e in the past, but always liked the idea of
-;; notmuch better.  I'll give notmuch a shot now that I have a working
-;; syncthing setup to sync my tag database.
+;; notmuch better.
 
 (setq user-full-name "Johannes Maier")
 
