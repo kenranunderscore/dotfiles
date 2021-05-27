@@ -278,9 +278,9 @@ haven't diminished, like seeing what project type projectile
 inferred, or whether envrc-mode works as expected. This toggles
 the display."
   (interactive)
-  (print doom-modeline-minor-modes)
   (setq doom-modeline-minor-modes
-        (if doom-modeline-minor-modes nil t)))
+        (if doom-modeline-minor-modes nil t))
+  (redraw-modeline))
 
 (with-leader
   :states '(normal visual)
