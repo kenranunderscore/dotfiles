@@ -1,4 +1,4 @@
-;;; doom-base16-apathy-theme.el --- inspired by Atom One Dark -*- no-byte-compile: t; -*-
+;;; doom-base16-apathy-theme.el --- inspired by base16-apathy -*- no-byte-compile: t; -*-
 (require 'doom-themes)
 
 ;;
@@ -30,7 +30,7 @@ determine the exact padding."
 
 ;;
 (def-doom-theme doom-base16-apathy
-  "A dark theme inspired by Atom One Dark"
+  "A dark theme inspired by base16-apathy"
 
   ;; name        default   256       16
   ((bg         '("#031a16" nil       nil            ))
@@ -48,35 +48,35 @@ determine the exact padding."
    (fg-alt     base5)
 
    (grey       base4)
-   (red        '("#3e9688" "#ff6655" "red"          ))
+   (red        '("#993e4c" "#ff6655" "red"          ))
    (orange     '("#87711d" "#dd8844" "brightred"    ))
-   (green      '("#883e96" "#99bb66" "green"        ))
-   (teal       '("#883e96" "#44b9b1" "brightgreen"  ))
+   (green      '("#4c963e" "#99bb66" "green"        ))
+   (teal       '("#3e965b" "#44b9b1" "brightgreen"  ))
    (yellow     '("#96883e" "#F4E409" "yellow"       ))
-   (blue       '("#3e7996" "#51afef" "brightblue"   ))
+   (blue       '("#3e4c96" "#51afef" "brightblue"   ))
    (dark-blue  '("#3e4c96" "#2257A0" "blue"         ))
    (magenta    '("#4c963e" "#c678dd" "brightmagenta"))
    (violet     '("#4c963e" "#a9a1e1" "magenta"      ))
-   (cyan       '("#963e4c" "#46D9FF" "brightcyan"   ))
-   (dark-cyan  '("#963e4c" "#5699AF" "cyan"         ))
+   (cyan       '("#3e7996" "#46D9FF" "brightcyan"   ))
+   (dark-cyan  '("#3e7996" "#5699AF" "cyan"         ))
 
    ;; face categories -- required for all themes
    (highlight      yellow)
    (vertical-bar   (doom-darken base1 0.1))
    (selection      yellow)
    (builtin        magenta)
-   (comments       base4)
+   (comments       base3)
    (doc-comments   base3)
    (constants      violet)
    (functions      magenta)
    (keywords       yellow)
    (methods        violet)
    (operators      dark-blue)
-   (type           dark-blue)
-   (strings        green)
-   (variables      cyan)
+   (type           dark-blue)           ;
+   (strings        teal)
+   (variables      green)              ;
    (numbers        orange)
-   (region         `(,(doom-lighten (car bg-alt) 0.15) ,@(doom-lighten (cdr base1) 0.35)))
+   (region         `(,(doom-darken (car green) 0.5) ,@(doom-lighten (cdr base1) 0.35)))
    (error          red)
    (warning        yellow)
    (success        green)
@@ -94,15 +94,9 @@ determine the exact padding."
    (modeline-fg     fg)
    (modeline-fg-alt base5)
 
-   (modeline-bg
-    (if -modeline-bright
-        (doom-darken blue 0.475)
-      `(,(doom-darken (car bg-alt) 0.15) ,@(cdr base0))))
-   (modeline-bg-l
-    (if -modeline-bright
-        (doom-darken blue 0.45)
-      `(,(doom-darken (car bg-alt) 0.1) ,@(cdr base0))))
-   (modeline-bg-inactive   `(,(doom-darken (car bg-alt) 0.1) ,@(cdr bg-alt)))
+   (modeline-bg base1)
+   (modeline-bg-l `(,(doom-darken (car bg-alt) 0.1) ,@(cdr base0)))
+   (modeline-bg-inactive   `(,(doom-darken (car bg-alt) 0.3) ,@(cdr bg-alt)))
    (modeline-bg-inactive-l `(,(car bg-alt) ,@(cdr base1))))
 
 
