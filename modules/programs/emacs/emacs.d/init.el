@@ -158,6 +158,7 @@
       '(eshell-mode
         notmuch-hello-mode
         racket-repl-mode
+        racket-stepper-mode
         shell-mode
         sly-mrepl-mode
         term-mode))
