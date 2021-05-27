@@ -5,6 +5,16 @@ in {
   options.modules.desktop.i3 = { enable = lib.mkEnableOption "i3"; };
 
   config = {
+    programs.i3status = {
+      enable = true;
+      enableDefault = true;
+      general = {
+        colors = true;
+        color_good = "#4c963e";
+        color_bad = "#993e4c";
+        color_degraded = "#3e4c96";
+      };
+    };
     xsession.windowManager.i3 = {
       enable = true;
       config = rec {

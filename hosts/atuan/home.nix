@@ -31,10 +31,6 @@
   programs = {
     rofi.enable = true;
     msmtp.enable = true;
-    i3status = {
-      enable = true;
-      enableDefault = true;
-    };
   };
 
   services = {
