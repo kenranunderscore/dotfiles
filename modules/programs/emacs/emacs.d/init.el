@@ -454,6 +454,18 @@ the display."
          (racket-mode . racket-unicode-input-method-enable)
          (racket-repl-mode . racket-unicode-input-method-enable)))
 
+;;; Java (for Crafting Interpreters)
+
+(use-package! meghanada
+  :defer t
+  :init
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (meghanada-mode t)
+              (flycheck-mode +1)
+              (setq c-basic-offset 2)
+              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like

@@ -62,6 +62,7 @@ in {
             dockerfile-mode
             haskell-mode
             markdown-mode
+            meghanada
             nix-mode
             epkgs.org
             org-bullets
