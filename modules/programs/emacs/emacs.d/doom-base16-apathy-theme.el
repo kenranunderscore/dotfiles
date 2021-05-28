@@ -48,15 +48,15 @@ determine the exact padding."
    (fg-alt     base5)
 
    (grey       base4)
-   (red        '("#993e4c" "#ff6655" "red"          ))
-   (orange     '("#87711d" "#dd8844" "brightred"    ))
+   (red        '("#963e4c" "#ff6655" "red"          ))
+   (orange     '("#ad5d4e" "#dd8844" "brightred"    ))
    (green      '("#4c963e" "#99bb66" "green"        ))
    (teal       '("#3e965b" "#44b9b1" "brightgreen"  ))
    (yellow     '("#96883e" "#F4E409" "yellow"       ))
-   (blue       '("#3e4c96" "#51afef" "brightblue"   ))
+   (blue       '("#5162b8" "#51afef" "brightblue"   ))
    (dark-blue  '("#3e4c96" "#2257A0" "blue"         ))
-   (magenta    '("#4c963e" "#c678dd" "brightmagenta"))
-   (violet     '("#4c963e" "#a9a1e1" "magenta"      ))
+   (magenta    '("#a751b8" "#c678dd" "brightmagenta"))
+   (violet     '("#883e96" "#a9a1e1" "magenta"      ))
    (cyan       '("#3e7996" "#46D9FF" "brightcyan"   ))
    (dark-cyan  '("#3e7996" "#5699AF" "cyan"         ))
 
@@ -64,19 +64,19 @@ determine the exact padding."
    (highlight      yellow)
    (vertical-bar   (doom-darken base1 0.1))
    (selection      yellow)
-   (builtin        magenta)
+   (builtin        green)
    (comments       base3)
    (doc-comments   base3)
    (constants      violet)
-   (functions      magenta)
+   (functions      green)
    (keywords       yellow)
    (methods        violet)
-   (operators      dark-blue)
-   (type           dark-blue)           ;
-   (strings        teal)
-   (variables      green)              ;
+   (operators      blue)
+   (type           magenta)
+   (strings        cyan)
+   (variables      orange)
    (numbers        orange)
-   (region         `(,(doom-darken (car green) 0.5) ,@(doom-lighten (cdr base1) 0.35)))
+   (region         `(,(doom-darken (car cyan) 0.5) ,@(doom-lighten (cdr base1) 0.35)))
    (error          red)
    (warning        yellow)
    (success        green)
@@ -84,7 +84,7 @@ determine the exact padding."
    (vc-added       green)
    (vc-deleted     red)
 
-   ;; custom categories
+   ;;; custom categories
    (hidden     `(,(car bg) "black" "black"))
    (-modeline-bright doom-base16-apathy-brighter-modeline)
    (-modeline-pad
@@ -102,6 +102,8 @@ determine the exact padding."
 
   ;; --- extra faces ------------------------
   ((elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
+
+   (isearch )
 
    (evil-goggles-default-face :inherit 'region :background (doom-blend region bg 0.5))
 
