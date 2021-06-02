@@ -63,6 +63,10 @@
 
 (setq help-window-select t)
 
+;; Resize proportionally after deleting windows.
+
+(setq window-combination-resize t)
+
 ;; Since I cannot ever decide which theme I like best, there are a few
 ;; themes, or collections thereof, installed in my nix configuration:
 ;;
