@@ -18,7 +18,7 @@
 #define base0E #4C963E
 #define base0F #3E965B
 
-st.font:        Terminus:pixelsize=18
+st.font:        Anonymous Pro:pixelsize=18
 st.borderpx:    12
 st.cursorshape: 4
 
