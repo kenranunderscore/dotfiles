@@ -119,6 +119,7 @@ in {
         cantarell_fonts
         cascadia-code
         fira-code
+        fontmatrix # font explorer
         go-font
         hermit
         ibm-plex
