@@ -74,7 +74,8 @@
 ;; - https://github.com/hlissner/emacs-doom-themes
 ;; - https://github.com/emacs-jp/replace-colorthemes
 
-;; (use-package! modus-vivendi-theme
+;; (use-package modus-vivendi-theme
+;;   :ensure t
 ;;   :config (load-theme 'modus-vivendi t))
 
 (use-package! doom-themes
@@ -652,7 +653,8 @@ the display."
 ;; check out some of the new, more light-weight packages like
 ;; selectrum and vertico.
 
-(use-package! vertico
+(use-package vertico
+  :ensure t
   :init
   (vertico-mode +1)
   :custom
@@ -751,7 +753,8 @@ the display."
 
 ;;; Corfu
 
-(use-package! corfu
+(use-package corfu
+  :ensure t
   :config
   (corfu-global-mode)
   (setq completion-cycle-threshold 3)

@@ -41,7 +41,6 @@ in {
           with epkgs.melpaPackages; [
             # Essential
             consult
-            epkgs.elpaPackages.corfu
             embark
             embark-consult
             evil
@@ -52,7 +51,6 @@ in {
             projectile
             smartparens
             use-package
-            epkgs.elpaPackages.vertico
 
             # Language-specific
             cider
@@ -75,7 +73,6 @@ in {
 
             # Themes
             color-theme-modern
-            epkgs.elpaPackages.modus-themes
             doom-themes
 
             # Utility
