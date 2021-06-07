@@ -100,6 +100,7 @@ in {
             marginalia
             notmuch
             ripgrep
+            wgrep
             which-key
           ]);
       in [ myEmacs ];

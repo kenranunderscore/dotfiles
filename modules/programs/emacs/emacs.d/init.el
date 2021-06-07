@@ -908,6 +908,15 @@ the display."
   :after dired
   :hook (dired-mode . diredfl-mode))
 
+;; Edits in a grep buffer are applied sed-style.
+(use-package wgrep
+  :defer t
+  :ensure t
+  :custom
+  ((wgrep-auto-save-buffer t)
+   (wgrep-change-readonly-file nil)
+   (wgrep-too-many-file-length 15)))
+
 ;; Start `gcmh-mode' for better GC behavior.
 (use-package! gcmh
   :diminish gcmh-mode
