@@ -74,9 +74,9 @@
 ;; - https://github.com/hlissner/emacs-doom-themes
 ;; - https://github.com/emacs-jp/replace-colorthemes
 
-;; (use-package modus-vivendi-theme
-;;   :ensure t
-;;   :config (load-theme 'modus-vivendi t))
+(use-package modus-vivendi-theme
+  :ensure t
+  :defer t)
 
 (use-package! doom-themes
   :config
