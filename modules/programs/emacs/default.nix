@@ -40,6 +40,7 @@ in {
         myEmacs = emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
             # Essential
+            company
             consult
             embark
             embark-consult
