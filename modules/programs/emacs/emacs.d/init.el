@@ -26,7 +26,8 @@
 ;; the respective mode).
 (general-define-key
  :states '(normal visual motion emacs operator)
- "C-h F" 'describe-face)
+ "C-h F" 'describe-face
+ "C-h M" 'describe-keymap)
 
 ;;; I do not want customizations done via `customize' to end up in
 ;;; this file.  Use a separate file instead.
