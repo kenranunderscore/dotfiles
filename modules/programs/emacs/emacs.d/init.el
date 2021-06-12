@@ -21,6 +21,13 @@
 
 (use-package! general)
 
+;; Some additional and changed Emacs keybindings go here (evil- and
+;; mode-specific ones can be found in the evil section or the one for
+;; the respective mode).
+(general-define-key
+ :states '(normal visual motion emacs operator)
+ "C-h F" 'describe-face)
+
 ;;; I do not want customizations done via `customize' to end up in
 ;;; this file.  Use a separate file instead.
 
