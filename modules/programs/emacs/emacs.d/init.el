@@ -209,7 +209,7 @@
   :config
   (evil-collection-init)
   :custom
-  ((evil-collection-company-use-tng nil)
+  ((evil-collection-company-use-tng t)
    (evil-collection-want-unimpaired-p nil)))
 
 ;; The analogue of Tim Pope's vim-surround plugin in Emacs.  Now I can
