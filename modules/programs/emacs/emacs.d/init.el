@@ -169,7 +169,7 @@
 ;; mode-specific ones.
 
 (general-create-definer with-local-leader
-  :prefix "SPC m")
+  :prefix ",")
 
 ;; The evil package offers a very complete vim experience inside of
 ;; Emacs.
