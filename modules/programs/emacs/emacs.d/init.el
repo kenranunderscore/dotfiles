@@ -81,8 +81,9 @@
 ;; - https://github.com/hlissner/emacs-doom-themes
 ;; - https://github.com/emacs-jp/replace-colorthemes
 
-;; (use-package! modus-vivendi-theme
-;;   :config (load-theme 'modus-vivendi t))
+(use-package modus-vivendi-theme
+  :ensure t
+  :defer t)
 
 (use-package! doom-themes
   :config
@@ -205,7 +206,10 @@
 (use-package! evil-collection
   :after evil
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  :custom
+  ((evil-collection-company-use-tng nil)
+   (evil-collection-want-unimpaired-p nil)))
 
 ;; The analogue of Tim Pope's vim-surround plugin in Emacs.  Now I can
 ;; use things like ysiw) to surround an inner word with non-padded
@@ -281,7 +285,7 @@
 (use-package! doom-modeline
   :init (doom-modeline-mode 1)
   :custom
-  (doom-modeline-minor-modes t)
+  (doom-modeline-minor-modes nil)
   (doom-modeline-height 35)
   (doom-modeline-persp-icon nil)
   (doom-modeline-persp-name nil)
@@ -666,7 +670,8 @@ the display."
 ;; check out some of the new, more light-weight packages like
 ;; selectrum and vertico.
 
-(use-package! vertico
+(use-package vertico
+  :ensure t
   :init
   (vertico-mode +1)
   :custom
@@ -765,11 +770,30 @@ the display."
 
 ;;; Corfu
 
-(use-package! corfu
-  :config
-  (corfu-global-mode)
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
+;; While corfu is really nice overall, it's not the best choice for
+;; Haskell programming (yet), since indentation in haskell-mode is
+;; almost never "done", hence <M-TAB> needs to be used there for
+;; completion.
+
+;; (use-package corfu
+;;   :ensure t
+;;   :config
+;;   (corfu-global-mode)
+;;   (setq completion-cycle-threshold 3)
+;;   (setq tab-always-indent 'complete))
+
+;;; company
+
+(use-package! company
+  :hook ((after-init . global-company-mode))
+  :diminish company-mode
+  :init (define-advice company-capf
+            (:around (orig-fun &rest args) set-completion-styles)
+          (let ((completion-styles '(basic partial-completion)))
+            (apply orig-fun args)))
+  :custom
+  ((company-idle-delay 0)
+   (company-selection-wrap-around t)))
 
 ;;; hl-todo
 
@@ -921,6 +945,15 @@ the display."
   :defer t
   :after dired
   :hook (dired-mode . diredfl-mode))
+
+;; Edits in a grep buffer are applied sed-style.
+(use-package wgrep
+  :defer t
+  :ensure t
+  :custom
+  ((wgrep-auto-save-buffer t)
+   (wgrep-change-readonly-file nil)
+   (wgrep-too-many-file-length 15)))
 
 ;; Start `gcmh-mode' for better GC behavior.
 (use-package! gcmh

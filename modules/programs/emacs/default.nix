@@ -40,8 +40,8 @@ in {
         myEmacs = emacsWithPackages (epkgs:
           with epkgs.melpaPackages; [
             # Essential
+            company
             consult
-            epkgs.elpaPackages.corfu
             embark
             embark-consult
             evil
@@ -52,7 +52,6 @@ in {
             projectile
             smartparens
             use-package
-            epkgs.elpaPackages.vertico
 
             # Language-specific
             cider
@@ -75,7 +74,6 @@ in {
 
             # Themes
             color-theme-modern
-            epkgs.elpaPackages.modus-themes
             doom-themes
 
             # Utility
@@ -100,6 +98,7 @@ in {
             marginalia
             notmuch
             ripgrep
+            wgrep
             which-key
           ]);
       in [ myEmacs ];
