@@ -420,6 +420,18 @@ the display."
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
 
+(with-local-leader
+  :states 'normal
+  :keymaps 'interactive-haskell-mode-map
+  "e" '(:ignore t :which-key "errors")
+  "e f" '(haskell-goto-first-error :which-key "first")
+  "e n" '(haskell-goto-next-error :which-key "next")
+  "e p" '(haskell-goto-prev-error :which-key "previous")
+  "i" '(:ignore t :which-key "imports")
+  "i i" '(haskell-navigate-imports-go :which-key "navigate to imports")
+  "i r" '(haskell-navigate-imports-return :which-key "return from imports")
+  "i a" '(haskell-add-import :which-key "add import"))
+
 ;;; Dhall
 
 (use-package! dhall-mode
