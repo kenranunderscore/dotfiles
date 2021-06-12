@@ -162,6 +162,13 @@
 (general-create-definer with-leader
   :prefix "SPC")
 
+;; A local leader key is something that is usually used to access
+;; situational commands, for instance language-specific or
+;; mode-specific ones.
+
+(general-create-definer with-local-leader
+  :prefix "SPC m")
+
 ;; The evil package offers a very complete vim experience inside of
 ;; Emacs.
 
