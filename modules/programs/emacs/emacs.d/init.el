@@ -962,7 +962,6 @@ the display."
 ;; Edits in a grep buffer are applied sed-style.
 (use-package wgrep
   :defer t
-  :ensure t
   :custom
   ((wgrep-auto-save-buffer t)
    (wgrep-change-readonly-file nil)
