@@ -82,7 +82,7 @@
 ;; - https://github.com/hlissner/emacs-doom-themes
 ;; - https://github.com/emacs-jp/replace-colorthemes
 
-(use-package modus-vivendi-theme
+(use-package modus-themes
   :ensure t
   :defer t)
 
