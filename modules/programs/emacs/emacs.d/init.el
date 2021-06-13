@@ -2,24 +2,17 @@
 
 ;; Since I use home-manager to manage my dotfiles, user environment
 ;; and in particular Emacs (including packages) I have the guarantee
-;; that those packages are coming from Nix instead of having to be
-;; downloaded.  This is why I usually specify :ensure nil in my
-;; `use-package' calls.  Maybe this is bad, but I'm sticking with it
-;; for now. Hence this little macro comes in handy:
-
-(defmacro use-package! (package-name &rest args)
-  "Like use-package but prepends an :ensure value of nil on systems
-   that I manage with Nix, and t otherwise (on Windows,
-   basically)."
-  (declare (indent defun))
-  `(use-package ,package-name
-     :ensure ,(eq system-type 'windows-nt)
-     ,@args))
+;; that packages are coming from Nix instead of having to be
+;; downloaded.  This is why used to specify :ensure nil in my
+;; `use-package' calls.  Now that I've run into lots of problems
+;; especially with ELPA packages loaded through nixpkgs I want to have
+;; a fallback method.
+(setq use-package-always-ensure t)
 
 ;; The `general' package allows us to easily define keybindings. This
 ;; is especially useful for `evil-mode'.
 
-(use-package! general)
+(use-package general)
 
 ;; Some additional and changed Emacs keybindings go here (evil- and
 ;; mode-specific ones can be found in the evil section or the one for
@@ -83,10 +76,9 @@
 ;; - https://github.com/emacs-jp/replace-colorthemes
 
 (use-package modus-themes
-  :ensure t
   :defer t)
 
-(use-package! doom-themes
+(use-package doom-themes
   :config
   (load-theme 'doom-dracula t)
   :custom
@@ -128,7 +120,7 @@
 
 ;; Enable line numbers in programming modes.
 
-(use-package! display-line-numbers
+(use-package display-line-numbers
   :hook ((prog-mode . display-line-numbers-mode)
          (conf-mode . display-line-numbers-mode))
   :config
@@ -183,7 +175,7 @@
         sly-mrepl-mode
         term-mode))
 
-(use-package! evil
+(use-package evil
   :config
   (evil-mode 1)
   (dolist (mode my/holy-modes)
@@ -204,7 +196,7 @@
 ;; sure whether I wish to use all of these (I think I don't need evil
 ;; in shells and REPLs), but I'll give them a try.
 
-(use-package! evil-collection
+(use-package evil-collection
   :after evil
   :config
   (evil-collection-init)
@@ -218,7 +210,7 @@
 ;; change surrounding brackets to curly braces with whitespace
 ;; padding.
 
-(use-package! evil-surround
+(use-package evil-surround
   :after evil
   :config
   (global-evil-surround-mode))
@@ -230,7 +222,7 @@
 ;; respective key again to jump by one match.  It also adds
 ;; highlighting to those motions.
 
-(use-package! evil-snipe
+(use-package evil-snipe
   :after evil
   :diminish evil-snipe-local-mode
   :config
@@ -283,7 +275,7 @@
 
 ;;; Doom modeline
 
-(use-package! doom-modeline
+(use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-minor-modes nil)
@@ -313,12 +305,12 @@ the display."
 
 ;;; Nix expressions
 
-(use-package! nix-mode
+(use-package nix-mode
   :mode "\\.nix\\'")
 
 ;;; Markdown
 
-(use-package! markdown-mode
+(use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -329,7 +321,7 @@ the display."
 ;; I want my org files to have indentation corresponding to the header
 ;; level.
 
-(use-package! org-indent
+(use-package org-indent
   :diminish org-indent-mode)
 
 ;; When writing text in org-mode, auto-fill-mode should be enable to
@@ -337,7 +329,7 @@ the display."
 ;; typing.  We may still use M-q to re-fill paragraph when editing
 ;; text.  After loading org-mode, we then run our custom font setup.
 
-(use-package! org
+(use-package org
   :hook
   ((org-mode . auto-fill-mode)
    (org-trigger . save-buffer))
@@ -387,7 +379,7 @@ the display."
 ;; The org-bullets packages enables us to use UTF-8 characters for the
 ;; bullet points in org headers.
 
-(use-package! org-bullets
+(use-package org-bullets
   :hook (org-mode . org-bullets-mode)
   :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
@@ -401,7 +393,7 @@ the display."
 
 ;; For short presentations org-present looks like it is a good option.
 
-(use-package! org-present
+(use-package org-present
   :hook ((org-present-mode . (lambda ()
                                (org-present-big)
                                (org-display-inline-images)
@@ -415,7 +407,7 @@ the display."
 
 ;;; Haskell
 
-(use-package! haskell-mode
+(use-package haskell-mode
   :custom
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
@@ -434,36 +426,36 @@ the display."
 
 ;;; Dhall
 
-(use-package! dhall-mode
+(use-package dhall-mode
   :mode "\\.dhall\\'")
 
 ;;; Docker
 
-(use-package! dockerfile-mode
+(use-package dockerfile-mode
   :defer t)
 
 ;;; YAML
 
-(use-package! yaml-mode
+(use-package yaml-mode
   :defer t)
 
 ;;; Clojure with CIDER
 
-(use-package! clojure-mode
+(use-package clojure-mode
   :defer t)
 
-(use-package! cider
+(use-package cider
   :after clojure-mode
   :defer t)
 
 ;;; CSV
 
-(use-package! csv-mode
+(use-package csv-mode
   :defer t)
 
 ;;; PlantUML
 
-(use-package! plantuml-mode
+(use-package plantuml-mode
   :defer t
   :init
   (add-to-list 'auto-mode-alist
@@ -473,17 +465,17 @@ the display."
 
 ;;; Common Lisp
 
-(use-package! sly
+(use-package sly
   :defer t
   :config
   (setq inferior-lisp-program "sbcl"))
 
-(use-package! sly-asdf
+(use-package sly-asdf
   :defer t)
 
 ;;; Racket
 
-(use-package! racket-mode
+(use-package racket-mode
   :defer t
   :hook ((racket-mode . racket-xp-mode)
          (racket-mode . racket-unicode-input-method-enable)
@@ -491,7 +483,7 @@ the display."
 
 ;;; Java (for Crafting Interpreters)
 
-(use-package! meghanada
+(use-package meghanada
   :defer t
   :init
   (add-hook 'java-mode-hook
@@ -508,7 +500,7 @@ the display."
 ;; something more lightweight and closer to vanilla Emacs.  This is
 ;; where eglot comes into play.
 
-(use-package! eglot
+(use-package eglot
   :hook (haskell-mode . eglot-ensure))
 
 ;;; Emacs as e-mail client
@@ -518,7 +510,7 @@ the display."
 
 (setq user-full-name "Johannes Maier")
 
-(use-package! notmuch
+(use-package notmuch
   :defer t
   :config
   (setq user-mail-address "johannes.maier@mailbox.org")
@@ -535,7 +527,7 @@ the display."
 ;; To switch identities (which I basically only use to set my work
 ;; signature based on my From address), I use gnus-alias.
 
-(use-package! gnus-alias
+(use-package gnus-alias
   :defer t
   :config
   (setq gnus-alias-identity-alist
@@ -574,14 +566,14 @@ the display."
 ;; enabled anyway.  Use-package has built-in support for it available
 ;; with the :diminish keyword.
 
-(use-package! diminish)
+(use-package diminish)
 
 ;;; Helpful
 
 ;; This gives us better and more readable help pages.  We also replace
 ;; some built-in C-h keybings with helpful-* functions.
 
-(use-package! helpful
+(use-package helpful
   :after evil
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
@@ -591,7 +583,7 @@ the display."
 
 ;;; Projectile
 
-(use-package! projectile
+(use-package projectile
   :init
   (projectile-mode +1))
 
@@ -601,7 +593,7 @@ the display."
 
 ;;; Magit
 
-(use-package! magit
+(use-package magit
   :hook (git-commit-mode . evil-insert-state))
 
 (with-leader
@@ -616,7 +608,7 @@ the display."
 
 ;;; Smartparens
 
-(use-package! smartparens
+(use-package smartparens
   :diminish smartparens-mode
   :config
   (sp-pair "'" nil :actions nil)
@@ -661,7 +653,7 @@ the display."
 
 ;;; evil-cleverparens
 
-(use-package! evil-cleverparens
+(use-package evil-cleverparens
   :diminish evil-cleverparens-mode
   :after smartparens
   :init
@@ -684,7 +676,6 @@ the display."
 ;; selectrum and vertico.
 
 (use-package vertico
-  :ensure t
   :init
   (vertico-mode +1)
   :custom
@@ -720,7 +711,7 @@ the display."
   (when (string-prefix-p "~" pattern)
     `(orderless-flex . ,(substring pattern 1))))
 
-(use-package! orderless
+(use-package orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
    '(my/literal-if-=
@@ -734,7 +725,7 @@ the display."
 ;; defines some basic bindings mostly taken from an example in its
 ;; readme.
 
-(use-package! consult
+(use-package consult
   :bind (;; C-x bindings
          ("C-x b" . consult-buffer)
          ("C-x 4 b" . consult-buffer-other-window)
@@ -770,13 +761,13 @@ the display."
 
 ;;; Embark
 
-(use-package! embark
+(use-package embark
   :bind (("C-," . embark-act)
          ("C-h B" . embark-bindings))
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 
-(use-package! embark-consult
+(use-package embark-consult
   :after (embark consult)
   :demand t
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
@@ -789,7 +780,6 @@ the display."
 ;; completion.
 
 ;; (use-package corfu
-;;   :ensure t
 ;;   :config
 ;;   (corfu-global-mode)
 ;;   (setq completion-cycle-threshold 3)
@@ -797,7 +787,7 @@ the display."
 
 ;;; company
 
-(use-package! company
+(use-package company
   :hook ((after-init . global-company-mode))
   :diminish company-mode
   :init (define-advice company-capf
@@ -810,7 +800,7 @@ the display."
 
 ;;; hl-todo
 
-(use-package! hl-todo
+(use-package hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
 
@@ -819,7 +809,7 @@ the display."
 ;; When pressing the first key in a hotkey chain, show a popup that
 ;; displays the possible completions and associated functions.
 
-(use-package! which-key
+(use-package which-key
   :defer t
   :custom
   (which-key-idle-delay 0.3)
@@ -832,15 +822,15 @@ the display."
 ;; Attach beautiful symbols to, for instance, file names in a dired or
 ;; ibuffer buffer.
 
-(use-package! all-the-icons)
+(use-package all-the-icons)
 
-(use-package! all-the-icons-dired
+(use-package all-the-icons-dired
   :defer t
   :diminish all-the-icons-dired-mode
   :init
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
 
-(use-package! all-the-icons-ibuffer
+(use-package all-the-icons-ibuffer
   :defer t
   :init
   (all-the-icons-ibuffer-mode 1))
@@ -851,7 +841,7 @@ the display."
 ;; docstrings for commands in M-x, variable values in "C-h v", file
 ;; sizes and permissions in "C-x C-f", and much more.
 
-(use-package! marginalia
+(use-package marginalia
   :init
   (marginalia-mode)
   (advice-add #'marginalia-cycle :after
@@ -871,18 +861,18 @@ the display."
 ;; to load, as the hook function is then placed before the other modes
 ;; to ensure direnv integration is working as expected.
 
-(use-package! envrc
+(use-package envrc
   :defer t
   :init (envrc-global-mode))
 
 ;;; ripgrep
 
-(use-package! ripgrep
+(use-package ripgrep
   :defer t)
 
 ;;; ace-window
 
-(use-package! ace-window
+(use-package ace-window
   :defer t
   :init
   (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r))
@@ -896,11 +886,11 @@ the display."
 
 ;;; hydra
 
-(use-package! hydra)
+(use-package hydra)
 
 ;;; default-text-scale
 
-(use-package! default-text-scale
+(use-package default-text-scale
   :defer t
   :after hydra)
 
@@ -943,9 +933,11 @@ the display."
 
 ;; Diminish only.
 (use-package eldoc
+  :ensure nil
   :diminish eldoc-mode)
 
-(use-package! dired
+(use-package dired
+  :ensure nil
   :defer t
   :config
   (put 'dired-find-alternate-file 'disabled nil)
@@ -954,7 +946,7 @@ the display."
   (dired-listing-switches "-la --group-directories-first"))
 
 ;; Beautify dired a bit.
-(use-package! diredfl
+(use-package diredfl
   :defer t
   :after dired
   :hook (dired-mode . diredfl-mode))
@@ -968,7 +960,7 @@ the display."
    (wgrep-too-many-file-length 15)))
 
 ;; Start `gcmh-mode' for better GC behavior.
-(use-package! gcmh
+(use-package gcmh
   :diminish gcmh-mode
   :init
   (gcmh-mode 1))
