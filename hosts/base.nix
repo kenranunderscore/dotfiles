@@ -124,6 +124,7 @@ in {
         hermit
         ibm-plex
         inconsolata
+        iosevka
         jetbrains-mono
         roboto-mono
         source-code-pro
