@@ -11,7 +11,6 @@
 
 ;; The `general' package allows us to easily define keybindings. This
 ;; is especially useful for `evil-mode'.
-
 (use-package general)
 
 ;; Some additional and changed Emacs keybindings go here (evil- and
@@ -23,15 +22,14 @@
  "C-h M" 'describe-keymap)
 
 ;;; I do not want customizations done via `customize' to end up in
-;;; this file.  Use a separate file instead.
-
+;;; this file.  Use a separate file instead and load that one on
+;;; startup.
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'no-error)
 
 ;; I wish to know how fast my Emacs is starting.  I'm not sure how to
 ;; make use of all that `use-package' has to offer in that regard yet,
 ;; but I want to at least see when I've made things worse.
-
 (add-hook
  'emacs-startup-hook
  (lambda ()
@@ -42,69 +40,64 @@
      (float-time (time-subtract after-init-time before-init-time)))
     gcs-done)))
 
-;; Disable the graphical UI things like the menu bar, the splash
-;; screen, and others.
-
+;; Disable the graphical UI things like the tool and menu bars, the
+;; splash screen, and others.
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tooltip-mode -1)
-
 (setq inhibit-splash-screen t)
 
 ;; The default cursor is black, which interferes with mostly using a
 ;; dark theme.  Brighten it up a bit.
-
 (set-mouse-color "white")
 (add-hook 'server-after-make-frame-hook
           (lambda () (set-mouse-color "white")))
 
 ;; We want point to be inside newly opening help buffers so we may
 ;; quickly close them with q.
-
 (setq help-window-select t)
 
 ;; Resize proportionally after deleting windows.
-
 (setq window-combination-resize t)
 
-;; Since I cannot ever decide which theme I like best, there are a few
-;; themes, or collections thereof, installed in my nix configuration:
-;;
-;; - https://protesilaos.com/modus-themes/
-;; - https://github.com/hlissner/emacs-doom-themes
-;; - https://github.com/emacs-jp/replace-colorthemes
+;; Answering a question with =yes= instead of just =y= is just
+;; annoying.
+(fset 'yes-or-no-p 'y-or-n-p)
 
+;; Since I cannot ever decide which theme I like best, there are a few
+;; themes loaded here.
+
+;; https://protesilaos.com/modus-themes/
 (use-package modus-themes
   :defer t)
 
+;; https://github.com/hlissner/emacs-doom-themes
 (use-package doom-themes
   :config
   (load-theme 'doom-dracula t)
   :custom
   (doom-dracula-brighter-modeline t))
 
-;; Answering a question with =yes= instead of just =y= is just
-;; annoying.
+;;; Font faces and other settings.
 
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Font faces and setting.
-
-;; Good settings:
+;; Tried-and-approved fonts/heights:
 ;; - Terminus 160
 ;; - Inconsolata 160
 ;; - Camingo Code 140
 ;; - Fira Code 130
-
-(setq my/monospace-font "Fira Code")
+;; - Iosevka 140
+(setq my/monospace-font "Iosevka")
 (setq my/variable-font "Cantarell")
-(setq my/default-font-height 130)
+(setq my/default-font-height 140)
 
 (defun my/set-face-attributes ()
+  "Set the face attributes for 'default, 'fixed-pitch and
+'variable-pitch styles."
   (set-face-attribute
    'default nil
    :font my/monospace-font
+   :weight 'light
    :height my/default-font-height)
   (set-face-attribute
    'fixed-pitch nil
@@ -115,11 +108,13 @@
    :font my/variable-font
    :height 1.0))
 
+;; Now set all the face attributes, but also register a hook that
+;; makes sure that these also work when using the Emacs daemon
+;; together with emacsclient.
 (my/set-face-attributes)
 (add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
 
 ;; Enable line numbers in programming modes.
-
 (use-package display-line-numbers
   :hook ((prog-mode . display-line-numbers-mode)
          (conf-mode . display-line-numbers-mode))
@@ -128,7 +123,6 @@
   (column-number-mode -1))
 
 ;; Insert newline at the end of files.
-
 (setq require-final-newline t)
 (setq mode-require-final-newline t)
 
@@ -137,11 +131,9 @@
 ;; increase the minimum severity for logs to be shown by setting
 ;; warning-minimum-level to :error or disable the warnings for native
 ;; compilation entirely like this:
-
 (setq native-comp-async-report-warnings-errors nil)
 
 ;; Use spaces for indentation by default.
-
 (setq-default indent-tabs-mode nil)
 
 ;;; Vim emulation with evil-mode
@@ -152,20 +144,18 @@
 ;; with the default Emacs-style bindings many packages introduce.  I
 ;; will use this to try and create more vim-inspired mnemonic
 ;; keybindings (say, p for project-specific commands, g for git etc.)
-
 (general-create-definer with-leader
   :prefix "SPC")
 
 ;; A local leader key is something that is usually used to access
 ;; situational commands, for instance language-specific or
 ;; mode-specific ones.
-
 (general-create-definer with-local-leader
   :prefix ",")
 
-;; The evil package offers a very complete vim experience inside of
-;; Emacs.
-
+;; This is a list of modes that we do not want the evil mode (defined
+;; below) to be enabled in by default. It's mostly a preference of
+;; mine to use Emacs mode in REPL, terminal and shell buffers.
 (setq my/holy-modes
       '(eshell-mode
         notmuch-hello-mode
@@ -175,6 +165,8 @@
         sly-mrepl-mode
         term-mode))
 
+;; The evil package offers a very complete vim experience inside of
+;; Emacs.
 (use-package evil
   :config
   (evil-mode 1)
@@ -195,7 +187,6 @@
 ;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not
 ;; sure whether I wish to use all of these (I think I don't need evil
 ;; in shells and REPLs), but I'll give them a try.
-
 (use-package evil-collection
   :after evil
   :config
@@ -209,7 +200,6 @@
 ;; normal parentheses, ds] to delete surrounding brackets, or cd[{ to
 ;; change surrounding brackets to curly braces with whitespace
 ;; padding.
-
 (use-package evil-surround
   :after evil
   :config
@@ -221,7 +211,6 @@
 ;; the 'f', 'F', 't', 'T' searches repeatable by pressing the
 ;; respective key again to jump by one match.  It also adds
 ;; highlighting to those motions.
-
 (use-package evil-snipe
   :after evil
   :diminish evil-snipe-local-mode
@@ -231,7 +220,6 @@
 
 ;; Create nice custom mappings for normal mode (and others) that are
 ;; accessed with the SPC key.
-
 (with-leader
   :states '(normal visual)
   ;; Give SPC SPC one more chance
@@ -261,6 +249,9 @@
   "s p" 'consult-ripgrep
   "s t" 'load-theme)
 
+;; Enable C-w for window management everywhere.  This means that I
+;; need to override the Emacs default binding, which can be done via
+;; general's :keymaps 'override.
 (general-define-key
  :states '(normal visual motion emacs operator)
  :keymaps 'override
@@ -273,8 +264,8 @@
 
 ;;;; Package-specific configuration
 
-;;; Doom modeline
-
+;; Replace the default modeline with doom-modeline, which looks a bit
+;; nicer due to having symbols/icons, and is also more configurable.
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom
@@ -303,24 +294,23 @@ the display."
   ;; Toggle minor mode display
   "t m" '(my/toggle-modeline-minor-mode-display :which-key "minor mode display"))
 
-;;; Nix expressions
-
+;; A mode for writing Nix expressions in.
 (use-package nix-mode
   :mode "\\.nix\\'")
 
 ;;; Markdown
-
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc"))
 
-;;; Org-mode
+;;; I use org-mode for lots of things now, but have only recently
+;;; started doing so, hence my configuration is very much a work in
+;;; progress.
 
 ;; I want my org files to have indentation corresponding to the header
 ;; level.
-
 (use-package org-indent
   :diminish org-indent-mode)
 
@@ -328,7 +318,6 @@ the display."
 ;; automatically break overly long lines into smaller pieces when
 ;; typing.  We may still use M-q to re-fill paragraph when editing
 ;; text.  After loading org-mode, we then run our custom font setup.
-
 (use-package org
   :hook
   ((org-mode . auto-fill-mode)
@@ -366,7 +355,8 @@ the display."
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers))))
 
-;; Keybindings
+;; Add some globally useful Org keybindings under SPC o, like for
+;; capturing, storing links etc.
 (with-leader
   :states '(normal visual)
   "o" '(:which-key "org-mode" :ignore t)
@@ -378,21 +368,18 @@ the display."
 
 ;; The org-bullets packages enables us to use UTF-8 characters for the
 ;; bullet points in org headers.
-
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
   :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 ;; Render unordered list bullet points as dots instead of minus/plus.
-
 (font-lock-add-keywords
  'org-mode
- '(("^ *\\([-+]\\) "
+ '(("^ *\\([-]\\) "
     (0 (prog1 ()
          (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; For short presentations org-present looks like it is a good option.
-
 (use-package org-present
   :hook ((org-present-mode . (lambda ()
                                (org-present-big)
@@ -407,11 +394,16 @@ the display."
 
 ;;; Haskell
 
+;; Provide an interactive mode for writing Haskell.  I can work with a
+;; REPL, get feedback and compilation errors shown in the code, and so
+;; on.
 (use-package haskell-mode
   :custom
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
 
+;; Define some keybindings that are local to the
+;; interactive-haskell-mode using the local leader key.
 (with-local-leader
   :states 'normal
   :keymaps 'interactive-haskell-mode-map
@@ -425,22 +417,18 @@ the display."
   "i a" '(haskell-add-import :which-key "add import"))
 
 ;;; Dhall
-
 (use-package dhall-mode
   :mode "\\.dhall\\'")
 
 ;;; Docker
-
 (use-package dockerfile-mode
   :defer t)
 
 ;;; YAML
-
 (use-package yaml-mode
   :defer t)
 
 ;;; Clojure with CIDER
-
 (use-package clojure-mode
   :defer t)
 
@@ -449,12 +437,10 @@ the display."
   :defer t)
 
 ;;; CSV
-
 (use-package csv-mode
   :defer t)
 
 ;;; PlantUML
-
 (use-package plantuml-mode
   :defer t
   :init
@@ -464,7 +450,6 @@ the display."
   (setq plantuml-default-exec-mode 'executable))
 
 ;;; Common Lisp
-
 (use-package sly
   :defer t
   :config
@@ -474,7 +459,6 @@ the display."
   :defer t)
 
 ;;; Racket
-
 (use-package racket-mode
   :defer t
   :hook ((racket-mode . racket-xp-mode)
@@ -482,7 +466,6 @@ the display."
          (racket-repl-mode . racket-unicode-input-method-enable)))
 
 ;;; Java (for Crafting Interpreters)
-
 (use-package meghanada
   :defer t
   :init
@@ -499,17 +482,16 @@ the display."
 ;; it's more in line with the rest of this configuration to try out
 ;; something more lightweight and closer to vanilla Emacs.  This is
 ;; where eglot comes into play.
-
 (use-package eglot
   :hook (haskell-mode . eglot-ensure))
 
 ;;; Emacs as e-mail client
 
-;; I've tried and used mu4e in the past, but always liked the idea of
-;; notmuch better.
-
+;; Used by message-mode.
 (setq user-full-name "Johannes Maier")
 
+;; I've tried and used mu4e in the past, but always liked the idea of
+;; notmuch better.
 (use-package notmuch
   :defer t
   :config
@@ -526,7 +508,6 @@ the display."
 
 ;; To switch identities (which I basically only use to set my work
 ;; signature based on my From address), I use gnus-alias.
-
 (use-package gnus-alias
   :defer t
   :config
@@ -565,14 +546,12 @@ the display."
 ;; line.  It's especially useful for certain modes that are globally
 ;; enabled anyway.  Use-package has built-in support for it available
 ;; with the :diminish keyword.
-
 (use-package diminish)
 
 ;;; Helpful
 
 ;; This gives us better and more readable help pages.  We also replace
 ;; some built-in C-h keybings with helpful-* functions.
-
 (use-package helpful
   :after evil
   :bind (("C-h f" . helpful-callable)
@@ -582,7 +561,6 @@ the display."
   (evil-set-initial-state 'helpful-mode 'motion))
 
 ;;; Projectile
-
 (use-package projectile
   :init
   (projectile-mode +1))
@@ -592,10 +570,11 @@ the display."
   "p" '(projectile-command-map :which-key "projectile"))
 
 ;;; Magit
-
 (use-package magit
   :hook (git-commit-mode . evil-insert-state))
 
+;; Magit-specific keybindings are useful in a global scope, thus they
+;; may be accessed under SPC g.
 (with-leader
   :states '(normal visual)
   "g" '(:ignore t :which-key "git")
@@ -607,7 +586,6 @@ the display."
   "g d" '(magit-diff :which-key "diff"))
 
 ;;; Smartparens
-
 (use-package smartparens
   :diminish smartparens-mode
   :config
@@ -652,7 +630,6 @@ the display."
   "c f" 'sp-indent-defun)
 
 ;;; evil-cleverparens
-
 (use-package evil-cleverparens
   :diminish evil-cleverparens-mode
   :after smartparens
@@ -674,7 +651,6 @@ the display."
 ;; where after a while I tried out ivy and loved it.  Now I want to
 ;; check out some of the new, more light-weight packages like
 ;; selectrum and vertico.
-
 (use-package vertico
   :init
   (vertico-mode +1)
@@ -724,7 +700,6 @@ the display."
 ;; quite some time, though not in any extent close to full.  This
 ;; defines some basic bindings mostly taken from an example in its
 ;; readme.
-
 (use-package consult
   :bind (;; C-x bindings
          ("C-x b" . consult-buffer)
@@ -760,7 +735,6 @@ the display."
 ;; TODO :init narrowing, preview delay
 
 ;;; Embark
-
 (use-package embark
   :bind (("C-," . embark-act)
          ("C-h B" . embark-bindings))
@@ -772,34 +746,24 @@ the display."
   :demand t
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
 
-;;; Corfu
-
-;; While corfu is really nice overall, it's not the best choice for
-;; Haskell programming (yet), since indentation in haskell-mode is
-;; almost never "done", hence <M-TAB> needs to be used there for
-;; completion.
-
-;; (use-package corfu
-;;   :config
-;;   (corfu-global-mode)
-;;   (setq completion-cycle-threshold 3)
-;;   (setq tab-always-indent 'complete))
-
 ;;; company
 
+;; Company provides auto-completions in nearly every context.
 (use-package company
   :hook ((after-init . global-company-mode))
   :diminish company-mode
-  :init (define-advice company-capf
-            (:around (orig-fun &rest args) set-completion-styles)
-          (let ((completion-styles '(basic partial-completion)))
-            (apply orig-fun args)))
+  :init
+  ;; Without this orderless would be used by default for company
+  ;; completions.  It doesn't fit there as well though.
+  (define-advice company-capf
+      (:around (orig-fun &rest args) set-completion-styles)
+    (let ((completion-styles '(basic partial-completion)))
+      (apply orig-fun args)))
   :custom
   ((company-idle-delay 0)
    (company-selection-wrap-around t)))
 
-;;; hl-todo
-
+;;; Highlight "todo", "fixme" and other keywords everywhere.
 (use-package hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
@@ -808,7 +772,6 @@ the display."
 
 ;; When pressing the first key in a hotkey chain, show a popup that
 ;; displays the possible completions and associated functions.
-
 (use-package which-key
   :defer t
   :custom
@@ -821,7 +784,6 @@ the display."
 
 ;; Attach beautiful symbols to, for instance, file names in a dired or
 ;; ibuffer buffer.
-
 (use-package all-the-icons)
 
 (use-package all-the-icons-dired
@@ -840,7 +802,6 @@ the display."
 ;; Annotate minibuffer completions, like showing the bound keys and
 ;; docstrings for commands in M-x, variable values in "C-h v", file
 ;; sizes and permissions in "C-x C-f", and much more.
-
 (use-package marginalia
   :init
   (marginalia-mode)
@@ -860,18 +821,15 @@ the display."
 ;; direnv-mode.  Note: this should probably be one of the last modes
 ;; to load, as the hook function is then placed before the other modes
 ;; to ensure direnv integration is working as expected.
-
 (use-package envrc
   :defer t
   :init (envrc-global-mode))
 
 ;;; ripgrep
-
 (use-package ripgrep
   :defer t)
 
 ;;; ace-window
-
 (use-package ace-window
   :defer t
   :init
@@ -885,11 +843,9 @@ the display."
  "C-w C-w" 'ace-window)
 
 ;;; hydra
-
 (use-package hydra)
 
 ;;; default-text-scale
-
 (use-package default-text-scale
   :defer t
   :after hydra)
