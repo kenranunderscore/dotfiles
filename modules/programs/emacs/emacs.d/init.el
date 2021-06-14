@@ -97,7 +97,7 @@
   (set-face-attribute
    'default nil
    :font my/monospace-font
-   :weight 'light
+   :weight 'regular
    :height my/default-font-height)
   (set-face-attribute
    'fixed-pitch nil
