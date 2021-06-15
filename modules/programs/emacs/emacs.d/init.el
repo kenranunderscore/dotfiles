@@ -145,7 +145,10 @@
 ;; will use this to try and create more vim-inspired mnemonic
 ;; keybindings (say, p for project-specific commands, g for git etc.)
 (general-create-definer with-leader
-  :prefix "SPC")
+  :keymaps 'override
+  :states '(normal insert emacs visual motion)
+  :prefix "SPC"
+  :non-normal-prefix "C-SPC")
 
 ;; A local leader key is something that is usually used to access
 ;; situational commands, for instance language-specific or
@@ -221,7 +224,6 @@
 ;; Create nice custom mappings for normal mode (and others) that are
 ;; accessed with the SPC key.
 (with-leader
-  :states '(normal visual)
   ;; Give SPC SPC one more chance
   "SPC" '(execute-extended-command :which-key "M-x")
   ;; Different ways to quit Emacs
@@ -290,7 +292,6 @@ the display."
   (redraw-modeline))
 
 (with-leader
-  :states '(normal visual)
   ;; Toggle minor mode display
   "t m" '(my/toggle-modeline-minor-mode-display :which-key "minor mode display"))
 
@@ -358,7 +359,6 @@ the display."
 ;; Add some globally useful Org keybindings under SPC o, like for
 ;; capturing, storing links etc.
 (with-leader
-  :states '(normal visual)
   "o" '(:which-key "org-mode" :ignore t)
   "o a" 'org-agenda
   "o c" 'org-capture
@@ -566,7 +566,6 @@ the display."
   (projectile-mode +1))
 
 (with-leader
-  :states '(normal visual)
   "p" '(projectile-command-map :which-key "projectile"))
 
 ;;; Magit
@@ -576,7 +575,6 @@ the display."
 ;; Magit-specific keybindings are useful in a global scope, thus they
 ;; may be accessed under SPC g.
 (with-leader
-  :states '(normal visual)
   "g" '(:ignore t :which-key "git")
   "g s" '(magit-status :which-key "status")
   "g S" '(magit-status-here :which-key "status here")
@@ -626,7 +624,6 @@ the display."
    sp-lisp-modes))
 
 (with-leader
-  :states '(normal visual)
   "c f" 'sp-indent-defun)
 
 ;;; evil-cleverparens
@@ -867,7 +864,6 @@ the display."
   ("q" nil "exit"))
 
 (with-leader
-  :states '(normal visual)
   "s s" '(hydra-global-zoom/body :which-key "font zoom"))
 
 ;;; Built-in packages
