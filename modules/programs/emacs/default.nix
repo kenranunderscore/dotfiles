@@ -89,6 +89,7 @@ in {
             envrc
             evil-cleverparens
             evil-collection
+            evil-org
             evil-snipe
             evil-surround
             gnus-alias

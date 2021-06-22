@@ -221,6 +221,16 @@
   (evil-snipe-mode 1)
   (evil-snipe-override-mode 1))
 
+;; Evil-org enables me to use evil keybindings in org-agenda.  As a
+;; bonus it adds some keybindings and text objects for org files as
+;; well.
+(use-package evil-org
+  :after (evil org)
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 ;; Create nice custom mappings for normal mode (and others) that are
 ;; accessed with the SPC key.
 (with-leader
