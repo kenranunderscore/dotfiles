@@ -19,7 +19,8 @@
 (general-define-key
  :states '(normal visual motion emacs operator)
  "C-h F" 'describe-face
- "C-h M" 'describe-keymap)
+ "C-h M" 'describe-keymap
+ "C-h V" 'set-variable)
 
 ;;; I do not want customizations done via `customize' to end up in
 ;;; this file.  Use a separate file instead and load that one on
