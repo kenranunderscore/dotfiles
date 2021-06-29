@@ -161,20 +161,27 @@
 ;; below) to be enabled in by default. It's mostly a preference of
 ;; mine to use Emacs mode in REPL, terminal and shell buffers.
 (setq my/holy-modes
-      '(eshell-mode
-        notmuch-hello-mode
-        racket-repl-mode
-        racket-stepper-mode
-        shell-mode
-        sly-mrepl-mode
-        term-mode))
+      '((eshell-mode . eshell)
+        (notmuch-hello-mode . notmuch)
+        (racket-repl-mode . nil)
+        (racket-stepper-mode . nil)
+        (shell-mode . nil)
+        (sly-mrepl-mode . nil)
+        (term-mode . (term term ansi-term multi-term))))
+
+(setq my/evil-holy-modes
+      (mapcar #'car my/holy-modes))
+
+(setq my/evil-collection-exemptions
+      (remove nil
+              (mapcar #'cdr my/holy-modes)))
 
 ;; The evil package offers a very complete vim experience inside of
 ;; Emacs.
 (use-package evil
   :config
   (evil-mode 1)
-  (dolist (mode my/holy-modes)
+  (dolist (mode my/evil-holy-modes)
     (evil-set-initial-state mode 'emacs))
   (setq evil-insert-state-cursor '(hbar . 3))
   :custom
@@ -194,6 +201,8 @@
 (use-package evil-collection
   :after evil
   :config
+  (dolist (x my/evil-collection-exemptions)
+    (delete x evil-collection-mode-list))
   (evil-collection-init)
   :custom
   ((evil-collection-company-use-tng t)
