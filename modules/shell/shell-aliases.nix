@@ -16,11 +16,14 @@
   gd = "git diff";
   gds = "git diff --staged";
   gf = "git fetch";
+  gi = "git init";
   gl = "git pull";
   glog = "git log --oneline --decorate --graph";
   glo = "git log --oneline --decorate";
   gm = "git merge";
   gp = "git push";
+  gr = "git remote";
+  gra = "git remote add";
   grb = "git rebase";
   grs = "git restore";
   grss = "git restore --staged";
