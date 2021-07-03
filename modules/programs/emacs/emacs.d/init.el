@@ -162,7 +162,7 @@
 ;; mine to use Emacs mode in REPL, terminal and shell buffers.
 (setq my/holy-modes
       '((eshell-mode . eshell)
-        (notmuch-hello-mode . notmuch)
+        (notmuch-hello-mode . nil)
         (racket-repl-mode . nil)
         (racket-stepper-mode . nil)
         (shell-mode . nil)
@@ -204,6 +204,7 @@
   (dolist (x my/evil-collection-exemptions)
     (delete x evil-collection-mode-list))
   (evil-collection-init)
+  (evil-collection-inhibit-insert-state 'notmuch-hello-mode-map)
   :custom
   ((evil-collection-company-use-tng t)
    (evil-collection-want-unimpaired-p nil)))
@@ -534,7 +535,11 @@ the display."
   (mail-specify-envelope-from 'header)
   (mail-user-agent 'message-user-agent)
   (notmuch-show-all-multipart/alternative-parts nil)
-  (notmuch-always-prompt-for-sender t))
+  (notmuch-always-prompt-for-sender t)
+  (notmuch-hello-sections '(notmuch-hello-insert-header
+                            notmuch-hello-insert-saved-searches
+                            notmuch-hello-insert-alltags
+                            notmuch-hello-insert-footer)))
 
 ;; To switch identities (which I basically only use to set my work
 ;; signature based on my From address), I use gnus-alias.
