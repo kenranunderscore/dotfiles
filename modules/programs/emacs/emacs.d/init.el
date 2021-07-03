@@ -187,7 +187,7 @@
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
-   (evil-want-C-w-delete nil)
+   (evil-want-C-w-delete t)
    (evil-want-Y-yank-to-eol t)
    (evil-undo-system 'undo-redo))
   :init
@@ -275,7 +275,7 @@
 ;; need to override the Emacs default binding, which can be done via
 ;; general's :keymaps 'override.
 (general-define-key
- :states '(normal visual motion emacs operator)
+ :states '(normal visual motion operator)
  :keymaps 'override
  "C-w" 'evil-window-map
  "C-w C-h" 'evil-window-left
@@ -283,6 +283,16 @@
  "C-w C-j" 'evil-window-down
  "C-w C-l" 'evil-window-right
  "C-w C-d" 'evil-quit)
+
+;; C-l is a normal Emacs hotkey that I don't need or use because of
+;; evil, and in the modes that I've disabled evil for I don't use it
+;; either.  It thus seems like a good choice to have as a fallback for
+;; window management, as especially in terminal or shell modes I like
+;; being able to use C-w like in a terminal or in vim.
+(general-define-key
+ :states '(normal visual motion operator insert emacs)
+ :keymaps 'override
+ "C-l" 'evil-window-map)
 
 ;;;; Package-specific configuration
 
@@ -855,7 +865,7 @@ the display."
   (set-face-attribute 'aw-leading-char-face nil :height 2.5))
 
 (general-define-key
- :states '(normal visual emacs operator motion)
+ :states '(normal visual operator motion)
  :keymaps 'override
  "C-w C-w" 'ace-window)
 
