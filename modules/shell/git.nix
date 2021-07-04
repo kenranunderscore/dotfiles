@@ -27,6 +27,7 @@ in {
         # Vim
         "*.swp"
         # Direnv
+        ".direnv/"
         ".envrc"
         # macOS
         ".DS_Store"
