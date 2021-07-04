@@ -286,16 +286,6 @@
  "C-w C-l" 'evil-window-right
  "C-w C-d" 'evil-quit)
 
-;; C-l is a normal Emacs hotkey that I don't need or use because of
-;; evil, and in the modes that I've disabled evil for I don't use it
-;; either.  It thus seems like a good choice to have as a fallback for
-;; window management, as especially in terminal or shell modes I like
-;; being able to use C-w like in a terminal or in vim.
-(general-define-key
- :states '(normal visual motion operator insert emacs)
- :keymaps 'override
- "C-l" 'evil-window-map)
-
 ;;;; Package-specific configuration
 
 ;; Replace the default modeline with doom-modeline, which looks a bit
@@ -874,6 +864,18 @@ the display."
  :states '(normal visual operator motion)
  :keymaps 'override
  "C-w C-w" 'ace-window)
+
+;; C-l is a normal Emacs hotkey that I don't need or use because of
+;; evil, and in the modes that I've disabled evil for I don't use it
+;; either.  It thus seems like a good choice to have as a fallback for
+;; window management, as especially in terminal or shell modes I like
+;; being able to use C-w like in a terminal or in vim.  I used to bind
+;; 'evil-window-map to C-l, but perhaps it's also a good key to have
+;; 'ace-window on as in most cases it's what I'd use anyway.
+(general-define-key
+ :states '(normal visual motion operator insert emacs)
+ :keymaps 'override
+ "C-l" 'ace-window)
 
 ;;; hydra
 (use-package hydra)
