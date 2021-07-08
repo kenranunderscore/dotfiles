@@ -271,7 +271,9 @@
   "s" '(:ignore t :which-key "search/switch")
   "s g" 'consult-git-grep
   "s p" 'consult-ripgrep
-  "s t" 'load-theme)
+  "s t" 'load-theme
+  ;; Window management (redundant)
+  "w" '(evil-window-map :which-key "windows"))
 
 ;; Enable C-w for window management everywhere.  This means that I
 ;; need to override the Emacs default binding, which can be done via
