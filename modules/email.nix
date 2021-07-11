@@ -91,8 +91,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       };
     };
 
-    home.packages = with pkgs;
-      [ muchsync ] ++ lib.optionals (!cfg.isSyncServer) [ notmuch ];
+    home.packages = [ pkgs.muchsync ];
 
     programs.notmuch = {
       enable = true;
