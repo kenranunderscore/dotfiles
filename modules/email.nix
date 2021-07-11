@@ -98,7 +98,18 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       enable = true;
       hooks = mkIf cfg.isSyncServer {
         preNew = "mbsync --all";
+        postNew = ''
+          notmuch tag +work -- tag:new and to:johannes.maier@active-group.de
+          notmuch tag +private -- tag:new and to:johb.maier@gmail.com
+          notmuch tag +private -- tag:new and to:johannes.maier@mailbox.org
+          notmuch tag +sent -- tag:new and from:johb.maier@mailbox.org
+          notmuch tag +sent -- tag:new and from:johannes.maier@mailbox.org
+          notmuch tag +sent -- tag:new and from:johannes.maier@active-group.de
+          notmuch tag -new +unread +inbox -- tag:new
+        '';
       };
+      new.tags = [ "new" ];
+      search.excludeTags = [ "deleted" "spam" ];
     };
 
     services.muchsync = mkIf (!cfg.isSyncServer) {
