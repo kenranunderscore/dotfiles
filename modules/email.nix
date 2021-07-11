@@ -93,9 +93,9 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     home.packages = [ pkgs.muchsync ];
 
-    programs.notmuch = {
+    programs.notmuch = if cfg.isSyncServer then {
       enable = true;
-      hooks = mkIf cfg.isSyncServer {
+      hooks = {
         preNew = "mbsync --all";
         postNew = ''
           notmuch tag +work -- tag:new and to:johannes.maier@active-group.de
@@ -108,7 +108,9 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
         '';
       };
       new.tags = [ "new" ];
-      search.excludeTags = [ "deleted" "spam" ];
+    } else {
+      # Need this for muchsync to work.
+      enable = true;
     };
 
     services.muchsync = mkIf (!cfg.isSyncServer) {
