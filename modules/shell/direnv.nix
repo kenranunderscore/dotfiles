@@ -10,7 +10,7 @@ in {
       enable = true;
       enableBashIntegration = true;
       enableFishIntegration = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv.enable = true;
     };
   };
 }
