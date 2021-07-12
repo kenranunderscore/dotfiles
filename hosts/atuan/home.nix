@@ -22,7 +22,7 @@
       emacs.nativeComp = true;
       kitty = {
         useLoginShell = false;
-        fontSize = "10.0";
+        fontSize = "12.0";
       };
     };
     shell = { git.email = "johb.maier@gmail.com"; };
