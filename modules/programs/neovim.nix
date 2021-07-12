@@ -8,7 +8,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = [ pkgs.neovim-nightly ];
     nixpkgs.overlays = let
-      rev = "cf6e8a71c34b6dea741f920f9e6fe4b5328fb2b5";
+      rev = "8814fde215d6d34036c55135f33471a0edf07453";
       neovimOverlay = import (builtins.fetchTarball {
         url =
           "https://github.com/nix-community/neovim-nightly-overlay/archive/${rev}.tar.gz";
