@@ -5,6 +5,8 @@ in with lib; {
   options.modules.shell.fish = { enable = mkEnableOption "fish"; };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.starship ];
+
     programs.fish = {
       enable = true;
       functions = {
@@ -29,15 +31,6 @@ in with lib; {
           };
         }
         {
-          name = "spacefish";
-          src = pkgs.fetchFromGitHub {
-            owner = "matchai";
-            repo = "spacefish";
-            rev = "b1023a9d60fe1ae7234721ad2569b7c563aac46a";
-            sha256 = "0abj7g9kydb1am8kwx136wzlvj90z9ic2lfr2gg20jfr5k0s32f9";
-          };
-        }
-        {
           name = "fish-async-prompt";
           src = pkgs.fetchFromGitHub {
             owner = "acomagu";
@@ -57,6 +50,7 @@ in with lib; {
         }
       ];
       shellAbbrs = import ./shell-aliases.nix;
+      promptInit = "${pkgs.starship}/bin/starship init fish | source";
     };
   };
 }
