@@ -2,7 +2,14 @@
 
 let cfg = config.modules.desktop.i3;
 in {
-  options.modules.desktop.i3 = { enable = lib.mkEnableOption "i3"; };
+  options.modules.desktop.i3 = {
+    enable = lib.mkEnableOption "i3";
+
+    terminal = lib.mkOption {
+      type = lib.types.str;
+      default = "${pkgs.kitty}/bin/kitty";
+    };
+  };
 
   config = {
     programs.i3status = {
@@ -21,10 +28,10 @@ in {
     xsession.windowManager.i3 = {
       enable = true;
       config = rec {
+        inherit (cfg) terminal;
         modifier = "Mod4";
         startup = [ ];
         menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Terminus-14'";
-        terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
         window = {
           titlebar = false;
           border = 0;

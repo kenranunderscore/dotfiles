@@ -20,7 +20,12 @@ in rec {
   };
 
   modules = {
-    desktop = { i3.enable = true; };
+    desktop = {
+      i3 = {
+        enable = true;
+        terminal = "${pkgs.kittyWrapped}/bin/ky -e ${hosts.base.shellPath}";
+      };
+    };
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
