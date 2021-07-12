@@ -42,7 +42,7 @@ in {
             "exec ${pkgs.toggleKeyboardLayout}/bin/toggle_de_us";
         };
         bars = [{
-          position = "top";
+          position = "bottom";
           mode = "dock";
           statusCommand = "${pkgs.i3status}/bin/i3status";
           trayOutput = null;
