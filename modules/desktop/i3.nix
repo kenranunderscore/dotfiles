@@ -23,6 +23,7 @@ in {
       config = rec {
         modifier = "Mod4";
         startup = [ ];
+        menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Terminus-14'";
         terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
         window = { titlebar = false; };
         keybindings = lib.mkOptionDefault {
