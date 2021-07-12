@@ -124,9 +124,8 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       (_: super: {
         notmuch = super.notmuch.overrideAttrs (_old: rec {
           version = "0.32.2";
-          src = super.fetchgit {
-            url = "https://git.notmuchmail.org/git/notmuch";
-            rev = "04f378e673852ade100c54318124ff8c22f857b6";
+          src = builtins.fetchTarball {
+            url = "https://git.notmuchmail.org/git?p=notmuch;a=snapshot;h=04f378e673852ade100c54318124ff8c22f857b6;sf=tgz";
             sha256 = "sha256:1a1l2w4bas7vi9h9if6c3ah0xh3ky39pkrk0lmc666assp1shamd";
           };
         });
