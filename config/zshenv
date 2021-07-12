@@ -30,11 +30,8 @@ alias mv="command mv -i"
 
 # Aliases to manage emacs clients:
 #
-# Open an emacs frame in the current terminal.
-alias e="TERM=xterm-24bit emacsclient -a '' -t"
-#
 # Create a new graphical emacs frame, not tied to the shell.
-alias ee="emacsclient -a '' -c -n"
+alias e="emacsclient -a '' -c -n"
 #
 alias ec="emacsclient -a '' -c"
 #

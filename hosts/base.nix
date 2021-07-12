@@ -144,14 +144,6 @@ in {
       };
 
       activation = {
-        addXterm24bitTerminfo =
-          let tic = if pkgs.stdenv.isDarwin then "/usr/bin/tic" else "tic";
-          in dag.dagEntryAfter [ "writeBoundary" ] ''
-            $DRY_RUN_CMD ${tic} -x -o ~/.terminfo ${
-              ../config/xterm-24bit.terminfo
-            }
-          '';
-
         handlePrivateKeys = let privateKeyPath = cfg.privateDir + "/id_rsa";
         in dag.dagEntryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ln -sf ${

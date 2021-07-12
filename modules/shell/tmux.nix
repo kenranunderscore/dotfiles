@@ -18,7 +18,7 @@ in {
       escapeTime = 0;
       historyLimit = 50000;
       newSession = true;
-      terminal = "xterm-24bit";
+      terminal = "xterm-256color";
       resizeAmount = 10;
       shell = cfg.shellPath;
       extraConfig = ''
