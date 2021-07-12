@@ -97,6 +97,7 @@ in {
         neofetch
         nixfmt
         nix-index
+        nix-info
         nix-output-monitor
         nix-prefetch-git
         openssl
