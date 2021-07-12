@@ -27,16 +27,7 @@ in {
         terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
         window = {
           titlebar = false;
-          border = 1;
-        };
-        colors = {
-          focused = {
-            background = "#285577";
-            border = "#777777";
-            childBorder = "#777777";
-            indicator = "#2e9ef4";
-            text = "#ffffff";
-          };
+          border = 0;
         };
         keybindings = lib.mkOptionDefault {
           # Use normal vim keys for moving between windows.
