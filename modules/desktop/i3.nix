@@ -25,7 +25,19 @@ in {
         startup = [ ];
         menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Terminus-14'";
         terminal = "${pkgs.xst}/bin/xst -e ${pkgs.fish}/bin/fish";
-        window = { titlebar = false; };
+        window = {
+          titlebar = false;
+          border = 1;
+        };
+        colors = {
+          focused = {
+            background = "#285577";
+            border = "#777777";
+            childBorder = "#777777";
+            indicator = "#2e9ef4";
+            text = "#ffffff";
+          };
+        };
         keybindings = lib.mkOptionDefault {
           # Use normal vim keys for moving between windows.
           "${modifier}+h" = "focus left";
