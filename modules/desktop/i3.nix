@@ -15,6 +15,9 @@ in {
         color_degraded = "#3e4c96";
       };
     };
+
+    home.packages = [ pkgs.dmenu ];
+
     xsession.windowManager.i3 = {
       enable = true;
       config = rec {
