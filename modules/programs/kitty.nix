@@ -42,6 +42,7 @@ in {
         initial_window_width = 800;
         initial_window_height = 520;
         enable_audio_bell = false;
+        window_padding_width = "0 10 0 10";
         # Color scheme
         background = "#001014";
         foreground = "#405555";
