@@ -30,7 +30,10 @@ in {
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
-        startup = [ ];
+        startup = [{
+          command = "setxkbmap -layout us -variant altgr-intl";
+          always = true;
+        }];
         menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Terminus-14'";
         window = {
           titlebar = false;
@@ -51,9 +54,6 @@ in {
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce ''
             exec "${pkgs.rofi}/bin/rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
-          # Switch between DE and US keyboard layouts
-          "${modifier}+g" =
-            "exec ${pkgs.toggleKeyboardLayout}/bin/toggle_de_us";
         };
         bars = [{
           position = "bottom";
