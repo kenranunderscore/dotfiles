@@ -8,6 +8,8 @@ history
 auto-save-list/
 elpa/
 eshell/
+meghanada/
+racket-mode/
 transient/
 custom.el
 projectile.cache
