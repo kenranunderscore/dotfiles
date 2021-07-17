@@ -52,7 +52,6 @@ in rec {
   };
 
   programs = {
-    rofi.enable = true;
     msmtp.enable = true;
   };
 

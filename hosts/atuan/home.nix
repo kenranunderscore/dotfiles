@@ -29,7 +29,6 @@
   };
 
   programs = {
-    rofi.enable = true;
     msmtp.enable = true;
   };
 

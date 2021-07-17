@@ -52,8 +52,7 @@ in {
           "${modifier}+v" = "split v";
           "${modifier}+s" = "split h";
           "${modifier}+t" = "exec ${terminal}";
-          "${modifier}+space" = lib.mkForce ''
-            exec "${pkgs.rofi}/bin/rofi --no-startup-id -show drun -modi drun,run -show-icons"'';
+          "${modifier}+space" = lib.mkForce "exec ${menu}";
         };
         bars = [{
           position = "bottom";
