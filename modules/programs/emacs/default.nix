@@ -96,6 +96,7 @@ in {
             helpful
             hl-todo
             hydra
+            magit-todos
             marginalia
             notmuch
             ripgrep

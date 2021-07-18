@@ -600,6 +600,15 @@ the display."
 (use-package magit
   :hook (git-commit-mode . evil-insert-state))
 
+;; magit-todos shows lists of the keywords of hl-todo-mode in
+;; magit-status buffers, as well as in a dedicated list of todos
+;; accessible with magit-todos-list.  Note: The items have to be
+;; followed by a colon (more specifically, check out
+;; `magit-todos-keyword-suffix').
+(use-package magit-todos
+  :after (magit hl-todo)
+  :config (magit-todos-mode))
+
 ;; Magit-specific keybindings are useful in a global scope, thus they
 ;; may be accessed under SPC g.
 (with-leader
@@ -609,7 +618,8 @@ the display."
   "g l" '(magit-log :which-key "log")
   "g f" '(magit-pull-from-upstream :which-key "pull")
   "g p" '(magit-push :which-key "pull")
-  "g d" '(magit-diff :which-key "diff"))
+  "g d" '(magit-diff :which-key "diff")
+  "g t" '(magit-todos-list :which-key "todos"))
 
 ;;; Smartparens
 (use-package smartparens
