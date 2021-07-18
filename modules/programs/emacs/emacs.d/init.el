@@ -591,7 +591,9 @@ the display."
 ;;; Projectile
 (use-package projectile
   :init
-  (projectile-mode +1))
+  (projectile-mode +1)
+  :custom
+  (projectile-switch-project-action #'projectile-commander))
 
 (with-leader
   "p" '(projectile-command-map :which-key "projectile"))
