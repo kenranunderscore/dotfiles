@@ -62,3 +62,18 @@ Xft.dpi:        96
 Xft.hinting:    true
 Xft.hintstyle:  hintfull
 Xft.rgba:       rgb
+
+! URxvt configuration
+URxvt.termName:       xterm-256color
+URxvt.skipScroll:     False
+URxvt.fading:         10
+URxvt.internalBorder: 10
+URxvt.visualBell:     False
+URxvt.scrollBar:      False
+URxvt.saveLines:      50000
+URxvt.font:           xft:Fira Code:pixelsize=16:antialias=true,\
+                      xft:FiraCode Nerd Font Mono:pixelsize=16:antialias=true
+URxvt.boldFont:       xft:Fira Code:style=Bold:pixelsize=16:antialias=true,\
+                      xft:FiraCode Nerd Font Mono:style=Bold:pixelsize=16:antialias=true
+URxvt.keysym.C-plus:  font-size:increase
+URxvt.keysym.C-minus: font-size:decrease

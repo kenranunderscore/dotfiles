@@ -106,6 +106,7 @@ in {
         ripgrep
         rlwrap
         rsync
+        rxvt-unicode
         sbcl
         scrot
         tree
@@ -127,6 +128,7 @@ in {
         inconsolata
         iosevka
         jetbrains-mono
+        nerdfonts
         roboto-mono
         source-code-pro
         terminus_font
