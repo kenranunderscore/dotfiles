@@ -118,10 +118,7 @@
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
   :hook ((prog-mode . display-line-numbers-mode)
-         (conf-mode . display-line-numbers-mode))
-  :config
-  (line-number-mode -1)
-  (column-number-mode -1))
+         (conf-mode . display-line-numbers-mode)))
 
 ;; Insert newline at the end of files.
 (setq require-final-newline t)
@@ -289,35 +286,6 @@
  "C-w C-d" 'evil-quit)
 
 ;;;; Package-specific configuration
-
-;; Replace the default modeline with doom-modeline, which looks a bit
-;; nicer due to having symbols/icons, and is also more configurable.
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :custom
-  (doom-modeline-minor-modes nil)
-  (doom-modeline-height 35)
-  (doom-modeline-persp-icon nil)
-  (doom-modeline-persp-name nil)
-  (doom-modeline-buffer-encoding nil)
-  (doom-modeline-percent-position nil)
-  (doom-modeline-icon t)
-  :config
-  (setq doom-modeline-percent-position nil))
-
-(defun my/toggle-modeline-minor-mode-display ()
-  "Sometimes it's useful to display those minor modes that I
-haven't diminished, like seeing what project type projectile
-inferred, or whether envrc-mode works as expected. This toggles
-the display."
-  (interactive)
-  (setq doom-modeline-minor-modes
-        (if doom-modeline-minor-modes nil t))
-  (redraw-modeline))
-
-(with-leader
-  ;; Toggle minor mode display
-  "t m" '(my/toggle-modeline-minor-mode-display :which-key "minor mode display"))
 
 ;; A mode for writing Nix expressions in.
 (use-package nix-mode

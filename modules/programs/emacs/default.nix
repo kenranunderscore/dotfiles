@@ -84,7 +84,6 @@ in {
             default-text-scale
             diminish
             diredfl
-            doom-modeline
             eglot
             envrc
             evil-cleverparens
