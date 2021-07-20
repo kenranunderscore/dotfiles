@@ -104,9 +104,9 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           notmuch tag +private -- tag:new and from:johb.maier@gmail.com
           notmuch tag +private -- tag:new and to:johannes.maier@mailbox.org
           notmuch tag +private -- tag:new and from:johannes.maier@mailbox.org
-          notmuch tag +sent -- tag:new and from:johb.maier@mailbox.org
-          notmuch tag +sent -- tag:new and from:johannes.maier@mailbox.org
-          notmuch tag +sent -- tag:new and from:johannes.maier@active-group.de
+          notmuch tag -new +sent -- tag:new and from:johb.maier@mailbox.org
+          notmuch tag -new +sent -- tag:new and from:johannes.maier@mailbox.org
+          notmuch tag -new +sent -- tag:new and from:johannes.maier@active-group.de
           notmuch tag -new +unread +inbox -- tag:new
         '';
       };
