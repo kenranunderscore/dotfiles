@@ -39,7 +39,7 @@ in rec {
       kitty = {
         enable = true;
         useLoginShell = false;
-        fontSize = "10.0";
+        fontSize = "12.0";
       };
       qutebrowser = {
         package = pkgs.writeShellScriptBin "qb" ''
