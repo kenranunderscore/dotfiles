@@ -1,0 +1,16 @@
+[character]
+success_symbol = "[❱](bold green)"
+error_symbol = "[❱](bold red)"
+
+[nix_shell]
+symbol = "❄️"
+format = 'via [$symbol$state()]($style) '
+
+[hg_branch]
+disabled = false
+
+[package]
+disabled = true
+
+[java]
+disabled = true

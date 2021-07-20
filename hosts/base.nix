@@ -75,6 +75,7 @@ in {
 
     xdg.configFile = {
       "nixpkgs/config.nix".source = ../nix/nixpkgs-config.nix;
+      "starship.toml".source = ../config/starship.toml;
     };
 
     home = {
