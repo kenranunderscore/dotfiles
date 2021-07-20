@@ -27,15 +27,15 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        package = pkgs.hack-font;
-        name = "Hack";
+        package = pkgs.fira-code;
+        name = "Fira Code";
       };
       settings = {
         term = "xterm-256color";
         shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
         macos_option_as_alt = true;
         font_size = cfg.fontSize;
-        adjust_line_height = 1;
+        adjust_line_height = 0;
         scrollback_lines = 50000;
         hide_window_decorations = false;
         remember_window_size = false;
