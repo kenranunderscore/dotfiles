@@ -577,7 +577,9 @@
 ;; `magit-todos-keyword-suffix').
 (use-package magit-todos
   :after (magit hl-todo)
-  :config (magit-todos-mode))
+  :config
+  (magit-todos-mode)
+  (setq magit-todos-rg-extra-args '("-M 120")))
 
 ;; Magit-specific keybindings are useful in a global scope, thus they
 ;; may be accessed under SPC g.
