@@ -98,8 +98,8 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       hooks = {
         preNew = "mbsync --all";
         postNew = ''
-          notmuch tag +work -- tag:new and to:/active-group\.de\$/
-          notmuch tag +work -- tag:new and from:/active-group\.de\$/
+          notmuch tag +work -- tag:new and to:/active-group\.de/
+          notmuch tag +work -- tag:new and from:/active-group\.de/
           notmuch tag +private -- tag:new and to:johb.maier@gmail.com
           notmuch tag +private -- tag:new and from:johb.maier@gmail.com
           notmuch tag +private -- tag:new and to:johannes.maier@mailbox.org
