@@ -46,7 +46,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
             enable = cfg.isSyncServer;
             create = "maildir";
             expunge = "both";
-            extraConfig = { channel = { Patterns = "* !Drafts"; }; };
+            patterns = [ "*" "!Drafts" ];
           };
           msmtp.enable = !cfg.isSyncServer;
           notmuch.enable = true;
@@ -71,9 +71,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
             enable = cfg.isSyncServer;
             create = "maildir";
             expunge = "both";
-            extraConfig = {
-              channel = { Patterns = ''* !Drafts !"Deleted Messages"''; };
-            };
+            patterns = [ "*" "!Drafts" "!Deleted Messages" ];
           };
           msmtp.enable = !cfg.isSyncServer;
           notmuch.enable = true;
