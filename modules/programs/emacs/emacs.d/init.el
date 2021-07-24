@@ -159,7 +159,7 @@
 ;; mine to use Emacs mode in REPL, terminal and shell buffers.
 (setq my/holy-modes
       '((eshell-mode . eshell)
-        (notmuch-hello-mode . nil)
+        (notmuch-hello-mode . notmuch)
         (racket-repl-mode . nil)
         (racket-stepper-mode . nil)
         (shell-mode . nil)
@@ -489,18 +489,33 @@
   :config
   (setq user-mail-address "johannes.maier@mailbox.org")
   :custom
+  ;; Settings for message-mode
   (message-send-mail-function 'message-send-mail-with-sendmail)
   (message-kill-buffer-on-exit t)
   (message-sendmail-envelope-from 'header)
+  ;; When replying to mail, choose the account according to the
+  ;; recipient address
   (mail-envelope-from 'header)
   (mail-specify-envelope-from 'header)
   (mail-user-agent 'message-user-agent)
+  ;; Notmuch-specific settings
+  (notmuch-show-logo nil)
   (notmuch-show-all-multipart/alternative-parts nil)
   (notmuch-always-prompt-for-sender t)
-  (notmuch-hello-sections '(notmuch-hello-insert-header
-                            notmuch-hello-insert-saved-searches
-                            notmuch-hello-insert-alltags
-                            notmuch-hello-insert-footer)))
+  (notmuch-hello-sections
+   '(notmuch-hello-insert-header
+     notmuch-hello-insert-saved-searches
+     notmuch-hello-insert-footer))
+  (notmuch-search-oldest-first nil)
+  (notmuch-saved-searches
+   '((:name "inbox" :query "tag:inbox" :key "i")
+     (:name "unread" :query "tag:unread" :key "u")
+     (:name "sent" :query "tag:sent" :key "s")
+     (:name "work" :query "tag:inbox and tag:work" :key "w")
+     (:name "private" :query "tag:inbox and tag:private" :key "p"))))
+
+(with-leader
+  "m" '(notmuch :which-key "mail"))
 
 ;; To switch identities (which I basically only use to set my work
 ;; signature based on my From address), I use gnus-alias.
