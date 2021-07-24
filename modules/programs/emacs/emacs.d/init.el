@@ -687,6 +687,10 @@
         ("C-j" . vertico-next)
         ("C-k" . vertico-previous)))
 
+(use-package savehist
+  :init
+  (savehist-mode))
+
 ;;; Orderless
 
 ;; orderless is a completion style that fits in very well with
