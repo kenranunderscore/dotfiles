@@ -101,19 +101,7 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
       enable = true;
       hooks = {
         preNew = "mbsync --all";
-        postNew = ''
-          notmuch tag +work -- tag:new and to:/active-group\.de/
-          notmuch tag +work -- tag:new and from:/active-group\.de/
-          notmuch tag +private -- tag:new and to:johb.maier@gmail.com
-          notmuch tag +private -- tag:new and from:johb.maier@gmail.com
-          notmuch tag +private -- tag:new and to:johannes.maier@mailbox.org
-          notmuch tag +private -- tag:new and from:johannes.maier@mailbox.org
-          notmuch tag -new +sent -- tag:new and from:johb.maier@mailbox.org
-          notmuch tag -new +sent -- tag:new and from:johannes.maier@mailbox.org
-          notmuch tag -new +sent -- tag:new and from:johannes.maier@active-group.de
-          notmuch tag -new +list +unread +notmuch -- from:notmuch@notmuchmail.org or to:notmuch@notmuchmail.org
-          notmuch tag -new +unread +inbox -- tag:new
-        '';
+        postNew = "notmuch tag --batch --input=${./notmuch-initial-tags}";
       };
       new.tags = [ "new" ];
     } else {
@@ -133,8 +121,10 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
         notmuch = super.notmuch.overrideAttrs (_old: rec {
           version = "0.32.2";
           src = builtins.fetchTarball {
-            url = "https://git.notmuchmail.org/git?p=notmuch;a=snapshot;h=04f378e673852ade100c54318124ff8c22f857b6;sf=tgz";
-            sha256 = "sha256:1a1l2w4bas7vi9h9if6c3ah0xh3ky39pkrk0lmc666assp1shamd";
+            url =
+              "https://git.notmuchmail.org/git?p=notmuch;a=snapshot;h=04f378e673852ade100c54318124ff8c22f857b6;sf=tgz";
+            sha256 =
+              "sha256:1a1l2w4bas7vi9h9if6c3ah0xh3ky39pkrk0lmc666assp1shamd";
           };
         });
       })
