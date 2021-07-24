@@ -98,6 +98,7 @@ in {
             magit-todos
             marginalia
             notmuch
+            ol-notmuch
             ripgrep
             wgrep
             which-key

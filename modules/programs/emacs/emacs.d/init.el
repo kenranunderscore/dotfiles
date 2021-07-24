@@ -518,6 +518,11 @@
      ("johannes.maier@mailbox.org" . "mailbox/Sent")
      (".*" . "sent"))))
 
+;; Enable storing links to emails in notmuch.
+(use-package ol-notmuch
+  :after (org notmuch)
+  :commands (org-notmuch-store-link))
+
 (with-leader
   "m" '(notmuch :which-key "mail"))
 
