@@ -512,7 +512,11 @@
      (:name "unread" :query "tag:unread" :key "u")
      (:name "sent" :query "tag:sent" :key "s")
      (:name "work" :query "tag:inbox and tag:work" :key "w")
-     (:name "private" :query "tag:inbox and tag:private" :key "p"))))
+     (:name "private" :query "tag:inbox and tag:private" :key "p")))
+  (notmuch-fcc-dirs
+   '(("johannes.maier@active-group.de" . "ag/Sent")
+     ("johannes.maier@mailbox.org" . "mailbox/Sent")
+     (".*" . "sent"))))
 
 (with-leader
   "m" '(notmuch :which-key "mail"))
