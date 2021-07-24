@@ -14,3 +14,4 @@ transient/
 custom.el
 projectile.cache
 projects
+tramp
