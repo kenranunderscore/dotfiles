@@ -507,12 +507,14 @@
      notmuch-hello-insert-saved-searches
      notmuch-hello-insert-footer))
   (notmuch-search-oldest-first nil)
+  (notmuch-archive-tags '("-inbox" "-unread"))
   (notmuch-saved-searches
    '((:name "inbox" :query "tag:inbox" :key "i")
      (:name "unread" :query "tag:unread" :key "u")
      (:name "sent" :query "tag:sent" :key "s")
      (:name "work" :query "tag:inbox and tag:work" :key "w")
-     (:name "private" :query "tag:inbox and tag:private" :key "p")))
+     (:name "private" :query "tag:inbox and tag:private" :key "p")
+     (:name "all mail" :query "*" :key "a")))
   (notmuch-maildir-use-notmuch-insert t)
   (notmuch-message-replied-tags '("+replied" "+sent"))
   (notmuch-fcc-dirs
