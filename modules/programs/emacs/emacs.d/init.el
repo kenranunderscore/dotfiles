@@ -516,8 +516,8 @@
   (notmuch-maildir-use-notmuch-insert t)
   (notmuch-message-replied-tags '("+replied" "+sent"))
   (notmuch-fcc-dirs
-   '(("johannes.maier@active-group.de" . "ag/Sent +sent +work")
-     ("johannes.maier@mailbox.org" . "mailbox/Sent +sent +private")
+   '(("johannes.maier@active-group.de" . "ag/Sent -new +sent +work")
+     ("johannes.maier@mailbox.org" . "mailbox/Sent -new +sent +private")
      (".*" . "sent"))))
 
 ;; Enable storing links to emails in notmuch.
