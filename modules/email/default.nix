@@ -97,9 +97,11 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     programs.notmuch = {
       enable = true;
-      hooks = mkIf cfg.isSyncServer {
+      hooks = if cfg.isSyncServer then {
         preNew = "mbsync --all";
         postNew = "notmuch tag --batch --input=${./notmuch-initial-tags}";
+      } else {
+        preNew = "muchsync --nonew sync";
       };
       new.tags = [ "new" ];
     };
