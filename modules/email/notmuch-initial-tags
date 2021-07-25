@@ -7,8 +7,7 @@
 -new +sent -- tag:new and from:johb.maier@mailbox.org
 -new +sent -- tag:new and from:johannes.maier@mailbox.org
 -new +sent -- tag:new and from:johannes.maier@active-group.de
--new +sent -inbox -- not tag:sent and from:johb.maier@mailbox.org
--new +sent -inbox -- not tag:sent and from:johannes.maier@mailbox.org
--new +sent -inbox -- not tag:sent and from:johannes.maier@active-group.de
+-inbox -- tag:sent and tag:inbox
+-unread -- tag:sent and tag:unread
 -new +list +unread +notmuch -- from:notmuch@notmuchmail.org or to:notmuch@notmuchmail.org
 -new +unread +inbox -- tag:new
