@@ -129,6 +129,7 @@ in {
         inconsolata
         iosevka
         jetbrains-mono
+        meslo-lg
         nerdfonts
         roboto-mono
         source-code-pro
