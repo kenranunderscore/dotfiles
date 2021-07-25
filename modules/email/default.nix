@@ -29,9 +29,6 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
     };
   };
 
-  # TODO notmuch configuration
-  # TODO afew?
-
   config = mkIf cfg.enable {
     # TODO enable pass and automatically prompt for mail address entries
     accounts.email = {
