@@ -513,6 +513,7 @@
      (:name "sent" :query "tag:sent" :key "s")
      (:name "work" :query "tag:inbox and tag:work" :key "w")
      (:name "private" :query "tag:inbox and tag:private" :key "p")))
+  (notmuch-maildir-use-notmuch-insert nil)
   (notmuch-message-replied-tags '("+replied" "+sent"))
   (notmuch-fcc-dirs
    '(("johannes.maier@active-group.de" . "ag/Sent")

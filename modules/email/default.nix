@@ -109,8 +109,13 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     services.muchsync = mkIf (!cfg.isSyncServer) {
       remotes.syncRoot = {
-        remote.host = "sync";
+        remote = {
+          host = "sync";
+          importNew = true;
+        };
+        local.importNew = false;
         frequency = "*:0/5";
+        upload = true;
       };
     };
 
