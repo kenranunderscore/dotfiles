@@ -1,6 +1,31 @@
 ;; Used by message-mode.
 (setq user-full-name "Johannes Maier")
 
+(defun my/notmuch-search-mark-read ()
+  "Toggle unread tag at point in notmuch-search-mode."
+  (interactive)
+  (if (member "unread" (notmuch-search-get-tags))
+      (notmuch-search-tag (list "-unread"))
+    (notmuch-search-tag (list "+unread")))
+  (notmuch-search-next-thread))
+
+(defun my/notmuch-search-delete-mail ()
+  "Toggle deleted tag at point in notmuch-search-mode."
+  (interactive)
+  (if (member "deleted" (notmuch-search-get-tags))
+      (notmuch-search-tag (list "-deleted"))
+    (notmuch-search-tag (list "+deleted")))
+  (notmuch-search-next-thread))
+
+(defun my/notmuch-show-delete-mail ()
+  "Toggle deleted tag at point in notmuch-show-mode."
+  (interactive)
+  (if (member "deleted" (notmuch-show-get-tags))
+      (notmuch-show-tag (list "-deleted"))
+    (notmuch-show-tag (list "+deleted")))
+  (unless (notmuch-show-next-open-message)
+    (notmuch-show-next-thread t)))
+
 ;; I've tried and used mu4e in the past, but always liked the idea of
 ;; notmuch better.
 (use-package notmuch
@@ -39,7 +64,13 @@
   (notmuch-fcc-dirs
    '(("johannes.maier@active-group.de" . "ag/Sent -new +sent +work")
      ("johannes.maier@mailbox.org" . "mailbox/Sent -new +sent +private")
-     (".*" . "sent"))))
+     (".*" . "sent")))
+  :bind
+  (:map notmuch-show-mode-map
+        ("d" . my/notmuch-show-delete-mail)
+        :map notmuch-search-mode-map
+        ("d" . my/notmuch-search-delete-mail)
+        ("u" . my/notmuch-search-mark-read)))
 
 ;; Enable storing links to emails in notmuch.
 (use-package ol-notmuch
