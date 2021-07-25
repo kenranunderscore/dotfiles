@@ -692,7 +692,8 @@
   :bind
   (:map vertico-map
         ("C-j" . vertico-next)
-        ("C-k" . vertico-previous)))
+        ("C-k" . vertico-previous)
+        ("C-w" . evil-cp-delete-backward-word)))
 
 (use-package savehist
   :init
