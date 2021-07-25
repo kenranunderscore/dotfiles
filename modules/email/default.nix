@@ -95,16 +95,13 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
 
     home.packages = [ pkgs.muchsync ];
 
-    programs.notmuch = if cfg.isSyncServer then {
+    programs.notmuch = {
       enable = true;
-      hooks = {
+      hooks = mkIf cfg.isSyncServer {
         preNew = "mbsync --all";
         postNew = "notmuch tag --batch --input=${./notmuch-initial-tags}";
       };
       new.tags = [ "new" ];
-    } else {
-      # Need this for muchsync to work.
-      enable = true;
     };
 
     services.muchsync = mkIf (!cfg.isSyncServer) {
