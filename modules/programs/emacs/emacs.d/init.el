@@ -49,6 +49,10 @@
 (tooltip-mode -1)
 (setq inhibit-splash-screen t)
 
+;; Ignore the X resources.  Now Emacs doesn't use the terminal
+;; background/foreground colors.
+(setq inhibit-x-resources t)
+
 ;; The default cursor is black, which interferes with mostly using a
 ;; dark theme.  Brighten it up a bit.
 (set-mouse-color "white")
