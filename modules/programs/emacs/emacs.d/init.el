@@ -79,10 +79,13 @@
 
 ;; https://github.com/hlissner/emacs-doom-themes
 (use-package doom-themes
+  :defer t)
+
+;; https://github.com/purcell/color-theme-sanityinc-tomorrow
+(use-package color-theme-sanityinc-tomorrow
+  :defer t
   :config
-  (load-theme 'doom-dracula t)
-  :custom
-  (doom-dracula-brighter-modeline t))
+  (color-theme-sanityinc-tomorrow-bright))
 
 ;;; Font faces and other settings.
 

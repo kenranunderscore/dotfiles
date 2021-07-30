@@ -74,6 +74,7 @@ in {
 
             # Themes
             color-theme-modern
+            color-theme-sanityinc-tomorrow
             doom-themes
 
             # Utility
