@@ -87,7 +87,7 @@
   :config
   (color-theme-sanityinc-tomorrow-bright))
 
-(defun my/switch-theme (name)
+(defun my--switch-theme (name)
   "Switch themes interactively.  Like `load-theme' but also
 disables all other enabled themes."
   (interactive
@@ -109,32 +109,33 @@ disables all other enabled themes."
 ;; - Camingo Code 140
 ;; - Fira Code 130
 ;; - Iosevka 140
-(setq my/monospace-font "Iosevka")
-(setq my/variable-font "Cantarell")
-(setq my/default-font-height 140)
+;; - IBM Plex Mono 150
+(setq my--monospace-font "IBM Plex Mono")
+(setq my--variable-font "Cantarell")
+(setq my--default-font-height 150)
 
-(defun my/set-face-attributes ()
+(defun my--set-face-attributes ()
   "Set the face attributes for 'default, 'fixed-pitch and
 'variable-pitch styles."
   (set-face-attribute
    'default nil
-   :font my/monospace-font
+   :font my--monospace-font
    :weight 'regular
-   :height my/default-font-height)
+   :height my--default-font-height)
   (set-face-attribute
    'fixed-pitch nil
-   :font my/monospace-font
+   :font my--monospace-font
    :height 1.0)
   (set-face-attribute
    'variable-pitch nil
-   :font my/variable-font
+   :font my--variable-font
    :height 1.0))
 
 ;; Now set all the face attributes, but also register a hook that
 ;; makes sure that these also work when using the Emacs daemon
 ;; together with emacsclient.
-(my/set-face-attributes)
-(add-hook 'server-after-make-frame-hook #'my/set-face-attributes)
+(my--set-face-attributes)
+(add-hook 'server-after-make-frame-hook #'my--set-face-attributes)
 
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
@@ -178,7 +179,7 @@ disables all other enabled themes."
 ;; This is a list of modes that we do not want the evil mode (defined
 ;; below) to be enabled in by default. It's mostly a preference of
 ;; mine to use Emacs mode in REPL, terminal and shell buffers.
-(setq my/holy-modes
+(setq my--holy-modes
       '((eshell-mode . eshell)
         (notmuch-hello-mode . notmuch)
         (racket-repl-mode . nil)
@@ -188,19 +189,19 @@ disables all other enabled themes."
         (term-mode . (term term ansi-term multi-term))
         (haskell-interactive-mode . nil)))
 
-(setq my/evil-holy-modes
-      (mapcar #'car my/holy-modes))
+(setq my--evil-holy-modes
+      (mapcar #'car my--holy-modes))
 
-(setq my/evil-collection-exemptions
+(setq my--evil-collection-exemptions
       (remove nil
-              (mapcar #'cdr my/holy-modes)))
+              (mapcar #'cdr my--holy-modes)))
 
 ;; The evil package offers a very complete vim experience inside of
 ;; Emacs.
 (use-package evil
   :config
   (evil-mode 1)
-  (dolist (mode my/evil-holy-modes)
+  (dolist (mode my--evil-holy-modes)
     (evil-set-initial-state mode 'emacs))
   (setq evil-insert-state-cursor '(hbar . 3))
   :custom
@@ -220,7 +221,7 @@ disables all other enabled themes."
 (use-package evil-collection
   :after evil
   :config
-  (dolist (x my/evil-collection-exemptions)
+  (dolist (x my--evil-collection-exemptions)
     (delete x evil-collection-mode-list))
   (evil-collection-init)
   (evil-collection-inhibit-insert-state 'notmuch-hello-mode-map)
@@ -289,7 +290,7 @@ disables all other enabled themes."
   "s" '(:ignore t :which-key "search/switch")
   "s g" 'consult-git-grep
   "s p" 'consult-ripgrep
-  "s t" '(my/switch-theme :which-key "change theme")
+  "s t" '(my--switch-theme :which-key "change theme")
   ;; Window management (redundant)
   "w" '(evil-window-map :which-key "windows"))
 
@@ -649,27 +650,27 @@ disables all other enabled themes."
 
 ;; Prepending an equals sign to a search term will search for literal
 ;; matches of the preceding string.
-(defun my/literal-if-= (pattern _index _total)
+(defun my--literal-if-= (pattern _index _total)
   (when (string-prefix-p "=" pattern)
     `(orderless-literal . ,(substring pattern 1))))
 
 ;; A prepended bang discards everything that matches the preceding
 ;; literal string.
-(defun my/without-if-! (pattern _index _total)
+(defun my--without-if-! (pattern _index _total)
   (when (string-prefix-p "!" pattern)
     `(orderless-without-literal . ,(substring pattern 1))))
 
 ;; The tilde sign gives me a way to have "fuzzy" search, if needed.
-(defun my/flex-if-~ (pattern _index _total)
+(defun my--flex-if-~ (pattern _index _total)
   (when (string-prefix-p "~" pattern)
     `(orderless-flex . ,(substring pattern 1))))
 
 (use-package orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
-   '(my/literal-if-=
-     my/without-if-!
-     my/flex-if-~)))
+   '(my--literal-if-=
+     my--without-if-!
+     my--flex-if-~)))
 
 ;;; Consult
 
@@ -851,7 +852,7 @@ disables all other enabled themes."
          (interactive)
          (setq default-text-scale--complement 0)
          (set-face-attribute 'default nil
-                             :height my/default-font-height))
+                             :height my--default-font-height))
    "reset" :color blue)
   ("q" nil "exit"))
 
