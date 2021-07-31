@@ -564,6 +564,7 @@ disables all other enabled themes."
   :diminish smartparens-mode
   :config
   (sp-pair "'" nil :actions nil)
+  (sp-pair "`" nil :actions nil)
   :bind (("C-M-a" . sp-beginning-of-sexp)
          ("C-M-e" . sp-end-of-sexp)
          ("C-<down>" . sp-down-sexp)
