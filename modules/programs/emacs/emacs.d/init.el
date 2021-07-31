@@ -87,6 +87,20 @@
   :config
   (color-theme-sanityinc-tomorrow-bright))
 
+(defun my/switch-theme (name)
+  "Switch themes interactively.  Like `load-theme' but also
+disables all other enabled themes."
+  (interactive
+   (list (intern
+          (completing-read
+           "Theme: "
+           (mapcar #'symbol-name
+                   (custom-available-themes))))))
+  (progn
+    (mapcar #'disable-theme
+            custom-enabled-themes)
+    (load-theme name t)))
+
 ;;; Font faces and other settings.
 
 ;; Tried-and-approved fonts/heights:
@@ -275,7 +289,7 @@
   "s" '(:ignore t :which-key "search/switch")
   "s g" 'consult-git-grep
   "s p" 'consult-ripgrep
-  "s t" 'load-theme
+  "s t" '(my/switch-theme :which-key "change theme")
   ;; Window management (redundant)
   "w" '(evil-window-map :which-key "windows"))
 
