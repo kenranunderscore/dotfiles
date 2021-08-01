@@ -1,5 +1,12 @@
 ;;;; General settings
 
+;; Even though I'm specifying the Emacs packages I'm using via
+;; home-manager/nixpkgs, it's still useful to have MELPA accessible
+;; directly in case something's broken in nixpkgs.
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
 ;; Since I use home-manager to manage my dotfiles, user environment
 ;; and in particular Emacs (including packages) I have the guarantee
 ;; that packages are coming from Nix instead of having to be
