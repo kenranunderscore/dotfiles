@@ -1,5 +1,5 @@
-+work -- tag:new and to:/active-group\.de/
-+work -- tag:new and from:/active-group\.de/
++work -- tag:new and to:active-group.de
++work -- tag:new and from:active-group.de
 -new +sent -- tag:new and from:johannes.maier@active-group.de
 +private -- tag:new and to:johb.maier@gmail.com
 +private -- tag:new and to:johannes.maier@mailbox.org
