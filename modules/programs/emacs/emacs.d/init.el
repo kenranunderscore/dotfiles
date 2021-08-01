@@ -77,6 +77,21 @@
 ;; annoying.
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(defun my--switch-theme (name)
+  "Switch themes interactively.  Similar to `load-theme' but also
+disables all other enabled themes."
+  (interactive
+   (list (intern
+          (completing-read
+           "Theme: "
+           (mapcar #'symbol-name
+                   (-difference (custom-available-themes)
+                                custom-enabled-themes))))))
+  (progn
+    (mapcar #'disable-theme
+            custom-enabled-themes)
+    (load-theme name t)))
+
 ;; Since I cannot ever decide which theme I like best, there are a few
 ;; themes loaded here.
 
@@ -90,23 +105,9 @@
 
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 (use-package color-theme-sanityinc-tomorrow
-  :defer t
-  :config
-  (color-theme-sanityinc-tomorrow-bright))
-
-(defun my--switch-theme (name)
-  "Switch themes interactively.  Like `load-theme' but also
-disables all other enabled themes."
-  (interactive
-   (list (intern
-          (completing-read
-           "Theme: "
-           (mapcar #'symbol-name
-                   (custom-available-themes))))))
-  (progn
-    (mapcar #'disable-theme
-            custom-enabled-themes)
-    (load-theme name t)))
+  :defer nil
+  :init
+  (my--switch-theme 'sanityinc-tomorrow-bright))
 
 ;;; Font faces and other settings.
 
