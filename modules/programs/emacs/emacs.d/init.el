@@ -400,6 +400,20 @@ disables all other enabled themes."
     (0 (prog1 ()
          (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
+;; Try out this Zettelkasten approach so many people are talking
+;; about.
+(use-package org-roam
+  :ensure t
+  :init
+  ;; Didn't work for the initial setup when set in :custom.
+  (setq org-roam-directory (file-truename "~/org/roam/"))
+  :custom
+  (org-roam-db-location (expand-file-name
+                         (concat (system-name) "-roam" ".db")
+                         org-roam-directory))
+  :config
+  (org-roam-setup))
+
 ;; For short presentations org-present looks like it is a good option.
 (use-package org-present
   :hook ((org-present-mode . (lambda ()
