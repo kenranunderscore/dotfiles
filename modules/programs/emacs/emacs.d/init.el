@@ -405,6 +405,7 @@ disables all other enabled themes."
 (use-package org-roam
   :ensure t
   :init
+  (setq org-roam-v2-ack t)
   ;; Didn't work for the initial setup when set in :custom.
   (setq org-roam-directory (file-truename "~/org/roam/"))
   :custom
