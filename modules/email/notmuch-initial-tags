@@ -5,6 +5,5 @@
 +private -- tag:new and to:johannes.maier@mailbox.org
 -new +sent +private -- tag:new and from:johb.maier@mailbox.org
 -new +sent +private -- tag:new and from:johannes.maier@mailbox.org
--new +list +unread +notmuch -- tag:new and from:notmuch@notmuchmail.org
 -new +list +unread +notmuch -- tag:new and to:notmuch@notmuchmail.org
 -new +unread +inbox -- tag:new
