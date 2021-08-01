@@ -91,6 +91,7 @@ in {
         fd
         gcc
         gnumake
+        graphviz
         htop
         lorri
         manpages
@@ -110,6 +111,7 @@ in {
         rxvt-unicode
         sbcl
         scrot
+        sqlite
         tree
         unzip
         vim
