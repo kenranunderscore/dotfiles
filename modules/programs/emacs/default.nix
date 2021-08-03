@@ -92,6 +92,7 @@ in {
             evil-org
             evil-snipe
             evil-surround
+            git-gutter
             gnus-alias
             helpful
             hl-todo

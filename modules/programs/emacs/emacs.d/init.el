@@ -583,6 +583,11 @@ disables all other enabled themes."
   "g d" '(magit-diff :which-key "diff")
   "g t" '(magit-todos-list :which-key "todos"))
 
+;; Show nice little VC annotations on the left side.
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode t))
+
 ;;; Smartparens
 (use-package smartparens
   :diminish smartparens-mode
