@@ -12,9 +12,13 @@
 (defun my/notmuch-search-delete-mail ()
   "Toggle deleted tag at point in notmuch-search-mode."
   (interactive)
-  (if (member "deleted" (notmuch-search-get-tags))
-      (notmuch-search-tag (list "-deleted"))
-    (notmuch-search-tag (list "+deleted")))
+  (let ((current-tags (notmuch-search-get-tags)))
+    (if (member "deleted" current-tags)
+        (progn
+          (notmuch-search-tag (list "-deleted"))
+          (when (member "unread" current-tags)
+            (notmuch-search-tag (list "-unread"))))
+      (notmuch-search-tag (list "+deleted"))))
   (notmuch-search-next-thread))
 
 (defun my/notmuch-show-delete-mail ()
