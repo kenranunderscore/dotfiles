@@ -14,11 +14,8 @@
   (interactive)
   (let ((current-tags (notmuch-search-get-tags)))
     (if (member "deleted" current-tags)
-        (progn
-          (notmuch-search-tag (list "-deleted"))
-          (when (member "unread" current-tags)
-            (notmuch-search-tag (list "-unread"))))
-      (notmuch-search-tag (list "+deleted"))))
+        (notmuch-search-tag (list "-deleted"))
+      (notmuch-search-tag (list "+deleted" "-unread"))))
   (notmuch-search-next-thread))
 
 (defun my--notmuch-show-delete-mail ()
