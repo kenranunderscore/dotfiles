@@ -54,6 +54,7 @@ in {
             use-package
 
             # Language-specific
+            anaconda-mode
             cider
             clojure-mode
             epkgs.csv-mode
@@ -67,6 +68,7 @@ in {
             org-bullets
             org-present
             plantuml-mode
+            pyimport
             racket-mode
             sly
             sly-asdf

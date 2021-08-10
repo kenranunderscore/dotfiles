@@ -514,6 +514,14 @@ disables all other enabled themes."
               (setq c-basic-offset 2)
               (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
 
+;;; Python
+(use-package anaconda-mode
+  :defer t
+  :hook (python-mode . anaconda-mode))
+
+(use-package pyimport
+  :defer t)
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like
