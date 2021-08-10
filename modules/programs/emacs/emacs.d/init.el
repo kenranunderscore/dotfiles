@@ -435,6 +435,7 @@ disables all other enabled themes."
 ;; REPL, get feedback and compilation errors shown in the code, and so
 ;; on.
 (use-package haskell-mode
+  :diminish interactive-haskell-mode
   :custom
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
@@ -548,6 +549,7 @@ disables all other enabled themes."
 
 ;;; Projectile
 (use-package projectile
+  :diminish projectile-mode
   :init
   (projectile-mode +1)
   :custom
@@ -585,6 +587,7 @@ disables all other enabled themes."
 
 ;; Show nice little VC annotations on the left side.
 (use-package git-gutter
+  :diminish git-gutter-mode
   :config
   (global-git-gutter-mode t))
 
