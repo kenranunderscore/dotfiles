@@ -45,6 +45,7 @@ in {
         };
         init.defaultBranch = "main";
         pull.rebase = "true";
+        submodule.recurse = "true";
         url = {
           "https://github.com/" = { insteadOf = "gh:"; };
           "git@github.com:kenranunderscore/" = { insteadOf = "gh:/"; };
