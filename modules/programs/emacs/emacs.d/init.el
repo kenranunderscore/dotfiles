@@ -282,7 +282,7 @@ disables all other enabled themes."
   ;; Buffer-related commands
   "b" '(:ignore t :which-key "buffer")
   "b b" 'consult-buffer
-  "b q" 'kill-this-buffer
+  "b q" 'kill-current-buffer
   "b i" 'ibuffer
   "b k" 'kill-buffer
   "b n" 'next-buffer
