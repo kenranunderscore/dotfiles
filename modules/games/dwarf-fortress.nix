@@ -6,7 +6,7 @@ in {
     enable = lib.mkEnableOption "dwarfFortress";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     home.packages = let
       df = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
         dfVersion = "0.47.05";
