@@ -17,6 +17,7 @@
       primaryAccount = "mailbox";
       isSyncServer = false;
     };
+    games.dwarfFortress.enable = true;
     programs = {
       emacs.emacsVersion = "git";
       emacs.nativeComp = true;
