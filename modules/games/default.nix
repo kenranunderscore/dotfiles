@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  imports = [ ./dwarf-fortress.nix ];
+}

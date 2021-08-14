@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./desktop ./email ./programs ./shell ];
+  imports = [ ./desktop ./email ./programs ./shell ./games ];
 }
