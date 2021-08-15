@@ -29,9 +29,7 @@
     shell = { git.email = "johb.maier@gmail.com"; };
   };
 
-  programs = {
-    msmtp.enable = true;
-  };
+  programs = { msmtp.enable = true; };
 
   services = {
     gpg-agent = {

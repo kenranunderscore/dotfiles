@@ -52,9 +52,7 @@ in rec {
     shell = { git = { email = "johannes.maier@active-group.de"; }; };
   };
 
-  programs = {
-    msmtp.enable = true;
-  };
+  programs = { msmtp.enable = true; };
 
   services = {
     gpg-agent = {
