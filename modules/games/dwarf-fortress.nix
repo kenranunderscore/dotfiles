@@ -12,6 +12,7 @@ in {
         dfVersion = "0.47.05";
         enableIntro = false;
         enableFPS = true;
+        enableSound = false;
         theme = null;
       };
     in with pkgs.dwarf-fortress-packages; [ df soundSense dwarf-therapist ];
