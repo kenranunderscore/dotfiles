@@ -9,5 +9,17 @@ in {
       packages = [ pkgs.imwheel ];
       file.".imwheelrc".source = ../../config/imwheelrc;
     };
+
+    systemd.user.services.imwheel = {
+      Unit.Description = "IMWheel";
+      Install.WantedBy = [ "graphical-session.target" ];
+      Service = {
+        Type = "simple";
+        ExecStart = "${pkgs.imwheel}/bin/imwheel -d";
+        ExecStop = "pkill imwheel";
+        Environment = "XAUTHORITY=%h/.Xauthority";
+        RemainAfterExit = "yes";
+      };
+    };
   };
 }
