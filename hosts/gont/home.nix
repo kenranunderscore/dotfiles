@@ -37,6 +37,7 @@ in rec {
         emacsVersion = "git";
         nativeComp = true;
       };
+      imwheel.enable = true;
       kitty = {
         enable = true;
         useLoginShell = false;
