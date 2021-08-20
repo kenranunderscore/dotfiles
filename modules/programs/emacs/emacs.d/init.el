@@ -485,6 +485,19 @@ to the top of the file."
       (goto-char (point-min))
       (insert pragma))))
 
+(defun my--add-haskell-ghc-option (opt-name)
+  "Add a GHC option from the list of options to the top of the
+file."
+  (interactive
+   (list
+    (completing-read
+     "GHC option: "
+     haskell-ghc-supported-options)))
+  (let ((pragma (concat "{-# OPTIONS_GHC " ext-name " #-}\n")))
+    (save-excursion
+      (goto-char (point-min))
+      (insert pragma))))
+
 ;; Define some keybindings that are local to the
 ;; interactive-haskell-mode using the local leader key.
 (with-local-leader
@@ -499,7 +512,8 @@ to the top of the file."
   "i r" '(haskell-navigate-imports-return :which-key "return from imports")
   "i a" '(haskell-add-import :which-key "add import")
   "p" '(:ignore t :which-key "pragmas")
-  "p l" '(my--add-haskell-language-extension :which-key "add language extension"))
+  "p l" '(my--add-haskell-language-extension :which-key "add language extension")
+  "p o" '(my--add-haskell-ghc-option :which-key "add GHC option"))
 
 ;;; Dhall
 (use-package dhall-mode
