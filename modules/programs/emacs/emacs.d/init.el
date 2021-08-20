@@ -472,6 +472,19 @@ disables all other enabled themes."
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
 
+(defun my--add-haskell-language-extension (ext-name)
+  "Add an extension from the list of available language extensions
+to the top of the file."
+  (interactive
+   (list
+    (completing-read
+     "Extension: "
+     haskell-ghc-supported-extensions)))
+  (let ((pragma (concat "{-# LANGUAGE " ext-name " #-}\n")))
+    (save-excursion
+      (goto-char (point-min))
+      (insert pragma))))
+
 ;; Define some keybindings that are local to the
 ;; interactive-haskell-mode using the local leader key.
 (with-local-leader
@@ -484,7 +497,9 @@ disables all other enabled themes."
   "i" '(:ignore t :which-key "imports")
   "i i" '(haskell-navigate-imports-go :which-key "navigate to imports")
   "i r" '(haskell-navigate-imports-return :which-key "return from imports")
-  "i a" '(haskell-add-import :which-key "add import"))
+  "i a" '(haskell-add-import :which-key "add import")
+  "p" '(:ignore t :which-key "pragmas")
+  "p l" '(my--add-haskell-language-extension :which-key "add language extension"))
 
 ;;; Dhall
 (use-package dhall-mode
