@@ -2,6 +2,7 @@
 \#*\#
 *.elc
 *.eld
+.org-id-locations
 bookmarks
 config.el
 history
