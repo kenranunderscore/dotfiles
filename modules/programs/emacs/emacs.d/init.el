@@ -472,7 +472,7 @@ disables all other enabled themes."
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
 
-(defun my--add-haskell-language-extension (ext-name)
+(defun my--haskell-add-language-extension (ext-name)
   "Add an extension from the list of available language extensions
 to the top of the file."
   (interactive
@@ -485,7 +485,7 @@ to the top of the file."
       (goto-char (point-min))
       (insert pragma))))
 
-(defun my--add-haskell-ghc-option (opt-name)
+(defun my--haskell-add-ghc-option (opt-name)
   "Add a GHC option from the list of options to the top of the
 file."
   (interactive
@@ -512,8 +512,8 @@ file."
   "i r" '(haskell-navigate-imports-return :which-key "return from imports")
   "i a" '(haskell-add-import :which-key "add import")
   "p" '(:ignore t :which-key "pragmas")
-  "p l" '(my--add-haskell-language-extension :which-key "add language extension")
-  "p o" '(my--add-haskell-ghc-option :which-key "add GHC option"))
+  "p l" '(my--haskell-add-language-extension :which-key "add language extension")
+  "p o" '(my--haskell-add-ghc-option :which-key "add GHC option"))
 
 ;;; Dhall
 (use-package dhall-mode
