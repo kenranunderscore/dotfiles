@@ -478,6 +478,10 @@ disables all other enabled themes."
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
 
+(defun my--make-pragma (pragma content)
+  "Create a pragma line of type `pragma' containing `content'."
+  (concat "{-# " pragma " " content " #-}\n"))
+
 (defun my--haskell-add-language-extension (ext-name)
   "Add an extension from the list of available language extensions
 to the top of the file."
@@ -486,7 +490,7 @@ to the top of the file."
     (completing-read
      "Extension: "
      haskell-ghc-supported-extensions)))
-  (let ((pragma (concat "{-# LANGUAGE " ext-name " #-}\n")))
+  (let ((pragma (my--make-pragma "LANGUAGE" ext-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
@@ -499,7 +503,7 @@ file."
     (completing-read
      "GHC option: "
      haskell-ghc-supported-options)))
-  (let ((pragma (concat "{-# OPTIONS_GHC " ext-name " #-}\n")))
+  (let ((pragma (my--make-pragma "OPTIONS_GHC" opt-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
