@@ -739,7 +739,7 @@ file."
   (vertico-cycle t)
   :bind
   (:map vertico-map
-        ("C-w" . evil-cp-delete-backward-word)))
+        ("C-w" . evil-delete-backward-word)))
 
 (use-package savehist
   :init
