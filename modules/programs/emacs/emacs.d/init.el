@@ -29,11 +29,17 @@
  "C-h M" 'describe-keymap
  "C-h V" 'set-variable)
 
-;;; I do not want customizations done via `customize' to end up in
-;;; this file.  Use a separate file instead and load that one on
-;;; startup.
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file 'no-error)
+(defmacro my--load-config-file (file)
+  "Load FILE relative to the .emacs.d directory."
+  `(load (concat user-emacs-directory ,file)
+         'no-error))
+
+;; I do not want customizations done via `customize' to end up in
+;; this file.  Use a separate file instead and load that one on
+;; startup.
+(let ((my-custom-file (concat user-emacs-directory "custom.el")))
+  (setq custom-file my-custom-file)
+  (my--load-config-file custom-file))
 
 ;; I wish to know how fast my Emacs is starting.  I'm not sure how to
 ;; make use of all that `use-package' has to offer in that regard yet,
@@ -603,8 +609,7 @@ file."
   :hook (haskell-mode . eglot-ensure))
 
 ;; Mail configuration
-(setq email-configuration (concat user-emacs-directory "email-configuration.el"))
-(load email-configuration 'no-error)
+(my--load-config-file "email-configuration.el")
 
 ;;; Diminish
 
