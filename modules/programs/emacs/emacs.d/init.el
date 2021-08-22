@@ -347,6 +347,12 @@ disables all other enabled themes."
  "C-w C-l" 'evil-window-right
  "C-w C-d" 'evil-quit)
 
+;; Enable C-w to delete backward (like in vim or bash) when Emacs is
+;; reading user input in the minibuffer.
+(general-define-key
+ :keymaps 'minibuffer-local-map
+ "C-w" 'evil-delete-backward-word)
+
 ;;;; Package-specific configuration
 
 ;; A mode for writing Nix expressions in.
