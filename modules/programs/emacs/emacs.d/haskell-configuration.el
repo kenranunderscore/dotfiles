@@ -45,7 +45,8 @@ string, return nil instead."
       str)))
 
 (defun my--haskell-add-import (module &optional qualified? alias)
-  "Add  FIXME: does not insert imports in the right place yet."
+  "Add an import to the import list.  Prompts for qualified import
+and alias."
   (interactive
    (let* ((module (read-string "Module: "))
           (qualified? (y-or-n-p (concat "Import " module " qualified?")))
@@ -59,7 +60,7 @@ string, return nil instead."
                  (when alias (concat " as " alias))
                  "\n")))
     (save-excursion
-      (goto-char (point-min))
+      (haskell-navigate-imports-go)
       (insert import-line))))
 
 ;; Define some keybindings that are local to the
