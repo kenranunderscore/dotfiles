@@ -556,7 +556,7 @@ disables all other enabled themes."
 ;; something more lightweight and closer to vanilla Emacs.  This is
 ;; where eglot comes into play.
 (use-package eglot
-  :hook (haskell-mode . eglot-ensure))
+  :defer t)
 
 ;; Mail configuration
 (my--load-config-file "email-configuration.el")
