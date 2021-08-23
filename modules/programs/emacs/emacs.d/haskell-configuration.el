@@ -37,6 +37,31 @@ file."
       (goto-char (point-min))
       (insert pragma))))
 
+(defun my--read-non-empty-string (prompt)
+  "Read a string from the minibuffer.  When the result is the empty
+string, return nil instead."
+  (let ((str (read-string prompt)))
+    (unless (string-empty-p str)
+      str)))
+
+(defun my--haskell-add-import (module &optional qualified? alias)
+  "Add  FIXME: does not insert imports in the right place yet."
+  (interactive
+   (let* ((module (read-string "Module: "))
+          (qualified? (y-or-n-p (concat "Import " module " qualified?")))
+          (alias (when qualified?
+                   (my--read-non-empty-string "Alias [or leave empty]: "))))
+     (list module qualified? alias)))
+  (let ((import-line
+         (concat "import "
+                 (when qualified? "qualified ")
+                 module
+                 (when alias (concat " as " alias))
+                 "\n")))
+    (save-excursion
+      (goto-char (point-min))
+      (insert import-line))))
+
 ;; Define some keybindings that are local to the
 ;; interactive-haskell-mode using the local leader key.
 (with-local-leader
