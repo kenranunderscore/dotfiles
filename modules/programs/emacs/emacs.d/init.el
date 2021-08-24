@@ -594,6 +594,7 @@ disables all other enabled themes."
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
   (magit-save-repository-buffers nil)
+  (magit-diff-refine-hunk t)
   :config
   ;; I frequently pull with the autostash option.
   (transient-append-suffix 'magit-pull "-r"
@@ -610,9 +611,7 @@ disables all other enabled themes."
   :after (magit hl-todo)
   :config
   (magit-todos-mode)
-  (setq magit-todos-rg-extra-args '("-M 120"))
-  :custom
-  (magit-diff-refine-hunk t))
+  (setq magit-todos-rg-extra-args '("-M 120")))
 
 ;; Magit-specific keybindings are useful in a global scope, thus they
 ;; may be accessed under SPC g.
