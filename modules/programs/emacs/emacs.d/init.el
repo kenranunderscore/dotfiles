@@ -955,7 +955,13 @@ disables all other enabled themes."
 ;; Diminish only.
 (use-package eldoc
   :ensure nil
-  :diminish eldoc-mode)
+  :diminish eldoc-mode
+  :config
+  (advice-add 'eldoc-doc-buffer
+              :after
+              (defun my--focus-eldoc-buffer ()
+                (message (buffer-name (current-buffer)))
+                (pop-to-buffer eldoc--doc-buffer))))
 
 (use-package dired
   :ensure nil
