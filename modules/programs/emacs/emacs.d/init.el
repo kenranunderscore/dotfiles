@@ -76,6 +76,11 @@
 ;; quickly close them with q.
 (setq help-window-select t)
 
+;; Same for apropos buffers.
+(add-hook 'apropos-mode-hook
+          (defun my--focus-apropos-buffer ()
+            (pop-to-buffer (current-buffer))))
+
 ;; Resize proportionally after deleting windows.
 (setq window-combination-resize t)
 
