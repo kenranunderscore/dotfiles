@@ -589,7 +589,17 @@ disables all other enabled themes."
 
 ;;; Magit
 (use-package magit
-  :hook (git-commit-mode . evil-insert-state))
+  :hook (git-commit-mode . evil-insert-state)
+  :custom
+  ;; No autosave for open buffers, as that might trigger hooks and
+  ;; such.
+  (magit-save-repository-buffers nil)
+  :config
+  ;; I frequently pull with the autostash option.
+  (transient-append-suffix 'magit-pull "-r"
+    '("-a" "Autostash" "--autostash"))
+  ;; ESC as alternative to C-g for going 'back' one transient level.
+  (define-key transient-map [escape] #'transient-quit-one))
 
 ;; magit-todos shows lists of the keywords of hl-todo-mode in
 ;; magit-status buffers, as well as in a dedicated list of todos
