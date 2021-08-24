@@ -37,7 +37,7 @@ in {
         menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Terminus-14'";
         window = {
           titlebar = false;
-          border = 0;
+          border = 2;
         };
         keybindings = lib.mkOptionDefault {
           # Use normal vim keys for moving between windows.
