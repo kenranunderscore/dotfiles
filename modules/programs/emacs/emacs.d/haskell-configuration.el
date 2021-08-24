@@ -7,10 +7,12 @@
   (haskell-process-type 'cabal-repl)
   :hook (haskell-mode . interactive-haskell-mode))
 
+;;;###autoload
 (defun my--make-pragma (pragma content)
   "Create a pragma line of type `pragma' containing `content'."
   (concat "{-# " pragma " " content " #-}\n"))
 
+;;;###autoload
 (defun my--haskell-add-language-extension (ext-name)
   "Add an extension from the list of available language extensions
 to the top of the file."
@@ -24,6 +26,7 @@ to the top of the file."
       (goto-char (point-min))
       (insert pragma))))
 
+;;;###autoload
 (defun my--haskell-add-ghc-option (opt-name)
   "Add a GHC option from the list of options to the top of the
 file."
@@ -44,6 +47,7 @@ string, return nil instead."
     (unless (string-empty-p str)
       str)))
 
+;;;###autoload
 (defun my--haskell-add-import (module &optional qualified? alias)
   "Add an import to the import list.  Prompts for qualified import
 and alias."
