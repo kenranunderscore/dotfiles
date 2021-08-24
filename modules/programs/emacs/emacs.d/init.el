@@ -39,7 +39,7 @@
 ;; startup.
 (let ((my-custom-file (concat user-emacs-directory "custom.el")))
   (setq custom-file my-custom-file)
-  (my--load-config-file custom-file))
+  (load custom-file 'no-error))
 
 ;; I wish to know how fast my Emacs is starting.  I'm not sure how to
 ;; make use of all that `use-package' has to offer in that regard yet,
