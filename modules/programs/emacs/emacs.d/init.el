@@ -88,6 +88,12 @@
 ;; annoying.
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Make commands shown with M-x depend on the active major mode.
+;; Note: doesn't work correctly yet, as (command-modes 'some-command)
+;; seems to return the modes in an unexpected format.
+(setq read-extended-command-predicate
+      #'command-completion-default-include-p)
+
 (defun my--switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
