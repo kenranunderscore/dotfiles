@@ -1,0 +1,29 @@
+diff --git a/lisp/simple.el b/lisp/simple.el
+index db083cfc25..99b86f98d5 100644
+--- a/lisp/simple.el
++++ b/lisp/simple.el
+@@ -2069,22 +2069,8 @@ This function uses the `read-extended-command-predicate' user option."
+ (defun command-completion-using-modes-p (symbol buffer)
+   "Say whether SYMBOL has been marked as a mode-specific command in BUFFER."
+   ;; Check the modes.
+-  (let ((modes (command-modes symbol)))
+-    ;; Common case: Just a single mode.
+-    (if (null (cdr modes))
+-        (or (provided-mode-derived-p
+-             (buffer-local-value 'major-mode buffer) (car modes))
+-            (memq (car modes)
+-                  (buffer-local-value 'local-minor-modes buffer))
+-            (memq (car modes) global-minor-modes))
+-      ;; Uncommon case: Multiple modes.
+-      (apply #'provided-mode-derived-p
+-             (buffer-local-value 'major-mode buffer)
+-             modes)
+-      (seq-intersection modes
+-                        (buffer-local-value 'local-minor-modes buffer)
+-                        #'eq)
+-      (seq-intersection modes global-minor-modes #'eq))))
++  (command-completion-with-modes-p (command-modes symbol)
++                                   buffer))
+ 
+ (defun command-completion-default-include-p (symbol buffer)
+   "Say whether SYMBOL should be offered as a completion.

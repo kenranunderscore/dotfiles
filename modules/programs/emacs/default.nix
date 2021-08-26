@@ -29,7 +29,8 @@ in {
 
       packages = let
         targetEmacs = if cfg.emacsVersion == "git" then
-          (pkgs.emacsGit.override { inherit (cfg) nativeComp; })
+          (pkgs.emacsGit.override { inherit (cfg) nativeComp; }).overrideAttrs
+          (attrs: { patches = attrs.patches ++ [ ./my.patch ]; })
         else
           (if cfg.emacsVersion == "stable" then
             pkgs.emacs
