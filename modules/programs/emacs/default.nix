@@ -8,8 +8,8 @@ in {
     enable = mkEnableOption "emacs";
 
     emacsVersion = mkOption {
-      type = types.enum [ "unstable" "stable" "git" ];
-      default = "stable";
+      type = types.enum [ "stable" "git" ];
+      default = "git";
     };
 
     nativeComp = mkOption {
@@ -32,10 +32,7 @@ in {
           (pkgs.emacsGit.override { inherit (cfg) nativeComp; }).overrideAttrs
           (attrs: { patches = attrs.patches ++ [ ./my.patch ]; })
         else
-          (if cfg.emacsVersion == "stable" then
-            pkgs.emacs
-          else
-            pkgs.emacsUnstable);
+          pkgs.emacs;
         emacsWithPackages =
           (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
         myEmacs = emacsWithPackages (epkgs:
