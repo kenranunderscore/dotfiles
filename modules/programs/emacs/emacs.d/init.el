@@ -135,7 +135,7 @@ disables all other enabled themes."
 ;; - Fira Code 130
 ;; - Iosevka 140
 ;; - IBM Plex Mono 150
-(setq my--monospace-font "IBM Plex Mono")
+(setq my--monospace-font "Iosevka")
 (setq my--variable-font "Cantarell")
 (setq my--default-font-height 150)
 
