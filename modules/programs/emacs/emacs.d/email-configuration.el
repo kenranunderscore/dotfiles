@@ -55,7 +55,6 @@
   (notmuch-archive-tags '("-inbox" "-unread"))
   (notmuch-saved-searches
    '((:name "inbox" :query "tag:inbox" :key "i")
-     (:name "unread" :query "tag:unread" :key "u")
      (:name "sent" :query "tag:sent" :key "s")
      (:name "work" :query "tag:inbox and tag:work" :key "w")
      (:name "private" :query "tag:inbox and tag:private" :key "p")
