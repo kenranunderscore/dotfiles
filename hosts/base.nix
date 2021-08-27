@@ -49,10 +49,7 @@ in {
         bat.enable = true;
         direnv.enable = true;
         fish.enable = true;
-        git = {
-          enable = true;
-          inherit (cfg) gpgKey;
-        };
+        git.enable = true;
         pass = {
           enable = true;
           inherit (cfg) gpgKey;

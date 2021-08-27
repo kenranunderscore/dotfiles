@@ -26,7 +26,7 @@
         fontSize = "12.0";
       };
     };
-    shell = { git.email = "johb.maier@gmail.com"; };
+    shell.git.email = "johannes.maier@mailbox.org";
   };
 
   programs = { msmtp.enable = true; };

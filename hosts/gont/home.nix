@@ -50,7 +50,7 @@ in rec {
         '';
       };
     };
-    shell = { git = { email = "johannes.maier@active-group.de"; }; };
+    shell.git.email = "johannes.maier@active-group.de";
   };
 
   programs = { msmtp.enable = true; };
