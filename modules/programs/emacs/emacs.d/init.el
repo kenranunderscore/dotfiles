@@ -391,7 +391,8 @@ disables all other enabled themes."
 
 ;; A mode for writing Nix expressions in.
 (use-package nix-mode
-  :mode "\\.nix\\'")
+  :mode "\\.nix\\'"
+  :hook (before-save . nix-format-before-save))
 
 ;;; Markdown
 (use-package markdown-mode
