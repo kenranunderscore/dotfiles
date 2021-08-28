@@ -50,6 +50,11 @@
   (setq custom-file my-custom-file)
   (load custom-file 'no-error))
 
+(defun my--open-init-file ()
+  "Open my init.el file."
+  (interactive)
+  (find-file (file-truename "~/.emacs.d/init.el")))
+
 ;; I wish to know how fast my Emacs is starting.  I'm not sure how to
 ;; make use of all that `use-package' has to offer in that regard yet,
 ;; but I want to at least see when I've made things worse.
@@ -358,7 +363,10 @@ disables all other enabled themes."
   "s p" 'consult-ripgrep
   "s t" '(my--switch-theme :which-key "change theme")
   ;; Window management (redundant)
-  "w" '(evil-window-map :which-key "windows"))
+  "w" '(evil-window-map :which-key "windows")
+  ;; Emacs config
+  "e" '(:ignore t :which-key "emacs")
+  "e c" '(my--open-init-file :which-key "edit config"))
 
 ;; Enable C-w for window management everywhere.  This means that I
 ;; need to override the Emacs default binding, which can be done via
