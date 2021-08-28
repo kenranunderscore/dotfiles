@@ -121,9 +121,9 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
           version = "0.32.2";
           src = builtins.fetchTarball {
             url =
-              "https://git.notmuchmail.org/git?p=notmuch;a=snapshot;h=04f378e673852ade100c54318124ff8c22f857b6;sf=tgz";
+              "https://git.notmuchmail.org/git?p=notmuch;a=snapshot;h=d25dafb4c2f26d9f7ae67ca603181238514e6e97;sf=tgz";
             sha256 =
-              "sha256:1a1l2w4bas7vi9h9if6c3ah0xh3ky39pkrk0lmc666assp1shamd";
+              "sha256:18plnk33k2ghgrcka5rna3h0d19wiiz7ai123w57q1gdjagi7ag8";
           };
         });
       })
