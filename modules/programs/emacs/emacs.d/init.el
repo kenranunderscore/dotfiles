@@ -7,6 +7,15 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+;; Install use-package if it's not installed already.  The nixpkgs
+;; version of Emacs on my systems already contains most packages,
+;; including use-package itself, but when self-compiling Emacs or on
+;; Windows I rely on use-package for the installation of all the
+;; packages.
+(dolist (package '(use-package))
+   (unless (package-installed-p package)
+       (package-install package)))
+
 ;; Since I use home-manager to manage my dotfiles, user environment
 ;; and in particular Emacs (including packages) I have the guarantee
 ;; that packages are coming from Nix instead of having to be
