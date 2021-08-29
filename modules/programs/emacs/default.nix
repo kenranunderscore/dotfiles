@@ -29,8 +29,7 @@ in {
 
       packages = let
         targetEmacs = if cfg.emacsVersion == "git" then
-          (pkgs.emacsGit.override { inherit (cfg) nativeComp; }).overrideAttrs
-          (attrs: { patches = attrs.patches ++ [ ./my.patch ]; })
+          pkgs.emacsGit.override { inherit (cfg) nativeComp; }
         else
           pkgs.emacs;
         emacsWithPackages =
@@ -109,7 +108,7 @@ in {
     };
 
     nixpkgs.overlays = let
-      rev = "e3e97b8cd1c8db6fb5bf43ded3dc85a84e732a7a";
+      rev = "0f2e92d0624f5a6887c8a07e1a5ae6ab298e194b";
       emacsOverlay = (import (builtins.fetchTarball {
         url =
           "https://github.com/nix-community/emacs-overlay/archive/${rev}.tar.gz";
