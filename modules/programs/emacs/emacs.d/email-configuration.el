@@ -59,7 +59,9 @@
      (:name "work" :query "tag:inbox and tag:work" :key "w")
      (:name "private" :query "tag:inbox and tag:private" :key "p")
      (:name "all mail" :query "*" :key "a")
-     (:name "lists" :query "tag:list and tag:unread" :key "l")))
+     (:name "lists" :query "tag:list and tag:unread" :key "l")
+     (:name "emacs" :query "tag:emacs and tag:unread" :key "e")
+     (:name "notmuch" :query "tag:notmuch and tag:unread" :key "n")))
   (notmuch-maildir-use-notmuch-insert t)
   (notmuch-message-replied-tags '("+replied" "+sent"))
   (notmuch-fcc-dirs

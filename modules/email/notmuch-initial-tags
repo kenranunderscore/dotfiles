@@ -1,4 +1,6 @@
--new +list +unread +notmuch -- tag:new and to:notmuchmail.org
+-new +list +notmuch +unread -- tag:new and to:notmuchmail.org
+-new +list +emacs +unread -- tag:new and to:emacs-devel@gnu.org
+-new +list +emacs +unread -- tag:new and to:bug-gnu-emacs@gnu.org
 +work -- tag:new and to:active-group.de
 +work -- tag:new and from:active-group.de
 -new +sent -- tag:new and from:johannes.maier@active-group.de
