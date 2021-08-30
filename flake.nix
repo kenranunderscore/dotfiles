@@ -30,7 +30,7 @@
     in {
       nixosConfigurations = {
         atuan = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
+          inherit system pkgs specialArgs;
           modules = [
             ./system-configurations/atuan
             home-manager.nixosModules.home-manager
@@ -41,16 +41,22 @@
               home-manager.extraSpecialArgs = specialArgs;
             }
           ];
-          inherit specialArgs;
         };
-        test = nixpkgs.lib.nixosSystem {
-          inherit system;
+        paln = nixpkgs.lib.nixosSystem {
+          inherit system pkgs specialArgs;
           modules = [
-            ./system-configurations/atuan
+            ./system-configurations/paln
             home-manager.nixosModules.home-manager
+            {
+              home-manager.users.kenran = import ./hosts/paln/home.nix;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = false;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
           ];
         };
       };
+
       homeConfigurations = {
         gont = home-manager.lib.homeManagerConfiguration {
           inherit system pkgs;
