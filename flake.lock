@@ -177,11 +177,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1630330496,
-        "narHash": "sha256-YUHHTqCnfvVWiXtehykgCB1ppNy37vMHrj8k7vBKItM=",
+        "lastModified": 1630358600,
+        "narHash": "sha256-p5BK8BFpwy0p2VGo3FpeaurgKegDAjK5dY+LESdfuX4=",
         "ref": "master",
-        "rev": "d3c311e161b95c277bce4bade1f8d7d1453e5a7e",
-        "revCount": 6,
+        "rev": "61b14347f97a8515d29727663dee15287de29899",
+        "revCount": 7,
         "type": "git",
         "url": "ssh://git@github.com/kenranunderscore/private-config"
       },
