@@ -57,8 +57,7 @@ in {
       };
     };
 
-    # FIXME `true` clashes with something?
-    fonts.fontconfig.enable = false;
+    fonts.fontconfig.enable = lib.mkForce true;
 
     programs = {
       gpg.enable = true;
