@@ -12,10 +12,12 @@
   gap = "git add -p";
   gc = "git commit -v";
   gca = "git commit -v --amend";
+  gcl = "git clone";
   gcm = "git commit -v -m";
   gd = "git diff";
   gds = "git diff --staged";
   gf = "git fetch";
+  gfa = "git fetch --all";
   gi = "git init";
   gl = "git pull";
   glog = "git log --oneline --decorate --graph";
@@ -27,6 +29,7 @@
   grb = "git rebase";
   grs = "git restore";
   grss = "git restore --staged";
+  grv = "git remote -v";
   gs = "git status --short";
   gst = "git status";
   gsw = "git switch";
