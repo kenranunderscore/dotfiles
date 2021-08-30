@@ -4,7 +4,7 @@ with lib;
 let
   realName = "Johannes Maier";
   cfg = config.modules.email;
-in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
+in {
   options.modules.email = {
     enable = mkEnableOption "email module";
 
@@ -114,19 +114,5 @@ in with import <home-manager/modules/lib/dag.nix> { inherit lib; }; {
         upload = true;
       };
     };
-
-    nixpkgs.overlays = [
-      (_: super: {
-        notmuch = super.notmuch.overrideAttrs (_old: rec {
-          version = "0.32.2";
-          src = builtins.fetchTarball {
-            url =
-              "https://git.notmuchmail.org/git?p=notmuch;a=snapshot;h=d25dafb4c2f26d9f7ae67ca603181238514e6e97;sf=tgz";
-            sha256 =
-              "sha256:18plnk33k2ghgrcka5rna3h0d19wiiz7ai123w57q1gdjagi7ag8";
-          };
-        });
-      })
-    ];
   };
 }

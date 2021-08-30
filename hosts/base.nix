@@ -2,7 +2,7 @@
 
 let
   cfg = config.hosts.base;
-  dag = import <home-manager/modules/lib/dag.nix> { inherit lib; };
+  # dag = import <home-manager/modules/lib/dag.nix> { inherit lib; };
 in {
   options.hosts.base = {
     username = lib.mkOption { type = lib.types.str; };
@@ -28,9 +28,6 @@ in {
   imports = [ ../modules ];
 
   config = {
-    # Config for nixpkgs when used by home-manager.
-    nixpkgs = { config = import ../nix/nixpkgs-config.nix; };
-
     modules = {
       email.enable = true;
       programs = {
@@ -147,7 +144,7 @@ in {
 
       activation = {
         handlePrivateKeys = let privateKeyPath = cfg.privateDir + "/id_rsa";
-        in dag.dagEntryAfter [ "writeBoundary" ] ''
+        in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ln -sf ${
             builtins.toPath privateKeyPath
           } $HOME/.ssh/id_rsa && \

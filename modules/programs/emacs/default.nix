@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-with import <home-manager/modules/lib/dag.nix> { inherit lib; };
 let cfg = config.modules.programs.emacs;
 in {
   options.modules.programs.emacs = {
@@ -22,7 +21,7 @@ in {
     home = {
       activation = {
         # FIXME Check for existence of ~/.emacs.d
-        symlinkDotEmacs = dagEntryAfter [ "writeBoundary" ] ''
+        symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ln -snf ${builtins.toPath ./.}/emacs.d $HOME/.emacs.d
         '';
       };
@@ -106,13 +105,5 @@ in {
           ]);
       in [ myEmacs ];
     };
-
-    nixpkgs.overlays = let
-      rev = "0f2e92d0624f5a6887c8a07e1a5ae6ab298e194b";
-      emacsOverlay = (import (builtins.fetchTarball {
-        url =
-          "https://github.com/nix-community/emacs-overlay/archive/${rev}.tar.gz";
-      }));
-    in [ emacsOverlay ];
   };
 }
