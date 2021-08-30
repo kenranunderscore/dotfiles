@@ -53,11 +53,12 @@
       };
       homeConfigurations = {
         gont = home-manager.lib.homeManagerConfiguration {
-          inherit system;
+          inherit system pkgs;
           configuration = import ./hosts/gont/home.nix;
           homeDirectory = "/home/johannes";
           username = "johannes";
           stateVersion = "21.03";
+          extraSpecialArgs = specialArgs;
         };
       };
     };
