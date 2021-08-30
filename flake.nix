@@ -25,9 +25,9 @@
           ./system-configurations/atuan
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
             home-manager.users.kenran = import ./hosts/atuan/home.nix;
+            home-manager.useGlobalPkgs = false;
+            home-manager.useUserPackages = false;
             home-manager.extraSpecialArgs = specialArgs;
           }
           { nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; }
