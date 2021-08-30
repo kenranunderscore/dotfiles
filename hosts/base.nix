@@ -64,10 +64,7 @@ in {
       home-manager.enable = true;
     };
 
-    xdg.configFile = {
-      "nixpkgs/config.nix".source = ../nix/nixpkgs-config.nix;
-      "starship.toml".source = ../config/starship.toml;
-    };
+    xdg.configFile = { "starship.toml".source = ../config/starship.toml; };
 
     home = {
       username = cfg.username;

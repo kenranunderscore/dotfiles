@@ -46,9 +46,5 @@
       stateVersion = "21.03";
       packages = with pkgs; [ cacert curl fd gnumake ripgrep tree unzip wget ];
     };
-
-    xdg.configFile = {
-      "nixpkgs/config.nix".source = ../../nix/nixpkgs-config.nix;
-    };
   };
 }
