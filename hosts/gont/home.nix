@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let
   nixGLSource = let rev = "7d6bc1b21316bab6cf4a6520c2639a11c25a220e";
@@ -14,7 +14,7 @@ in rec {
 
   hosts.base = {
     username = "johannes";
-    privateDir = ../../private/gont;
+    privateDir = "${inputs.privateConfig}/linux";
     shellPath = "${pkgs.fish}/bin/fish";
     gpgKey = "DDB27C847E768551";
   };

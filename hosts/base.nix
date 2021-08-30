@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-  cfg = config.hosts.base;
-  # dag = import <home-manager/modules/lib/dag.nix> { inherit lib; };
+let cfg = config.hosts.base;
 in {
   options.hosts.base = {
     username = lib.mkOption { type = lib.types.str; };
@@ -59,7 +57,8 @@ in {
       };
     };
 
-    fonts.fontconfig.enable = true;
+    # FIXME `true` clashes with something?
+    fonts.fontconfig.enable = false;
 
     programs = {
       gpg.enable = true;
