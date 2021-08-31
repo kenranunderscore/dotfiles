@@ -21,7 +21,14 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      overlays = [ inputs.emacs-overlay.overlay inputs.neovim-overlay.overlay ];
+      overlays = [
+        inputs.emacs-overlay.overlay
+        inputs.neovim-overlay.overlay
+        (_final: prev: {
+          notmuch =
+            prev.notmuch.overrideAttrs (_old: { src = inputs.notmuch; });
+        })
+      ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;
