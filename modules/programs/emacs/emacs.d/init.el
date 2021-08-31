@@ -108,6 +108,10 @@
 (setq read-extended-command-predicate
       #'command-completion-default-include-p)
 
+;; The cursor doesn't need to be blinking when it's distinctive
+;; enough.
+(blink-cursor-mode -1)
+
 (defun my--switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
