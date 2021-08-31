@@ -131,22 +131,12 @@ in {
 
       file = {
         ".sbclrc".source = ../config/sbclrc;
-        # The private key file is linked to directly during activation.
-        ".ssh/id_rsa.pub".source = cfg.privateDir + "/id_rsa.pub";
         ".vimrc".source = ../config/vimrc;
         ".Xresources".source = ../config/Xresources;
       };
 
       activation = {
-        handlePrivateKeys = let privateKeyPath = cfg.privateDir + "/id_rsa";
-        in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ln -sf ${
-            builtins.toPath privateKeyPath
-          } $HOME/.ssh/id_rsa && \
-          $DRY_RUN_CMD cd ${builtins.toPath ../.}/private && \
-          $DRY_RUN_CMD chmod 400 *.pem **/*.key **/id_rsa* && \
-          $DRY_RUN_CMD ssh-add $HOME/.ssh/id_rsa && \
-          $DRY_RUN_CMD eval "$(ssh-agent)" && \
+        importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD gpg --import ${cfg.privateDir + "/gpg.key"}
         '';
       };
