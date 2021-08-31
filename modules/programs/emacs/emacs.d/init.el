@@ -119,8 +119,8 @@ disables all other enabled themes."
                    (-difference (custom-available-themes)
                                 custom-enabled-themes))))))
   (progn
-    (mapcar #'disable-theme
-            custom-enabled-themes)
+    (mapc #'disable-theme
+          custom-enabled-themes)
     (load-theme name t)))
 
 ;; Since I cannot ever decide which theme I like best, there are a few

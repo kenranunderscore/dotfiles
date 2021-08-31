@@ -115,6 +115,7 @@ in {
         fira-code
         fontmatrix # font explorer
         go-font
+        hack-font
         hermit
         ibm-plex
         inconsolata
