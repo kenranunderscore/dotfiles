@@ -20,9 +20,10 @@ in {
   config = mkIf cfg.enable {
     home = {
       activation = {
-        # FIXME Check for existence of ~/.emacs.d
         symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/programs/emacs/emacs.d $HOME/.emacs.d
+          if [ ! -e $HOME/.emacs.d ]; then
+            $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/programs/emacs/emacs.d $HOME/.emacs.d
+          fi
         '';
       };
 
