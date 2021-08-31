@@ -77,6 +77,7 @@ in {
         curl
         darcs
         fd
+        fzf
         gcc
         gnumake
         graphviz
