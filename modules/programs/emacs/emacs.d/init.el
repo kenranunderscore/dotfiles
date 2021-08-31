@@ -112,6 +112,26 @@
 ;; enough.
 (blink-cursor-mode -1)
 
+(defun my--set-evil-state-cursor-colors (color)
+  "Set the cursor to a box, and use a different color for insert
+and emacs mode."
+  (let ((default-cursor `(,color box))
+        (insert-cursor `("lime green" box)))
+    (setq evil-operator-state-cursor default-cursor)
+    (setq evil-normal-state-cursor default-cursor)
+    (setq evil-replace-state-cursor default-cursor)
+    (setq evil-visual-state-cursor default-cursor)
+    (setq evil-motion-state-cursor default-cursor)
+    (setq evil-emacs-state-cursor insert-cursor)
+    (setq evil-insert-state-cursor insert-cursor)))
+
+(defun my--is-initial-daemon-frame-p ()
+  "Check whether the selected frame is the one that seems to be
+automatically created when the daemon starts.  If this is the
+selected frame we don't want to do certain things, like modifying
+faces."
+  (string= (frame-parameter (selected-frame) 'name) "F1"))
+
 (defun my--switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
@@ -125,7 +145,12 @@ disables all other enabled themes."
   (progn
     (mapc #'disable-theme
           custom-enabled-themes)
-    (load-theme name t)))
+    (load-theme name t)
+    (unless (my--is-initial-daemon-frame-p)
+      ;; If it's the initial "daemon frame" then hooks in
+      ;; `server-after-make-frame-hook' will be executed, including
+      ;; one that calls `my--set-evil-state-cursor-colors'.
+      (my--set-evil-state-cursor-colors (face-background 'cursor)))))
 
 ;; Since I cannot ever decide which theme I like best, there are a few
 ;; themes loaded here.
@@ -281,7 +306,6 @@ disables all other enabled themes."
   (evil-mode 1)
   (dolist (mode my--evil-holy-modes)
     (evil-set-initial-state mode 'emacs))
-  (setq evil-insert-state-cursor '(hbar . 3))
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
@@ -290,7 +314,10 @@ disables all other enabled themes."
    (evil-undo-system 'undo-redo))
   :init
   (setq evil-want-integration t)
-  (setq evil-want-keybinding nil))
+  (setq evil-want-keybinding nil)
+  (add-hook 'server-after-make-frame-hook
+            (lambda ()
+              (my--set-evil-state-cursor-colors (face-background 'cursor)))))
 
 ;; This package makes it possible to enable evil-mode (and therefore
 ;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not
