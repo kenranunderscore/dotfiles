@@ -213,6 +213,9 @@ disables all other enabled themes."
   :hook ((prog-mode . display-line-numbers-mode)
          (conf-mode . display-line-numbers-mode)))
 
+;; Show column numbers in the modeline.
+(column-number-mode)
+
 ;; Insert newline at the end of files.
 (setq require-final-newline t)
 (setq mode-require-final-newline t)
