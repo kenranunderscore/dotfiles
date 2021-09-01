@@ -116,6 +116,7 @@ in {
         fontmatrix # font explorer
         go-font
         hack-font
+        hasklig
         hermit
         ibm-plex
         inconsolata
