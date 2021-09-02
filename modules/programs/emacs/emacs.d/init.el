@@ -639,16 +639,12 @@ disables all other enabled themes."
   :config
   (evil-set-initial-state 'helpful-mode 'motion))
 
-;;; Projectile
-(use-package projectile
-  :diminish projectile-mode
-  :init
-  (projectile-mode +1)
-  :custom
-  (projectile-switch-project-action #'projectile-commander))
+(use-package project
+  :config
+  (fset 'project-prefix-map project-prefix-map))
 
 (with-leader
-  "p" '(projectile-command-map :which-key "projectile"))
+  "p" '(project-prefix-map :which-key "project"))
 
 ;;; Magit
 (use-package magit

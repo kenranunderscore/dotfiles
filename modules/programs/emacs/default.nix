@@ -46,7 +46,6 @@ in {
             general
             magit
             orderless
-            projectile
             smartparens
             use-package
 
