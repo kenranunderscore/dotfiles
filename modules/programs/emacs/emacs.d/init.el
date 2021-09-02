@@ -311,7 +311,8 @@ disables all other enabled themes."
    (evil-want-C-u-delete nil)
    (evil-want-C-w-delete t)
    (evil-want-Y-yank-to-eol t)
-   (evil-undo-system 'undo-redo))
+   (evil-undo-system 'undo-redo)
+   (evil-symbol-word-search t))
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
