@@ -620,15 +620,11 @@ disables all other enabled themes."
 ;; Mail configuration
 (my--load-config-file "email-configuration.el")
 
-;;; Diminish
-
 ;; The diminish package enables us to hide minor modes from the mode
 ;; line.  It's especially useful for certain modes that are globally
 ;; enabled anyway.  Use-package has built-in support for it available
 ;; with the :diminish keyword.
 (use-package diminish)
-
-;;; Helpful
 
 ;; This gives us better and more readable help pages.  We also replace
 ;; some built-in C-h keybings with helpful-* functions.

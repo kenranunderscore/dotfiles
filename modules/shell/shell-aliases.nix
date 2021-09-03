@@ -4,7 +4,8 @@
   # kill the emacs daemon
   ekill = "emacsclient --eval '(kill-emacs)'";
   # try using emacs/magit as replacement for CLI git
-  eg = "emacsclient --eval '(magit-status)'";
+  eg =
+    "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'";
 
   # git aliases
   g = "git";
