@@ -171,33 +171,103 @@ disables all other enabled themes."
 
 ;;; Font faces and other settings.
 
-;; Tried-and-approved fonts/heights:
-;; - Terminus 160
-;; - Inconsolata 160
-;; - Camingo Code 140
-;; - Fira Code 130
-;; - Iosevka 140
-;; - IBM Plex Mono 150
-(setq my--monospace-font "Iosevka")
-(setq my--variable-font "Cantarell")
-(setq my--default-font-height 150)
+;; An alist of my preferred font families, together with a plist of
+;; certain attributes that need to be applied when switching to the
+;; respective font.
+(setq my--font-alist
+   '((iosevka-serif . (:family
+                      "Iosevka Custom"
+                      :default-height
+                      160
+                      :weight
+                      regular
+                      :italic-slant
+                      oblique))
+    (iosevka . (:family
+                "Iosevka"
+                :default-height
+                160
+                :weight
+                regular
+                :italic-slant
+                italic))
+    (hack . (:family
+             "Hack"
+             :default-height
+             150
+             :weight
+             regular
+             :italic-slant
+             italic))
+    (fira . (:family
+             "Fira Code"
+             :default-height
+             140
+             :weight
+             regular
+             :italic-slant
+             italic))
+    (ibm-plex . (:family
+                 "IBM Plex Mono"
+                 :default-height
+                 150
+                 :weight
+                 regular
+                 :italic-slant
+                 italic))
+    (cascadia . (:family
+                 "Cascadia Code"
+                 :default-height
+                 140
+                 :weight
+                 light
+                 :italic-slant
+                 italic))))
 
-(defun my--set-face-attributes ()
-  "Set the face attributes for 'default, 'fixed-pitch and
-'variable-pitch styles."
-  (set-face-attribute
-   'default nil
-   :font my--monospace-font
-   :weight 'regular
-   :height my--default-font-height)
-  (set-face-attribute
-   'fixed-pitch nil
-   :font my--monospace-font
-   :height 1.0)
-  (set-face-attribute
-   'variable-pitch nil
-   :font my--variable-font
-   :height 1.0))
+;; The currently selected font (key of `my--font-alist').  Setting
+;; this value only changes the default; it is reset when switching
+;; fonts.
+(setq my--current-font 'iosevka-serif)
+
+(defun my--switch-font (font)
+  "Apply the attributes stored for FONT in `my--font-alist'."
+  (interactive
+   (list (intern
+          (completing-read
+           "Font: "
+           (mapcar #'car my--font-alist)))))
+  (let* ((attrs (alist-get font my--font-alist))
+         (family (plist-get attrs :family))
+         (italic-slant (plist-get attrs :italic-slant)))
+    (setq my--current-font font)
+    (set-face-attribute
+     'default nil
+     :font family
+     :weight (plist-get attrs :weight)
+     :height (plist-get attrs :default-height))
+    (set-face-attribute
+     'fixed-pitch nil
+     :font family
+     :height 1.0)
+    (set-face-attribute
+     'italic nil
+     :slant italic-slant)
+    (set-face-attribute
+     'bold-italic nil
+     :slant italic-slant)
+    ;; This face doesn't inherit its slant property from the 'italic
+    ;; face, so it must be set manually.
+    (set-face-attribute
+     'font-lock-comment-face nil
+     :slant italic-slant)))
+
+;; Now set all the face attributes, but also register a hook that
+;; makes sure that these also work when using the Emacs daemon
+;; together with emacsclient.
+(my--switch-font my--current-font)
+(add-hook 'server-after-make-frame-hook
+          (lambda ()
+            (my--switch-font my--current-font)))
 
 ;; Try out native ligature support via Harfbuzz composition tables
 ;; (doesn't work with every font, but works for instance with Fira
@@ -230,12 +300,6 @@ disables all other enabled themes."
   (dolist (char-regexp alist)
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
-
-;; Now set all the face attributes, but also register a hook that
-;; makes sure that these also work when using the Emacs daemon
-;; together with emacsclient.
-(my--set-face-attributes)
-(add-hook 'server-after-make-frame-hook #'my--set-face-attributes)
 
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
@@ -385,9 +449,11 @@ disables all other enabled themes."
   "b k" 'kill-buffer
   "b n" 'next-buffer
   "b p" 'previous-buffer
-  ;; Toggles
-  "t" '(:ignore t :which-key "toggle")
+  ;; Toggles/switches
+  "t" '(:ignore t :which-key "toggle/switch")
   "t l" '(display-line-numbers-mode :which-key "line numbers")
+  "t t" '(my--switch-theme :which-key "switch theme")
+  "t f" '(my--switch-font :which-key "switch font")
   ;; Language-agnostic code-related commands
   "c" '(:ignore t :which-key "code")
   "c l" 'comment-line
@@ -396,7 +462,6 @@ disables all other enabled themes."
   "s" '(:ignore t :which-key "search/switch")
   "s g" 'consult-git-grep
   "s p" 'consult-ripgrep
-  "s t" '(my--switch-theme :which-key "change theme")
   ;; Window management (redundant)
   "w" '(evil-window-map :which-key "windows")
   ;; Emacs config

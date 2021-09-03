@@ -120,7 +120,15 @@ in {
         hermit
         ibm-plex
         inconsolata
-        iosevka
+        (iosevka.override {
+          privateBuildPlan = {
+            family = "Iosevka Custom";
+            spacing = "normal";
+            serifs = "slab";
+            ligations.inherits = "haskell";
+          };
+          set = "iosevka-custom";
+        })
         jetbrains-mono
         meslo-lg
         nerdfonts
