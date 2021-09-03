@@ -10,8 +10,7 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
     notmuch = {
-      url =
-        "github:notmuch/notmuch?rev=d25dafb4c2f26d9f7ae67ca603181238514e6e97";
+      url = "github:notmuch/notmuch";
       flake = false;
     };
     privateConfig.url =

@@ -158,17 +158,16 @@
     "notmuch": {
       "flake": false,
       "locked": {
-        "lastModified": 1629999819,
-        "narHash": "sha256-6KkTn5LtBXwKHyJEdX6MPIUG4FA2FzVZfvCJOca09KI=",
+        "lastModified": 1630366449,
+        "narHash": "sha256-UIIM/gkv6RbQ3yIA14v2lWw3L0r8vMMP4YyRbJ4Mti0=",
         "owner": "notmuch",
         "repo": "notmuch",
-        "rev": "d25dafb4c2f26d9f7ae67ca603181238514e6e97",
+        "rev": "9c4037ff193a4015fc132ceb7918e6b8274cfb8c",
         "type": "github"
       },
       "original": {
         "owner": "notmuch",
         "repo": "notmuch",
-        "rev": "d25dafb4c2f26d9f7ae67ca603181238514e6e97",
         "type": "github"
       }
     },
