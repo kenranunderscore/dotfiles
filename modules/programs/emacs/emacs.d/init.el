@@ -649,7 +649,11 @@ disables all other enabled themes."
 
 ;;; Magit
 (use-package magit
-  :hook (git-commit-mode . evil-insert-state)
+  ;; FIXME: this works, but at the same time - because evil sets the
+  ;; 'cursor face according to the current mode - it forces a wrong
+  ;; subsequent cursor color becaus magit triggers the
+  ;; 'server-after-make-frame-hook.
+  ;; :hook (git-commit-mode . evil-insert-state)
   :custom
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
