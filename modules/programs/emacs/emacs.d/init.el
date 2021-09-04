@@ -709,6 +709,8 @@ disables all other enabled themes."
 
 (use-package project
   :config
+  ;; Makes the `project-prefix-map' callable so that it can be bound
+  ;; to a key with `with-leader'.
   (fset 'project-prefix-map project-prefix-map))
 
 (with-leader
