@@ -1059,6 +1059,14 @@ disables all other enabled themes."
 
 ;;; Built-in packages
 
+;; Render manpages in Emacs
+(use-package man
+  :defer t
+  :config
+  ;; As soon as it is ready open the manpage in a separate, focused
+  ;; window.
+  (setq Man-notify-method 'aggressive))
+
 ;; Diminish only.
 (use-package face-remap
   :ensure nil
