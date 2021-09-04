@@ -31,6 +31,11 @@
 
   programs = { msmtp.enable = true; };
 
+  xsession = {
+    enable = true;
+    windowManager.command = "${pkgs.i3}/bin/i3";
+  };
+
   services = {
     gpg-agent = {
       enable = true;

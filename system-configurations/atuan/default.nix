@@ -61,14 +61,16 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        defaultSession = "none+i3";
+        session = [{
+          manage = "desktop";
+          name = "xsession";
+          start = "exec $HOME/.xsession";
+        }];
+        defaultSession = "none+xsession";
         lightdm.enable = true;
         lightdm.greeters.mini.enable = true;
         lightdm.greeters.mini.user = "kenran";
-      };
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
+        job.logToJournal = true;
       };
     };
   };
