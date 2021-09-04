@@ -711,7 +711,13 @@ disables all other enabled themes."
   :config
   ;; Makes the `project-prefix-map' callable so that it can be bound
   ;; to a key with `with-leader'.
-  (fset 'project-prefix-map project-prefix-map))
+  (fset 'project-prefix-map project-prefix-map)
+  (setq project-switch-commands
+        '((project-find-file "Find file")
+          (consult-ripgrep "Grep" ?g)
+          (magit-status "Git status" ?v)
+          (project-dired "Dired")
+          (project-eshell "Eshell"))))
 
 (with-leader
   "p" '(project-prefix-map :which-key "project"))
