@@ -67,7 +67,13 @@
           start = "";
         }];
         defaultSession = "none+fake";
-        lightdm.enable = true;
+        lightdm = {
+          enable = true;
+          greeters.mini = {
+            enable = true;
+            user = "kenran";
+          };
+        };
         autoLogin = {
           user = "kenran";
           enable = true;
