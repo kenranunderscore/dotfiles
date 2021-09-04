@@ -62,14 +62,16 @@
       };
       displayManager = {
         session = [{
-          manage = "desktop";
-          name = "xsession";
-          start = "exec $HOME/.xsession";
+          manage = "window";
+          name = "fake";
+          start = "";
         }];
-        defaultSession = "none+xsession";
+        defaultSession = "none+fake";
         lightdm.enable = true;
-        lightdm.greeters.mini.enable = true;
-        lightdm.greeters.mini.user = "kenran";
+        autoLogin = {
+          user = "kenran";
+          enable = true;
+        };
         job.logToJournal = true;
       };
     };
