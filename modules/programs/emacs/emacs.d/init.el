@@ -261,14 +261,6 @@ disables all other enabled themes."
      'font-lock-comment-face nil
      :slant italic-slant)))
 
-(defun my--is-server-buffer ()
-  "Predicate function to check whether the current buffer is the '
-*server*' buffer. This happens for instance when entering a
-magit-commit buffer, since magit starts an emacsclient process in
-the background."
-  (string= (buffer-name (current-buffer))
-           " *server*"))
-
 ;; Now set all the face attributes, but also register a hook that
 ;; makes sure that these also work when using the Emacs daemon
 ;; together with emacsclient.
@@ -276,8 +268,7 @@ the background."
 (setq my--has-set-font-in-initial-frame nil)
 (add-hook 'server-after-make-frame-hook
           (lambda ()
-            (unless (or (my--is-server-buffer)
-                        my--has-set-font-in-initial-frame)
+            (unless my--has-set-font-in-initial-frame
               (setq my--has-set-font-in-initial-frame t)
               (my--switch-font my--current-font))))
 
@@ -392,9 +383,11 @@ the background."
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq my--has-set-evil-cursor-colors nil)
   (add-hook 'server-after-make-frame-hook
             (lambda ()
-              (unless (my--is-server-buffer)
+              (unless my--has-set-evil-cursor-colors
+                (setq my--has-set-evil-cursor-colors t)
                 (my--set-evil-state-cursor-colors (face-background 'cursor))))))
 
 ;; This package makes it possible to enable evil-mode (and therefore
