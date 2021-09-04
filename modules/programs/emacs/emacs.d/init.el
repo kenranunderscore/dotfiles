@@ -273,9 +273,12 @@ the background."
 ;; makes sure that these also work when using the Emacs daemon
 ;; together with emacsclient.
 (my--switch-font my--current-font)
+(setq my--has-set-font-in-initial-frame nil)
 (add-hook 'server-after-make-frame-hook
           (lambda ()
-            (unless (my--is-server-buffer)
+            (unless (or (my--is-server-buffer)
+                        my--has-set-font-in-initial-frame)
+              (setq my--has-set-font-in-initial-frame t)
               (my--switch-font my--current-font))))
 
 ;; Try out native ligature support via Harfbuzz composition tables
