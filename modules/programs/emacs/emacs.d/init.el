@@ -261,13 +261,22 @@ disables all other enabled themes."
      'font-lock-comment-face nil
      :slant italic-slant)))
 
+(defun my--is-server-buffer ()
+  "Predicate function to check whether the current buffer is the '
+*server*' buffer. This happens for instance when entering a
+magit-commit buffer, since magit starts an emacsclient process in
+the background."
+  (string= (buffer-name (current-buffer))
+           " *server*"))
+
 ;; Now set all the face attributes, but also register a hook that
 ;; makes sure that these also work when using the Emacs daemon
 ;; together with emacsclient.
 (my--switch-font my--current-font)
 (add-hook 'server-after-make-frame-hook
           (lambda ()
-            (my--switch-font my--current-font)))
+            (unless (my--is-server-buffer)
+              (my--switch-font my--current-font))))
 
 ;; Try out native ligature support via Harfbuzz composition tables
 ;; (doesn't work with every font, but works for instance with Fira
@@ -382,7 +391,8 @@ disables all other enabled themes."
   (setq evil-want-keybinding nil)
   (add-hook 'server-after-make-frame-hook
             (lambda ()
-              (my--set-evil-state-cursor-colors (face-background 'cursor)))))
+              (unless (my--is-server-buffer)
+                (my--set-evil-state-cursor-colors (face-background 'cursor))))))
 
 ;; This package makes it possible to enable evil-mode (and therefore
 ;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not
@@ -710,11 +720,7 @@ disables all other enabled themes."
 
 ;;; Magit
 (use-package magit
-  ;; FIXME: this works, but at the same time - because evil sets the
-  ;; 'cursor face according to the current mode - it forces a wrong
-  ;; subsequent cursor color becaus magit triggers the
-  ;; 'server-after-make-frame-hook.
-  ;; :hook (git-commit-mode . evil-insert-state)
+  :hook (git-commit-mode . evil-insert-state)
   :custom
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
