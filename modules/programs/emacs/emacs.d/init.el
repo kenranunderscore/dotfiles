@@ -107,7 +107,7 @@
 (blink-cursor-mode -1)
 
 ;; Load themes and other improvements over the default look.
-(my--load-config-file "visuals.el")
+(my--load-config-file "lisp/visuals.el")
 
 ;;; Since I cannot ever decide which theme I like best, there are a
 ;;; few themes loaded here.
@@ -431,7 +431,7 @@
                                     (org-present-read-write)))))
 
 ;; Haskell configuration
-(my--load-config-file "haskell-configuration.el")
+(my--load-config-file "lisp/haskell-configuration.el")
 
 ;;; Dhall
 (use-package dhall-mode
@@ -511,7 +511,7 @@
   :defer t)
 
 ;; Mail configuration
-(my--load-config-file "email-configuration.el")
+(my--load-config-file "lisp/email-configuration.el")
 
 ;; The diminish package enables us to hide minor modes from the mode
 ;; line.  It's especially useful for certain modes that are globally
