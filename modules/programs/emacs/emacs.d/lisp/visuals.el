@@ -36,7 +36,6 @@ faces."
            (mapcar #'car my--font-alist)))))
   (let* ((attrs (alist-get font my--font-alist))
          (family (plist-get attrs :family))
-         (italic-slant (plist-get attrs :italic-slant))
          (height (plist-get attrs :default-height)))
     (setq my--current-font font)
     (setq my--default-font-height height)
@@ -48,71 +47,48 @@ faces."
     (set-face-attribute
      'fixed-pitch nil
      :font family
-     :height 1.0)
-    (set-face-attribute
-     'italic nil
-     :slant italic-slant)
-    (set-face-attribute
-     'bold-italic nil
-     :slant italic-slant)
-    ;; This face doesn't inherit its slant property from the 'italic
-    ;; face, so it must be set manually.
-    (set-face-attribute
-     'font-lock-comment-face nil
-     :slant italic-slant)))
+     :height 1.0)))
 
 ;; An alist of my preferred font families, together with a plist of
 ;; certain attributes that need to be applied when switching to the
 ;; respective font.
 (setq my--font-alist
-   '((iosevka-serif . (:family
-                      "Iosevka Custom"
-                      :default-height
-                      160
-                      :weight
-                      regular
-                      :italic-slant
-                      oblique))
-    (iosevka . (:family
-                "Iosevka"
-                :default-height
-                160
-                :weight
-                regular
-                :italic-slant
-                italic))
-    (hack . (:family
-             "Hack"
-             :default-height
-             150
-             :weight
-             regular
-             :italic-slant
-             italic))
-    (fira . (:family
-             "Fira Code"
-             :default-height
-             140
-             :weight
-             regular
-             :italic-slant
-             italic))
-    (ibm-plex . (:family
-                 "IBM Plex Mono"
+      '((iosevka-serif . (:family
+                          "Iosevka Custom"
+                          :default-height
+                          160
+                          :weight
+                          regular))
+        (iosevka . (:family
+                    "Iosevka"
+                    :default-height
+                    160
+                    :weight
+                    regular))
+        (hack . (:family
+                 "Hack"
                  :default-height
                  150
                  :weight
-                 regular
-                 :italic-slant
-                 italic))
-    (cascadia . (:family
-                 "Cascadia Code"
+                 regular))
+        (fira . (:family
+                 "Fira Code"
                  :default-height
                  140
                  :weight
-                 light
-                 :italic-slant
-                 italic))))
+                 regular))
+        (ibm-plex . (:family
+                     "IBM Plex Mono"
+                     :default-height
+                     150
+                     :weight
+                     regular))
+        (cascadia . (:family
+                     "Cascadia Code"
+                     :default-height
+                     140
+                     :weight
+                     light))))
 
 ;; The currently selected font (key of `my--font-alist').  Setting
 ;; this value only changes the default; it is reset when switching
