@@ -126,6 +126,26 @@ in {
             spacing = "normal";
             serifs = "slab";
             ligations.inherits = "haskell";
+            slopes = {
+              upright = {
+                angle = 0;
+                shape = "upright";
+                menu = "upright";
+                css = "normal";
+              };
+              italic = {
+                angle = 9.4;
+                shape = "oblique";
+                menu = "italic";
+                css = "italic";
+              };
+              oblique = {
+                angle = 9.4;
+                shape = "oblique";
+                menu = "oblique";
+                css = "oblique";
+              };
+            };
           };
           set = "iosevka-custom";
         })
