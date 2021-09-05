@@ -36,8 +36,10 @@ faces."
            (mapcar #'car my--font-alist)))))
   (let* ((attrs (alist-get font my--font-alist))
          (family (plist-get attrs :family))
-         (italic-slant (plist-get attrs :italic-slant)))
+         (italic-slant (plist-get attrs :italic-slant))
+         (height (plist-get attrs :default-height)))
     (setq my--current-font font)
+    (setq my--default-font-height height)
     (set-face-attribute
      'default nil
      :font family
