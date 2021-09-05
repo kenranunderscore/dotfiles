@@ -1,5 +1,3 @@
-;;;; General settings
-
 ;; Even though I'm specifying the Emacs packages I'm using via
 ;; home-manager/nixpkgs, it's still useful to have MELPA accessible
 ;; directly in case something's broken in nixpkgs.
