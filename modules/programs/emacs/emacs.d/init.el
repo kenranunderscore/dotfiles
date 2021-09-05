@@ -218,12 +218,8 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  (setq my--has-set-evil-cursor-colors nil)
   (add-hook 'server-after-make-frame-hook
-            (lambda ()
-              (unless my--has-set-evil-cursor-colors
-                (setq my--has-set-evil-cursor-colors t)
-                (my--set-evil-state-cursor-colors (face-background 'cursor))))))
+            #'my--set-evil-state-cursors))
 
 ;; This package makes it possible to enable evil-mode (and therefore
 ;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not

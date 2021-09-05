@@ -7,18 +7,22 @@
 (add-hook 'server-after-make-frame-hook
           (lambda () (set-mouse-color "white")))
 
-(defun my--set-evil-state-cursor-colors (color)
+(defun my--set-evil-state-cursors ()
   "Set the cursor to a box, and use a different color for insert
-and emacs mode."
-  (let ((default-cursor `(,color box))
-        (insert-cursor `("lime green" box)))
+and emacs mode.  The default color should be the one that the
+current theme uses as background for the 'cursor face."
+  (let* ((color (face-background 'cursor))
+         (default-cursor `(,color box))
+         (insert-cursor `("lime green" box)))
     (setq evil-operator-state-cursor default-cursor)
     (setq evil-normal-state-cursor default-cursor)
     (setq evil-replace-state-cursor default-cursor)
     (setq evil-visual-state-cursor default-cursor)
     (setq evil-motion-state-cursor default-cursor)
     (setq evil-emacs-state-cursor insert-cursor)
-    (setq evil-insert-state-cursor insert-cursor)))
+    (setq evil-insert-state-cursor insert-cursor)
+    (remove-hook 'server-after-make-frame-hook
+                 #'my--set-evil-state-cursors)))
 
 (defun my--is-initial-daemon-frame-p ()
   "Check whether the selected frame is the one that seems to be
@@ -158,4 +162,4 @@ disables all other enabled themes."
       ;; If it's the initial "daemon frame" then hooks in
       ;; `server-after-make-frame-hook' will be executed, including
       ;; one that calls `my--set-evil-state-cursor-colors'.
-      (my--set-evil-state-cursor-colors (face-background 'cursor)))))
+      (my--set-evil-state-cursors))))
