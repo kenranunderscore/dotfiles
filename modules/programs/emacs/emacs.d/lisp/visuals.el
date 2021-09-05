@@ -33,7 +33,9 @@ faces."
    (list (intern
           (completing-read
            "Font: "
-           (mapcar #'car my--font-alist)))))
+           (mapcar #'car
+                   (assoc-delete-all my--current-font
+                                     (copy-alist my--font-alist)))))))
   (let* ((attrs (alist-get font my--font-alist))
          (family (plist-get attrs :family))
          (height (plist-get attrs :default-height)))
