@@ -92,7 +92,7 @@ faces."
         (cascadia . (:family
                      "Cascadia Code"
                      :default-height
-                     140
+                     150
                      :weight
                      light))))
 
