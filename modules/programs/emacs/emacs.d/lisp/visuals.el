@@ -77,6 +77,12 @@ faces."
                  150
                  :weight
                  regular))
+        (source-code-pro . (:family
+                            "Source Code Pro"
+                            :default-height
+                            150
+                            :weight
+                            regular))
         (fira . (:family
                  "Fira Code"
                  :default-height
