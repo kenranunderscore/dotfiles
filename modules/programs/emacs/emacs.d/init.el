@@ -887,6 +887,7 @@
   ("r" (lambda ()
          (interactive)
          (setq default-text-scale--complement 0)
+         (face-spec-set 'default `((t (:height ,my--default-font-height))))
          (set-face-attribute 'default nil
                              :height my--default-font-height))
    "reset" :color blue)
