@@ -114,12 +114,11 @@ faces."
 ;; makes sure that these also work when using the Emacs daemon
 ;; together with emacsclient.
 (my--switch-font my--current-font)
-(setq my--has-set-font-in-initial-frame nil)
 (add-hook 'server-after-make-frame-hook
-          (lambda ()
-            (unless my--has-set-font-in-initial-frame
-              (setq my--has-set-font-in-initial-frame t)
-              (my--switch-font my--current-font))))
+          (defun my--switch-to-current-font ()
+            (my--switch-font my--current-font)
+            (remove-hook 'server-after-make-frame-hook
+                         #'my--switch-to-current-font)))
 
 ;; Try out native ligature support via Harfbuzz composition tables
 ;; (doesn't work with every font, but works for instance with Fira
