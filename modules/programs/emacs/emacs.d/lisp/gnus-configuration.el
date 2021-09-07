@@ -1,4 +1,6 @@
 (use-package gnus
+  :init
+  (setq gnus-home-directory "~/sync")
   :config
   (setq user-full-name "Johannes Maier")
   (setq user-mail-address "johannes.maier@mailbox.org")
@@ -15,7 +17,53 @@
   (setq gnus-use-article-prefetch 15)
   (setq gnus-select-method '(nnnil ""))
   (setq gnus-secondary-select-methods
-        '((nnimap "work"
+        '((nnimap "ag"
                   (nnimap-address "imap.active-group.de")
                   (nnimap-server-port 993)
-                  (nnimap-stream ssl)))))
+                  (nnimap-stream ssl))
+          (nnimap "mailbox"
+                  (nnimap-address "imap.mailbox.org")
+                  (nnimap-server-port 993)
+                  (nnimap-stream ssl))))
+  (setq gnus-message-archive-group
+        ;; FIXME put it into the group it came from? is that the default?
+        '(("nnimap+ag" "nnimap+ag:Sent")
+          (".*" "nnimap+mailbox:Sent"))))
+
+;; To switch identities (which I basically only use to set my work
+;; signature based on my From address), I use gnus-alias.
+(use-package gnus-alias
+  :after gnus
+  :config
+  (setq gnus-alias-identity-alist
+        `(("mailbox"
+           nil
+           "Johannes Maier <johannes.maier@mailbox.org>"
+           nil
+           nil
+           nil
+           nil)
+          ("ag"
+           nil
+           "Johannes Maier <johannes.maier@active-group.de>"
+           "Active Group GmbH"
+           nil
+           nil
+           ,(concat
+             "Johannes Maier\n"
+             "johannes.maier@active-group.de\n\n"
+             "+49 (7071) 70896-67\n\n"
+             "Active Group GmbH\n"
+             "Hechinger Str. 12/1\n"
+             "72072 Tübingen\n"
+             "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+             "Geschäftsführer: Dr. Michael Sperber"))))
+  (setq gnus-alias-default-identity "mailbox")
+  (setq gnus-alias-identity-rules
+        '(("ag" ("any" "@active-group.de" both) "ag")))
+  :init (add-hook 'message-setup-hook #'gnus-alias-determine-identity))
+
+(with-local-leader
+  :states 'normal
+  :keymaps 'message-mode-map
+  "i" '(gnus-alias-select-identity :which-key "select identity"))
