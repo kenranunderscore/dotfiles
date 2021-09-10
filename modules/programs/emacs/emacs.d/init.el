@@ -877,7 +877,9 @@
 ;;; default-text-scale
 (use-package default-text-scale
   :defer t
-  :after hydra)
+  :after hydra
+  :config
+  (setq default-text-scale-amount 15))
 
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "
