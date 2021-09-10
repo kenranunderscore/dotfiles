@@ -31,6 +31,7 @@ in rec {
       primaryAccount = "mailbox";
       isSyncServer = false;
     };
+    fonts.enable = true;
     games.dwarfFortress.enable = true;
     programs = {
       emacs = {

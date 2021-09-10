@@ -106,58 +106,6 @@ in {
         vim
         wget
         xst
-
-        # Fonts
-        anonymousPro
-        camingo-code
-        cantarell_fonts
-        cascadia-code
-        fira-code
-        fontmatrix # font explorer
-        go-font
-        hack-font
-        hasklig
-        hermit
-        ibm-plex
-        inconsolata
-        (iosevka.override {
-          privateBuildPlan = {
-            family = "Iosevka Custom";
-            spacing = "normal";
-            serifs = "slab";
-            ligations.inherits = "haskell";
-            slopes = {
-              upright = {
-                angle = 0;
-                shape = "upright";
-                menu = "upright";
-                css = "normal";
-              };
-              italic = {
-                angle = 9.4;
-                shape = "oblique";
-                menu = "italic";
-                css = "italic";
-              };
-              oblique = {
-                angle = 9.4;
-                shape = "oblique";
-                menu = "oblique";
-                css = "oblique";
-              };
-            };
-          };
-          set = "iosevka-custom";
-        })
-        jetbrains-mono
-        meslo-lg
-        nerdfonts
-        roboto-mono
-        source-code-pro
-        terminus_font
-        ubuntu_font_family
-        unifont
-        uw-ttyp0
       ];
 
       file = {
