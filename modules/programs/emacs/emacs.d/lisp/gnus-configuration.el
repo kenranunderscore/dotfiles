@@ -22,11 +22,15 @@
           (nnimap "ag"
                   (nnimap-address "imap.active-group.de")
                   (nnimap-server-port 993)
-                  (nnimap-stream ssl))
+                  (nnimap-stream ssl)
+                  (nnimap-inbox "INBOX")
+                  (nnir-search-engine imap))
           (nnimap "mailbox"
                   (nnimap-address "imap.mailbox.org")
                   (nnimap-server-port 993)
-                  (nnimap-stream ssl))))
+                  (nnimap-stream ssl)
+                  (nnimap-inbox "INBOX")
+                  (nnir-search-engine imap))))
   ;; Visuals
   (setq gnus-sum-thread-tree-indent "  ")
   (setq gnus-sum-thread-tree-root "● ")
