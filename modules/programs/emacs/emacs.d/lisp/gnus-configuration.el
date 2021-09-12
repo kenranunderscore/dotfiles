@@ -10,7 +10,7 @@
   (setq message-sendmail-envelope-from 'header)
   (setq mail-envelope-from 'header)
   (setq mail-specify-envelope-from 'header)
-  (setq gnus-check-new-newsgroups nil)
+  (setq gnus-check-new-newsgroups t)
   (setq gnus-gcc-mark-as-read t)
   (setq nnml-directory "~/.gnus")
   (setq gnus-interactive-exit t)
