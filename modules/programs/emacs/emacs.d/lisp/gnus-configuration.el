@@ -48,13 +48,25 @@
          "%s\n"))
   (setq gnus-summary-display-arrow t))
 
+;;;###autoload
+(defun my--gnus-topic-fold-unfold ()
+  "Toggle fold level on the current topic.  Point doesn't need to
+be on the actual topic line."
+  (interactive)
+  (gnus-topic-goto-topic (gnus-current-topic))
+  (gnus-topic-fold))
+
 (use-package gnus-topic
   :ensure nil
   :after gnus
   :hook
   (gnus-group-mode . gnus-topic-mode)
   :config
-  (setq gnus-topic-display-empty-topics t))
+  (setq gnus-topic-display-empty-topics t)
+  :bind
+  ((:map gnus-topic-mode-map
+         ("<tab>" . my--gnus-topic-fold-unfold)
+         ("TAB" . my--gnus-topic-fold-unfold))))
 
 ;; FIXME gcc: should it put sent mail into the group it came from?
 ;; Is that perhaps the default?
