@@ -17,18 +17,21 @@
   (setq gnus-use-article-prefetch 15)
   (setq gnus-select-method '(nnnil ""))
   (setq gnus-secondary-select-methods
-        '((nnimap "ag"
+        '((nntp "news.gwene.org")
+          (nnimap "ag"
                   (nnimap-address "imap.active-group.de")
                   (nnimap-server-port 993)
                   (nnimap-stream ssl))
           (nnimap "mailbox"
                   (nnimap-address "imap.mailbox.org")
                   (nnimap-server-port 993)
-                  (nnimap-stream ssl))))
-  (setq gnus-message-archive-group
-        ;; FIXME put it into the group it came from? is that the default?
-        '(("nnimap+ag" "nnimap+ag:Sent")
-          (".*" "nnimap+mailbox:Sent"))))
+                  (nnimap-stream ssl)))))
+
+;; FIXME gcc: should it put sent mail into the group it came from?
+;; Is that perhaps the default?
+;; I would like to:
+;;  a) see threads
+;;  b) have sent mail available on the server
 
 ;; To switch identities (which I basically only use to set my work
 ;; signature based on my From address), I use gnus-alias.
@@ -40,14 +43,14 @@
            nil
            "Johannes Maier <johannes.maier@mailbox.org>"
            nil
-           nil
+           (("Gcc" . "nnimap+mailbox:Sent"))
            nil
            nil)
           ("ag"
            nil
            "Johannes Maier <johannes.maier@active-group.de>"
            "Active Group GmbH"
-           nil
+           (("Gcc" . "nnimap+ag:Sent"))
            nil
            ,(concat
              "Johannes Maier\n"
