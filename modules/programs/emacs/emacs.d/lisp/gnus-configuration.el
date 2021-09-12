@@ -93,7 +93,8 @@
   (setq gnus-alias-default-identity "mailbox")
   (setq gnus-alias-identity-rules
         '(("ag" ("any" "@active-group.de" both) "ag")))
-  :init (add-hook 'message-setup-hook #'gnus-alias-determine-identity))
+  :hook
+  (message-setup . gnus-alias-determine-identity))
 
 (with-local-leader
   :states 'normal
