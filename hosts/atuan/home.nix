@@ -30,8 +30,6 @@
     shell.git.email = "johannes.maier@mailbox.org";
   };
 
-  programs = { msmtp.enable = true; };
-
   xsession = {
     enable = true;
     windowManager.command = "${pkgs.i3}/bin/i3";
