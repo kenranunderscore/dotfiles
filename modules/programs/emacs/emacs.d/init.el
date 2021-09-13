@@ -185,7 +185,6 @@
 (setq my--holy-modes
       '((eshell-mode . eshell)
         (notmuch-hello-mode . notmuch)
-        (gnus . gnus)
         (racket-repl-mode . nil)
         (racket-stepper-mode . nil)
         (shell-mode . nil)
@@ -521,8 +520,6 @@
 
 ;; Mail configuration
 ;; (my--load-config-file "lisp/email-configuration.el")
-
-(my--load-config-file "lisp/gnus-configuration.el")
 
 ;; The diminish package enables us to hide minor modes from the mode
 ;; line.  It's especially useful for certain modes that are globally
