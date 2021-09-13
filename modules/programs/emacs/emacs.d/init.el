@@ -38,20 +38,20 @@
 
 (defmacro my--load-config-file (file)
   "Load FILE relative to the .emacs.d directory."
-  `(load (concat user-emacs-directory ,file)
+  `(load (locate-user-emacs-file ,file)
          'no-error))
 
 ;; I do not want customizations done via `customize' to end up in
 ;; this file.  Use a separate file instead and load that one on
 ;; startup.
-(let ((my-custom-file (concat user-emacs-directory "custom.el")))
+(let ((my-custom-file (locate-user-emacs-file "custom.el")))
   (setq custom-file my-custom-file)
   (load custom-file 'no-error))
 
 (defun my--open-init-file ()
   "Open my init.el file."
   (interactive)
-  (find-file (file-truename (concat user-emacs-directory "init.el"))))
+  (find-file (file-truename (locate-user-emacs-file "init.el"))))
 
 ;; Where the custom Elisp files reside.
 (setq my--lisp-dir (concat user-emacs-directory "lisp/"))
