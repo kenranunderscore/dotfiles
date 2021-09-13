@@ -17,6 +17,7 @@
       primaryAccount = "mailbox";
       isSyncServer = false;
     };
+    fonts.enable = true;
     games.dwarfFortress.enable = true;
     programs = {
       emacs.emacsVersion = "git";
@@ -28,8 +29,6 @@
     };
     shell.git.email = "johannes.maier@mailbox.org";
   };
-
-  programs = { msmtp.enable = true; };
 
   xsession = {
     enable = true;

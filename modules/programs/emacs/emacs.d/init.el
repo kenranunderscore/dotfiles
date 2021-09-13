@@ -38,20 +38,20 @@
 
 (defmacro my--load-config-file (file)
   "Load FILE relative to the .emacs.d directory."
-  `(load (concat user-emacs-directory ,file)
+  `(load (locate-user-emacs-file ,file)
          'no-error))
 
 ;; I do not want customizations done via `customize' to end up in
 ;; this file.  Use a separate file instead and load that one on
 ;; startup.
-(let ((my-custom-file (concat user-emacs-directory "custom.el")))
+(let ((my-custom-file (locate-user-emacs-file "custom.el")))
   (setq custom-file my-custom-file)
   (load custom-file 'no-error))
 
 (defun my--open-init-file ()
   "Open my init.el file."
   (interactive)
-  (find-file (file-truename (concat user-emacs-directory "init.el"))))
+  (find-file (file-truename (locate-user-emacs-file "init.el"))))
 
 ;; Where the custom Elisp files reside.
 (setq my--lisp-dir (concat user-emacs-directory "lisp/"))
@@ -185,6 +185,7 @@
 (setq my--holy-modes
       '((eshell-mode . eshell)
         (notmuch-hello-mode . notmuch)
+        (gnus . gnus)
         (racket-repl-mode . nil)
         (racket-stepper-mode . nil)
         (shell-mode . nil)
@@ -519,7 +520,9 @@
   :defer t)
 
 ;; Mail configuration
-(my--load-config-file "lisp/email-configuration.el")
+;; (my--load-config-file "lisp/email-configuration.el")
+
+(my--load-config-file "lisp/gnus-configuration.el")
 
 ;; The diminish package enables us to hide minor modes from the mode
 ;; line.  It's especially useful for certain modes that are globally
@@ -874,7 +877,9 @@
 ;;; default-text-scale
 (use-package default-text-scale
   :defer t
-  :after hydra)
+  :after hydra
+  :config
+  (setq default-text-scale-amount 15))
 
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "

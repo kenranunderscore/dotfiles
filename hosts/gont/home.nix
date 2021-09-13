@@ -31,6 +31,7 @@ in rec {
       primaryAccount = "mailbox";
       isSyncServer = false;
     };
+    fonts.enable = true;
     games.dwarfFortress.enable = true;
     programs = {
       emacs = {
@@ -52,8 +53,6 @@ in rec {
     };
     shell.git.email = "johannes.maier@active-group.de";
   };
-
-  programs = { msmtp.enable = true; };
 
   services = {
     gpg-agent = {

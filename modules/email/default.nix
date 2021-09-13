@@ -45,7 +45,10 @@ in {
             expunge = "both";
             patterns = [ "*" "!Drafts" ];
           };
-          msmtp.enable = !cfg.isSyncServer;
+          msmtp = {
+            enable = !cfg.isSyncServer;
+            extraConfig = { "syslog" = "LOG_USER"; };
+          };
           notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
@@ -70,7 +73,10 @@ in {
             expunge = "both";
             patterns = [ "*" "!Drafts" "!Deleted Messages" ];
           };
-          msmtp.enable = !cfg.isSyncServer;
+          msmtp = {
+            enable = !cfg.isSyncServer;
+            extraConfig = { "syslog" = "LOG_USER"; };
+          };
           notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
@@ -91,6 +97,8 @@ in {
     };
 
     home.packages = [ pkgs.muchsync ];
+
+    programs.msmtp.enable = !cfg.isSyncServer;
 
     programs.notmuch = {
       enable = true;
