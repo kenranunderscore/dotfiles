@@ -1,7 +1,7 @@
 ;; Used by message-mode.
 (setq user-full-name "Johannes Maier")
 
-(defun my--notmuch-search-mark-read ()
+(defun kenran/notmuch-search-mark-read ()
   "Toggle unread tag at point in notmuch-search-mode."
   (interactive)
   (if (member "unread" (notmuch-search-get-tags))
@@ -9,7 +9,7 @@
     (notmuch-search-tag (list "+unread")))
   (notmuch-search-next-thread))
 
-(defun my--notmuch-search-delete-mail ()
+(defun kenran/notmuch-search-delete-mail ()
   "Toggle deleted tag at point in notmuch-search-mode."
   (interactive)
   (let ((current-tags (notmuch-search-get-tags)))
@@ -18,7 +18,7 @@
       (notmuch-search-tag (list "+deleted" "-unread"))))
   (notmuch-search-next-thread))
 
-(defun my--notmuch-show-delete-mail ()
+(defun kenran/notmuch-show-delete-mail ()
   "Toggle deleted tag at point in notmuch-show-mode."
   (interactive)
   (if (member "deleted" (notmuch-show-get-tags))
@@ -69,10 +69,10 @@
      (".*" . "sent")))
   :bind
   (:map notmuch-show-mode-map
-        ("d" . my--notmuch-show-delete-mail)
+        ("d" . kenran/notmuch-show-delete-mail)
         :map notmuch-search-mode-map
-        ("d" . my--notmuch-search-delete-mail)
-        ("u" . my--notmuch-search-mark-read)))
+        ("d" . kenran/notmuch-search-delete-mail)
+        ("u" . kenran/notmuch-search-mark-read)))
 
 ;; Enable storing links to emails in notmuch.
 (use-package ol-notmuch

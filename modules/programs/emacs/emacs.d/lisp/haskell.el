@@ -8,12 +8,12 @@
   :hook (haskell-mode . interactive-haskell-mode))
 
 ;;;###autoload
-(defun my--make-pragma (pragma content)
+(defun kenran/make-pragma (pragma content)
   "Create a pragma line of type `pragma' containing `content'."
   (concat "{-# " pragma " " content " #-}\n"))
 
 ;;;###autoload
-(defun my--haskell-add-language-extension (ext-name)
+(defun kenran/haskell-add-language-extension (ext-name)
   "Add an extension from the list of available language extensions
 to the top of the file."
   (interactive
@@ -21,13 +21,13 @@ to the top of the file."
     (completing-read
      "Extension: "
      haskell-ghc-supported-extensions)))
-  (let ((pragma (my--make-pragma "LANGUAGE" ext-name)))
+  (let ((pragma (kenran/make-pragma "LANGUAGE" ext-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
 
 ;;;###autoload
-(defun my--haskell-add-ghc-option (opt-name)
+(defun kenran/haskell-add-ghc-option (opt-name)
   "Add a GHC option from the list of options to the top of the
 file."
   (interactive
@@ -35,12 +35,12 @@ file."
     (completing-read
      "GHC option: "
      haskell-ghc-supported-options)))
-  (let ((pragma (my--make-pragma "OPTIONS_GHC" opt-name)))
+  (let ((pragma (kenran/make-pragma "OPTIONS_GHC" opt-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
 
-(defun my--read-non-empty-string (prompt)
+(defun kenran/read-non-empty-string (prompt)
   "Read a string from the minibuffer.  When the result is the empty
 string, return nil instead."
   (let ((str (read-string prompt)))
@@ -48,14 +48,14 @@ string, return nil instead."
       str)))
 
 ;;;###autoload
-(defun my--haskell-add-import (module &optional qualified? alias)
+(defun kenran/haskell-add-import (module &optional qualified? alias)
   "Add an import to the import list.  Prompts for qualified import
 and alias."
   (interactive
    (let* ((module (read-string "Module: "))
           (qualified? (y-or-n-p (concat "Import " module " qualified?")))
           (alias (when qualified?
-                   (my--read-non-empty-string "Alias [or leave empty]: "))))
+                   (kenran/read-non-empty-string "Alias [or leave empty]: "))))
      (list module qualified? alias)))
   (let ((import-line
          (concat "import "
@@ -79,7 +79,7 @@ and alias."
   "i" '(:ignore t :which-key "imports")
   "i i" '(haskell-navigate-imports-go :which-key "navigate to imports")
   "i r" '(haskell-navigate-imports-return :which-key "return from imports")
-  "i a" '(my--haskell-add-import :which-key "add import")
+  "i a" '(kenran/haskell-add-import :which-key "add import")
   "p" '(:ignore t :which-key "pragmas")
-  "p l" '(my--haskell-add-language-extension :which-key "add language extension")
-  "p o" '(my--haskell-add-ghc-option :which-key "add GHC option"))
+  "p l" '(kenran/haskell-add-language-extension :which-key "add language extension")
+  "p o" '(kenran/haskell-add-ghc-option :which-key "add GHC option"))

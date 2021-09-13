@@ -7,14 +7,14 @@
 (add-hook 'server-after-make-frame-hook
           (lambda () (set-mouse-color "white")))
 
-(setq my--has-set-cursor-colors nil)
-(defun my--set-evil-state-cursors (&optional force)
+(setq kenran/has-set-cursor-colors nil)
+(defun kenran/set-evil-state-cursors (&optional force)
   "Set the cursor to a box, and use a different color for insert
 and emacs mode.  The default color should be the one that the
 current theme uses as background for the 'cursor face.  If FORCE
 is true, then always set the colors anew."
-  (when (or force (not my--has-set-cursor-colors))
-    (setq my--has-set-cursor-colors t)
+  (when (or force (not kenran/has-set-cursor-colors))
+    (setq kenran/has-set-cursor-colors t)
     (let* ((color (face-background 'cursor))
            (default-cursor `(,color box))
            (insert-cursor `("lime green" box)))
@@ -26,29 +26,29 @@ is true, then always set the colors anew."
       (setq evil-emacs-state-cursor insert-cursor)
       (setq evil-insert-state-cursor insert-cursor)
       (remove-hook 'server-after-make-frame-hook
-                   #'my--set-evil-state-cursors))))
+                   #'kenran/set-evil-state-cursors))))
 
-(defun my--is-initial-daemon-frame-p ()
+(defun kenran/is-initial-daemon-frame-p ()
   "Check whether the selected frame is the one that seems to be
 automatically created when the daemon starts.  If this is the
 selected frame we don't want to do certain things, like modifying
 faces."
   (string= (frame-parameter (selected-frame) 'name) "F1"))
 
-(defun my--switch-font (font)
-  "Apply the attributes stored for FONT in `my--font-alist'."
+(defun kenran/switch-font (font)
+  "Apply the attributes stored for FONT in `kenran/font-alist'."
   (interactive
    (list (intern
           (completing-read
            "Font: "
            (mapcar #'car
-                   (assoc-delete-all my--current-font
-                                     (copy-alist my--font-alist)))))))
-  (let* ((attrs (alist-get font my--font-alist))
+                   (assoc-delete-all kenran/current-font
+                                     (copy-alist kenran/font-alist)))))))
+  (let* ((attrs (alist-get font kenran/font-alist))
          (family (plist-get attrs :family))
          (height (plist-get attrs :default-height)))
-    (setq my--current-font font)
-    (setq my--default-font-height height)
+    (setq kenran/current-font font)
+    (setq kenran/default-font-height height)
     (set-face-attribute
      'default nil
      :font family
@@ -62,7 +62,7 @@ faces."
 ;; An alist of my preferred font families, together with a plist of
 ;; certain attributes that need to be applied when switching to the
 ;; respective font.
-(setq my--font-alist
+(setq kenran/font-alist
       '((iosevka-serif . (:family
                           "Iosevka Custom"
                           :default-height
@@ -106,20 +106,20 @@ faces."
                      :weight
                      light))))
 
-;; The currently selected font (key of `my--font-alist').  Setting
+;; The currently selected font (key of `kenran/font-alist').  Setting
 ;; this value only changes the default; it is reset when switching
 ;; fonts.
-(setq my--current-font 'iosevka-serif)
+(setq kenran/current-font 'iosevka-serif)
 
 ;; Now set all the face attributes, but also register a hook that
 ;; makes sure that these also work when using the Emacs daemon
 ;; together with emacsclient.
-(my--switch-font my--current-font)
+(kenran/switch-font kenran/current-font)
 (add-hook 'server-after-make-frame-hook
-          (defun my--switch-to-current-font ()
-            (my--switch-font my--current-font)
+          (defun kenran/switch-to-current-font ()
+            (kenran/switch-font kenran/current-font)
             (remove-hook 'server-after-make-frame-hook
-                         #'my--switch-to-current-font)))
+                         #'kenran/switch-to-current-font)))
 
 ;; Try out native ligature support via Harfbuzz composition tables
 ;; (doesn't work with every font, but works for instance with Fira
@@ -153,7 +153,7 @@ faces."
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
-(defun my--switch-theme (name)
+(defun kenran/switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
   (interactive
@@ -167,8 +167,8 @@ disables all other enabled themes."
     (mapc #'disable-theme
           custom-enabled-themes)
     (load-theme name t)
-    (unless (my--is-initial-daemon-frame-p)
+    (unless (kenran/is-initial-daemon-frame-p)
       ;; If it's the initial "daemon frame" then hooks in
       ;; `server-after-make-frame-hook' will be executed, including
-      ;; one that calls `my--set-evil-state-cursor-colors'.
-      (my--set-evil-state-cursors t))))
+      ;; one that calls `kenran/set-evil-state-cursor-colors'.
+      (kenran/set-evil-state-cursors t))))

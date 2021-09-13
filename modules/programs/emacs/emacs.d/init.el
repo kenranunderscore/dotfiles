@@ -36,7 +36,7 @@
  "C-h M" 'describe-keymap
  "C-h V" 'set-variable)
 
-(defmacro my--load-config-file (file)
+(defmacro kenran/load-config-file (file)
   "Load FILE relative to the .emacs.d directory."
   `(load (locate-user-emacs-file ,file)
          'no-error))
@@ -48,23 +48,23 @@
   (setq custom-file my-custom-file)
   (load custom-file 'no-error))
 
-(defun my--open-init-file ()
+(defun kenran/open-init-file ()
   "Open my init.el file."
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "init.el"))))
 
 ;; Where the custom Elisp files reside.
-(setq my--lisp-dir (concat user-emacs-directory "lisp/"))
+(setq kenran/lisp-dir (concat user-emacs-directory "lisp/"))
 
-(defun my--open-other-config-file (file)
+(defun kenran/open-other-config-file (file)
   "Open FILE of the config files in the lisp directory."
   (interactive
    (list
     (completing-read
      "Config file: "
      (mapcar #'f-filename
-             (f-files my--lisp-dir)))))
-  (find-file (file-truename (concat my--lisp-dir file))))
+             (f-files kenran/lisp-dir)))))
+  (find-file (file-truename (concat kenran/lisp-dir file))))
 
 ;; I wish to know how fast my Emacs is starting.  I'm not sure how to
 ;; make use of all that `use-package' has to offer in that regard yet,
@@ -97,7 +97,7 @@
 
 ;; Same for apropos buffers.
 (add-hook 'apropos-mode-hook
-          (defun my--focus-apropos-buffer ()
+          (defun kenran/focus-apropos-buffer ()
             (pop-to-buffer (current-buffer))))
 
 ;; Resize proportionally after deleting windows.
@@ -118,7 +118,7 @@
 (blink-cursor-mode -1)
 
 ;; Load themes and other improvements over the default look.
-(my--load-config-file "lisp/visuals.el")
+(kenran/load-config-file "lisp/visuals.el")
 
 ;;; Since I cannot ever decide which theme I like best, there are a
 ;;; few themes loaded here.
@@ -135,7 +135,7 @@
 (use-package color-theme-sanityinc-tomorrow
   :defer nil
   :init
-  (my--switch-theme 'sanityinc-tomorrow-bright))
+  (kenran/switch-theme 'sanityinc-tomorrow-bright))
 
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
@@ -182,7 +182,7 @@
 ;; This is a list of modes that we do not want the evil mode (defined
 ;; below) to be enabled in by default. It's mostly a preference of
 ;; mine to use Emacs mode in REPL, terminal and shell buffers.
-(setq my--holy-modes
+(setq kenran/holy-modes
       '((eshell-mode . eshell)
         (notmuch-hello-mode . notmuch)
         (racket-repl-mode . nil)
@@ -192,19 +192,19 @@
         (term-mode . (term term ansi-term multi-term))
         (haskell-interactive-mode . nil)))
 
-(setq my--evil-holy-modes
-      (mapcar #'car my--holy-modes))
+(setq kenran/evil-holy-modes
+      (mapcar #'car kenran/holy-modes))
 
-(setq my--evil-collection-exemptions
+(setq kenran/evil-collection-exemptions
       (remove nil
-              (mapcar #'cdr my--holy-modes)))
+              (mapcar #'cdr kenran/holy-modes)))
 
 ;; The evil package offers a very complete vim experience inside of
 ;; Emacs.
 (use-package evil
   :config
   (evil-mode 1)
-  (dolist (mode my--evil-holy-modes)
+  (dolist (mode kenran/evil-holy-modes)
     (evil-set-initial-state mode 'emacs))
   :custom
   ((evil-want-C-u-scroll t)
@@ -217,7 +217,7 @@
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (add-hook 'server-after-make-frame-hook
-            #'my--set-evil-state-cursors))
+            #'kenran/set-evil-state-cursors))
 
 ;; This package makes it possible to enable evil-mode (and therefore
 ;; have a more vim-ish feel) in lots of (mostly minor) modes.  I'm not
@@ -226,7 +226,7 @@
 (use-package evil-collection
   :after evil
   :config
-  (dolist (x my--evil-collection-exemptions)
+  (dolist (x kenran/evil-collection-exemptions)
     (delete x evil-collection-mode-list))
   (evil-collection-init)
   (evil-collection-inhibit-insert-state 'notmuch-hello-mode-map)
@@ -287,8 +287,8 @@
   ;; Toggles/switches
   "t" '(:ignore t :which-key "toggle/switch")
   "t l" '(display-line-numbers-mode :which-key "line numbers")
-  "t t" '(my--switch-theme :which-key "switch theme")
-  "t f" '(my--switch-font :which-key "switch font")
+  "t t" '(kenran/switch-theme :which-key "switch theme")
+  "t f" '(kenran/switch-font :which-key "switch font")
   ;; Language-agnostic code-related commands
   "c" '(:ignore t :which-key "code")
   "c l" 'comment-line
@@ -301,8 +301,8 @@
   "w" '(evil-window-map :which-key "windows")
   ;; Emacs config
   "e" '(:ignore t :which-key "emacs")
-  "e e" '(my--open-init-file :which-key "edit init.el")
-  "e c" '(my--open-other-config-file :which-key "edit other config file"))
+  "e e" '(kenran/open-init-file :which-key "edit init.el")
+  "e c" '(kenran/open-other-config-file :which-key "edit other config file"))
 
 ;; Enable C-w for window management everywhere.  This means that I
 ;; need to override the Emacs default binding, which can be done via
@@ -439,7 +439,7 @@
                                     (org-present-read-write)))))
 
 ;; Haskell configuration
-(my--load-config-file "lisp/haskell.el")
+(kenran/load-config-file "lisp/haskell.el")
 
 ;;; Dhall
 (use-package dhall-mode
@@ -519,7 +519,7 @@
   :defer t)
 
 ;; Mail configuration
-;; (my--load-config-file "lisp/email.el")
+;; (kenran/load-config-file "lisp/email.el")
 
 ;; The diminish package enables us to hide minor modes from the mode
 ;; line.  It's especially useful for certain modes that are globally
@@ -686,27 +686,27 @@
 
 ;; Prepending an equals sign to a search term will search for literal
 ;; matches of the preceding string.
-(defun my--literal-if-= (pattern _index _total)
+(defun kenran/literal-if-= (pattern _index _total)
   (when (string-prefix-p "=" pattern)
     `(orderless-literal . ,(substring pattern 1))))
 
 ;; A prepended bang discards everything that matches the preceding
 ;; literal string.
-(defun my--without-if-! (pattern _index _total)
+(defun kenran/without-if-! (pattern _index _total)
   (when (string-prefix-p "!" pattern)
     `(orderless-without-literal . ,(substring pattern 1))))
 
 ;; The tilde sign gives me a way to have "fuzzy" search, if needed.
-(defun my--flex-if-~ (pattern _index _total)
+(defun kenran/flex-if-~ (pattern _index _total)
   (when (string-prefix-p "~" pattern)
     `(orderless-flex . ,(substring pattern 1))))
 
 (use-package orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
-   '(my--literal-if-=
-     my--without-if-!
-     my--flex-if-~)))
+   '(kenran/literal-if-=
+     kenran/without-if-!
+     kenran/flex-if-~)))
 
 ;;; Consult
 
@@ -889,9 +889,9 @@
   ("r" (lambda ()
          (interactive)
          (setq default-text-scale--complement 0)
-         (face-spec-set 'default `((t (:height ,my--default-font-height))))
+         (face-spec-set 'default `((t (:height ,kenran/default-font-height))))
          (set-face-attribute 'default nil
-                             :height my--default-font-height))
+                             :height kenran/default-font-height))
    "reset" :color blue)
   ("q" nil "exit"))
 
@@ -930,7 +930,7 @@
   :config
   (advice-add 'eldoc-doc-buffer
               :after
-              (defun my--focus-eldoc-buffer ()
+              (defun kenran/focus-eldoc-buffer ()
                 (message (buffer-name (current-buffer)))
                 (pop-to-buffer eldoc--doc-buffer))))
 
