@@ -53,7 +53,16 @@
   (setq message-sendmail-envelope-from 'header)
   (setq mail-envelope-from 'header)
   (setq mail-specify-envelope-from 'header)
-  (setq message-kill-buffer-on-exit t))
+  (setq message-kill-buffer-on-exit t)
+
+  ;; Visuals
+  (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
+  (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
+  (setq mu4e-headers-thread-child-prefix '("├> " . "├▶"))
+  (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
+  (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
+  (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
+  (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
 
 (with-leader
   "m" '(mu4e :which-key "mail"))
