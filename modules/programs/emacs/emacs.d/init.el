@@ -851,11 +851,6 @@
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 2.5))
 
-(general-define-key
- :states '(normal visual operator motion)
- :keymaps 'override
- "C-w C-w" 'ace-window)
-
 ;; C-l is a normal Emacs hotkey that I don't need or use because of
 ;; evil, and in the modes that I've disabled evil for I don't use it
 ;; either.  It thus seems like a good choice to have as a fallback for
