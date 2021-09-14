@@ -29,7 +29,6 @@ in rec {
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
-      isSyncServer = false;
     };
     fonts.enable = true;
     games.dwarfFortress.enable = true;

@@ -519,7 +519,7 @@
   :defer t)
 
 ;; Mail configuration
-;; (kenran/load-config-file "lisp/email.el")
+(kenran/load-config-file "lisp/email.el")
 
 ;; The diminish package enables us to hide minor modes from the mode
 ;; line.  It's especially useful for certain modes that are globally

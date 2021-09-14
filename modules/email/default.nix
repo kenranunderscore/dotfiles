@@ -22,11 +22,6 @@ in {
       type = types.enum [ "ag" "mailbox" ];
       default = "mailbox";
     };
-
-    isSyncServer = mkOption {
-      type = types.bool;
-      default = false;
-    };
   };
 
   config = mkIf cfg.enable {
@@ -40,16 +35,15 @@ in {
           userName = address;
           primary = cfg.primaryAccount == "mailbox";
           mbsync = {
-            enable = cfg.isSyncServer;
+            enable = true;
             create = "maildir";
             expunge = "both";
             patterns = [ "*" "!Drafts" ];
           };
           msmtp = {
-            enable = !cfg.isSyncServer;
+            enable = true;
             extraConfig = { "syslog" = "LOG_USER"; };
           };
-          notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -68,16 +62,15 @@ in {
           userName = "maier";
           primary = cfg.primaryAccount == "ag";
           mbsync = {
-            enable = cfg.isSyncServer;
+            enable = true;
             create = "maildir";
             expunge = "both";
             patterns = [ "*" "!Drafts" "!Deleted Messages" ];
           };
           msmtp = {
-            enable = !cfg.isSyncServer;
+            enable = true;
             extraConfig = { "syslog" = "LOG_USER"; };
           };
-          notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
@@ -96,31 +89,10 @@ in {
       };
     };
 
-    home.packages = [ pkgs.muchsync ];
-
-    programs.msmtp.enable = !cfg.isSyncServer;
-
-    programs.notmuch = {
-      enable = true;
-      hooks = if cfg.isSyncServer then {
-        preNew = "mbsync --all";
-        postNew = "notmuch tag --batch --input=${./notmuch-initial-tags}";
-      } else {
-        preNew = "muchsync --nonew sync";
-      };
-      new.tags = [ "new" ];
-    };
-
-    services.muchsync = mkIf (!cfg.isSyncServer) {
-      remotes.syncRoot = {
-        remote = {
-          host = "sync";
-          importNew = true;
-        };
-        local.importNew = false;
-        frequency = "*:0/5";
-        upload = true;
-      };
+    programs = {
+      mbsync.enable = true;
+      msmtp.enable = true;
+      mu.enable = true;
     };
   };
 }

@@ -8,7 +8,6 @@
       email = {
         enable = true;
         certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
-        isSyncServer = true;
       };
       shell = {
         bash.enable = true;
