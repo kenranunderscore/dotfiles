@@ -323,6 +323,10 @@
  :keymaps 'minibuffer-local-map
  "C-w" 'evil-delete-backward-word)
 
+(general-define-key
+ :states '(emacs)
+ "C-w" 'evil-delete-backward-word)
+
 ;;;; Package-specific configuration
 
 ;; A mode for writing Nix expressions in.
