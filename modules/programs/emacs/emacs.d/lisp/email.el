@@ -11,42 +11,44 @@
   ;; I don't sync drafts to either of the accounts
   (setq mu4e-drafts-folder "/drafts")
   (setq mu4e-contexts
-        `(,(let ((addr "johannes.maier@mailbox.org"))
-             (make-mu4e-context
-              :name "mailbox"
-              :match-func (lambda (msg)
-                            (when msg
-                              (mu4e-message-contact-field-matches msg (:to :from :cc :bcc) addr)))
-              :vars `((user-mail-address . ,addr)
-                      (mu4e-compose-signature . nil)
-                      (mu4e-sent-folder . "/mailbox/Sent")
-                      (mu4e-trash-folder . "/mailbox/Trash")
-                      (mu4e-refile-folder . "/mailbox/Archive"))))
-          ,(let ((addr "johannes.maier@active-group.de"))
-             (make-mu4e-context
-              :name "ag"
-              :match-func (lambda (msg)
-                            (when msg
-                              (mu4e-message-contact-field-matches msg (:to :from :cc :bcc) addr)))
-              :vars `((user-mail-address . ,addr)
-                      (mu4e-compose-signature . ,(concat
-                                                  "Johannes Maier\n"
-                                                  "johannes.maier@active-group.de\n\n"
-                                                  "+49 (7071) 70896-67\n\n"
-                                                  "Active Group GmbH\n"
-                                                  "Hechinger Str. 12/1\n"
-                                                  "72072 Tübingen\n"
-                                                  "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-                                                  "Geschäftsführer: Dr. Michael Sperber"))
-                      (mu4e-sent-folder . "/ag/Sent")
-                      (mu4e-refile-folder . "/ag/Archive")
-                      (mu4e-trash-folder . "/ag/Trash"))))))
+        `(,(make-mu4e-context
+            :name "mailbox"
+            :match-func (lambda (msg)
+                          (when msg
+                            (string-prefix-p "/mailbox"
+                                             (mu4e-message-field msg :maildir)
+                                             t)))
+            :vars '((user-mail-address . "johannes.maier@mailbox.org")
+                    (mu4e-compose-signature . nil)
+                    (mu4e-sent-folder . "/mailbox/Sent")
+                    (mu4e-trash-folder . "/mailbox/Trash")
+                    (mu4e-refile-folder . "/mailbox/Archive")
+                    (mu4e-maildir-shortcuts . ((:maildir "/mailbox/Inbox" :key ?i)))))
+          ,(make-mu4e-context
+            :name "ag"
+            :match-func (lambda (msg)
+                          (when msg
+                            (string-prefix-p "/ag"
+                                             (mu4e-message-field msg :maildir)
+                                             t)))
+            :vars `((user-mail-address ."johannes.maier@active-group.de")
+                    (mu4e-compose-signature . ,(concat
+                                                "Johannes Maier\n"
+                                                "johannes.maier@active-group.de\n\n"
+                                                "+49 (7071) 70896-67\n\n"
+                                                "Active Group GmbH\n"
+                                                "Hechinger Str. 12/1\n"
+                                                "72072 Tübingen\n"
+                                                "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+                                                "Geschäftsführer: Dr. Michael Sperber"))
+                    (mu4e-sent-folder . "/ag/Sent")
+                    (mu4e-refile-folder . "/ag/Archive")
+                    (mu4e-trash-folder . "/ag/Trash")
+                    (mu4e-maildir-shortcuts . ((:maildir "/ag/Inbox" :key ?i)))))))
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-policy 'ask)
-
   ;; Getting mail via mbsync
   (setq mu4e-get-mail-command "mbsync -a")
-
   ;; Composing emails
   (setq message-send-mail-function #'message-send-mail-with-sendmail)
   (setq send-mail-function #'message-send-mail-with-sendmail)
@@ -54,7 +56,6 @@
   (setq mail-envelope-from 'header)
   (setq mail-specify-envelope-from 'header)
   (setq message-kill-buffer-on-exit t)
-
   ;; Visuals
   (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
   (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
