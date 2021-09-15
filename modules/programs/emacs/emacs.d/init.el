@@ -939,7 +939,7 @@
   :ensure nil
   :defer t
   :config
-  (put 'dired-find-alternate-file 'disabled nil)
+  (setq dired-kill-when-opening-new-dired-buffer t)
   :custom
   ;; Sort directories to the top
   (dired-listing-switches "-la --group-directories-first"))
