@@ -1,6 +1,9 @@
 ;; Used by message-mode.
 (setq user-full-name "Johannes Maier")
 
+;; FIXME Smart refiling: really split lists according to year? How
+;; does Thunderbird handle this?
+;; FIXME Signature in a file?
 (use-package mu4e
   :ensure nil
   :defer t
@@ -23,7 +26,11 @@
                     (mu4e-compose-signature . nil)
                     (mu4e-sent-folder . "/mailbox/Sent")
                     (mu4e-trash-folder . "/mailbox/Trash")
-                    (mu4e-refile-folder . "/mailbox/Archive")))
+                    (mu4e-refile-folder . (lambda (msg)
+                                            (let* ((date (mu4e-message-field-at-point :date))
+                                                   (year (decoded-time-year (decode-time date))))
+                                              (concat "/mailbox/Archive/"
+                                                      (number-to-string year)))))))
           ,(make-mu4e-context
             :name "ag"
             :match-func (lambda (msg)
@@ -42,7 +49,11 @@
                                                 "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
                                                 "Geschäftsführer: Dr. Michael Sperber"))
                     (mu4e-sent-folder . "/ag/Sent")
-                    (mu4e-refile-folder . "/ag/Archive")
+                    (mu4e-refile-folder . (lambda (msg)
+                                            (let* ((date (mu4e-message-field-at-point :date))
+                                                   (year (decoded-time-year (decode-time date))))
+                                              (concat "/ag/Archives/"
+                                                      (number-to-string year)))))
                     (mu4e-trash-folder . "/ag/Trash")))))
   (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
                          (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
