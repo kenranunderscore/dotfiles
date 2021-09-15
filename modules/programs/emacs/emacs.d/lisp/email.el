@@ -9,6 +9,7 @@
   (setq mail-user-agent 'mu4e-user-agent)
   (setq mu4e-completing-read-function #'completing-read)
   ;; I don't sync drafts to either of the accounts
+  (setq mu4e-confirm-quit nil)
   (setq mu4e-drafts-folder "/drafts")
   (setq mu4e-contexts
         `(,(make-mu4e-context
@@ -22,8 +23,7 @@
                     (mu4e-compose-signature . nil)
                     (mu4e-sent-folder . "/mailbox/Sent")
                     (mu4e-trash-folder . "/mailbox/Trash")
-                    (mu4e-refile-folder . "/mailbox/Archive")
-                    (mu4e-maildir-shortcuts . ((:maildir "/mailbox/Inbox" :key ?i)))))
+                    (mu4e-refile-folder . "/mailbox/Archive")))
           ,(make-mu4e-context
             :name "ag"
             :match-func (lambda (msg)
@@ -43,8 +43,11 @@
                                                 "Geschäftsführer: Dr. Michael Sperber"))
                     (mu4e-sent-folder . "/ag/Sent")
                     (mu4e-refile-folder . "/ag/Archive")
-                    (mu4e-trash-folder . "/ag/Trash")
-                    (mu4e-maildir-shortcuts . ((:maildir "/ag/Inbox" :key ?i)))))))
+                    (mu4e-trash-folder . "/ag/Trash")))))
+  (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
+                         (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
+                         (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
+                         (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-policy 'ask)
   ;; Getting mail via mbsync
