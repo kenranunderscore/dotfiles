@@ -185,6 +185,8 @@
 (setq kenran/holy-modes
       '((eshell-mode . eshell)
         (notmuch-hello-mode . notmuch)
+        (mu4e . mu4e)
+        (mu4e . mu4e-conversation)
         (racket-repl-mode . nil)
         (racket-stepper-mode . nil)
         (shell-mode . nil)
