@@ -191,7 +191,7 @@
         (racket-stepper-mode . nil)
         (shell-mode . nil)
         (sly-mrepl-mode . nil)
-        (term-mode . (term term ansi-term multi-term))
+        (term-mode . (term ansi-term multi-term))
         (haskell-interactive-mode . nil)))
 
 (setq kenran/evil-holy-modes
