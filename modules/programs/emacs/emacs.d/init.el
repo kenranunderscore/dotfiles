@@ -781,7 +781,10 @@
       (apply orig-fun args)))
   :custom
   ((company-idle-delay 0)
-   (company-selection-wrap-around t)))
+   (company-selection-wrap-around t))
+  :bind
+  (:map company-active-map
+        ("C-w" . evil-delete-backward-word)))
 
 ;;; Highlight "todo", "fixme" and other keywords everywhere.
 (use-package hl-todo
