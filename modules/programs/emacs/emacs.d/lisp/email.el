@@ -1,8 +1,6 @@
 ;; Used by message-mode.
 (setq user-full-name "Johannes Maier")
 
-;; FIXME Smart refiling: really split lists according to year? How
-;; does Thunderbird handle this?
 ;; FIXME Signature in a file?
 (use-package mu4e
   :ensure nil
