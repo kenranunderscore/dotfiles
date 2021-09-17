@@ -11,6 +11,7 @@
   (setq mu4e-completing-read-function #'completing-read)
   ;; I don't sync drafts to either of the accounts
   (setq mu4e-confirm-quit nil)
+  (setq mu4e-change-filenames-when-moving t)
   (setq mu4e-drafts-folder "/drafts")
   (setq mu4e-contexts
         `(,(make-mu4e-context
