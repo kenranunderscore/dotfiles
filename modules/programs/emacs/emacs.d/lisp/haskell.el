@@ -82,4 +82,7 @@ and alias."
   "i a" '(kenran/haskell-add-import :which-key "add import")
   "p" '(:ignore t :which-key "pragmas")
   "p l" '(kenran/haskell-add-language-extension :which-key "add language extension")
-  "p o" '(kenran/haskell-add-ghc-option :which-key "add GHC option"))
+  "p o" '(kenran/haskell-add-ghc-option :which-key "add GHC option")
+  "h" '(:ignore t :which-key "haskell-process")
+  "h r" '(haskell-process-restart :which-key "restart")
+  "h k" 'haskell-session-kill)
