@@ -36,7 +36,8 @@ in {
           primary = cfg.primaryAccount == "mailbox";
           mbsync = {
             enable = true;
-            create = "maildir";
+            create = "both";
+            remove = "both";
             expunge = "both";
             patterns = [ "*" "!Drafts" ];
           };
@@ -63,7 +64,8 @@ in {
           primary = cfg.primaryAccount == "ag";
           mbsync = {
             enable = true;
-            create = "maildir";
+            create = "both";
+            remove = "both";
             expunge = "both";
             patterns = [ "*" "!Drafts" "!Deleted Messages" ];
           };
