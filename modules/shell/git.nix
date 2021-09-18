@@ -31,10 +31,12 @@ in {
         ".envrc"
         # macOS
         ".DS_Store"
-        # Emacs: backup, auto-save, lock files
+        # Emacs: backup, auto-save, lock files, directory-local
+        # variables
         "*~"
         "\\#*\\#"
         ".\\#*"
+        ".dir-locals.el"
       ];
       signing.signByDefault = cfg.gpgKey != null;
       signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
