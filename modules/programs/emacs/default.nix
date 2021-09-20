@@ -68,6 +68,7 @@ in {
             racket-mode
             sly
             sly-asdf
+            v-mode
             yaml-mode
 
             # Themes

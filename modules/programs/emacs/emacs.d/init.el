@@ -515,6 +515,11 @@
 (use-package pyimport
   :defer t)
 
+;;; V
+(use-package v-mode
+  :defer t
+  :mode ("\\.v\\'" . 'v-mode))
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like
