@@ -35,7 +35,7 @@ in {
           always = true;
         }];
         defaultWorkspace = "workspace number 1";
-        menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Terminus-14'";
+        menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Hack-13'";
         window = {
           titlebar = false;
           border = 2;
@@ -64,8 +64,8 @@ in {
           workspaceNumbers = true;
           hiddenState = "hide";
           fonts = {
-            names = [ "Terminus" ];
-            size = 14.0;
+            names = [ "Hack" ];
+            size = 13.0;
           };
         }];
       };
