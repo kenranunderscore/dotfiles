@@ -59,6 +59,7 @@ in {
             haskell-mode
             markdown-mode
             meghanada
+            nim-mode
             nix-mode
             epkgs.org
             org-bullets

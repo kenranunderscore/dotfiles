@@ -520,6 +520,10 @@
   :defer t
   :mode ("\\.v\\'" . 'v-mode))
 
+;;; Nim
+(use-package nim-mode
+  :defer t)
+
 ;;; LSP integration
 
 ;; I've used lsp-mode in the past and while it's nice, I feel like
