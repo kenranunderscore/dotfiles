@@ -952,6 +952,7 @@
   :defer t
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-create-destination-dirs 'ask)
   :custom
   ;; Sort directories to the top
   (dired-listing-switches "-la --group-directories-first"))
