@@ -58,6 +58,13 @@
                          (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
                          (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
                          (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
+  (setf (alist-get 'trash mu4e-marks)
+        (list :char '("d" . "▼")
+              :prompt "dtrash"
+              :dyn-target (lambda (target msg)
+                            (mu4e-get-trash-folder msg))
+              :action (lambda (docid msg target)
+                        (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-policy 'ask)
   ;; Getting mail via mbsync
