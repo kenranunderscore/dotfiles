@@ -104,7 +104,7 @@ faces."
                      :default-height
                      150
                      :weight
-                     light))))
+                     regular))))
 
 ;; The currently selected font (key of `kenran/font-alist').  Setting
 ;; this value only changes the default; it is reset when switching
