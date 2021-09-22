@@ -120,23 +120,6 @@
 ;; Load themes and other improvements over the default look.
 (kenran/load-config-file "lisp/visuals.el")
 
-;;; Since I cannot ever decide which theme I like best, there are a
-;;; few themes loaded here.
-
-;; https://protesilaos.com/modus-themes/
-(use-package modus-themes
-  :defer t)
-
-;; https://github.com/hlissner/emacs-doom-themes
-(use-package doom-themes
-  :defer t)
-
-;; https://github.com/purcell/color-theme-sanityinc-tomorrow
-(use-package color-theme-sanityinc-tomorrow
-  :defer nil
-  :init
-  (kenran/switch-theme 'sanityinc-tomorrow-bright))
-
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
   :hook ((prog-mode . display-line-numbers-mode)

@@ -172,3 +172,20 @@ disables all other enabled themes."
       ;; `server-after-make-frame-hook' will be executed, including
       ;; one that calls `kenran/set-evil-state-cursor-colors'.
       (kenran/set-evil-state-cursors t))))
+
+;;; Since I cannot ever decide which theme I like best, there are a
+;;; few themes loaded here.
+
+;; https://protesilaos.com/modus-themes/
+(use-package modus-themes
+  :defer t)
+
+;; https://github.com/hlissner/emacs-doom-themes
+(use-package doom-themes
+  :defer t)
+
+;; https://github.com/purcell/color-theme-sanityinc-tomorrow
+(use-package color-theme-sanityinc-tomorrow
+  :defer nil
+  :init
+  (kenran/switch-theme 'sanityinc-tomorrow-bright))
