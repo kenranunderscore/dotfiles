@@ -76,6 +76,9 @@ in {
             color-theme-modern
             color-theme-sanityinc-tomorrow
             doom-themes
+            green-phosphor-theme
+            humanoid-themes
+            immaterial-theme
 
             # Utility
             ace-window

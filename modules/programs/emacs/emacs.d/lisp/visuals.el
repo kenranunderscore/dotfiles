@@ -184,6 +184,18 @@ disables all other enabled themes."
 (use-package doom-themes
   :defer t)
 
+;; https://github.com/petergardfjall/emacs-immaterial-theme
+(use-package immaterial-theme
+  :defer t)
+
+;; https://github.com/aalpern/emacs-color-theme-green-phosphor
+(use-package green-phosphor-theme
+  :defer t)
+
+;; https://github.com/humanoid-colors/emacs-humanoid-themes
+(use-package humanoid-themes
+  :defer t)
+
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 (use-package color-theme-sanityinc-tomorrow
   :defer nil
