@@ -56,6 +56,7 @@ in {
             epkgs.csv-mode
             dhall-mode
             dockerfile-mode
+            fsharp-mode
             haskell-mode
             markdown-mode
             meghanada
