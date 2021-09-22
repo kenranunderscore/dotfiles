@@ -166,10 +166,11 @@
 ;; below) to be enabled in by default. It's mostly a preference of
 ;; mine to use Emacs mode in REPL, terminal and shell buffers.
 (setq kenran/holy-modes
-      '((eshell-mode . eshell)
-        (notmuch-hello-mode . notmuch)
+      '((ediff . ediff)
+        (eshell-mode . eshell)
         (mu4e . mu4e)
         (mu4e . mu4e-conversation)
+        (notmuch-hello-mode . notmuch)
         (racket-repl-mode . nil)
         (racket-stepper-mode . nil)
         (shell-mode . nil)
