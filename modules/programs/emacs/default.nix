@@ -97,6 +97,7 @@ in {
             evil-snipe
             evil-surround
             git-gutter
+            git-timemachine
             gnus-alias
             helpful
             hl-todo

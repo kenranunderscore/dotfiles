@@ -585,6 +585,10 @@
   (magit-todos-mode)
   (setq magit-todos-rg-extra-args '("-M 120")))
 
+;; Browse the git history interactively.
+(use-package git-timemachine
+  :defer t)
+
 ;; Magit-specific keybindings are useful in a global scope, thus they
 ;; may be accessed under SPC g.
 (with-leader
