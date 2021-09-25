@@ -70,7 +70,7 @@ in {
         }];
         colors = {
           focused = {
-            background = "#285577";
+            background = "#185517";
             border = "#4c7899";
             childBorder = "#007000";
             indicator = "#007000";
