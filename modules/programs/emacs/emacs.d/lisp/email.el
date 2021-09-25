@@ -65,6 +65,12 @@
                             (mu4e-get-trash-folder msg))
               :action (lambda (docid msg target)
                         (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
+  (setq mu4e-headers-fields '((:human-date . 12)
+                              (:flags . 6)
+                              (:maildir . 15)
+                              (:mailing-list . 10)
+                              (:from . 22)
+                              (:subject)))
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-policy 'ask)
   ;; Getting mail via mbsync
