@@ -34,7 +34,7 @@ in {
           command = "setxkbmap -layout us -variant altgr-intl";
           always = true;
         }];
-        defaultWorkspace = "workspace number 1";
+        defaultWorkspace = "workspace number 0";
         menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Hack-13'";
         window = {
           titlebar = false;
