@@ -105,6 +105,7 @@ in {
         unzip
         vim
         wget
+        xcape
         xst
       ];
 
