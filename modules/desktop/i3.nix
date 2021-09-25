@@ -17,9 +17,9 @@ in {
       enableDefault = true;
       general = {
         colors = true;
-        color_good = "#4c963e";
-        color_bad = "#993e4c";
-        color_degraded = "#3e4c96";
+        color_good = "#005000";
+        color_bad = "#700000";
+        color_degraded = "#202060";
       };
     };
 
@@ -68,6 +68,15 @@ in {
             size = 13.0;
           };
         }];
+        colors = {
+          focused = {
+            background = "#285577";
+            border = "#4c7899";
+            childBorder = "#007000";
+            indicator = "#007000";
+            text = "#ffffff";
+          };
+        };
       };
     };
   };
