@@ -51,7 +51,7 @@ in {
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";
           "${modifier}+v" = "split v";
-          "${modifier}+s" = "split h";
+          "${modifier}+g" = "split h";
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce "exec ${menu}";
         };
