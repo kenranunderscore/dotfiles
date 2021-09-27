@@ -192,10 +192,6 @@ disables all other enabled themes."
 (use-package green-phosphor-theme
   :defer t)
 
-;; https://github.com/humanoid-colors/emacs-humanoid-themes
-(use-package humanoid-themes
-  :defer t)
-
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 (use-package color-theme-sanityinc-tomorrow
   :defer nil
