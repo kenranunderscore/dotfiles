@@ -25,7 +25,13 @@
            (mode-line-buffer-id ((t (:weight bold))))
            (mode-line-emphasis ((t (:weight bold))))
            (mode-line-inactive ((t (:box "#555555" :background ,bg :foreground "#707370"))))
-           (isearch ((t (foreground "green" :weight semi-bold :background "blue"))))
-           (lazy-highlight ((t (:foreground ,fg :background "blue3")))))))
+           (isearch ((t (:foreground ,bg :weight semi-bold :background ,fg))))
+           (lazy-highlight ((t (:foreground ,fg :background "blue3"))))
+
+           ;; orderless
+           (orderless-match-face-0 ((t (:foreground "yellow"))))
+           (orderless-match-face-1 ((t (:foreground "hot pink"))))
+           (orderless-match-face-2 ((t (:foreground "dark khaki"))))
+           (orderless-match-face-3 ((t (:foreground "cyan2")))))))
 
 (provide-theme 'kenran)
