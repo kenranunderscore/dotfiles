@@ -6,9 +6,10 @@
   (apply #'custom-theme-set-faces
          `(kenran
            (default ((t (:foreground ,fg :background ,bg))))
-           (minibuffer-prompt ((t (:weight semi-bold :foreground "#ff9800"))))
+           (minibuffer-prompt ((t (:foreground "olivedrab3"))))
            (highlight ((t (:foreground ,fg :background "gray12" :weight semi-bold))))
            (region ((t (:background "blue4"))))
+           ;; (font-lock-builtin-face ((t (:foreground "#d67618"))))
            (font-lock-builtin-face ((t (:foreground "darkorange2"))))
            (font-lock-comment-face ((t (:slant italic :foreground "#707370"))))
            (font-lock-constant-face ((t (:foreground "hot pink"))))
@@ -21,13 +22,13 @@
            (font-lock-variable-name-face ((t (:foreground ,fg))))
            (fringe ((t (:background ,bg))))
            (warning ((t (:foreground "orange red" :weight regular))))
-           (mode-line ((t (:background ,bg :box "#cccccc"))))
+           (mode-line ((t (:background ,bg :box "#cccccc")))) ;; maybe foreground olivedrab3?
            (mode-line-buffer-id ((t (:weight bold))))
            (mode-line-emphasis ((t (:weight bold))))
            (mode-line-inactive ((t (:box "#555555" :background ,bg :foreground "#707370"))))
            (isearch ((t (:foreground ,bg :weight semi-bold :background ,fg))))
            (lazy-highlight ((t (:foreground ,fg :background "blue3"))))
-           (show-paren-match ((t (:foreground ,bg :background "gold"))))
+           (show-paren-match ((t (:foreground ,bg :background ,fg))))
 
            ;; orderless
            (orderless-match-face-0 ((t (:foreground "yellow"))))
