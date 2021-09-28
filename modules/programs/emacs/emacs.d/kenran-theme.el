@@ -9,8 +9,7 @@
            (minibuffer-prompt ((t (:foreground "olivedrab3"))))
            (highlight ((t (:foreground ,fg :background "gray12" :weight semi-bold))))
            (region ((t (:background "blue4"))))
-           ;; (font-lock-builtin-face ((t (:foreground "#d67618"))))
-           (font-lock-builtin-face ((t (:foreground "darkorange2"))))
+           (font-lock-builtin-face ((t (:foreground "#dc7612"))))
            (font-lock-comment-face ((t (:slant italic :foreground "#707370"))))
            (font-lock-constant-face ((t (:foreground "hot pink"))))
            (font-lock-doc-face ((t (:slant italic :foreground "olivedrab4"))))
@@ -22,7 +21,7 @@
            (font-lock-variable-name-face ((t (:foreground ,fg))))
            (fringe ((t (:background ,bg))))
            (warning ((t (:foreground "orange red" :weight regular))))
-           (mode-line ((t (:background ,bg :box "#cccccc")))) ;; maybe foreground olivedrab3?
+           (mode-line ((t (:background ,bg :foreground "olivedrab3" :box "#cccccc"))))
            (mode-line-buffer-id ((t (:weight bold))))
            (mode-line-emphasis ((t (:weight bold))))
            (mode-line-inactive ((t (:box "#555555" :background ,bg :foreground "#707370"))))
