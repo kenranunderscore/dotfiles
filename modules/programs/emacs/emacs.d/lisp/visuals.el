@@ -153,6 +153,7 @@ faces."
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
+###;;; autoload
 (defun kenran/switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
@@ -172,6 +173,13 @@ disables all other enabled themes."
       ;; `server-after-make-frame-hook' will be executed, including
       ;; one that calls `kenran/set-evil-state-cursor-colors'.
       (kenran/set-evil-state-cursors t))))
+
+###;;;autoload
+(defun kenran/reload-theme ()
+  "Reload the currently active theme."
+  (interactive)
+  (let ((active-theme (car custom-enabled-themes)))
+    (kenran/switch-theme active-theme)))
 
 ;;; Since I cannot ever decide which theme I like best, there are a
 ;;; few themes loaded here.

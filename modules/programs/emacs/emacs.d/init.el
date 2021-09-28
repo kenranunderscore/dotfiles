@@ -274,6 +274,7 @@
   "t" '(:ignore t :which-key "toggle/switch")
   "t l" '(display-line-numbers-mode :which-key "line numbers")
   "t t" '(kenran/switch-theme :which-key "switch theme")
+  "t r" '(kenran/reload-theme :which-key "reload theme")
   "t f" '(kenran/switch-font :which-key "switch font")
   ;; Language-agnostic code-related commands
   "c" '(:ignore t :which-key "code")
