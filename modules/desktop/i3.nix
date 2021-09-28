@@ -23,7 +23,7 @@ in {
       };
     };
 
-    home.packages = [ pkgs.dmenu ];
+    home.packages = [ pkgs.dmenu pkgs.j4-dmenu-desktop ];
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -35,7 +35,8 @@ in {
           always = true;
         }];
         defaultWorkspace = "workspace number 0";
-        menu = "${pkgs.dmenu}/bin/dmenu_run -b -l 5 -fn 'Hack-13'";
+        menu =
+          "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu='${pkgs.dmenu}/bin/dmenu_run -b -i -l 5 -fn 'Hack-13''";
         window = {
           titlebar = false;
           border = 2;
@@ -54,6 +55,8 @@ in {
           "${modifier}+g" = "split h";
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce "exec ${menu}";
+          "${modifier}+d" = lib.mkForce
+            "exec ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu='${pkgs.dmenu}/bin/dmenu -b -i -l 5 -fn 'Hack-13''";
         };
         bars = [{
           position = "bottom";
