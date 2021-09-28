@@ -153,7 +153,6 @@ faces."
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
-###;;; autoload
 (defun kenran/switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
@@ -174,7 +173,6 @@ disables all other enabled themes."
       ;; one that calls `kenran/set-evil-state-cursor-colors'.
       (kenran/set-evil-state-cursors t))))
 
-###;;;autoload
 (defun kenran/reload-theme ()
   "Reload the currently active theme."
   (interactive)
