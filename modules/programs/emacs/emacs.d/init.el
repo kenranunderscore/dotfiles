@@ -928,10 +928,12 @@
   :ensure nil
   :diminish auto-revert-mode)
 
-;; Diminish only.
 (use-package simple
   :ensure nil
-  :diminish auto-fill-function)
+  :diminish auto-fill-function
+  :config
+  (setq eval-expression-print-length nil)
+  (setq eval-expression-print-level nil))
 
 ;; Diminish only.
 (use-package eldoc
