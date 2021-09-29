@@ -1,6 +1,9 @@
 (deftheme kenran
   "Created 2021-09-26.")
 
+;; Ideas:
+;; - switch bold green/yellow
+
 (defmacro create-theme-colors ()
   "Expects the color variables to be bound."
   '(mapcar
@@ -45,7 +48,12 @@
       (outline-5 (:foreground ,pink))
       (outline-6 (:foreground "olivedrab2"))
       (outline-7 (:foreground ,string))
-      (outline-8 (:foreground ,fg)))))
+      (outline-8 (:foreground ,fg))
+
+      ;; company
+      (company-tooltip (:background "gray10"))
+      (company-tooltip-common (:foreground ,yellow))
+      (company-tooltip-selection (:background "blue4" :weight bold)))))
 
 ;; Set all the colors to their actual values.
 (let ((bg "#040404")
