@@ -594,6 +594,7 @@
 ;; may be accessed under SPC g.
 (with-leader
   "g" '(:ignore t :which-key "git")
+  "g i" '(magit-init :which-key "init")
   "g s" '(magit-status :which-key "status")
   "g S" '(magit-status-here :which-key "status here")
   "g l" '(magit-log :which-key "log")
