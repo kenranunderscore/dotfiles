@@ -93,15 +93,15 @@
 
 ;; Set all the colors to their actual values.
 (let ((bg "#040404")
-      (fg "green3")
+      (fg "#0ac30a")
       (yellow "gold2")
       (cyan "cyan3")
       (string "dark khaki")
-      (pink "hot pink")
+      (pink "#f474b4")
       (orange "#dc7612")
       (light-olive "olivedrab2")
       (comment "#707370")
-      (dark-blue "blue4"))
+      (dark-blue "#01018a"))
   (apply #'custom-theme-set-faces
          (cons 'kenran (create-theme-colors))))
 
