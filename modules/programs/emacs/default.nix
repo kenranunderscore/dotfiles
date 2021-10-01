@@ -104,6 +104,7 @@ in {
             magit-todos
             marginalia
             ripgrep
+            vterm
             wgrep
             which-key
           ]);

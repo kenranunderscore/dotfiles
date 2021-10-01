@@ -330,6 +330,13 @@
 
 ;;;; Package-specific configuration
 
+;; A terminal emulator for Emacs (more feature-rich than `term').
+;; Currently just trying it out.
+(use-package vterm
+  :defer t
+  :config
+  (setq vterm-shell "fish"))
+
 ;; A mode for writing Nix expressions in.
 (use-package nix-mode
   :mode "\\.nix\\'"
