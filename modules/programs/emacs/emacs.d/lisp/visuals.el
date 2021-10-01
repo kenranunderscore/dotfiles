@@ -200,6 +200,6 @@ disables all other enabled themes."
 
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 (use-package color-theme-sanityinc-tomorrow
-  :defer nil
-  :init
-  (kenran/switch-theme 'sanityinc-tomorrow-bright))
+  :defer nil)
+
+(kenran/switch-theme 'kenran)
