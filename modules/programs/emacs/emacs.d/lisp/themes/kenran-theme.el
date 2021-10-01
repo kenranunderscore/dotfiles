@@ -16,6 +16,7 @@
       (minibuffer-prompt (:foreground ,light-olive))
       (highlight (:foreground ,fg :background ,dark-blue))
       (region (:background ,dark-blue))
+      (secondary-selection (:background ,(color-darken-name "dark green" 7)))
       (font-lock-builtin-face (:foreground ,orange))
       (font-lock-comment-face (:slant italic :foreground ,comment))
       (font-lock-constant-face (:foreground ,pink))
@@ -39,10 +40,10 @@
       (show-paren-match (:foreground ,bg :background ,fg))
 
       ;; orderless
-      (orderless-match-face-0 (:foreground ,pink))
-      (orderless-match-face-1 (:foreground ,light-olive))
-      (orderless-match-face-2 (:foreground ,yellow))
-      (orderless-match-face-3 (:foreground ,orange))
+      (orderless-match-face-0 (:foreground ,orange))
+      (orderless-match-face-1 (:foreground ,yellow))
+      (orderless-match-face-2 (:foreground ,pink))
+      (orderless-match-face-3 (:foreground ,light-olive))
 
       ;; outline-*, and by extension org-level-*
       (outline-1 (:weight semi-bold :foreground ,fg))
@@ -56,7 +57,7 @@
 
       ;; company
       (company-tooltip (:background "gray10"))
-      (company-tooltip-common (:foreground ,light-olive))
+      (company-tooltip-common (:foreground ,orange))
       (company-tooltip-selection (:background ,dark-blue :weight bold))
 
       ;; which-key
