@@ -56,6 +56,9 @@
 ;; Where the custom Elisp files reside.
 (setq kenran/lisp-dir (concat user-emacs-directory "lisp/"))
 
+;; Where custom themes reside.
+(setq custom-theme-directory (concat kenran/lisp-dir "themes/"))
+
 (defun kenran/open-other-config-file (file)
   "Open FILE of the config files in the lisp directory."
   (interactive
