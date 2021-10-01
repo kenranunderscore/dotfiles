@@ -69,6 +69,16 @@
              (f-files kenran/lisp-dir)))))
   (find-file (file-truename (concat kenran/lisp-dir file))))
 
+(defun kenran/open-custom-theme-file (file)
+  "Open FILE of the themes in `custom-theme-directory'."
+  (interactive
+   (list
+    (completing-read
+     "Theme: "
+     (mapcar #'f-filename
+             (f-files custom-theme-directory)))))
+  (find-file (file-truename (concat custom-theme-directory file))))
+
 ;; I wish to know how fast my Emacs is starting.  I'm not sure how to
 ;; make use of all that `use-package' has to offer in that regard yet,
 ;; but I want to at least see when I've made things worse.
@@ -292,7 +302,8 @@
   ;; Emacs config
   "e" '(:ignore t :which-key "emacs")
   "e e" '(kenran/open-init-file :which-key "edit init.el")
-  "e c" '(kenran/open-other-config-file :which-key "edit other config file"))
+  "e c" '(kenran/open-other-config-file :which-key "edit other config file")
+  "e t" '(kenran/open-custom-theme-file :which-key "edit custom theme"))
 
 ;; Enable C-w for window management everywhere.  This means that I
 ;; need to override the Emacs default binding, which can be done via
