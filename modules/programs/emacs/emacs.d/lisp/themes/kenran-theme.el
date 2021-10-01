@@ -17,6 +17,7 @@
       (highlight (:foreground ,fg :background ,dark-blue))
       (region (:background ,dark-blue))
       (secondary-selection (:background ,(color-darken-name "dark green" 7)))
+      (vertical-border (:foreground "gray30"))
       (font-lock-builtin-face (:foreground ,orange))
       (font-lock-comment-face (:slant italic :foreground ,comment))
       (font-lock-constant-face (:foreground ,pink))
@@ -27,7 +28,7 @@
       (font-lock-string-face ((t (:foreground ,string))))
       (font-lock-type-face (:foreground "olivedrab3"))
       ;; TODO This is not yet decided, maybe use semi-bold fg instead?
-      (font-lock-variable-name-face (:foreground "medium sea green"))
+      (font-lock-variable-name-face (:foreground ,sea-green))
       (font-lock-warning-face (:slant italic :foreground "orange red"))
       (fringe (:background ,bg))
       (warning (:foreground "orange red" :weight regular))
@@ -62,7 +63,7 @@
 
       ;; which-key
       (which-key-key-face (:foreground ,yellow))
-      (which-key-group-description-face (:foreground ,light-olive))
+      (which-key-group-description-face (:foreground ,sea-green))
       (which-key-command-description-face (:foreground ,fg))
 
       ;; dired and related
@@ -86,6 +87,7 @@
       (magit-section-highlight (:background ,dark-blue))
       (magit-branch-local (:foreground ,yellow))
       (magit-branch-remote (:foreground ,cyan))
+      (magit-tag (:foreground ,light-olive))
       (magit-diff-file-heading-highlight (:background ,dark-blue))
       (magit-diff-context-highlight (:background "gray15" :foreground "gray65"))
       (magit-diff-context (:foreground "gray40"))
@@ -102,7 +104,8 @@
       (orange "#dc7612")
       (light-olive "olivedrab2")
       (comment "#707370")
-      (dark-blue "#01018a"))
+      (dark-blue "#01018a")
+      (sea-green "medium sea green"))
   (apply #'custom-theme-set-faces
          (cons 'kenran (create-theme-colors))))
 

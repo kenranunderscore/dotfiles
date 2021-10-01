@@ -347,7 +347,8 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc"))
+  :init (setq markdown-command "pandoc")
+  :hook ((markdown-mode gfm-mode) . auto-fill-mode))
 
 ;;; I use org-mode for lots of things now, but have only recently
 ;;; started doing so, hence my configuration is very much a work in
