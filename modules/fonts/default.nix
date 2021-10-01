@@ -26,6 +26,7 @@ in {
       hermit
       ibm-plex
       inconsolata
+      iosevka
       (iosevka.override {
         privateBuildPlan = {
           family = "Iosevka Custom";
