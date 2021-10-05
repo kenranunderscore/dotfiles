@@ -18,6 +18,8 @@
       (region (:background ,dark-blue))
       (secondary-selection (:background ,(color-darken-name "dark green" 7)))
       (vertical-border (:foreground "gray30"))
+      (help-key-binding (:background "#002000" :box ,fg))
+      (link (:foreground ,cyan :underline t))
       (font-lock-builtin-face (:foreground ,orange))
       (font-lock-comment-face (:slant italic :foreground ,comment))
       (font-lock-constant-face (:foreground ,pink))
@@ -92,7 +94,10 @@
       (magit-diff-context-highlight (:background "gray15" :foreground "gray65"))
       (magit-diff-context (:foreground "gray40"))
       (magit-diff-hunk-heading (:background "gray12" :foreground "gray70"))
-      (magit-diff-hunk-heading-highlight (:background "gray20" :foreground "gray80")))))
+      (magit-diff-hunk-heading-highlight (:background "gray20" :foreground "gray80"))
+
+      ;; manpages
+      (Man-overstrike (:foreground ,cyan)))))
 
 ;; Set all the colors to their actual values.
 (let ((bg "#040404")
