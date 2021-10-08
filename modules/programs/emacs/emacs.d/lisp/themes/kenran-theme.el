@@ -97,7 +97,10 @@
       (magit-diff-hunk-heading-highlight (:background "gray20" :foreground "gray80"))
 
       ;; manpages
-      (Man-overstrike (:foreground ,cyan)))))
+      (Man-overstrike (:foreground ,cyan))
+
+      ;; mu4e
+      (mu4e-highlight-face (:weight semi-bold :foreground ,orange)))))
 
 ;; Set all the colors to their actual values.
 (let ((bg "#040404")
