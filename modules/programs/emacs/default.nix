@@ -101,6 +101,7 @@ in {
             helpful
             hl-todo
             hydra
+            lsp-mode
             magit-todos
             marginalia
             ripgrep
