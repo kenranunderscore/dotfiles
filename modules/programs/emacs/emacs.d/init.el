@@ -645,6 +645,7 @@
   :config
   (sp-pair "'" nil :actions nil)
   (sp-pair "`" nil :actions nil)
+  (setq sp-highlight-pair-overlay nil)
   :bind (("C-M-a" . sp-beginning-of-sexp)
          ("C-M-e" . sp-end-of-sexp)
          ("C-<down>" . sp-down-sexp)
