@@ -54,7 +54,7 @@
       (outline-3 (:foreground ,cyan))
       (outline-4 (:foreground ,orange))
       (outline-5 (:foreground ,pink))
-      (outline-6 (:foreground "olivedrab2"))
+      (outline-6 (:foreground ,light-olive))
       (outline-7 (:foreground ,string))
       (outline-8 (:foreground ,fg))
 
