@@ -16,7 +16,7 @@
       (minibuffer-prompt (:foreground ,light-olive))
       (highlight (:foreground ,fg :background ,dark-blue))
       (region (:background ,dark-blue))
-      (secondary-selection (:background ,(color-darken-name "dark green" 7)))
+      (secondary-selection (:foreground "black" :background ,(color-darken-name "dark green" 7)))
       (vertical-border (:foreground "gray30"))
       (help-key-binding (:background "#002000" :box ,fg))
       (link (:foreground ,cyan :underline t))
