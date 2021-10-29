@@ -1,23 +1,24 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let cfg = config.modules.programs.emacs;
+let
+  cfg = config.modules.programs.emacs;
+  types = lib.types;
 in {
   options.modules.programs.emacs = {
-    enable = mkEnableOption "emacs";
+    enable = lib.mkEnableOption "emacs";
 
-    emacsVersion = mkOption {
+    emacsVersion = lib.mkOption {
       type = types.enum [ "stable" "git" ];
       default = "git";
     };
 
-    nativeComp = mkOption {
+    nativeComp = lib.mkOption {
       type = types.bool;
       default = false;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home = {
       activation = {
         symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

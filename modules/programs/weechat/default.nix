@@ -3,8 +3,9 @@
 let
   cfg = config.modules.programs.weechat;
   certPath = "${inputs.privateConfig}/irssi.pem";
-in with lib; {
-  options.modules.programs.weechat = { enable = mkEnableOption "weechat"; };
+in {
+  options.modules.programs.weechat.enable = lib.mkEnableOption "weechat";
+
   config = {
     home.file = {
       ".weechat" = {

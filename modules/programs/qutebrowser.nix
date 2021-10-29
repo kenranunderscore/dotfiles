@@ -1,18 +1,19 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let cfg = config.modules.programs.qutebrowser;
+let
+  cfg = config.modules.programs.qutebrowser;
+  types = lib.types;
 in {
   options.modules.programs.qutebrowser = {
-    enable = mkEnableOption "qutebrowser";
+    enable = lib.mkEnableOption "qutebrowser";
 
-    package = mkOption {
+    package = lib.mkOption {
       type = types.package;
       default = pkgs.qutebrowser;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.qutebrowser = {
       enable = true;
       package = cfg.package;

@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let cfg = config.modules.shell.fish;
-in with lib; {
-  options.modules.shell.fish = { enable = mkEnableOption "fish"; };
+in {
+  options.modules.shell.fish.enable = lib.mkEnableOption "fish";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.starship ];
 
     programs.fish = {
@@ -27,7 +27,8 @@ in with lib; {
             owner = "danhper";
             repo = "fish-fastdir";
             rev = "4f616a6071f05ae89d5f72c20216f6f851e6ca1d";
-            sha256 = "sha256:1kr90b03pry7k74g80wnmmlw2d6pvp3637cifywqpkwdyizys6va";
+            sha256 =
+              "sha256:1kr90b03pry7k74g80wnmmlw2d6pvp3637cifywqpkwdyizys6va";
           };
         }
         {
@@ -36,7 +37,8 @@ in with lib; {
             owner = "jorgebucaran";
             repo = "autopair.fish";
             rev = "1222311994a0730e53d8e922a759eeda815fcb62";
-            sha256 = "sha256:0lxfy17r087q1lhaz5rivnklb74ky448llniagkz8fy393d8k9cp";
+            sha256 =
+              "sha256:0lxfy17r087q1lhaz5rivnklb74ky448llniagkz8fy393d8k9cp";
           };
         }
       ];

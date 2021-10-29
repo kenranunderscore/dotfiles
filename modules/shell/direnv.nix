@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let cfg = config.modules.shell.direnv;
 in {
-  options.modules.shell.direnv = { enable = mkEnableOption "direnv"; };
+  options.modules.shell.direnv.enable = lib.mkEnableOption "direnv";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.direnv = {
       enable = true;
       enableBashIntegration = true;

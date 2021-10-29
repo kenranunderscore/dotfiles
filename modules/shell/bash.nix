@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let cfg = config.modules.shell.bash;
 in {
-  options.modules.shell.bash = { enable = mkEnableOption "bash"; };
+  options.modules.shell.bash.enable = lib.mkEnableOption "bash";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.bash = {
       enable = true;
       historyIgnore = [ "ls" "cd" "exit" ];

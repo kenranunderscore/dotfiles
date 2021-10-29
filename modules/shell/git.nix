@@ -1,23 +1,24 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let cfg = config.modules.shell.git;
+let
+  cfg = config.modules.shell.git;
+  types = lib.types;
 in {
   options.modules.shell.git = {
-    enable = mkEnableOption "git";
+    enable = lib.mkEnableOption "git";
 
-    email = mkOption {
+    email = lib.mkOption {
       type = types.str;
       default = "";
     };
 
-    gpgKey = mkOption {
+    gpgKey = lib.mkOption {
       type = types.nullOr types.str;
       default = null;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.git = {
       package = pkgs.gitAndTools.gitFull;
       enable = true;

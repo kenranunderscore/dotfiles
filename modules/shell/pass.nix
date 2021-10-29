@@ -1,18 +1,19 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let cfg = config.modules.shell.pass;
+let
+  cfg = config.modules.shell.pass;
+  types = lib.types;
 in {
   options.modules.shell.pass = {
-    enable = mkEnableOption "pass module";
+    enable = lib.mkEnableOption "pass module";
 
-    gpgKey = mkOption {
+    gpgKey = lib.mkOption {
       type = types.str;
       default = "";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.password-store = {
       enable = true;
       package = pkgs.pass.withExtensions (e: [ e.pass-import ]);

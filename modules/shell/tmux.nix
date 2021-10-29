@@ -1,18 +1,19 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let cfg = config.modules.shell.tmux;
+let
+  cfg = config.modules.shell.tmux;
+  types = lib.types;
 in {
   options.modules.shell.tmux = {
-    enable = mkEnableOption "tmux";
+    enable = lib.mkEnableOption "tmux";
 
-    shellPath = mkOption {
+    shellPath = lib.mkOption {
       type = types.nullOr types.str;
       default = null;
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.tmux = {
       enable = true;
       escapeTime = 0;

@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let cfg = config.modules.programs.neovim;
 in {
-  options.modules.programs.neovim = { enable = mkEnableOption "neovim"; };
+  options.modules.programs.neovim.enable = lib.mkEnableOption "neovim";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.neovim-nightly ];
     xdg.configFile = {
       "nvim" = {

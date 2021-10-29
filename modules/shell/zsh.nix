@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let cfg = config.modules.shell.zsh;
 in {
-  options.modules.shell.zsh = { enable = mkEnableOption "zsh"; };
+  options.modules.shell.zsh.enable = lib.mkEnableOption "zsh";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.file = {
       ".zshrc".source = ../../config/zshrc;
       ".zshenv".source = ../../config/zshenv;

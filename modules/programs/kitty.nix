@@ -1,29 +1,29 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-let cfg = config.modules.programs.kitty;
+let
+  cfg = config.modules.programs.kitty;
+  types = lib.types;
 in {
   options.modules.programs.kitty = {
-    enable = mkEnableOption "kitty";
+    enable = lib.mkEnableOption "kitty";
 
-    shellPath = mkOption {
+    shellPath = lib.mkOption {
       type = types.str;
       default = "${pkgs.bash}/bin/bash";
     };
 
-    useLoginShell = mkOption {
+    useLoginShell = lib.mkOption {
       type = types.bool;
       default = false;
     };
 
-    fontSize = mkOption {
-      # TODO make it int/float
+    fontSize = lib.mkOption {
       type = types.str;
       default = "12.0";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
       font = {

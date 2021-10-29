@@ -1,30 +1,30 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
+  types = lib.types;
   realName = "Johannes Maier";
   cfg = config.modules.email;
 in {
   options.modules.email = {
-    enable = mkEnableOption "email module";
+    enable = lib.mkEnableOption "email module";
 
-    maildir = mkOption {
+    maildir = lib.mkOption {
       type = types.str;
       default = ".mail";
     };
 
-    certificatesFile = mkOption {
+    certificatesFile = lib.mkOption {
       type = types.nullOr types.str;
       default = null;
     };
 
-    primaryAccount = mkOption {
+    primaryAccount = lib.mkOption {
       type = types.enum [ "ag" "mailbox" ];
       default = "mailbox";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # TODO enable pass and automatically prompt for mail address entries
     accounts.email = {
       maildirBasePath = cfg.maildir;
