@@ -109,6 +109,7 @@ in {
             vterm
             wgrep
             which-key
+            yasnippet
           ]);
       in [ myEmacs ];
     };
