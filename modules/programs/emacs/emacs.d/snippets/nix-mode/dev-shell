@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dev-shell
+# key: sh
+# --
+{ pkgs ? import <nixpkgs> { } }:
+
+pkgs.mkShell { nativeBuildInputs = [ pkgs.$0 ]; }
