@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sum-type
+# key: st
+# --
+data ${1:TypeName}
+  = $0
