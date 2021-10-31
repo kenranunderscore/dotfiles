@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: derive-eq-show
+# key: ds
+# expand-env: ((yas-indent-line 'fixed))
+# --
+deriving stock (Eq, Show)
