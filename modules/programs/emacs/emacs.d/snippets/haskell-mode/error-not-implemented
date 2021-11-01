@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: error-not-implemented
+# key: impl
+# --
+error "TODO: implement this"
