@@ -104,7 +104,13 @@ faces."
                      :default-height
                      150
                      :weight
-                     regular))))
+                     regular))
+        (ubuntu-mono . (:family
+                        "Ubuntu Mono"
+                        :default-height
+                        200
+                        :weight
+                        regular))))
 
 ;; The currently selected font (key of `kenran/font-alist').  Setting
 ;; this value only changes the default; it is reset when switching
