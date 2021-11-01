@@ -853,6 +853,17 @@
 
 ;;; Built-in packages
 
+(use-package whitespace
+  :config
+  (setq whitespace-style
+        '(face spaces tabs trailing lines-tail space-before-tab
+          indentation empty space-after-tab space-mark tab-mark
+          missing-newline-at-eof))
+  (setq whitespace-line-column 100)
+  (setq whitespace-global-modes
+        '(not magit-status-mode))
+  (global-whitespace-mode 1))
+
 ;; Render manpages in Emacs
 (use-package man
   :defer t

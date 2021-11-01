@@ -31,9 +31,9 @@
       (font-lock-type-face (:foreground "olivedrab3"))
       ;; TODO This is not yet decided, maybe use semi-bold fg instead?
       (font-lock-variable-name-face (:foreground ,sea-green))
-      (font-lock-warning-face (:slant italic :foreground "orange red"))
+      (font-lock-warning-face (:slant italic :foreground ,orange-red))
       (fringe (:background ,bg))
-      (warning (:foreground "orange red" :weight regular))
+      (warning (:foreground ,orange-red :weight regular))
       (mode-line (:background ,bg :foreground ,fg :box "#cccccc"))
       (mode-line-buffer-id (:weight bold))
       (mode-line-emphasis (:weight bold))
@@ -79,9 +79,9 @@
       (line-number-current-line (:foreground "dark green"))
 
       ;; org
-      (org-todo (:foreground "orange red"))
+      (org-todo (:foreground ,orange-red))
       (org-done (:foreground ,fg))
-      (org-headline-todo (:foreground "orange red"))
+      (org-headline-todo (:foreground ,orange-red))
       (org-headline-done (:foreground ,comment :strike-through t))
 
       ;; magit
@@ -100,7 +100,12 @@
       (Man-overstrike (:foreground ,cyan))
 
       ;; mu4e
-      (mu4e-highlight-face (:weight semi-bold :foreground ,orange)))))
+      (mu4e-highlight-face (:weight semi-bold :foreground ,orange))
+
+      ;; whitespace-mode
+      (whitespace-space (:foreground ,whitespace-fg :background ,bg))
+      (whitespace-tab (:foreground ,whitespace-fg :background ,bg))
+      (whitespace-line (:foreground ,orange-red :background ,bg)))))
 
 ;; Set all the colors to their actual values.
 (let ((bg "#040404")
@@ -113,7 +118,9 @@
       (light-olive "olivedrab2")
       (comment "#707370")
       (dark-blue "#01018a")
-      (sea-green "medium sea green"))
+      (sea-green "medium sea green")
+      (orange-red "orange red")
+      (whitespace-fg "#151515"))
   (apply #'custom-theme-set-faces
          (cons 'kenran (create-theme-colors))))
 
