@@ -196,16 +196,12 @@ disables all other enabled themes."
 (use-package doom-themes
   :defer t)
 
-;; https://github.com/petergardfjall/emacs-immaterial-theme
-(use-package immaterial-theme
-  :defer t)
-
-;; https://github.com/aalpern/emacs-color-theme-green-phosphor
-(use-package green-phosphor-theme
-  :defer t)
-
 ;; https://github.com/purcell/color-theme-sanityinc-tomorrow
 (use-package color-theme-sanityinc-tomorrow
-  :defer nil)
+  :defer t)
+
+;; https://github.com/rexim/gruber-darker-theme
+(use-package gruber-darker-theme
+  :defer t)
 
 (kenran/switch-theme 'kenran)

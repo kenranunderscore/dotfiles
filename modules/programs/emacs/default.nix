@@ -78,8 +78,7 @@ in {
             color-theme-modern
             color-theme-sanityinc-tomorrow
             doom-themes
-            green-phosphor-theme
-            immaterial-theme
+            gruber-darker-theme
 
             # Utility
             ace-window
