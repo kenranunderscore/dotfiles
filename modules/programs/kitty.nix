@@ -27,8 +27,8 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        package = pkgs.fira-code;
-        name = "Fira Code";
+        # package = pkgs.fira-code;
+        name = "Hack";
       };
       settings = {
         term = "xterm-256color";
