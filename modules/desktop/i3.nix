@@ -17,9 +17,9 @@ in {
       enableDefault = true;
       general = {
         colors = true;
-        color_good = "#005000";
-        color_bad = "#700000";
-        color_degraded = "#202060";
+        color_good = "#0ac30a";
+        color_bad = "#ff4500";
+        color_degraded = "#eec900";
       };
     };
 
@@ -70,14 +70,72 @@ in {
             names = [ "Hack" ];
             size = 13.0;
           };
+          colors = {
+            background = "#040404";
+            statusline = "#bbbbbb";
+            separator = "#0ac80a";
+            focusedWorkspace = {
+              background = "#042004";
+              border = "#0ac90a";
+              text = "#0ac90a";
+            };
+            activeWorkspace = {
+              background = "#040404";
+              border = "#666666";
+              text = "#0ac90a";
+            };
+            inactiveWorkspace = {
+              background = "#040404";
+              border = "#666666";
+              text = "#909590";
+            };
+            bindingMode = {
+              background = "#040404";
+              border = "#ff4500";
+              text = "#ff4500";
+            };
+            urgentWorkspace = {
+              background = "#040404";
+              border = "#ff4500";
+              text = "#ff4500";
+            };
+          };
         }];
         colors = {
           focused = {
-            background = "#185517";
-            border = "#4c7899";
+            background = "#042004";
+            border = "#0ac90a";
             childBorder = "#007000";
             indicator = "#007000";
-            text = "#ffffff";
+            text = "#0ac90a";
+          };
+          focusedInactive = {
+            background = "#5f676a";
+            border = "#333333";
+            childBorder = "#5f676a";
+            indicator = "#484e50";
+            text = "#eeeeee";
+          };
+          placeholder = {
+            background = "#040404";
+            border = "#040404";
+            childBorder = "#0c0c0c";
+            indicator = "#040404";
+            text = "#eeeeee";
+          };
+          unfocused = {
+            background = "#222222";
+            border = "#333333";
+            childBorder = "#222222";
+            indicator = "#292d2e";
+            text = "#909590";
+          };
+          urgent = {
+            background = "#040404";
+            border = "#ff4500";
+            childBorder = "#700000";
+            indicator = "#700000";
+            text = "#ff4500";
           };
         };
       };
