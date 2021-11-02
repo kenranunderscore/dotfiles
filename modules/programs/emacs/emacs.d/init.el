@@ -735,6 +735,28 @@
   (:map company-active-map
         ("C-w" . evil-delete-backward-word)))
 
+(defun company--replacement-with-ws-face (str)
+  "A workaround for company popups showing the space marks in
+`whitespace-mode'.  See
+https://github.com/company-mode/company-mode/issues/1231."
+  (if (and (or global-whitespace-mode whitespace-mode)
+           (memq 'space-mark whitespace-active-style)
+           (memq 'face whitespace-active-style)
+           (memq 'spaces whitespace-active-style))
+      (let ((face `(:foreground ,(face-attribute 'whitespace-space :foreground))))
+        (replace-regexp-in-string
+         " "
+         (lambda (s)
+           (setq s (copy-sequence s))
+           (add-face-text-property 0 (length s) face nil s)
+           s)
+         str))
+    str))
+
+(advice-add #'company--replacement-string
+            :filter-return
+            #'company--replacement-with-ws-face)
+
 ;;; Highlight "todo", "fixme" and other keywords everywhere.
 (use-package hl-todo
   :init
