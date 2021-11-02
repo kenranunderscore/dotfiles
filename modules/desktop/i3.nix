@@ -17,7 +17,7 @@ in {
       enableDefault = true;
       general = {
         colors = true;
-        color_good = "#0ac30a";
+        color_good = "#0ac90a";
         color_bad = "#ff4500";
         color_degraded = "#eec900";
       };
@@ -25,7 +25,11 @@ in {
 
     home.packages = [ pkgs.dmenu pkgs.j4-dmenu-desktop ];
 
-    xsession.windowManager.i3 = {
+    xsession.windowManager.i3 = let
+      j4 = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop";
+      dmenuOpts =
+        "-nf \\#0AC90A -nb \\#040404 -sb \\#01018A -sf \\#0AC90A -b -l 3 -i -fn 'Iosevka-14'";
+    in {
       enable = true;
       config = rec {
         inherit (cfg) terminal;
@@ -35,8 +39,7 @@ in {
           always = true;
         }];
         defaultWorkspace = "workspace number 0";
-        menu =
-          "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu='${pkgs.dmenu}/bin/dmenu_run -b -i -l 5 -fn 'Hack-13''";
+        menu = "${j4} --dmenu='${pkgs.dmenu}/bin/dmenu_run ${dmenuOpts}'";
         window = {
           titlebar = false;
           border = 2;
@@ -56,7 +59,7 @@ in {
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce "exec ${menu}";
           "${modifier}+d" = lib.mkForce
-            "exec ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu='${pkgs.dmenu}/bin/dmenu -b -i -l 5 -fn 'Hack-13''";
+            "exec ${j4} --dmenu='${pkgs.dmenu}/bin/dmenu ${dmenuOpts}'";
         };
         bars = [{
           position = "bottom";
