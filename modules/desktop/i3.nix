@@ -18,7 +18,7 @@ in {
         enableDefault = true;
         general = {
           colors = true;
-          color_good = "#0ac90a";
+          color_good = "#0ac30a";
           color_bad = "#ff4500";
           color_degraded = "#eec900";
         };
@@ -84,13 +84,13 @@ in {
             separator = "#0ac80a";
             focusedWorkspace = {
               background = "#042004";
-              border = "#0ac90a";
-              text = "#0ac90a";
+              border = "#0ac30a";
+              text = "#0ac30a";
             };
             activeWorkspace = {
               background = "#040404";
               border = "#666666";
-              text = "#0ac90a";
+              text = "#0ac30a";
             };
             inactiveWorkspace = {
               background = "#040404";
@@ -112,10 +112,10 @@ in {
         colors = {
           focused = {
             background = "#042004";
-            border = "#0ac90a";
+            border = "#0ac30a";
             childBorder = "#007000";
             indicator = "#007000";
-            text = "#0ac90a";
+            text = "#0ac30a";
           };
           focusedInactive = {
             background = "#5f676a";
