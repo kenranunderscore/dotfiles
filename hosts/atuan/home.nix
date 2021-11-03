@@ -21,10 +21,7 @@
     programs = {
       emacs.emacsVersion = "git";
       emacs.nativeComp = true;
-      kitty = {
-        useLoginShell = false;
-        fontSize = "12.0";
-      };
+      kitty = { useLoginShell = false; };
     };
     shell.git.email = "johannes.maier@mailbox.org";
   };

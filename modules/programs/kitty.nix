@@ -19,7 +19,7 @@ in {
 
     fontSize = lib.mkOption {
       type = types.str;
-      default = "12.0";
+      default = "14.0";
     };
   };
 
@@ -28,7 +28,7 @@ in {
       enable = true;
       font = {
         # package = pkgs.fira-code;
-        name = "Hack";
+        name = "Iosevka";
       };
       settings = {
         term = "xterm-256color";

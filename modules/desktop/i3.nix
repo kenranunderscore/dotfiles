@@ -70,8 +70,8 @@ in {
           workspaceNumbers = true;
           hiddenState = "hide";
           fonts = {
-            names = [ "Hack" ];
-            size = 13.0;
+            names = [ "Iosevka" ];
+            size = 14.0;
           };
           colors = {
             background = "#040404";
