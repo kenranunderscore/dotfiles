@@ -11,7 +11,7 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs = {
       i3status = {
         enable = true;
