@@ -12,24 +12,29 @@ in {
   };
 
   config = {
-    programs.i3status = {
-      enable = true;
-      enableDefault = true;
-      general = {
-        colors = true;
-        color_good = "#0ac90a";
-        color_bad = "#ff4500";
-        color_degraded = "#eec900";
+    programs = {
+      i3status = {
+        enable = true;
+        enableDefault = true;
+        general = {
+          colors = true;
+          color_good = "#0ac90a";
+          color_bad = "#ff4500";
+          color_degraded = "#eec900";
+        };
+      };
+
+      rofi = {
+        enable = true;
+        cycle = true;
+        font = "Iosevka 14";
+        location = "center";
+        terminal = "${pkgs.kitty}/bin/kitty";
+        extraConfig = { modi = "run,drun,ssh,window"; };
       };
     };
 
-    home.packages = [ pkgs.dmenu pkgs.j4-dmenu-desktop ];
-
-    xsession.windowManager.i3 = let
-      j4 = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop";
-      dmenuOpts =
-        "-nf \\#0AC90A -nb \\#040404 -sb \\#01018A -sf \\#0AC90A -b -l 3 -i -fn 'Iosevka-14'";
-    in {
+    xsession.windowManager.i3 = {
       enable = true;
       config = rec {
         inherit (cfg) terminal;
@@ -39,7 +44,7 @@ in {
           always = true;
         }];
         defaultWorkspace = "workspace number 0";
-        menu = "${j4} --dmenu='${pkgs.dmenu}/bin/dmenu_run ${dmenuOpts}'";
+        menu = "rofi -show run";
         window = {
           titlebar = false;
           border = 2;
@@ -58,8 +63,7 @@ in {
           "${modifier}+g" = "split h";
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce "exec ${menu}";
-          "${modifier}+d" = lib.mkForce
-            "exec ${j4} --dmenu='${pkgs.dmenu}/bin/dmenu ${dmenuOpts}'";
+          "${modifier}+d" = lib.mkForce "exec rofi -show drun";
         };
         bars = [{
           position = "bottom";

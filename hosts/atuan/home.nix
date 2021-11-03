@@ -38,5 +38,5 @@
     };
   };
 
-  home.packages = with pkgs; [ dmenu pandoc xorg.xkbcomp ];
+  home.packages = with pkgs; [ pandoc xorg.xkbcomp ];
 }
