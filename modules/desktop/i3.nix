@@ -30,6 +30,7 @@ in {
         font = "Iosevka 14";
         location = "center";
         terminal = "${pkgs.kitty}/bin/kitty";
+        theme = ./rofi/kenran.rasi;
         extraConfig = { modi = "run,drun,ssh,window"; };
       };
     };
@@ -44,7 +45,7 @@ in {
           always = true;
         }];
         defaultWorkspace = "workspace number 0";
-        menu = "rofi -show run";
+        menu = "rofi -disable-history -show run";
         window = {
           titlebar = false;
           border = 2;
@@ -63,7 +64,7 @@ in {
           "${modifier}+g" = "split h";
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce "exec ${menu}";
-          "${modifier}+d" = lib.mkForce "exec rofi -show drun";
+          "${modifier}+d" = lib.mkForce "exec rofi -disable-history -show drun";
         };
         bars = [{
           position = "bottom";

@@ -1,0 +1,182 @@
+* {
+    green:                       #0ac30a;
+    red:                         #ff4500;
+    yellow:                      #eec900;
+    cyan:                        #00cdcd;
+    bg:                          #040404;
+    highlight-bg:                #01018a;
+    separatorcolor:              var(green);
+    background-color:            var(bg);
+    border-color:                var(green);
+}
+
+element {
+    padding: 1px ;
+    cursor:  pointer;
+    spacing: 5px ;
+    border:  0;
+}
+
+element normal.normal {
+    background-color: var(bg);
+    text-color:       var(green);
+}
+
+element normal.urgent {
+    background-color: var(bg);
+    text-color:       var(red);
+}
+
+element normal.active {
+    background-color: var(bg);
+    text-color:       var(yellow);
+}
+
+element selected.normal {
+    background-color: var(highlight-bg);
+    text-color:       var(green);
+}
+
+element selected.urgent {
+    background-color: var(highlight-bg);
+    text-color:       var(red);
+}
+
+element selected.active {
+    background-color: var(highlight-bg);
+    text-color:       var(yellow);
+}
+
+element alternate.normal {
+    background-color: var(bg);
+    text-color:       var(green);
+}
+
+element alternate.urgent {
+    background-color: var(bg);
+    text-color:       var(red);
+}
+
+element alternate.active {
+    background-color: var(bg);
+    text-color:       var(yellow);
+}
+
+element-text {
+    background-color: rgba ( 0, 0, 0, 0 % );
+    cursor:           inherit;
+    highlight:        inherit;
+    text-color:       inherit;
+}
+
+element-icon {
+    background-color: rgba ( 0, 0, 0, 0 % );
+    size:             1.0000em ;
+    cursor:           inherit;
+    text-color:       inherit;
+}
+
+window {
+    padding:          5;
+    background-color: var(background);
+    border:           1;
+    width:            25%;
+}
+
+mainbox {
+    padding: 0;
+    border:  0;
+}
+
+message {
+    padding:      1px ;
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+}
+
+textbox {
+    text-color: var(green);
+}
+
+listview {
+    padding:      2px 0px 0px ;
+    scrollbar:    true;
+    border-color: var(separatorcolor);
+    spacing:      2px ;
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+    lines:        5;
+    columns:      1;
+}
+
+scrollbar {
+    width:        4px ;
+    padding:      0;
+    handle-width: 8px ;
+    border:       0;
+    handle-color: var(separatorcolor);
+}
+
+sidebar {
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+}
+
+button {
+    cursor:     pointer;
+    spacing:    0;
+    text-color: var(green);
+}
+
+button selected {
+    background-color: var(highlight-bg);
+    text-color:       var(green);
+}
+
+num-filtered-rows {
+    expand:     false;
+    text-color: rgba ( 128, 128, 128, 100 % );
+}
+
+num-rows {
+    expand:     false;
+    text-color: rgba ( 128, 128, 128, 100 % );
+}
+
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: rgba ( 128, 128, 128, 100 % );
+}
+
+inputbar {
+    padding:    1px ;
+    spacing:    0px ;
+    text-color: var(green);
+    children:   [ prompt,textbox-prompt-colon,entry,num-filtered-rows,textbox-num-sep,num-rows,case-indicator ];
+}
+
+case-indicator {
+    spacing:    0;
+    text-color: var(green);
+}
+
+entry {
+    text-color:        var(green);
+    cursor:            text;
+    spacing:           0;
+    placeholder-color: rgba ( 128, 128, 128, 100 % );
+    placeholder:       "Type to filter";
+}
+
+prompt {
+    spacing:    0;
+    text-color: #00cdcd;
+}
+
+textbox-prompt-colon {
+    margin:     0px 0.3000em 0.0000em 0.0000em ;
+    expand:     false;
+    str:        ":";
+    text-color: inherit;
+}
