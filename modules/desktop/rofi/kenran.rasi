@@ -80,7 +80,7 @@ window {
     padding:          5;
     background-color: var(background);
     border:           1;
-    width:            25%;
+    width:            30%;
 }
 
 mainbox {
