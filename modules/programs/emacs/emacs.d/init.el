@@ -155,6 +155,9 @@
 ;; Use spaces for indentation by default.
 (setq-default indent-tabs-mode nil)
 
+;; File name searches should be case-insensitive.
+(setq read-file-name-completion-ignore-case t)
+
 ;;; Vim emulation with evil-mode
 
 ;; Having a dedicated leader key (SPC in my case) is one of the most
