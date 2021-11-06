@@ -9,10 +9,6 @@
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    notmuch = {
-      url = "github:notmuch/notmuch";
-      flake = false;
-    };
     privateConfig.url =
       "git+ssh://git@github.com/kenranunderscore/private-config";
   };
@@ -20,14 +16,7 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      overlays = [
-        inputs.emacs-overlay.overlay
-        inputs.neovim-overlay.overlay
-        (_final: prev: {
-          notmuch =
-            prev.notmuch.overrideAttrs (_old: { src = inputs.notmuch; });
-        })
-      ];
+      overlays = [ inputs.emacs-overlay.overlay inputs.neovim-overlay.overlay ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;

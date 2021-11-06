@@ -155,22 +155,6 @@
         "type": "indirect"
       }
     },
-    "notmuch": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1631369489,
-        "narHash": "sha256-92ZqHyqqCVqSfRW/XVLMT3ciAv5mNlfU7vRutncLR7Q=",
-        "owner": "notmuch",
-        "repo": "notmuch",
-        "rev": "21e365f51a7ff17e5154cf06396aeafe3f7d9bd7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "notmuch",
-        "repo": "notmuch",
-        "type": "github"
-      }
-    },
     "privateConfig": {
       "inputs": {
         "nixpkgs": "nixpkgs_3"
@@ -195,7 +179,6 @@
         "home-manager": "home-manager",
         "neovim-overlay": "neovim-overlay",
         "nixpkgs": "nixpkgs_2",
-        "notmuch": "notmuch",
         "privateConfig": "privateConfig"
       }
     }
