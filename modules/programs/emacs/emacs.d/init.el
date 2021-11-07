@@ -490,6 +490,15 @@
   :config
   (evil-set-initial-state 'helpful-mode 'motion))
 
+(defun kenran/add-nix-envrc-file ()
+  "If it doesn't already exist create a .envrc file containing 'use
+nix' in the current directory."
+  (interactive)
+  (let ((envrc (expand-file-name ".envrc")))
+    (if (file-exists-p envrc)
+        (message "Envrc file already exists")
+      (write-region "use nix" nil envrc))))
+
 (use-package project
   :config
   ;; Makes the `project-prefix-map' callable so that it can be bound
