@@ -499,6 +499,14 @@ nix' in the current directory."
         (message "Envrc file already exists")
       (write-region "use nix" nil envrc))))
 
+;;;###autoload
+(defun kenran/project-vterm ()
+  "Open a `vterm' session in the project root of the current
+project.  Prompt if no project can be found."
+  (interactive)
+  (let ((default-directory (project-root (project-current t))))
+    (vterm)))
+
 (use-package project
   :config
   ;; Makes the `project-prefix-map' callable so that it can be bound
@@ -509,7 +517,10 @@ nix' in the current directory."
           (consult-ripgrep "Grep" ?g)
           (magit-status "Git status" ?v)
           (project-dired "Dired")
-          (project-eshell "Eshell"))))
+          (project-eshell "Eshell")
+          (kenran/project-vterm "Vterm" ?t)))
+  :bind (:map project-prefix-map
+              ("t" . kenran/project-vterm)))
 
 (with-leader
   "p" '(project-prefix-map :which-key "project"))
