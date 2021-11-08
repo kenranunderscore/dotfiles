@@ -351,7 +351,11 @@
 (use-package vterm
   :defer t
   :config
-  (setq vterm-shell "fish"))
+  (setq vterm-shell "fish")
+  (general-define-key
+   :keymaps 'vterm-mode-map
+   :states 'emacs
+   "C-w" 'vterm-send-C-w))
 
 ;; A mode for writing Nix expressions in.
 (use-package nix-mode
