@@ -13,6 +13,7 @@
   (setq mu4e-confirm-quit nil)
   (setq mu4e-change-filenames-when-moving t)
   (setq mu4e-drafts-folder "/drafts")
+  (setq mu4e-attachment-dir "~/Downloads/")
   (setq mu4e-contexts
         `(,(make-mu4e-context
             :name "mailbox"
