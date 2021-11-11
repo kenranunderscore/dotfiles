@@ -565,7 +565,7 @@ project.  Prompt if no project can be found."
   "g" '(:ignore t :which-key "git")
   "g i" '(magit-gitignore :which-key "ignore")
   "g I" '(magit-init :which-key "init")
-  "g s" '(magit-status :which-key "status")
+  "g s" '(magit-project-status :which-key "status")
   "g S" '(magit-status-here :which-key "status here")
   "g l" '(magit-log :which-key "log")
   "g f" '(magit-pull-from-upstream :which-key "pull")
