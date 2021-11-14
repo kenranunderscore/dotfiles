@@ -588,34 +588,31 @@ project.  Prompt if no project can be found."
   (setq sp-highlight-pair-overlay nil)
   :init
   (smartparens-global-mode t)
-  (show-smartparens-global-mode t)
-  ;; Enable smartparens-strict-mode for all LISP modes listed in
-  ;; sp-lisp-modes.
-  (mapc
-   (lambda (mode)
-     (add-hook
-      (intern (format "%s-hook" (symbol-name mode)))
-      'smartparens-strict-mode))
-   sp-lisp-modes))
+  (show-smartparens-global-mode t))
 
 (with-leader
   "c f" 'sp-indent-defun)
 
-;;; evil-cleverparens
-(use-package evil-cleverparens
-  :diminish evil-cleverparens-mode
-  :after smartparens
-  :init
-  (setq evil-cleverparens-use-s-and-S nil)
-  (with-eval-after-load 'evil-cleverparens
-    (general-define-key
-     :states '(normal operator visual)
-     :keymaps 'evil-cleverparens-mode-map
-     "}" 'evil-forward-paragraph
-     "{" 'evil-backward-paragraph
-     "M-<" 'evil-cp-next-opening
-     "M->" 'evil-cp-previous-closing))
-  (add-hook 'smartparens-strict-mode-hook #'evil-cleverparens-mode))
+(use-package lispyville
+  :hook
+  ((emacs-lisp-mode
+    lisp-mode
+    common-lisp-mode
+    racket-mode
+    racket-repl-mode
+    sly-mrepl-mode)
+   . lispyville-mode)
+  :config
+  (with-eval-after-load 'lispyville
+    (lispyville-set-key-theme
+     '(operators
+       c-w
+       c-u
+       prettify
+       slurp/barf-cp
+       text-objects
+       additional-insert
+       additional-movement))))
 
 ;;; Incremental narrowing
 
