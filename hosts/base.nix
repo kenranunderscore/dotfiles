@@ -62,6 +62,8 @@ in {
     programs = {
       gpg.enable = true;
       home-manager.enable = true;
+      # TODO(Johannes): Customize colors?
+      jq.enable = true;
     };
 
     xdg.configFile = { "starship.toml".source = ../config/starship.toml; };
