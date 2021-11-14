@@ -95,7 +95,6 @@ in {
         nix-prefetch-git
         openssl
         plantuml
-        ranger
         ripgrep
         rlwrap
         rsync
