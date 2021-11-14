@@ -116,6 +116,12 @@ faces."
                      :default-height
                      170
                      :weight
+                     regular))
+        (terminus . (:family
+                     "Terminus"
+                     :default-height
+                     170
+                     :weight
                      regular))))
 
 ;; The currently selected font (key of `kenran/font-alist').  Setting
