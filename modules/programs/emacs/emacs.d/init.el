@@ -614,8 +614,7 @@ project.  Prompt if no project can be found."
        prettify
        slurp/barf-cp
        text-objects
-       additional-insert
-       additional-movement))))
+       additional-insert))))
 
 ;;; Incremental narrowing
 
