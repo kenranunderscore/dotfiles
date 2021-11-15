@@ -17,7 +17,7 @@
 ;; Since I use home-manager to manage my dotfiles, user environment
 ;; and in particular Emacs (including packages) I have the guarantee
 ;; that packages are coming from Nix instead of having to be
-;; downloaded.  This is why used to specify :ensure nil in my
+;; downloaded.  This is why I used to specify :ensure nil in my
 ;; `use-package' calls.  Now that I've run into lots of problems
 ;; especially with ELPA packages loaded through nixpkgs I want to have
 ;; a fallback method.
