@@ -122,7 +122,13 @@ faces."
                      :default-height
                      170
                      :weight
-                     regular))))
+                     regular))
+        (jetbrains-mono . (:family
+                           "JetBrains Mono"
+                           :default-height
+                           150
+                           :weight
+                           regular))))
 
 ;; The currently selected font (key of `kenran/font-alist').  Setting
 ;; this value only changes the default; it is reset when switching
