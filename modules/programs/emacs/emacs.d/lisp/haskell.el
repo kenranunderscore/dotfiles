@@ -5,6 +5,7 @@
   :diminish interactive-haskell-mode
   :custom
   (haskell-process-type 'cabal-repl)
+  (haskell-interactive-popup-errors nil)
   :hook (haskell-mode . interactive-haskell-mode))
 
 ;;;###autoload
