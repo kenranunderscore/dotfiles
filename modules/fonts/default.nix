@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let
   cfg = config.modules.fonts;
@@ -31,6 +31,8 @@ let
     };
     set = "iosevka-custom";
   };
+  pragmataPro =
+    pkgs.callPackage (import ./pp.nix "${inputs.privateConfig}/linux") { };
 in {
   options.modules.fonts = {
     enable = lib.mkEnableOption "fonts";
@@ -45,6 +47,8 @@ in {
     fonts.fontconfig.enable = lib.mkForce true;
 
     home.packages = [
+      iosevkaSerif
+      pragmataPro
       pkgs.anonymousPro
       pkgs.camingo-code
       pkgs.cantarell_fonts
@@ -57,7 +61,6 @@ in {
       pkgs.ibm-plex
       pkgs.inconsolata
       pkgs.iosevka
-      iosevkaSerif
       pkgs.jetbrains-mono
       pkgs.meslo-lg
       pkgs.roboto-mono

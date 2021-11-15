@@ -63,7 +63,13 @@ faces."
 ;; certain attributes that need to be applied when switching to the
 ;; respective font.
 (setq kenran/font-alist
-      '((iosevka-serif . (:family
+      '((pragmata-pro . (:family
+                         "Pragmata Pro Mono Liga"
+                         :default-height
+                         170
+                         :weight
+                         regular))
+        (iosevka-serif . (:family
                           "Iosevka Custom"
                           :default-height
                           160
