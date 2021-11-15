@@ -293,7 +293,7 @@
   "t t" '(kenran/switch-theme :which-key "switch theme")
   "t r" '(kenran/reload-theme :which-key "reload theme")
   "t f" '(kenran/switch-font :which-key "switch font")
-  "t w" 'whitespace-mode
+  "t w" 'global-whitespace-mode
   ;; Language-agnostic code-related commands
   "c" '(:ignore t :which-key "code")
   "c l" 'comment-line
