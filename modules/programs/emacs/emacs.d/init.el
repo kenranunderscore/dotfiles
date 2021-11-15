@@ -308,7 +308,10 @@
   "e" '(:ignore t :which-key "emacs")
   "e e" '(kenran/open-init-file :which-key "edit init.el")
   "e c" '(kenran/open-other-config-file :which-key "edit other config file")
-  "e t" '(kenran/open-custom-theme-file :which-key "edit custom theme"))
+  "e t" '(kenran/open-custom-theme-file :which-key "edit custom theme")
+  ;; Additional help commands
+  "h" '(:ignore t :which-key "help")
+  "h m" 'man)
 
 ;; Enable C-w for window management everywhere.  This means that I
 ;; need to override the Emacs default binding, which can be done via
