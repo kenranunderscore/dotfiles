@@ -1,6 +1,36 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.fonts;
+let
+  cfg = config.modules.fonts;
+  iosevkaSerif = pkgs.iosevka.override {
+    privateBuildPlan = {
+      family = "Iosevka Custom";
+      spacing = "normal";
+      serifs = "slab";
+      ligations.inherits = "haskell";
+      slopes = {
+        upright = {
+          angle = 0;
+          shape = "upright";
+          menu = "upright";
+          css = "normal";
+        };
+        italic = {
+          angle = 9.4;
+          shape = "oblique";
+          menu = "italic";
+          css = "italic";
+        };
+        oblique = {
+          angle = 9.4;
+          shape = "oblique";
+          menu = "oblique";
+          css = "oblique";
+        };
+      };
+    };
+    set = "iosevka-custom";
+  };
 in {
   options.modules.fonts = {
     enable = lib.mkEnableOption "fonts";
@@ -27,35 +57,7 @@ in {
       ibm-plex
       inconsolata
       iosevka
-      (iosevka.override {
-        privateBuildPlan = {
-          family = "Iosevka Custom";
-          spacing = "normal";
-          serifs = "slab";
-          ligations.inherits = "haskell";
-          slopes = {
-            upright = {
-              angle = 0;
-              shape = "upright";
-              menu = "upright";
-              css = "normal";
-            };
-            italic = {
-              angle = 9.4;
-              shape = "oblique";
-              menu = "italic";
-              css = "italic";
-            };
-            oblique = {
-              angle = 9.4;
-              shape = "oblique";
-              menu = "oblique";
-              css = "oblique";
-            };
-          };
-        };
-        set = "iosevka-custom";
-      })
+      iosevkaSerif
       jetbrains-mono
       meslo-lg
       roboto-mono
