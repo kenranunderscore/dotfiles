@@ -139,7 +139,7 @@ faces."
 ;; The currently selected font (key of `kenran/font-alist').  Setting
 ;; this value only changes the default; it is reset when switching
 ;; fonts.
-(setq kenran/current-font 'iosevka)
+(setq kenran/current-font 'pragmata-pro)
 
 ;; Now set all the face attributes, but also register a hook that
 ;; makes sure that these also work when using the Emacs daemon

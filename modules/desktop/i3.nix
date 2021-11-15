@@ -70,7 +70,7 @@ in {
       rofi = {
         enable = true;
         cycle = true;
-        font = "Iosevka 14";
+        font = "Pragmata Pro Mono 14";
         location = "center";
         terminal = "${pkgs.kitty}/bin/kitty";
         theme = ./rofi/kenran.rasi;
@@ -123,7 +123,7 @@ in {
           workspaceNumbers = true;
           hiddenState = "hide";
           fonts = {
-            names = [ "Iosevka" "FontAwesome" ];
+            names = [ "Pragmata Pro Mono" "FontAwesome" ];
             size = 14.0;
           };
           colors = {

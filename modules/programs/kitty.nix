@@ -26,16 +26,13 @@ in {
   config = lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      font = {
-        # package = pkgs.fira-code;
-        name = "Iosevka";
-      };
+      font.name = "Pragmata Pro Mono Liga";
       settings = {
         term = "xterm-256color";
         shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
         macos_option_as_alt = true;
         font_size = cfg.fontSize;
-        adjust_line_height = 0;
+        adjust_line_height = 1;
         scrollback_lines = 50000;
         hide_window_decorations = false;
         remember_window_size = false;
