@@ -44,28 +44,28 @@ in {
   config = lib.mkIf cfg.enable {
     fonts.fontconfig.enable = lib.mkForce true;
 
-    home.packages = with pkgs; [
-      anonymousPro
-      camingo-code
-      cantarell_fonts
-      cascadia-code
-      fira-code
-      go-font
-      hack-font
-      hasklig
-      hermit
-      ibm-plex
-      inconsolata
-      iosevka
+    home.packages = [
+      pkgs.anonymousPro
+      pkgs.camingo-code
+      pkgs.cantarell_fonts
+      pkgs.cascadia-code
+      pkgs.fira-code
+      pkgs.go-font
+      pkgs.hack-font
+      pkgs.hasklig
+      pkgs.hermit
+      pkgs.ibm-plex
+      pkgs.inconsolata
+      pkgs.iosevka
       iosevkaSerif
-      jetbrains-mono
-      meslo-lg
-      roboto-mono
-      source-code-pro
-      terminus_font
-      ubuntu_font_family
-      unifont
-      uw-ttyp0
+      pkgs.jetbrains-mono
+      pkgs.meslo-lg
+      pkgs.roboto-mono
+      pkgs.source-code-pro
+      pkgs.terminus_font
+      pkgs.ubuntu_font_family
+      pkgs.unifont
+      pkgs.uw-ttyp0
     ];
   };
 }
