@@ -14,6 +14,13 @@ in {
           user = "kenran";
           compression = true;
         };
+
+        "diablo" = {
+          host = "diablo";
+          hostname = "diablo";
+          user = "ag";
+          proxyCommand = "ssh maier@home.active-group.de -W %h:%p";
+        };
       };
     };
   };
