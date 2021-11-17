@@ -79,6 +79,7 @@ in {
             color-theme-sanityinc-tomorrow
             doom-themes
             gruber-darker-theme
+            zweilight-theme
 
             # Utility
             ace-window

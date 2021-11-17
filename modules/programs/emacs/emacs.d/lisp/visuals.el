@@ -228,4 +228,8 @@ disables all other enabled themes."
 (use-package gruber-darker-theme
   :defer t)
 
+;; https://github.com/philiparvidsson/Zweilight-Theme-for-Emacs
+(use-package zweilight-theme
+  :defer t)
+
 (kenran/switch-theme 'kenran)
