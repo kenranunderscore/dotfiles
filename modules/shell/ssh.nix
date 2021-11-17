@@ -21,6 +21,12 @@ in {
           user = "ag";
           proxyCommand = "ssh maier@home.active-group.de -W %h:%p";
         };
+
+        "diabloag" = {
+          host = "diabloag";
+          hostname = "diablo";
+          user = "ag";
+        };
       };
     };
   };
