@@ -9,7 +9,7 @@
 
 ;; Enable a forever-blinking cursor.  I used to disable this mode but
 ;; I found myself searching for the cursor a couple of times lately.
-(setq blink-cursor-delay 1.0)
+(setq blink-cursor-delay 0.5)
 (setq blink-cursor-blinks -1)
 (blink-cursor-mode 1)
 
