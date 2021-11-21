@@ -131,7 +131,7 @@ in {
             statusline = "#bbbbbb";
             separator = "#0ac80a";
             focusedWorkspace = {
-              background = "#042004";
+              background = "#041a04";
               border = "#0ac30a";
               text = "#0ac30a";
             };
@@ -159,7 +159,7 @@ in {
         }];
         colors = {
           focused = {
-            background = "#042004";
+            background = "#041a04";
             border = "#0ac30a";
             childBorder = "#007000";
             indicator = "#007000";

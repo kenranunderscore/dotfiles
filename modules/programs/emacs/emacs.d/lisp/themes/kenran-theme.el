@@ -33,7 +33,7 @@
       (font-lock-warning-face (:slant italic :foreground ,orange-red))
       (fringe (:background ,bg))
       (warning (:foreground ,orange-red :weight regular))
-      (mode-line (:background ,bg :foreground ,fg :box "#cccccc"))
+      (mode-line (:background "#041a04" :foreground ,fg :box ,fg))
       (mode-line-buffer-id (:weight bold))
       (mode-line-emphasis (:weight bold))
       (mode-line-inactive (:box "#555555" :background ,bg :foreground ,comment))

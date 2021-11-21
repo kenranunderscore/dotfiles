@@ -3,7 +3,7 @@
     red:                         #ff4500;
     yellow:                      #eec900;
     cyan:                        #00cdcd;
-    bg:                          #040404;
+    bg:                          #041a04;
     highlight-bg:                #01018a;
     separatorcolor:              var(green);
     background-color:            var(bg);
