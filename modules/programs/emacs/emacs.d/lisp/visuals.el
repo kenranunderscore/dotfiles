@@ -239,3 +239,9 @@ disables all other enabled themes."
   :defer t)
 
 (kenran/switch-theme 'kenran)
+
+;; Render color names or codes with "their" color.  It's an ELPA
+;; package, so no need/use to put it in the nix-managed Emacs
+;; packages.
+(use-package rainbow-mode
+  :defer t)
