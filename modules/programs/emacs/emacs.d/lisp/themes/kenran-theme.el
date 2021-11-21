@@ -39,7 +39,7 @@
       (mode-line-inactive (:box "#555555" :background ,bg :foreground ,comment))
       (isearch (:foreground ,bg :weight semi-bold :background ,fg))
       (lazy-highlight (:foreground ,fg :background "blue3"))
-      (show-paren-match (:foreground ,bg :background "chartreuse1"))
+      (show-paren-match (:foreground ,bg :background "cyan4"))
       (show-paren-mismatch (:foreground "red" :background ,dark-blue))
 
       ;; orderless
