@@ -29,7 +29,6 @@
       (font-lock-preprocessor-face (:inherit (font-lock-constant-face)))
       (font-lock-string-face ((t (:foreground ,string))))
       (font-lock-type-face (:foreground "olivedrab3"))
-      ;; TODO This is not yet decided, maybe use semi-bold fg instead?
       (font-lock-variable-name-face (:foreground ,sea-green))
       (font-lock-warning-face (:slant italic :foreground ,orange-red))
       (fringe (:background ,bg))
@@ -40,7 +39,7 @@
       (mode-line-inactive (:box "#555555" :background ,bg :foreground ,comment))
       (isearch (:foreground ,bg :weight semi-bold :background ,fg))
       (lazy-highlight (:foreground ,fg :background "blue3"))
-      (show-paren-match (:foreground ,bg :background ,fg))
+      (show-paren-match (:foreground ,bg :background "chartreuse1"))
       (show-paren-mismatch (:foreground "red" :background ,dark-blue))
 
       ;; orderless

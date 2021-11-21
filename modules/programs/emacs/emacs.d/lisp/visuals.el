@@ -17,7 +17,7 @@ is true, then always set the colors anew."
     (setq kenran/has-set-cursor-colors t)
     (let* ((color "red")
            (default-cursor `(,color box))
-           (insert-cursor `("gold" box)))
+           (insert-cursor `("chartreuse1" box)))
       (setq evil-operator-state-cursor default-cursor)
       (setq evil-normal-state-cursor default-cursor)
       (setq evil-replace-state-cursor default-cursor)
