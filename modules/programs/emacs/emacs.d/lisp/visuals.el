@@ -7,6 +7,12 @@
 (add-hook 'server-after-make-frame-hook
           (lambda () (set-mouse-color "white")))
 
+;; Enable a forever-blinking cursor.  I used to disable this mode but
+;; I found myself searching for the cursor a couple of times lately.
+(setq blink-cursor-delay 1.0)
+(setq blink-cursor-blinks -1)
+(blink-cursor-mode 1)
+
 (setq kenran/has-set-cursor-colors nil)
 (defun kenran/set-evil-state-cursors (&optional force)
   "Set the cursor to a box, and use a different color for insert

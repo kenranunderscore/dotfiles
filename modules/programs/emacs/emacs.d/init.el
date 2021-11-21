@@ -126,10 +126,6 @@
 (setq read-extended-command-predicate
       #'command-completion-default-include-p)
 
-;; The cursor doesn't need to be blinking when it's distinctive
-;; enough.
-(blink-cursor-mode -1)
-
 ;; Load themes and other improvements over the default look.
 (kenran/load-config-file "lisp/visuals.el")
 
