@@ -596,6 +596,9 @@ project.  Prompt if no project can be found."
   :hook
   ((emacs-lisp-mode
     lisp-mode
+    clojure-mode
+    clojurec-mode
+    clojurescript-mode
     common-lisp-mode
     racket-mode
     racket-repl-mode
