@@ -734,7 +734,8 @@ project.  Prompt if no project can be found."
       (apply orig-fun args)))
   :custom
   ((company-idle-delay 0)
-   (company-selection-wrap-around t))
+   (company-selection-wrap-around t)
+   (company-minimum-prefix-length 4))
   :bind
   (:map company-active-map
         ("C-w" . evil-delete-backward-word)))
