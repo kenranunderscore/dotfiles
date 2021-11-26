@@ -43,7 +43,7 @@ in {
         }
       ];
       shellAbbrs = import ./shell-aliases.nix;
-      interactiveShellInit = "${pkgs.starship}/bin/starship init fish | source";
+      promptInit = "${pkgs.starship}/bin/starship init fish | source";
     };
   };
 }
