@@ -468,13 +468,6 @@
 (use-package eglot
   :defer t)
 
-(use-package lsp-mode
-  :defer t
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (lsp-mode . lsp-enable-which-key-integration)
-  :commands lsp)
-
 ;; Mail configuration
 (kenran/load-config-file "lisp/email.el")
 
