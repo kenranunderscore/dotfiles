@@ -62,6 +62,7 @@ in rec {
   home.packages = with pkgs; [
     dhall
     feh
+    firefox-bin
     keepass
     keepassx
     kittyWrapped
