@@ -447,11 +447,6 @@
 (use-package pyimport
   :defer t)
 
-;;; V
-(use-package v-mode
-  :defer t
-  :mode ("\\.v\\'" . 'v-mode))
-
 ;;; Nim
 (use-package nim-mode
   :defer t)
