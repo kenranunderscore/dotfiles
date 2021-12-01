@@ -53,10 +53,12 @@
     keepassx
     leiningen
     linphone
+    mattermost-desktop
     mercurial
     racket
     sieve-connect
     subversion
+    thunderbird
     xorg.xkbcomp
   ];
 
