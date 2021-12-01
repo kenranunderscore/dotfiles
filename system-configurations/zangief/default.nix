@@ -20,10 +20,13 @@
 
   boot.loader = {
     systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 20;
-    systemd-boot.consoleMode = "max";
-    systemd-boot.editor = false;
-    grub.useOSProber = true;
+    grub = {
+      enable = true;
+      default = "saved";
+      useOSProber = true;
+      efiSupport = true;
+      device = "nodev";
+    };
     efi.canTouchEfiVariables = true;
   };
 
