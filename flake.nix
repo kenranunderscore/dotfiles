@@ -37,6 +37,19 @@
             }
           ];
         };
+        zangief = nixpkgs.lib.nixosSystem {
+          inherit system pkgs specialArgs;
+          modules = [
+            ./system-configurations/zangief
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.users.johannes = import ./hosts/zangief/home.nix;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = false;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+          ];
+        };
         paln = nixpkgs.lib.nixosSystem {
           inherit system pkgs specialArgs;
           modules = [
