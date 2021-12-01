@@ -18,7 +18,6 @@
     trustedUsers = [ "root" "johannes" ];
   };
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader = {
     systemd-boot.enable = true;
     systemd-boot.configurationLimit = 20;
@@ -28,13 +27,9 @@
     efi.canTouchEfiVariables = true;
   };
 
-  # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
   networking = {
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
     useDHCP = false;
     interfaces.enp3s0f1.useDHCP = true;
     interfaces.wlp4s0.useDHCP = true;
@@ -49,12 +44,21 @@
   };
 
   services = {
-    # Enable the X11 windowing system.
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" "nouveau" ];
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      displayManager = {
+        session = [{
+          manage = "window";
+          name = "fake";
+          start = "";
+        }];
+        defaultSession = "none+fake";
+        gdm = {
+          enable = true;
+          wayland = false;
+        };
+      };
       layout = "us";
       libinput = {
         enable = true;
@@ -78,13 +82,14 @@
     opengl.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.johannes = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
   programs.ssh.startAgent = true;
+
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -93,5 +98,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }

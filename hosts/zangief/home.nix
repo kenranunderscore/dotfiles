@@ -13,11 +13,7 @@
   };
 
   modules = {
-    desktop = {
-      i3 = {
-        enable = true;
-      };
-    };
+    desktop.i3.enable = true;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
@@ -61,6 +57,13 @@
     thunderbird
     xorg.xkbcomp
   ];
+
+  home.stateVersion = lib.mkForce "22.05";
+
+  xsession = {
+    enable = true;
+    windowManager.command = "${pkgs.i3}/bin/i3";
+  };
 
   xsession.windowManager.i3 = {
     # FIXME Make startup commands configurable, and merge
