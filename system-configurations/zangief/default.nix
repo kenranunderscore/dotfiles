@@ -15,95 +15,72 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    trustedUsers = [ "root" "johannes" ];
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 20;
-  boot.loader.systemd-boot.consoleMode = "max";
-  boot.loader.systemd-boot.editor = false;
-  boot.loader.grub.useOSProber = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "zangief"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  boot.loader = {
+    systemd-boot.enable = true;
+    systemd-boot.configurationLimit = 20;
+    systemd-boot.consoleMode = "max";
+    systemd-boot.editor = false;
+    grub.useOSProber = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp3s0f1.useDHCP = true;
-  networking.interfaces.wlp4s0.useDHCP = true;
+  networking = {
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    useDHCP = false;
+    interfaces.enp3s0f1.useDHCP = true;
+    interfaces.wlp4s0.useDHCP = true;
+    hostName = "zangief";
+    networkmanager.enable = true;
+  };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  services = {
+    # Enable the X11 windowing system.
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" "nouveau" ];
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+      layout = "us";
+      libinput = {
+        enable = true;
+        mouse.naturalScrolling = true;
+        touchpad.naturalScrolling = true;
+      };
+    };
+    printing.enable = true;
+  };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" "nouveau" ];
+  documentation = {
+    enable = true;
+    man.enable = true;
+    dev.enable = true;
+  };
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.johannes = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs;
-    [
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  # enable = true;
-  # enableSSHSupport = true;
-  # };
   programs.ssh.startAgent = true;
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -114,4 +91,3 @@
   system.stateVersion = "22.05"; # Did you read the comment?
 
 }
-
