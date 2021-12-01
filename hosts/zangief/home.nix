@@ -9,7 +9,7 @@
     username = "johannes";
     privateDir = "${inputs.privateConfig}/linux";
     shellPath = "${pkgs.fish}/bin/fish";
-    gpgKey = "DDB27C847E768551";
+    gpgKey = "9AC78C1A48681583";
   };
 
   modules = {
