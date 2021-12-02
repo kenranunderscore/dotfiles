@@ -13,8 +13,17 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        default = "saved";
+        useOSProber = true;
+        efiSupport = true;
+        device = "nodev";
+      };
+    };
   };
 
   networking = {
