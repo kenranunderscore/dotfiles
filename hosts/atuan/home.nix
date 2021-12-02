@@ -39,7 +39,7 @@
   };
 
   home = {
-    packages = with pkgs; [ pandoc xorg.xkbcomp ];
+    packages = with pkgs; [ pandoc xorg.xkbcomp firefox-bin ];
     stateVersion = "21.03";
   };
 }
