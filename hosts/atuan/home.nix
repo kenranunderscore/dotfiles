@@ -38,5 +38,8 @@
     };
   };
 
-  home.packages = with pkgs; [ pandoc xorg.xkbcomp ];
+  home = {
+    packages = with pkgs; [ pandoc xorg.xkbcomp ];
+    stateVersion = "21.03";
+  };
 }

@@ -59,7 +59,7 @@
     xorg.xkbcomp
   ];
 
-  home.stateVersion = lib.mkForce "22.05";
+  home.stateVersion = "22.05";
 
   xsession = {
     enable = true;

@@ -59,21 +59,23 @@ in rec {
     syncthing.enable = true;
   };
 
-  home.packages = with pkgs; [
-    dhall
-    feh
-    firefox-bin
-    keepass
-    keepassx
-    kittyWrapped
-    leiningen
-    linphone
-    mercurial
-    racket
-    sieve-connect
-    subversion
-    xorg.xkbcomp
-  ];
+  home = {
+    packages = with pkgs; [
+      dhall
+      feh
+      firefox-bin
+      keepass
+      keepassx
+      kittyWrapped
+      leiningen
+      linphone
+      mercurial
+      racket
+      sieve-connect
+      subversion
+      xorg.xkbcomp
+    ];
+  };
 
   xsession.windowManager.i3 = {
     # FIXME Make startup commands configurable, and merge
