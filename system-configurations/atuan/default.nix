@@ -36,10 +36,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
-    printing = {
-      enable = true;
-      drivers = [ pkgs.samsungUnifiedLinuxDriver ];
-    };
     syncthing = {
       enable = true;
       user = "kenran";
