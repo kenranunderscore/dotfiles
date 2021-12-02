@@ -1,16 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
-  # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
@@ -31,13 +23,11 @@
   users.users.kenran = {
     isNormalUser = true;
     home = "/home/kenran";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
   };
   nix.trustedUsers = [ "root" "kenran" ];
 
-  environment.systemPackages = with pkgs; [
-    vim
-  ];
+  environment.systemPackages = with pkgs; [ vim ];
 
   services = {
     openssh.enable = true;
@@ -51,7 +41,6 @@
 
   programs.ssh.startAgent = true;
 
-  # Open ports in the firewall.
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22000 ];
@@ -66,4 +55,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 }
-
