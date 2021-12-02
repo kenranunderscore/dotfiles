@@ -42,6 +42,7 @@
   };
 
   home.packages = with pkgs; [
+    cloc
     dhall
     feh
     firefox-bin

@@ -76,7 +76,6 @@ in {
 
       packages = with pkgs; [
         cacert
-        cloc
         curl
         darcs
         fd
