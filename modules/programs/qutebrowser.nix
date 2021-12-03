@@ -21,6 +21,7 @@ in {
         dict = "https://www.dict.cc/?s={}";
         g = "https://www.google.com/search?hl=en&q={}";
         h = "https://hoogle.haskell.org/?hoogle={}";
+        yt = "youtube.com/results?search_query={}";
       };
     };
   };
