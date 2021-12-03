@@ -43,6 +43,7 @@
 
   home.packages = with pkgs; [
     cloc
+    dbeaver
     dhall
     google-chrome-beta
     feh
