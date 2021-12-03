@@ -44,6 +44,7 @@
   home.packages = with pkgs; [
     cloc
     dhall
+    google-chrome-beta
     feh
     firefox-bin
     keepass
