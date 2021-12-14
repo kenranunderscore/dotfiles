@@ -82,6 +82,7 @@ in {
         gnumake
         graphviz
         htop
+        killall
         lorri
         manpages
         mercurial
