@@ -54,6 +54,7 @@ in {
           "https://github.com/" = { insteadOf = "gh:"; };
           "git@github.com:kenranunderscore/" = { insteadOf = "gh:/"; };
           "https://gitlab.com/" = { insteadOf = "gl:"; };
+          "ssh://git@gitlab.active-group.de:1022/ag/" = { insteadOf = "ag:"; };
         };
       };
     };
