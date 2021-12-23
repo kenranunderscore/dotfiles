@@ -356,6 +356,11 @@
    :states 'emacs
    "C-w" 'vterm-send-C-w))
 
+;; Purescript
+(use-package purescript-mode
+  :defer t
+  :mode "\\.ps\\'")
+
 ;; A mode for writing Nix expressions in.
 (use-package nix-mode
   :mode "\\.nix\\'"

@@ -67,6 +67,7 @@ in {
             org-bullets
             org-present
             plantuml-mode
+            purescript-mode
             pyimport
             racket-mode
             sly
