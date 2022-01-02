@@ -364,7 +364,9 @@
 
 ;; Purescript
 (use-package psc-ide
-  :hook (purescript-mode . psc-ide-mode))
+  :hook (purescript-mode . psc-ide-mode)
+  :config
+  (setq psc-ide-rebuild-on-save t))
 
 (use-package purescript-mode
   :hook (purescript-mode . turn-on-purescript-indentation))
