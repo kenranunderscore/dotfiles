@@ -356,6 +356,12 @@
    :states 'emacs
    "C-w" 'vterm-send-C-w))
 
+;; Built-in JavaScript mode
+(use-package js
+  :defer t
+  :config
+  (setq js-indent-level 2))
+
 ;; Purescript
 (use-package purescript-mode
   :hook (purescript-mode . turn-on-purescript-indentation))
