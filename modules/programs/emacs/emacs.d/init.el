@@ -358,8 +358,7 @@
 
 ;; Purescript
 (use-package purescript-mode
-  :defer t
-  :mode "\\.ps\\'")
+  :hook (purescript-mode . turn-on-purescript-indentation))
 
 ;; A mode for writing Nix expressions in.
 (use-package nix-mode
