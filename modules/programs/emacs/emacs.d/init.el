@@ -363,6 +363,9 @@
   (setq js-indent-level 2))
 
 ;; Purescript
+(use-package psc-ide
+  :hook (purescript-mode . psc-ide-mode))
+
 (use-package purescript-mode
   :hook (purescript-mode . turn-on-purescript-indentation))
 
