@@ -581,6 +581,12 @@ project.  Prompt if no project can be found."
   :config
   (global-git-gutter-mode t))
 
+;; TODO bindings for hunk navigation
+(with-leader
+  "g g" '(:ignore t :which-key "gutter")
+  "g g n" 'git-gutter:next-hunk
+  "g g p" 'git-gutter:previous-hunk)
+
 ;;; Smartparens
 (use-package smartparens
   :diminish smartparens-mode
@@ -816,8 +822,6 @@ https://github.com/company-mode/company-mode/issues/1231."
   :bind
   (:map minibuffer-local-map
         ("M-A" . marginalia-cycle)))
-
-;;; envrc
 
 ;; Let's try out Steve Purcell's envrc package as an alternative to
 ;; direnv-mode.  Note: this should probably be one of the last modes
