@@ -98,7 +98,6 @@ in {
         rlwrap
         rsync
         rxvt-unicode
-        sbcl
         scrot
         sqlite
         tree
