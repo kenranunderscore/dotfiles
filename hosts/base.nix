@@ -87,6 +87,7 @@ in {
         manpages
         mercurial
         neofetch
+        niv
         nixfmt
         nix-index
         nix-info
