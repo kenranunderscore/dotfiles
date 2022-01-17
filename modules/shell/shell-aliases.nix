@@ -13,6 +13,7 @@
   g = "git";
   ga = "git add";
   gap = "git add -p";
+  gb = "git branch -v";
   gc = "git commit -v";
   gca = "git commit -v --amend";
   gcl = "git clone";
