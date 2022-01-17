@@ -10,9 +10,8 @@
 ;; including use-package itself, but when self-compiling Emacs or on
 ;; Windows I rely on use-package for the installation of all the
 ;; packages.
-(dolist (package '(use-package))
-   (unless (package-installed-p package)
-       (package-install package)))
+(unless (package-installed-p 'use-package)
+  (package-install package))
 
 ;; Since I use home-manager to manage my dotfiles, user environment
 ;; and in particular Emacs (including packages) I have the guarantee
