@@ -533,6 +533,22 @@ project.  Prompt if no project can be found."
   (let ((default-directory (project-root (project-current t))))
     (vterm)))
 
+;;;###autoload
+(defun kenran/project-edit-dir-local-variable (mode variable value)
+  "Edit directory-local variables in the root directory of the
+current project."
+  (interactive
+   ;; Taken from `add-dir-local-variable', as I don't know of a better
+   ;; way to simply wrap that command.
+   (let (variable)
+     (require 'files-x)
+     (list
+      (read-file-local-variable-mode)
+      (setq variable (read-file-local-variable "Add or edit directory-local variable"))
+      (read-file-local-variable-value variable))))
+  (let ((default-directory (project-root (project-current t))))
+    (modify-dir-local-variable mode variable value 'add-or-replace)))
+
 (use-package project
   :config
   ;; Makes the `project-prefix-map' callable so that it can be bound
@@ -546,7 +562,9 @@ project.  Prompt if no project can be found."
           (project-eshell "Eshell")
           (kenran/project-vterm "Vterm" ?t)))
   :bind (:map project-prefix-map
-              ("t" . kenran/project-vterm)))
+              ("t" . kenran/project-vterm)
+              ("d" . project-dired)
+              ("D" . kenran/project-edit-dir-local-variable)))
 
 (with-leader
   "p" '(project-prefix-map :which-key "project"))
