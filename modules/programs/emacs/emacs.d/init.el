@@ -128,13 +128,29 @@
 ;; Load themes and other improvements over the default look.
 (kenran/load-config-file "lisp/visuals.el")
 
+;;;###autoload
+(defun kenran/switch-to-absolute-line-numbers ()
+  "Enable absolute line numbers."
+  (interactive)
+  (setq display-line-numbers t))
+
+;;;###autoload
+(defun kenran/switch-to-hybrid-line-numbers ()
+    "Enable relative line numbers, but with the current line showing
+its absolute line number."
+  (interactive)
+  (setq display-line-numbers 'relative)
+  (setq display-line-numbers-current-absolute t))
+
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
   :config
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t)
   :hook ((prog-mode . display-line-numbers-mode)
-         (conf-mode . display-line-numbers-mode)))
+         (conf-mode . display-line-numbers-mode)
+         (evil-insert-state-entry . kenran/switch-to-absolute-line-numbers)
+         (evil-insert-state-exit . kenran/switch-to-hybrid-line-numbers)))
 
 ;; Show column numbers in the modeline.
 (column-number-mode)
