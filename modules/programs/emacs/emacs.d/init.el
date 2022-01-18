@@ -130,6 +130,9 @@
 
 ;; Enable line numbers in programming modes.
 (use-package display-line-numbers
+  :config
+  (setq display-line-numbers-type 'relative)
+  (setq display-line-numbers-current-absolute t)
   :hook ((prog-mode . display-line-numbers-mode)
          (conf-mode . display-line-numbers-mode)))
 
