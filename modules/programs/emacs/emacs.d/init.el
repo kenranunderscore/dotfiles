@@ -397,7 +397,7 @@
 (use-package dhall-mode
   :mode "\\.dhall\\'"
   :config
-  (setq dhall-type-check-inactivity-timeout 10))
+  (setq dhall-type-check-inactivity-timeout 2))
 
 ;;; Docker
 (use-package dockerfile-mode
