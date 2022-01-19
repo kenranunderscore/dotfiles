@@ -253,7 +253,7 @@ its absolute line number."
 
 ;; The analogue of Tim Pope's vim-surround plugin in Emacs.  Now I can
 ;; use things like ysiw) to surround an inner word with non-padded
-;; normal parentheses, ds] to delete surrounding brackets, or cd[{ to
+;; normal parentheses, ds] to delete surrounding brackets, or cs[{ to
 ;; change surrounding brackets to curly braces with whitespace
 ;; padding.
 (use-package evil-surround
