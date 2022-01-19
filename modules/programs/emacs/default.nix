@@ -96,6 +96,7 @@ in {
             evil-org
             evil-snipe
             evil-surround
+            evil-visual-mark-mode
             git-gutter
             git-timemachine
             gnus-alias

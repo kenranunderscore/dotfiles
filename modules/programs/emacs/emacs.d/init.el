@@ -284,6 +284,12 @@ its absolute line number."
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
+;; Highlight vim marks in evil mode.
+(use-package evil-visual-mark-mode
+  :defer t
+  :after evil
+  :init (evil-visual-mark-mode))
+
 ;; Create nice custom mappings for normal mode (and others) that are
 ;; accessed with the SPC key.
 (with-leader
