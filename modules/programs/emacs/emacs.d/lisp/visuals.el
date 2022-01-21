@@ -13,6 +13,11 @@
 (setq blink-cursor-blinks -1)
 (blink-cursor-mode 1)
 
+;; Don't show a cursor in inactive windows.  The default, hollow
+;; cursor in inactive windows change colors when switching evil modes
+;; as well, that's kind of annoying.
+(setq cursor-in-non-selected-windows nil)
+
 (setq kenran/has-set-cursor-colors nil)
 (defun kenran/set-evil-state-cursors (&optional force)
   "Set the cursor to a box, and use a different color for insert
