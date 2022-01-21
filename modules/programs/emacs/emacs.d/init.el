@@ -939,8 +939,7 @@ https://github.com/company-mode/company-mode/issues/1231."
           missing-newline-at-eof))
   (setq whitespace-line-column 100)
   (setq whitespace-global-modes
-        '(not magit-status-mode))
-  (global-whitespace-mode 1))
+        '(not magit-status-mode)))
 
 ;; Render manpages in Emacs
 (use-package man
