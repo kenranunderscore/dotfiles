@@ -46,6 +46,7 @@
     dbeaver
     dhall
     discord
+    element-desktop
     google-chrome-beta
     feh
     firefox-bin
