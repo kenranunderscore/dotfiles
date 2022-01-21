@@ -45,6 +45,7 @@
     cloc
     dbeaver
     dhall
+    discord
     google-chrome-beta
     feh
     firefox-bin
