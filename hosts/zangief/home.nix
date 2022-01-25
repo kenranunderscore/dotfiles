@@ -42,6 +42,7 @@
   };
 
   home.packages = with pkgs; [
+    broot
     cloc
     dbeaver
     dhall
