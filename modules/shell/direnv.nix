@@ -8,7 +8,8 @@ in {
     programs.direnv = {
       enable = true;
       enableBashIntegration = true;
-      enableFishIntegration = true;
+      # Automatically enabled, thus readonly:
+      # enableFishIntegration = true;
       nix-direnv.enable = true;
     };
   };
