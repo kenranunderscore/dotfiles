@@ -42,8 +42,8 @@
 
   services = {
     xserver = {
-      enable = true;
-      videoDrivers = [ "nvidia" "nouveau" ];
+      enable = false;
+      videoDrivers = [ "nouveau" ];
       displayManager = {
         session = [{
           manage = "window";
@@ -53,7 +53,7 @@
         defaultSession = "none+fake";
         gdm = {
           enable = true;
-          wayland = false;
+          wayland = true;
         };
       };
       layout = "us";

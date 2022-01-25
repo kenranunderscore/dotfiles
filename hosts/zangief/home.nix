@@ -13,7 +13,7 @@
   };
 
   modules = {
-    desktop.i3.enable = true;
+    desktop.i3.enable = false;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
@@ -82,9 +82,11 @@
   home.stateVersion = "22.05";
 
   xsession = {
-    enable = true;
-    windowManager.command = "${pkgs.i3}/bin/i3";
+    enable = false;
+    # windowManager.command = "${pkgs.sway}/bin/sway";
   };
+
+  wayland.windowManager.sway.enable = true;
 
   xsession.windowManager.i3 = {
     # FIXME Make startup commands configurable, and merge
