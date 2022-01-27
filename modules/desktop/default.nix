@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./i3.nix ./sway.nix ];
+  imports = [ ./i3.nix ./sway ];
 }

@@ -116,15 +116,50 @@ in {
           enable = true;
           target = "sway-session.target";
         };
+        style = ./waybarStyle.css;
         settings = [{
           layer = "bottom";
           position = "bottom";
-          # height = 30;
           output = [ "eDP-1" "HDMI-A-1" ];
-          modules-left = [ "sway/workspaces" "sway/mode" "tray" ];
-          modules-center = [ "clock#date" "clock#time" ];
-          modules-right =
-            [ "pulseaudio" "network" "cpu" "memory" "temperature" "battery" ];
+          modules-left = [ "sway/workspaces" "sway/mode" "custom/rarrow" ];
+          modules-center = [ ];
+          modules-right = [
+            "custom/larrow"
+            "pulseaudio"
+            "custom/larrow-2"
+            "custom/larrow"
+            "network"
+            "custom/larrow-2"
+            "custom/larrow"
+            "cpu"
+            "custom/larrow-2"
+            "custom/larrow"
+            "memory"
+            "custom/larrow-2"
+            "custom/larrow"
+            "temperature"
+            "custom/larrow-2"
+            "custom/larrow"
+            "battery"
+            "custom/larrow-2"
+            "custom/larrow"
+            "clock#date"
+            "custom/larrow-2"
+            "custom/larrow"
+            "clock#time"
+          ];
+          "custom/larrow" = {
+            format = "";
+            tooltip = false;
+          };
+          "custom/larrow-2" = {
+            format = "";
+            tooltip = false;
+          };
+          "custom/rarrow" = {
+            format = "";
+            tooltip = false;
+          };
           "sway/workspaces" = {
             disable-scroll = true;
             all-outputs = false;
@@ -155,32 +190,30 @@ in {
               car = "";
               default = [ "" "" "" ];
             };
-            on-click = "pavucontrol";
+            tooltip = false;
           };
           network = {
-            format-wifi = " {essid} ({signalStrength}%)";
+            format-wifi = " {ifname} ({signalStrength}%)";
             format-ethernet = " {ipaddr}/{cidr}";
             tooltip-format = " {ifname} via {gwaddr}";
             format-linked = " {ifname} (No IP)";
             format-disconnected = "⚠ Disconnected";
-            format-alt = "{ifname}: {ipaddr}/{cidr}";
-          };
-          cpu = {
-            format = " {} ({usage}%)";
+            format-alt = "{essid}: {ipaddr}/{cidr}";
             tooltip = false;
           };
-          memory = { format = " {used:0.1f}G {}%"; };
+          cpu = {
+            format = " {load} ({usage}%)";
+            tooltip = false;
+          };
+          memory = {
+            format = " {used:0.1f}G {}%";
+            tooltip = false;
+          };
           temperature = {
             interval = 5;
             critical-threshold = 80;
             format = "{icon}  {temperatureC}°C";
-            format-icons = [
-              "" # Icon: temperature-empty
-              "" # Icon: temperature-quarter
-              "" # Icon: temperature-half
-              "" # Icon: temperature-three-quarters
-              "" # temperature-full
-            ];
+            format-icons = [ "" "" "" "" ];
             tooltip = true;
           };
           battery = {
@@ -191,6 +224,7 @@ in {
               critical = 15;
             };
             format-icons = [ "" "" "" "" "" ];
+            tooltip = false;
           };
         }];
       };
