@@ -33,6 +33,7 @@ in {
             natural_scroll = "enabled";
             accel_profile = "adaptive";
           };
+          "type:touchpad" = { tap = "enabled"; };
         };
         output = {
           HDMI-A-1 = { pos = "0 0"; };
