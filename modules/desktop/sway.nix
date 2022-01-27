@@ -20,9 +20,13 @@ in {
         inherit (cfg) terminal;
         modifier = "Mod4";
         input = {
-          "*" = {
+          "type:keyboard" = {
             xkb_layout = "us";
             xkb_variant = "altgr-intl";
+          };
+          "type:pointer" = {
+            natural_scroll = "enabled";
+            scroll_factor = "2.0";
           };
         };
         output = {
@@ -36,7 +40,6 @@ in {
           command = "setxkbmap -layout us -variant altgr-intl";
           always = true;
         }];
-        defaultWorkspace = "workspace number 0";
         window = {
           titlebar = false;
           border = 2;
