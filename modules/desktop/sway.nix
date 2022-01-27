@@ -13,7 +13,11 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.font-awesome ];
 
-    wayland.windowManager.sway = {
+    wayland.windowManager.sway = let
+      j4 = "${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop";
+      dmenuOpts =
+        "-nf \\#0AC90A -nb \\#040404 -sb \\#01018A -sf \\#0AC90A -b -l 3 -i -fn 'Iosevka-14'";
+    in {
       enable = true;
       wrapperFeatures.gtk = true;
       systemdIntegration = true;
@@ -37,6 +41,7 @@ in {
             res = "1920x1080@72.007Hz";
           };
         };
+        menu = "${j4} --dmenu='${pkgs.dmenu}/bin/dmenu_run ${dmenuOpts}'";
         startup = [{
           command = "systemctl --user restart waybar";
           always = true;
@@ -58,8 +63,9 @@ in {
           "${modifier}+v" = "split v";
           "${modifier}+g" = "split h";
           "${modifier}+t" = "exec ${terminal}";
-          # "${modifier}+space" = lib.mkForce "exec ${menu}";
-          # "${modifier}+d" = lib.mkForce "exec rofi -disable-history -show drun";
+          "${modifier}+space" = lib.mkForce "exec ${menu}";
+          "${modifier}+d" = lib.mkForce
+            "exec ${j4} --dmenu='${pkgs.dmenu}/bin/dmenu ${dmenuOpts}'";
         };
         colors = {
           focused = {
@@ -110,7 +116,7 @@ in {
           target = "sway-session.target";
         };
         settings = [{
-          layer = "top";
+          layer = "bottom";
           position = "bottom";
           # height = 30;
           output = [ "eDP-1" "HDMI-A-1" ];
