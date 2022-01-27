@@ -16,6 +16,7 @@ in {
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      systemdIntegration = true;
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
@@ -26,7 +27,7 @@ in {
           };
           "type:pointer" = {
             natural_scroll = "enabled";
-            scroll_factor = "2.0";
+            accel_profile = "adaptive";
           };
         };
         output = {
@@ -36,7 +37,10 @@ in {
             res = "1920x1080@72.007Hz";
           };
         };
-        startup = [ ];
+        startup = [{
+          command = "systemctl --user restart waybar";
+          always = true;
+        }];
         window = {
           titlebar = false;
           border = 2;
@@ -94,46 +98,92 @@ in {
             text = "#ff4500";
           };
         };
-        bars = [{
+        bars = [ ];
+      };
+    };
+
+    programs = {
+      waybar = {
+        enable = true;
+        systemd = {
+          enable = true;
+          target = "sway-session.target";
+        };
+        settings = [{
+          layer = "top";
           position = "bottom";
-          mode = "dock";
-          trayOutput = null;
-          workspaceButtons = true;
-          workspaceNumbers = true;
-          hiddenState = "hide";
-          fonts = {
-            names = [ "Pragmata Pro Mono" "FontAwesome" ];
-            size = 14.0;
+          # height = 30;
+          output = [ "eDP-1" "HDMI-A-1" ];
+          modules-left = [ "sway/workspaces" "sway/mode" "tray" ];
+          modules-center = [ "clock#date" "clock#time" ];
+          modules-right =
+            [ "pulseaudio" "network" "cpu" "memory" "temperature" "battery" ];
+          "sway/workspaces" = {
+            disable-scroll = true;
+            all-outputs = false;
           };
-          colors = {
-            background = "#040404";
-            statusline = "#bbbbbb";
-            separator = "#0ac80a";
-            focusedWorkspace = {
-              background = "#041a04";
-              border = "#0ac30a";
-              text = "#0ac30a";
+          "clock#date" = {
+            interval = 60;
+            format = " {:%e %b %Y}";
+            tooltip = false;
+          };
+          "clock#time" = {
+            interval = 1;
+            format = "{:%H:%M:%S}";
+            tooltip = false;
+          };
+          pulseaudio = {
+            format = "{icon} {volume}% {format_source}";
+            format-bluetooth = "{volume}% {icon} {format_source}";
+            format-bluetooth-muted = " {icon} {format_source}";
+            format-muted = " {format_source}";
+            format-source = " {volume}%";
+            format-source-muted = "";
+            format-icons = {
+              headphone = "";
+              hands-free = "";
+              headset = "";
+              phone = "";
+              portable = "";
+              car = "";
+              default = [ "" "" "" ];
             };
-            activeWorkspace = {
-              background = "#040404";
-              border = "#666666";
-              text = "#0ac30a";
+            on-click = "pavucontrol";
+          };
+          network = {
+            format-wifi = " {essid} ({signalStrength}%)";
+            format-ethernet = " {ipaddr}/{cidr}";
+            tooltip-format = " {ifname} via {gwaddr}";
+            format-linked = " {ifname} (No IP)";
+            format-disconnected = "⚠ Disconnected";
+            format-alt = "{ifname}: {ipaddr}/{cidr}";
+          };
+          cpu = {
+            format = " {} ({usage}%)";
+            tooltip = false;
+          };
+          memory = { format = " {used:0.1f}G {}%"; };
+          temperature = {
+            interval = 5;
+            critical-threshold = 80;
+            format = "{icon}  {temperatureC}°C";
+            format-icons = [
+              "" # Icon: temperature-empty
+              "" # Icon: temperature-quarter
+              "" # Icon: temperature-half
+              "" # Icon: temperature-three-quarters
+              "" # temperature-full
+            ];
+            tooltip = true;
+          };
+          battery = {
+            format = "{icon} {capacity}%";
+            states = {
+              good = 90;
+              warning = 50;
+              critical = 15;
             };
-            inactiveWorkspace = {
-              background = "#040404";
-              border = "#666666";
-              text = "#909590";
-            };
-            bindingMode = {
-              background = "#040404";
-              border = "#ff4500";
-              text = "#ff4500";
-            };
-            urgentWorkspace = {
-              background = "#040404";
-              border = "#ff4500";
-              text = "#ff4500";
-            };
+            format-icons = [ "" "" "" "" "" ];
           };
         }];
       };
