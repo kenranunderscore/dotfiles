@@ -36,10 +36,7 @@ in {
             res = "1920x1080@72.007Hz";
           };
         };
-        startup = [{
-          command = "setxkbmap -layout us -variant altgr-intl";
-          always = true;
-        }];
+        startup = [ ];
         window = {
           titlebar = false;
           border = 2;
