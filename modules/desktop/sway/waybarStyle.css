@@ -1,6 +1,7 @@
+@define-color fg #0ac30a;
+@define-color light-bg #212121;
+
 * {
-    /* border: none; */
-    /* border-radius: 0; */
     font-size: 14pt;
     font-family: "Iosevka", monospace;
 }
@@ -10,24 +11,24 @@
 }
 
 window#waybar {
-    color: #0ac30a;
+    color: @fg;
 }
 
 #custom-rarrow,
 #custom-larrow {
     font-size: 16pt;
-    color: #111111;
+    color: @light-bg;
 }
 
 #custom-larrow-2 {
     font-size: 16pt;
-    background: #111111;
+    background: @light-bg;
     color: #040404;
 }
 
 #workspaces,
 #mode {
-    background: #111111;
+    background: @light-bg;
 }
 
 #pulseaudio,
@@ -38,7 +39,7 @@ window#waybar {
 #battery,
 #clock {
     padding: 0 10px;
-    background: #111111;
+    background: @light-bg;
 }
 
 #workspaces button {
@@ -50,8 +51,8 @@ window#waybar {
 
 #workspaces button.focused {
     background: #041a04;
-    border-color: #0ac30a;
-    color: #0ac30a;
+    border-color: @fg;
+    color: @fg;
 }
 
 #workspaces button.urgent {
