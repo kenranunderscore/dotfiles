@@ -52,7 +52,7 @@
         }];
         defaultSession = "none+fake";
         gdm = {
-          enable = true;
+          enable = false;
           wayland = true;
         };
       };
@@ -74,7 +74,7 @@
 
   sound.enable = true;
   hardware = {
-    nvidia.modesetting.enable = true;
+    nvidia.modesetting.enable = false;
     pulseaudio.enable = true;
     opengl.enable = true;
   };
