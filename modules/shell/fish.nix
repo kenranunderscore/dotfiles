@@ -26,9 +26,8 @@ in {
           src = pkgs.fetchFromGitHub {
             owner = "danhper";
             repo = "fish-fastdir";
-            rev = "4f616a6071f05ae89d5f72c20216f6f851e6ca1d";
-            sha256 =
-              "sha256:1kr90b03pry7k74g80wnmmlw2d6pvp3637cifywqpkwdyizys6va";
+            rev = "dddc6c13b4afe271dd91ec004fdd199d3bbb1602";
+            sha256 = "sha256-iu7zNO7yKVK2bhIIlj4UKHHqDaGe4q2tIdNgifxPev4=";
           };
         }
         {
@@ -37,8 +36,7 @@ in {
             owner = "jorgebucaran";
             repo = "autopair.fish";
             rev = "1222311994a0730e53d8e922a759eeda815fcb62";
-            sha256 =
-              "sha256:0lxfy17r087q1lhaz5rivnklb74ky448llniagkz8fy393d8k9cp";
+            sha256 = "sha256-l6WJ2kjDO/TnU9FSigjxk5xFp90xl68gDfggkE/wrlM=";
           };
         }
       ];
