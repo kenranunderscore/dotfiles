@@ -5,8 +5,6 @@ in {
   options.modules.shell.fish.enable = lib.mkEnableOption "fish";
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.starship ];
-
     programs.fish = {
       enable = true;
       functions = {
@@ -41,7 +39,6 @@ in {
         }
       ];
       shellAbbrs = import ./shell-aliases.nix;
-      interactiveShellInit = "${pkgs.starship}/bin/starship init fish | source";
     };
   };
 }

@@ -66,7 +66,7 @@ in {
       jq.enable = true;
     };
 
-    xdg.configFile = { "starship.toml".source = ../config/starship.toml; };
+    xdg.configFile = { };
 
     home = {
       username = cfg.username;
