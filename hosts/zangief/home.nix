@@ -123,7 +123,6 @@
     sieve-connect
     subversion
     thunderbird
-    xorg.xkbcomp
   ];
 
   home.stateVersion = "22.05";
