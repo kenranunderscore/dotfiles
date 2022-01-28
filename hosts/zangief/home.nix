@@ -126,42 +126,4 @@
   ];
 
   home.stateVersion = "22.05";
-
-  xsession.windowManager.i3 = {
-    # FIXME Make startup commands configurable, and merge
-    config.startup = [
-      {
-        command = "setxkbmap -layout us -variant altgr-intl";
-        always = true;
-      }
-      {
-        command = "xrandr --output DP-2 --rate 72.01 --right-of HDMI-0";
-        always = true;
-      }
-      {
-        command = "~/.fehbg";
-        always = true;
-      }
-      {
-        command =
-          "xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Natural Scrolling Enabled' 1";
-        always = true;
-      }
-      {
-        command =
-          "xinput set-prop 'SYNA1202:00 06CB:CD64 Touchpad' 'libinput Tapping Enabled' 1";
-        always = true;
-      }
-      {
-        command =
-          "xinput set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Natural Scrolling Enabled' 1";
-        always = true;
-      }
-      {
-        command =
-          "xinput set-prop 'Razer  Razer Abyssus' 'libinput Natural Scrolling Enabled' 1";
-        always = true;
-      }
-    ];
-  };
 }
