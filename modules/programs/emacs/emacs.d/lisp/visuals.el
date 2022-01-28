@@ -83,43 +83,43 @@ faces."
         (iosevka-serif . (:family
                           "Iosevka Custom"
                           :default-height
-                          170
+                          160
                           :weight
                           regular))
         (iosevka . (:family
                     "Iosevka"
                     :default-height
-                    170
+                    160
                     :weight
                     regular))
         (hack . (:family
                  "Hack"
                  :default-height
-                 160
+                 150
                  :weight
                  regular))
         (hasklig . (:family
                     "Hasklig"
                     :default-height
-                    160
+                    150
                     :weight
                     regular))
         (fira . (:family
                  "Fira Code"
                  :default-height
-                 150
+                 140
                  :weight
                  regular))
         (ibm-plex . (:family
                      "IBM Plex Mono"
                      :default-height
-                     170
+                     150
                      :weight
                      regular))
         (cascadia . (:family
                      "Cascadia Code"
                      :default-height
-                     170
+                     150
                      :weight
                      regular))
         (ubuntu-mono . (:family
@@ -143,7 +143,7 @@ faces."
         (jetbrains-mono . (:family
                            "JetBrains Mono"
                            :default-height
-                           170
+                           150
                            :weight
                            regular))))
 
