@@ -1,4 +1,5 @@
 @define-color fg #0ac30a;
+@define-color bg #040404;
 @define-color light-bg #212121;
 
 * {
@@ -7,7 +8,7 @@
 }
 
 #waybar {
-    background: #040404;
+    background: @bg;
 }
 
 window#waybar {
@@ -23,12 +24,16 @@ window#waybar {
 #custom-larrow-2 {
     font-size: 16pt;
     background: @light-bg;
-    color: #040404;
+    color: @bg;
 }
 
 #workspaces,
 #mode {
     background: @light-bg;
+}
+
+#mode {
+    padding: 0 10px;
 }
 
 #pulseaudio,
@@ -56,7 +61,15 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-    background: #040404;
+    background: @bg;
     border-color: #ff4500;
     color: #ff4500;
+}
+
+#workspaces button:hover {
+    background: @fg;
+    border-color: @bg;
+    color: @bg;
+    box-shadow: none;
+    text-shadow: none;
 }

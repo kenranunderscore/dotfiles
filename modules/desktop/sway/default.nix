@@ -175,9 +175,9 @@ in {
             tooltip = false;
           };
           pulseaudio = {
-            format = "{icon} {volume}% {format_source}";
-            format-bluetooth = "{volume}% {icon} {format_source}";
-            format-bluetooth-muted = " {icon} {format_source}";
+            format = "{icon} {volume}%  {format_source}";
+            format-bluetooth = "{volume}% {icon}  {format_source}";
+            format-bluetooth-muted = " {icon}  {format_source}";
             format-muted = " {format_source}";
             format-source = " {volume}%";
             format-source-muted = "";
@@ -212,7 +212,7 @@ in {
           temperature = {
             interval = 5;
             critical-threshold = 80;
-            format = "{icon}  {temperatureC}°C";
+            format = "{icon} {temperatureC}°C";
             format-icons = [ "" "" "" "" ];
             tooltip = true;
           };
