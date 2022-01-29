@@ -27,16 +27,10 @@
   };
 
   xsession = {
-    windowManager.i3.config.startup = lib.mkForce [
-      {
-        command = "xrandr --dpi 96";
-        always = false;
-      }
-      {
-        command = "setxkbmap -layout us -variant altgr-intl";
-        always = false;
-      }
-    ];
+    windowManager.i3.config.startup = lib.mkForce [{
+      command = "setxkbmap -layout us -variant altgr-intl";
+      always = false;
+    }];
   };
 
   services = {

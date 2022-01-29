@@ -54,6 +54,10 @@
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
+      # The default value that is detected is too high; alternative
+      # would be to set this in i3 startup, but this setting here is
+      # just right for this machine.
+      dpi = 96;
       libinput = {
         enable = true;
         mouse.naturalScrolling = true;
