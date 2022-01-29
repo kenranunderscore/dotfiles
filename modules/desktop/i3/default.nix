@@ -83,7 +83,7 @@ in {
       source = ./.xinitrc;
     };
 
-    home.packages = [ pkgs.font-awesome ];
+    home.packages = [ pkgs.font-awesome pkgs.xorg.xauth ];
 
     xsession.windowManager.i3 = {
       enable = true;

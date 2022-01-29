@@ -42,20 +42,10 @@
 
   services = {
     xserver = {
-      enable = false;
-      videoDrivers = [ "nouveau" ];
-      displayManager = {
-        session = [{
-          manage = "window";
-          name = "fake";
-          start = "";
-        }];
-        defaultSession = "none+fake";
-        gdm = {
-          enable = false;
-          wayland = true;
-        };
-      };
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      dpi = 96;
+      displayManager.startx.enable = true;
       layout = "us";
       libinput = {
         enable = true;
