@@ -58,26 +58,7 @@
         enable = true;
         mouse.naturalScrolling = true;
       };
-      displayManager = {
-        session = [{
-          manage = "window";
-          name = "fake";
-          start = "";
-        }];
-        defaultSession = "none+fake";
-        lightdm = {
-          enable = true;
-          greeters.mini = {
-            enable = true;
-            user = "kenran";
-          };
-        };
-        autoLogin = {
-          user = "kenran";
-          enable = true;
-        };
-        job.logToJournal = true;
-      };
+      displayManager.startx.enable = true;
     };
   };
 

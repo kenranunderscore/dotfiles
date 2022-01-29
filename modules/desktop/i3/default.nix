@@ -78,6 +78,11 @@ in {
       };
     };
 
+    home.file.".xinitrc" = {
+      executable = true;
+      source = ./.xinitrc;
+    };
+
     home.packages = [ pkgs.font-awesome ];
 
     xsession.windowManager.i3 = {
@@ -85,11 +90,8 @@ in {
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
-        startup = [{
-          command = "setxkbmap -layout us -variant altgr-intl";
-          always = true;
-        }];
-        defaultWorkspace = "workspace number 0";
+        startup = [ ];
+        defaultWorkspace = "workspace number 1";
         menu = "rofi -disable-history -show run";
         window = {
           titlebar = false;
