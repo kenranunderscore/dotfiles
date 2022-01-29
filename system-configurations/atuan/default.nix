@@ -45,12 +45,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
-    syncthing = {
-      enable = true;
-      user = "kenran";
-      dataDir = "/home/kenran/sync";
-      configDir = "/home/kenran/.config/syncthing";
-    };
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
