@@ -11,7 +11,10 @@
   };
 
   modules = {
-    desktop = { i3.enable = true; };
+    desktop = {
+      i3.enable = true;
+      polybar.enable = true;
+    };
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";

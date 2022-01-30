@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./i3 ./sway ];
+  imports = [ ./i3 ./sway ./polybar ];
 }
