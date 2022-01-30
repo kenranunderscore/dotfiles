@@ -49,6 +49,10 @@ in {
             [ ];
         in cmds ++ cfg.additionalStartupCommands;
         defaultWorkspace = "workspace number 1";
+        focus = {
+          followMouse = false;
+          mouseWarping = false;
+        };
         menu = "rofi -disable-history -show run";
         window = {
           titlebar = false;
