@@ -12,6 +12,7 @@ in {
         alsaSupport = true;
         githubSupport = true;
         pulseSupport = true;
+        i3GapsSupport = true;
       };
     in [ myPolybar ];
     xdg.configFile."polybar/config".source = ./config.ini;

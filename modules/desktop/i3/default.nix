@@ -34,6 +34,7 @@ in {
 
     xsession.windowManager.i3 = {
       enable = true;
+      package = pkgs.i3-gaps;
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
@@ -104,6 +105,17 @@ in {
             indicator = "#700000";
             text = "#ff4500";
           };
+        };
+        gaps = let val = 20;
+        in {
+          inner = val;
+          outer = val;
+          left = 0;
+          right = 0;
+          bottom = 0;
+          top = 0;
+          horizontal = val;
+          vertical = val;
         };
       };
     };
