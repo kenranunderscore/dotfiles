@@ -14,7 +14,15 @@
 
   modules = {
     desktop = {
-      i3.enable = true;
+      i3 = {
+        enable = true;
+        additionalStartupCommands = [{
+          command =
+            "xrandr --output DP-2 --primary --mode 1920x1080 --rate 72.01 --right-of HDMI-0";
+          always = false;
+        }];
+      };
+      polybar.enable = true;
       sway.enable = false;
     };
     email = {
@@ -85,10 +93,6 @@
 
   xsession.windowManager.i3 = {
     # FIXME Make startup commands configurable, and merge
-    config.startup = [{
-      command =
-        "xrandr --output DP-2 --primary --mode 1920x1080 --rate 72.01 --right-of HDMI-0";
-      always = false;
-    }];
+    config.startup = [ ];
   };
 }

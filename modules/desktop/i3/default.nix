@@ -9,6 +9,9 @@ in {
       type = lib.types.str;
       default = "${pkgs.kitty}/bin/kitty";
     };
+
+    # TODO: type this with hm.lib.options?
+    additionalStartupCommands = lib.mkOption { default = [ ]; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,11 +37,14 @@ in {
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
-        startup = [{
-          command = "polybar main";
-          always = false;
-          notification = false;
-        }];
+        startup = let
+          cmds = if config.modules.desktop.polybar.enable then [{
+            command = "polybar main";
+            always = false;
+            notification = false;
+          }] else
+            [ ];
+        in cmds ++ cfg.additionalStartupCommands;
         defaultWorkspace = "workspace number 1";
         menu = "rofi -disable-history -show run";
         window = {
