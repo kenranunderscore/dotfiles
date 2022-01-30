@@ -54,6 +54,7 @@ in {
       pkgs.cantarell_fonts
       pkgs.cascadia-code
       pkgs.fira-code
+      pkgs.font-awesome_5
       pkgs.go-font
       pkgs.hack-font
       pkgs.hasklig
@@ -68,8 +69,6 @@ in {
       pkgs.source-code-pro
       pkgs.terminus_font
       pkgs.ubuntu_font_family
-      pkgs.unifont
-      pkgs.uw-ttyp0
     ];
   };
 }
