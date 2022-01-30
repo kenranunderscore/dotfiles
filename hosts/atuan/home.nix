@@ -14,6 +14,7 @@
     desktop = {
       i3.enable = true;
       polybar.enable = true;
+      picom.enable = true;
     };
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";

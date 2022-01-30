@@ -23,7 +23,7 @@
         }];
       };
       polybar.enable = true;
-      sway.enable = false;
+      picom.enable = true;
     };
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
