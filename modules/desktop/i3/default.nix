@@ -39,7 +39,7 @@ in {
         modifier = "Mod4";
         startup = let
           cmds = if config.modules.desktop.polybar.enable then [{
-            command = "polybar main";
+            command = "${../polybar/launch.sh}";
             always = false;
             notification = false;
           }] else
