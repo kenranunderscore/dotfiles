@@ -76,6 +76,7 @@ in {
         cacert
         curl
         darcs
+        feh
         fd
         fzf
         gcc
