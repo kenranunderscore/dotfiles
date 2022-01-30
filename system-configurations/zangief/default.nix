@@ -45,7 +45,6 @@
       enable = true;
       videoDrivers = [ "nvidia" ];
       dpi = 96;
-      layout = "us";
       libinput = {
         enable = true;
         mouse.naturalScrolling = true;
