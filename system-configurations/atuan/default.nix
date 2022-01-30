@@ -56,6 +56,8 @@
         enable = true;
         mouse.naturalScrolling = true;
       };
+      layout = "us";
+      xkbVariant = "altgr-intl";
       displayManager.startx.enable = true;
     };
   };

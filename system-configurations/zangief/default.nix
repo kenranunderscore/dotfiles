@@ -45,13 +45,15 @@
       enable = true;
       videoDrivers = [ "nvidia" ];
       dpi = 96;
-      displayManager.startx.enable = true;
       layout = "us";
       libinput = {
         enable = true;
         mouse.naturalScrolling = true;
         touchpad.naturalScrolling = true;
       };
+      layout = "us";
+      xkbVariant = "altgr-intl";
+      displayManager.startx.enable = true;
     };
     printing.enable = true;
   };

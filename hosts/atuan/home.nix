@@ -26,13 +26,6 @@
     shell.git.email = "johannes.maier@mailbox.org";
   };
 
-  xsession = {
-    windowManager.i3.config.startup = lib.mkForce [{
-      command = "setxkbmap -layout us -variant altgr-intl";
-      always = false;
-    }];
-  };
-
   services = {
     syncthing.enable = true;
     gpg-agent = {

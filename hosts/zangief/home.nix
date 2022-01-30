@@ -85,16 +85,10 @@
 
   xsession.windowManager.i3 = {
     # FIXME Make startup commands configurable, and merge
-    config.startup = [
-      {
-        command = "setxkbmap -layout us -variant altgr-intl";
-        always = false;
-      }
-      {
-        command =
-          "xrandr --output DP-2 --primary --mode 1920x1080 --rate 72.01 --right-of HDMI-0";
-        always = false;
-      }
-    ];
+    config.startup = [{
+      command =
+        "xrandr --output DP-2 --primary --mode 1920x1080 --rate 72.01 --right-of HDMI-0";
+      always = false;
+    }];
   };
 }
