@@ -63,6 +63,7 @@ in {
       pkgs.iosevka
       pkgs.jetbrains-mono
       pkgs.meslo-lg
+      pkgs.nerdfonts
       pkgs.roboto-mono
       pkgs.source-code-pro
       pkgs.terminus_font
