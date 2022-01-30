@@ -91,8 +91,5 @@
 
   home.stateVersion = "22.05";
 
-  xsession.windowManager.i3 = {
-    # FIXME Make startup commands configurable, and merge
-    config.startup = [ ];
-  };
+  xsession.enable = true;
 }

@@ -58,7 +58,19 @@
       };
       layout = "us";
       xkbVariant = "altgr-intl";
-      displayManager.startx.enable = true;
+      displayManager = {
+        session = [{
+          manage = "window";
+          name = "fake";
+          start = "";
+        }];
+        defaultSession = "none+fake";
+        lightdm = {
+          enable = true;
+          greeters.mini.enable = true;
+          greeters.mini.user = "kenran";
+        };
+      };
     };
   };
 

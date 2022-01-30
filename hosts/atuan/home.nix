@@ -37,6 +37,8 @@
     };
   };
 
+  xsession.enable = true;
+
   home = {
     packages = with pkgs; [ firefox-bin ];
     stateVersion = "21.03";
