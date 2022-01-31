@@ -7,15 +7,17 @@ in {
   config = lib.mkIf cfg.enable {
     services.picom = {
       enable = true;
-      activeOpacity = "0.98";
-      inactiveOpacity = "0.8";
-      # menuOpacity = "0.8";
+      activeOpacity = "0.95";
+      inactiveOpacity = "0.7";
+      opacityRule = [
+        ''100:role = "browser"''
+        ''100:class_i = "mattermost"''
+        ''100:name *= "Thunderbird"''
+      ];
       backend = "glx";
       experimentalBackends = true;
-      # fade = true;
-      # fadeDelta = 5;
-      # shadow = true;
-      # shadowOpacity = "0.75";
+      fade = true;
+      fadeDelta = 5;
       vSync = true;
       extraOptions = "xrender-sync-fence = true;";
     };
