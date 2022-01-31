@@ -62,7 +62,7 @@
         lightdm = {
           enable = true;
           greeters.mini.enable = true;
-          greeters.mini.user = "kenran";
+          greeters.mini.user = "johannes";
         };
       };
     };
