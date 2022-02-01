@@ -40,7 +40,7 @@ in {
             notification = false;
           }] else
             [ ];
-        in cmds ++ cfg.additionalStartupCommands;
+        in cfg.additionalStartupCommands ++ cmds;
         defaultWorkspace = "workspace number 1";
         focus = {
           followMouse = true;
