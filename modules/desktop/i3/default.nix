@@ -72,8 +72,8 @@ in {
           focused = {
             background = "#041a04";
             border = "#0ac30a";
-            childBorder = "#007000";
-            indicator = "#007000";
+            childBorder = "#00a000";
+            indicator = "#00a000";
             text = "#0ac30a";
           };
           focusedInactive = {
