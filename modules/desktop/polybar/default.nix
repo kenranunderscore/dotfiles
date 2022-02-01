@@ -5,16 +5,19 @@ in {
   options.modules.desktop.polybar = { enable = lib.mkEnableOption "polybar"; };
 
   config = lib.mkIf cfg.enable {
-    # Using services.polybar doesn't work for me.  It's probably due
-    # to using startx, so I'd have to start it manually.
-    home.packages = let
+    services.polybar = let
       myPolybar = pkgs.polybar.override {
         alsaSupport = true;
         githubSupport = true;
         pulseSupport = true;
         i3GapsSupport = true;
       };
-    in [ myPolybar ];
-    xdg.configFile."polybar/config".source = ./config.ini;
+    in {
+      enable = true;
+      package = myPolybar;
+      # script = "polybar -q -r top & polybar -q -r bottom &";
+      script = "polybar -q -r main";
+      config = ./config.ini;
+    };
   };
 }

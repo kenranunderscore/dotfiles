@@ -34,18 +34,11 @@ in {
         inherit (cfg) terminal;
         modifier = "Mod4";
         startup = let
-          cmds = if config.modules.desktop.polybar.enable then [
-            {
-              command = "${../polybar/launch.sh}";
-              always = false;
-              notification = false;
-            }
-            {
-              command = "~/.fehbg";
-              always = false;
-              notification = false;
-            }
-          ] else
+          cmds = if config.modules.desktop.polybar.enable then [{
+            command = "~/.fehbg";
+            always = false;
+            notification = false;
+          }] else
             [ ];
         in cmds ++ cfg.additionalStartupCommands;
         defaultWorkspace = "workspace number 1";
