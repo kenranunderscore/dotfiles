@@ -380,6 +380,10 @@ its absolute line number."
    :states 'emacs
    "C-w" 'vterm-send-C-w))
 
+;; Some packages and programs (still) use INI files for configuration.
+(use-package ini-mode
+  :defer t)
+
 ;; Built-in JavaScript mode
 (use-package js
   :defer t

@@ -59,6 +59,7 @@ in {
             dockerfile-mode
             fsharp-mode
             haskell-mode
+            ini-mode
             markdown-mode
             meghanada
             nim-mode
