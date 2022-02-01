@@ -15,8 +15,11 @@ in {
     in {
       enable = true;
       package = myPolybar;
-      # script = "polybar -q -r top & polybar -q -r bottom &";
-      script = "polybar -q -r main";
+      script = ''
+        for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+          MONITOR=$m polybar -r main &
+        done
+      '';
       config = ./config.ini;
     };
   };
