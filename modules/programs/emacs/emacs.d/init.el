@@ -911,7 +911,7 @@ https://github.com/company-mode/company-mode/issues/1231."
   :defer t
   :after hydra
   :config
-  (setq default-text-scale-amount 15))
+  (setq default-text-scale-amount 5))
 
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "
