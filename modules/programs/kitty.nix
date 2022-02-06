@@ -19,14 +19,15 @@ in {
 
     fontSize = lib.mkOption {
       type = types.str;
-      default = "14.0";
+      default = "15.0";
     };
   };
 
   config = lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      font.name = "Pragmata Pro Mono Liga";
+      # font.name = "Pragmata Pro Mono Liga";
+      font.name = "Iosevka";
       settings = {
         term = "xterm-256color";
         shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
