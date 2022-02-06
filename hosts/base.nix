@@ -73,28 +73,23 @@ in {
       homeDirectory = cfg.homeDirectory;
 
       packages = with pkgs; [
+        broot
         cacert
         curl
         darcs
         feh
         fd
+        firefox-bin
         fzf
-        gcc
         gnumake
         graphviz
         htop
-        lorri
         manpages
-        mercurial
         neofetch
         niv
         nixfmt
-        nix-index
-        nix-info
-        nix-output-monitor
         nix-prefetch-git
         openssl
-        plantuml
         ripgrep
         rlwrap
         rsync

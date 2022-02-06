@@ -41,7 +41,7 @@
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [ firefox-bin ];
+    packages = with pkgs; [ ];
     stateVersion = "21.03";
   };
 }

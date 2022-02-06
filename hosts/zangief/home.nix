@@ -68,22 +68,17 @@
     linphonePatched =
       pkgs.linphone.override { liblinphone = liblinphoneWithOlderSoci; };
   in with pkgs; [
-    broot
     cloc
     dbeaver
     dhall
     discord
     element-desktop
     google-chrome-beta
-    feh
-    firefox-bin
     keepass
     keepassx
     leiningen
     linphonePatched
     mattermost-desktop
-    mercurial
-    racket
     sieve-connect
     subversion
     thunderbird
