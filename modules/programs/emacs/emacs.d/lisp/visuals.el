@@ -83,13 +83,13 @@ faces."
         (iosevka-serif . (:family
                           "Iosevka Custom"
                           :default-height
-                          160
+                          166
                           :weight
                           regular))
         (iosevka . (:family
                     "Iosevka"
                     :default-height
-                    160
+                    166
                     :weight
                     regular))
         (hack . (:family
