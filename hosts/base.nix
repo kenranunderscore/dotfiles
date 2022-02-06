@@ -43,6 +43,7 @@ in {
         bat.enable = true;
         direnv.enable = true;
         fish.enable = true;
+        fzf.enable = true;
         git.enable = true;
         pass = {
           enable = true;
@@ -80,7 +81,6 @@ in {
         feh
         fd
         firefox-bin
-        fzf
         gnumake
         graphviz
         htop
