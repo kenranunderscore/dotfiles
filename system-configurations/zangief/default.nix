@@ -9,7 +9,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    trustedUsers = [ "root" "johannes" ];
+    settings.trusted-users = [ "root" "johannes" ];
   };
 
   boot.loader = {

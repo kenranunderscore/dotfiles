@@ -97,7 +97,7 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
-  nix.trustedUsers = [ "root" "kenran" ];
+  nix.settings.trusted-users = [ "root" "kenran" ];
 
   environment.systemPackages = with pkgs; [ ];
 

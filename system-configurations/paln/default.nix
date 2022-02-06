@@ -25,7 +25,7 @@
     home = "/home/kenran";
     extraGroups = [ "wheel" ];
   };
-  nix.trustedUsers = [ "root" "kenran" ];
+  nix.settings.trusted-users = [ "root" "kenran" ];
 
   environment.systemPackages = with pkgs; [ vim ];
 
