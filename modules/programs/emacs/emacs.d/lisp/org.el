@@ -24,6 +24,7 @@
    (org-agenda-files '("~/org/inbox.org"
                        "~/org/gtd.org"
                        "~/org/someday.org"))
+   (org-agenda-restore-windows-after-quit t)
    (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
                          ("~/org/someday.org" :level . 1)))
    (org-capture-templates '(("t" "Todo" entry
