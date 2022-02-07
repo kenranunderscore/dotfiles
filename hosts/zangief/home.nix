@@ -79,6 +79,7 @@
     leiningen
     linphonePatched
     mattermost-desktop
+    pavucontrol
     sieve-connect
     subversion
     thunderbird

@@ -65,6 +65,11 @@
         };
       };
     };
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = false;
+    };
     printing.enable = true;
   };
 
@@ -74,10 +79,8 @@
     dev.enable = true;
   };
 
-  sound.enable = true;
   hardware = {
     nvidia.modesetting.enable = false;
-    pulseaudio.enable = true;
     opengl.enable = true;
   };
 
