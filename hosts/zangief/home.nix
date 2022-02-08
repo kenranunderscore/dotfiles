@@ -79,6 +79,7 @@
     leiningen
     linphonePatched
     mattermost-desktop
+    mercurial
     pavucontrol
     sieve-connect
     subversion
