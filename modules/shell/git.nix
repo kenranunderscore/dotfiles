@@ -24,6 +24,10 @@ in {
       enable = true;
       userName = "Johannes Maier";
       userEmail = cfg.email;
+      aliases = {
+        co = "checkout";
+        pushf = "push --force-with-lease";
+      };
       ignores = [
         # Vim
         "*.swp"
