@@ -72,6 +72,11 @@
         };
       };
     };
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = false;
+    };
   };
 
   programs.ssh.startAgent = true;
@@ -82,9 +87,7 @@
     dev.enable = true;
   };
 
-  sound.enable = true;
   hardware = {
-    pulseaudio.enable = true;
     opengl = {
       enable = true;
       driSupport32Bit = true;
