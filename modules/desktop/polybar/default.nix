@@ -17,7 +17,8 @@ in {
       package = myPolybar;
       script = ''
         for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-          MONITOR=$m polybar -r main &
+          MONITOR=$m polybar -r top &
+          MONITOR=$m polybar -r bottom &
         done
       '';
       config = ./config.ini;
