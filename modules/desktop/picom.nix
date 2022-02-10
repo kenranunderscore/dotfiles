@@ -13,6 +13,7 @@ in {
         ''100:role = "browser"''
         ''100:class_i = "mattermost"''
         ''100:name *= "Thunderbird"''
+        ''100:class_i = "rofi"''
       ];
       backend = "glx";
       experimentalBackends = true;
