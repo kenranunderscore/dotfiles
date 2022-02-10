@@ -27,7 +27,7 @@ in {
     programs.kitty = {
       enable = true;
       # font.name = "Pragmata Pro Mono Liga";
-      font.name = "Iosevka";
+      font.name = "Iosevka Term";
       settings = {
         term = "xterm-256color";
         shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
