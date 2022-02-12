@@ -33,14 +33,7 @@ in {
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
-        startup = let
-          cmds = if config.modules.desktop.polybar.enable then [{
-            command = "~/.fehbg";
-            always = false;
-            notification = false;
-          }] else
-            [ ];
-        in cfg.additionalStartupCommands ++ cmds;
+        startup = cfg.additionalStartupCommands;
         defaultWorkspace = "workspace number 1";
         focus = {
           followMouse = true;

@@ -16,11 +16,18 @@
     desktop = {
       i3 = {
         enable = true;
-        additionalStartupCommands = [{
-          command =
-            "xrandr --output DP-2 --primary --mode 1920x1080 --rate 72.01 --right-of HDMI-0";
-          always = false;
-        }];
+        additionalStartupCommands = [
+          {
+            command =
+              "xrandr --output DP-2 --primary --mode 1920x1080 --rate 72.01 --right-of HDMI-0";
+            always = false;
+          }
+          {
+            command = "~/.fehbg";
+            always = false;
+            notification = false;
+          }
+        ];
       };
       polybar.enable = true;
       picom.enable = true;

@@ -12,7 +12,13 @@
 
   modules = {
     desktop = {
-      i3.enable = true;
+      i3 = {
+        enable = true;
+        additionalStartupCommands = [{
+          command = "~/.fehbg";
+          always = false;
+        }];
+      };
       polybar.enable = true;
       picom.enable = true;
     };
