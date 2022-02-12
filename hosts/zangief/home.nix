@@ -69,6 +69,7 @@
       pkgs.linphone.override { liblinphone = liblinphoneWithOlderSoci; };
   in with pkgs; [
     cloc
+    cmus
     dbeaver
     dhall
     discord

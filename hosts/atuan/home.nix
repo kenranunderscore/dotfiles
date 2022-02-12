@@ -41,7 +41,7 @@
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [ ];
+    packages = with pkgs; [ cmus ];
     stateVersion = "21.03";
   };
 }
