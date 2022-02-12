@@ -24,6 +24,13 @@
         configurationLimit = 20;
       };
     };
+    supportedFilesystems = [ "ntfs" ];
+  };
+
+  fileSystems."/music" = {
+    device = "/dev/sda1";
+    fsType = "ntfs";
+    options = [ "rw" "uid=1000" ];
   };
 
   networking = {
