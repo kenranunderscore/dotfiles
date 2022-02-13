@@ -21,7 +21,7 @@ in {
           MONITOR=$m polybar -r bottom &
         done
       '';
-      config = ./config.ini;
+      config = import ./config.nix pkgs;
     };
   };
 }
