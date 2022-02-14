@@ -39,8 +39,13 @@
   gsw = "git switch";
   gupa = "git pull --rebase --autostash";
 
+  # systemd
+  sy = "systemctl";
+  syu = "systemctl --user";
+  jo = "journalctl";
+  jou = "journalctl --user";
+
   # misc
   md = "mkdir -p";
   s = "sudo";
-  hs = "home-manager switch";
 }
