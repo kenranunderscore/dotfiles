@@ -14,6 +14,7 @@ in {
         ''100:class_i = "mattermost"''
         ''100:name *= "Thunderbird"''
         ''100:class_i = "rofi"''
+        ''100:class_i = "DBeaver"''
       ];
       backend = "glx";
       experimentalBackends = true;
