@@ -14,10 +14,18 @@
     desktop = {
       i3 = {
         enable = true;
-        additionalStartupCommands = [{
-          command = "~/.fehbg";
-          always = false;
-        }];
+        additionalStartupCommands = [
+          {
+            command = "~/.fehbg";
+            always = false;
+            notification = false;
+          }
+          {
+            # Workaround: otherwise i3 module will be empty at first
+            command = "systemctl --user restart polybar";
+            notification = false;
+          }
+        ];
       };
       polybar.enable = true;
       picom.enable = true;
