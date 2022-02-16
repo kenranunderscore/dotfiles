@@ -14,9 +14,9 @@ let
     background = "#00000000";
     foreground = "#0ac30a";
     fixed-center = true;
-    font-0 = "FuraCode Nerd Font:size=15;3";
+    font-0 = "Iosevka Nerd Font:size=15;4";
     font-1 = "FuraCode Nerd Font:style=Bold:size=19;4";
-    font-2 = "FuraCode Nerd Font:style=Bold:size=15;3";
+    font-2 = "Iosevka Nerd Font:style=Bold:size=15;4";
     height = "30";
     locale = "en_US.UTF-8";
     offset-x = "1%";
@@ -78,7 +78,7 @@ in {
   };
 
   "module/cpu" = {
-    format = " <label>";
+    format = "  <label>";
     format-background = "#040404";
     format-foreground = "#0ac30a";
     format-padding = 2;
@@ -129,7 +129,7 @@ in {
     format-muted-overline = "#00000000";
     format-muted-padding = 2;
     format-muted-margin = 0;
-    format-muted-prefix = "婢 ";
+    format-muted-prefix = "婢  ";
     format-muted-prefix-foreground = "#ff4500";
     format-volume = "墳  VOL <label-volume>";
     format-volume-background = "#040404";
@@ -208,7 +208,7 @@ in {
     label-close = " ";
     label-close-padding-right = 0;
     label-close-padding-left = 1;
-    label-open = "";
+    label-open = " ";
     label-open-padding = 1;
     label-separator = "|";
     label-separator-padding = 1;
@@ -224,7 +224,7 @@ in {
   "module/wlan2" = mkWlanModule "wlp4s0";
 
   "module/memory" = {
-    format = " <label>";
+    format = "  <label>";
     format-background = "#040404";
     format-foreground = "#0ac30a";
     format-padding = 2;
