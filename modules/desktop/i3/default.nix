@@ -19,7 +19,8 @@ in {
       rofi = {
         enable = true;
         cycle = true;
-        font = "Pragmata Pro Mono 14";
+        # font = "Pragmata Pro Mono 14";
+        font = "Iosevka 15";
         location = "center";
         terminal = "${pkgs.kitty}/bin/kitty";
         theme = ./rofi/kenran.rasi;
