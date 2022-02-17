@@ -1,6 +1,11 @@
 {
+  # nixos
+  nrs = "sudo nixos-rebuild switch --flake ~/dotfiles/";
+
+  # direnv
   dea = "direnv allow";
   ded = "direnv deny";
+
   # create a new graphical emacs frame, not tied to a shell
   e = "emacsclient --alternate-editor '' --create-frame --no-wait";
   # kill the emacs daemon
