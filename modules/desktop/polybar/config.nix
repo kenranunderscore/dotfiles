@@ -1,18 +1,24 @@
 pkgs:
 
 let
+  colors = {
+    foreground = "#0ac30a";
+    background = "#040404";
+    transparent = "#00000000";
+    urgent = "#ff4500";
+  };
   mkLayoutTextModule = content: {
     inherit content;
-    content-background = "#00000000";
-    content-foreground = "#040404";
+    content-background = "${colors.transparent}";
+    content-foreground = "${colors.background}";
     type = "custom/text";
     content-font = 2;
   };
   mkBar = bottom: modules-left: modules-center: modules-right: {
     inherit bottom modules-left modules-center modules-right;
     monitor = "\${env:MONITOR:}";
-    background = "#00000000";
-    foreground = "#0ac30a";
+    background = "${colors.transparent}";
+    foreground = "${colors.foreground}";
     fixed-center = true;
     font-0 = "Iosevka Nerd Font:size=15;4";
     font-1 = "FuraCode Nerd Font:style=Bold:size=19;4";
@@ -29,19 +35,19 @@ let
     type = "internal/network";
     accumulate-stats = "true";
     format-connected = "<label-connected>";
-    format-connected-background = "#040404";
-    format-connected-foreground = "#0ac30a";
+    format-connected-background = "${colors.background}";
+    format-connected-foreground = "${colors.foreground}";
     format-connected-margin = 0;
-    format-connected-overline = "#00000000";
+    format-connected-overline = "${colors.transparent}";
     format-connected-padding = 2;
-    format-connected-underline = "#00000000";
+    format-connected-underline = "${colors.transparent}";
     format-disconnected = "<label-disconnected>";
-    format-disconnected-background = "#040404";
+    format-disconnected-background = "${colors.background}";
     format-disconnected-foreground = "#909090";
     format-disconnected-margin = 0;
-    format-disconnected-overline = "#00000000";
+    format-disconnected-overline = "${colors.transparent}";
     format-disconnected-padding = 2;
-    format-disconnected-underline = "#00000000";
+    format-disconnected-underline = "${colors.transparent}";
     interval = "1.0";
     label-connected = "%essid% %signal%%";
     label-disconnected = "DISCONNECTED";
@@ -66,8 +72,8 @@ in {
 
   "module/date" = {
     format = "<label>";
-    format-foreground = "#0ac30a";
-    format-background = "#040404";
+    format-foreground = "${colors.foreground}";
+    format-background = "${colors.background}";
     format-padding = 2;
     format-margin = 0;
     interval = 1;
@@ -79,8 +85,8 @@ in {
 
   "module/cpu" = {
     format = "  <label>";
-    format-background = "#040404";
-    format-foreground = "#0ac30a";
+    format-background = "${colors.background}";
+    format-foreground = "${colors.foreground}";
     format-padding = 2;
     interval = "0.5";
     label = "CPU %percentage%%";
@@ -124,16 +130,16 @@ in {
 
   "module/audio" = {
     format-muted = "<label-muted>";
-    format-muted-background = "#040404";
-    format-muted-foreground = "#ff4500";
-    format-muted-overline = "#00000000";
+    format-muted-background = "${colors.background}";
+    format-muted-foreground = "${colors.urgent}";
+    format-muted-overline = "${colors.transparent}";
     format-muted-padding = 2;
     format-muted-margin = 0;
     format-muted-prefix = "婢  ";
-    format-muted-prefix-foreground = "#ff4500";
+    format-muted-prefix-foreground = "${colors.urgent}";
     format-volume = "墳  VOL <label-volume>";
-    format-volume-background = "#040404";
-    format-volume-foreground = "#0ac30a";
+    format-volume-background = "${colors.background}";
+    format-volume-foreground = "${colors.foreground}";
     format-volume-padding = 2;
     format-volume-margin = 0;
     label-muted = "MUTED";
@@ -151,29 +157,29 @@ in {
     label-separator-padding = 0;
     label-separator-margin = 0;
     label-mode = "%mode%";
-    label-mode-background = "#040404";
-    label-mode-foreground = "#ff4500";
+    label-mode-background = "${colors.background}";
+    label-mode-foreground = "${colors.urgent}";
     label-mode-padding = 1;
     label-mode-margin = 0;
     label-focused = "%index%";
-    label-focused-background = "#040404";
-    label-focused-foreground = "#0ac30a";
+    label-focused-background = "${colors.background}";
+    label-focused-foreground = "${colors.foreground}";
     label-focused-padding = 1;
     label-focused-margin = 0;
     label-focused-font = 3;
     label-unfocused = "%index%";
-    label-unfocused-background = "#040404";
+    label-unfocused-background = "${colors.background}";
     label-unfocused-foreground = "#707070";
     label-unfocused-padding = 1;
     label-unfocused-margin = 0;
     label-visible = "%index%";
-    label-visible-background = "#040404";
+    label-visible-background = "${colors.background}";
     label-visible-foreground = "#707070";
     label-visible-padding = 1;
     label-visible-margin = 0;
     label-urgent = "%index%";
-    label-urgent-background = "#040404";
-    label-urgent-foreground = "#ff4500";
+    label-urgent-background = "${colors.background}";
+    label-urgent-foreground = "${colors.urgent}";
     label-urgent-padding = 1;
     label-urgent-margin = 0;
   };
@@ -195,15 +201,15 @@ in {
     label = "%title%";
     label-maxlen = "70";
     format = "<label>";
-    format-foreground = "cccccc";
+    format-foreground = "#cccccc";
   };
 
   "module/powermenu" = {
     type = "custom/menu";
     expand-left = true;
     format = "<label-toggle> <menu>";
-    format-background = "#040404";
-    format-foreground = "#0ac30a";
+    format-background = "${colors.background}";
+    format-foreground = "${colors.foreground}";
     format-padding = 1;
     label-close = " ";
     label-close-padding-right = 0;
@@ -225,8 +231,8 @@ in {
 
   "module/memory" = {
     format = "  <label>";
-    format-background = "#040404";
-    format-foreground = "#0ac30a";
+    format-background = "${colors.background}";
+    format-foreground = "${colors.foreground}";
     format-padding = 2;
     format-margin = 0;
     interval = 3;
@@ -237,8 +243,8 @@ in {
   "module/distro-icon" = {
     exec = "${pkgs.coreutils}/bin/uname -r | ${pkgs.coreutils}/bin/cut -d- -f1";
     format = "   <label>";
-    format-background = "#040404";
-    format-foreground = "#0ac30a";
+    format-background = "${colors.background}";
+    format-foreground = "${colors.foreground}";
     format-padding = 2;
     interval = "999999999";
     label = "%output%";
