@@ -521,11 +521,15 @@ its absolute line number."
 
 ;; This gives us better and more readable help pages.  We also replace
 ;; some built-in C-h keybings with helpful-* functions.
+;; FIXME: helpful is broken as of February 2022; recheck frequently
+;; to see whether the bug https://github.com/Wilfred/helpful/issues/282
+;; is fixed.
 (use-package helpful
   :after evil
-  :bind (("C-h f" . helpful-callable)
-         ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key))
+  :bind (;; ("C-h f" . helpful-callable)
+         ;; ("C-h v" . helpful-variable)
+         ;; ("C-h k" . helpful-key)
+         )
   :config
   (evil-set-initial-state 'helpful-mode 'motion))
 
