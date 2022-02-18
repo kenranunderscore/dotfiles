@@ -58,6 +58,9 @@
 ;; Where custom themes reside.
 (setq custom-theme-directory (concat kenran/lisp-dir "themes/"))
 
+;; This package is required for the following functions.
+(require 'f)
+
 (defun kenran/open-other-config-file (file)
   "Open FILE of the config files in the lisp directory."
   (interactive
