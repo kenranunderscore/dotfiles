@@ -174,7 +174,7 @@ in {
     label-unfocused-margin = 0;
     label-visible = "%index%";
     label-visible-background = "${colors.background}";
-    label-visible-foreground = "#707070";
+    label-visible-foreground = "#3cb371";
     label-visible-padding = 1;
     label-visible-margin = 0;
     label-urgent = "%index%";
