@@ -98,18 +98,6 @@ faces."
                  150
                  :weight
                  regular))
-        (hasklig . (:family
-                    "Hasklig"
-                    :default-height
-                    150
-                    :weight
-                    regular))
-        (fira . (:family
-                 "Fira Code"
-                 :default-height
-                 140
-                 :weight
-                 regular))
         (ibm-plex . (:family
                      "IBM Plex Mono"
                      :default-height
@@ -120,18 +108,6 @@ faces."
                      "Cascadia Code"
                      :default-height
                      150
-                     :weight
-                     regular))
-        (ubuntu-mono . (:family
-                        "Ubuntu Mono"
-                        :default-height
-                        200
-                        :weight
-                        regular))
-        (meslo-lg . (:family
-                     "Meslo LG M"
-                     :default-height
-                     170
                      :weight
                      regular))
         (terminus . (:family
