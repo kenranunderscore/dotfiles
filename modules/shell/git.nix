@@ -46,10 +46,7 @@ in {
       signing.signByDefault = cfg.gpgKey != null;
       signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
       extraConfig = {
-        core = {
-          editor = "vim";
-          askPass = "";
-        };
+        core.askPass = "";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         pull.rebase = "true";
