@@ -73,6 +73,11 @@ in {
       username = cfg.username;
       homeDirectory = cfg.homeDirectory;
 
+      sessionVariables = rec {
+        EDITOR = "emacsclient -a '' -c";
+        VISUAL = EDITOR;
+      };
+
       packages = with pkgs; [
         broot
         cacert
