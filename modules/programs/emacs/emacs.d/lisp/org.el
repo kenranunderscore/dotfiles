@@ -42,6 +42,7 @@
                          "DONE(d)"
                          "CANCELLED(c)"))))
   :config
+  (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers))))
 
