@@ -40,7 +40,8 @@
                          "WAITING(w)"
                          "|"
                          "DONE(d)"
-                         "CANCELLED(c)"))))
+                         "CANCELLED(c)")))
+   (org-html-htmlize-output-type 'css))
   :config
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
@@ -97,3 +98,8 @@
                                     (org-present-show-cursor)
                                     (org-present-read-write)))))
 
+;; This is needed to enable syntax highlighting when exporting org to
+;; HTML.
+(use-package htmlize
+  :ensure t
+  :after ox)
