@@ -80,9 +80,9 @@ when the switch to the literate config is complete.
 
 #+begin_src elisp
 (defun kenran/open-init-file ()
-  "Open my init.el file."
+  "Open my config.org file."
   (interactive)
-  (find-file (file-truename (locate-user-emacs-file "init.el"))))
+  (find-file (file-truename (locate-user-emacs-file "config.org"))))
 #+end_src
 
 This is where my custom ELisp files reside.
@@ -511,7 +511,7 @@ accessed with the leader key, =SPC=.
   "w" '(evil-window-map :which-key "windows")
   ;; Emacs config
   "e" '(:ignore t :which-key "emacs")
-  "e e" '(kenran/open-init-file :which-key "edit init.el")
+  "e e" '(kenran/open-init-file :which-key "edit config.org")
   "e c" '(kenran/open-other-config-file :which-key "edit other config file")
   "e t" '(kenran/open-custom-theme-file :which-key "edit custom theme")
   ;; Additional help commands
