@@ -1,0 +1,44 @@
+#+TITLE: My User Environment
+#+AUTHOR: Johannes Maier
+#+EMAIL: johannes.maier@mailbox.org
+#+STARTUP: show2levels indent
+
+* Overview
+
+This repository represents the current state of the environment(s) I'm
+currently using for development, learning and, to some degree,
+entertainment.  Currently there are three machines I manage this way:
+
+- [[file:system-configurations/atuan/][atuan]]: my home PC
+- [[file:system-configurations/zangief/][zangief]]: my beefy [[https://www.tuxedocomputers.com/][TUXEDO]] work laptop
+- [[file:system-configurations/paln/][paln]]: a tiny [[https://www.hetzner.com/cloud][Hetzner Cloud]] VM I use for synchronization and small
+  backups
+
+  Nowadays what all these have in common is that they're running
+  [[https://nixos.org/][NixOS]].  The actual (development) environments are managed with
+  [[https://github.com/nix-community/home-manager][home-manager]].  =home-manager= makes it possible and easy to bundle
+  binaries / packages with their respective configuration (usually
+  files inside the home directory or =$XDG_CONFIG_HOME=).
+
+  In the past I was using macOS as well as Ubuntu, but have since
+  fully transitioned.  Note that using a nearly identical setup
+  powered by the Nix package manager and =home-manager= is not that
+  different.  Only a handful of things are actually managed by the
+  underlying system anymore.
+
+* Emacs configuration
+
+A special case of a program with a relatively huge accompanying
+configuration is GNU Emacs.  My literate Emacs configuration (very
+much a work-in-progress, as I've only recently started going back to
+using [[https://orgmode.org/][Org Mode]] to configure Emacs itself) can be found [[file:modules/programs/emacs/emacs.d/][here]].
+
+Note that there is a corresponding [[file:modules/programs/emacs/default.nix][default.nix]] which specifies the
+version of Emacs I use (usually a quite recent one, made possible by
+[[https://github.com/nix-community/emacs-overlay][emacs-overlay]]), as well as some pre-built packages, all "obeying" my
+current pin of =nixpkgs= (see [[file:flake.lock][flake.lock]]).
+
+* TODO Document the rest [0/3]
+- [ ] Flakes setup
+- [ ] Home-manager setup without NixOS
+- [ ] Commands to build and switch
