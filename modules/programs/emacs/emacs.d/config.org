@@ -1141,7 +1141,7 @@ be accessed under =SPC g=.
   "g l" '(magit-log :which-key "log")
   "g f" '(magit-pull-from-upstream :which-key "pull")
   "g p" '(magit-push :which-key "pull")
-  "g d" '(magit-diff :which-key "diff")
+  "g d" '(magit-dispatch :which-key "show dispatch popup")
   "g t" '(magit-todos-list :which-key "todos"))
 #+end_src
 
