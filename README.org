@@ -31,7 +31,7 @@ entertainment.  Currently there are three machines I manage this way:
 A special case of a program with a relatively huge accompanying
 configuration is GNU Emacs.  My literate Emacs configuration (very
 much a work-in-progress, as I've only recently started going back to
-using [[https://orgmode.org/][Org Mode]] to configure Emacs itself) can be found [[file:modules/programs/emacs/emacs.d/][here]].
+using [[https://orgmode.org/][Org Mode]] to configure Emacs itself) can be found [[file:modules/programs/emacs/emacs.d/config.org][here]].
 
 Note that there is a corresponding [[file:modules/programs/emacs/default.nix][default.nix]] which specifies the
 version of Emacs I use (usually a quite recent one, made possible by
