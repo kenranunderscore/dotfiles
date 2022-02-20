@@ -1,6 +1,7 @@
 ;; I want my org files to have indentation corresponding to the header
 ;; level.
 (use-package org-indent
+  :ensure nil
   :diminish org-indent-mode)
 
 ;; When writing text in org-mode, auto-fill-mode should be enable to
