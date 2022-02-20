@@ -65,6 +65,7 @@ in {
       pkgs.jetbrains-mono
       pkgs.meslo-lg
       pkgs.nerdfonts
+      pkgs.noto-fonts
       pkgs.roboto-mono
       pkgs.source-code-pro
       pkgs.terminus_font
