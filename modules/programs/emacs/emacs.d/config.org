@@ -1053,10 +1053,192 @@ https://github.com/company-mode/company-mode/issues/1231.
 #+end_src
 * E-Mail configuration
 
+There are some different ways to "do e-mail in Emacs".  Over the last
+two years I've tried out =notmuch=, =gnus=, and =mu4e=. Some thoughts on
+each of those:
+
+** Notmuch
+
+The Emacs integration for =notmuch= is great; it has the most intuitive
+and appealing UI from each of the options.  =Notmuch= works by
+referencing incoming e-mail in a separate database only, not ever
+touching or modifying it.  I really like this idea, and in practice it
+also felt great due to the quick und customizable searches.  The usual
+approach is to use a tag-based system of categorizing your e-mail, but
+simply having lots of stored queries is a little bit more flexible.
+
+But =notmuch= only handles this single aspect; this means that one needs
+to find solutions to the following:
+
+- Getting mail
+- Initial tagging
+- Sending mail
+- Synchronization between machines
+
+Due to the declarative e-mail account configuration from =home-manager=
+the first part is very simple, and I could also easily switch between
+different tools like =isync= or =offlineimap=.
+
+The initial tagging can be done with a shell script using the
+well-documented =notmuch= CLI, or via =afew=.
+
+For sending mail I use =msmtp=.
+
+Synchronization is where it broke down for me.  I have a PC at home,
+and a laptop at work, and I'd like those two machines to have
+identical state with respect to e-mail at all times.  I've tried using
+=muchsync= on my personal server to be the "source of truth".  This
+means that only the server downloads e-mail via IMAP, and the machines
+are simply its /clients/; they use =muchsync= to download mail from the
+server.
+
+This sounds great on paper but it presents a problem with sent mail,
+which I'd also like to sync back via IMAP to my accounts.  The client
+machine sends this and puts it into a special =sent= directory, which is
+then synchronized/uploaded to the server via =muchsync=.  I've had
+problems with mails appearing twice, or appearing not at all on the
+respective "other" machine.
+
+If I only used one machine, =notmuch= would definitely be my preference,
+but debugging this situation was very tedious and I just didn't have
+the energy or time to do it.
+
+** Gnus
+
+I've not given =gnus= the trial it deserves.  Reading newsgroups and
+mailing lists is something I can image using =gnus= for in the future.
+Using it for e-mail, though, would require another synchronization
+process of the =gnus= state.
+
+I could utilize =syncthing=, which I use for synchronization of my =org=
+files, to do this as well, but I've given it a couple of tries and
+couldn't do it.  An experiment for another time, for sure.
+
+** Mu for Emacs
+
+[[https://www.djcbsoftware.nl/code/mu/][Mu]] is what I'm currently using, and =mu4e= is its Emacs frontend.  It's
+not as customizable as =notmuch=, but part of its charme is that I don't
+need to sync anything between my machines, at the cost of =mu= touching
+my e-mail (adding custom headers I believe).  I don't mind this at
+all, and I can use =isync= and =msmtp= to receive and send mail on any
+host.
+
+For writing e-mails =mu4e= uses =message-mode= like the other tools.  This
+checks the =user-full-name= variable to fill in my name.
+
 #+begin_src elisp
-(kenran/load-config-file "lisp/email.el")
+(setq user-full-name "Johannes Maier")
 #+end_src
 
+The actual =mu4e= configuration is one huge =use-package= block, but most
+of it is due to its concept of /contexts/.  Usually there's one context
+for each of my e-mail addresses, and switching between them I may set
+some context-specific variables, or even change the =mu4e= UI
+accordingly.
+
+Note that =mu4e= is one of those packages that would behave strangely
+when using the =evil-collection= integration.
+
+#+begin_src elisp
+(use-package mu4e
+  :ensure nil
+  :defer t
+  :commands (mu4e)
+  :config
+  (setq mail-user-agent 'mu4e-user-agent)
+  (setq mu4e-completing-read-function #'completing-read)
+  ;; I don't sync drafts to either of the accounts
+  (setq mu4e-confirm-quit nil)
+  (setq mu4e-change-filenames-when-moving t)
+  (setq mu4e-drafts-folder "/drafts")
+  (setq mu4e-attachment-dir "~/Downloads/")
+  (setq mu4e-contexts
+        `(,(make-mu4e-context
+            :name "mailbox"
+            :match-func (lambda (msg)
+                          (when msg
+                            (string-prefix-p "/mailbox"
+                                             (mu4e-message-field msg :maildir)
+                                             t)))
+            :vars '((user-mail-address . "johannes.maier@mailbox.org")
+                    (mu4e-compose-signature . nil)
+                    (mu4e-sent-folder . "/mailbox/Sent")
+                    (mu4e-trash-folder . "/mailbox/Trash")
+                    (mu4e-refile-folder . (lambda (msg)
+                                            (let* ((date (mu4e-message-field-at-point :date))
+                                                   (year (decoded-time-year (decode-time date))))
+                                              (concat "/mailbox/Archive/"
+                                                      (number-to-string year)))))))
+          ,(make-mu4e-context
+            :name "ag"
+            :match-func (lambda (msg)
+                          (when msg
+                            (string-prefix-p "/ag"
+                                             (mu4e-message-field msg :maildir)
+                                             t)))
+            :vars `((user-mail-address ly-raw string "\"johannes.maier@active-group.de\"")
+                    ;; FIXME: Signature in a file?
+                    (mu4e-compose-signature . ,(concat
+                                                "Johannes Maier\n"
+                                                "johannes.maier@active-group.de\n\n"
+                                                "+49 (7071) 70896-67\n\n"
+                                                "Active Group GmbH\n"
+                                                "Hechinger Str. 12/1\n"
+                                                "72072 Tübingen\n"
+                                                "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+                                                "Geschäftsführer: Dr. Michael Sperber"))
+                    (mu4e-sent-folder . "/ag/Sent")
+                    (mu4e-refile-folder . (lambda (msg)
+                                            (let* ((date (mu4e-message-field-at-point :date))
+                                                   (year (decoded-time-year (decode-time date))))
+                                              (concat "/ag/Archives/"
+                                                      (number-to-string year)))))
+                    (mu4e-trash-folder . "/ag/Trash")))))
+  (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
+                         (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
+                         (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
+                         (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
+  (setf (alist-get 'trash mu4e-marks)
+        (list :char '("d" . "▼")
+              :prompt "dtrash"
+              :dyn-target (lambda (target msg)
+                            (mu4e-get-trash-folder msg))
+              :action (lambda (docid msg target)
+                        (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
+  (setq mu4e-headers-fields '((:human-date . 12)
+                              (:flags . 6)
+                              (:maildir . 15)
+                              (:mailing-list . 10)
+                              (:from . 22)
+                              (:subject)))
+  (setq mu4e-context-policy 'pick-first)
+  (setq mu4e-compose-policy 'ask)
+  ;; Getting mail via mbsync
+  (setq mu4e-get-mail-command "mbsync -a")
+  ;; Composing emails
+  (setq message-send-mail-function #'message-send-mail-with-sendmail)
+  (setq send-mail-function #'message-send-mail-with-sendmail)
+  (setq message-sendmail-envelope-from 'header)
+  (setq mail-envelope-from 'header)
+  (setq mail-specify-envelope-from 'header)
+  (setq message-kill-buffer-on-exit t)
+  ;; Visuals
+  (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
+  (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
+  (setq mu4e-headers-thread-child-prefix '("├> " . "├▶"))
+  (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
+  (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
+  (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
+  (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
+#+end_src
+
+Bind e-mail management to the global hotkey =SPC m=.
+
+#+begin_src elisp
+(with-leader
+  "m" '(mu4e :which-key "mail"))
+#+end_src
+  
 * Package-specific configuration
 ** Hide minor modes from the modeline
 
