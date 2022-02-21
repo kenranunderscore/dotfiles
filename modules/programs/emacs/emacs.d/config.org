@@ -133,10 +133,317 @@ A similar thing for opening custom theme files quickly.
 * Custom Emacs look
 
 Load themes and other improvements over the default Emacs look.
-FIXME: port to literate config
+
+One thing to pay attention to is that nearly all those operations on
+"visuals" work slightly differently when starting Emacs as
+=emacsclient=, for instance via
+
+#+begin_src shell :tangle no
+emacsclient -a ''
+#+end_src
+
+Setting some things at this point often results in the changes not
+being applied correctly.  I think it's due to them happening in a
+technical, visible Emacs frame.  See also
+=kenran/is-initial-daemon-frame= below.
+
+** Cursor
+
+The default cursor is black, which interferes with mostly using a dark
+theme.  Brighten it up a bit.
 
 #+begin_src elisp
-(kenran/load-config-file "lisp/visuals.el")
+(set-mouse-color "white")
+(add-hook 'server-after-make-frame-hook
+          (lambda () (set-mouse-color "white")))
+#+end_src
+
+Enable a forever-blinking cursor.  I used to disable this mode but I
+found myself searching for the cursor a couple of times lately.
+
+#+begin_src elisp
+(setq blink-cursor-delay 0.5)
+(setq blink-cursor-blinks -1)
+(blink-cursor-mode 1)
+#+end_src
+
+Don't show a cursor in inactive windows.  The default, hollow cursor
+in inactive windows changes colors when switching evil modes as well;
+that's kind of annoying.
+
+#+begin_src elisp
+(setq-default cursor-in-non-selected-windows nil)
+#+end_src
+
+Set the cursor to my preferred style, a box, and some very visible
+colors for normal and insert mode.
+
+#+begin_src elisp
+(setq kenran/has-set-cursor-colors nil)
+(defun kenran/set-evil-state-cursors (&optional force)
+  "Set the cursor to a box, and use a different color for insert
+and emacs mode.  The default color should be the one that the
+current theme uses as background for the 'cursor face.  If FORCE
+is true, then always set the colors anew."
+  (when (or force (not kenran/has-set-cursor-colors))
+    (setq kenran/has-set-cursor-colors t)
+    (let* ((color "red")
+           (default-cursor `(,color box))
+           (insert-cursor `("chartreuse1" box)))
+      (setq evil-operator-state-cursor default-cursor)
+      (setq evil-normal-state-cursor default-cursor)
+      (setq evil-replace-state-cursor default-cursor)
+      (setq evil-visual-state-cursor default-cursor)
+      (setq evil-motion-state-cursor default-cursor)
+      (setq evil-emacs-state-cursor insert-cursor)
+      (setq evil-insert-state-cursor insert-cursor)
+      (remove-hook 'server-after-make-frame-hook
+                   #'kenran/set-evil-state-cursors))))
+#+end_src
+
+** Check whether the current frame is the initial daemon frame
+
+#+begin_src elisp
+(defun kenran/is-initial-daemon-frame-p ()
+  "Check whether the selected frame is the one that seems to be
+automatically created when the daemon starts.  If this is the
+selected frame we don't want to do certain things, like modifying
+faces."
+  (string= (frame-parameter (selected-frame) 'name) "F1"))
+#+end_src
+
+** Fonts
+
+An alist of my preferred font families, together with a plist of
+certain attributes that need to be applied when switching to the
+respective font.
+
+#+begin_src elisp
+(setq kenran/font-alist
+      '((pragmata-pro . (:family
+                         "Pragmata Pro Mono Liga"
+                         :default-height
+                         170
+                         :weight
+                         regular))
+        (iosevka-serif . (:family
+                          "Iosevka Custom"
+                          :default-height
+                          166
+                          :weight
+                          regular))
+        (iosevka . (:family
+                    "Iosevka"
+                    :default-height
+                    166
+                    :weight
+                    regular))
+        (hack . (:family
+                 "Hack"
+                 :default-height
+                 150
+                 :weight
+                 regular))
+        (ibm-plex . (:family
+                     "IBM Plex Mono"
+                     :default-height
+                     150
+                     :weight
+                     regular))
+        (cascadia . (:family
+                     "Cascadia Code"
+                     :default-height
+                     150
+                     :weight
+                     regular))
+        (terminus . (:family
+                     "Terminus"
+                     :default-height
+                     170
+                     :weight
+                     regular))
+        (jetbrains-mono . (:family
+                           "JetBrains Mono"
+                           :default-height
+                           150
+                           :weight
+                           regular))))
+#+end_src
+
+The currently selected font (key of =kenran/font-alist=).  Setting this
+value only changes the default; it is reset when switching fonts.
+
+#+begin_src elisp
+(setq kenran/current-font 'iosevka)
+#+end_src
+
+The function I use to switch between the various fonts I like.  It
+applies the attributes of its value in =kenran/font-alist=.
+
+#+begin_src elisp
+(defun kenran/switch-font (font)
+  "Apply the attributes stored for FONT in `kenran/font-alist'."
+  (interactive
+   (list (intern
+          (completing-read
+           "Font: "
+           (mapcar #'car
+                   (assoc-delete-all kenran/current-font
+                                     (copy-alist kenran/font-alist)))))))
+  (let* ((attrs (alist-get font kenran/font-alist))
+         (family (plist-get attrs :family))
+         (height (plist-get attrs :default-height)))
+    (setq kenran/current-font font)
+    (setq kenran/default-font-height height)
+    (set-face-attribute
+     'default nil
+     :font family
+     :weight (plist-get attrs :weight)
+     :height (plist-get attrs :default-height))
+    (set-face-attribute
+     'fixed-pitch nil
+     :font family
+     :height 1.0)))
+#+end_src
+
+Finally, set all the face attributes, and register a hook that makes
+sure that these also work when using the Emacs daemon together with
+=emacsclient=.
+
+#+begin_src elisp
+(kenran/switch-font kenran/current-font)
+(add-hook 'server-after-make-frame-hook
+          (defun kenran/switch-to-current-font ()
+            (kenran/switch-font kenran/current-font)
+            (remove-hook 'server-after-make-frame-hook
+                         #'kenran/switch-to-current-font)))
+#+end_src
+
+** Ligature support
+
+Try out native ligature support via Harfbuzz composition tables
+(doesn't work with every font, but works for instance with Fira Code
+and Iosevka).  See
+https://github.com/tonsky/FiraCode/wiki/Emacs-instructions#using-composition-char-table
+
+#+begin_src elisp
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)"))))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
+#+end_src
+
+** Color theme
+*** Utilities
+
+A command to switch themes interactively.  Emacs's =load-theme= applies
+all the loaded themes on top of each other; I like to only have one
+theme active at all times, so I use =disable-theme= on all themes in
+=custom-enabled-themes= before enabling the target theme.
+
+#+begin_src elisp
+(defun kenran/switch-theme (name)
+  "Switch themes interactively.  Similar to `load-theme' but also
+disables all other enabled themes."
+  (interactive
+   (list (intern
+          (completing-read
+           "Theme: "
+           (mapcar #'symbol-name
+                   (-difference (custom-available-themes)
+                                custom-enabled-themes))))))
+  (progn
+    (mapc #'disable-theme
+          custom-enabled-themes)
+    (load-theme name t)
+    (unless (kenran/is-initial-daemon-frame-p)
+      ;; If it's the initial "daemon frame" then hooks in
+      ;; `server-after-make-frame-hook' will be executed, including
+      ;; one that calls `kenran/set-evil-state-cursor-colors'.
+      (kenran/set-evil-state-cursors t))))
+#+end_src
+
+When developing a theme, like I did with my custom one, it's handy to
+be able to reload it on the fly.
+
+#+begin_src elisp
+(defun kenran/reload-theme ()
+  "Reload the currently active theme."
+  (interactive)
+  (let ((active-theme (car custom-enabled-themes)))
+    (kenran/switch-theme active-theme)))
+#+end_src
+
+*** Other themes I like
+
+Since I cannot ever decide which theme I like best, there are a few
+themes loaded here.
+
+https://protesilaos.com/modus-themes/
+
+#+begin_src elisp
+(use-package modus-themes
+  :defer t)
+#+end_src
+
+https://github.com/hlissner/emacs-doom-themes
+
+#+begin_src elisp
+(use-package doom-themes
+  :defer t)
+#+end_src
+
+https://github.com/purcell/color-theme-sanityinc-tomorrow
+
+#+begin_src elisp
+(use-package color-theme-sanityinc-tomorrow
+  :defer t)
+#+end_src
+
+https://github.com/rexim/gruber-darker-theme
+
+#+begin_src elisp
+(use-package gruber-darker-theme
+  :defer t)
+#+end_src
+
+I usually use my own custom theme.
+
+#+begin_src elisp
+(kenran/switch-theme 'kenran)
+#+end_src
+
+** Render color names/codes with as their respective color
+
+It's an ELPA package, so no need/use to put it in the nix-managed
+Emacs packages.
+
+#+begin_src elisp
+(use-package rainbow-mode
+  :defer t)
 #+end_src
 
 * Basic options
