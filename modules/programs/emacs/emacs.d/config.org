@@ -571,6 +571,18 @@ Show column numbers in the modeline.
 (column-number-mode)
 #+end_src
 
+Toggle line numbers interactively.  I've tried simply binding
+=display-line-numbers-mode=, but I had to use it twice for the /first/
+toggle.  This is more stable so far.
+
+#+begin_src elisp
+(defun kenran/toggle-line-numbers ()
+  "Toggle `display-line-numbers-mode'.  Meant to be used in a
+keybinding."
+  (interactive)
+  (display-line-numbers-mode 'toggle))
+#+end_src
+
 ** Insert a newline at the end of files
 
 #+begin_src elisp
@@ -802,7 +814,7 @@ accessed with the leader key, =SPC=.
   "b p" 'previous-buffer
   ;; Toggles/switches
   "t" '(:ignore t :which-key "toggle/switch")
-  "t l" '(display-line-numbers-mode :which-key "line numbers")
+  "t l" '(kenran/toggle-line-numbers :which-key "line numbers")
   "t t" '(kenran/switch-theme :which-key "switch theme")
   "t r" '(kenran/reload-theme :which-key "reload theme")
   "t f" '(kenran/switch-font :which-key "switch font")
