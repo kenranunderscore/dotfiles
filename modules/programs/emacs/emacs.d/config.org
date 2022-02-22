@@ -1277,6 +1277,22 @@ for instance in the at the top-level directory of a project.
    "C-w" 'vterm-send-C-w))
 #+end_src
 
+** EditorConfig
+
+I want to be able to simply clone and work in projects and adapt to
+their respective styles of indentation, newlines at the end of files,
+and the like.  [[https://editorconfig.org/][EditorConfig]] comes with a specified file format to
+describe these things, possible even on per-file basis; all one needs
+to use these is support of one's editor.  Many editors have
+out-of-the-box EditorConfig support nowadays.  For Emacs, there's the
+official [[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]] package.
+
+#+begin_src elisp
+(use-package editorconfig
+  :config
+  (editorconfig-mode 1))
+#+end_src
+
 ** Ini files
 
 I'm not 100 percent happy with this package, as paragraphs seem to be

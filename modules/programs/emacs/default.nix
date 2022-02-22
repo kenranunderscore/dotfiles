@@ -91,6 +91,7 @@ in {
             default-text-scale
             diminish
             diredfl
+            editorconfig
             eglot
             envrc
             evil-cleverparens
