@@ -5,6 +5,7 @@
   # direnv
   dea = "direnv allow";
   ded = "direnv deny";
+  der = "direnv reload";
 
   # create a new graphical emacs frame, not tied to a shell
   e = "emacsclient --alternate-editor '' --create-frame --no-wait";
