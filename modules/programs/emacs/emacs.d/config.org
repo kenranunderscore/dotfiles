@@ -764,6 +764,7 @@ this brings with it, but I'm not writing enough with =org=
 (use-package evil-org
   :after (evil org)
   :hook (org-mode . evil-org-mode)
+  :diminish evil-org-mode
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
