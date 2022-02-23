@@ -1,6 +1,7 @@
 { inputs, config, lib, pkgs, ... }:
 
-{
+let email = "johannes.maier@active-group.de";
+in {
   imports = [ ../base.nix ../../modules ];
 
   targets.genericLinux = { enable = true; };
@@ -42,7 +43,31 @@
         useLoginShell = false;
       };
     };
-    shell.git.email = "johannes.maier@active-group.de";
+    shell.git.email = email;
+  };
+
+  programs = {
+    mercurial = {
+      enable = true;
+      userEmail = email;
+      userName = "Johannes Maier";
+      # FIXME: always enable git, and use its config here, or extract
+      ignores = [
+        # Vim
+        "*.swp"
+        # Direnv
+        ".direnv/"
+        ".envrc"
+        # macOS
+        ".DS_Store"
+        # Emacs: backup, auto-save, lock files, directory-local
+        # variables
+        "*~"
+        "\\#*\\#"
+        ".\\#*"
+        ".dir-locals.el"
+      ];
+    };
   };
 
   services = {
@@ -81,7 +106,6 @@
     leiningen
     linphonePatched
     mattermost-desktop
-    mercurial
     pavucontrol
     sieve-connect
     subversion
