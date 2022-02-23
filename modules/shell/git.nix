@@ -5,8 +5,6 @@ let
   types = lib.types;
 in {
   options.modules.shell.git = {
-    enable = lib.mkEnableOption "git";
-
     email = lib.mkOption {
       type = types.str;
       default = "";
@@ -18,7 +16,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.git = {
       package = pkgs.gitAndTools.gitFull;
       enable = true;

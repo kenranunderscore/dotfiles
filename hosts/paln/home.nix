@@ -12,7 +12,6 @@
       shell = {
         bash.enable = true;
         fish.enable = true;
-        git.enable = true;
         pass = {
           enable = true;
           # FIXME customize GPG key in "user environment" module

@@ -44,7 +44,6 @@ in {
         direnv.enable = true;
         fish.enable = true;
         fzf.enable = true;
-        git.enable = true;
         pass = {
           enable = true;
           inherit (cfg) gpgKey;
