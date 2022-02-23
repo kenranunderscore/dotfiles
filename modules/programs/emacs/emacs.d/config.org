@@ -1402,12 +1402,17 @@ either through hooks or manual trigger.
   "Set the face attributes for code, verbatim, and other markup
 elements.  Also increase org header size."
   (interactive)
+  ;; FIXME: colors like `shadow' and `font-lock-comment-face' should
+  ;; be set via theme, not here.  It should only amount to
+  ;; `fixed-pitch', `:height' and the like here.  Figure out what the
+  ;; correct way of saying "use a monospace font here" is; maybe set
+  ;; my current font specifically via `:font'?  That would get rid of
+  ;; overriding issues with `:inherit' maybe.
   (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-block-begin-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-block-end-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-document-info-keyword nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-document-info-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-document-info nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-document-title nil :inherit 'default :height 1.8)
+  (set-face-attribute 'org-document-title nil :inherit 'default :height 1.8 :weight 'bold)
   (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))

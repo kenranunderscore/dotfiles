@@ -83,6 +83,8 @@
       (org-done (:foreground ,fg))
       (org-headline-todo (:foreground ,orange-red))
       (org-headline-done (:foreground ,comment :strike-through t))
+      (org-document-title (:foreground ,cyan))
+      (org-document-info (:foreground ,cyan))
 
       ;; magit
       (magit-section-heading (:foreground ,orange :weight semi-bold))
