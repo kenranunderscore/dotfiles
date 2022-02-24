@@ -416,19 +416,37 @@ be able to reload it on the fly.
     (kenran/switch-theme active-theme)))
 #+end_src
 
-*** Other themes I like
+*** My favorite Emacs themes
 
 Since I cannot ever decide which theme I like best, there are a few
-themes loaded here.
+themes, or theme collections, loaded here.
 
-https://protesilaos.com/modus-themes/
+**** Modus themes
+
+[[https://protesilaos.com/emacs/modus-themes][This package]] by Protesilaos Stavrou is my first choice of "external"
+themes.  I find myself going back to =modus-vivendi= in the evening,
+even though I keep saying that I don't like that high of a contrast.
+
+These two themes are very customizable and come with the most
+comprehensive and extensive documentation (same as with basically
+anything that Prot makes available).
 
 #+begin_src elisp
 (use-package modus-themes
   :defer t)
 #+end_src
 
-https://github.com/hlissner/emacs-doom-themes
+**** Doom themes
+
+[[https://github.com/hlissner/doom-emacs][This package]] used to be my go-to source of different themes.  It's a
+megapack, started by the creator of [[https://github.com/hlissner/doom-emacs][Doom Emacs]], Henrik Lissner, but
+over time it grew into an extensive collection of different themes.
+
+It also comes with a DSL to create custom "doom themes", that is, one
+specifies a relatively small number of faces / colors and the results
+are propagated to most faces of all the common packages.  Without
+using (something like) this, it's quite a bit of work to style lots of
+packages, as one might imagine.
 
 #+begin_src elisp
 (use-package doom-themes
@@ -437,19 +455,21 @@ https://github.com/hlissner/emacs-doom-themes
 
 https://github.com/purcell/color-theme-sanityinc-tomorrow
 
+**** Tomorrow
+
+Steve Purcell (author of many Emacs packages) has ported the
+well-known =tomorrow= themes [[https://github.com/purcell/color-theme-sanityinc-tomorrow][to Emacs]].  I haven't used them much, but I
+really like the =sanityinc-tomorrow-bright= variant for its higher
+contrast, overall darker look, and beautiful accent colors.
+
 #+begin_src elisp
 (use-package color-theme-sanityinc-tomorrow
   :defer t)
 #+end_src
 
-https://github.com/rexim/gruber-darker-theme
+**** Custom theme
 
-#+begin_src elisp
-(use-package gruber-darker-theme
-  :defer t)
-#+end_src
-
-I usually use my own custom theme.
+I usually use my own custom theme, which can be found [[file:lisp/themes/kenran-theme.el][here]].
 
 #+begin_src elisp
 (kenran/switch-theme 'kenran)
