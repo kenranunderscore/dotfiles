@@ -1397,32 +1397,43 @@ and the rest uses a serif font more suitable for longer texts.  But
 customizing these faces with =set-face-attribute= has the usual problems
 with the initial daemon frame, and doesn't hold up when switching
 fonts or themes.  That's why I've put those changes into the following
-function which I can call whenever these sorts of changes happen,
+functions which I can call whenever these sorts of changes happen,
 either through hooks or manual trigger.
 
+Note that some themes, like =modus-{vivendi,operandi}=, might set the
+=:inherit= attribute on a face, in which case a naive
+~(set-face-attribute face nil :inherit 'fixed-pitch)~ overrides the
+theme settings.  To circumvent this I've written the following
+function that appends a single new value to the current =:inherit=
+attribute value of a face.
+
 #+begin_src elisp
+(defun inherit-fixed-pitch (face)
+  "Append `fixed-pitch' to the `:inherit' attribute of FACE."
+  (let* ((current (face-attribute face :inherit))
+         (new (cond
+               ((eq 'unspecified current) 'fixed-pitch)
+               ((listp current) (cons 'fixed-pitch current))
+               (t `(fixed-pitch ,current)))))
+    (set-face-attribute face nil :inherit new)))
+
 (defun kenran/org-font-setup ()
   "Set the face attributes for code, verbatim, and other markup
 elements.  Also increase org header size."
   (interactive)
-  ;; FIXME: colors like `shadow' and `font-lock-comment-face' should
-  ;; be set via theme, not here.  It should only amount to
-  ;; `fixed-pitch', `:height' and the like here.  Figure out what the
-  ;; correct way of saying "use a monospace font here" is; maybe set
-  ;; my current font specifically via `:font'?  That would get rid of
-  ;; overriding issues with `:inherit' maybe.
-  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block-begin-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-document-info-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-document-info nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-document-title nil :inherit 'default :height 1.8 :weight 'bold)
-  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
+  (inherit-fixed-pitch 'org-block)
+  (inherit-fixed-pitch 'org-block-begin-line)
+  (inherit-fixed-pitch 'org-document-info-keyword)
+  (inherit-fixed-pitch 'org-document-info)
+  (inherit-fixed-pitch 'org-code)
+  (inherit-fixed-pitch 'org-table)
+  (inherit-fixed-pitch 'org-verbatim)
+  (inherit-fixed-pitch 'org-checkbox)
+  (inherit-fixed-pitch 'org-meta-line)
+  (inherit-fixed-pitch 'org-special-keyword)
+  (inherit-fixed-pitch 'org-indent)
+  (inherit-fixed-pitch 'org-link)
+  (set-face-attribute 'org-document-title nil :height 1.8 :weight 'bold)
   (dolist (face '((org-level-1 . 1.6)
                   (org-level-2 . 1.4)
                   (org-level-3 . 1.2)
