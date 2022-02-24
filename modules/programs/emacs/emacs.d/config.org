@@ -1446,6 +1446,7 @@ attribute value of a face.
 
 #+begin_src elisp
 (defun inherit-fixed-pitch (face)
+  ;; FIXME: keeps appending 'fixed-pitch, but never loses it
   "Append `fixed-pitch' to the `:inherit' attribute of FACE."
   (let* ((current (face-attribute face :inherit))
          (new (cond
