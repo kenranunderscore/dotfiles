@@ -1476,6 +1476,7 @@ elements.  Also increase org header size."
   (inherit-fixed-pitch 'org-special-keyword)
   (inherit-fixed-pitch 'org-indent)
   (inherit-fixed-pitch 'org-link)
+  (inherit-fixed-pitch 'org-todo)
   (set-face-attribute 'org-document-title nil :height 1.8 :weight 'bold)
   (dolist (face '((org-level-1 . 1.6)
                   (org-level-2 . 1.4)
