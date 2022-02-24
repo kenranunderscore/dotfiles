@@ -1446,13 +1446,17 @@ attribute value of a face.
 
 #+begin_src elisp
 (defun inherit-fixed-pitch (face)
-  ;; FIXME: keeps appending 'fixed-pitch, but never loses it
   "Append `fixed-pitch' to the `:inherit' attribute of FACE."
   (let* ((current (face-attribute face :inherit))
          (new (cond
-               ((eq 'unspecified current) 'fixed-pitch)
-               ((listp current) (cons 'fixed-pitch current))
-               (t `(fixed-pitch ,current)))))
+               ((eq 'unspecified current)
+                'fixed-pitch)
+               ((listp current)
+                (if (member 'fixed-pitch current)
+                    current
+                  (cons 'fixed-pitch current)))
+               ((not (eq 'fixed-pitch current))
+                (list 'fixed-pitch current)))))
     (set-face-attribute face nil :inherit new)))
 
 (defun kenran/org-font-setup ()
