@@ -1083,6 +1083,7 @@ https://github.com/company-mode/company-mode/issues/1231.
             :filter-return
             #'company--replacement-with-ws-face)
 #+end_src
+
 * E-Mail configuration
 
 There are some different ways to "do e-mail in Emacs".  Over the last
