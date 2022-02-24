@@ -85,6 +85,12 @@
       (org-headline-done (:foreground ,comment :strike-through t))
       (org-document-title (:foreground ,cyan))
       (org-document-info (:foreground ,cyan))
+      (org-verbatim (:foreground ,yellow))
+      (org-code (:foreground ,light-olive))
+      (org-block (:background "#121212"))
+      (org-block-begin-line (:foreground ,comment))
+      (org-block-end-line (:inherit 'org-block-begin-line :extend nil))
+      (org-special-keyword (:foreground ,comment))
 
       ;; magit
       (magit-section-heading (:foreground ,orange :weight semi-bold))
