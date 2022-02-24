@@ -433,7 +433,24 @@ anything that Prot makes available).
 
 #+begin_src elisp
 (use-package modus-themes
-  :defer t)
+  :ensure nil
+  :defer t
+  :config
+  (setq modus-themes-subtle-line-numbers t)
+  (setq modus-themes-bold-constructs t)
+  (setq modus-themes-italic-constructs nil)
+  (setq modus-themes-syntax '(green-strings alt-syntax))
+  (setq modus-themes-prompts '(background bold))
+  (setq modus-themes-mode-line nil)
+  (setq modus-themes-completions
+        '((matches . (intense background))
+          (selection . (intense accented))
+          (popup . (intense accented))))
+  (setq modus-themes-fringes nil)
+  (setq modus-themes-paren-match '(bold intense))
+  (setq modus-themes-region '(accented bg-only))
+  ;; TODO: org agenda, mail citations
+  (setq modus-themes-org-blocks nil))
 #+end_src
 
 **** Doom themes
