@@ -1445,7 +1445,7 @@ function that appends a single new value to the current =:inherit=
 attribute value of a face.
 
 #+begin_src elisp
-(defun inherit-fixed-pitch (face)
+(defun kenran/inherit-fixed-pitch (face)
   "Append `fixed-pitch' to the `:inherit' attribute of FACE."
   (let* ((current (face-attribute face :inherit))
          (new (cond
@@ -1463,20 +1463,20 @@ attribute value of a face.
   "Set the face attributes for code, verbatim, and other markup
 elements.  Also increase org header size."
   (interactive)
-  (inherit-fixed-pitch 'org-block)
-  (inherit-fixed-pitch 'org-block-begin-line)
-  (inherit-fixed-pitch 'org-block-end-line)
-  (inherit-fixed-pitch 'org-document-info-keyword)
-  (inherit-fixed-pitch 'org-document-info)
-  (inherit-fixed-pitch 'org-code)
-  (inherit-fixed-pitch 'org-table)
-  (inherit-fixed-pitch 'org-verbatim)
-  (inherit-fixed-pitch 'org-checkbox)
-  (inherit-fixed-pitch 'org-meta-line)
-  (inherit-fixed-pitch 'org-special-keyword)
-  (inherit-fixed-pitch 'org-indent)
-  (inherit-fixed-pitch 'org-link)
-  (inherit-fixed-pitch 'org-todo)
+  (kenran/inherit-fixed-pitch 'org-block)
+  (kenran/inherit-fixed-pitch 'org-block-begin-line)
+  (kenran/inherit-fixed-pitch 'org-block-end-line)
+  (kenran/inherit-fixed-pitch 'org-document-info-keyword)
+  (kenran/inherit-fixed-pitch 'org-document-info)
+  (kenran/inherit-fixed-pitch 'org-code)
+  (kenran/inherit-fixed-pitch 'org-table)
+  (kenran/inherit-fixed-pitch 'org-verbatim)
+  (kenran/inherit-fixed-pitch 'org-checkbox)
+  (kenran/inherit-fixed-pitch 'org-meta-line)
+  (kenran/inherit-fixed-pitch 'org-special-keyword)
+  (kenran/inherit-fixed-pitch 'org-indent)
+  (kenran/inherit-fixed-pitch 'org-link)
+  (kenran/inherit-fixed-pitch 'org-todo)
   (set-face-attribute 'org-document-title nil :height 1.8 :weight 'bold)
   (dolist (face '((org-level-1 . 1.6)
                   (org-level-2 . 1.4)
