@@ -560,14 +560,16 @@ functions are used for.
 (defun kenran/switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
   (interactive)
-  (setq display-line-numbers t))
+  (when display-line-numbers-mode
+    (setq display-line-numbers t)))
 
 (defun kenran/switch-to-hybrid-line-numbers ()
   "Enable relative line numbers, but with the current line
 showing its absolute line number."
   (interactive)
-  (setq display-line-numbers 'relative)
-  (setq display-line-numbers-current-absolute t))
+  (when display-line-numbers-mode
+    (setq display-line-numbers 'relative)
+    (setq display-line-numbers-current-absolute t)))
 #+end_src
 
 To display line numbers, the aptly named =display-line-numbers= package
