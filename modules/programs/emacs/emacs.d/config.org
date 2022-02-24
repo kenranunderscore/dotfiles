@@ -1423,6 +1423,7 @@ elements.  Also increase org header size."
   (interactive)
   (inherit-fixed-pitch 'org-block)
   (inherit-fixed-pitch 'org-block-begin-line)
+  (inherit-fixed-pitch 'org-block-end-line)
   (inherit-fixed-pitch 'org-document-info-keyword)
   (inherit-fixed-pitch 'org-document-info)
   (inherit-fixed-pitch 'org-code)
