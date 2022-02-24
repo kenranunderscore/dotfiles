@@ -6,7 +6,7 @@
 * Package management
 
 I'm usually specifying the Emacs I'm using via [[https://github.com/nixos/nixpkgs][nixpkgs]] / my
-[[https://github.com/nix-community/home-manager][home-manager]] setup, it's still useful to have MELPA accessible
+[[https://github.com/nix-community/home-manager][home-manager]] setup, but it's still useful to have MELPA accessible
 directly in case something is broken in =nixpkgs=.  This seems to happen
 rather often with packages from ELPA especially.
 
