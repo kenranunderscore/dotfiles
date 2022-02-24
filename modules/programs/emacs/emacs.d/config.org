@@ -1209,7 +1209,7 @@ when using the =evil-collection= integration.
                             (string-prefix-p "/ag"
                                              (mu4e-message-field msg :maildir)
                                              t)))
-            :vars `((user-mail-address ly-raw string "\"johannes.maier@active-group.de\"")
+            :vars `((user-mail-address . "johannes.maier@active-group.de")
                     ;; FIXME: Signature in a file?
                     (mu4e-compose-signature . ,(concat
                                                 "Johannes Maier\n"
