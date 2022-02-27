@@ -1559,7 +1559,9 @@ capturing, storing links etc.
   "o c" 'org-capture
   "o l" 'org-store-link
   "o f" 'org-cycle-agenda-files
-  "o s" 'org-save-all-org-buffers)
+  "o s" 'org-save-all-org-buffers
+  "o t" '(:which-key "toggle" :ignore t)
+  "o t l" 'org-toggle-link-display)
 #+end_src
 
 *** Beautiful bullet points
