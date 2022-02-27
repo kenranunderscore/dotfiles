@@ -66,6 +66,7 @@ in {
             nim-mode
             nix-mode
             epkgs.org
+            org-appear
             org-bullets
             org-present
             plantuml-mode
