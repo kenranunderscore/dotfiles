@@ -1335,7 +1335,7 @@ anyway.  =Use-package= has built-in support for this available with the
 
 =vterm= is a terminal emulator for Emacs, more feature-rich than the
 built-in =term=.  This is very useful for quickly spawning a terminal,
-for instance in the at the top-level directory of a project.
+for instance in the top-level directory of a project.
 
 #+begin_src elisp
 (use-package vterm
