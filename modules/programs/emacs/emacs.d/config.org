@@ -1541,7 +1541,10 @@ loading =org=, a custom font setup might run to adjust the headers.
   (kenran/org-font-setup)
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
-              :after (lambda (&rest _) (org-save-all-org-buffers))))
+              :after (lambda (&rest _) (org-save-all-org-buffers)))
+  :bind (:map org-mode-map
+              ("M-n" . org-next-visible-heading)
+              ("M-p" . org-previous-visible-heading)))
 #+end_src
 
 *** Keybindings
