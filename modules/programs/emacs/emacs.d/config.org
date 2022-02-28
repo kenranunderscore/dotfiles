@@ -1602,8 +1602,12 @@ the ='always= option value after all.
 #+begin_src elisp
 (use-package org-appear
   :hook ((org-mode . org-appear-mode)
-         (evil-insert-state-entry . org-appear-manual-start)
-         (evil-insert-state-exit . org-appear-manual-stop))
+         (evil-insert-state-entry . (lambda ()
+                                      (when (derived-mode-p 'org-mode)
+                                        org-appear-manual-start)))
+         (evil-insert-state-exit . (lambda ()
+                                     (when (derived-mode-p 'org-mode)
+                                       org-appear-manual-stop))))
   :config
   (setq org-appear-autolinks t)
   (setq org-appear-autosubmarkers t)
