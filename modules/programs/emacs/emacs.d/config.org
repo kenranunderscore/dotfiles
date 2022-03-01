@@ -1603,11 +1603,13 @@ the ='always= option value after all.
 (use-package org-appear
   :hook ((org-mode . org-appear-mode)
          (evil-insert-state-entry . (lambda ()
-                                      (when (derived-mode-p 'org-mode)
-                                        org-appear-manual-start)))
+                                      (when (and (derived-mode-p 'org-mode)
+                                                 (bound-and-true-p org-appear-mode))
+                                        (org-appear-manual-start))))
          (evil-insert-state-exit . (lambda ()
-                                     (when (derived-mode-p 'org-mode)
-                                       org-appear-manual-stop))))
+                                     (when (and (derived-mode-p 'org-mode)
+                                                (bound-and-true-p org-appear-mode))
+                                       (org-appear-manual-stop)))))
   :config
   (setq org-appear-autolinks t)
   (setq org-appear-autosubmarkers t)
