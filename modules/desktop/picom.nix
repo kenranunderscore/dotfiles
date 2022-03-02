@@ -15,6 +15,7 @@ in {
         ''100:name *= "Thunderbird"''
         ''100:class_i = "rofi"''
         ''100:class_i = "DBeaver"''
+        ''100:class_i = "emacs"''
       ];
       backend = "glx";
       experimentalBackends = true;
