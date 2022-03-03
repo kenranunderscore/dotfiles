@@ -280,7 +280,7 @@ value only changes the default; it is reset when switching fonts.
 For =org-mode= I like using a serif font.  This is it.
 
 #+begin_src elisp
-(defconst kenran/serif-font "Noto Serif")
+(defconst kenran/serif-font "Noto Sans")
 #+end_src
 
 The function I use to switch between the various fonts I like.  It
