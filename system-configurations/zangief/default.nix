@@ -40,6 +40,10 @@
   };
 
   services = {
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+    };
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
