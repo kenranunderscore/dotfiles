@@ -16,6 +16,8 @@ in {
         ''100:class_i = "rofi"''
         ''100:class_i = "DBeaver"''
         ''100:class_i = "emacs"''
+        ''100:class_i = "VirtualBox Machine"''
+        ''100:class_i = "VirtualBox Manager"''
       ];
       backend = "glx";
       experimentalBackends = true;
