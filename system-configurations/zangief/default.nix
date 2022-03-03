@@ -88,10 +88,19 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
+  users.extraGroups.vboxusers.members = [ "johannes" ];
 
   programs.ssh.startAgent = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    virtualbox = {
+      host = {
+        enable = true;
+        enableExtensionPack = true;
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
