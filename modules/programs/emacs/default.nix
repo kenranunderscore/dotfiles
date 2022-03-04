@@ -57,6 +57,7 @@ in {
             epkgs.csv-mode
             dhall-mode
             dockerfile-mode
+            fish-mode
             fsharp-mode
             haskell-mode
             htmlize

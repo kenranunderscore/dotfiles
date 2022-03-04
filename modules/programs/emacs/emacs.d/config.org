@@ -1348,6 +1348,18 @@ for instance in the top-level directory of a project.
    "C-w" 'vterm-send-C-w))
 #+end_src
 
+** Fish
+
+I'm often using the [[https://fishshell.com/][fish]] shell.  It comes with its own,
+POSIX-incompatible language, but I mainly use it for =fish='s
+configuration (though most of that is done via =nix=, anyway).  It's
+nice to have syntax highlighting, though.
+
+#+begin_src elisp
+(use-package fish-mode
+  :defer t)
+#+end_src
+
 ** EditorConfig
 
 I want to be able to simply clone and work in projects and adapt to
