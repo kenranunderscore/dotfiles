@@ -51,7 +51,7 @@ in {
       pragmataPro
       pkgs.anonymousPro
       pkgs.camingo-code
-      pkgs.cantarell_fonts
+      pkgs.cantarell-fonts
       pkgs.cascadia-code
       pkgs.fira-code
       pkgs.font-awesome_5

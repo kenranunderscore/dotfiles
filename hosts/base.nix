@@ -88,7 +88,7 @@ in {
         gnumake
         graphviz
         htop
-        manpages
+        man-pages
         neofetch
         niv
         nixfmt
