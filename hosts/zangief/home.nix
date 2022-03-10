@@ -96,6 +96,7 @@ in {
   in with pkgs; [
     cloc
     cmus
+    coq_8_14
     dbeaver
     dhall
     discord
