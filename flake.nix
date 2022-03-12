@@ -23,46 +23,42 @@
       };
       specialArgs = { inherit inputs; };
     in {
-      nixosConfigurations = {
-        atuan = nixpkgs.lib.nixosSystem {
-          inherit system pkgs specialArgs;
-          modules = [
-            ./system-configurations/atuan
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.users.kenran = import ./hosts/atuan/home.nix;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = false;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-          ];
+      nixosConfigurations =
+        # FIXME(Johannes): create lib; improve username handling
+        # (they're still repeated everywhere...). Maybe via
+        # specialArgs? Also bundle home + system modules somehow (or
+        # have a mechanism to detect corresponding ones; via
+        # hostname).
+        let
+          mkNixosSystem =
+            { systemConfiguration, homeConfiguration, username ? "kenran" }:
+            nixpkgs.lib.nixosSystem {
+              inherit system pkgs specialArgs;
+              modules = [
+                systemConfiguration
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.users.${username} = import homeConfiguration;
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = false;
+                  home-manager.extraSpecialArgs = specialArgs;
+                }
+              ];
+            };
+        in {
+          atuan = mkNixosSystem {
+            systemConfiguration = ./system-configurations/atuan;
+            homeConfiguration = ./hosts/atuan/home.nix;
+          };
+          zangief = mkNixosSystem {
+            systemConfiguration = ./system-configurations/zangief;
+            homeConfiguration = ./hosts/zangief/home.nix;
+            username = "johannes";
+          };
+          paln = mkNixosSystem {
+            systemConfiguration = ./system-configurations/paln;
+            homeConfiguration = ./hosts/paln/home.nix;
+          };
         };
-        zangief = nixpkgs.lib.nixosSystem {
-          inherit system pkgs specialArgs;
-          modules = [
-            ./system-configurations/zangief
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.users.johannes = import ./hosts/zangief/home.nix;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = false;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-          ];
-        };
-        paln = nixpkgs.lib.nixosSystem {
-          inherit system pkgs specialArgs;
-          modules = [
-            ./system-configurations/paln
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.users.kenran = import ./hosts/paln/home.nix;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = false;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-          ];
-        };
-      };
     };
 }
