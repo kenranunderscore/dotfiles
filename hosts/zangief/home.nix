@@ -7,7 +7,6 @@ in {
   targets.genericLinux = { enable = true; };
 
   hosts.base = {
-    username = "johannes";
     privateDir = "${inputs.privateConfig}/linux";
     shellPath = "${pkgs.fish}/bin/fish";
     gpgKey = "9AC78C1A48681583";

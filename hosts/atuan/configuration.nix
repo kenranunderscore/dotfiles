@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, customConfig, ... }:
 
-{
+let username = customConfig.username;
+in {
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
@@ -75,7 +76,7 @@
         lightdm = {
           enable = true;
           greeters.mini.enable = true;
-          greeters.mini.user = "kenran";
+          greeters.mini.user = username;
         };
       };
     };
@@ -101,13 +102,13 @@
     };
   };
 
-  users.users.kenran = {
+  users.users.${username} = {
     isNormalUser = true;
-    home = "/home/kenran";
+    home = "/home/${username}";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
-  nix.settings.trusted-users = [ "root" "kenran" ];
+  nix.settings.trusted-users = [ "root" username ];
 
   environment.systemPackages = with pkgs; [ ];
 

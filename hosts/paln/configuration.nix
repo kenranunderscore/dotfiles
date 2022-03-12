@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, customConfig, ... }:
 
-{
+let username = customConfig.username;
+in {
   imports = [ ./hardware-configuration.nix ];
 
   boot.loader.grub.enable = true;
@@ -20,12 +21,12 @@
     keyMap = "us";
   };
 
-  users.users.kenran = {
+  users.users.${username} = {
     isNormalUser = true;
-    home = "/home/kenran";
+    home = "/home/${username}";
     extraGroups = [ "wheel" ];
   };
-  nix.settings.trusted-users = [ "root" "kenran" ];
+  nix.settings.trusted-users = [ "root" username ];
 
   environment.systemPackages = with pkgs; [ vim ];
 
@@ -33,9 +34,9 @@
     openssh.enable = true;
     syncthing = {
       enable = true;
-      user = "kenran";
-      dataDir = "/home/kenran/sync";
-      configDir = "/home/kenran/.config/syncthing";
+      user = username;
+      dataDir = "/home/${username}/sync";
+      configDir = "/home/${username}/.config/syncthing";
     };
   };
 

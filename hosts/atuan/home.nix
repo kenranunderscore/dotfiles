@@ -4,7 +4,6 @@
   imports = [ ../base.nix ../../modules ];
 
   hosts.base = {
-    username = "kenran";
     privateDir = "${inputs.privateConfig}/linux";
     shellPath = "${pkgs.fish}/bin/fish";
     gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";

@@ -1,15 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ customConfig, config, lib, pkgs, ... }:
 
 let cfg = config.hosts.base;
 in {
   options.hosts.base = {
-    username = lib.mkOption { type = lib.types.str; };
-
-    homeDirectory = lib.mkOption {
-      type = lib.types.str;
-      default = builtins.toPath "/home/${cfg.username}";
-    };
-
     privateDir = lib.mkOption { type = lib.types.path; };
 
     shellPath = lib.mkOption {
@@ -69,9 +62,9 @@ in {
 
     xdg.configFile = { };
 
-    home = {
-      username = cfg.username;
-      homeDirectory = cfg.homeDirectory;
+    home = rec {
+      inherit (customConfig) username;
+      homeDirectory = "/home/${username}";
 
       sessionVariables = rec {
         EDITOR = "emacsclient -a '' -c";

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ customConfig, config, lib, pkgs, ... }:
 
 {
   imports = [ ../../modules ];
@@ -38,9 +38,9 @@
       };
     };
 
-    home = {
-      username = "kenran";
-      homeDirectory = "/home/kenran";
+    home = rec {
+      inherit (customConfig) username;
+      homeDirectory = "/home/${username}";
       stateVersion = "21.03";
       packages = with pkgs; [ cacert curl fd gnumake ripgrep tree unzip wget ];
     };

@@ -21,7 +21,6 @@
         config.allowUnfree = true;
         inherit overlays system;
       };
-      specialArgs = { inherit inputs; };
     in {
       nixosConfigurations =
         # FIXME(Johannes): create lib; improve username handling
@@ -30,29 +29,27 @@
         # have a mechanism to detect corresponding ones; via
         # hostname).
         let
-          mkNixosSystem = { hostname, username ? "kenran" }:
-            let directory = ./hosts + "/${hostname}";
+          mkNixosSystem = hostname:
+            let
+              dir = ./hosts + "/${hostname}";
+              customConfig = import (dir + /customConfig.nix);
+              username = customConfig.username;
+              specialArgs = { inherit inputs customConfig; };
             in nixpkgs.lib.nixosSystem {
               inherit system pkgs specialArgs;
               modules = [
-                (directory + /configuration.nix)
+                (dir + /configuration.nix)
                 home-manager.nixosModules.home-manager
                 {
-                  home-manager.users.${username} =
-                    import (directory + /home.nix);
+                  home-manager.users.${username} = import (dir + /home.nix);
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = false;
                   home-manager.extraSpecialArgs = specialArgs;
                 }
               ];
             };
-        in {
-          atuan = mkNixosSystem { hostname = "atuan"; };
-          zangief = mkNixosSystem {
-            hostname = "zangief";
-            username = "johannes";
-          };
-          paln = mkNixosSystem { hostname = "paln"; };
-        };
+          machines = [ "atuan" "paln" "zangief" ];
+        in builtins.foldl' (acc: host: acc // { ${host} = mkNixosSystem host; })
+        { } machines;
     };
 }

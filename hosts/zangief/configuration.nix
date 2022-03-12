@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, customConfig, ... }:
 
-{
+let username = customConfig.username;
+in {
   imports = [ ./hardware-configuration.nix ];
 
   nixpkgs.config.allowUnfree = true;
@@ -9,7 +10,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings.trusted-users = [ "root" "johannes" ];
+    settings.trusted-users = [ "root" username ];
   };
 
   boot.loader = {
@@ -65,7 +66,7 @@
         lightdm = {
           enable = true;
           greeters.mini.enable = true;
-          greeters.mini.user = "johannes";
+          greeters.mini.user = username;
         };
       };
     };
@@ -88,11 +89,11 @@
     opengl.enable = true;
   };
 
-  users.users.johannes = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
-  users.extraGroups.vboxusers.members = [ "johannes" ];
+  users.extraGroups.vboxusers.members = [ username ];
 
   programs.ssh.startAgent = true;
 
