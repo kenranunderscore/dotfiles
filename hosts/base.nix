@@ -102,7 +102,6 @@ in {
         sqlite
         tree
         unzip
-        vim
         wget
         xcape
         xst
@@ -110,7 +109,6 @@ in {
 
       file = {
         ".sbclrc".source = ../config/sbclrc;
-        ".vimrc".source = ../config/vimrc;
         ".Xresources".source = ../config/Xresources;
       };
 
