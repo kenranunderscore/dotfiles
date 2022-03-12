@@ -30,6 +30,7 @@ in {
       email.enable = true;
       programs = {
         emacs.enable = true;
+        firefox.enable = true;
         kitty = {
           enable = true;
           inherit (cfg) shellPath;
@@ -83,7 +84,6 @@ in {
         darcs
         feh
         fd
-        firefox-bin
         gnumake
         graphviz
         htop

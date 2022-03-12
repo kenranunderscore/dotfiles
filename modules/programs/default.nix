@@ -3,6 +3,7 @@
 {
   imports = [
     ./emacs
+    ./firefox.nix
     ./imwheel
     ./kitty.nix
     ./neovim.nix
