@@ -47,16 +47,16 @@
             };
         in {
           atuan = mkNixosSystem {
-            systemConfiguration = ./system-configurations/atuan;
+            systemConfiguration = ./hosts/atuan/configuration.nix;
             homeConfiguration = ./hosts/atuan/home.nix;
           };
           zangief = mkNixosSystem {
-            systemConfiguration = ./system-configurations/zangief;
+            systemConfiguration = ./hosts/zangief/configuration.nix;
             homeConfiguration = ./hosts/zangief/home.nix;
             username = "johannes";
           };
           paln = mkNixosSystem {
-            systemConfiguration = ./system-configurations/paln;
+            systemConfiguration = ./hosts/paln/configuration.nix;
             homeConfiguration = ./hosts/paln/home.nix;
           };
         };
