@@ -9,7 +9,7 @@ in {
   config = {
     home.file = {
       ".weechat" = {
-        source = ../../../config/weechat;
+        source = ./weechat;
         recursive = true;
       };
       ".weechat/irc.conf".text = import ./irc.conf.nix certPath;
