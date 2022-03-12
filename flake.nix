@@ -30,15 +30,16 @@
         # have a mechanism to detect corresponding ones; via
         # hostname).
         let
-          mkNixosSystem =
-            { systemConfiguration, homeConfiguration, username ? "kenran" }:
-            nixpkgs.lib.nixosSystem {
+          mkNixosSystem = { hostname, username ? "kenran" }:
+            let directory = ./hosts + "/${hostname}";
+            in nixpkgs.lib.nixosSystem {
               inherit system pkgs specialArgs;
               modules = [
-                systemConfiguration
+                (directory + /configuration.nix)
                 home-manager.nixosModules.home-manager
                 {
-                  home-manager.users.${username} = import homeConfiguration;
+                  home-manager.users.${username} =
+                    import (directory + /home.nix);
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = false;
                   home-manager.extraSpecialArgs = specialArgs;
@@ -46,19 +47,12 @@
               ];
             };
         in {
-          atuan = mkNixosSystem {
-            systemConfiguration = ./hosts/atuan/configuration.nix;
-            homeConfiguration = ./hosts/atuan/home.nix;
-          };
+          atuan = mkNixosSystem { hostname = "atuan"; };
           zangief = mkNixosSystem {
-            systemConfiguration = ./hosts/zangief/configuration.nix;
-            homeConfiguration = ./hosts/zangief/home.nix;
+            hostname = "zangief";
             username = "johannes";
           };
-          paln = mkNixosSystem {
-            systemConfiguration = ./hosts/paln/configuration.nix;
-            homeConfiguration = ./hosts/paln/home.nix;
-          };
+          paln = mkNixosSystem { hostname = "paln"; };
         };
     };
 }
