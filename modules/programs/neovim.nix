@@ -5,12 +5,25 @@ in {
   options.modules.programs.neovim.enable = lib.mkEnableOption "neovim";
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.neovim-nightly ];
-    xdg.configFile = {
-      "nvim" = {
-        source = ../../config/nvim;
-        recursive = true;
-      };
+    programs.neovim = {
+      enable = true;
+      package = pkgs.neovim-nightly;
+      plugins = with pkgs.vimPlugins; [
+        auto-pairs
+        indentLine
+        lightline-vim
+        neoformat
+        nvim-compe
+        telescope-nvim
+        vim-fugitive
+        vim-lion
+        vim-nix
+        vim-rhubarb
+        vim-rooter
+        vim-surround
+        vim-sleuth
+        vim-sneak
+      ];
     };
   };
 }
