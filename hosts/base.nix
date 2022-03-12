@@ -107,10 +107,7 @@ in {
         xst
       ];
 
-      file = {
-        ".sbclrc".source = ../config/sbclrc;
-        ".Xresources".source = ../config/Xresources;
-      };
+      file.".Xresources".source = ../config/Xresources;
 
       activation = {
         importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
