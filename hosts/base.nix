@@ -78,7 +78,6 @@ in {
       };
 
       packages = with pkgs; [
-        broot
         cacert
         curl
         darcs
@@ -92,7 +91,6 @@ in {
         neofetch
         niv
         nixfmt
-        nix-prefetch-git
         openssl
         ripgrep
         rlwrap
@@ -103,8 +101,6 @@ in {
         tree
         unzip
         wget
-        xcape
-        xst
       ];
 
       file.".Xresources".source = ../config/Xresources;
