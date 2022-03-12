@@ -103,8 +103,6 @@ in {
         wget
       ];
 
-      file.".Xresources".source = ../config/Xresources;
-
       activation = {
         importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --import ${

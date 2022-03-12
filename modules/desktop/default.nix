@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./i3 ./sway ./polybar ./picom.nix ];
+  imports = [ ./i3 ./sway ./polybar ./picom.nix ./x-configuration ];
 }
