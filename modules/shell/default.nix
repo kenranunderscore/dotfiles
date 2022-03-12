@@ -11,6 +11,6 @@
     ./pass.nix
     ./ssh.nix
     ./tmux.nix
-    ./zsh.nix
+    ./zsh
   ];
 }

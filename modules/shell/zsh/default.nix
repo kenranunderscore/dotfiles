@@ -6,8 +6,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.file = {
-      ".zshrc".source = ../../config/zshrc;
-      ".zshenv".source = ../../config/zshenv;
+      ".zshrc".source = ./zshrc;
+      ".zshenv".source = ./zshenv;
     };
     programs.zsh.enable = true;
   };
