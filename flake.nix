@@ -23,11 +23,7 @@
       };
     in {
       nixosConfigurations =
-        # FIXME(Johannes): create lib; improve username handling
-        # (they're still repeated everywhere...). Maybe via
-        # specialArgs? Also bundle home + system modules somehow (or
-        # have a mechanism to detect corresponding ones; via
-        # hostname).
+        # TODO(Johannes): create lib
         let
           mkNixosSystem = hostname:
             let
@@ -48,7 +44,9 @@
                 }
               ];
             };
-          machines = [ "atuan" "paln" "zangief" ];
+          machines = builtins.attrNames
+            (pkgs.lib.filterAttrs (_: type: type == "directory")
+              (builtins.readDir ./hosts));
         in builtins.foldl' (acc: host: acc // { ${host} = mkNixosSystem host; })
         { } machines;
     };
