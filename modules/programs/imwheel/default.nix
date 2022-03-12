@@ -7,7 +7,7 @@ in {
   config = lib.mkIf cfg.enable {
     home = {
       packages = [ pkgs.imwheel ];
-      file.".imwheelrc".source = ../../config/imwheelrc;
+      file.".imwheelrc".source = ./imwheelrc;
     };
 
     systemd.user.services.imwheel = {
