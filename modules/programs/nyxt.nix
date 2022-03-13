@@ -10,6 +10,7 @@ let
     genericName = name;
     exec = "nyxt";
     comment = "The hacker's power browser";
+    icon = "nyxt";
   };
 
   # The currently packaged version of Nyxt is broken due to some
@@ -27,8 +28,9 @@ let
       mkdir -p $out/bin
       cp -r * $out
       ln -sf $out/usr/local/bin/nyxt $out/bin/nyxt
-      mkdir -p $out/share
+      mkdir -p $out/share/icons
       cp -r ${desktopItem}/share/applications $out/share/
+      find gnu -type d -regex '.*nyxt.*/share/icons/hicolor' | xargs cp -r -t $out/share/icons/
     '';
     dontFixup = true;
   };
