@@ -16,38 +16,42 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      overlays = [ inputs.emacs-overlay.overlay inputs.neovim-overlay.overlay ];
+      overlays = [
+        (final: prev: {
+          # Shorter than prev.lib.extend (f: p: ...), but I don't know
+          # if there's another difference.
+          lib = prev.lib // { my = import ./lib { inherit (final) lib; }; };
+        })
+        inputs.emacs-overlay.overlay
+        inputs.neovim-overlay.overlay
+      ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;
       };
     in {
-      nixosConfigurations =
-        # TODO(Johannes): create lib
-        let
-          mkNixosSystem = hostname:
-            let
-              dir = ./hosts + "/${hostname}";
-              customConfig = import (dir + /customConfig.nix);
-              username = customConfig.username;
-              specialArgs = { inherit inputs customConfig; };
-            in nixpkgs.lib.nixosSystem {
-              inherit system pkgs specialArgs;
-              modules = [
-                (dir + /configuration.nix)
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager.users.${username} = import (dir + /home.nix);
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = false;
-                  home-manager.extraSpecialArgs = specialArgs;
-                }
-              ];
-            };
-          machines = builtins.attrNames
-            (pkgs.lib.filterAttrs (_: type: type == "directory")
-              (builtins.readDir ./hosts));
-        in builtins.foldl' (acc: host: acc // { ${host} = mkNixosSystem host; })
-        { } machines;
+      nixosConfigurations = let
+        mkNixosSystem = hostname:
+          let
+            dir = ./hosts + "/${hostname}";
+            customConfig = import (dir + /customConfig.nix);
+            username = customConfig.username;
+            specialArgs = { inherit inputs customConfig; };
+          in nixpkgs.lib.nixosSystem {
+            inherit system pkgs specialArgs;
+            modules = [
+              (dir + /configuration.nix)
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.users.${username} = import (dir + /home.nix);
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = false;
+                home-manager.extraSpecialArgs = specialArgs;
+              }
+            ];
+          };
+        machines = pkgs.lib.my.readDirNames ./hosts;
+      in builtins.foldl' (acc: host: acc // { ${host} = mkNixosSystem host; })
+      { } machines;
     };
 }
