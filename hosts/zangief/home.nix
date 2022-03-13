@@ -37,6 +37,7 @@ in {
         nativeComp = true;
       };
       imwheel.enable = true;
+      nyxt.enable = true;
       kitty = {
         enable = true;
         useLoginShell = false;
