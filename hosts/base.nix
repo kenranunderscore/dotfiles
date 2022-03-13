@@ -60,7 +60,11 @@ in {
       jq.enable = true;
     };
 
-    xdg.configFile = { };
+    xdg = {
+      enable = true;
+      configFile = { };
+      mime.enable = true;
+    };
 
     home = rec {
       inherit (customConfig) username;
