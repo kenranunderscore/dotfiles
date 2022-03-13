@@ -59,7 +59,8 @@ in {
           "${modifier}+g" = "split h";
           "${modifier}+t" = "exec ${terminal}";
           "${modifier}+space" = lib.mkForce "exec ${menu}";
-          "${modifier}+d" = lib.mkForce "exec rofi -disable-history -show drun";
+          "${modifier}+d" =
+            lib.mkForce "exec rofi -disable-history -show-icons -show drun";
         };
         bars = [ ];
         colors = {
