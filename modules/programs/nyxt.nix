@@ -3,11 +3,20 @@
 let
   cfg = config.modules.programs.nyxt;
 
+  name = "nyxt-bin";
+  desktopItem = pkgs.makeDesktopItem {
+    inherit name;
+    desktopName = "Nyxt";
+    genericName = name;
+    exec = "nyxt";
+    comment = "The hacker's power browser";
+  };
+
   # The currently packaged version of Nyxt is broken due to some
   # FHS-related issue.  So for now I download the current release
   # version and put in in the nix store manually.
   nyxtBin = pkgs.stdenv.mkDerivation {
-    name = "nyxt-bin";
+    inherit name;
     src = builtins.fetchurl {
       url =
         "https://github.com/atlas-engineer/nyxt/releases/download/2.2.4/nyxt-2.2.4.tar.xz";
@@ -18,6 +27,8 @@ let
       mkdir -p $out/bin
       cp -r * $out
       ln -sf $out/usr/local/bin/nyxt $out/bin/nyxt
+      mkdir -p $out/share
+      cp -r ${desktopItem}/share/applications $out/share/
     '';
     dontFixup = true;
   };
