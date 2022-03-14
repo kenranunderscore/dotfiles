@@ -1348,6 +1348,42 @@ for instance in the top-level directory of a project.
    "C-w" 'vterm-send-C-w))
 #+end_src
 
+** OCaml
+
+[[https://github.com/ocaml/tuareg][tuareg]] is the standard mode for OCaml editing, providing syntax
+highlighting, REPL support, etc., similar to what =haskell-mode= does
+for Haskell.
+
+#+begin_src elisp
+(use-package tuareg
+  :hook (tuareg-mode . (lambda () (setq mode-name "🐫")))
+  :config
+  (setq tuareg-indent-align-with-first-arg nil)
+  (setq tuareg-match-patterns-aligned t))
+#+end_src
+
+To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/merlin][merlin]].
+
+#+begin_src elisp
+(use-package merlin
+  :hook ((tuareg-mode . merlin-mode)
+         (merlin-mode . company-mode)))
+#+end_src
+
+[[https://github.com/Khady/merlin-eldoc][merlin-eldoc]] integrates =merlin= with =eldoc-mode=, automatically
+documenting things at point.
+
+#+begin_src elisp
+(use-package merlin-eldoc
+  :after merlin
+  :hook (tuareg-mode . merlin-eldoc-setup)
+  :config
+  (setq merlin-eldoc-max-lines 8)
+  (setq merlin-eldoc-type-verbosity 'min)
+  (setq merlin-eldoc-function-arguments t)
+  (setq merlin-eldoc-doc t))
+#+end_src
+
 ** Fish
 
 I'm often using the [[https://fishshell.com/][fish]] shell.  It comes with its own,

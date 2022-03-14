@@ -91,6 +91,11 @@ in {
             # Nix
             nix-mode
 
+            # OCaml
+            merlin
+            merlin-eldoc
+            tuareg
+
             # Org
             epkgs.org
             org-appear
