@@ -50,32 +50,67 @@ in {
             smartparens
             use-package
 
-            # Language-specific
-            anaconda-mode
+            # Clojure
             cider
             clojure-mode
+
+            # Common Lisp
+            sly
+            sly-asdf
+
+            # CSV
             epkgs.csv-mode
+
+            # Dhall
             dhall-mode
+
+            # Docker
             dockerfile-mode
-            fish-mode
+
+            # F#
             fsharp-mode
+
+            # Fish
+            fish-mode
+
+            # Haskell
             haskell-mode
-            htmlize
+
+            # Ini
             ini-mode
-            markdown-mode
+
+            # Java
             meghanada
+
+            # Markdown
+            markdown-mode
+
+            # Nim
             nim-mode
+
+            # Nix
             nix-mode
+
+            # Org
             epkgs.org
             org-appear
             org-bullets
             org-present
+
+            # PlantUML
             plantuml-mode
+
+            # PureScript
             purescript-mode
+
+            # Python
+            anaconda-mode
             pyimport
+
+            # Racket
             racket-mode
-            sly
-            sly-asdf
+
+            # YAML
             yaml-mode
 
             # Themes
@@ -104,6 +139,7 @@ in {
             gnus-alias
             helpful
             hl-todo
+            htmlize
             hydra
             magit-todos
             marginalia
