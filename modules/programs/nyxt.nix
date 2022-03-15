@@ -37,5 +37,10 @@ let
 in {
   options.modules.programs.nyxt.enable = lib.mkEnableOption "nyxt";
 
-  config = lib.mkIf cfg.enable { home.packages = [ nyxtBin ]; };
+  config = lib.mkIf cfg.enable {
+    home = {
+      packages = [ nyxtBin ];
+      sessionVariables = { WEBKIT_FORCE_SANDBOX = 0; };
+    };
+  };
 }
