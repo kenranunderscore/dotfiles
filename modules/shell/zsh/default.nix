@@ -10,12 +10,8 @@ in {
     # - ls colored
     # - prompt
     # - plugins from old zshrc
-    # - mc
-    # 
-    # home.file = {
-    #   ".zshrc".source = ./zshrc;
-    #   ".zshenv".source = ./zshenv;
-    # };
+    # - tabbing with completion -> highlight current match
+    # - in general: autoloading functions
     programs.zsh = {
       enable = true;
       dotDir = ".config/zsh";
@@ -49,14 +45,31 @@ in {
           };
         }
       ];
-      initExtra = "";
+      # TODO: make this more bash-compatible, that is, use C-w for
+      # deleting "whole words", and use M-BSPC for breaking on special
+      # characters.
+      envExtra = ''
+        my-backward-kill-word() {
+          local WORDCHARS='*?_-.[]~=&;!#$%^(){}<>:,"'"'"
+          zle -f kill
+          zle backward-kill-word
+        }
+        zle -N my-backward-kill-word
+        bindkey '^w' my-backward-kill-word
+
+        mc() {
+          mkdir -p $1
+          cd $1
+        }
+      '';
     };
 
     # Create shell abbreviations (akin to what fish does) from the set
     # of shell aliases.
-    xdg.configFile."zsh/abbreviations".text =
-      let aliases = import ../shell-aliases.nix;
+    xdg.configFile = {
+      "zsh/abbreviations".text = let aliases = import ../shell-aliases.nix;
       in lib.concatStringsSep "\n"
       (lib.mapAttrsToList (alias: cmd: ''abbr -g ${alias}="${cmd}"'') aliases);
+    };
   };
 }
