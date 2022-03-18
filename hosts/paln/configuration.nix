@@ -28,7 +28,10 @@ in {
   };
   nix.settings.trusted-users = [ "root" username ];
 
-  environment.systemPackages = with pkgs; [ vim ];
+  environment = {
+    systemPackages = with pkgs; [ vim ];
+    pathsToLink = [ "/share/zsh" ];
+  };
 
   services = {
     openssh.enable = true;

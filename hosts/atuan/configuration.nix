@@ -110,7 +110,10 @@ in {
 
   nix.settings.trusted-users = [ "root" username ];
 
-  environment.systemPackages = with pkgs; [ ];
+  environment = {
+    systemPackages = with pkgs; [ ];
+    pathsToLink = [ "/share/zsh" ];
+  };
 
   virtualisation.docker.enable = true;
 
