@@ -7,12 +7,10 @@ in {
   config = lib.mkIf cfg.enable {
     # TODO(Johannes):
     #
-    # - zsh-abbr
     # - ls colored
     # - prompt
     # - plugins from old zshrc
-    # - things from old zshenv perhaps
-    # - environment link /share/zsh?
+    # - mc
     # 
     # home.file = {
     #   ".zshrc".source = ./zshrc;
@@ -20,6 +18,7 @@ in {
     # };
     programs.zsh = {
       enable = true;
+      dotDir = ".config/zsh";
       enableAutosuggestions = true;
       enableCompletion = true;
       enableSyntaxHighlighting = true;
@@ -30,6 +29,34 @@ in {
         ignoreDups = true;
         ignorePatterns = [ "rm *" "kill *" "pkill *" ];
       };
+      plugins = [
+        {
+          name = "zsh-autopair";
+          src = pkgs.fetchFromGitHub {
+            owner = "hlissner";
+            repo = "zsh-autopair";
+            rev = "9d003fc02dbaa6db06e6b12e8c271398478e0b5d";
+            sha256 = "sha256-hwZDbVo50kObLQxCa/wOZImjlH4ZaUI5W5eWs/2RnWg=";
+          };
+        }
+        {
+          name = "zsh-abbr";
+          src = pkgs.fetchFromGitHub {
+            owner = "olets";
+            repo = "zsh-abbr";
+            rev = "91280150cf8de09f84ab02c00fc04605400ea914";
+            sha256 = "sha256-6T27TTD4V3nzx1D8vhMpn2FIodYtLkOBoi6J7GYNV6k=";
+          };
+        }
+      ];
+      initExtra = "";
     };
+
+    # Create shell abbreviations (akin to what fish does) from the set
+    # of shell aliases.
+    xdg.configFile."zsh/abbreviations".text =
+      let aliases = import ../shell-aliases.nix;
+      in lib.concatStringsSep "\n"
+      (lib.mapAttrsToList (alias: cmd: ''abbr -g ${alias}="${cmd}"'') aliases);
   };
 }
