@@ -19,7 +19,7 @@ in {
       enableCompletion = true;
       enableSyntaxHighlighting = true;
       history = {
-        size = 50000;
+        size = 10000;
         share = true;
         expireDuplicatesFirst = true;
         ignoreDups = true;
