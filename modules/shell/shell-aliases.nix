@@ -54,4 +54,5 @@
   # misc
   md = "mkdir -p";
   s = "sudo";
+  rr = "rm -rf";
 }
