@@ -11,7 +11,6 @@ in {
 
     # TODO(Johannes):
     # - prompt
-    # - case insensitive globbing
     # - completion of word parts
     programs.zsh = let
     in {
@@ -37,6 +36,11 @@ in {
       # plugins and variables -- I don't like mixing methods.
       initExtraFirst = ''
         setopt auto_cd
+        unsetopt case_glob
+      '';
+      initExtraBeforeCompInit = ''
+        # Case-insensitive completion
+        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       '';
       initExtra = ''
         source ${inputs.zsh-autopair}/autopair.zsh
