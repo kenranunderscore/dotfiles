@@ -11,7 +11,7 @@
       };
       shell = {
         bash.enable = true;
-        fish.enable = true;
+        zsh.enable = true;
         pass = {
           enable = true;
           # FIXME customize GPG key in "user environment" module
@@ -19,7 +19,7 @@
         };
         tmux = {
           enable = true;
-          shellPath = "${pkgs.fish}/bin/fish";
+          shellPath = "${pkgs.zsh}/bin/zsh";
         };
       };
     };
