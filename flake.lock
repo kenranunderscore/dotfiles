@@ -180,7 +180,75 @@
         "home-manager": "home-manager",
         "neovim-overlay": "neovim-overlay",
         "nixpkgs": "nixpkgs_2",
-        "privateConfig": "privateConfig"
+        "privateConfig": "privateConfig",
+        "zsh-abbr": "zsh-abbr",
+        "zsh-autopair": "zsh-autopair",
+        "zsh-autosuggestions": "zsh-autosuggestions",
+        "zsh-syntax-highlighting": "zsh-syntax-highlighting"
+      }
+    },
+    "zsh-abbr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641236044,
+        "narHash": "sha256-6T27TTD4V3nzx1D8vhMpn2FIodYtLkOBoi6J7GYNV6k=",
+        "owner": "olets",
+        "repo": "zsh-abbr",
+        "rev": "91280150cf8de09f84ab02c00fc04605400ea914",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olets",
+        "repo": "zsh-abbr",
+        "type": "github"
+      }
+    },
+    "zsh-autopair": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1620015610,
+        "narHash": "sha256-hwZDbVo50kObLQxCa/wOZImjlH4ZaUI5W5eWs/2RnWg=",
+        "owner": "hlissner",
+        "repo": "zsh-autopair",
+        "rev": "9d003fc02dbaa6db06e6b12e8c271398478e0b5d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hlissner",
+        "repo": "zsh-autopair",
+        "type": "github"
+      }
+    },
+    "zsh-autosuggestions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1622844304,
+        "narHash": "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=",
+        "owner": "zsh-users",
+        "repo": "zsh-autosuggestions",
+        "rev": "a411ef3e0992d4839f0732ebeb9823024afaaaa8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zsh-users",
+        "repo": "zsh-autosuggestions",
+        "type": "github"
+      }
+    },
+    "zsh-syntax-highlighting": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645642093,
+        "narHash": "sha256-UqeK+xFcKMwdM62syL2xkV8jwkf/NWfubxOTtczWEwA=",
+        "owner": "zsh-users",
+        "repo": "zsh-syntax-highlighting",
+        "rev": "c5ce0014677a0f69a10b676b6038ad127f40c6b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zsh-users",
+        "repo": "zsh-syntax-highlighting",
+        "type": "github"
       }
     }
   },

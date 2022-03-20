@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let cfg = config.modules.shell.zsh;
 in {
@@ -11,32 +11,9 @@ in {
 
     # TODO(Johannes):
     # - prompt
-    # - flakes for pinning plugins
+    # - case insensitive globbing
+    # - completion of word parts
     programs.zsh = let
-      zsh-autopair = pkgs.fetchFromGitHub {
-        owner = "hlissner";
-        repo = "zsh-autopair";
-        rev = "9d003fc02dbaa6db06e6b12e8c271398478e0b5d";
-        sha256 = "sha256-hwZDbVo50kObLQxCa/wOZImjlH4ZaUI5W5eWs/2RnWg=";
-      };
-      zsh-abbr = pkgs.fetchFromGitHub {
-        owner = "olets";
-        repo = "zsh-abbr";
-        rev = "91280150cf8de09f84ab02c00fc04605400ea914";
-        sha256 = "sha256-6T27TTD4V3nzx1D8vhMpn2FIodYtLkOBoi6J7GYNV6k=";
-      };
-      zsh-syntax-highlighting = pkgs.fetchFromGitHub {
-        owner = "zsh-users";
-        repo = "zsh-syntax-highlighting";
-        rev = "c5ce0014677a0f69a10b676b6038ad127f40c6b1";
-        sha256 = "sha256-UqeK+xFcKMwdM62syL2xkV8jwkf/NWfubxOTtczWEwA=";
-      };
-      zsh-autosuggestions = pkgs.fetchFromGitHub {
-        owner = "zsh-users";
-        repo = "zsh-autosuggestions";
-        rev = "a411ef3e0992d4839f0732ebeb9823024afaaaa8";
-        sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
-      };
     in {
       enable = true;
       dotDir = ".config/zsh";
@@ -62,13 +39,13 @@ in {
         setopt auto_cd
       '';
       initExtra = ''
-        source ${zsh-autopair}/autopair.zsh
+        source ${inputs.zsh-autopair}/autopair.zsh
         autopair-init
-        source ${zsh-autosuggestions}/zsh-autosuggestions.zsh
-        source ${zsh-syntax-highlighting}/zsh-syntax-highlighting.zsh
+        source ${inputs.zsh-autosuggestions}/zsh-autosuggestions.zsh
+        source ${inputs.zsh-syntax-highlighting}/zsh-syntax-highlighting.zsh
         # Need to source zsh-abbr after z-sy-h, otherwise there's subtle
         # breakage with the way autosuggestions are highlighted (?).
-        source ${zsh-abbr}/zsh-abbr.zsh
+        source ${inputs.zsh-abbr}/zsh-abbr.zsh
 
         # Highlight current selection when completing
         zstyle ':completion:*' menu select

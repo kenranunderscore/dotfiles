@@ -7,10 +7,30 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
     privateConfig.url =
       "git+ssh://git@github.com/kenranunderscore/private-config";
+
+    # Editors
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    # zsh plugins
+    zsh-abbr = {
+      url = "github:olets/zsh-abbr";
+      flake = false;
+    };
+    zsh-autopair = {
+      url = "github:hlissner/zsh-autopair";
+      flake = false;
+    };
+    zsh-autosuggestions = {
+      url = "github:zsh-users/zsh-autosuggestions";
+      flake = false;
+    };
+    zsh-syntax-highlighting = {
+      url = "github:zsh-users/zsh-syntax-highlighting";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
