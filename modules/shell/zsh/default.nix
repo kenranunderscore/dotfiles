@@ -5,11 +5,11 @@ in {
   options.modules.shell.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
-    # Packages that I want aliases to use.
+    # Packages that I want aliases to use, like 'exa' as 'ls'
+    # replacement.
     home.packages = with pkgs; [ exa ];
 
     # TODO(Johannes):
-    # - functions, how to autoload?
     # - prompt
     # - flakes for pinning plugins
     programs.zsh = let
@@ -72,6 +72,10 @@ in {
 
         # Highlight current selection when completing
         zstyle ':completion:*' menu select
+
+        # Autoload custom functions
+        fpath+=$ZDOTDIR/functions
+        autoload -Uz $ZDOTDIR/functions/*(:t)
       '';
       # The one thing that's not as nice as in bash (but I don't have
       # it in fish either): I cannot really distinguish between
@@ -88,12 +92,19 @@ in {
       };
     };
 
-    # Create shell abbreviations (akin to what fish does) from the set
-    # of shell aliases.
     xdg.configFile = {
+      # Create shell abbreviations (akin to what fish does) from the
+      # set of shell aliases via zsh-abbr.
       "zsh/abbreviations".text = let aliases = import ../shell-aliases.nix;
       in lib.concatStringsSep "\n"
       (lib.mapAttrsToList (alias: cmd: ''abbr -g ${alias}="${cmd}"'') aliases);
+
+      # My custom functions live here.  They get added to fpath and
+      # autoloaded as part of .zshrc above.
+      "zsh/functions" = {
+        source = ./functions;
+        recursive = true;
+      };
     };
   };
 }
