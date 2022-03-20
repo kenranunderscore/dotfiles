@@ -7,12 +7,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    privateConfig.url =
-      "git+ssh://git@github.com/kenranunderscore/private-config";
+    privateConfig = {
+      url = "git+ssh://git@github.com/kenranunderscore/private-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Editors
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    neovim-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # zsh plugins
     zsh-abbr = {
