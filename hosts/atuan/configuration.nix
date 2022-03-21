@@ -28,11 +28,13 @@ in {
     supportedFilesystems = [ "ntfs" ];
   };
 
-  fileSystems."/music" = {
-    device = "/dev/sda1";
-    fsType = "ntfs";
-    options = [ "rw" "uid=1000" ];
-  };
+  # FIXME(Johannes): load this "lazily"?  It's not necessary for the boot
+  # process, but right now if mounting this fails, the PC won't start.
+  # fileSystems."/music" = {
+  #   device = "/dev/sda1";
+  #   fsType = "ntfs";
+  #   options = [ "rw" "uid=1000" ];
+  # };
 
   networking = {
     hostName = "atuan";
