@@ -32,6 +32,10 @@
       url = "github:zsh-users/zsh-autosuggestions";
       flake = false;
     };
+    zsh-history-substring-search = {
+      url = "github:zsh-users/zsh-history-substring-search";
+      flake = false;
+    };
     zsh-syntax-highlighting = {
       url = "github:zsh-users/zsh-syntax-highlighting";
       flake = false;

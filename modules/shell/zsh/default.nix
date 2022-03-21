@@ -44,6 +44,8 @@ in {
         autopair-init
         source ${inputs.zsh-autosuggestions}/zsh-autosuggestions.zsh
         source ${inputs.zsh-syntax-highlighting}/zsh-syntax-highlighting.zsh
+        # Needs to be sourced _after_ z-sy-h
+        source ${inputs.zsh-history-substring-search}/zsh-history-substring-search.zsh
         # Need to source zsh-abbr after z-sy-h, otherwise there's subtle
         # breakage with the way autosuggestions are highlighted (?).
         source ${inputs.zsh-abbr}/zsh-abbr.zsh
@@ -60,13 +62,26 @@ in {
 
         # Enable completion now that fpath is set
         autoload -Uz compinit && compinit
+
+        # Key bindings
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
       '';
-      # The one thing that's not as nice as in bash (but I don't have
-      # it in fish either): I cannot really distinguish between
-      # M-<backspace> and C-w, while in bash the former deletes
-      # "file-wise" in a path, and the latter doesn't.  This makes it
-      # so deletions stop at a / character.
-      localVariables = { WORDCHARS = "\${WORDCHARS/\\/}"; };
+      localVariables = {
+        # The one thing that's not as nice as in bash (but I don't have
+        # it in fish either): I cannot really distinguish between
+        # M-<backspace> and C-w, while in bash the former deletes
+        # "file-wise" in a path, and the latter doesn't.  This makes it
+        # so deletions stop at a / character.
+        WORDCHARS = "\${WORDCHARS/\\/}";
+        # When having entered part of a command and pressing
+        # <up>/<down>, then the history should be searched for that
+        # _prefix_ (zsh-history-substring-search).
+        HISTORY_SUBSTRING_SEARCH_PREFIXED = "1";
+        # Make sure to _never_ save duplicates in the history.  The
+        # above home-manager setting only sets HISTORY_IGNORE_DUPS.
+        HISTORY_IGNORE_ALL_DUPS = "1";
+      };
       shellGlobalAliases = {
         ls = "exa";
         l = "exa -lbF --git --group-directories-first --icons";

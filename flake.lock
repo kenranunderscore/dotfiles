@@ -192,6 +192,7 @@
         "zsh-abbr": "zsh-abbr",
         "zsh-autopair": "zsh-autopair",
         "zsh-autosuggestions": "zsh-autosuggestions",
+        "zsh-history-substring-search": "zsh-history-substring-search",
         "zsh-syntax-highlighting": "zsh-syntax-highlighting"
       }
     },
@@ -240,6 +241,22 @@
       "original": {
         "owner": "zsh-users",
         "repo": "zsh-autosuggestions",
+        "type": "github"
+      }
+    },
+    "zsh-history-substring-search": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627971553,
+        "narHash": "sha256-8kiPBtgsjRDqLWt0xGJ6vBBLqCWEIyFpYfd+s1prHWk=",
+        "owner": "zsh-users",
+        "repo": "zsh-history-substring-search",
+        "rev": "4abed97b6e67eb5590b39bcd59080aa23192f25d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zsh-users",
+        "repo": "zsh-history-substring-search",
         "type": "github"
       }
     },
