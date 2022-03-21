@@ -73,6 +73,10 @@ in {
           start = "";
         }];
         defaultSession = "none+fake";
+        autoLogin = {
+          enable = true;
+          user = username;
+        };
         lightdm = {
           enable = true;
           greeters.mini.enable = true;
