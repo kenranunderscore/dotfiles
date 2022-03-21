@@ -38,6 +38,7 @@ in {
       initExtraFirst = ''
         setopt auto_cd
         unsetopt case_glob
+        setopt prompt_subst
       '';
       initExtra = ''
         source ${inputs.zsh-autopair}/autopair.zsh
@@ -66,6 +67,9 @@ in {
         # Key bindings
         bindkey '^[[A' history-substring-search-up
         bindkey '^[[B' history-substring-search-down
+
+        # Prompt
+        PROMPT='%1~%(?..%F{red} [$?]%f)%# '
       '';
       localVariables = {
         # The one thing that's not as nice as in bash (but I don't have
