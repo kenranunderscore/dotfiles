@@ -16,7 +16,8 @@ in {
     in {
       enable = true;
       dotDir = ".config/zsh";
-      enableCompletion = true;
+      # I enable completion myself after the relevant fpath mutations.
+      enableCompletion = false;
       # I choose to manage most of the plugins myself, by pinning the
       # sources and sourcing the files.  This gives better control
       # over the versions and makes the ordering explicit.  These
@@ -38,10 +39,6 @@ in {
         setopt auto_cd
         unsetopt case_glob
       '';
-      initExtraBeforeCompInit = ''
-        # Case-insensitive completion
-        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-      '';
       initExtra = ''
         source ${inputs.zsh-autopair}/autopair.zsh
         autopair-init
@@ -51,12 +48,18 @@ in {
         # breakage with the way autosuggestions are highlighted (?).
         source ${inputs.zsh-abbr}/zsh-abbr.zsh
 
-        # Highlight current selection when completing
-        zstyle ':completion:*' menu select
-
         # Autoload custom functions
         fpath+=$ZDOTDIR/functions
         autoload -Uz $ZDOTDIR/functions/*(:t)
+
+        # Case-insensitive completion
+        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+        # Highlight current selection when completing
+        zstyle ':completion:*' menu select
+
+        # Enable completion now that fpath is set
+        autoload -Uz compinit && compinit
       '';
       # The one thing that's not as nice as in bash (but I don't have
       # it in fish either): I cannot really distinguish between
