@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "autopair.fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610912397,
+        "narHash": "sha256-l6WJ2kjDO/TnU9FSigjxk5xFp90xl68gDfggkE/wrlM=",
+        "owner": "jorgebucaran",
+        "repo": "autopair.fish",
+        "rev": "1222311994a0730e53d8e922a759eeda815fcb62",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jorgebucaran",
+        "repo": "autopair.fish",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "locked": {
         "lastModified": 1647568430,
@@ -12,6 +28,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
+    "fish-fastdir": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641490690,
+        "narHash": "sha256-iu7zNO7yKVK2bhIIlj4UKHHqDaGe4q2tIdNgifxPev4=",
+        "owner": "danhper",
+        "repo": "fish-fastdir",
+        "rev": "dddc6c13b4afe271dd91ec004fdd199d3bbb1602",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danhper",
+        "repo": "fish-fastdir",
         "type": "github"
       }
     },
@@ -150,7 +182,9 @@
     },
     "root": {
       "inputs": {
+        "autopair.fish": "autopair.fish",
         "emacs-overlay": "emacs-overlay",
+        "fish-fastdir": "fish-fastdir",
         "home-manager": "home-manager",
         "neovim-overlay": "neovim-overlay",
         "nixpkgs": "nixpkgs",

@@ -36,6 +36,16 @@
       url = "github:zsh-users/zsh-syntax-highlighting";
       flake = false;
     };
+
+    # fish plugins
+    fish-fastdir = {
+      url = "github:danhper/fish-fastdir";
+      flake = false;
+    };
+    "autopair.fish" = {
+      url = "github:jorgebucaran/autopair.fish";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
