@@ -69,7 +69,7 @@ in {
         bindkey '^[[B' history-substring-search-down
 
         # Prompt
-        PROMPT='%1~%(?..%F{red} [$?]%f)%# '
+        PROMPT='%1~%(?..%F{red}[$?]%f)%# '
       '';
       localVariables = {
         # The one thing that's not as nice as in bash (but I don't have
