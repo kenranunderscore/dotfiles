@@ -55,8 +55,9 @@ in {
         fpath+=$ZDOTDIR/functions
         autoload -Uz $ZDOTDIR/functions/*(:t)
 
-        # Case-insensitive completion
-        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+        # Case-insensitive and in-word completion, for instance, complete
+        # "cd ~/own<TAB>" to "cd ~/Downloads"
+        zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*' 'm:{a-zA-Z}={A-Za-z}'
 
         # Highlight current selection when completing
         zstyle ':completion:*' menu select
