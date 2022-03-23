@@ -1,0 +1,16 @@
+# The function assumes I'm always passing the repo URL as first
+# argument.  If there's a target directory as well (that is, there's
+# at least two arguments to `git clone`) then it has to be the last
+# argument to the call, and not start with a double dash.
+
+gclone () {
+    set -e
+
+    git clone $@
+
+    if [[ "$#" -gt 1 && "$@[-1]" != "--"* ]]; then
+        cd "$@[-1]"
+    else
+        cd $(basename $1 ".git")
+    fi
+}
