@@ -85,7 +85,7 @@
       (org-headline-done (:foreground ,comment :strike-through t))
       (org-document-title (:foreground ,cyan))
       (org-document-info (:foreground ,cyan))
-      (org-verbatim (:foreground ,yellow))
+      (org-verbatim (:foreground ,pink))
       (org-code (:foreground ,light-olive))
       (org-block (:background "#121212"))
       (org-block-begin-line (:foreground ,comment))
