@@ -61,6 +61,7 @@ in {
       pkgs.hermit
       pkgs.ibm-plex
       pkgs.inconsolata
+      (import ./input-mono.nix { inherit pkgs; })
       pkgs.iosevka
       pkgs.jetbrains-mono
       pkgs.meslo-lg
