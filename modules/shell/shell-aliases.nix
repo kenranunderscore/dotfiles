@@ -45,6 +45,13 @@
   gsw = "git switch";
   gupa = "git pull --rebase --autostash";
 
+  # nix
+  n = "nix";
+  nf = "nix flake";
+  nb = "nix build";
+  nd = "nix develop";
+  ns = "nix shell";
+
   # systemd
   sy = "systemctl";
   syu = "systemctl --user";
