@@ -7,15 +7,17 @@
   ded = "direnv deny";
   der = "direnv reload";
 
-  # create a new graphical emacs frame, not tied to a shell
+  # Create a new graphical emacs frame, not tied to a shell
   e = "emacsclient --alternate-editor '' --create-frame --no-wait";
-  # kill the emacs daemon
+  # Attach to existing emacs frame
+  ec = "emacsclient --alternate-editor '' --no-wait";
+  # Kill the emacs daemon
   ekill = "emacsclient --eval '(kill-emacs)'";
-  # try using emacs/magit as replacement for CLI git
+  # Try using emacs/magit as replacement for CLI git
   eg =
     "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'";
 
-  # git aliases
+  # git
   g = "git";
   ga = "git add";
   gap = "git add -p";
