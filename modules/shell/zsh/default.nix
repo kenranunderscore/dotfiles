@@ -26,6 +26,7 @@ in {
       enableSyntaxHighlighting = false;
       enableAutosuggestions = false;
       history = {
+        path = "${config.xdg.dataHome}/zsh/zsh_history";
         size = 10000;
         save = 20000;
         share = true;
