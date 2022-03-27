@@ -77,12 +77,12 @@ in {
           if [[ x"$IN_NIX_SHELL" == "x" ]]; then
             nix_tag=""
           else
-            nix_tag="[nix] "
+            nix_tag="[nix]"
           fi
 
           PR_NIX_SHELL=%F{240}$nix_tag%f
         }
-        PROMPT='%(?..%F{red}[$?]%f )$PR_NIX_SHELL%1~%# '
+        PROMPT='%(?..%F{red}[$?]%f)$PR_NIX_SHELL%1~%# '
       '';
       localVariables = {
         # The one thing that's not as nice as in bash (but I don't have
@@ -111,9 +111,11 @@ in {
     xdg.configFile = {
       # Create shell abbreviations (akin to what fish does) from the
       # set of shell aliases via zsh-abbr.
-      "zsh/abbreviations".text = let aliases = import ../shell-aliases.nix;
-      in lib.concatStringsSep "\n"
-      (lib.mapAttrsToList (alias: cmd: ''abbr -g ${alias}="${cmd}"'') aliases);
+      "zsh/abbreviations".text =
+        let aliases = import ../shell-aliases.nix { inherit pkgs; };
+        in lib.concatStringsSep "\n"
+        (lib.mapAttrsToList (alias: cmd: ''abbr -g ${alias}="${cmd}"'')
+          aliases);
 
       # My custom functions live here.  They get added to fpath and
       # autoloaded as part of .zshrc above.

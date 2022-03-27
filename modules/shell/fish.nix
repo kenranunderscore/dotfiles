@@ -28,7 +28,7 @@ in {
           src = inputs."autopair.fish";
         }
       ];
-      shellAbbrs = import ./shell-aliases.nix;
+      shellAbbrs = import ./shell-aliases.nix { inherit pkgs; };
     };
   };
 }

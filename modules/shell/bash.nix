@@ -8,7 +8,7 @@ in {
     programs.bash = {
       enable = true;
       historyIgnore = [ "ls" "cd" "exit" ];
-      shellAliases = import ./shell-aliases.nix;
+      shellAliases = import ./shell-aliases.nix { inherit pkgs; };
     };
   };
 }

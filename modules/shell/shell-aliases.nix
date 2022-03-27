@@ -1,3 +1,5 @@
+{ pkgs }:
+
 {
   # nixos
   nrs = "sudo nixos-rebuild switch --flake ~/dotfiles/";
@@ -64,4 +66,5 @@
   md = "mkdir -p";
   s = "sudo";
   rr = "rm -rf";
+  serve-this = "${pkgs.python3}/bin/python -m http.server";
 }
