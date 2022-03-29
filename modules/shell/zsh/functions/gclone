@@ -4,8 +4,6 @@
 # argument to the call, and not start with a double dash.
 
 gclone () {
-    set -e
-
     git clone $@
 
     if [[ "$#" -gt 1 && "$@[-1]" != "--"* ]]; then
