@@ -33,6 +33,15 @@ in {
     pathsToLink = [ "/share/zsh" ];
   };
 
+  security.acme = rec {
+    acceptTerms = true;
+    defaults = {
+      email = "johannes.maier@mailbox.org";
+      renewInterval = "daily";
+    };
+    certs."kenran.info".email = defaults.email;
+  };
+
   services = {
     openssh.enable = true;
     syncthing = {
@@ -41,13 +50,22 @@ in {
       dataDir = "/home/${username}/sync";
       configDir = "/home/${username}/.config/syncthing";
     };
+
+    nginx = {
+      enable = true;
+      virtualHosts."kenran.info" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/kenran.info";
+      };
+    };
   };
 
   programs.ssh.startAgent = true;
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22000 ];
+    allowedTCPPorts = [ 22000 80 443 ];
     allowedUDPPorts = [ 21027 22000 ];
   };
 
