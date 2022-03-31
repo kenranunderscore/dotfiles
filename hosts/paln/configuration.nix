@@ -33,6 +33,10 @@ in {
     pathsToLink = [ "/share/zsh" ];
   };
 
+  system.activationScripts = {
+    create_var_www = "mkdir -m 0777 -p /var/www/kenran.info";
+  };
+
   security.acme = rec {
     acceptTerms = true;
     defaults = {
