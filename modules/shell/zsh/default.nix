@@ -70,19 +70,7 @@ in {
         bindkey '^[[A' history-substring-search-up
         bindkey '^[[B' history-substring-search-down
 
-        # FIXME(Johannes): . prompt.zsh?
-        # Prompt
-        precmd () {
-          local nix_tag
-          if [[ x"$IN_NIX_SHELL" == "x" ]]; then
-            nix_tag=""
-          else
-            nix_tag="[nix]"
-          fi
-
-          PR_NIX_SHELL=%F{240}$nix_tag%f
-        }
-        PROMPT='%(?..%F{red}[$?]%f)$PR_NIX_SHELL%1~%# '
+        source ${./prompt.zsh}
       '';
       localVariables = {
         # The one thing that's not as nice as in bash (but I don't have
