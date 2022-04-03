@@ -9,4 +9,4 @@ precmd () {
     PR_NIX_SHELL=%F{240}$nix_tag%f
 }
 
-PROMPT='%(?..%F{red}[$?]%f)$PR_NIX_SHELL%1~%# '
+PROMPT='%(?..%F{red}[$?]%f)$PR_NIX_SHELL%2~%# '
