@@ -76,6 +76,7 @@ in {
       };
 
       packages = with pkgs; [
+        binutils
         cacert
         curl
         darcs
