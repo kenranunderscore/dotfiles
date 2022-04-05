@@ -62,6 +62,10 @@
   jo = "journalctl";
   jou = "journalctl --user";
 
+  # docker
+  drun = "docker run -it --rm";
+  dsp = "docker system prune";
+
   # misc
   md = "mkdir -p";
   s = "sudo";
