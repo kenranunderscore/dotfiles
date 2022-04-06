@@ -116,7 +116,7 @@
       (whitespace-line (:foreground ,orange-red :background ,bg))
 
       ;; gnus and message-mode
-      (gnus-header (:inherit 'default)))))
+      (gnus-header (:inherit default)))))
 
 ;; Set all the colors to their actual values.
 (let ((bg "#040404")
