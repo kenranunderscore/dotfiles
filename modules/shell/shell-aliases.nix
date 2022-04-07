@@ -38,6 +38,7 @@
   glo = "git log --oneline --decorate";
   gm = "git merge";
   gp = "git push";
+  gpu = "git push --set-upstream origin";
   gr = "git remote";
   gra = "git remote add";
   grb = "git rebase";
