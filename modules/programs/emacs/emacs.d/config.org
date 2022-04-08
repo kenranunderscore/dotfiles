@@ -319,6 +319,11 @@ applies the attributes of its value in =kenran/font-alist=.
     (set-face-attribute
      'variable-pitch nil
      :font kenran/serif-font
+     :height 1.0)
+    (set-face-attribute
+     'fixed-pitch-serif nil
+     :font family
+     :inherit 'fixed-pitch
      :height 1.0)))
 #+end_src
 
