@@ -44,8 +44,8 @@ in {
         modifier = "Mod4";
         startup = cfg.startupCommands;
         focus = {
-          followMouse = true;
-          mouseWarping = true;
+          followMouse = false;
+          mouseWarping = false;
         };
         menu = "rofi -disable-history -show run";
         window = {
