@@ -108,7 +108,7 @@ in {
           workspaceOutputAssign = builtins.map (w: {
             inherit (w) output;
             workspace = workspaceName w.number w.label;
-          }) cfg.workspaces;
+          }) (builtins.filter (builtins.hasAttr "output") cfg.workspaces);
           bars = [ ];
           colors = {
             focused = {
