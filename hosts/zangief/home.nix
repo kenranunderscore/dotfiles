@@ -26,6 +26,8 @@ in {
             number = 2;
             label = "web";
             output = "HDMI-0";
+            assigns =
+              [ { class = "Google-chrome-beta"; } { class = "firefox"; } ];
           }
           {
             number = 3;
@@ -41,6 +43,7 @@ in {
             number = 5;
             label = "irc/matrix";
             output = "HDMI-0";
+            assigns = [{ class = "Element"; }];
           }
           {
             number = 6;
@@ -56,11 +59,13 @@ in {
             number = 8;
             label = "calendar";
             output = "DP-2";
+            assigns = [{ class = "Thunderbird"; }];
           }
           {
             number = 9;
             label = "mattermost";
             output = "DP-2";
+            assigns = [{ class = "Mattermost"; }];
           }
         ];
         startupCommands = [
@@ -74,19 +79,27 @@ in {
           # fine with these kinds of commands failing should I decide
           # to get rid of any of the respective programs.
           {
-            command = "i3-msg 'workspace number 9; exec mattermost-desktop'";
+            command = "i3-msg 'exec mattermost-desktop'";
             always = false;
             notification = false;
           }
           {
-            command =
-              "i3-msg 'workspace number 9; move workspace to output right'";
+            command = "i3-msg 'exec google-chrome-beta'";
             always = false;
             notification = false;
           }
           {
-            command =
-              "i3-msg 'workspace number 1; move workspace to output left'";
+            command = "i3-msg 'exec thunderbird'";
+            always = false;
+            notification = false;
+          }
+          {
+            command = "i3-msg 'workspace 9:mattermost'";
+            always = false;
+            notification = false;
+          }
+          {
+            command = "i3-msg 'workspace 1:main'";
             always = false;
             notification = false;
           }

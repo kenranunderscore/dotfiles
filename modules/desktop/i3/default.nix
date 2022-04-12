@@ -31,6 +31,9 @@ in {
       };
     };
 
+    # FIXME: pull out the config generated from workspaces and merge.
+    # Should make the code easier on the eyes.
+    # FIXME: drop workspace number altogether and just use the name?
     xsession.windowManager.i3 =
       let workspaceName = index: label: "${toString index}:${label}";
       in {
@@ -49,15 +52,20 @@ in {
             titlebar = false;
             border = 2;
           };
+          assigns = builtins.foldl' (acc: w:
+            if builtins.hasAttr "assigns" w then
+              acc // { "${workspaceName w.number w.label}" = w.assigns; }
+            else
+              acc) { } cfg.workspaces;
           keybindings = let
-            workspaceKeybindings = builtins.foldl' (acc:
-              { number, label, ... }:
+            workspaceKeybindings = builtins.foldl' (acc: w:
               let
-                n = toString number;
-                ws = workspaceName number label;
+                n = toString w.number;
+                name = workspaceName w.number w.label;
               in acc // {
-                "${modifier}+${n}" = "workspace ${ws}";
-                "${modifier}+Shift+${n}" = "move container to workspace ${ws}";
+                "${modifier}+${n}" = "workspace ${name}";
+                "${modifier}+Shift+${n}" =
+                  "move container to workspace ${name}";
               }) { } cfg.workspaces;
           in lib.mkOptionDefault ({
             # Disable the default workspaces
@@ -97,11 +105,10 @@ in {
             "${modifier}+d" =
               lib.mkForce "exec rofi -disable-history -show-icons -show drun";
           } // workspaceKeybindings);
-          workspaceOutputAssign = builtins.map
-            ({ number, label, output, ... }: {
-              inherit output;
-              workspace = workspaceName number label;
-            }) cfg.workspaces;
+          workspaceOutputAssign = builtins.map (w: {
+            inherit (w) output;
+            workspace = workspaceName w.number w.label;
+          }) cfg.workspaces;
           bars = [ ];
           colors = {
             focused = {
