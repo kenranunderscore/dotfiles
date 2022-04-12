@@ -16,12 +16,72 @@ in {
     desktop = {
       i3 = {
         enable = true;
-        startupCommands = [{
-          command =
-            "xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0; exec ~/.fehbg";
-          always = false;
-          notification = false;
-        }];
+        workspaces = [
+          {
+            number = 1;
+            label = "main";
+          }
+          {
+            number = 2;
+            label = "web";
+          }
+          {
+            number = 3;
+            label = "3";
+          }
+          {
+            number = 4;
+            label = "4";
+          }
+          {
+            number = 5;
+            label = "irc/matrix";
+          }
+          {
+            number = 6;
+            label = "6";
+          }
+          {
+            number = 7;
+            label = "7";
+          }
+          {
+            number = 8;
+            label = "calendar";
+          }
+          {
+            number = 9;
+            label = "mattermost";
+          }
+        ];
+        startupCommands = [
+          {
+            command =
+              "xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0; exec ~/.fehbg";
+            always = false;
+            notification = false;
+          }
+          # I could use ${pkgs.foo}/bin/foo here for instance, but I'm
+          # fine with these kinds of commands failing should I decide
+          # to get rid of any of the respective programs.
+          {
+            command = "i3-msg 'workspace number 9; exec mattermost-desktop'";
+            always = false;
+            notification = false;
+          }
+          {
+            command =
+              "i3-msg 'workspace number 9; move workspace to output right'";
+            always = false;
+            notification = false;
+          }
+          {
+            command =
+              "i3-msg 'workspace number 1; move workspace to output left'";
+            always = false;
+            notification = false;
+          }
+        ];
       };
       polybar.enable = true;
       picom.enable = true;

@@ -12,6 +12,14 @@ in {
 
     # TODO: type this with hm.lib.options?
     startupCommands = lib.mkOption { default = [ ]; };
+
+    # TODO: type this
+    workspaces = lib.mkOption {
+      default = [{
+        number = 1;
+        label = "1";
+      }];
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -35,7 +43,6 @@ in {
         inherit (cfg) terminal;
         modifier = "Mod4";
         startup = cfg.startupCommands;
-        defaultWorkspace = "workspace number 1";
         focus = {
           followMouse = true;
           mouseWarping = true;
@@ -45,7 +52,38 @@ in {
           titlebar = false;
           border = 2;
         };
-        keybindings = lib.mkOptionDefault {
+        keybindings = let
+          workspaceKeybindings = builtins.foldl' (acc:
+            { number, label }:
+            let
+              n = toString number;
+              ws = "${n}:${label}";
+            in acc // {
+              "${modifier}+${n}" = "workspace ${ws}";
+              "${modifier}+Shift+${n}" = "move container to workspace ${ws}";
+            }) { } cfg.workspaces;
+        in lib.mkOptionDefault ({
+          # Disable the default workspaces
+          "${modifier}+0" = null;
+          "${modifier}+1" = null;
+          "${modifier}+2" = null;
+          "${modifier}+3" = null;
+          "${modifier}+4" = null;
+          "${modifier}+5" = null;
+          "${modifier}+6" = null;
+          "${modifier}+7" = null;
+          "${modifier}+8" = null;
+          "${modifier}+9" = null;
+          "${modifier}+Shift+0" = null;
+          "${modifier}+Shift+1" = null;
+          "${modifier}+Shift+2" = null;
+          "${modifier}+Shift+3" = null;
+          "${modifier}+Shift+4" = null;
+          "${modifier}+Shift+5" = null;
+          "${modifier}+Shift+6" = null;
+          "${modifier}+Shift+7" = null;
+          "${modifier}+Shift+8" = null;
+          "${modifier}+Shift+9" = null;
           # Use normal vim keys for moving between windows.
           "${modifier}+h" = "focus left";
           "${modifier}+l" = "focus right";
@@ -61,7 +99,7 @@ in {
           "${modifier}+space" = lib.mkForce "exec ${menu}";
           "${modifier}+d" =
             lib.mkForce "exec rofi -disable-history -show-icons -show drun";
-        };
+        } // workspaceKeybindings);
         bars = [ ];
         colors = {
           focused = {

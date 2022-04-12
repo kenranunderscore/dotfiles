@@ -13,6 +13,10 @@
     desktop = {
       i3 = {
         enable = true;
+        workspaces = builtins.map (n: {
+          number = n;
+          label = toString n;
+        }) [ 1 2 3 4 5 6 7 8 9 ];
         startupCommands = [
           {
             command = "~/.fehbg";
