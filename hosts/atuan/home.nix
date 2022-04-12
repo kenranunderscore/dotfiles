@@ -13,7 +13,7 @@
     desktop = {
       i3 = {
         enable = true;
-        additionalStartupCommands = [
+        startupCommands = [
           {
             command = "~/.fehbg";
             always = false;

@@ -11,7 +11,7 @@ in {
     };
 
     # TODO: type this with hm.lib.options?
-    additionalStartupCommands = lib.mkOption { default = [ ]; };
+    startupCommands = lib.mkOption { default = [ ]; };
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,7 +34,7 @@ in {
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
-        startup = cfg.additionalStartupCommands;
+        startup = cfg.startupCommands;
         defaultWorkspace = "workspace number 1";
         focus = {
           followMouse = true;

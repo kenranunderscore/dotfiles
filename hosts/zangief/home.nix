@@ -16,7 +16,7 @@ in {
     desktop = {
       i3 = {
         enable = true;
-        additionalStartupCommands = [{
+        startupCommands = [{
           command =
             "xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0; exec ~/.fehbg";
           always = false;
