@@ -18,52 +18,43 @@ in {
         enable = true;
         workspaces = [
           {
-            number = 1;
-            label = "main";
+            name = "1:main/emacs";
             output = "HDMI-0";
           }
           {
-            number = 2;
-            label = "web";
+            name = "2:web";
             output = "HDMI-0";
             assigns =
               [ { class = "Google-chrome-beta"; } { class = "firefox"; } ];
           }
           {
-            number = 3;
-            label = "3";
+            name = "3";
             output = "HDMI-0";
           }
           {
-            number = 4;
-            label = "4";
+            name = "4";
             output = "HDMI-0";
           }
           {
-            number = 5;
-            label = "irc/matrix";
+            name = "5:irc/matrix";
             output = "HDMI-0";
             assigns = [{ class = "Element"; }];
           }
           {
-            number = 6;
-            label = "6";
+            name = "6";
             output = "DP-2";
           }
           {
-            number = 7;
-            label = "7";
+            name = "7";
             output = "DP-2";
           }
           {
-            number = 8;
-            label = "calendar";
+            name = "8:calendar";
             output = "DP-2";
             assigns = [{ class = "Thunderbird"; }];
           }
           {
-            number = 9;
-            label = "mattermost";
+            name = "9:mattermost";
             output = "DP-2";
             assigns = [{ class = "Mattermost"; }];
           }
