@@ -79,17 +79,17 @@ in {
           # fine with these kinds of commands failing should I decide
           # to get rid of any of the respective programs.
           {
-            command = "i3-msg 'exec mattermost-desktop'";
+            command = "mattermost-desktop";
             always = false;
             notification = false;
           }
           {
-            command = "i3-msg 'exec google-chrome-beta'";
+            command = "google-chrome-beta";
             always = false;
             notification = false;
           }
           {
-            command = "i3-msg 'exec thunderbird'";
+            command = "thunderbird";
             always = false;
             notification = false;
           }
