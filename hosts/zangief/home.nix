@@ -20,38 +20,47 @@ in {
           {
             number = 1;
             label = "main";
+            output = "HDMI-0";
           }
           {
             number = 2;
             label = "web";
+            output = "HDMI-0";
           }
           {
             number = 3;
             label = "3";
+            output = "HDMI-0";
           }
           {
             number = 4;
             label = "4";
+            output = "HDMI-0";
           }
           {
             number = 5;
             label = "irc/matrix";
+            output = "HDMI-0";
           }
           {
             number = 6;
             label = "6";
+            output = "DP-2";
           }
           {
             number = 7;
             label = "7";
+            output = "DP-2";
           }
           {
             number = 8;
             label = "calendar";
+            output = "DP-2";
           }
           {
             number = 9;
             label = "mattermost";
+            output = "DP-2";
           }
         ];
         startupCommands = [
