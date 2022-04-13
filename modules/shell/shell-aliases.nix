@@ -72,4 +72,6 @@
   s = "sudo";
   rr = "rm -rf";
   serve-this = "${pkgs.python3}/bin/python -m http.server";
+  dual-monitor-setup =
+    "xrandr --auto && xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0 && systemctl --user restart polybar";
 }
