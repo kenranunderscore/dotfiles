@@ -65,7 +65,7 @@
       emacs.emacsVersion = "git";
       emacs.nativeComp = true;
       kitty = { useLoginShell = false; };
-      nyxt.enable = false;
+      nyxt.enable = true;
       sbcl.enable = true;
     };
     shell.git.email = "johannes.maier@mailbox.org";
