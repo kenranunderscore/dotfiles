@@ -146,6 +146,8 @@ in {
             hl-todo
             htmlize
             hydra
+            lispy
+            lispyville
             magit-todos
             marginalia
             ripgrep

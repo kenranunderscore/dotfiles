@@ -2137,10 +2137,10 @@ tried several, but I'm not happy yet.
   "c f" 'sp-indent-defun)
 #+end_src
 
-** Lispyville
+** LISP editing with Lispy and Lispyville
 
 #+begin_src elisp
-(use-package lispyville
+(use-package lispy
   :hook
   ((emacs-lisp-mode
     lisp-mode
@@ -2151,7 +2151,13 @@ tried several, but I'm not happy yet.
     racket-mode
     racket-repl-mode
     sly-mrepl-mode)
-   . lispyville-mode)
+   . lispy-mode))
+#+end_src
+
+#+begin_src elisp
+(use-package lispyville
+  :hook
+  (lispy-mode . lispyville-mode)
   :config
   (with-eval-after-load 'lispyville
     (lispyville-set-key-theme
@@ -2161,6 +2167,7 @@ tried several, but I'm not happy yet.
        prettify
        slurp/barf-cp
        text-objects
+       additional
        additional-insert))))
 #+end_src
 
