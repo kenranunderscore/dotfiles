@@ -2322,6 +2322,11 @@ TODO
          (set-face-attribute 'default nil
                              :height kenran/default-font-height))
    "reset" :color blue)
+  ("s" (lambda (height)
+         (interactive "nFont size: ")
+         (set-face-attribute 'default nil
+                             :height height))
+   "set size" :color blue)
   ("q" nil "exit"))
 
 (with-leader
