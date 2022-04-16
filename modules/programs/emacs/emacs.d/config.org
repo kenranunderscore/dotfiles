@@ -736,10 +736,12 @@ Emacs mode in REPL, terminal and shell buffers.
         (sly-mrepl-mode . nil)
         (term-mode . (term term ansi-term multi-term))
         (vterm-mode . vterm)
-        (haskell-interactive-mode . nil)))
+        (haskell-interactive-mode . nil)
+        (nil . lispy)))
 
 (setq kenran/evil-holy-modes
-      (mapcar #'car kenran/holy-modes))
+      (remove nil
+              (mapcar #'car kenran/holy-modes)))
 
 (setq kenran/evil-collection-exemptions
       (remove nil
