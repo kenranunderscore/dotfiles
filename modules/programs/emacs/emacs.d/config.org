@@ -2132,8 +2132,7 @@ tried several, but I'm not happy yet.
   (sp-pair "`" nil :actions nil)
   (setq sp-highlight-pair-overlay nil)
   :init
-  (smartparens-global-mode t)
-  (show-smartparens-global-mode t))
+  (smartparens-global-mode t))
 
 (with-leader
   "c f" 'sp-indent-defun)
