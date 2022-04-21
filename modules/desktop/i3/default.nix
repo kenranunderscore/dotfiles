@@ -42,7 +42,7 @@ in {
         startup = cfg.startupCommands;
         focus = {
           followMouse = false;
-          mouseWarping = false;
+          mouseWarping = true;
         };
         menu = "rofi -disable-history -show run";
         window = {
