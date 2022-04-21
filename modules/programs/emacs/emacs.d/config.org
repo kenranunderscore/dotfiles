@@ -765,7 +765,8 @@ Emacs.
    (evil-want-C-w-delete t)
    (evil-want-Y-yank-to-eol t)
    (evil-undo-system 'undo-redo)
-   (evil-symbol-word-search t))
+   (evil-symbol-word-search t)
+   (evil-jumps-cross-buffers nil))
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
