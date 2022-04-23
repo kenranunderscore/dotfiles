@@ -59,7 +59,7 @@ in {
     margin-top = 0;
   };
 
-  "bar/bottom" = mkBar true "cpu tri1 tri2 memory tri1" "title"
+  "bar/bottom" = mkBar true "cpu tri1 tri2 memory tri1" ""
     "tri3 wlan1 wlan2 tri4 tri3 powermenu";
 
   "bar/top" =
@@ -196,14 +196,6 @@ in {
     screenchange-reload = true;
     throttle-output = "5";
     throttle-output-for = "10";
-  };
-
-  "module/title" = {
-    type = "internal/xwindow";
-    label = "%title%";
-    label-maxlen = "70";
-    format = "<label>";
-    format-foreground = "#cccccc";
   };
 
   "module/powermenu" = {
