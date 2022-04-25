@@ -1540,6 +1540,8 @@ elements.  Also increase org header size."
   (kenran/inherit-fixed-pitch 'org-link)
   (kenran/inherit-fixed-pitch 'org-todo)
   (kenran/inherit-fixed-pitch 'org-done)
+  (kenran/inherit-fixed-pitch 'org-drawer)
+  (kenran/inherit-fixed-pitch 'org-property-value)
   (set-face-attribute 'org-document-title nil :height 1.8 :weight 'bold)
   (dolist (face '((org-level-1 . 1.6)
                   (org-level-2 . 1.4)
