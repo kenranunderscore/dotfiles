@@ -67,7 +67,26 @@ URxvt.internalBorder: 10
 URxvt.visualBell:     False
 URxvt.scrollBar:      False
 URxvt.saveLines:      50000
-URxvt.font:           xft:MesloLGS Nerd Font Mono:pixelsize=16:antialias=true
-URxvt.boldFont:       xft:MesloLGS Nerd Font Mono:style=Bold:pixelsize=16:antialias=true
+URxvt.font:           xft:DejaVu Sans Mono:pixelsize=26:antialias=true
+URxvt.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=26:antialias=true
 URxvt.keysym.C-plus:  font-size:increase
 URxvt.keysym.C-minus: font-size:decrease
+URxvt.foreground:  #a2a2a2
+URxvt.background:  #000000
+URxvt.cursorColor: #a2a2a2
+URxvt.color0:      #000000
+URxvt.color8:      #525252
+URxvt.color1:      #ff3000
+URxvt.color9:      #ff5252
+URxvt.color2:      #64b946
+URxvt.color10:     #52ff52
+URxvt.color3:      #a55b00
+URxvt.color11:     #ffff52
+URxvt.color4:      #0052ff
+URxvt.color12:     #5266ff
+URxvt.color5:      #ee5cee
+URxvt.color13:     #ff52ff
+URxvt.color6:      #00b4b4
+URxvt.color14:     #52ffff
+URxvt.color7:      #a2a2a2
+URxvt.color15:     #ffffff
