@@ -238,12 +238,12 @@ respective font.
                     166
                     :weight
                     regular))
-        (hack . (:family
-                 "Hack"
-                 :default-height
-                 150
-                 :weight
-                 regular))
+        (dejavu . (:family
+                   "DejaVu Sans Mono"
+                   :default-height
+                   150
+                   :weight
+                   regular))
         (ibm-plex . (:family
                      "IBM Plex Mono"
                      :default-height
