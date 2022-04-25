@@ -1695,6 +1695,16 @@ approach yet, but might in the future.  My synchronization setup with
   (org-roam-setup))
 #+end_src
 
+**** Keybindings for =org-roam=
+
+#+begin_src elisp
+(with-leader
+  "o r" '(:which-key "roam" :ignore t)
+  "o r c" 'org-roam-capture
+  "o r f" 'org-roam-node-find
+  "o r i" 'org-roam-node-insert)
+#+end_src
+
 *** Short presentations with org
 
 #+begin_src elisp
