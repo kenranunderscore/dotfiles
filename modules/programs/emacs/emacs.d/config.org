@@ -1625,8 +1625,7 @@ capturing, storing links etc.
   "o f" 'org-cycle-agenda-files
   "o s" 'org-save-all-org-buffers
   "o p" '((lambda () (interactive) (org-publish-all t)) :which-key "publish all")
-  "o t" '(:which-key "toggle" :ignore t)
-  "o t l" 'org-toggle-link-display)
+  "o t" '(:which-key "toggle" :ignore t))
 #+end_src
 
 *** Beautiful bullet points
