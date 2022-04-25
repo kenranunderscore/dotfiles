@@ -13,15 +13,18 @@ in {
     settings.trusted-users = [ "root" username ];
   };
 
-  boot.loader = {
-    grub = {
-      enable = true;
-      default = "saved";
-      useOSProber = true;
-      efiSupport = true;
-      device = "nodev";
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      grub = {
+        enable = true;
+        default = "saved";
+        useOSProber = true;
+        efiSupport = true;
+        device = "nodev";
+      };
+      efi.canTouchEfiVariables = true;
     };
-    efi.canTouchEfiVariables = true;
   };
 
   time.timeZone = "Europe/Berlin";
