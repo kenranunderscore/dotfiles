@@ -9,11 +9,7 @@ in {
     # replacement.
     home.packages = with pkgs; [ exa ];
 
-    # TODO(Johannes):
-    # - prompt
-    # - completion of word parts
-    programs.zsh = let
-    in {
+    programs.zsh = {
       enable = true;
       dotDir = ".config/zsh";
       # I enable completion myself after the relevant fpath mutations.
