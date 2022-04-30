@@ -67,8 +67,8 @@ URxvt.internalBorder: 10
 URxvt.visualBell:     False
 URxvt.scrollBar:      False
 URxvt.saveLines:      50000
-URxvt.font:           xft:DejaVu Sans Mono:pixelsize=26:antialias=true
-URxvt.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=26:antialias=true
+URxvt.font:           xft:Courier Prime:pixelsize=26:antialias=true
+URxvt.boldFont:       xft:Courier Prime:style=Bold:pixelsize=26:antialias=true
 URxvt.keysym.C-plus:  font-size:increase
 URxvt.keysym.C-minus: font-size:decrease
 URxvt.foreground:  #ffffff
