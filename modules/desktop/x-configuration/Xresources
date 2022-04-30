@@ -71,9 +71,9 @@ URxvt.font:           xft:DejaVu Sans Mono:pixelsize=26:antialias=true
 URxvt.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=26:antialias=true
 URxvt.keysym.C-plus:  font-size:increase
 URxvt.keysym.C-minus: font-size:decrease
-URxvt.foreground:  #a2a2a2
+URxvt.foreground:  #ffffff
 URxvt.background:  #000000
-URxvt.cursorColor: #a2a2a2
+URxvt.cursorColor: #ffffff
 URxvt.color0:      #000000
 URxvt.color8:      #525252
 URxvt.color1:      #ff3000
