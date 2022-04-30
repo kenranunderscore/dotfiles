@@ -19,11 +19,11 @@
     "crawlrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1499202000,
-        "narHash": "sha256-AXjKvW+jmTq2LIKEHendIhSXRKCkM64i78m8VLZkX+8=",
+        "lastModified": 1651330664,
+        "narHash": "sha256-Zfy6eiK8dCT4Pxg+VYnUplsgsx1V00EuVNB6gTQ7hE4=",
         "owner": "kenranunderscore",
         "repo": "crawlrc",
-        "rev": "454c3dfd333074094014588b86e7a5db281c7df8",
+        "rev": "81cf2bbf746822a65f666e6280810e5da3b4bc19",
         "type": "github"
       },
       "original": {
