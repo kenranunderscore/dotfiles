@@ -53,18 +53,19 @@ in {
       pkgs.camingo-code
       pkgs.cantarell-fonts
       pkgs.cascadia-code
+      pkgs.courier-prime
       pkgs.fira-code
       pkgs.font-awesome_5
       pkgs.go-font
       pkgs.hack-font
       pkgs.hasklig
-      pkgs.hermit
       pkgs.ibm-plex
       pkgs.inconsolata
       (import ./input-mono.nix { inherit pkgs; })
       pkgs.iosevka
       pkgs.jetbrains-mono
-      pkgs.meslo-lg
+      pkgs.liberation_ttf
+      pkgs.lmodern
       pkgs.nerdfonts
       pkgs.noto-fonts
       pkgs.roboto-mono
