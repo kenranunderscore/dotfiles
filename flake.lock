@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "crawlrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1499202000,
+        "narHash": "sha256-AXjKvW+jmTq2LIKEHendIhSXRKCkM64i78m8VLZkX+8=",
+        "owner": "kenranunderscore",
+        "repo": "crawlrc",
+        "rev": "454c3dfd333074094014588b86e7a5db281c7df8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kenranunderscore",
+        "repo": "crawlrc",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "locked": {
         "lastModified": 1650537077,
@@ -183,6 +199,7 @@
     "root": {
       "inputs": {
         "autopair.fish": "autopair.fish",
+        "crawlrc": "crawlrc",
         "emacs-overlay": "emacs-overlay",
         "fish-fastdir": "fish-fastdir",
         "home-manager": "home-manager",

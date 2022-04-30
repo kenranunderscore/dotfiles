@@ -1,4 +1,4 @@
-{ customConfig, config, lib, pkgs, ... }:
+{ inputs, customConfig, config, lib, pkgs, ... }:
 
 let cfg = config.hosts.base;
 in {
@@ -70,6 +70,8 @@ in {
       inherit (customConfig) username;
       homeDirectory = "/home/${username}";
 
+      file.".crawlrc".source = "${inputs.crawlrc}/.crawlrc";
+
       sessionVariables = rec {
         EDITOR = "emacsclient -a '' -c";
         VISUAL = EDITOR;
@@ -80,6 +82,8 @@ in {
         binutils
         cacert
         curl
+        crawl
+        crawlTiles
         darcs
         feh
         fd

@@ -50,6 +50,12 @@
       url = "github:jorgebucaran/autopair.fish";
       flake = false;
     };
+
+    # DCSS
+    crawlrc = {
+      url = "github:kenranunderscore/crawlrc";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
