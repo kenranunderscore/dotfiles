@@ -683,6 +683,14 @@ native compilation entirely like this:
 (setq-default indent-tabs-mode nil)
 #+end_src
 
+** If I have to use tabs, at least make them smaller
+
+Looking at you, [[https://go.dev/][Go]].
+
+#+begin_src elisp
+(setq-default tab-width 4)
+#+end_src
+
 ** File name searches should be case-insensitive
 
 #+begin_src elisp
