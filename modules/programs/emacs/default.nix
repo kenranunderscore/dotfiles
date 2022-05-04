@@ -140,6 +140,7 @@ in {
             evil-surround
             evil-visual-mark-mode
             git-gutter
+            git-modes
             git-timemachine
             gnus-alias
             helpful

@@ -2144,6 +2144,22 @@ be accessed under =SPC g=.
   "g g p" 'git-gutter:previous-hunk)
 #+end_src
 
+*** Modes for other kinds of =git=-related files
+
+It's useful to have a little bit of syntax highlighting in files like
+=.gitignore= or =.gitattributes=.  The =git-modes= package provides just
+that, and autoloads the specific modes for the respective file types.
+Like its readme proposes it's also possible to reuse the
+=gitignore-mode= for other things, in this case =.dockerignore= files.
+
+#+begin_src elisp
+(use-package git-modes
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist
+               (cons "/.dockerignore\\'" 'gitignore-mode)))
+#+end_src
+
 ** Auto-closing parentheses and other delimiters
 
 Smartparens as a global minor mode works well for all programming
