@@ -2234,7 +2234,10 @@ displays the possible completions and associated functions.
   (which-key-idle-delay 0.3)
   :diminish which-key-mode
   :init
-  (add-hook 'after-init-hook 'which-key-mode))
+  ;; See https://github.com/justbur/emacs-which-key/issues/306
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook 'which-key-mode)
+    (add-hook 'after-init-hook 'which-key-mode)))
 #+end_src
 
 ** Beautiful font icons
