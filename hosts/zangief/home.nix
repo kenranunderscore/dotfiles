@@ -152,20 +152,7 @@ in {
   };
 
   home.packages = let
-    liblinphoneWithOlderSoci = pkgs.liblinphone.override {
-      soci = pkgs.soci.overrideAttrs (old: rec {
-        pname = "soci";
-        version = "4.0.1";
-        src = pkgs.fetchFromGitHub {
-          owner = "SOCI";
-          repo = pname;
-          rev = version;
-          sha256 = "sha256-d4GtxDaB+yGfyCnbvnLRUYcrPSMkUF7Opu6+SZd8opM=";
-        };
-      });
     };
-    linphonePatched =
-      pkgs.linphone.override { liblinphone = liblinphoneWithOlderSoci; };
   in with pkgs; [
     cloc
     cmus
@@ -178,7 +165,7 @@ in {
     keepass
     keepassx
     leiningen
-    linphonePatched
+    linphone
     mattermost-desktop
     pavucontrol
     sieve-connect
