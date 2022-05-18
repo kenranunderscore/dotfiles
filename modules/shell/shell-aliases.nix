@@ -2,7 +2,7 @@
 
 {
   # nixos
-  nrs = "sudo nixos-rebuild switch --flake ~/dotfiles/";
+  nrs = "nixos-rebuild switch --use-remote-sudo --flake ~/dotfiles/";
 
   # direnv
   dea = "direnv allow";
