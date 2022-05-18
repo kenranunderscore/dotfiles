@@ -94,6 +94,11 @@ in {
             always = false;
             notification = false;
           }
+          {
+            command = "xset r rate 200 35";
+            always = true;
+            notification = false;
+          }
         ];
       };
       polybar.enable = true;

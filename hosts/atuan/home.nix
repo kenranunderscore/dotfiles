@@ -50,6 +50,11 @@
             command = "i3-msg 'workspace 1:main/emacs; exec kitty'";
             notification = false;
           }
+          {
+            command = "xset r rate 200 35";
+            always = true;
+            notification = false;
+          }
         ];
       };
       polybar.enable = true;
