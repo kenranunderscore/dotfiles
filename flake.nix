@@ -56,6 +56,10 @@
       url = "github:kenranunderscore/crawlrc";
       flake = false;
     };
+    crawl = {
+      url = "github:crawl/crawl";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:

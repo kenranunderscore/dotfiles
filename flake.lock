@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "crawl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1652721705,
+        "narHash": "sha256-09Gz+jSHas0ccoHDWcZ4N9lhQvdFxbt2CRicsuEy54Y=",
+        "owner": "crawl",
+        "repo": "crawl",
+        "rev": "c0181ea820b1a56c9fa00e9c434dfd5118fe64a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "crawl",
+        "repo": "crawl",
+        "type": "github"
+      }
+    },
     "crawlrc": {
       "flake": false,
       "locked": {
@@ -232,6 +248,7 @@
     "root": {
       "inputs": {
         "autopair.fish": "autopair.fish",
+        "crawl": "crawl",
         "crawlrc": "crawlrc",
         "emacs-overlay": "emacs-overlay",
         "fish-fastdir": "fish-fastdir",

@@ -152,6 +152,8 @@ in {
   };
 
   home.packages = let
+    dcss = (pkgs.crawl.overrideAttrs (_: { src = inputs.crawl; })).override {
+      tileMode = true;
     };
   in with pkgs; [
     cloc
@@ -160,6 +162,7 @@ in {
     dbeaver
     dhall
     discord
+    dcss
     element-desktop
     google-chrome-beta
     keepass

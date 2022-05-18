@@ -82,8 +82,6 @@ in {
         binutils
         cacert
         curl
-        crawl
-        crawlTiles
         darcs
         feh
         fd
