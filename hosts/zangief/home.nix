@@ -95,7 +95,7 @@ in {
             notification = false;
           }
           {
-            command = "xset r rate 200 35";
+            command = "xset r rate 200 55";
             always = true;
             notification = false;
           }
