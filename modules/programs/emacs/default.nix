@@ -115,6 +115,9 @@ in {
             # Racket
             racket-mode
 
+            # Rust
+            rust-mode
+
             # YAML
             yaml-mode
 

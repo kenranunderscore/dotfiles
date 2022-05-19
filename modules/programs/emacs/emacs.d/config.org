@@ -1926,6 +1926,15 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
          (racket-repl-mode . racket-unicode-input-method-enable)))
 #+end_src
 
+** Rust
+
+#+begin_src elisp
+(use-package rust-mode
+  :defer t
+  :config
+  (setq rust-format-on-save t))
+#+end_src
+
 ** Java
 
 I don't use Java, but Bob Nystrom's excellent and free book [[https://craftinginterpreters.com/][Crafting
