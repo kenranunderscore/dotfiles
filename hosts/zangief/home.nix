@@ -14,6 +14,7 @@ in {
 
   modules = {
     desktop = {
+      rofi.enable = true;
       i3 = {
         enable = true;
         workspaces = [

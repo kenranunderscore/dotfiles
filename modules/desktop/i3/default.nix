@@ -18,19 +18,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs = {
-      rofi = {
-        enable = true;
-        cycle = true;
-        # font = "Pragmata Pro Mono 14";
-        font = "Iosevka 15";
-        location = "center";
-        terminal = "${pkgs.kitty}/bin/kitty";
-        theme = ./rofi/kenran.rasi;
-        extraConfig = { modi = "run,drun,ssh,window"; };
-      };
-    };
-
     # FIXME: pull out the config generated from workspaces and merge.
     # Should make the code easier on the eyes.
     xsession.windowManager.i3 = {
