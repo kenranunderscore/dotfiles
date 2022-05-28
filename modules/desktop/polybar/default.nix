@@ -21,7 +21,12 @@ in {
           MONITOR=$m polybar -r bottom &
         done
       '';
-      config = import ./config.nix pkgs;
+      config = let
+        configFile = if config.modules.desktop.i3.enable then
+          ./config-i3.nix
+        else
+          ./config-herbstluftwm.nix;
+      in import configFile pkgs;
     };
   };
 }
