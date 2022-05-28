@@ -17,7 +17,7 @@ let
   mkBar = bottom: modules-left: modules-center: modules-right: {
     inherit bottom modules-left modules-center modules-right;
     monitor = "\${env:MONITOR:}";
-    background = "${colors.transparent}";
+    background = "${colors.background}";
     foreground = "${colors.foreground}";
     fixed-center = true;
     font-0 = "Iosevka Nerd Font:size=15;4";
@@ -59,16 +59,8 @@ in {
     margin-top = 0;
   };
 
-  "bar/bottom" = mkBar true "cpu tri1 tri2 memory tri1" ""
-    "tri3 wlan1 wlan2 tri4 tri3 powermenu";
-
-  "bar/top" = mkBar false "distro-icon tri4" "tri2 xworkspaces tri4"
-    "tri2 audio tri1 tri2 date";
-
-  "module/tri1" = mkLayoutTextModule "";
-  "module/tri2" = mkLayoutTextModule "";
-  "module/tri3" = mkLayoutTextModule "";
-  "module/tri4" = mkLayoutTextModule " ";
+  "bar/bottom" = mkBar true "date distro-icon cpu memory" "xworkspaces"
+    "wlan1 wlan2 audio powermenu";
 
   "module/date" = {
     format = "<label>";
@@ -146,45 +138,6 @@ in {
     label-volume = "%percentage%%";
     type = "internal/pulseaudio";
   };
-
-  # "module/i3" = {
-  #   type = "internal/i3";
-  #   pin-workspaces = true;
-  #   strip-wsnumbers = true;
-  #   index-sort = true;
-  #   enable-click = true;
-  #   enable-scroll = false;
-  #   format = "<label-state><label-mode>";
-  #   label-separator = "";
-  #   label-separator-padding = 0;
-  #   label-separator-margin = 0;
-  #   label-mode = "%mode%";
-  #   label-mode-background = "${colors.background}";
-  #   label-mode-foreground = "${colors.urgent}";
-  #   label-mode-padding = 1;
-  #   label-mode-margin = 0;
-  #   label-focused = "%name%";
-  #   label-focused-background = "${colors.background}";
-  #   label-focused-foreground = "${colors.foreground}";
-  #   label-focused-padding = 1;
-  #   label-focused-margin = 0;
-  #   label-focused-font = 3;
-  #   label-unfocused = "%name%";
-  #   label-unfocused-background = "${colors.background}";
-  #   label-unfocused-foreground = "#707070";
-  #   label-unfocused-padding = 1;
-  #   label-unfocused-margin = 0;
-  #   label-visible = "%name%";
-  #   label-visible-background = "${colors.background}";
-  #   label-visible-foreground = "#3cb371";
-  #   label-visible-padding = 1;
-  #   label-visible-margin = 0;
-  #   label-urgent = "%name%";
-  #   label-urgent-background = "${colors.background}";
-  #   label-urgent-foreground = "${colors.urgent}";
-  #   label-urgent-padding = 1;
-  #   label-urgent-margin = 0;
-  # };
 
   "module/xworkspaces" = {
     type = "internal/xworkspaces";
