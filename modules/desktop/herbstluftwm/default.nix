@@ -57,6 +57,7 @@ in {
         done
         herbstclient use_index 0
 
+        xset r rate 200 55
         ~/.fehbg
       '';
     };
