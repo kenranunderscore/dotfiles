@@ -42,6 +42,7 @@ in {
             consult
             embark
             embark-consult
+            epkgs.elpaPackages.vertico
             evil
             gcmh
             general
@@ -101,12 +102,14 @@ in {
             org-appear
             org-bullets
             org-present
+            org-roam
 
             # PlantUML
             plantuml-mode
 
             # PureScript
             purescript-mode
+            psc-ide
 
             # Python
             anaconda-mode
@@ -154,6 +157,7 @@ in {
             lispyville
             magit-todos
             marginalia
+            epkgs.elpaPackages.rainbow-mode
             ripgrep
             vterm
             wgrep
