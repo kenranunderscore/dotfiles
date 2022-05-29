@@ -7,6 +7,7 @@ in {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    settings.trusted-users = [ "root" username ];
   };
   nixpkgs.config.allowUnfree = true;
 
@@ -113,8 +114,6 @@ in {
     home = "/home/${username}";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
-
-  nix.settings.trusted-users = [ "root" username ];
 
   environment = {
     systemPackages = with pkgs; [ ];
