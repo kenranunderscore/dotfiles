@@ -57,6 +57,11 @@ in {
         done
         herbstclient use_index 0
 
+        if [ $(hostname) = zangief ]; then
+          xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0
+          herbstclient detect_monitors
+        fi
+
         xset r rate 200 55
         ~/.fehbg
       '';
