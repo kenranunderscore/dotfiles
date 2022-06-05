@@ -83,8 +83,9 @@ in {
         cacert
         curl
         darcs
-        feh
         fd
+        feh
+        file
         gnumake
         graphviz
         htop
