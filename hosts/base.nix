@@ -66,8 +66,9 @@ in {
       mime.enable = true;
     };
 
-    home = rec {
-      inherit (customConfig) username;
+    home = let inherit (customConfig) username;
+    in {
+      inherit username;
       homeDirectory = "/home/${username}";
 
       file.".crawlrc".source = "${inputs.crawlrc}/.crawlrc";
