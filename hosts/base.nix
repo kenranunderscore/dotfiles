@@ -89,6 +89,7 @@ in {
         file
         gnumake
         graphviz
+        gh
         htop
         man-pages
         neofetch
