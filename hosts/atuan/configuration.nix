@@ -19,7 +19,7 @@ in {
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
-        default = "saved";
+        default = "0";
         useOSProber = true;
         efiSupport = true;
         device = "nodev";
