@@ -79,6 +79,7 @@ in {
       };
 
       packages = with pkgs; [
+        (pkgs.callPackage ../modules/games/angband.nix { enableSdl2 = true; })
         arandr
         binutils
         cacert
