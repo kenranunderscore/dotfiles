@@ -32,6 +32,7 @@
   gds = "git diff --staged";
   gf = "git fetch";
   gfa = "git fetch --all";
+  gfu = "git fetch upstream";
   gi = "git init";
   gl = "git pull";
   glog = "git log --oneline --decorate --graph";
