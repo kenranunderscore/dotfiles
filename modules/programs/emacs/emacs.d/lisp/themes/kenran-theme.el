@@ -27,7 +27,7 @@
       (font-lock-function-name-face (:foreground ,cyan))
       (font-lock-keyword-face (:foreground ,yellow))
       (font-lock-preprocessor-face (:inherit (font-lock-constant-face)))
-      (font-lock-string-face ((t (:foreground ,string))))
+      (font-lock-string-face (:foreground ,string))
       (font-lock-type-face (:foreground "olivedrab3"))
       (font-lock-variable-name-face (:foreground ,sea-green))
       (font-lock-warning-face (:slant italic :foreground ,orange-red))
