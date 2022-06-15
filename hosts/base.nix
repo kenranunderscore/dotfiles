@@ -102,6 +102,7 @@ in {
         rsync
         rxvt-unicode
         scrot
+        shfmt
         sqlite
         tree
         unzip
