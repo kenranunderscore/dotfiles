@@ -9,7 +9,7 @@ in {
       rofi = {
         enable = true;
         cycle = true;
-        font = "Courier Prime 18";
+        font = "JetBrains Mono 15";
         location = "center";
         terminal = "${pkgs.kitty}/bin/kitty";
         theme = ./kenran.rasi;
