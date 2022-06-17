@@ -102,6 +102,7 @@ in {
         rsync
         rxvt-unicode
         scrot
+        shellcheck
         shfmt
         sqlite
         tree
