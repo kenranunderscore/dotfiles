@@ -286,7 +286,7 @@ The currently selected font (key of =kenran/font-alist=).  Setting this
 value only changes the default; it is reset when switching fonts.
 
 #+begin_src elisp
-(setq kenran/current-monospace-font 'iosevka)
+(setq kenran/current-monospace-font 'jetbrains-mono)
 #+end_src
 
 For =org-mode= I like using a serif font.  This is it.
