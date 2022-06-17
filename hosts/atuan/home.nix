@@ -11,10 +11,10 @@
 
   modules = {
     desktop = {
-      herbstluftwm.enable = true;
+      herbstluftwm.enable = false;
       rofi.enable = true;
       i3 = {
-        enable = false;
+        enable = true;
         workspaces = [
           { name = "1:main/emacs"; }
           {
