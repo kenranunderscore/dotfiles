@@ -1440,6 +1440,18 @@ official [[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emac
   (editorconfig-mode 1))
 #+end_src
 
+** Formatting files on save
+
+Another generally useful package by Steve Purcell is [[https://github.com/purcell/emacs-reformatter][reformatter.el]].
+It enables easy definition of commands to format buffers, as well as
+minor modes that, when active, automatically apply these commands on
+save.
+
+#+begin_src elisp
+(use-package reformatter
+  :defer t)
+#+end_src
+
 ** Ini files
 
 I'm not 100 percent happy with this package, as paragraphs seem to be

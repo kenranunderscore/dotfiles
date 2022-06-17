@@ -158,6 +158,7 @@ in {
             magit-todos
             marginalia
             epkgs.elpaPackages.rainbow-mode
+            reformatter
             ripgrep
             vterm
             wgrep
