@@ -4,7 +4,7 @@ let
   colors = {
     foreground = "#0ac30a";
     background = "#040404";
-    transparent = "#00000000";
+    transparent = "#040404";
     urgent = "#ff4500";
   };
   mkLayoutTextModule = content: {
@@ -59,16 +59,8 @@ in {
     margin-top = 0;
   };
 
-  "bar/bottom" = mkBar true "cpu tri1 tri2 memory tri1" ""
-    "tri3 wlan1 wlan2 tri4 tri3 powermenu";
-
-  "bar/top" =
-    mkBar false "distro-icon tri4" "tri2 i3 tri4" "tri2 audio tri1 tri2 date";
-
-  "module/tri1" = mkLayoutTextModule "";
-  "module/tri2" = mkLayoutTextModule "";
-  "module/tri3" = mkLayoutTextModule "";
-  "module/tri4" = mkLayoutTextModule " ";
+  "bar/bottom" =
+    mkBar true "date distro-icon cpu memory" "i3" "wlan1 wlan2 audio powermenu";
 
   "module/date" = {
     format = "<label>";
