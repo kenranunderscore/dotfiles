@@ -20,6 +20,7 @@ in {
         ''100:class_i = "VirtualBox Machine"''
         ''100:class_i = "VirtualBox Manager"''
         ''100:class_i = "urxvt"''
+        ''100:class_i = "element"''
       ];
       backend = "glx";
       experimentalBackends = true;
