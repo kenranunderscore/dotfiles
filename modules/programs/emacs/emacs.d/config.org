@@ -1568,19 +1568,20 @@ elements.  Also increase org header size."
   (kenran/inherit-fixed-pitch 'org-done)
   (kenran/inherit-fixed-pitch 'org-drawer)
   (kenran/inherit-fixed-pitch 'org-property-value)
-  (set-face-attribute 'org-document-title nil :height 1.8 :weight 'bold)
-  (dolist (face '((org-level-1 . 1.6)
-                  (org-level-2 . 1.4)
-                  (org-level-3 . 1.2)
+  (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold)
+  (dolist (face '((org-level-1 . 1.0)
+                  (org-level-2 . 1.0)
+                  (org-level-3 . 1.0)
                   (org-level-4 . 1.0)
                   (org-level-5 . 1.0)
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil
-                        :font kenran/serif-font
-                        :height (cdr face)
-                        :weight 'bold)))
+    ;; (set-face-attribute (car face) nil
+    ;;                     :font kenran/serif-font
+    ;;                     :height (cdr face)
+    ;;                     :weight 'bold)
+    ))
 
 (add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
 #+end_src
@@ -1594,7 +1595,7 @@ loading =org=, a custom font setup might run to adjust the headers.
 (use-package org
   :hook
   ((org-mode . auto-fill-mode)
-   (org-mode . variable-pitch-mode)
+   ;; (org-mode . variable-pitch-mode)
    (org-trigger . save-buffer))
   :custom
   ((org-startup-indented t)
@@ -1658,7 +1659,7 @@ capturing, storing links etc.
 
 #+begin_src elisp
 (use-package org-bullets
-  :hook (org-mode . org-bullets-mode)
+  ;; :hook (org-mode . org-bullets-mode)
   :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 #+end_src
 
