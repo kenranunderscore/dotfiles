@@ -49,7 +49,7 @@
   gs = "git status --short";
   gst = "git status";
   gsw = "git switch";
-  gupa = "git pull --rebase --autostash";
+  gpra = "git pull --rebase --autostash";
 
   # nix
   n = "nix";
