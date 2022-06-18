@@ -56,6 +56,7 @@
   nf = "nix flake";
   nb = "nix build";
   nd = "nix develop";
+  nr = "nix run";
   ns = "nix shell";
 
   # systemd
