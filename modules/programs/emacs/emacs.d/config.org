@@ -438,6 +438,25 @@ be able to reload it on the fly.
 Since I cannot ever decide which theme I like best, there are a few
 themes, or theme collections, loaded here.
 
+**** Custom theme: =naga=
+
+I usually use [[https://github.com/kenranunderscore/emacs-naga-theme][my own /naga/ theme]].  It is currently in the process of
+being made ready to be put on MELPA.
+
+While that is still going on I'm using a "mutable" path, assuming I've
+cloned my project repository to a fixed location.  This allows for
+quick iteration.
+
+#+begin_src elisp
+(add-to-list 'custom-theme-load-path "~/projects/emacs-naga-theme")
+#+end_src
+
+Enable =naga=:
+
+#+begin_src elisp
+(kenran/switch-theme 'naga)
+#+end_src
+
 **** Modus themes
 
 [[https://protesilaos.com/emacs/modus-themes][This package]] by Protesilaos Stavrou is my first choice of "external"
@@ -499,14 +518,6 @@ contrast, overall darker look, and beautiful accent colors.
 #+begin_src elisp
 (use-package color-theme-sanityinc-tomorrow
   :defer t)
-#+end_src
-
-**** Custom theme
-
-I usually use my own custom theme, which can be found [[file:lisp/themes/kenran-theme.el][here]].
-
-#+begin_src elisp
-(kenran/switch-theme 'kenran)
 #+end_src
 
 ** Render color names/codes with as their respective color
