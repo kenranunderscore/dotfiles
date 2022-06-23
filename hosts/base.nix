@@ -29,7 +29,6 @@ in {
           inherit (cfg) shellPath;
         };
         neovim.enable = true;
-        qutebrowser.enable = true;
         weechat.enable = true;
       };
       shell = {
