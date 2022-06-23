@@ -10,6 +10,7 @@
     privateConfig = {
       url = "git+ssh://git@github.com/kenranunderscore/private-config";
       inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
 
     # Editors

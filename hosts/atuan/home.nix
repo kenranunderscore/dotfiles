@@ -4,7 +4,7 @@
   imports = [ ../base.nix ../../modules ];
 
   hosts.base = {
-    privateDir = "${inputs.privateConfig}/linux";
+    privateDir = "${inputs.privateConfig}";
     shellPath = "${pkgs.zsh}/bin/zsh";
     gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
   };

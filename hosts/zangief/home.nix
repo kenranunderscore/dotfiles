@@ -7,7 +7,7 @@ in {
   targets.genericLinux = { enable = true; };
 
   hosts.base = {
-    privateDir = "${inputs.privateConfig}/linux";
+    privateDir = "${inputs.privateConfig}";
     shellPath = "${pkgs.zsh}/bin/zsh";
     gpgKey = "9AC78C1A48681583";
   };

@@ -32,7 +32,7 @@ let
     set = "iosevka-custom";
   };
   pragmataPro =
-    pkgs.callPackage (import ./pp.nix "${inputs.privateConfig}/linux") { };
+    pkgs.callPackage (import ./pp.nix "${inputs.privateConfig}") { };
 in {
   options.modules.fonts = {
     enable = lib.mkEnableOption "fonts";
