@@ -89,7 +89,12 @@
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [ cmus cmusfm element-desktop ];
+    packages = with pkgs; [
+      (angband.override { enableSdl2 = true; })
+      cmus
+      cmusfm
+      element-desktop
+    ];
     stateVersion = "21.03";
   };
 }
