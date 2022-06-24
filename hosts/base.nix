@@ -78,12 +78,9 @@ in {
       };
 
       packages = with pkgs; [
-        (pkgs.callPackage ../modules/games/angband.nix { enableSdl2 = true; })
-        arandr
         binutils
         cacert
         curl
-        darcs
         fd
         feh
         file
@@ -91,11 +88,12 @@ in {
         graphviz
         gh
         htop
+        jq
         man-pages
         neofetch
-        niv
         nixfmt
         openssl
+        perl
         ripgrep
         rlwrap
         rsync
@@ -103,7 +101,6 @@ in {
         scrot
         shellcheck
         shfmt
-        sqlite
         tree
         unzip
         wget
