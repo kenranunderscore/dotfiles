@@ -1,13 +1,6 @@
 { ... }:
 
 {
-  imports = [
-    ./herbstluftwm
-    ./i3
-    ./sway
-    ./polybar
-    ./picom.nix
-    ./rofi
-    ./x-configuration
-  ];
+  imports =
+    [ ./herbstluftwm ./i3 ./polybar ./picom.nix ./rofi ./x-configuration ];
 }
