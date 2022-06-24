@@ -7,7 +7,7 @@ in {
 
     terminal = lib.mkOption {
       type = lib.types.str;
-      default = "${pkgs.kitty}/bin/kitty";
+      default = "${lib.getExe pkgs.kitty}";
     };
 
     # TODO: type this with hm.lib.options?

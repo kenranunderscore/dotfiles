@@ -15,7 +15,7 @@ in {
       Install.WantedBy = [ "graphical-session.target" ];
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.imwheel}/bin/imwheel -d";
+        ExecStart = "${lib.getExe pkgs.imwheel} -d";
         ExecStop = "pkill imwheel";
         Environment = "XAUTHORITY=%h/.Xauthority";
         RemainAfterExit = "yes";

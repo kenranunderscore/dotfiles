@@ -9,7 +9,7 @@ in {
 
     shellPath = lib.mkOption {
       type = types.str;
-      default = "${pkgs.bash}/bin/bash";
+      default = "${lib.getExe pkgs.bash}";
     };
 
     useLoginShell = lib.mkOption {

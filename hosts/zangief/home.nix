@@ -8,7 +8,7 @@ in {
 
   hosts.base = {
     privateDir = "${inputs.privateConfig}";
-    shellPath = "${pkgs.zsh}/bin/zsh";
+    shellPath = "${lib.getExe pkgs.zsh}";
     gpgKey = "9AC78C1A48681583";
   };
 

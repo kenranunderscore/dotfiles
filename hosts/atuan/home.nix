@@ -5,7 +5,7 @@
 
   hosts.base = {
     privateDir = "${inputs.privateConfig}";
-    shellPath = "${pkgs.zsh}/bin/zsh";
+    shellPath = "${lib.getExe pkgs.zsh}";
     gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
   };
 

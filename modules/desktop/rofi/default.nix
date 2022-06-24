@@ -11,7 +11,7 @@ in {
         cycle = true;
         font = "JetBrains Mono 15";
         location = "center";
-        terminal = "${pkgs.kitty}/bin/kitty";
+        terminal = "${lib.getExe pkgs.kitty}";
         theme = ./kenran.rasi;
         extraConfig = { modi = "run,drun,ssh,window"; };
       };

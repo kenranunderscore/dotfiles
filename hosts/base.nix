@@ -111,7 +111,7 @@ in {
 
       activation = {
         importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --import ${
+          $DRY_RUN_CMD ${lib.getExe pkgs.gnupg} --import ${
             cfg.privateDir + "/gpg.key"
           }
         '';
