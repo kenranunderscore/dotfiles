@@ -38,6 +38,7 @@ in {
       libinput = {
         enable = true;
         mouse.naturalScrolling = true;
+        touchpad.naturalScrolling = true;
       };
       layout = "us";
       xkbVariant = "altgr-intl";
