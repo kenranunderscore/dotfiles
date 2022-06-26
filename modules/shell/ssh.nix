@@ -8,6 +8,10 @@ in {
     programs.ssh = {
       enable = true;
       compression = true;
+      extraConfig = ''
+        IdentityFile ~/.ssh/id_ed25519
+        AddKeysToAgent yes
+      '';
 
       matchBlocks = {
         "sync" = {
