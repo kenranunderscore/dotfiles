@@ -15,6 +15,11 @@ in {
 
     # TODO: type this
     workspaces = lib.mkOption { default = [ ]; };
+
+    withGaps = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -22,7 +27,7 @@ in {
     # Should make the code easier on the eyes.
     xsession.windowManager.i3 = {
       enable = true;
-      package = pkgs.i3-gaps;
+      package = if cfg.withGaps then pkgs.i3-gaps else pkgs.i3;
       config = rec {
         inherit (cfg) terminal;
         modifier = "Mod4";
@@ -130,7 +135,7 @@ in {
           };
         };
         gaps = let val = 20;
-        in {
+        in lib.mkIf cfg.withGaps {
           inner = val;
           outer = val;
           left = 0;

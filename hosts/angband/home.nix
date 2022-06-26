@@ -14,6 +14,7 @@
       rofi.enable = true;
       i3 = {
         enable = true;
+        withGaps = false;
         workspaces = [
           { name = "1:main/emacs"; }
           {
