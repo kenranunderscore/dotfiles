@@ -45,6 +45,11 @@
             always = true;
             notification = false;
           }
+          {
+            command = "setxkbmap -option 'caps:ctrl_modifier'";
+            notification = false;
+            always = true;
+          }
         ];
       };
       polybar.enable = true;
@@ -75,7 +80,7 @@
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [ xorg.xkbcomp ];
+    packages = with pkgs; [ xorg.xkbcomp xcape ];
     stateVersion = "21.03";
   };
 }
