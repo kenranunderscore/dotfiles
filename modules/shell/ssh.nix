@@ -7,6 +7,8 @@ in {
   config = {
     programs.ssh = {
       enable = true;
+      compression = true;
+
       matchBlocks = {
         "sync" = {
           host = "sync";
