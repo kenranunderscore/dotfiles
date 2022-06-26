@@ -59,7 +59,10 @@
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
     };
-    fonts.enable = true;
+    fonts = {
+      enable = true;
+      withCustomBuilds = false;
+    };
     programs = {
       emacs.emacsVersion = "stable";
       kitty = { useLoginShell = false; };

@@ -46,9 +46,11 @@ in {
   config = lib.mkIf cfg.enable {
     fonts.fontconfig.enable = lib.mkForce true;
 
-    home.packages = [
+    home.packages = lib.optionals cfg.withCustomBuilds [
       iosevkaSerif
+      (import ./input-mono.nix { inherit pkgs; })
       pragmataPro
+    ] ++ [
       pkgs.anonymousPro
       pkgs.camingo-code
       pkgs.cantarell-fonts
@@ -61,7 +63,6 @@ in {
       pkgs.hasklig
       pkgs.ibm-plex
       pkgs.inconsolata
-      (import ./input-mono.nix { inherit pkgs; })
       pkgs.iosevka
       pkgs.jetbrains-mono
       pkgs.liberation_ttf
