@@ -75,7 +75,7 @@
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [ cmus cmusfm element-desktop ];
+    packages = with pkgs; [ xorg.xkbcomp ];
     stateVersion = "21.03";
   };
 }
