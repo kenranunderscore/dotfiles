@@ -61,7 +61,7 @@ in {
 
   "bar/bottom" = mkBar true "date distro-icon cpu memory" "i3"
     (pkgs.lib.optionalString withBattery "battery "
-      + "wlan1 wlan2 audio powermenu");
+      + "wlan1 wlan2 wlan3 audio powermenu");
 
   "module/date" = {
     format = "<label>";
@@ -215,6 +215,7 @@ in {
 
   "module/wlan1" = mkWlanModule "wlp3s0";
   "module/wlan2" = mkWlanModule "wlp4s0";
+  "module/wlan3" = mkWlanModule "wlp1s0";
 
   "module/memory" = {
     format = "  <label>";
