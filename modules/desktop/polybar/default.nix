@@ -4,7 +4,14 @@ let
   cfg = config.modules.desktop.polybar;
   i3 = config.modules.desktop.i3.enable;
 in {
-  options.modules.desktop.polybar = { enable = lib.mkEnableOption "polybar"; };
+  options.modules.desktop.polybar = {
+    enable = lib.mkEnableOption "polybar";
+
+    withBattery = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     services.polybar = let
@@ -25,7 +32,7 @@ in {
       '';
       config = let
         configFile = if i3 then ./config-i3.nix else ./config-herbstluftwm.nix;
-      in import configFile pkgs;
+      in import configFile cfg.withBattery pkgs;
     };
   };
 }

@@ -52,7 +52,10 @@
           }
         ];
       };
-      polybar.enable = true;
+      polybar = {
+        enable = true;
+        withBattery = true;
+      };
       picom.enable = true;
     };
     email = {

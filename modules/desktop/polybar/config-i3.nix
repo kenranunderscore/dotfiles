@@ -1,4 +1,4 @@
-pkgs:
+withBattery: pkgs:
 
 let
   colors = {
@@ -59,8 +59,9 @@ in {
     margin-top = 0;
   };
 
-  "bar/bottom" =
-    mkBar true "date distro-icon cpu memory" "i3" "wlan1 wlan2 audio powermenu";
+  "bar/bottom" = mkBar true "date distro-icon cpu memory" "i3"
+    (pkgs.lib.optionalString withBattery "battery "
+      + "wlan1 wlan2 audio powermenu");
 
   "module/date" = {
     format = "<label>";
@@ -96,20 +97,20 @@ in {
     animation-charging-framerate = 500;
     battery = "BAT0";
     format-charging = " <animation-charging> <label-charging>";
-    format-charging-background = "#91ddff";
-    format-charging-foreground = "#141228";
+    format-charging-background = "${colors.background}";
+    format-charging-foreground = "${colors.foreground}";
     format-charging-padding = 1;
     format-discharging = "<ramp-capacity> <label-discharging>";
-    format-discharging-background = "#91ddff";
-    format-discharging-foreground = "#141228";
+    format-discharging-background = "${colors.background}";
+    format-discharging-foreground = "${colors.foreground}";
     format-discharging-padding = 1;
-    format-full-background = "#91ddff";
-    format-full-foreground = "#141228";
+    format-full-background = "${colors.background}";
+    format-full-foreground = "${colors.foreground}";
     format-full-padding = 1;
     full-at = 101;
     label-charging = "%percentage%% +%consumption%W";
     label-discharging = "%percentage%% -%consumption%W";
-    label-full = " 100%";
+    label-full = "  100%";
     poll-interval = 2;
     ramp-capacity-0 = "";
     ramp-capacity-0-foreground = "#e74c3c";
