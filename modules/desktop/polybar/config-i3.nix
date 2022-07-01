@@ -108,17 +108,17 @@ in {
     format-full-foreground = "${colors.foreground}";
     format-full-padding = 1;
     full-at = 101;
-    label-charging = "%percentage%% +%consumption%W";
-    label-discharging = "%percentage%% -%consumption%W";
+    label-charging = "%percentage%%";
+    label-discharging = "%percentage%%";
     label-full = "  100%";
     poll-interval = 2;
-    ramp-capacity-0 = "";
+    ramp-capacity-0 = " ";
     ramp-capacity-0-foreground = "#e74c3c";
-    ramp-capacity-1 = "";
+    ramp-capacity-1 = " ";
     ramp-capacity-1-foreground = "#e74c3c";
-    ramp-capacity-2 = "";
-    ramp-capacity-3 = "";
-    ramp-capacity-4 = "";
+    ramp-capacity-2 = " ";
+    ramp-capacity-3 = " ";
+    ramp-capacity-4 = " ";
   };
 
   "module/audio" = {
