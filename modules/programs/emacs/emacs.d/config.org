@@ -2001,10 +2001,9 @@ bug https://github.com/Wilfred/helpful/issues/282 is fixed.
 #+begin_src elisp
 (use-package helpful
   :after evil
-  :bind (;; ("C-h f" . helpful-callable)
-         ;; ("C-h v" . helpful-variable)
-         ;; ("C-h k" . helpful-key)
-         )
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key))
   :config
   (evil-set-initial-state 'helpful-mode 'motion))
 #+end_src
