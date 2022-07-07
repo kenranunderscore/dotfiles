@@ -70,7 +70,6 @@
     games.dwarfFortress.enable = true;
     programs = {
       emacs.emacsVersion = "git";
-      emacs.nativeComp = true;
       kitty = { useLoginShell = false; };
       nyxt.enable = true;
       sbcl.enable = true;

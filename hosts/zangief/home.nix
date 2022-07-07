@@ -111,10 +111,7 @@ in {
     };
     fonts.enable = true;
     programs = {
-      emacs = {
-        emacsVersion = "git";
-        nativeComp = true;
-      };
+      emacs.emacsVersion = "git";
       imwheel.enable = true;
       nyxt.enable = true;
       kitty = {

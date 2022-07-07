@@ -11,11 +11,6 @@ in {
       type = types.enum [ "stable" "git" ];
       default = "git";
     };
-
-    nativeComp = lib.mkOption {
-      type = types.bool;
-      default = false;
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -30,7 +25,7 @@ in {
 
       packages = let
         targetEmacs = if cfg.emacsVersion == "git" then
-          pkgs.emacsGit.override { inherit (cfg) nativeComp; }
+          pkgs.emacsGitNativeComp
         else
           pkgs.emacs;
         emacsWithPackages =
