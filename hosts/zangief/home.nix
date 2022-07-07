@@ -162,6 +162,7 @@ in {
       tileMode = true;
     };
   in with pkgs; [
+    citrix_workspace
     cloc
     dbeaver
     dhall
