@@ -7,3 +7,6 @@
 ;; be started at the end of my init file, which will then control the
 ;; GC behavior.
 (setq gc-cons-threshold most-positive-fixnum)
+
+;; Prevent loading packages before my init file is evaluated.
+(setq package-enable-at-startup nil)

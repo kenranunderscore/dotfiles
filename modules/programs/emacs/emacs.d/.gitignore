@@ -15,4 +15,5 @@ transient/
 custom.el
 projectile.cache
 projects
+straight/
 tramp

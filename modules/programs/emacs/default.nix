@@ -35,137 +35,16 @@ in {
           pkgs.emacs;
         emacsWithPackages =
           (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
-        myEmacs = emacsWithPackages (epkgs:
-          with epkgs.melpaPackages; [
-            # Essential
-            company
-            consult
-            embark
-            embark-consult
-            epkgs.elpaPackages.vertico
-            evil
-            gcmh
-            general
-            magit
-            orderless
-            smartparens
-            use-package
+        # Empty package list as I use straight.el now to try it out
+        myEmacs = emacsWithPackages (_epkgs: [ ]);
+      in with pkgs; [
+        myEmacs
 
-            # Clojure
-            cider
-            clojure-mode
-
-            # Common Lisp
-            sly
-            sly-asdf
-
-            # CSV
-            epkgs.csv-mode
-
-            # Dhall
-            dhall-mode
-
-            # Docker
-            dockerfile-mode
-
-            # F#
-            fsharp-mode
-
-            # Fish
-            fish-mode
-
-            # Haskell
-            haskell-mode
-
-            # Ini
-            ini-mode
-
-            # Java
-            meghanada
-
-            # Markdown
-            markdown-mode
-
-            # Nim
-            nim-mode
-
-            # Nix
-            nix-mode
-
-            # OCaml
-            merlin
-            merlin-eldoc
-            tuareg
-
-            # Org
-            epkgs.org
-            org-appear
-            org-bullets
-            org-present
-            org-roam
-
-            # PlantUML
-            plantuml-mode
-
-            # PureScript
-            purescript-mode
-            psc-ide
-
-            # Python
-            anaconda-mode
-            pyimport
-
-            # Racket
-            racket-mode
-
-            # Rust
-            rust-mode
-
-            # YAML
-            yaml-mode
-
-            # Themes
-            color-theme-sanityinc-tomorrow
-            doom-themes
-
-            # Utility
-            ace-window
-            all-the-icons
-            all-the-icons-dired
-            all-the-icons-ibuffer
-            default-text-scale
-            diminish
-            diredfl
-            editorconfig
-            eglot
-            envrc
-            evil-cleverparens
-            evil-collection
-            evil-org
-            evil-snipe
-            evil-surround
-            evil-visual-mark-mode
-            git-gutter
-            git-modes
-            git-timemachine
-            gnus-alias
-            helpful
-            hl-todo
-            htmlize
-            hydra
-            lispy
-            lispyville
-            magit-todos
-            marginalia
-            epkgs.elpaPackages.rainbow-mode
-            reformatter
-            ripgrep
-            vterm
-            wgrep
-            which-key
-            yasnippet
-          ]);
-      in [ myEmacs ];
+        # Programs needed at runtime or for straight to build packages
+        gcc
+        meson
+        ninja
+      ];
     };
   };
 }

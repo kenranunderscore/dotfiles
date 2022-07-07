@@ -5,15 +5,31 @@
 
 * Package management
 
-I'm usually specifying the Emacs I'm using via [[https://github.com/nixos/nixpkgs][nixpkgs]] / my
-[[https://github.com/nix-community/home-manager][home-manager]] setup, but it's still useful to have MELPA accessible
-directly in case something is broken in =nixpkgs=.  This seems to happen
-rather often with packages from ELPA especially.
+I'm specifying the Emacs I'm using via [[https://github.com/nixos/nixpkgs][nixpkgs]] / my [[https://github.com/nix-community/home-manager][home-manager]]
+setup, but for package management I'm currently test driving
+[[https://github.com/radian-software/straight.el][straight.el]].  Having the packages come from =nixpkgs= (marked as
+=external= in =list-packages=) is nice, but requires a =nixos-rebuild= and
+restarting Emacs after making some changes.  =straight.el= should make
+the process of quickly trying out packages much simpler, and
+afterwards they're neither gone nor silently "leaking" (i.e.,
+automatically loaded even though I don't use them anymore) into Emacs.
+
+The script below is taken right from =straight.el='s readme.
 
 #+begin_src elisp
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+(defvar bootstrap-version)
+
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 #+end_src
 
 Install [[https://github.com/jwiegley/use-package][use-package]].  The =nixpkgs= version of Emacs on my systems
@@ -22,16 +38,16 @@ self-compiling Emacs or on Windows I rely on =use-package= for the
 installation of most/all the packages.
 
 #+begin_src elisp
-(unless (package-installed-p 'use-package)
-  (package-install package))
+(straight-use-package 'use-package)
 #+end_src
 
-Due the aforementioned setup I used to specify =:ensure nil= in my
-=use-package= calls.  Now that I've run into lots of problems especially
-with ELPA packages I want to have a fallback method.
+Now make every =use-package= block below behave as if I had specified
+=:straight t= by default.  Note that this requires me to handle
+configuration of built-in packages explicitly, usually by adding
+=:straight (:type built-in)=.
 
 #+begin_src elisp
-(setq use-package-always-ensure t)
+(setq straight-use-package-by-default t)
 #+end_src
 
 * Keybinding management
@@ -83,51 +99,6 @@ when the switch to the literate config is complete.
   "Open my config.org file."
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
-#+end_src
-
-This is where my custom ELisp files reside.
-
-#+begin_src elisp
-(setq kenran/lisp-dir (concat user-emacs-directory "lisp/"))
-#+end_src
-
-And this is where I put custom themes.
-
-#+begin_src elisp
-(setq custom-theme-directory (concat kenran/lisp-dir "themes/"))
-#+end_src
-
-Without loading the =f= package the following function won't work any
-longer.  It must have broken at some point when I switched to Emacs
-29, or some other package must have loaded it before I ever tried
-opening any of my configuration files.
-
-#+begin_src elisp
-(require 'f)
-
-(defun kenran/open-other-config-file (file)
-  "Open FILE of the config files in the lisp directory."
-  (interactive
-   (list
-    (completing-read
-     "Config file: "
-     (mapcar #'f-filename
-             (f-files kenran/lisp-dir)))))
-  (find-file (file-truename (concat kenran/lisp-dir file))))
-#+end_src
-
-A similar thing for opening custom theme files quickly.
-
-#+begin_src elisp
-(defun kenran/open-custom-theme-file (file)
-  "Open FILE of the themes in `custom-theme-directory'."
-  (interactive
-   (list
-    (completing-read
-     "Theme: "
-     (mapcar #'f-filename
-             (f-files custom-theme-directory)))))
-  (find-file (file-truename (concat custom-theme-directory file))))
 #+end_src
 
 * Custom Emacs look
@@ -469,7 +440,6 @@ anything that Prot makes available).
 
 #+begin_src elisp
 (use-package modus-themes
-  :ensure nil
   :defer t
   :config
   (setq modus-themes-subtle-line-numbers t)
@@ -708,6 +678,17 @@ Looking at you, [[https://go.dev/][Go]].
 (setq read-file-name-completion-ignore-case t)
 #+end_src
 
+** Hide minor modes from the modeline
+
+The =diminish= package enables us to hide minor modes from the modeline.
+It's especially useful for certain modes that are globally enabled
+anyway.  =Use-package= has built-in support for this available with the
+=:diminish= keyword.
+
+#+begin_src elisp
+(use-package diminish)
+#+end_src
+
 * Vim emulation
 
 ** Leader keys
@@ -929,8 +910,6 @@ accessed with the leader key, =SPC=.
   ;; Emacs config
   "e" '(:ignore t :which-key "emacs")
   "e e" '(kenran/open-init-file :which-key "edit config.org")
-  "e c" '(kenran/open-other-config-file :which-key "edit other config file")
-  "e t" '(kenran/open-custom-theme-file :which-key "edit custom theme")
   ;; Additional help commands
   "h" '(:ignore t :which-key "help")
   "h m" 'man)
@@ -1109,6 +1088,255 @@ Integrate =embark= with =consult=.
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
 #+end_src
 
+* Org mode
+
+I want my headers to stand out by being really big.  I also like using
+=variable-pitch-mode=, which makes it so only code, verbatim, and some
+other things are written with my current monospace / fixed-width font,
+and the rest uses a serif font more suitable for longer texts.  But
+customizing these faces with =set-face-attribute= has the usual problems
+with the initial daemon frame, and doesn't hold up when switching
+fonts or themes.  That's why I've put those changes into the following
+functions which I can call whenever these sorts of changes happen,
+either through hooks or manual trigger.
+
+Note that some themes, like =modus-{vivendi,operandi}=, might set the
+=:inherit= attribute on a face, in which case a naive
+~(set-face-attribute face nil :inherit 'fixed-pitch)~ overrides the
+theme settings.  To circumvent this I've written the following
+function that appends a single new value to the current =:inherit=
+attribute value of a face.
+
+#+begin_src elisp
+(defun kenran/inherit-fixed-pitch (face)
+  "Append `fixed-pitch' to the `:inherit' attribute of FACE."
+  (let* ((current (face-attribute face :inherit))
+         (new (cond
+               ((eq 'unspecified current)
+                'fixed-pitch)
+               ((listp current)
+                (if (member 'fixed-pitch current)
+                    current
+                  (cons 'fixed-pitch current)))
+               ((not (eq 'fixed-pitch current))
+                (list 'fixed-pitch current)))))
+    (set-face-attribute face nil :inherit new)))
+
+(defun kenran/org-font-setup ()
+  "Set the face attributes for code, verbatim, and other markup
+elements.  Also increase org header size."
+  (interactive)
+  (kenran/inherit-fixed-pitch 'org-block)
+  (kenran/inherit-fixed-pitch 'org-block-begin-line)
+  (kenran/inherit-fixed-pitch 'org-block-end-line)
+  (kenran/inherit-fixed-pitch 'org-document-info-keyword)
+  (kenran/inherit-fixed-pitch 'org-document-info)
+  (kenran/inherit-fixed-pitch 'org-code)
+  (kenran/inherit-fixed-pitch 'org-table)
+  (kenran/inherit-fixed-pitch 'org-verbatim)
+  (kenran/inherit-fixed-pitch 'org-checkbox)
+  (kenran/inherit-fixed-pitch 'org-meta-line)
+  (kenran/inherit-fixed-pitch 'org-special-keyword)
+  ;; (kenran/inherit-fixed-pitch 'org-indent)
+  (kenran/inherit-fixed-pitch 'org-link)
+  (kenran/inherit-fixed-pitch 'org-todo)
+  (kenran/inherit-fixed-pitch 'org-done)
+  (kenran/inherit-fixed-pitch 'org-drawer)
+  (kenran/inherit-fixed-pitch 'org-property-value)
+  (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold)
+  (dolist (face '((org-level-1 . 1.0)
+                  (org-level-2 . 1.0)
+                  (org-level-3 . 1.0)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
+    ;; (set-face-attribute (car face) nil
+    ;;                     :font kenran/serif-font
+    ;;                     :height (cdr face)
+    ;;                     :weight 'bold)
+    ))
+
+(add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
+#+end_src
+
+When writing text with =org=, =auto-fill-mode= should be enabled to
+automatically break overly long lines into smaller pieces when typing.
+One may still use =M-q= to re-fill paragraphs when editing text.  After
+loading =org=, a custom font setup might run to adjust the headers.
+
+#+begin_src elisp
+(use-package org
+  ;; Use the built-in version of org (which is quite up-to-date as I'm
+  ;; always using emacs HEAD).  This circumvents problems with
+  ;; 'org-compat of the older version having been loaded.
+  :straight (:type built-in)
+  :hook
+  ((org-mode . auto-fill-mode)
+   ;; (org-mode . variable-pitch-mode)
+   (org-trigger . save-buffer))
+  :diminish org-indent-mode
+  :custom
+  ((org-startup-indented t)
+   (org-startup-folded 'content)
+   (org-directory "~/org")
+   (org-log-done t)
+   (org-special-ctrl-a/e t)
+   ;; If this has a value greater than 0, every RET press
+   ;; keeps indenting the source block further and further.
+   (org-edit-src-content-indentation 0)
+   (org-default-notes-file "~/org/notes.org")
+   (org-agenda-files '("~/org/inbox.org"
+                       "~/org/gtd.org"
+                       "~/org/someday.org"))
+   (org-agenda-restore-windows-after-quit t)
+   (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
+                         ("~/org/someday.org" :level . 1)))
+   (org-capture-templates '(("t" "Todo" entry
+                             (file+headline "~/org/inbox.org" "Tasks")
+                             "* TODO %i%?")
+                            ("n" "Note" entry
+                             (file+headline "~/org/notes.org" "Notes")
+                             "* %?\n%a\nNote taken on %U")))
+   (org-capture-bookmark nil)
+   (org-bookmark-names-plist nil)
+   (org-todo-keywords '((sequence
+                         "TODO(t)"
+                         "WAITING(w)"
+                         "|"
+                         "DONE(d)"
+                         "CANCELLED(c)")))
+   (org-html-htmlize-output-type 'css))
+  :config
+  (kenran/org-font-setup)
+  (setq-default org-hide-emphasis-markers t)
+  (advice-add 'org-refile
+              :after (lambda (&rest _) (org-save-all-org-buffers)))
+  :bind (:map org-mode-map
+              ("M-n" . org-next-visible-heading)
+              ("M-p" . org-previous-visible-heading)))
+#+end_src
+
+** Keybindings
+
+Add some globally useful =org= keybindings under =SPC o=, like for
+capturing, storing links etc.
+
+#+begin_src elisp
+(with-leader
+  "o" '(:which-key "org-mode" :ignore t)
+  "o a" 'org-agenda
+  "o c" 'org-capture
+  "o l" 'org-store-link
+  "o f" 'org-cycle-agenda-files
+  "o s" 'org-save-all-org-buffers
+  "o p" '((lambda () (interactive) (org-publish-all t)) :which-key "publish all")
+  "o t" '(:which-key "toggle" :ignore t))
+#+end_src
+
+** Beautiful bullet points
+
+#+begin_src elisp
+(use-package org-bullets
+  ;; :hook (org-mode . org-bullets-mode)
+  :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+#+end_src
+
+Also render unordered list bullet points as dots instead of =-= or =+=.
+
+#+begin_src elisp
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ *\\([-]\\) "
+    (0 (prog1 ()
+         (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+end_src
+
+** Show emphasis markers depending on point
+
+In my =org= configuration I'm setting =org-hide-emphasis-markers= to =t=,
+thus hiding certain markup elements around text.  Unfortunately it
+seem to be currently impossible to switch this interactively, or I
+just don't know how, which prevents me from simply adding a keybinding
+to toggle it.
+
+Thankfully a new package has appeared recently: [[https://github.com/awth13/org-appear][org-appear]]. It reacts
+to the position of point to automatically show surrounding markup.
+
+Since I'm using =evil-mode= I set the =org-appear-trigger= to ='manual=, and
+add hooks that show/hide the markers to entering/leaving insert mode.
+This might turn out to be a hindrance after all, since bindings like
+=ciw= become a bit weird to work with.  I might end up actually using
+the ='always= option value after all.
+
+#+begin_src elisp
+(use-package org-appear
+  :hook ((org-mode . org-appear-mode))
+  :config
+  (setq org-appear-autolinks t)
+  (setq org-appear-autosubmarkers t)
+  (setq org-appear-autoentities t)
+  (setq org-appear-autokeywords t)
+  (setq org-appear-trigger 'always))
+#+end_src
+
+** Org as a Zettelkasten implementation
+
+This is a very basic setup for =org-roam=.  I don't use the Zettelkasten
+approach yet, but might in the future.  My synchronization setup with
+=syncthing= should handle this well.
+
+#+begin_src elisp
+(use-package org-roam
+  :defer t
+  :after org
+  :init
+  (setq org-roam-v2-ack t)
+  ;; Didn't work for the initial setup when set in :custom.
+  (setq org-roam-directory (file-truename "~/org/roam/"))
+  :custom
+  (org-roam-db-location (expand-file-name
+                         (concat (system-name) "-roam" ".db")
+                         org-roam-directory))
+  :config
+  (org-roam-setup))
+#+end_src
+
+*** Keybindings for =org-roam=
+
+#+begin_src elisp
+(with-leader
+  "o r" '(:which-key "roam" :ignore t)
+  "o r c" 'org-roam-capture
+  "o r f" 'org-roam-node-find
+  "o r i" 'org-roam-node-insert)
+#+end_src
+
+** Short presentations with org
+
+#+begin_src elisp
+(use-package org-present
+  :hook ((org-present-mode . (lambda ()
+                               (org-present-big)
+                               (org-display-inline-images)
+                               (org-present-hide-cursor)
+                               (org-present-read-only)))
+         (org-present-mode-quit . (lambda ()
+                                    (org-present-small)
+                                    (org-remove-inline-images)
+                                    (org-present-show-cursor)
+                                    (org-present-read-write)))))
+#+end_src
+
+** Enable syntax highlighting when exporting to HTML
+
+#+begin_src elisp
+(use-package htmlize
+  :defer t
+  :after ox)
+#+end_src
+
 * Auto-completion popups
 
 [[https://company-mode.github.io/][company-mode]] provides textual auto-completions in nearly every
@@ -1251,96 +1479,98 @@ Note that =mu4e= is one of those packages that would behave strangely
 when using the =evil-collection= integration.
 
 #+begin_src elisp
-(use-package mu4e
-  :ensure nil
-  :defer t
-  :commands (mu4e)
-  :config
-  (setq mail-user-agent 'mu4e-user-agent)
-  (setq mu4e-completing-read-function #'completing-read)
-  ;; I don't sync drafts to either of the accounts
-  (setq mu4e-confirm-quit nil)
-  (setq mu4e-change-filenames-when-moving t)
-  (setq mu4e-drafts-folder "/drafts")
-  (setq mu4e-attachment-dir "~/Downloads/")
-  (setq mu4e-contexts
-        `(,(make-mu4e-context
-            :name "mailbox"
-            :match-func (lambda (msg)
-                          (when msg
-                            (string-prefix-p "/mailbox"
-                                             (mu4e-message-field msg :maildir)
-                                             t)))
-            :vars '((user-mail-address . "johannes.maier@mailbox.org")
-                    (mu4e-compose-signature . nil)
-                    (mu4e-sent-folder . "/mailbox/Sent")
-                    (mu4e-trash-folder . "/mailbox/Trash")
-                    (mu4e-refile-folder . (lambda (msg)
-                                            (let* ((date (mu4e-message-field-at-point :date))
-                                                   (year (decoded-time-year (decode-time date))))
-                                              (concat "/mailbox/Archive/"
-                                                      (number-to-string year)))))))
-          ,(make-mu4e-context
-            :name "ag"
-            :match-func (lambda (msg)
-                          (when msg
-                            (string-prefix-p "/ag"
-                                             (mu4e-message-field msg :maildir)
-                                             t)))
-            :vars `((user-mail-address . "johannes.maier@active-group.de")
-                    ;; FIXME: Signature in a file?
-                    (mu4e-compose-signature . ,(concat
-                                                "Johannes Maier\n"
-                                                "johannes.maier@active-group.de\n\n"
-                                                "+49 (7071) 70896-67\n\n"
-                                                "Active Group GmbH\n"
-                                                "Hechinger Str. 12/1\n"
-                                                "72072 Tübingen\n"
-                                                "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-                                                "Geschäftsführer: Dr. Michael Sperber"))
-                    (mu4e-sent-folder . "/ag/Sent")
-                    (mu4e-refile-folder . (lambda (msg)
-                                            (let* ((date (mu4e-message-field-at-point :date))
-                                                   (year (decoded-time-year (decode-time date))))
-                                              (concat "/ag/Archives/"
-                                                      (number-to-string year)))))
-                    (mu4e-trash-folder . "/ag/Trash")))))
-  (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
-                         (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
-                         (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
-                         (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
-  (setf (alist-get 'trash mu4e-marks)
-        (list :char '("d" . "▼")
-              :prompt "dtrash"
-              :dyn-target (lambda (target msg)
-                            (mu4e-get-trash-folder msg))
-              :action (lambda (docid msg target)
-                        (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
-  (setq mu4e-headers-fields '((:human-date . 12)
-                              (:flags . 6)
-                              (:maildir . 15)
-                              (:mailing-list . 10)
-                              (:from . 22)
-                              (:subject)))
-  (setq mu4e-context-policy 'pick-first)
-  (setq mu4e-compose-policy 'ask)
-  ;; Getting mail via mbsync
-  (setq mu4e-get-mail-command "mbsync -a")
-  ;; Composing emails
-  (setq message-send-mail-function #'message-send-mail-with-sendmail)
-  (setq send-mail-function #'message-send-mail-with-sendmail)
-  (setq message-sendmail-envelope-from 'header)
-  (setq mail-envelope-from 'header)
-  (setq mail-specify-envelope-from 'header)
-  (setq message-kill-buffer-on-exit t)
-  ;; Visuals
-  (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
-  (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
-  (setq mu4e-headers-thread-child-prefix '("├> " . "├▶"))
-  (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
-  (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
-  (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
-  (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
+  (use-package mu4e
+    :straight
+    (:local-repo "~/.nix-profile/share/emacs/site-lisp/mu4e"
+     :type built-in)
+    :defer t
+    :commands (mu4e)
+    :config
+    (setq mail-user-agent 'mu4e-user-agent)
+    (setq mu4e-completing-read-function #'completing-read)
+    ;; I don't sync drafts to either of the accounts
+    (setq mu4e-confirm-quit nil)
+    (setq mu4e-change-filenames-when-moving t)
+    (setq mu4e-drafts-folder "/drafts")
+    (setq mu4e-attachment-dir "~/Downloads/")
+    (setq mu4e-contexts
+          `(,(make-mu4e-context
+              :name "mailbox"
+              :match-func (lambda (msg)
+                            (when msg
+                              (string-prefix-p "/mailbox"
+                                               (mu4e-message-field msg :maildir)
+                                               t)))
+              :vars '((user-mail-address . "johannes.maier@mailbox.org")
+                      (mu4e-compose-signature . nil)
+                      (mu4e-sent-folder . "/mailbox/Sent")
+                      (mu4e-trash-folder . "/mailbox/Trash")
+                      (mu4e-refile-folder . (lambda (msg)
+                                              (let* ((date (mu4e-message-field-at-point :date))
+                                                     (year (decoded-time-year (decode-time date))))
+                                                (concat "/mailbox/Archive/"
+                                                        (number-to-string year)))))))
+            ,(make-mu4e-context
+              :name "ag"
+              :match-func (lambda (msg)
+                            (when msg
+                              (string-prefix-p "/ag"
+                                               (mu4e-message-field msg :maildir)
+                                               t)))
+              :vars `((user-mail-address . "johannes.maier@active-group.de")
+                      ;; FIXME: Signature in a file?
+                      (mu4e-compose-signature . ,(concat
+                                                  "Johannes Maier\n"
+                                                  "johannes.maier@active-group.de\n\n"
+                                                  "+49 (7071) 70896-67\n\n"
+                                                  "Active Group GmbH\n"
+                                                  "Hechinger Str. 12/1\n"
+                                                  "72072 Tübingen\n"
+                                                  "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+                                                  "Geschäftsführer: Dr. Michael Sperber"))
+                      (mu4e-sent-folder . "/ag/Sent")
+                      (mu4e-refile-folder . (lambda (msg)
+                                              (let* ((date (mu4e-message-field-at-point :date))
+                                                     (year (decoded-time-year (decode-time date))))
+                                                (concat "/ag/Archives/"
+                                                        (number-to-string year)))))
+                      (mu4e-trash-folder . "/ag/Trash")))))
+    (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
+                           (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
+                           (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
+                           (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
+    (setf (alist-get 'trash mu4e-marks)
+          (list :char '("d" . "▼")
+                :prompt "dtrash"
+                :dyn-target (lambda (target msg)
+                              (mu4e-get-trash-folder msg))
+                :action (lambda (docid msg target)
+                          (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
+    (setq mu4e-headers-fields '((:human-date . 12)
+                                (:flags . 6)
+                                (:maildir . 15)
+                                (:mailing-list . 10)
+                                (:from . 22)
+                                (:subject)))
+    (setq mu4e-context-policy 'pick-first)
+    (setq mu4e-compose-policy 'ask)
+    ;; Getting mail via mbsync
+    (setq mu4e-get-mail-command "mbsync -a")
+    ;; Composing emails
+    (setq message-send-mail-function #'message-send-mail-with-sendmail)
+    (setq send-mail-function #'message-send-mail-with-sendmail)
+    (setq message-sendmail-envelope-from 'header)
+    (setq mail-envelope-from 'header)
+    (setq mail-specify-envelope-from 'header)
+    (setq message-kill-buffer-on-exit t)
+    ;; Visuals
+    (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
+    (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
+    (setq mu4e-headers-thread-child-prefix '("├> " . "├▶"))
+    (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
+    (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
+    (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
+    (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
 #+end_src
 
 Bind e-mail management to the global hotkey =SPC m=.
@@ -1351,17 +1581,6 @@ Bind e-mail management to the global hotkey =SPC m=.
 #+end_src
   
 * Package-specific configuration
-** Hide minor modes from the modeline
-
-The =diminish= package enables us to hide minor modes from the modeline.
-It's especially useful for certain modes that are globally enabled
-anyway.  =Use-package= has built-in support for this available with the
-=:diminish= keyword.
-
-#+begin_src elisp
-(use-package diminish)
-#+end_src
-
 ** Mode-specific code snippets
 
 #+begin_src elisp
@@ -1518,258 +1737,6 @@ header.
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc")
   :hook ((markdown-mode gfm-mode) . auto-fill-mode))
-#+end_src
-
-** Org mode
-
-I want my =org= files to have indentation corresponding to the header
-level.
-
-#+begin_src elisp
-(use-package org-indent
-  :ensure nil
-  :diminish org-indent-mode)
-#+end_src
-
-I want my headers to stand out by being really big.  I also like using
-=variable-pitch-mode=, which makes it so only code, verbatim, and some
-other things are written with my current monospace / fixed-width font,
-and the rest uses a serif font more suitable for longer texts.  But
-customizing these faces with =set-face-attribute= has the usual problems
-with the initial daemon frame, and doesn't hold up when switching
-fonts or themes.  That's why I've put those changes into the following
-functions which I can call whenever these sorts of changes happen,
-either through hooks or manual trigger.
-
-Note that some themes, like =modus-{vivendi,operandi}=, might set the
-=:inherit= attribute on a face, in which case a naive
-~(set-face-attribute face nil :inherit 'fixed-pitch)~ overrides the
-theme settings.  To circumvent this I've written the following
-function that appends a single new value to the current =:inherit=
-attribute value of a face.
-
-#+begin_src elisp
-(defun kenran/inherit-fixed-pitch (face)
-  "Append `fixed-pitch' to the `:inherit' attribute of FACE."
-  (let* ((current (face-attribute face :inherit))
-         (new (cond
-               ((eq 'unspecified current)
-                'fixed-pitch)
-               ((listp current)
-                (if (member 'fixed-pitch current)
-                    current
-                  (cons 'fixed-pitch current)))
-               ((not (eq 'fixed-pitch current))
-                (list 'fixed-pitch current)))))
-    (set-face-attribute face nil :inherit new)))
-
-(defun kenran/org-font-setup ()
-  "Set the face attributes for code, verbatim, and other markup
-elements.  Also increase org header size."
-  (interactive)
-  (kenran/inherit-fixed-pitch 'org-block)
-  (kenran/inherit-fixed-pitch 'org-block-begin-line)
-  (kenran/inherit-fixed-pitch 'org-block-end-line)
-  (kenran/inherit-fixed-pitch 'org-document-info-keyword)
-  (kenran/inherit-fixed-pitch 'org-document-info)
-  (kenran/inherit-fixed-pitch 'org-code)
-  (kenran/inherit-fixed-pitch 'org-table)
-  (kenran/inherit-fixed-pitch 'org-verbatim)
-  (kenran/inherit-fixed-pitch 'org-checkbox)
-  (kenran/inherit-fixed-pitch 'org-meta-line)
-  (kenran/inherit-fixed-pitch 'org-special-keyword)
-  (kenran/inherit-fixed-pitch 'org-indent)
-  (kenran/inherit-fixed-pitch 'org-link)
-  (kenran/inherit-fixed-pitch 'org-todo)
-  (kenran/inherit-fixed-pitch 'org-done)
-  (kenran/inherit-fixed-pitch 'org-drawer)
-  (kenran/inherit-fixed-pitch 'org-property-value)
-  (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold)
-  (dolist (face '((org-level-1 . 1.0)
-                  (org-level-2 . 1.0)
-                  (org-level-3 . 1.0)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    ;; (set-face-attribute (car face) nil
-    ;;                     :font kenran/serif-font
-    ;;                     :height (cdr face)
-    ;;                     :weight 'bold)
-    ))
-
-(add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
-#+end_src
-
-When writing text with =org=, =auto-fill-mode= should be enabled to
-automatically break overly long lines into smaller pieces when typing.
-One may still use =M-q= to re-fill paragraphs when editing text.  After
-loading =org=, a custom font setup might run to adjust the headers.
-
-#+begin_src elisp
-(use-package org
-  :hook
-  ((org-mode . auto-fill-mode)
-   ;; (org-mode . variable-pitch-mode)
-   (org-trigger . save-buffer))
-  :custom
-  ((org-startup-indented t)
-   (org-startup-folded 'content)
-   (org-directory "~/org")
-   (org-log-done t)
-   (org-special-ctrl-a/e t)
-   ;; If this has a value greater than 0, every RET press
-   ;; keeps indenting the source block further and further.
-   (org-edit-src-content-indentation 0)
-   (org-default-notes-file "~/org/notes.org")
-   (org-agenda-files '("~/org/inbox.org"
-                       "~/org/gtd.org"
-                       "~/org/someday.org"))
-   (org-agenda-restore-windows-after-quit t)
-   (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
-                         ("~/org/someday.org" :level . 1)))
-   (org-capture-templates '(("t" "Todo" entry
-                             (file+headline "~/org/inbox.org" "Tasks")
-                             "* TODO %i%?")
-                            ("n" "Note" entry
-                             (file+headline "~/org/notes.org" "Notes")
-                             "* %?\n%a\nNote taken on %U")))
-   (org-capture-bookmark nil)
-   (org-bookmark-names-plist nil)
-   (org-todo-keywords '((sequence
-                         "TODO(t)"
-                         "WAITING(w)"
-                         "|"
-                         "DONE(d)"
-                         "CANCELLED(c)")))
-   (org-html-htmlize-output-type 'css))
-  :config
-  (kenran/org-font-setup)
-  (setq-default org-hide-emphasis-markers t)
-  (advice-add 'org-refile
-              :after (lambda (&rest _) (org-save-all-org-buffers)))
-  :bind (:map org-mode-map
-              ("M-n" . org-next-visible-heading)
-              ("M-p" . org-previous-visible-heading)))
-#+end_src
-
-*** Keybindings
-
-Add some globally useful =org= keybindings under =SPC o=, like for
-capturing, storing links etc.
-
-#+begin_src elisp
-(with-leader
-  "o" '(:which-key "org-mode" :ignore t)
-  "o a" 'org-agenda
-  "o c" 'org-capture
-  "o l" 'org-store-link
-  "o f" 'org-cycle-agenda-files
-  "o s" 'org-save-all-org-buffers
-  "o p" '((lambda () (interactive) (org-publish-all t)) :which-key "publish all")
-  "o t" '(:which-key "toggle" :ignore t))
-#+end_src
-
-*** Beautiful bullet points
-
-#+begin_src elisp
-(use-package org-bullets
-  ;; :hook (org-mode . org-bullets-mode)
-  :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-#+end_src
-
-Also render unordered list bullet points as dots instead of =-= or =+=.
-
-#+begin_src elisp
-(font-lock-add-keywords
- 'org-mode
- '(("^ *\\([-]\\) "
-    (0 (prog1 ()
-         (compose-region (match-beginning 1) (match-end 1) "•"))))))
-#+end_src
-
-*** Show emphasis markers depending on point
-
-In my =org= configuration I'm setting =org-hide-emphasis-markers= to =t=,
-thus hiding certain markup elements around text.  Unfortunately it
-seem to be currently impossible to switch this interactively, or I
-just don't know how, which prevents me from simply adding a keybinding
-to toggle it.
-
-Thankfully a new package has appeared recently: [[https://github.com/awth13/org-appear][org-appear]]. It reacts
-to the position of point to automatically show surrounding markup.
-
-Since I'm using =evil-mode= I set the =org-appear-trigger= to ='manual=, and
-add hooks that show/hide the markers to entering/leaving insert mode.
-This might turn out to be a hindrance after all, since bindings like
-=ciw= become a bit weird to work with.  I might end up actually using
-the ='always= option value after all.
-
-#+begin_src elisp
-(use-package org-appear
-  :hook ((org-mode . org-appear-mode))
-  :config
-  (setq org-appear-autolinks t)
-  (setq org-appear-autosubmarkers t)
-  (setq org-appear-autoentities t)
-  (setq org-appear-autokeywords t)
-  (setq org-appear-trigger 'always))
-#+end_src
-
-*** Org as a Zettelkasten implementation
-
-This is a very basic setup for =org-roam=.  I don't use the Zettelkasten
-approach yet, but might in the future.  My synchronization setup with
-=syncthing= should handle this well.
-
-#+begin_src elisp
-(use-package org-roam
-  :ensure t
-  :init
-  (setq org-roam-v2-ack t)
-  ;; Didn't work for the initial setup when set in :custom.
-  (setq org-roam-directory (file-truename "~/org/roam/"))
-  :custom
-  (org-roam-db-location (expand-file-name
-                         (concat (system-name) "-roam" ".db")
-                         org-roam-directory))
-  :config
-  (org-roam-setup))
-#+end_src
-
-**** Keybindings for =org-roam=
-
-#+begin_src elisp
-(with-leader
-  "o r" '(:which-key "roam" :ignore t)
-  "o r c" 'org-roam-capture
-  "o r f" 'org-roam-node-find
-  "o r i" 'org-roam-node-insert)
-#+end_src
-
-*** Short presentations with org
-
-#+begin_src elisp
-(use-package org-present
-  :hook ((org-present-mode . (lambda ()
-                               (org-present-big)
-                               (org-display-inline-images)
-                               (org-present-hide-cursor)
-                               (org-present-read-only)))
-         (org-present-mode-quit . (lambda ()
-                                    (org-present-small)
-                                    (org-remove-inline-images)
-                                    (org-present-show-cursor)
-                                    (org-present-read-write)))))
-#+end_src
-
-*** Enable syntax highlighting when exporting to HTML
-
-#+begin_src elisp
-(use-package htmlize
-  :defer t
-  :after ox)
 #+end_src
 
 ** Haskell
@@ -2447,11 +2414,9 @@ Make whitespace symbols visible.
 
 #+begin_src elisp
 (use-package face-remap
-  :ensure nil
   :diminish buffer-face-mode)
 
 (use-package autorevert
-  :ensure nil
   :diminish auto-revert-mode)
 #+end_src
 
@@ -2459,7 +2424,7 @@ Make whitespace symbols visible.
 
 #+begin_src elisp
 (use-package simple
-  :ensure nil
+  :straight (:type built-in)
   :diminish auto-fill-function
   :config
   (setq eval-expression-print-length nil)
@@ -2470,7 +2435,6 @@ Make whitespace symbols visible.
 
 #+begin_src elisp
 (use-package eldoc
-  :ensure nil
   :diminish eldoc-mode
   :config
   (advice-add 'eldoc-doc-buffer
@@ -2484,7 +2448,7 @@ Make whitespace symbols visible.
 
 #+begin_src elisp
 (use-package dired
-  :ensure nil
+  :straight (:type built-in)
   :defer t
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
@@ -2507,7 +2471,7 @@ Beautify =dired= a bit.
 
 #+begin_src elisp
 (use-package ediff-wind
-  :ensure nil
+  :straight (:type built-in)
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
