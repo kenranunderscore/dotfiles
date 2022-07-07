@@ -157,11 +157,7 @@ in {
     syncthing.enable = true;
   };
 
-  home.packages = let
-    dcss = (pkgs.crawl.overrideAttrs (_: { src = inputs.crawl; })).override {
-      tileMode = true;
-    };
-  in with pkgs; [
+  home.packages = with pkgs; [
     citrix_workspace
     cloc
     dbeaver
