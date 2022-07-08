@@ -689,6 +689,100 @@ anyway.  =Use-package= has built-in support for this available with the
 (use-package diminish)
 #+end_src
 
+* Built-in packages
+** Display whitespace
+
+Make whitespace symbols visible.
+
+#+begin_src elisp
+(use-package whitespace
+  :config
+  (setq whitespace-style
+        '(face spaces tabs trailing lines-tail space-before-tab
+          indentation empty space-after-tab space-mark tab-mark
+          missing-newline-at-eof))
+  (setq whitespace-line-column 100)
+  (setq whitespace-global-modes
+        '(not magit-status-mode)))
+#+end_src
+
+** Render manpages in Emacs
+
+#+begin_src elisp
+(use-package man
+  :defer t
+  :config
+  ;; As soon as it is ready open the manpage in a separate, focused
+  ;; window.
+  (setq Man-notify-method 'aggressive))
+#+end_src
+
+** Diminish only
+
+#+begin_src elisp
+(use-package face-remap
+  :diminish buffer-face-mode)
+
+(use-package autorevert
+  :diminish auto-revert-mode)
+#+end_src
+
+** Don't trim ELisp evaluation results
+
+#+begin_src elisp
+(use-package simple
+  :straight (:type built-in)
+  :diminish auto-fill-function
+  :config
+  (setq eval-expression-print-length nil)
+  (setq eval-expression-print-level nil))
+#+end_src
+
+** ElDoc
+
+#+begin_src elisp
+(use-package eldoc
+  :diminish eldoc-mode
+  :config
+  (advice-add 'eldoc-doc-buffer
+              :after
+              (defun kenran/focus-eldoc-buffer ()
+                (message (buffer-name (current-buffer)))
+                (pop-to-buffer eldoc--doc-buffer))))
+#+end_src
+
+** Directory editor
+
+#+begin_src elisp
+(use-package dired
+  :straight (:type built-in)
+  :defer t
+  :config
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-create-destination-dirs 'ask)
+  :custom
+  ;; Sort directories to the top
+  (dired-listing-switches "-la --group-directories-first"))
+#+end_src
+
+Beautify =dired= a bit.
+
+#+begin_src elisp
+(use-package diredfl
+  :defer t
+  :after dired
+  :hook (dired-mode . diredfl-mode))
+#+end_src
+
+** Ediff
+
+#+begin_src elisp
+(use-package ediff-wind
+  :straight (:type built-in)
+  :config
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain))
+#+end_src
+
 * Vim emulation
 
 ** Leader keys
@@ -2379,100 +2473,6 @@ TODO
 
 (with-leader
   "s s" '(hydra-global-zoom/body :which-key "font zoom"))
-#+end_src
-
-** Built-in packages
-*** Display whitespace
-
-Make whitespace symbols visible.
-
-#+begin_src elisp
-(use-package whitespace
-  :config
-  (setq whitespace-style
-        '(face spaces tabs trailing lines-tail space-before-tab
-          indentation empty space-after-tab space-mark tab-mark
-          missing-newline-at-eof))
-  (setq whitespace-line-column 100)
-  (setq whitespace-global-modes
-        '(not magit-status-mode)))
-#+end_src
-
-*** Render manpages in Emacs
-
-#+begin_src elisp
-(use-package man
-  :defer t
-  :config
-  ;; As soon as it is ready open the manpage in a separate, focused
-  ;; window.
-  (setq Man-notify-method 'aggressive))
-#+end_src
-
-*** Diminish only
-
-#+begin_src elisp
-(use-package face-remap
-  :diminish buffer-face-mode)
-
-(use-package autorevert
-  :diminish auto-revert-mode)
-#+end_src
-
-*** Don't trim ELisp evaluation results
-
-#+begin_src elisp
-(use-package simple
-  :straight (:type built-in)
-  :diminish auto-fill-function
-  :config
-  (setq eval-expression-print-length nil)
-  (setq eval-expression-print-level nil))
-#+end_src
-
-*** ElDoc
-
-#+begin_src elisp
-(use-package eldoc
-  :diminish eldoc-mode
-  :config
-  (advice-add 'eldoc-doc-buffer
-              :after
-              (defun kenran/focus-eldoc-buffer ()
-                (message (buffer-name (current-buffer)))
-                (pop-to-buffer eldoc--doc-buffer))))
-#+end_src
-
-*** Directory editor
-
-#+begin_src elisp
-(use-package dired
-  :straight (:type built-in)
-  :defer t
-  :config
-  (setq dired-kill-when-opening-new-dired-buffer t)
-  (setq dired-create-destination-dirs 'ask)
-  :custom
-  ;; Sort directories to the top
-  (dired-listing-switches "-la --group-directories-first"))
-#+end_src
-
-Beautify =dired= a bit.
-
-#+begin_src elisp
-(use-package diredfl
-  :defer t
-  :after dired
-  :hook (dired-mode . diredfl-mode))
-#+end_src
-
-*** Ediff
-
-#+begin_src elisp
-(use-package ediff-wind
-  :straight (:type built-in)
-  :config
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
 ** Edit =grep= results over multiple buffers
