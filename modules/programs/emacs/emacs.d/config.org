@@ -793,6 +793,17 @@ single-frame, circumventing the problem.
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
+** On-the-fly syntax checking (and other things): Flymake
+
+#+begin_src elisp
+(use-package flymake
+  :straight (:type built-in)
+  :config
+  (setq flymake-suppress-zero-counters t)
+  (setq flymake-fringe-indicator-position 'left-fringe)
+  (setq flymake-no-changes-timeout 1.0))
+#+end_src
+
 * Vim emulation
 
 ** Leader keys
