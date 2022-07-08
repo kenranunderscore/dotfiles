@@ -776,6 +776,16 @@ Beautify =dired= a bit.
 
 ** Ediff
 
+=Ediff= is a great way to diff and/or merge files or buffers.  By
+default it creates a new frame containing a "control buffer" used to
+navigate the diff and manipulate the output.  Unfortunately for the
+longest time this behaved weirdly for me: whenever I'd tab to the
+frame containing the diff, do something, then tab back, the next
+navigational command from the control frame would work but drop me
+back in the diff frame.  It's possible to use
+=ediff-setup-windows-plain= as setup function, which makes =ediff=
+single-frame, circumventing the problem.
+
 #+begin_src elisp
 (use-package ediff-wind
   :straight (:type built-in)
