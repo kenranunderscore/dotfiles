@@ -39,6 +39,7 @@ in {
         gcc
         meson
         ninja
+        shellcheck
       ];
     };
   };
