@@ -30,13 +30,17 @@ in {
           pkgs.emacs;
         emacsWithPackages =
           (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
-        # Empty package list as I use straight.el now to try it out
-        myEmacs = emacsWithPackages (_epkgs: [ ]);
+        # Empty package list as I use straight.el now to try it out.
+        # vterm is an exception as it does not currently build in a
+        # naive way, which makes straight.el support difficult.
+        myEmacs = emacsWithPackages (p: [ p.vterm ]);
       in with pkgs; [
         myEmacs
 
         # Programs needed at runtime or for straight to build packages
+        cmake
         gcc
+        libtool
         meson
         ninja
         shellcheck
