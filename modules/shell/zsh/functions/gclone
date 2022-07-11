@@ -4,11 +4,11 @@
 # argument to the call, and not start with a double dash.
 
 gclone () {
-    git clone $@
+    git clone "$@"
 
     if [[ "$#" -gt 1 && "$@[-1]" != "--"* ]]; then
         cd "$@[-1]"
     else
-        cd $(basename $1 ".git")
+        cd "$(basename "$1" ".git")"
     fi
 }
