@@ -61,6 +61,12 @@
       url = "github:crawl/crawl";
       flake = false;
     };
+
+    # Fonts
+    sf-mono = {
+      url = "github:supercomputra/sf-mono-font";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:

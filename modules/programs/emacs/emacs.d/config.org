@@ -250,7 +250,13 @@ respective font.
                           :default-height
                           150
                           :weight
-                          regular))))
+                          regular))
+        (sf-mono . (:family
+                    "SFMono"
+                    :default-height
+                    150
+                    :weight
+                    regular))))
 #+end_src
 
 The currently selected font (key of =kenran/font-alist=).  Setting this

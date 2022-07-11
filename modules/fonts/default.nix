@@ -49,6 +49,10 @@ in {
     home.packages = lib.optionals cfg.withCustomBuilds [
       iosevkaSerif
       (import ./input-mono.nix { inherit pkgs; })
+      (import ./sf-mono.nix {
+        inherit (pkgs) runCommand;
+        inherit (inputs) sf-mono;
+      })
       pragmataPro
     ] ++ [
       pkgs.anonymousPro
