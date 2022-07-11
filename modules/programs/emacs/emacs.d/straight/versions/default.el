@@ -50,6 +50,7 @@
  ("f.el" . "d2019d4f9625bcc44349c69fe46d6645fd9ff4ff")
  ("flycheck" . "c955fd6fb970eed5fdecf675369d3d61a41f6c68")
  ("flycheck-nimsuggest" . "dc9a5de1cb3ee05db5794d824610959a1f603bc9")
+ ("flymake-shellcheck" . "688638177b4e23ecc192975e3062274ca904ada1")
  ("gcmh" . "0089f9c3a6d4e9a310d0791cf6fa8f35642ecfd9")
  ("general.el" . "9651024e7f40a8ac5c3f31f8675d3ebe2b667344")
  ("git-gutter" . "a50672b62a678922b8c0cab95225d520f493439b")
