@@ -24,7 +24,7 @@ in {
       ];
       backend = "glx";
       experimentalBackends = true;
-      fade = true;
+      fade = false;
       fadeDelta = 5;
       vSync = true;
       extraOptions = "xrender-sync-fence = true;";
