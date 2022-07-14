@@ -697,13 +697,19 @@ Make whitespace symbols visible.
 #+begin_src elisp
 (use-package whitespace
   :config
-  (setq whitespace-style
-        '(face spaces tabs trailing lines-tail space-before-tab
-          indentation empty space-after-tab space-mark tab-mark
-          missing-newline-at-eof))
   (setq whitespace-line-column 100)
   (setq whitespace-global-modes
-        '(not magit-status-mode)))
+        '(not magit-status-mode
+              org-mode))
+  (setq whitespace-style
+        '(face newline newline-mark missing-newline-at-eof
+               trailing empty tabs tab-mark))
+  (setq whitespace-display-mappings
+        '((newline-mark 10
+                        [9166 10])
+          (tab-mark 9
+                    [187 9]
+                    [92 9]))))
 #+end_src
 
 ** Render manpages in Emacs
