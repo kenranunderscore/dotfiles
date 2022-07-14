@@ -197,12 +197,6 @@ respective font.
                          170
                          :weight
                          regular))
-        (iosevka-serif . (:family
-                          "Iosevka Custom"
-                          :default-height
-                          166
-                          :weight
-                          regular))
         (iosevka . (:family
                     "Iosevka"
                     :default-height
