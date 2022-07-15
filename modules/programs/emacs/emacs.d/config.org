@@ -2131,9 +2131,7 @@ comes into play.
 ** Better Emacs help and documentation
 
 This gives us better and more readable help pages.  We also replace
-some built-in =C-h= keybings with =helpful-*= functions.  FIXME: helpful
-is broken as of February 2022; recheck frequently to see whether the
-bug https://github.com/Wilfred/helpful/issues/282 is fixed.
+some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src elisp
 (use-package helpful
