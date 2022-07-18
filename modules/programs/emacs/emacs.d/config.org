@@ -1856,14 +1856,14 @@ header.
 ** Nix
 
 #+begin_src elisp
-(reformatter-define kenran--nix-format
+(reformatter-define kenran/nix-format
   :program "nixfmt"
   :args '()
   :lighter " k/nixfmt")
 
 (use-package nix-mode
   :mode "\\.nix\\'"
-  :hook (nix-mode . kenran--nix-format-on-save-mode))
+  :hook (nix-mode . kenran/nix-format-on-save-mode))
 #+end_src
 
 ** Markdown
