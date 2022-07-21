@@ -781,6 +781,27 @@ Beautify =dired= a bit.
   :hook (dired-mode . diredfl-mode))
 #+end_src
 
+=Dired-narrow= is a package containing functionality to enter a filter
+to narrow down the contents of a =dired= buffer interactively.  The
+filter could be either some fixed string, with normal or fuzzy
+matching, or a regural expression.  Bind those three functions to the
+local leader key to have easier access, as =dired= already has lots of
+keys bound.
+
+#+begin_src elisp
+(use-package dired-narrow
+  :defer t
+  :after dired)
+
+(with-local-leader
+  :states 'normal
+  :keymaps 'dired-mode-map
+  "n" '(:ignore t :which-key "dired-narrow")
+  "n n" 'dired-narrow
+  "n f" 'dired-narrow-fuzzy
+  "n r" 'dired-narrow-regexp)
+#+end_src
+
 ** Ediff
 
 =Ediff= is a great way to diff and/or merge files or buffers.  By
