@@ -689,138 +689,6 @@ anyway.  =Use-package= has built-in support for this available with the
 (use-package diminish)
 #+end_src
 
-* Built-in packages
-** Display whitespace
-
-Make whitespace symbols visible.
-
-#+begin_src elisp
-(use-package whitespace
-  :config
-  (setq whitespace-line-column 100)
-  (setq whitespace-global-modes
-        '(not magit-status-mode
-              org-mode))
-  (setq whitespace-style
-        '(face newline newline-mark missing-newline-at-eof
-               trailing empty tabs tab-mark))
-  (setq whitespace-display-mappings
-        '((newline-mark 10
-                        [9166 10])
-          (tab-mark 9
-                    [187 9]
-                    [92 9])))
-  (global-whitespace-mode 1))
-#+end_src
-
-** Render manpages in Emacs
-
-#+begin_src elisp
-(use-package man
-  :defer t
-  :config
-  ;; As soon as it is ready open the manpage in a separate, focused
-  ;; window.
-  (setq Man-notify-method 'aggressive))
-#+end_src
-
-** Diminish only
-
-#+begin_src elisp
-(use-package face-remap
-  :diminish buffer-face-mode)
-
-(use-package autorevert
-  :diminish auto-revert-mode)
-#+end_src
-
-** Don't trim ELisp evaluation results
-
-#+begin_src elisp
-(use-package simple
-  :straight (:type built-in)
-  :diminish auto-fill-function
-  :config
-  (setq eval-expression-print-length nil)
-  (setq eval-expression-print-level nil))
-#+end_src
-
-** ElDoc
-
-#+begin_src elisp
-(use-package eldoc
-  :diminish eldoc-mode
-  :config
-  (advice-add 'eldoc-doc-buffer
-              :after
-              (defun kenran/focus-eldoc-buffer ()
-                (message (buffer-name (current-buffer)))
-                (pop-to-buffer eldoc--doc-buffer))))
-#+end_src
-
-** Directory editor
-
-#+begin_src elisp
-(use-package dired
-  :straight (:type built-in)
-  :defer t
-  :config
-  (setq dired-kill-when-opening-new-dired-buffer t)
-  (setq dired-create-destination-dirs 'ask)
-  :custom
-  ;; Sort directories to the top
-  (dired-listing-switches "-la --group-directories-first"))
-#+end_src
-
-Beautify =dired= a bit.
-
-#+begin_src elisp
-(use-package diredfl
-  :defer t
-  :after dired
-  :hook (dired-mode . diredfl-mode))
-#+end_src
-
-=Dired-narrow= is a package containing functionality to enter a filter
-to narrow down the contents of a =dired= buffer interactively.  The
-filter could be either some fixed string, with normal or fuzzy
-matching, or a regural expression.  Bind those three functions to the
-local leader key to have easier access, as =dired= already has lots of
-keys bound.
-
-#+begin_src elisp
-(use-package dired-narrow
-  :defer t
-  :after dired)
-
-(with-local-leader
-  :states 'normal
-  :keymaps 'dired-mode-map
-  "n" '(:ignore t :which-key "dired-narrow")
-  "n n" 'dired-narrow
-  "n f" 'dired-narrow-fuzzy
-  "n r" 'dired-narrow-regexp)
-#+end_src
-
-** Ediff
-
-=Ediff= is a great way to diff and/or merge files or buffers.  By
-default it creates a new frame containing a "control buffer" used to
-navigate the diff and manipulate the output.  Unfortunately for the
-longest time this behaved weirdly for me: whenever I'd tab to the
-frame containing the diff, do something, then tab back, the next
-navigational command from the control frame would work but drop me
-back in the diff frame.  It's possible to use
-=ediff-setup-windows-plain= as setup function, which makes =ediff=
-single-frame, circumventing the problem.
-
-#+begin_src elisp
-(use-package ediff-wind
-  :straight (:type built-in)
-  :config
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain))
-#+end_src
-
 * Vim emulation
 
 ** Leader keys
@@ -1076,6 +944,138 @@ and also when Emacs is reading user input in the minibuffer.
 (general-define-key
  :states '(emacs)
  "C-w" 'evil-delete-backward-word)
+#+end_src
+
+* Built-in packages with extensions
+** Display whitespace
+
+Make whitespace symbols visible.
+
+#+begin_src elisp
+(use-package whitespace
+  :config
+  (setq whitespace-line-column 100)
+  (setq whitespace-global-modes
+        '(not magit-status-mode
+              org-mode))
+  (setq whitespace-style
+        '(face newline newline-mark missing-newline-at-eof
+               trailing empty tabs tab-mark))
+  (setq whitespace-display-mappings
+        '((newline-mark 10
+                        [9166 10])
+          (tab-mark 9
+                    [187 9]
+                    [92 9])))
+  (global-whitespace-mode 1))
+#+end_src
+
+** Render manpages in Emacs
+
+#+begin_src elisp
+(use-package man
+  :defer t
+  :config
+  ;; As soon as it is ready open the manpage in a separate, focused
+  ;; window.
+  (setq Man-notify-method 'aggressive))
+#+end_src
+
+** Diminish only
+
+#+begin_src elisp
+(use-package face-remap
+  :diminish buffer-face-mode)
+
+(use-package autorevert
+  :diminish auto-revert-mode)
+#+end_src
+
+** Don't trim ELisp evaluation results
+
+#+begin_src elisp
+(use-package simple
+  :straight (:type built-in)
+  :diminish auto-fill-function
+  :config
+  (setq eval-expression-print-length nil)
+  (setq eval-expression-print-level nil))
+#+end_src
+
+** ElDoc
+
+#+begin_src elisp
+(use-package eldoc
+  :diminish eldoc-mode
+  :config
+  (advice-add 'eldoc-doc-buffer
+              :after
+              (defun kenran/focus-eldoc-buffer ()
+                (message (buffer-name (current-buffer)))
+                (pop-to-buffer eldoc--doc-buffer))))
+#+end_src
+
+** Directory editor
+
+#+begin_src elisp
+(use-package dired
+  :straight (:type built-in)
+  :defer t
+  :config
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-create-destination-dirs 'ask)
+  :custom
+  ;; Sort directories to the top
+  (dired-listing-switches "-la --group-directories-first"))
+#+end_src
+
+Beautify =dired= a bit.
+
+#+begin_src elisp
+(use-package diredfl
+  :defer t
+  :after dired
+  :hook (dired-mode . diredfl-mode))
+#+end_src
+
+=Dired-narrow= is a package containing functionality to enter a filter
+to narrow down the contents of a =dired= buffer interactively.  The
+filter could be either some fixed string, with normal or fuzzy
+matching, or a regural expression.  Bind those three functions to the
+local leader key to have easier access, as =dired= already has lots of
+keys bound.
+
+#+begin_src elisp
+  (use-package dired-narrow
+    :defer t
+    :after dired)
+
+  ;; (with-local-leader
+  ;;   :states 'normal
+  ;;   :keymaps 'dired-mode-map
+  ;;   "n" '(:ignore t :which-key "dired-narrow")
+  ;;   "n n" 'dired-narrow
+  ;;   "n f" 'dired-narrow-fuzzy
+  ;;   "n r" 'dired-narrow-regexp)
+#+end_src
+
+** Ediff
+
+=Ediff= is a great way to diff and/or merge files or buffers.  By
+default it creates a new frame containing a "control buffer" used to
+navigate the diff and manipulate the output.  Unfortunately for the
+longest time this behaved weirdly for me: whenever I'd tab to the
+frame containing the diff, do something, then tab back, the next
+navigational command from the control frame would work but drop me
+back in the diff frame.  It's possible to use
+=ediff-setup-windows-plain= as setup function, which makes =ediff=
+single-frame, circumventing the problem.
+
+#+begin_src elisp
+(use-package ediff-wind
+  :straight (:type built-in)
+  :config
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
 * Incremental narrowing
