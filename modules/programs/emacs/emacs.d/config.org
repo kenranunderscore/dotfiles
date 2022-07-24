@@ -1510,7 +1510,6 @@ child frame for the completion popup and thus does not clash with
 
 #+begin_src elisp
 (use-package corfu
-  :straight t
   :init (global-corfu-mode)
   :config
   (setq corfu-cycle t)
@@ -1522,6 +1521,15 @@ child frame for the completion popup and thus does not clash with
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous)))
+#+end_src
+
+** More completion-at-point backends via =cape=
+
+#+begin_src elisp
+(use-package cape
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
 #+end_src
 
 * E-Mail configuration
