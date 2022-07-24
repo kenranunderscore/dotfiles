@@ -1761,6 +1761,18 @@ for instance in the top-level directory of a project.
    "C-w" 'vterm-send-C-w))
 #+end_src
 
+** Zig
+
+[[https://ziglang.org/][Zig]] is a relatively new systems programming language that I could see
+me learning more in-depth in the near future.  It's a smaller language
+than, say, Rust, and less safe; but I like its explicit nature and
+great defaults.  The community is very welcoming so far, as well!
+
+#+begin_src elisp
+(use-package zig-mode
+  :defer t)
+#+end_src
+
 ** OCaml
 
 [[https://github.com/ocaml/tuareg][tuareg]] is the standard mode for OCaml editing, providing syntax
