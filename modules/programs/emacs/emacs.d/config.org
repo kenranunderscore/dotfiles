@@ -803,8 +803,7 @@ instance with =mu4e=).
   (evil-collection-init)
   (evil-collection-inhibit-insert-state 'notmuch-hello-mode-map)
   :custom
-  ((evil-collection-company-use-tng t)
-   (evil-collection-want-unimpaired-p nil)))
+  (evil-collection-want-unimpaired-p nil))
 #+end_src
 
 *** Surrounding things
@@ -1495,57 +1494,34 @@ via hooks to =sh-mode=.
          (sh-mode . flymake-mode)))
 #+end_src
 
-* Auto-completion popups
+* Auto-completion popups via =corfu=
 
-[[https://company-mode.github.io/][company-mode]] provides textual auto-completions in nearly every
-context.  There are lots of backends that can be used for
-context-sensitiv completion, but I don't make use of those really
-(yet).
+This is another one of Daniel Mendler's (aka =minad='s) absolutely great
+Emacs packages!  I've replaced =company= with =corfu= in the past, but
+back then it did not have the automatic mode (=corfu-auto=) yet.
+Without automatic completion it was a little more tedious to use in
+modes where =TAB= changes the level of indentation, like in
+=haskell-mode= for instance.
+
+Now that this feature exists it's time to give the package another
+try.  The first impression was very positive, as =corfu= is using a
+child frame for the completion popup and thus does not clash with
+=whitespace-mode= the way =company= does.
 
 #+begin_src elisp
-(use-package company
-  :hook ((after-init . global-company-mode))
-  :diminish company-mode
-  :init
-  ;; Without this orderless would be used by default for company
-  ;; completions.  It doesn't fit there as well though.
-  (define-advice company-capf
-      (:around (orig-fun &rest args) set-completion-styles)
-    (let ((completion-styles '(basic partial-completion)))
-      (apply orig-fun args)))
-  :custom
-  ((company-idle-delay 0)
-   (company-selection-wrap-around t)
-   (company-minimum-prefix-length 4))
+(use-package corfu
+  :straight t
+  :init (global-corfu-mode)
+  :config
+  (setq corfu-cycle t)
+  (setq corfu-auto t)
+  (setq corfu-auto-delay 0.1)
   :bind
-  (:map company-active-map
-        ("C-w" . evil-delete-backward-word)))
-#+end_src
-
-This is a workaround for using =company= together with =whitespace-mode=.
-Seeing the whitespace marks in the popup is quite annoying, but this
-makes it manageable.  See
-https://github.com/company-mode/company-mode/issues/1231.
-
-#+begin_src elisp
-(defun company--replacement-with-ws-face (str)
-  (if (and (or global-whitespace-mode whitespace-mode)
-           (memq 'space-mark whitespace-active-style)
-           (memq 'face whitespace-active-style)
-           (memq 'spaces whitespace-active-style))
-      (let ((face `(:foreground ,(face-attribute 'whitespace-space :foreground))))
-        (replace-regexp-in-string
-         " "
-         (lambda (s)
-           (setq s (copy-sequence s))
-           (add-face-text-property 0 (length s) face nil s)
-           s)
-         str))
-    str))
-
-(advice-add #'company--replacement-string
-            :filter-return
-            #'company--replacement-with-ws-face)
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous)))
 #+end_src
 
 * E-Mail configuration
@@ -1795,8 +1771,7 @@ To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/mer
 
 #+begin_src elisp
 (use-package merlin
-  :hook ((tuareg-mode . merlin-mode)
-         (merlin-mode . company-mode)))
+  :hook ((tuareg-mode . merlin-mode)))
 #+end_src
 
 [[https://github.com/Khady/merlin-eldoc][merlin-eldoc]] integrates =merlin= with =eldoc-mode=, automatically
