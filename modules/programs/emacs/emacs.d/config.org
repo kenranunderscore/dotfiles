@@ -221,6 +221,18 @@ respective font.
                      150
                      :weight
                      regular))
+        (source-code-pro . (:family
+                            "Source Code Pro"
+                            :default-height
+                            150
+                            :weight
+                            regular))
+        (fira-code . (:family
+                      "Fira Code"
+                      :default-height
+                      150
+                      :weight
+                      regular))
         (terminus . (:family
                      "Terminus"
                      :default-height
