@@ -103,6 +103,7 @@ in {
         shfmt
         tree
         unzip
+        watchexec
         wget
       ];
 
