@@ -30,6 +30,7 @@ in {
       pkgs.cantarell-fonts
       pkgs.cascadia-code
       pkgs.courier-prime
+      pkgs.fantasque-sans-mono
       pkgs.fira-code
       pkgs.font-awesome_5
       pkgs.go-font
