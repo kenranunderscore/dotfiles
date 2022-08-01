@@ -52,7 +52,7 @@ in {
           {
             name = "8:calendar";
             output = "DP-2";
-            assigns = [{ class = "Thunderbird"; }];
+            assigns = [{ class = "thunderbird"; }];
           }
           {
             name = "9:mattermost";
