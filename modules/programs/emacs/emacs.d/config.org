@@ -1063,17 +1063,17 @@ local leader key to have easier access, as =dired= already has lots of
 keys bound.
 
 #+begin_src elisp
-  (use-package dired-narrow
-    :defer t
-    :after dired)
+(use-package dired-narrow
+  :defer t
+  :after dired)
 
-  ;; (with-local-leader
-  ;;   :states 'normal
-  ;;   :keymaps 'dired-mode-map
-  ;;   "n" '(:ignore t :which-key "dired-narrow")
-  ;;   "n n" 'dired-narrow
-  ;;   "n f" 'dired-narrow-fuzzy
-  ;;   "n r" 'dired-narrow-regexp)
+(with-local-leader
+  :states 'normal
+  :keymaps 'dired-mode-map
+  "n" '(:ignore t :which-key "dired-narrow")
+  "n n" 'dired-narrow
+  "n f" 'dired-narrow-fuzzy
+  "n r" 'dired-narrow-regexp)
 #+end_src
 
 ** Ediff
