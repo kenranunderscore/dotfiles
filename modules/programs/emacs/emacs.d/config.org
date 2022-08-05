@@ -1095,6 +1095,24 @@ single-frame, circumventing the problem.
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
+** Auto-closing parens, braces and other pairs
+
+I used to use =smartparens= to automatically insert closing parentheses
+and other pairs in non-lispy modes.  One thing I was missing from
+Neovim, though, was the newlines and indentation that it inserted
+automatically when pressing =RET= with point between braces.
+
+The built-in =electric-pair-mode= does just that (by default).
+
+#+begin_src elisp
+(use-package emacs
+  :straight nil
+  :init
+  (electric-pair-mode)
+  :config
+  (setq electric-pair-open-newline-between-pairs t))
+#+end_src
+
 * Incremental narrowing
 
 I started with =helm= in [[https://www.spacemacs.org/][spacemacs]], then later switched to [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
@@ -2333,26 +2351,6 @@ Like its readme proposes it's also possible to reuse the
   :init
   (add-to-list 'auto-mode-alist
                (cons "/.dockerignore\\'" 'gitignore-mode)))
-#+end_src
-
-** Auto-closing parentheses and other delimiters
-
-Smartparens as a global minor mode works well for all programming
-languages.  For lispy languages I probably want another solution and
-tried several, but I'm not happy yet.
-
-#+begin_src elisp
-(use-package smartparens
-  :diminish smartparens-mode
-  :config
-  (sp-pair "'" nil :actions nil)
-  (sp-pair "`" nil :actions nil)
-  (setq sp-highlight-pair-overlay nil)
-  :init
-  (smartparens-global-mode t))
-
-(with-leader
-  "c f" 'sp-indent-defun)
 #+end_src
 
 ** LISP editing with Lispy and Lispyville
