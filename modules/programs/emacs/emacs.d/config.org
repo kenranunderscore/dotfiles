@@ -1770,6 +1770,7 @@ for instance in the top-level directory of a project.
 #+begin_src elisp
 (use-package vterm
   :straight nil
+  :commands (vterm)
   :defer t
   :config
   (setq vterm-shell "zsh")
