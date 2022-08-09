@@ -2314,6 +2314,7 @@ One tricky thing was making it possible to bind the keymap
   ;; such.
   (magit-save-repository-buffers nil)
   (magit-diff-refine-hunk t)
+  (magit-display-buffer-function #'display-buffer)
   :config
   ;; I frequently pull with the autostash option.
   (transient-append-suffix 'magit-pull "-r"
