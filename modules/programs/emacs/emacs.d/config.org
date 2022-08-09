@@ -1069,7 +1069,7 @@ The built-in =electric-pair-mode= does just that (by default).
 
 #+begin_src elisp
 (use-package emacs
-  :straight nil
+  :straight (:type built-in)
   :init
   (electric-pair-mode)
   :config
@@ -1084,7 +1084,7 @@ reverts such changes.
 
 #+begin_src elisp
 (use-package emacs
-  :straight nil
+  :straight (:type built-in)
   :init (winner-mode))
 #+end_src
 
@@ -1104,6 +1104,7 @@ I've been happy with it ever since.
   (vertico-mode +1)
   :custom
   (vertico-cycle t)
+  (vertico-resize t)
   :bind
   (:map vertico-map
         ("C-w" . evil-delete-backward-word)))
