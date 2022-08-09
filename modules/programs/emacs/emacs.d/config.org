@@ -1076,6 +1076,18 @@ The built-in =electric-pair-mode= does just that (by default).
   (setq electric-pair-open-newline-between-pairs t))
 #+end_src
 
+** Undo changes to window arrangements
+
+Sometimes I accidentally mess up my window layout.  =Winner-mode= comes
+with the =winner-undo= command (bound by default to =C-<left>=) that
+reverts such changes.
+
+#+begin_src elisp
+(use-package emacs
+  :straight nil
+  :init (winner-mode))
+#+end_src
+
 * Incremental narrowing
 
 I started with =helm= in [[https://www.spacemacs.org/][spacemacs]], then later switched to [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
