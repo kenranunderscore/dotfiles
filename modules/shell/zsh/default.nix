@@ -85,10 +85,10 @@ in {
       };
       shellGlobalAliases = {
         ls = "exa";
-        l = "exa -lbF --git --group-directories-first --icons";
-        ll = "exa -lbGF --git --group-directories-first --icons";
-        la = "exa -labF --git --group-directories-first --icons";
-        lla = "exa -labGF --git --group-directories-first --icons";
+        l = "exa -lbF --group-directories-first --icons";
+        ll = "exa -lbGF --group-directories-first --icons";
+        la = "exa -labF --group-directories-first --icons";
+        lla = "exa -labGF --group-directories-first --icons";
       };
     };
 
