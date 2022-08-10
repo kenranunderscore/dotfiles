@@ -1772,11 +1772,13 @@ guess is that they probably go well together.
   :config
   (setq shackle-inhibit-window-quit-on-same-windows t)
   (setq shackle-default-alignment 'below)
-  (setq shackle-default-size 0.3)
+  (setq shackle-default-size 0.4)
   (setq shackle-rules '((helpful-mode :align below :select t)
                         (help-mode :align below :select t)
                         (compilation-mode :same t)
-                        (magit-status-mode :same t)
+                        (magit-status-mode :select t :align below :size 0.6)
+                        (magit-revision-mode :select t :align below :size 0.6)
+                        (magit-log-mode :select t :align below)
                         (apropos-mode :align below :select t)))
   (setq shackle-default-rule nil))
 #+end_src
@@ -2314,7 +2316,6 @@ One tricky thing was making it possible to bind the keymap
   ;; such.
   (magit-save-repository-buffers nil)
   (magit-diff-refine-hunk t)
-  (magit-display-buffer-function #'display-buffer)
   :config
   ;; I frequently pull with the autostash option.
   (transient-append-suffix 'magit-pull "-r"
