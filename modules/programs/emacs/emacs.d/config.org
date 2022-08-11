@@ -158,9 +158,8 @@ current theme uses as background for the 'cursor face.  If FORCE
 is true, then always set the colors anew."
   (when (or force (not kenran/has-set-cursor-colors))
     (setq kenran/has-set-cursor-colors t)
-    (let* ((color "red")
-           (default-cursor `(,color box))
-           (insert-cursor `("chartreuse1" box)))
+    (let* ((default-cursor 'box)
+           (insert-cursor '(hbar . 5)))
       (setq evil-operator-state-cursor default-cursor)
       (setq evil-normal-state-cursor default-cursor)
       (setq evil-replace-state-cursor default-cursor)
