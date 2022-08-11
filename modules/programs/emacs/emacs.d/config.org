@@ -1531,6 +1531,13 @@ child frame for the completion popup and thus does not clash with
 =whitespace-mode= the way =company= does.
 
 #+begin_src elisp
+(defun corfu-enable-always-in-minibuffer ()
+  "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+  (unless (bound-and-true-p vertico--input)
+    (setq-local corfu-auto t)
+    (corfu-mode 1)))
+(add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+
 (use-package corfu
   :init (global-corfu-mode)
   :config
@@ -1782,8 +1789,6 @@ guess is that they probably go well together.
                         ("^\\*eldoc" :regexp t :align below :select t)))
   (setq shackle-default-rule nil))
 #+end_src
-
-TODO/FIXME
 
 #+begin_src elisp
 (use-package popper
