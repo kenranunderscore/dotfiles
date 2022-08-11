@@ -694,27 +694,17 @@ Emacs mode in REPL, terminal and shell buffers.
 
 #+begin_src elisp
 (setq kenran/holy-modes
-      '((ediff . ediff)
-        (eshell-mode . eshell)
-        (mu4e . mu4e)
-        (mu4e . mu4e-conversation)
-        (notmuch-hello-mode . notmuch)
-        (racket-repl-mode . nil)
-        (racket-stepper-mode . nil)
-        (shell-mode . nil)
-        (sly-mrepl-mode . nil)
-        (term-mode . (term term ansi-term multi-term))
-        (vterm-mode . vterm)
-        (haskell-interactive-mode . nil)
-        (nil . lispy)))
-
-(setq kenran/evil-holy-modes
-      (remove nil
-              (mapcar #'car kenran/holy-modes)))
-
-(setq kenran/evil-collection-exemptions
-      (remove nil
-              (mapcar #'cdr kenran/holy-modes)))
+      '(ediff
+        eshell-mode
+        mu4e
+        notmuch-hello-mode
+        racket-repl-mode
+        racket-stepper-mode
+        shell-mode
+        sly-mrepl-mode
+        term-mode
+        vterm-mode
+        haskell-interactive-mode))
 #+end_src
 
 ** =Evil= and supporting packages
@@ -726,7 +716,7 @@ Emacs.
 (use-package evil
   :config
   (evil-mode 1)
-  (dolist (mode kenran/evil-holy-modes)
+  (dolist (mode kenran/holy-modes)
     (evil-set-initial-state mode 'emacs))
   :custom
   ((evil-want-C-u-scroll t)
@@ -761,10 +751,28 @@ instance with =mu4e=).
 (use-package evil-collection
   :after evil
   :config
-  (dolist (x kenran/evil-collection-exemptions)
-    (delete x evil-collection-mode-list))
-  (evil-collection-init)
-  (evil-collection-inhibit-insert-state 'notmuch-hello-mode-map)
+  (evil-collection-init
+   '(dired
+     ;; docker
+     ;; eglot
+     eldoc
+     ;; corfu/embark/vertico?
+     ;; grep
+     help
+     helpful
+     ibuffer
+     imenu
+     man
+     magit
+     (package-menu package)
+     proced
+     vc-annotate
+     vc-dir
+     vc-git
+     wgrep
+     ;; which-key
+     )
+)
   :custom
   (evil-collection-want-unimpaired-p nil))
 #+end_src
