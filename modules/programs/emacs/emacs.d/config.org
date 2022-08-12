@@ -165,7 +165,7 @@ is true, then always set the colors anew."
       (setq evil-replace-state-cursor default-cursor)
       (setq evil-visual-state-cursor default-cursor)
       (setq evil-motion-state-cursor default-cursor)
-      (setq evil-emacs-state-cursor insert-cursor)
+      (setq evil-emacs-state-cursor default-cursor)
       (setq evil-insert-state-cursor insert-cursor)
       (remove-hook 'server-after-make-frame-hook
                    #'kenran/set-evil-state-cursors))))
