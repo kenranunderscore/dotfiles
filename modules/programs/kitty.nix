@@ -33,6 +33,7 @@ in {
         shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
         macos_option_as_alt = true;
         font_size = cfg.fontSize;
+        disable_ligatures = "always";
         adjust_line_height = 1;
         scrollback_lines = 50000;
         hide_window_decorations = false;
