@@ -456,8 +456,6 @@ packages, as one might imagine.
   :defer t)
 #+end_src
 
-https://github.com/purcell/color-theme-sanityinc-tomorrow
-
 **** Tomorrow
 
 Steve Purcell (author of many Emacs packages) has ported the
