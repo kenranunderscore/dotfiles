@@ -1105,9 +1105,7 @@ change where I look.
 
 #+begin_src elisp
 (use-package vertico-reverse
-  :straight nil
-  :init
-  (vertico-reverse-mode +1))
+  :straight nil)
 #+end_src
 
 Directory navigation in =C-x d= or =C-x C-f= is something else that I
@@ -1124,6 +1122,27 @@ the slash symbol.  The following extension to =vertico= does just that.
               ("C-w" . vertico-directory-delete-word)
               ("RET" . vertico-directory-enter)))
 #+end_src
+
+The reversed vertical display is not ideal for every context in my
+opinion.  The =vertico-multiform= extension lets me choose which
+extensions I want to use in which context precisely.
+
+#+begin_src elisp
+(use-package vertico-multiform
+  :straight nil
+  :init (vertico-multiform-mode 1)
+  :config
+  (setq vertico-multiform-categories
+        '((file flat)
+          (t reverse)))
+  (setq vertico-multiform-commands
+        '((consult-grep buffer)
+          (consult-git-grep buffer)
+          (consult-ripgrep buffer)
+          (kenran/switch-theme grid reverse))))
+#+end_src
+
+*** Remembering command history
 
 =savehist-mode= keeps a history of commands and inputs I've done in a
 context-sensitive way, and then shows those at the top when presented
