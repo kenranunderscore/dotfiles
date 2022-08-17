@@ -1522,7 +1522,8 @@ approach yet, but might in the future.  My synchronization setup with
   :config
   (setq flymake-suppress-zero-counters t)
   (setq flymake-fringe-indicator-position 'left-fringe)
-  (setq flymake-no-changes-timeout 1.0))
+  (setq flymake-no-changes-timeout 1.0)
+  (setq flymake-mode-line-lighter ""))
 #+end_src
 
 ** Static analysis of shell scripts
