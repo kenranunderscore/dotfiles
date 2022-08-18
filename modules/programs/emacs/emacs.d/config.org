@@ -1558,7 +1558,9 @@ child frame for the completion popup and thus does not clash with
 #+begin_src elisp
 (defun corfu-enable-always-in-minibuffer ()
   "Enable Corfu in the minibuffer if Vertico/Mct are not active."
-  (unless (bound-and-true-p vertico--input)
+  (unless (or (bound-and-true-p vertico--input)
+              (equal (current-local-map)
+                     read-passwd-map))
     (setq-local corfu-auto t)
     (corfu-mode 1)))
 (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
