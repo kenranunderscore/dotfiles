@@ -2257,6 +2257,12 @@ comes into play.
 #+begin_src elisp
 (use-package eglot
   :defer t)
+
+(with-local-leader
+  :states 'normal
+  :keymaps 'eglot-mode-map
+  "l" '(:ignore t :which-key "LSP")
+  "l r" 'eglot-rename)
 #+end_src
 
 ** Better Emacs help and documentation
