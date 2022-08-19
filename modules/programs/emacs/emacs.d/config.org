@@ -1567,6 +1567,7 @@ child frame for the completion popup and thus does not clash with
 
 (use-package corfu
   :init (global-corfu-mode)
+  :hook (evil-insert-state-exit . corfu-quit)
   :config
   (setq corfu-cycle t)
   (setq corfu-auto t)
