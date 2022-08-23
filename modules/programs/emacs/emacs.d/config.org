@@ -1314,7 +1314,6 @@ elements.  Also increase org header size."
   (kenran/inherit-fixed-pitch 'org-checkbox)
   (kenran/inherit-fixed-pitch 'org-meta-line)
   (kenran/inherit-fixed-pitch 'org-special-keyword)
-  ;; (kenran/inherit-fixed-pitch 'org-indent)
   (kenran/inherit-fixed-pitch 'org-link)
   (kenran/inherit-fixed-pitch 'org-todo)
   (kenran/inherit-fixed-pitch 'org-done)
@@ -1352,7 +1351,10 @@ loading =org=, a custom font setup might run to adjust the headers.
   :hook
   ((org-mode . auto-fill-mode)
    ;; (org-mode . variable-pitch-mode)
-   (org-trigger . save-buffer))
+   (org-trigger . save-buffer)
+   ;; Inheriting fixed-pitch in kenran/org-font-setup doesn't work; the
+   ;; face is not yet known there, so use a hook
+   (org-indent-mode . (lambda () (kenran/inherit-fixed-pitch 'org-indent))))
   :diminish org-indent-mode
   :custom
   ((org-startup-indented t)
