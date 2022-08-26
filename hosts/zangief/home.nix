@@ -171,6 +171,7 @@ in {
     sieve-connect
     subversion
     thunderbird
+    wireshark
   ];
 
   home.stateVersion = "22.05";
