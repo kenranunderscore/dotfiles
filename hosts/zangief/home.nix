@@ -168,6 +168,7 @@ in {
     linphone
     mattermost-desktop
     pavucontrol
+    polymc
     sieve-connect
     subversion
     thunderbird
