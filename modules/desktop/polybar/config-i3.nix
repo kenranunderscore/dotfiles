@@ -21,7 +21,7 @@ let
     foreground = "${colors.foreground}";
     fixed-center = true;
     font-0 = "Iosevka Nerd Font:size=15;4";
-    font-1 = "FuraCode Nerd Font:style=Bold:size=19;4";
+    font-1 = "Iosevka Nerd Font:style=Bold:size=15;4";
     font-2 = "Iosevka Nerd Font:style=Bold:size=15;4";
     height = "30";
     locale = "en_US.UTF-8";
