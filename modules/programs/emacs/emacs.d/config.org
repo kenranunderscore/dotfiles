@@ -2009,6 +2009,25 @@ header.
   :hook ((markdown-mode gfm-mode) . auto-fill-mode))
 #+end_src
 
+#+begin_src elisp
+(with-local-leader
+  :states 'normal
+  "t" '(:ignore t :which-key "table")
+  "t a" '(markdown-table-align :which-key "align")
+  "t t" '(markdown-table-transpose :which-key "transpose")
+  "s" '(:ignore t :which-key "subtree")
+  "s p" '(markdown-promote-subtree :which-key "promote")
+  "s d" '(markdown-demote-subtree :which-key "demote"))
+
+(general-define-key
+ :states 'normal
+ :keymaps 'markdown-mode-map
+ "TAB" 'markdown-cycle
+ "S-TAB" 'markdown-shifttab
+ "{" 'markdown-backward-paragraph
+ "}" 'markdown-forward-paragraph)
+#+end_src
+
 ** Haskell
 
 Provide an interactive mode for writing Haskell.  I can work with a
