@@ -78,7 +78,7 @@ element-icon {
 
 window {
     padding:          5;
-    background-color: var(background);
+    background-color: var(bg);
     border:           1;
     width:            30%;
 }
