@@ -134,7 +134,7 @@ in {
             text = "#ff4500";
           };
         };
-        gaps = let val = 20;
+        gaps = let val = 50;
         in lib.mkIf cfg.withGaps {
           inner = val;
           outer = val;
