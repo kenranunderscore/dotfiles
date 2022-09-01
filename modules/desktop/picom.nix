@@ -13,6 +13,7 @@ in {
         ''100:role = "browser"''
         ''100:class_i = "mattermost"''
         ''100:name *= "Thunderbird"''
+        ''100:name *= "Minecraft"''
         ''100:class_i = "rofi"''
         ''100:class_i = "DBeaver"''
         ''100:class_i = "emacs"''
