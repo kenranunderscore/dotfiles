@@ -2401,6 +2401,7 @@ be accessed under =SPC g=.
 #+begin_src elisp
 (with-leader
   "g" '(:ignore t :which-key "git")
+  "g b" '(magit-branch-checkout :which-key "switch branch")
   "g i" '(magit-gitignore :which-key "ignore")
   "g I" '(magit-init :which-key "init")
   "g s" '(magit-project-status :which-key "status")
