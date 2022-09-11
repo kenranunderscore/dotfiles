@@ -273,7 +273,13 @@ respective font.
                            :default-height
                            160
                            :weight
-                           regular))))
+                           regular))
+        (gohu . (:family
+                 "GohuFont Nerd Font Mono"
+                 :default-height
+                 160
+                 :weight
+                 regular))))
 #+end_src
 
 The currently selected font (key of =kenran/font-alist=).  Setting this

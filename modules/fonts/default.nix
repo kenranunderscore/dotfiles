@@ -34,6 +34,7 @@ in {
       pkgs.fira-code
       pkgs.font-awesome_5
       pkgs.go-font
+      pkgs.gohufont
       pkgs.hack-font
       pkgs.hasklig
       pkgs.ibm-plex
