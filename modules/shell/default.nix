@@ -5,7 +5,7 @@
     ./bash.nix
     ./bat.nix
     ./direnv.nix
-    ./fish.nix
+    ./fish
     ./fzf.nix
     ./git.nix
     ./pass.nix
