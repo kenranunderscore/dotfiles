@@ -8,7 +8,6 @@ in {
 
   hosts.base = {
     privateDir = "${inputs.privateConfig}";
-    shellPath = "${lib.getExe pkgs.zsh}";
     gpgKey = "9AC78C1A48681583";
   };
 
@@ -114,10 +113,6 @@ in {
       emacs.emacsVersion = "git";
       imwheel.enable = true;
       nyxt.enable = true;
-      kitty = {
-        enable = true;
-        useLoginShell = false;
-      };
     };
     shell.git.email = email;
   };

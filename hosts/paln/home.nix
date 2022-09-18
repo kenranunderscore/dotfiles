@@ -17,10 +17,7 @@
           # FIXME customize GPG key in "user environment" module
           gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
         };
-        tmux = {
-          enable = true;
-          shellPath = "${lib.getExe pkgs.zsh}";
-        };
+        tmux.enable = true;
       };
     };
 

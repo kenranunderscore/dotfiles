@@ -4,14 +4,7 @@ let
   cfg = config.modules.shell.tmux;
   types = lib.types;
 in {
-  options.modules.shell.tmux = {
-    enable = lib.mkEnableOption "tmux";
-
-    shellPath = lib.mkOption {
-      type = types.nullOr types.str;
-      default = null;
-    };
-  };
+  options.modules.shell.tmux = { enable = lib.mkEnableOption "tmux"; };
 
   config = lib.mkIf cfg.enable {
     programs.tmux = {
@@ -21,7 +14,6 @@ in {
       newSession = true;
       terminal = "xterm-256color";
       resizeAmount = 10;
-      shell = cfg.shellPath;
       extraConfig = ''
         set-option -g renumber-windows on
         set -sa terminal-overrides "xterm*:Tc,alacritty:Tc"

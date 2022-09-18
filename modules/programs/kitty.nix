@@ -7,16 +7,6 @@ in {
   options.modules.programs.kitty = {
     enable = lib.mkEnableOption "kitty";
 
-    shellPath = lib.mkOption {
-      type = types.str;
-      default = "${lib.getExe pkgs.bash}";
-    };
-
-    useLoginShell = lib.mkOption {
-      type = types.bool;
-      default = false;
-    };
-
     fontSize = lib.mkOption {
       type = types.str;
       default = "15.0";
@@ -30,7 +20,6 @@ in {
       font.name = "JetBrains Mono";
       settings = {
         term = "xterm-256color";
-        shell = cfg.shellPath + (if cfg.useLoginShell then " --login" else "");
         macos_option_as_alt = true;
         font_size = cfg.fontSize;
         disable_ligatures = "always";

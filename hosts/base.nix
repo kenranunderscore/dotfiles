@@ -5,11 +5,6 @@ in {
   options.hosts.base = {
     privateDir = lib.mkOption { type = lib.types.path; };
 
-    shellPath = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-    };
-
     gpgKey = lib.mkOption {
       type = lib.types.str;
       default = null;
@@ -24,10 +19,7 @@ in {
       programs = {
         emacs.enable = true;
         firefox.enable = true;
-        kitty = {
-          enable = true;
-          inherit (cfg) shellPath;
-        };
+        kitty.enable = true;
         neovim.enable = true;
         weechat.enable = true;
       };
@@ -42,10 +34,7 @@ in {
           inherit (cfg) gpgKey;
         };
         ssh.enable = true;
-        tmux = {
-          enable = true;
-          inherit (cfg) shellPath;
-        };
+        tmux.enable = true;
         zsh.enable = true;
       };
     };

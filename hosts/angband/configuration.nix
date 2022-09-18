@@ -81,6 +81,7 @@ in {
     isNormalUser = true;
     home = "/home/${username}";
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.fish;
   };
 
   environment = {

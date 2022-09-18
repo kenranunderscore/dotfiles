@@ -113,6 +113,7 @@ in {
     isNormalUser = true;
     home = "/home/${username}";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
+    shell = pkgs.fish;
   };
 
   environment = {

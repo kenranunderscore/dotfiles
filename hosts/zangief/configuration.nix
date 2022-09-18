@@ -95,6 +95,7 @@ in {
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
+    shell = pkgs.fish;
   };
   users.extraGroups.vboxusers.members = [ username ];
 

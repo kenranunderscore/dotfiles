@@ -5,7 +5,6 @@
 
   hosts.base = {
     privateDir = "${inputs.privateConfig}";
-    shellPath = "${lib.getExe pkgs.zsh}";
     gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
   };
 
@@ -70,7 +69,6 @@
     games.dwarfFortress.enable = true;
     programs = {
       emacs.emacsVersion = "git";
-      kitty = { useLoginShell = false; };
       nyxt.enable = true;
       sbcl.enable = true;
     };
