@@ -20,10 +20,6 @@ in {
       };
       plugins = [
         {
-          name = "fish-fastdir";
-          src = inputs.fish-fastdir;
-        }
-        {
           name = "autopair.fish";
           src = inputs."autopair.fish";
         }

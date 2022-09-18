@@ -67,22 +67,6 @@
         "type": "github"
       }
     },
-    "fish-fastdir": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1641490690,
-        "narHash": "sha256-iu7zNO7yKVK2bhIIlj4UKHHqDaGe4q2tIdNgifxPev4=",
-        "owner": "danhper",
-        "repo": "fish-fastdir",
-        "rev": "dddc6c13b4afe271dd91ec004fdd199d3bbb1602",
-        "type": "github"
-      },
-      "original": {
-        "owner": "danhper",
-        "repo": "fish-fastdir",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -248,7 +232,6 @@
         "crawl": "crawl",
         "crawlrc": "crawlrc",
         "emacs-overlay": "emacs-overlay",
-        "fish-fastdir": "fish-fastdir",
         "home-manager": "home-manager",
         "neovim-overlay": "neovim-overlay",
         "nixpkgs": "nixpkgs_2",
