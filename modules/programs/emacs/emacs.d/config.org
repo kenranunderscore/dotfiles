@@ -1890,6 +1890,13 @@ for instance in the top-level directory of a project.
    "C-w" 'vterm-send-C-w))
 #+end_src
 
+** C/C++
+
+#+begin_src elisp
+(setq c-default-style '((awk-mode . "awk")
+                        (other . "stroustrup")))
+#+end_src
+
 ** Zig
 
 [[https://ziglang.org/][Zig]] is a relatively new systems programming language that I could see
