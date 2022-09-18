@@ -93,6 +93,7 @@
       cmus
       cmusfm
       element-desktop
+      obs-studio
       pavucontrol
     ];
     stateVersion = "21.03";
