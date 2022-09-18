@@ -12,6 +12,9 @@ in {
         src = inputs."autopair.fish";
       }];
       shellAbbrs = import ../shell-aliases.nix { inherit pkgs; };
+      interactiveShellInit = ''
+        set fish_greeting
+      '';
     };
 
     # Manage functions manually
