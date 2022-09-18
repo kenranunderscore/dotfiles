@@ -15,6 +15,13 @@ in {
       interactiveShellInit = ''
         set fish_greeting
       '';
+      shellAliases = {
+        ls = "exa";
+        l = "exa -lbF --group-directories-first --icons";
+        ll = "exa -lbGF --group-directories-first --icons";
+        la = "exa -labF --group-directories-first --icons";
+        lla = "exa -labGF --group-directories-first --icons";
+      };
     };
 
     # Manage functions manually
