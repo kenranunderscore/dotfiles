@@ -7,24 +7,19 @@ in {
   config = lib.mkIf cfg.enable {
     programs.fish = {
       enable = true;
-      functions = {
-        mc = {
-          description = "Create directory and cd into it";
-          body = ''
-            command mkdir -p $argv
-            if test $status = 0
-              cd $argv[(count $argv)]
-            end
-          '';
-        };
+      plugins = [{
+        name = "autopair.fish";
+        src = inputs."autopair.fish";
+      }];
+      shellAbbrs = import ../shell-aliases.nix { inherit pkgs; };
+    };
+
+    # Manage functions manually
+    xdg.configFile = {
+      "fish/functions" = {
+        source = ./functions;
+        recursive = true;
       };
-      plugins = [
-        {
-          name = "autopair.fish";
-          src = inputs."autopair.fish";
-        }
-      ];
-      shellAbbrs = import ./shell-aliases.nix { inherit pkgs; };
     };
   };
 }
