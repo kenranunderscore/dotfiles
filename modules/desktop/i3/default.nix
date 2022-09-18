@@ -137,13 +137,13 @@ in {
         gaps = let val = 50;
         in lib.mkIf cfg.withGaps {
           inner = val;
-          outer = val;
+          outer = 0;
           left = 0;
           right = 0;
           bottom = 0;
           top = 0;
-          horizontal = val;
-          vertical = val;
+          horizontal = 0;
+          vertical = 0;
         };
       };
     };
