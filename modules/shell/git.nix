@@ -54,6 +54,7 @@ in {
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         pull.rebase = "true";
+        push.autoSetupRemote = "true";
         submodule.recurse = "true";
         url = {
           "https://github.com/" = { insteadOf = "gh:"; };
