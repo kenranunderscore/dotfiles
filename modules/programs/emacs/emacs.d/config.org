@@ -2434,20 +2434,6 @@ be accessed under =SPC g=.
   "g t" '(magit-todos-list :which-key "todos"))
 #+end_src
 
-*** VC annotations on the side
-
-#+begin_src elisp
-(use-package git-gutter
-  :diminish git-gutter-mode
-  :config
-  (global-git-gutter-mode t))
-
-(with-leader
-  "g g" '(:ignore t :which-key "gutter")
-  "g g n" 'git-gutter:next-hunk
-  "g g p" 'git-gutter:previous-hunk)
-#+end_src
-
 *** Modes for other kinds of =git=-related files
 
 It's useful to have a little bit of syntax highlighting in files like
