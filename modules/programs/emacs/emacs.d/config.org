@@ -1152,7 +1152,8 @@ extensions I want to use in which context precisely.
           (consult-git-grep buffer)
           (consult-ripgrep buffer)
           (consult-buffer flat)
-          (list-buffers flat))))
+          (list-buffers flat)
+          (kenran/switch-theme grid reverse))))
 #+end_src
 
 *** Remembering command history
