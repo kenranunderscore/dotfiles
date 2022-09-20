@@ -1884,7 +1884,6 @@ for instance in the top-level directory of a project.
   :commands (vterm)
   :defer t
   :config
-  (setq vterm-shell "zsh")
   (general-define-key
    :keymaps 'vterm-mode-map
    :states 'emacs
