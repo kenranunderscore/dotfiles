@@ -7,10 +7,16 @@ in {
   config = lib.mkIf cfg.enable {
     programs.fish = {
       enable = true;
-      plugins = [{
-        name = "autopair.fish";
-        src = inputs."autopair.fish";
-      }];
+      plugins = [
+        {
+          name = "autopair.fish";
+          src = inputs."autopair.fish";
+        }
+        {
+          name = "z";
+          src = inputs.z;
+        }
+      ];
       shellAbbrs = import ../shell-aliases.nix { inherit pkgs; };
       interactiveShellInit = ''
         set fish_greeting

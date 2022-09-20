@@ -47,6 +47,10 @@
       url = "github:jorgebucaran/autopair.fish";
       flake = false;
     };
+    z = {
+      url = "github:jethrokuan/z";
+      flake = false;
+    };
 
     # DCSS
     crawlrc = {
