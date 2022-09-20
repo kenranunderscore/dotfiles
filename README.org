@@ -9,9 +9,11 @@ This repository represents the current state of the environment(s) I'm
 currently using for development, learning and, to some degree,
 entertainment.  Currently there are three machines I manage this way:
 
-- [[file:system-configurations/atuan/][atuan]]: my home PC
-- [[file:system-configurations/zangief/][zangief]]: my beefy [[https://www.tuxedocomputers.com/][TUXEDO]] work laptop
-- [[file:system-configurations/paln/][paln]]: a tiny [[https://www.hetzner.com/cloud][Hetzner Cloud]] VM I use for synchronization and small
+- [[file:hosts/atuan/][atuan]]: my home PC
+- [[file:hosts/zangief/][zangief]]: my beefy [[https://www.tuxedocomputers.com/][TUXEDO]] work laptop
+- [[file:hosts/angband/][angband]]: a tiny notebook (64 GB of disk space only) I use when
+  traveling
+- [[file:hosts/paln/][paln]]: a tiny [[https://www.hetzner.com/cloud][Hetzner Cloud]] VM I use for synchronization and small
   backups
 
   Nowadays what all these have in common is that they're running
