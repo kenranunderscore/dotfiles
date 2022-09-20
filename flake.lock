@@ -113,6 +113,22 @@
         "type": "github"
       }
     },
+    "fzf.fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660000546,
+        "narHash": "sha256-XmRGe39O3xXmTvfawwT2mCwLIyXOlQm7f40mH5tzz+s=",
+        "owner": "patrickf1",
+        "repo": "fzf.fish",
+        "rev": "2bb6f712b0b99fc5cc40ca78b6b3ba8b2529b0f7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "patrickf1",
+        "repo": "fzf.fish",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -232,6 +248,7 @@
         "crawl": "crawl",
         "crawlrc": "crawlrc",
         "emacs-overlay": "emacs-overlay",
+        "fzf.fish": "fzf.fish",
         "home-manager": "home-manager",
         "neovim-overlay": "neovim-overlay",
         "nixpkgs": "nixpkgs_2",

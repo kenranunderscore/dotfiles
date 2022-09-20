@@ -51,6 +51,10 @@
       url = "github:jethrokuan/z";
       flake = false;
     };
+    "fzf.fish" = {
+      url = "github:patrickf1/fzf.fish";
+      flake = false;
+    };
 
     # DCSS
     crawlrc = {

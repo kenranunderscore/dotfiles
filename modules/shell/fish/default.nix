@@ -16,6 +16,10 @@ in {
           name = "z";
           src = inputs.z;
         }
+        {
+          name = "fzf.fish";
+          src = inputs."fzf.fish";
+        }
       ];
       shellAbbrs = import ../shell-aliases.nix { inherit pkgs; };
       interactiveShellInit = ''

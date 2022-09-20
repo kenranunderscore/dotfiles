@@ -7,7 +7,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.fzf = {
       enable = true;
-      enableFishIntegration = config.modules.shell.fish.enable;
+      enableFishIntegration = false;
       enableBashIntegration = config.modules.shell.bash.enable;
       enableZshIntegration = config.modules.shell.zsh.enable;
     };
