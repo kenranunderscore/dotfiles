@@ -7,7 +7,7 @@
     ./imwheel
     ./kitty.nix
     ./neovim.nix
-    ./nyxt.nix
+    ./nyxt
     ./qutebrowser.nix
     ./sbcl
     ./vim.nix
