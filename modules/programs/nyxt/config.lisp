@@ -13,9 +13,10 @@
     ((theme (make-instance
              'theme:theme
              :dark-p t
-             :background-color "black"
-             :on-background-color "white"
-             :accent-color "#CD5C5C"
+             :background-color "#040404"
+             :on-background-color "#0ac30a"
+             :accent-color "#01018a"
+             :on-accent-color "#0ac30a"
              :primary-color "rgb(170, 170, 170)"
              :on-primary-color "black"
              :secondary-color "rgb(100, 100, 100)"
