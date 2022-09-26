@@ -289,10 +289,11 @@ value only changes the default; it is reset when switching fonts.
 (setq kenran/current-monospace-font 'jetbrains-mono)
 #+end_src
 
-For =org-mode= I like using a serif font.  This is it.
+For =org-mode= I (sometimes) like using a non-monospace font.  This is
+it.
 
 #+begin_src emacs-lisp
-(defconst kenran/serif-font "Noto Sans")
+(defconst kenran/variable-pitch-font "Cantarell")
 #+end_src
 
 The function I use to switch between the various fonts I like.  It
@@ -317,14 +318,14 @@ applies the attributes of its value in =kenran/font-alist=.
      'default nil
      :font family
      :weight (plist-get attrs :weight)
-     :height (plist-get attrs :default-height))
+     :height height)
     (set-face-attribute
      'fixed-pitch nil
      :font family
      :height 1.0)
     (set-face-attribute
      'variable-pitch nil
-     :font kenran/serif-font
+     :font kenran/variable-pitch-font
      :height 1.0)
     (set-face-attribute
      'fixed-pitch-serif nil
