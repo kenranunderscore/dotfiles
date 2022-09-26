@@ -322,7 +322,7 @@ applies the attributes of its value in =kenran/font-alist=.
     (set-face-attribute
      'fixed-pitch nil
      :font family
-     :height 1.0)
+     :height 0.9)
     (set-face-attribute
      'variable-pitch nil
      :font kenran/variable-pitch-font
@@ -1336,19 +1336,17 @@ elements.  Also increase org header size."
   (kenran/inherit-fixed-pitch 'org-drawer)
   (kenran/inherit-fixed-pitch 'org-property-value)
   (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold)
-  (dolist (face '((org-level-1 . 1.0)
-                  (org-level-2 . 1.0)
-                  (org-level-3 . 1.0)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.0)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    ;; (set-face-attribute (car face) nil
-    ;;                     :font kenran/serif-font
-    ;;                     :height (cdr face)
-    ;;                     :weight 'bold)
-    ))
+  (dolist (face '((org-level-1 . 1.15)
+                  (org-level-2 . 1.15)
+                  (org-level-3 . 1.15)
+                  (org-level-4 . 1.15)
+                  (org-level-5 . 1.15)
+                  (org-level-6 . 1.15)
+                  (org-level-7 . 1.15)
+                  (org-level-8 . 1.15)))
+    (set-face-attribute (car face) nil
+                        :height (cdr face)
+                        :weight 'bold)))
 
 (add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
 #+end_src
@@ -1366,10 +1364,10 @@ loading =org=, a custom font setup might run to adjust the headers.
   :straight (:type built-in)
   :hook
   ((org-mode . auto-fill-mode)
-   ;; (org-mode . variable-pitch-mode)
+   (org-mode . variable-pitch-mode)
    (org-trigger . save-buffer)
    ;; Inheriting fixed-pitch in kenran/org-font-setup doesn't work; the
-   ;; face is not yet known there, so use a hook
+   ;; face is not yet known there, so use a hook.
    (org-indent-mode . (lambda () (kenran/inherit-fixed-pitch 'org-indent))))
   :diminish org-indent-mode
   :custom
