@@ -2373,12 +2373,11 @@ One tricky thing was making it possible to bind the keymap
   :config
   (fset 'project-prefix-map project-prefix-map)
   (setq project-switch-commands
-        '((project-find-file "Find file")
-          (consult-ripgrep "Grep" ?g)
-          (magit-status "Git status" ?v)
-          (project-dired "Dired")
-          (project-eshell "Eshell")
-          (kenran/project-vterm "Vterm" ?t)))
+        '((project-find-file "find file")
+          (consult-ripgrep "search/grep" ?s)
+          (magit-status "git status" ?g)
+          (project-dired "dired")
+          (kenran/project-vterm "vterm" ?t)))
   :bind (:map project-prefix-map
               ("t" . kenran/project-vterm)
               ("d" . project-dired)
