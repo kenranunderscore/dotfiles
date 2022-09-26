@@ -92,6 +92,12 @@ in {
             notification = false;
           }
           {
+            command = ''
+              i3-msg "workspace 5:chat; exec emacs --eval '(start-irc)'"
+            '';
+            notification = false;
+          }
+          {
             command = "xset r rate 200 55";
             always = true;
             notification = false;
