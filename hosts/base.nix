@@ -1,10 +1,10 @@
 { inputs, customConfig, config, lib, pkgs, ... }:
 
-let cfg = config.hosts.base;
+let
+  cfg = config.hosts.base;
+  privateDir = "${inputs.privateConfig}";
 in {
   options.hosts.base = {
-    privateDir = lib.mkOption { type = lib.types.path; };
-
     gpgKey = lib.mkOption {
       type = lib.types.str;
       default = null;
@@ -63,7 +63,7 @@ in {
       sessionVariables = rec {
         EDITOR = "emacsclient -a '' -c";
         VISUAL = EDITOR;
-        KENRAN_IRC_CERTS = "${cfg.privateDir}/irc";
+        KENRAN_IRC_CERTS = "${privateDir}/irc";
       };
 
       packages = with pkgs; [
@@ -99,7 +99,7 @@ in {
       activation = {
         importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ${lib.getExe pkgs.gnupg} --import ${
-            cfg.privateDir + "/gpg.key"
+            privateDir + "/gpg.key"
           }
         '';
       };

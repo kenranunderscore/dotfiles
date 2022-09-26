@@ -6,10 +6,7 @@ in {
 
   targets.genericLinux = { enable = true; };
 
-  hosts.base = {
-    privateDir = "${inputs.privateConfig}";
-    gpgKey = "9AC78C1A48681583";
-  };
+  hosts.base.gpgKey = "9AC78C1A48681583";
 
   modules = {
     desktop = {
