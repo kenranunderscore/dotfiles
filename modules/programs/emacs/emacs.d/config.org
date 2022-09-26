@@ -16,7 +16,7 @@ automatically loaded even though I don't use them anymore) into Emacs.
 
 The script below is taken right from =straight.el='s readme.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defvar bootstrap-version)
 
 (let ((bootstrap-file
@@ -37,7 +37,7 @@ already contains most packages, including =use-package= itself, but when
 self-compiling Emacs or on Windows I rely on =use-package= for the
 installation of most/all the packages.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (straight-use-package 'use-package)
 #+end_src
 
@@ -46,7 +46,7 @@ Now make every =use-package= block below behave as if I had specified
 configuration of built-in packages explicitly, usually by adding
 =:straight (:type built-in)=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq straight-use-package-by-default t)
 #+end_src
 
@@ -57,7 +57,7 @@ straightforward and declarative way.  This is especially useful for
 its =evil-mode= integration, where I have to bind keys according to the
 current mode.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package general)
 #+end_src
 
@@ -65,7 +65,7 @@ Some additional and modified basic Emacs keybindings go here (evil-
 and mode-specific ones can be found in the evil section or the one for
 the respective mode).
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (general-define-key
  :states '(normal visual motion emacs operator)
  "C-h F" 'describe-face
@@ -75,7 +75,7 @@ the respective mode).
 
 * Loading additional ELisp configuration files
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defmacro kenran/load-config-file (file)
   "Load FILE relative to the .emacs.d directory."
   `(load (locate-user-emacs-file ,file)
@@ -85,7 +85,7 @@ the respective mode).
 I do not want customizations done via =customize= to end up in this
 file.  Use a separate file instead and load that one on startup.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (let ((my-custom-file (locate-user-emacs-file "custom.el")))
   (setq custom-file my-custom-file)
   (load custom-file 'no-error))
@@ -94,7 +94,7 @@ file.  Use a separate file instead and load that one on startup.
 A quick way to get to my =init.el= file.  FIXME: This should be changed
 when the switch to the literate config is complete.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/open-init-file ()
   "Open my config.org file."
   (interactive)
@@ -123,7 +123,7 @@ technical, visible Emacs frame.  See also
 The default cursor is black, which interferes with mostly using a dark
 theme.  Brighten it up a bit.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (set-mouse-color "white")
 (add-hook 'server-after-make-frame-hook
           (lambda () (set-mouse-color "white")))
@@ -132,7 +132,7 @@ theme.  Brighten it up a bit.
 Enable a forever-blinking cursor.  I used to disable this mode but I
 found myself searching for the cursor a couple of times lately.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq blink-cursor-delay 0.5)
 (setq blink-cursor-blinks -1)
 (blink-cursor-mode 1)
@@ -142,14 +142,14 @@ Don't show a cursor in inactive windows.  The default, hollow cursor
 in inactive windows changes colors when switching evil modes as well;
 that's kind of annoying.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq-default cursor-in-non-selected-windows nil)
 #+end_src
 
 Set the cursor to my preferred style, a box, and some very visible
 colors for normal and insert mode.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq kenran/has-set-cursor-colors nil)
 (defun kenran/set-evil-state-cursors (&optional force)
   "Set the cursor to a box, and use a different color for insert
@@ -173,7 +173,7 @@ is true, then always set the colors anew."
 
 ** Check whether the current frame is the initial daemon frame
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/is-initial-daemon-frame-p ()
   "Check whether the selected frame is the one that seems to be
 automatically created when the daemon starts.  If this is the
@@ -188,7 +188,7 @@ An alist of my preferred font families, together with a plist of
 certain attributes that need to be applied when switching to the
 respective font.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq kenran/font-alist
       '((pragmata-pro . (:family
                          "Pragmata Pro Mono Liga"
@@ -285,20 +285,20 @@ respective font.
 The currently selected font (key of =kenran/font-alist=).  Setting this
 value only changes the default; it is reset when switching fonts.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq kenran/current-monospace-font 'jetbrains-mono)
 #+end_src
 
 For =org-mode= I like using a serif font.  This is it.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defconst kenran/serif-font "Noto Sans")
 #+end_src
 
 The function I use to switch between the various fonts I like.  It
 applies the attributes of its value in =kenran/font-alist=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/switch-font (font)
   "Apply the attributes stored for FONT in `kenran/font-alist'."
   (interactive
@@ -337,7 +337,7 @@ Finally, set all the face attributes, and register a hook that makes
 sure that these also work when using the Emacs daemon together with
 =emacsclient=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (kenran/switch-font kenran/current-monospace-font)
 (add-hook 'server-after-make-frame-hook
           (defun kenran/switch-to-current-font ()
@@ -354,7 +354,7 @@ all the loaded themes on top of each other; I like to only have one
 theme active at all times, so I use =disable-theme= on all themes in
 =custom-enabled-themes= before enabling the target theme.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defvar kenran/switch-theme-hook nil
   "Functions to be called after switching the current (default)
 font.")
@@ -388,7 +388,7 @@ disables all other enabled themes."
 When developing a theme, like I did with my custom one, it's handy to
 be able to reload it on the fly.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/reload-theme ()
   "Reload the currently active theme."
   (interactive)
@@ -410,13 +410,13 @@ While that is still going on I'm using a "mutable" path, assuming I've
 cloned my project repository to a fixed location.  This allows for
 quick iteration.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/projects/emacs-naga-theme")
 #+end_src
 
 Enable =naga=:
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (kenran/switch-theme 'naga)
 #+end_src
 
@@ -430,7 +430,7 @@ These two themes are very customizable and come with the most
 comprehensive and extensive documentation (same as with basically
 anything that Prot makes available).
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package modus-themes
   :defer t
   :config
@@ -463,7 +463,7 @@ are propagated to most faces of all the common packages.  Without
 using (something like) this, it's quite a bit of work to style lots of
 packages, as one might imagine.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package doom-themes
   :defer t)
 #+end_src
@@ -475,7 +475,7 @@ well-known =tomorrow= themes [[https://github.com/purcell/color-theme-sanityinc-
 really like the =sanityinc-tomorrow-bright= variant for its higher
 contrast, overall darker look, and beautiful accent colors.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package color-theme-sanityinc-tomorrow
   :defer t)
 #+end_src
@@ -485,7 +485,7 @@ contrast, overall darker look, and beautiful accent colors.
 It's an ELPA package, so no need/use to put it in the nix-managed
 Emacs packages.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package rainbow-mode
   :defer t)
 #+end_src
@@ -500,7 +500,7 @@ I wish to know how fast my Emacs is starting.  I'm not sure how to
 make use of all that =use-package= has to offer in that regard yet, but
 I want to at least know when I've made things worse.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (add-hook
  'emacs-startup-hook
  (lambda ()
@@ -515,7 +515,7 @@ I want to at least know when I've made things worse.
 Disable the graphical UI things like the tool and menu bars, the
 splash screen, and others.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -526,13 +526,13 @@ splash screen, and others.
 Ignore the =X= resources.  Now Emacs doesn't use the terminal
 background/foreground colors.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq inhibit-x-resources t)
 #+end_src
 
 ** Resize proportionally after deleting windows
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq window-combination-resize t)
 #+end_src
 
@@ -541,7 +541,7 @@ background/foreground colors.
 The following setting enables answering those yes/no questions with
 just =y= or =n=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
@@ -551,7 +551,7 @@ Make commands shown with M-x depend on the active major mode.  Note:
 this doesn't work correctly yet, as =(command-modes 'some-command)=
 seems to return the modes in an unexpected format.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq read-extended-command-predicate
       #'command-completion-default-include-p)
 #+end_src
@@ -564,7 +564,7 @@ displays as its absolute line number.  But when switching to normal
 mode, line numbers should all be absolute.  That's what these two
 functions are used for.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
   (interactive)
@@ -583,7 +583,7 @@ showing its absolute line number."
 To display line numbers, the aptly named =display-line-numbers= package
 is used.  It's enabled by default in all programming modes.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package display-line-numbers
   :config
   (setq display-line-numbers-type 'relative)
@@ -596,7 +596,7 @@ is used.  It's enabled by default in all programming modes.
 
 Show column numbers in the modeline.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (column-number-mode)
 #+end_src
 
@@ -604,7 +604,7 @@ Toggle line numbers interactively.  I've tried simply binding
 =display-line-numbers-mode=, but I had to use it twice for the /first/
 toggle.  This is more stable so far.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/toggle-line-numbers ()
   "Toggle `display-line-numbers-mode'.  Meant to be used in a
 keybinding."
@@ -614,7 +614,7 @@ keybinding."
 
 ** Insert a newline at the end of files
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq require-final-newline t)
 (setq mode-require-final-newline t)
 #+end_src
@@ -627,13 +627,13 @@ increase the minimum severity for logs to be shown by setting
 =warning-minimum-level= to =:error,= or just disable the warnings for
 native compilation entirely like this:
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq native-comp-async-report-warnings-errors nil)
 #+end_src
 
 ** Spaces over tabs
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq-default indent-tabs-mode nil)
 #+end_src
 
@@ -641,13 +641,13 @@ native compilation entirely like this:
 
 Looking at you, [[https://go.dev/][Go]].
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq-default tab-width 4)
 #+end_src
 
 ** File name searches should be case-insensitive
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq read-file-name-completion-ignore-case t)
 #+end_src
 
@@ -658,7 +658,7 @@ It's especially useful for certain modes that are globally enabled
 anyway.  =Use-package= has built-in support for this available with the
 =:diminish= keyword.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package diminish)
 #+end_src
 
@@ -679,7 +679,7 @@ there seems to be a =:general= keyword, which probably works similar to
 the =:bind= one.  I sometimes use the latter for bindings that are not
 mode-sensitive.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (general-create-definer with-leader
   :keymaps 'override
   :states '(normal insert emacs visual motion)
@@ -691,7 +691,7 @@ A local leader key is something that is usually used to access
 situational commands, for instance language-specific or mode-specific
 ones.  I used =,= for this in Vim; same here now.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (general-create-definer with-local-leader
   :prefix ",")
 #+end_src
@@ -702,7 +702,7 @@ This is a list of modes that I do not want =evil= mode (defined below)
 to be enabled in by default.  It's mostly a preference of mine to use
 Emacs mode in REPL, terminal and shell buffers.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq kenran/holy-modes
       '(ediff
         eshell-mode
@@ -722,7 +722,7 @@ Emacs mode in REPL, terminal and shell buffers.
 The evil package offers a very complete vim experience inside of
 Emacs.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package evil
   :config
   (evil-mode 1)
@@ -757,7 +757,7 @@ current mode was evilified with =evil-collection=, and subsequently
 removing them from this list, has often fixed some problems (for
 instance with =mu4e=).
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package evil-collection
   :after evil
   :config
@@ -795,7 +795,7 @@ parentheses, =ds]= to delete surrounding brackets, or =cs[{= to change
 surrounding brackets to curly braces with whitespace padding.
 Selected regions can be surround with e.g. =S`=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package evil-surround
   :after evil
   :config
@@ -813,7 +813,7 @@ adds highlighting to those motions.
 It's also possible to configure/increase the scope of these searches,
 but for the moment I'm content with just using it on one line.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package evil-snipe
   :after evil
   :diminish evil-snipe-local-mode
@@ -830,7 +830,7 @@ it adds some keybindings and text objects for =org= files as well.
 TODO: It's surely worth spending some more time to find out what else
 this brings with it, but I'm not writing enough with =org=
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package evil-org
   :after (evil org)
   :hook (org-mode . evil-org-mode)
@@ -842,7 +842,7 @@ this brings with it, but I'm not writing enough with =org=
 
 *** Highlight vim marks
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package evil-visual-mark-mode
   :defer t
   :after evil
@@ -854,7 +854,7 @@ this brings with it, but I'm not writing enough with =org=
 Create nice custom mappings for normal mode (and others) that are
 accessed with the leader key, =SPC=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-leader
   ;; Give SPC SPC one more chance
   "SPC" '(execute-extended-command :which-key "M-x")
@@ -901,7 +901,7 @@ Enable =C-w= for vim-like window management (when not in insert or Emacs
 mode).  This means that I need to override the Emacs default binding,
 which can be done via =general='s =:keymaps 'override=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (general-define-key
  :states '(normal visual motion operator)
  :keymaps 'override
@@ -916,7 +916,7 @@ which can be done via =general='s =:keymaps 'override=.
 Enable =C-w= to delete backward (like in vim or bash) in insert mode,
 and also when Emacs is reading user input in the minibuffer.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (general-define-key
  :keymaps 'minibuffer-local-map
  "C-w" 'evil-delete-backward-word)
@@ -931,7 +931,7 @@ and also when Emacs is reading user input in the minibuffer.
 
 Make whitespace symbols visible.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package whitespace
   :config
   (setq whitespace-line-column 100)
@@ -951,7 +951,7 @@ Make whitespace symbols visible.
 
 ** Render manpages in Emacs
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package man
   :defer t
   :config
@@ -962,7 +962,7 @@ Make whitespace symbols visible.
 
 ** Diminish only
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package face-remap
   :diminish buffer-face-mode)
 
@@ -972,7 +972,7 @@ Make whitespace symbols visible.
 
 ** Don't trim ELisp evaluation results
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package simple
   :straight (:type built-in)
   :diminish auto-fill-function
@@ -983,7 +983,7 @@ Make whitespace symbols visible.
 
 ** ElDoc
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package eldoc
   :diminish eldoc-mode
   :config
@@ -996,7 +996,7 @@ Make whitespace symbols visible.
 
 ** Directory editor
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package dired
   :straight (:type built-in)
   :defer t
@@ -1010,7 +1010,7 @@ Make whitespace symbols visible.
 
 Beautify =dired= a bit.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package diredfl
   :defer t
   :after dired
@@ -1024,7 +1024,7 @@ matching, or a regural expression.  Bind those three functions to the
 local leader key to have easier access, as =dired= already has lots of
 keys bound.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package dired-narrow
   :defer t
   :after dired)
@@ -1050,7 +1050,7 @@ back in the diff frame.  It's possible to use
 =ediff-setup-windows-plain= as setup function, which makes =ediff=
 single-frame, circumventing the problem.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package ediff-wind
   :straight (:type built-in)
   :config
@@ -1066,7 +1066,7 @@ automatically when pressing =RET= with point between braces.
 
 The built-in =electric-pair-mode= does just that (by default).
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package emacs
   :straight (:type built-in)
   :init
@@ -1081,7 +1081,7 @@ Sometimes I accidentally mess up my window layout.  =Winner-mode= comes
 with the =winner-undo= command (bound by default to =C-<left>=) that
 reverts such changes.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package emacs
   :straight (:type built-in)
   :init (winner-mode))
@@ -1097,7 +1097,7 @@ integrate very well with default Emacs functionality, so a lot of
 things can utilize them "implicitly".  I've stuck with =vertico= and
 I've been happy with it ever since.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*.el"))
   :init
@@ -1115,7 +1115,7 @@ completion candidates above the prompt.  This has the nice effect of
 the prompt always being in the same location, so that I don't have to
 change where I look.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package vertico-reverse
   :straight nil)
 #+end_src
@@ -1125,7 +1125,7 @@ liked in Doom Emacs, as Doom had a notion of "directory name", that
 is, =DEL= would delete one level in the directory hierarchy, including
 the slash symbol.  The following extension to =vertico= does just that.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package vertico-directory
   :straight nil
   :after vertico
@@ -1139,7 +1139,7 @@ The reversed vertical display is not ideal for every context in my
 opinion.  The =vertico-multiform= extension lets me choose which
 extensions I want to use in which context precisely.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package vertico-multiform
   :straight nil
   :init (vertico-multiform-mode 1)
@@ -1162,7 +1162,7 @@ extensions I want to use in which context precisely.
 context-sensitive way, and then shows those at the top when presented
 with possible results from =vertico=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package savehist
   :init
   (savehist-mode))
@@ -1180,7 +1180,7 @@ Therefore we define style dispatchers and use them to customize
 Prepending an equals sign to a search term will search for literal
 matches of the preceding string.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/literal-if-= (pattern _index _total)
   (when (string-prefix-p "=" pattern)
     `(orderless-literal . ,(substring pattern 1))))
@@ -1189,7 +1189,7 @@ matches of the preceding string.
 A prepended bang discards everything that matches the preceding
 literal string.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/without-if-! (pattern _index _total)
   (when (string-prefix-p "!" pattern)
     `(orderless-without-literal . ,(substring pattern 1))))
@@ -1197,13 +1197,13 @@ literal string.
 
 The tilde sign gives me a way to have "fuzzy" search, if needed.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/flex-if-~ (pattern _index _total)
   (when (string-prefix-p "~" pattern)
     `(orderless-flex . ,(substring pattern 1))))
 #+end_src
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
@@ -1218,7 +1218,7 @@ The [[https://github.com/minad/consult][consult]] package is the analogue of =co
 some time, though not in any extent close to full.  This defines some
 basic bindings mostly taken from an example in its readme.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package consult
   :bind (;; C-x bindings
          ("C-x b" . consult-buffer)
@@ -1262,7 +1262,7 @@ conjunction with =embark-export=.  With this I often pull the results of
 some =grep= command into a separate buffer, where I can then utilize
 =wgrep= to bulk-modify the original buffers.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package embark
   :bind (("C-," . embark-act)
          ("C-h B" . embark-bindings))
@@ -1272,7 +1272,7 @@ some =grep= command into a separate buffer, where I can then utilize
 
 Integrate =embark= with =consult=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package embark-consult
   :after (embark consult)
   :demand t
@@ -1298,7 +1298,7 @@ theme settings.  To circumvent this I've written the following
 function that appends a single new value to the current =:inherit=
 attribute value of a face.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/inherit-fixed-pitch (face)
   "Append `fixed-pitch' to the `:inherit' attribute of FACE."
   (let* ((current (face-attribute face :inherit))
@@ -1356,7 +1356,7 @@ automatically break overly long lines into smaller pieces when typing.
 One may still use =M-q= to re-fill paragraphs when editing text.  After
 loading =org=, a custom font setup might run to adjust the headers.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package org
   ;; Use the built-in version of org (which is quite up-to-date as I'm
   ;; always using emacs HEAD).  This circumvents problems with
@@ -1416,7 +1416,7 @@ loading =org=, a custom font setup might run to adjust the headers.
 Add some globally useful =org= keybindings under =SPC o=, like for
 capturing, storing links etc.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-leader
   "o" '(:which-key "org-mode" :ignore t)
   "o a" 'org-agenda
@@ -1430,7 +1430,7 @@ capturing, storing links etc.
 
 ** Beautiful bullet points
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package org-bullets
   ;; :hook (org-mode . org-bullets-mode)
   :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
@@ -1438,7 +1438,7 @@ capturing, storing links etc.
 
 Also render unordered list bullet points as dots instead of =-= or =+=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (font-lock-add-keywords
  'org-mode
  '(("^ *\\([-]\\) "
@@ -1463,7 +1463,7 @@ This might turn out to be a hindrance after all, since bindings like
 =ciw= become a bit weird to work with.  I might end up actually using
 the ='always= option value after all.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package org-appear
   :hook ((org-mode . org-appear-mode))
   :config
@@ -1480,7 +1480,7 @@ This is a very basic setup for =org-roam=.  I don't use the Zettelkasten
 approach yet, but might in the future.  My synchronization setup with
 =syncthing= should handle this well.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package org-roam
   :defer t
   :after org
@@ -1498,7 +1498,7 @@ approach yet, but might in the future.  My synchronization setup with
 
 *** Keybindings for =org-roam=
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-leader
   "o r" '(:which-key "roam" :ignore t)
   "o r c" 'org-roam-capture
@@ -1508,7 +1508,7 @@ approach yet, but might in the future.  My synchronization setup with
 
 ** Short presentations with org
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package org-present
   :hook ((org-present-mode . (lambda ()
                                (org-present-big)
@@ -1524,7 +1524,7 @@ approach yet, but might in the future.  My synchronization setup with
 
 ** Enable syntax highlighting when exporting to HTML
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package htmlize
   :defer t
   :after ox)
@@ -1532,7 +1532,7 @@ approach yet, but might in the future.  My synchronization setup with
 
 * On-the-fly syntax checking (and other things): Flymake
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package flymake
   :straight (:type built-in)
   :config
@@ -1550,7 +1550,7 @@ ShellCheck with Flymake.  We have to trigger =flymake-shellcheck-load=
 when loading shell scripts, and also enable Flymake itself, both done
 via hooks to =sh-mode=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package flymake-shellcheck
   :commands (flymake-shellcheck-load)
   :hook ((sh-mode . flymake-shellcheck-load)
@@ -1571,7 +1571,7 @@ try.  The first impression was very positive, as =corfu= is using a
 child frame for the completion popup and thus does not clash with
 =whitespace-mode= the way =company= does.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun corfu-enable-always-in-minibuffer ()
   "Enable Corfu in the minibuffer if Vertico/Mct are not active."
   (unless (or (bound-and-true-p vertico--input)
@@ -1598,7 +1598,7 @@ child frame for the completion popup and thus does not clash with
 
 ** More completion-at-point backends via =cape=
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package cape
   :init
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
@@ -1680,7 +1680,7 @@ host.
 For writing e-mails =mu4e= uses =message-mode= like the other tools.  This
 checks the =user-full-name= variable to fill in my name.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq user-full-name "Johannes Maier")
 #+end_src
 
@@ -1693,7 +1693,7 @@ accordingly.
 Note that =mu4e= is one of those packages that would behave strangely
 when using the =evil-collection= integration.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
   (use-package mu4e
     :straight
     (:local-repo "~/.nix-profile/share/emacs/site-lisp/mu4e"
@@ -1790,7 +1790,7 @@ when using the =evil-collection= integration.
 
 Bind e-mail management to the global hotkey =SPC m=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-leader
   "m" '(mu4e :which-key "mail"))
 #+end_src
@@ -1816,7 +1816,7 @@ pretty arcane.  =Shackle.el= seems to make this easier.  There's also
 =popper.el=, and I'm not quite sure yet where the differences are.  My
 guess is that they probably go well together.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package shackle
   :init (shackle-mode)
   :config
@@ -1836,7 +1836,7 @@ guess is that they probably go well together.
   (setq shackle-default-rule nil))
 #+end_src
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package popper
   :disabled t
   :defer t
@@ -1860,7 +1860,7 @@ have their sole online presence in IRC.  As with anything, it's worth
 trying whether just using Emacs might be preferable.  ERC is an old
 and battle-tested package, so my hopes are high.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package erc
   :config
   (setq erc-autojoin-channels-alist
@@ -1882,7 +1882,7 @@ and battle-tested package, so my hopes are high.
 * Package-specific configuration
 ** Mode-specific code snippets
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package yasnippet
   :init (yas-global-mode 1)
   :diminish yas-minor-mode)
@@ -1895,7 +1895,7 @@ It enables easy definition of commands to format buffers, as well as
 minor modes that, when active, automatically apply these commands on
 save.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package reformatter
   :defer t)
 #+end_src
@@ -1906,7 +1906,7 @@ save.
 built-in =term=.  This is very useful for quickly spawning a terminal,
 for instance in the top-level directory of a project.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package vterm
   :straight nil
   :commands (vterm)
@@ -1920,7 +1920,7 @@ for instance in the top-level directory of a project.
 
 ** C/C++
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (setq c-default-style '((awk-mode . "awk")
                         (other . "stroustrup")))
 #+end_src
@@ -1932,7 +1932,7 @@ me learning more in-depth in the near future.  It's a smaller language
 than, say, Rust, and less safe; but I like its explicit nature and
 great defaults.  The community is very welcoming so far, as well!
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package zig-mode
   :defer t)
 #+end_src
@@ -1943,7 +1943,7 @@ great defaults.  The community is very welcoming so far, as well!
 highlighting, REPL support, etc., similar to what =haskell-mode= does
 for Haskell.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package tuareg
   :hook (tuareg-mode . (lambda () (setq mode-name "🐫")))
   :config
@@ -1953,7 +1953,7 @@ for Haskell.
 
 To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/merlin][merlin]].
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package merlin
   :hook ((tuareg-mode . merlin-mode)))
 #+end_src
@@ -1961,7 +1961,7 @@ To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/mer
 [[https://github.com/Khady/merlin-eldoc][merlin-eldoc]] integrates =merlin= with =eldoc-mode=, automatically
 documenting things at point.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package merlin-eldoc
   :after merlin
   :hook (tuareg-mode . merlin-eldoc-setup)
@@ -1979,7 +1979,7 @@ POSIX-incompatible language, but I mainly use it for =fish='s
 configuration (though most of that is done via =nix=, anyway).  It's
 nice to have syntax highlighting, though.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package fish-mode
   :defer t)
 #+end_src
@@ -1994,7 +1994,7 @@ to use these is support of one's editor.  Many editors have
 out-of-the-box EditorConfig support nowadays.  For Emacs, there's the
 official [[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]] package.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package editorconfig
   :config
   (editorconfig-mode 1))
@@ -2007,14 +2007,14 @@ acting strange.  Deleting a paragraph via =dap= for instance often
 deletes the following one, too, plus sometimes the previous section
 header.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package ini-mode
   :defer t)
 #+end_src
 
 ** JavaScript
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package js
   :defer t
   :config
@@ -2023,7 +2023,7 @@ header.
 
 ** Purescript
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package psc-ide
   :hook (purescript-mode . psc-ide-mode)
   :config
@@ -2035,7 +2035,7 @@ header.
 
 ** Nix
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (reformatter-define kenran/nix-format
   :program "nixfmt"
   :args '()
@@ -2048,7 +2048,7 @@ header.
 
 ** Markdown
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
@@ -2057,7 +2057,7 @@ header.
   :hook ((markdown-mode gfm-mode) . auto-fill-mode))
 #+end_src
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-local-leader
   :states 'normal
   "t" '(:ignore t :which-key "table")
@@ -2082,7 +2082,7 @@ Provide an interactive mode for writing Haskell.  I can work with a
 REPL, get feedback and compilation errors shown in the code, and so
 on.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package haskell-mode
   :diminish interactive-haskell-mode
   :custom
@@ -2095,7 +2095,7 @@ A couple of ELisp functions that help me to make quick changes to
 Haskell files (adding pragmas, language extensions, GHC options,
 imports).
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/make-pragma (pragma content)
   "Create a pragma line of type `pragma' containing `content'."
   (concat "{-# " pragma " " content " #-}\n"))
@@ -2156,7 +2156,7 @@ and alias."
 Define some keybindings that are local to the =interactive-haskell-mode=
 using the local leader key.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-local-leader
   :states 'normal
   :keymaps 'interactive-haskell-mode-map
@@ -2178,7 +2178,7 @@ using the local leader key.
   
 ** Dhall
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package dhall-mode
   :mode "\\.dhall\\'"
   :config
@@ -2187,14 +2187,14 @@ using the local leader key.
 
 ** Docker
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package dockerfile-mode
   :defer t)
 #+end_src
 
 ** YAML
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package yaml-mode
   :defer t)
 #+end_src
@@ -2203,7 +2203,7 @@ using the local leader key.
 
 The key to using Clojure effectively with Emacs seems to be [[https://github.com/clojure-emacs/cider][CIDER]].
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package clojure-mode
   :defer t)
 
@@ -2214,14 +2214,14 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 ** CSV
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package csv-mode
   :defer t)
 #+end_src
 
 ** PlantUML
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package plantuml-mode
   :defer t
   :init
@@ -2235,7 +2235,7 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 [[https://github.com/joaotavora/sly][SLY]] seems to be a bit more actively developed and modern than [[https://slime.common-lisp.dev/][SLIME]].
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package sly
   :defer t
   :config
@@ -2244,14 +2244,14 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 =sly-asdf= gives integration with Common Lisp's package manager, [[https://asdf.common-lisp.dev/][ASDF]].
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package sly-asdf
   :defer t)
 #+end_src
 
 ** Racket
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package racket-mode
   :defer t
   :hook ((racket-mode . racket-xp-mode)
@@ -2261,7 +2261,7 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 ** Rust
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package rust-mode
   :defer t
   :config
@@ -2275,7 +2275,7 @@ Interpreters]] uses it for the first part.  It's actually quite OK to
 write Java with =meghanada,= but it takes a long time to download all
 its dependencies.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package meghanada
   :defer t
   :init
@@ -2289,7 +2289,7 @@ its dependencies.
 
 ** Python
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package anaconda-mode
   :defer t
   :hook (python-mode . anaconda-mode))
@@ -2300,14 +2300,14 @@ its dependencies.
 
 ** Nim
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package nim-mode
   :defer t)
 #+end_src
 
 ** F#
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package fsharp-mode
   :defer t
   :config
@@ -2323,7 +2323,7 @@ more in line with the rest of this configuration to try out something
 more lightweight and closer to vanilla Emacs.  This is where [[https://github.com/joaotavora/eglot][eglot]]
 comes into play.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package eglot
   :defer t)
 
@@ -2339,7 +2339,7 @@ comes into play.
 This gives us better and more readable help pages.  We also replace
 some built-in =C-h= keybings with =helpful-*= functions.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package helpful
   :after evil
   :bind (("C-h f" . helpful-callable)
@@ -2360,7 +2360,7 @@ The following are utility functions that mostly rely on being in the
 top-level directory of a known project.  =project.el= is making this
 possible in a straightforward way.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun kenran/add-nix-envrc-file ()
   "If it doesn't already exist create a .envrc file containing 'use
 nix' in the current directory."
@@ -2396,7 +2396,7 @@ current project."
 One tricky thing was making it possible to bind the keymap
 =project-prefix-map= to a key.  One needs to make it callable via =fset=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package project
   :config
   (fset 'project-prefix-map project-prefix-map)
@@ -2417,7 +2417,7 @@ One tricky thing was making it possible to bind the keymap
 
 ** Magit
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package magit
   :hook (git-commit-mode . evil-insert-state)
   :custom
@@ -2435,7 +2435,7 @@ One tricky thing was making it possible to bind the keymap
 
 *** Interactively browse =git= history
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package git-timemachine
   :defer t)
 #+end_src
@@ -2445,7 +2445,7 @@ One tricky thing was making it possible to bind the keymap
 =Magit=-specific keybindings are useful in a global scope, thus they may
 be accessed under =SPC g=.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (with-leader
   "g" '(:ignore t :which-key "git")
   "g b" '(magit-branch-checkout :which-key "switch branch")
@@ -2468,7 +2468,7 @@ that, and autoloads the specific modes for the respective file types.
 Like its readme proposes it's also possible to reuse the
 =gitignore-mode= for other things, in this case =.dockerignore= files.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package git-modes
   :defer t
   :init
@@ -2478,7 +2478,7 @@ Like its readme proposes it's also possible to reuse the
 
 ** LISP editing with Lispy and Lispyville
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package lispy
   :hook
   ((emacs-lisp-mode
@@ -2493,7 +2493,7 @@ Like its readme proposes it's also possible to reuse the
    . lispy-mode))
 #+end_src
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package lispyville
   :hook
   (lispy-mode . lispyville-mode)
@@ -2512,7 +2512,7 @@ Like its readme proposes it's also possible to reuse the
 
 ** Highlight "todo", "fixme" and other keywords everywhere.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package hl-todo
   :init
   (add-hook 'after-init-hook 'global-hl-todo-mode))
@@ -2523,7 +2523,7 @@ Like its readme proposes it's also possible to reuse the
 When pressing the first key in a hotkey chain, show a popup that
 displays the possible completions and associated functions.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package which-key
   :defer t
   :custom
@@ -2541,7 +2541,7 @@ displays the possible completions and associated functions.
 Attach beautiful symbols to, for instance, file names in a =dired= or
 =ibuffer= buffer.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package all-the-icons)
 
 (use-package all-the-icons-dired
@@ -2562,7 +2562,7 @@ Annotate minibuffer completions, like showing the bound keys and
 docstrings for commands in =M-x=, variable values in =C-h v=, file sizes
 and permissions in =C-x C-f=, and much more.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package marginalia
   :init
   (marginalia-mode)
@@ -2586,7 +2586,7 @@ flawlessly so far.  Note: this should probably be one of the last
 modes to load, as the hook function is then placed before the other
 modes to ensure =direnv= integration is working as expected.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package envrc
   :defer t
   :init (envrc-global-mode))
@@ -2597,14 +2597,14 @@ modes to ensure =direnv= integration is working as expected.
 I use [[https://github.com/BurntSushi/ripgrep][ripgrep]] on the command line a lot.  This packages makes it
 comfortably usable from within Emacs.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package ripgrep
   :defer t)
 #+end_src
 
 ** Interactive window switching
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package ace-window
   :defer t
   :init
@@ -2623,7 +2623,7 @@ to use =C-w= like in a terminal or in vim.  I used to bind
 ='evil-window-map= to =C-l=, but perhaps it's also a good key to have
 ='ace-window= on as in most cases it's what I'd use anyway.
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (general-define-key
  :states '(normal visual motion operator insert emacs)
  :keymaps 'override
@@ -2634,13 +2634,13 @@ to use =C-w= like in a terminal or in vim.  I used to bind
 
 TODO
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package hydra)
 #+end_src
 
 ** Global font scaling
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package default-text-scale
   :defer t
   :after hydra
@@ -2675,7 +2675,7 @@ TODO
 
 ** Edit =grep= results over multiple buffers
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package wgrep
   :defer t
   :custom
@@ -2686,7 +2686,7 @@ TODO
 
 ** Improve garbage collector behavior
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package gcmh
   :diminish gcmh-mode
   :init
