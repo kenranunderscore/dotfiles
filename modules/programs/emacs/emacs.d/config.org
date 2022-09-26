@@ -705,7 +705,9 @@ Emacs mode in REPL, terminal and shell buffers.
 #+begin_src emacs-lisp
 (setq kenran/holy-modes
       '(ediff
+        erc-mode
         eshell-mode
+        haskell-interactive-mode
         mu4e
         notmuch-hello-mode
         racket-repl-mode
@@ -713,8 +715,7 @@ Emacs mode in REPL, terminal and shell buffers.
         shell-mode
         sly-mrepl-mode
         term-mode
-        vterm-mode
-        haskell-interactive-mode))
+        vterm-mode))
 #+end_src
 
 ** =Evil= and supporting packages
