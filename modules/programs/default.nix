@@ -11,6 +11,5 @@
     ./qutebrowser.nix
     ./sbcl
     ./vim.nix
-    ./weechat
   ];
 }

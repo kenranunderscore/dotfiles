@@ -44,10 +44,6 @@
             notification = false;
           }
           {
-            command = "i3-msg 'workspace 5:chat; exec kitty weechat'";
-            notification = false;
-          }
-          {
             command = "i3-msg 'workspace 1:main/emacs; exec kitty'";
             notification = false;
           }

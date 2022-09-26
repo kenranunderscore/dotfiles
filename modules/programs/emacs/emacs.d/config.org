@@ -1851,6 +1851,34 @@ guess is that they probably go well together.
 - [ ] Shell command results
 - [ ] LSP / =eglot=
 
+* IRC with ERC (WIP)
+
+I've been using [[https://weechat.org][weechat]] for IRC communication in the past.  And while
+my usage of IRC has decreased quite a bit due to a lot of things
+moving over to Discord, there are some channels and communities that
+have their sole online presence in IRC.  As with anything, it's worth
+trying whether just using Emacs might be preferable.  ERC is an old
+and battle-tested package, so my hopes are high.
+
+#+begin_src elisp
+(use-package erc
+  :config
+  (setq erc-autojoin-channels-alist
+        '((libera "#emacs" "#nyxt"))))
+
+(defun start-irc ()
+  "Connect to some IRC servers."
+  (interactive)
+  (erc-tls :id 'libera
+           :server "irc.libera.chat"
+           :port 6697
+           :nick "kenran"
+           :full-name "kenran"
+           :client-certificate (let ((cert-dir (getenv "KENRAN_IRC_CERTS")))
+                                 `(,(concat cert-dir "/kenran.key")
+                                   ,(concat cert-dir "/kenran.crt")))))
+#+end_src
+
 * Package-specific configuration
 ** Mode-specific code snippets
 

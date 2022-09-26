@@ -21,7 +21,6 @@ in {
         firefox.enable = true;
         kitty.enable = true;
         neovim.enable = true;
-        weechat.enable = true;
       };
       shell = {
         bash.enable = true;
@@ -64,6 +63,7 @@ in {
       sessionVariables = rec {
         EDITOR = "emacsclient -a '' -c";
         VISUAL = EDITOR;
+        KENRAN_IRC_CERTS = "${cfg.privateDir}/irc";
       };
 
       packages = with pkgs; [
