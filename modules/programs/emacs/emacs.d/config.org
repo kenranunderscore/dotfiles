@@ -1864,7 +1864,14 @@ and battle-tested package, so my hopes are high.
 (use-package erc
   :config
   (setq erc-autojoin-channels-alist
-        '((libera "#emacs" "#nyxt"))))
+        '((libera "#emacs"
+                  "#nyxt"
+                  "#systemcrafters"
+                  "#org-mode"
+                  "#haskell"
+                  "#nim"
+                  "#zig"
+                  "##crawl"))))
 
 (defun start-irc ()
   "Connect to some IRC servers."
