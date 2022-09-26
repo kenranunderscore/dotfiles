@@ -229,11 +229,11 @@
     "privateConfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1655970329,
-        "narHash": "sha256-oYcaMRMZJtfwOCzX54juK4S7O+JaEYmhV1k0K9Xi8QA=",
+        "lastModified": 1664188739,
+        "narHash": "sha256-eUb0ZB4BozAz4MA7bamEtFl2o+MptXDUKuEcmVOPHW0=",
         "ref": "refs/heads/master",
-        "rev": "39f5b1defa984d9495336752d8af311e8276360a",
-        "revCount": 11,
+        "rev": "c36e6c6b774610a3b56e1d838c44b219d0b923f1",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/kenranunderscore/private-config"
       },
