@@ -33,7 +33,7 @@ in {
             output = "HDMI-0";
           }
           {
-            name = "5:irc/matrix";
+            name = "5:chat";
             output = "HDMI-0";
             assigns = [{ class = "Element"; }];
           }
