@@ -189,97 +189,143 @@ certain attributes that need to be applied when switching to the
 respective font.
 
 #+begin_src emacs-lisp
+;; FIXME: tweak org-height values
 (setq kenran/font-alist
-      '((pragmata-pro . (:family
-                         "Pragmata Pro Mono Liga"
-                         :default-height
-                         170
-                         :weight
-                         regular))
-        (iosevka . (:family
-                    "Iosevka"
-                    :default-height
-                    166
-                    :weight
-                    regular))
-        (dejavu . (:family
-                   "DejaVu Sans Mono"
-                   :default-height
-                   150
-                   :weight
-                   regular))
-        (ibm-plex . (:family
-                     "IBM Plex Mono"
-                     :default-height
-                     150
-                     :weight
-                     regular))
-        (cascadia . (:family
-                     "Cascadia Code"
-                     :default-height
-                     150
-                     :weight
-                     regular))
-        (source-code-pro . (:family
-                            "Source Code Pro"
-                            :default-height
-                            150
-                            :weight
-                            regular))
-        (fira-code . (:family
-                      "Fira Code"
-                      :default-height
-                      150
-                      :weight
-                      regular))
-        (terminus . (:family
-                     "Terminus"
-                     :default-height
-                     170
-                     :weight
-                     regular))
-        (jetbrains-mono . (:family
-                           "JetBrains Mono"
-                           :default-height
-                           150
-                           :weight
-                           regular))
-        (input-mono . (:family
-                       "Input Mono"
-                       :default-height
-                       150
-                       :weight
-                       regular))
-        (courier-prime . (:family
-                          "Courier Prime"
-                          :default-height
-                          150
-                          :weight
-                          regular))
-        (sf-mono . (:family
-                    "SFMono"
-                    :default-height
-                    150
-                    :weight
-                    regular))
-        (fantasque-sans-mono . (:family
-                                "Fantasque Sans Mono"
-                                :default-height
-                                170
-                                :weight
-                                regular))
-        (code-new-roman . (:family
-                           "CodeNewRoman Nerd Font Mono"
-                           :default-height
-                           160
-                           :weight
-                           regular))
-        (gohu . (:family
-                 "GohuFont Nerd Font Mono"
-                 :default-height
-                 160
-                 :weight
-                 regular))))
+      '((pragmata-pro
+         . (:family
+            "Pragmata Pro Mono Liga"
+            :default-height
+            170
+            :org-height
+            0.9
+            :weight
+            regular))
+        (iosevka
+         . (:family
+            "Iosevka"
+            :default-height
+            166
+            :org-height
+            0.9
+            :weight
+            regular))
+        (dejavu
+         . (:family
+            "DejaVu Sans Mono"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (ibm-plex
+         . (:family
+            "IBM Plex Mono"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (cascadia
+         . (:family
+            "Cascadia Code"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (source-code-pro
+         . (:family
+            "Source Code Pro"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (fira-code
+         . (:family
+            "Fira Code"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (terminus
+         . (:family
+            "Terminus"
+            :default-height
+            170
+            :org-height
+            0.9
+            :weight
+            regular))
+        (jetbrains-mono
+         . (:family
+            "JetBrains Mono"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (input-mono
+         . (:family
+            "Input Mono"
+            :default-height
+            150
+            :org-height
+            0.9
+            :weight
+            regular))
+        (courier-prime
+         . (:family
+            "Courier Prime"
+            :default-height
+            150
+            :org-height
+            1.5
+            :weight
+            regular))
+        (sf-mono
+         . (:family
+            "SFMono"
+            :default-height
+            150
+            :org-height
+            1.0
+            :weight
+            regular))
+        (fantasque-sans-mono
+         . (:family
+            "Fantasque Sans Mono"
+            :default-height
+            170
+            :org-height
+            1.0
+            :weight
+            regular))
+        (code-new-roman
+         . (:family
+            "CodeNewRoman Nerd Font Mono"
+            :default-height
+            160
+            :org-height
+            1.0
+            :weight
+            regular))
+        (gohu
+         . (:family
+            "GohuFont Nerd Font Mono"
+            :default-height
+            160
+            :org-height
+            1.0
+            :weight
+            regular))))
 #+end_src
 
 The currently selected font (key of =kenran/font-alist=).  Setting this
@@ -311,7 +357,8 @@ applies the attributes of its value in =kenran/font-alist=.
                                      (copy-alist kenran/font-alist)))))))
   (let* ((attrs (alist-get font kenran/font-alist))
          (family (plist-get attrs :family))
-         (height (plist-get attrs :default-height)))
+         (height (plist-get attrs :default-height))
+         (org-height (plist-get attrs :org-height)))
     (setq kenran/current-monospace-font font)
     (setq kenran/default-font-height height)
     (set-face-attribute
@@ -322,7 +369,7 @@ applies the attributes of its value in =kenran/font-alist=.
     (set-face-attribute
      'fixed-pitch nil
      :font family
-     :height 0.9)
+     :height org-height)
     (set-face-attribute
      'variable-pitch nil
      :font kenran/variable-pitch-font
