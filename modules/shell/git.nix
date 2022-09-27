@@ -43,11 +43,11 @@ in {
       ];
       signing.signByDefault = cfg.gpgKey != null;
       signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
-      diff-so-fancy = {
+      difftastic = {
         enable = true;
-        stripLeadingSymbols = false;
-        markEmptyLines = true;
-        changeHunkIndicators = true;
+        display = "inline";
+        background = "light";
+        color = "auto";
       };
       extraConfig = {
         core.askPass = "";
