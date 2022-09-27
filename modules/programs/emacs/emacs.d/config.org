@@ -1368,7 +1368,9 @@ loading =org=, a custom font setup might run to adjust the headers.
    (org-trigger . save-buffer)
    ;; Inheriting fixed-pitch in kenran/org-font-setup doesn't work; the
    ;; face is not yet known there, so use a hook.
-   (org-indent-mode . (lambda () (kenran/inherit-fixed-pitch 'org-indent)))
+   (org-indent-mode . (lambda ()
+                        (kenran/inherit-fixed-pitch 'org-indent)
+                        (kenran/inherit-fixed-pitch 'org-hide)))
    (org-mode . (lambda () (text-scale-increase 1))))
   :diminish org-indent-mode
   :custom
