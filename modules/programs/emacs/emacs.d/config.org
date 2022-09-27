@@ -1874,7 +1874,28 @@ and battle-tested package, so my hopes are high.
                   "#haskell"
                   "#nim"
                   "#zig"
-                  "##crawl"))))
+                  "##crawl")))
+  (setq erc-track-exclude
+        '("#org-mode" "#haskell" "#nim" "#zig" "##crawl"))
+  (setq erc-track-exclude-types
+        '("JOIN" "PART" "NICK" "QUIT" "MODE" "AWAY" "333" "353"))
+  (setq erc-hide-list '("NICK" "MODE" "AWAY"))
+  (setq erc-track-exclude-server-buffer t)
+  (setq erc-kill-server-buffer-on-quit t)
+  (setq erc-kill-buffer-on-part t)
+  (setq erc-fill-column 130)
+  (setq erc-fill-static-center 20)
+  (setq erc-fill-function #'erc-fill-static))
+
+(use-package erc-hl-nicks
+  :after erc
+  (add-to-list 'erc-modules 'hl-nicks))
+
+(use-package erc-image
+  :after erc
+  :config
+  (setq erc-image-inline-rescale 200)
+  (add-to-list 'erc-modules 'image))
 
 (defun start-irc ()
   "Connect to some IRC servers."
