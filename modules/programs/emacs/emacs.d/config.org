@@ -1924,9 +1924,8 @@ and battle-tested package, so my hopes are high.
                   "##crawl")))
   (setq erc-track-exclude
         '("#org-mode" "#haskell" "#nim" "#zig" "##crawl"))
-  (setq erc-track-exclude-types
-        '("JOIN" "PART" "NICK" "QUIT" "MODE" "AWAY" "333" "353"))
-  (setq erc-hide-list '("NICK" "MODE" "AWAY"))
+  (setq erc-track-exclude-types '("333" "353"))
+  (setq erc-hide-list '("NICK" "MODE" "AWAY" "JOIN" "PART" "QUIT" "AWAY"))
   (setq erc-track-exclude-server-buffer t)
   (setq erc-kill-server-buffer-on-quit t)
   (setq erc-kill-buffer-on-part t)
