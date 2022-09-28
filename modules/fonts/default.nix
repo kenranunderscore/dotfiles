@@ -23,6 +23,7 @@ in {
         inherit (pkgs) runCommand;
         inherit (inputs) sf-mono;
       })
+      (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
       pragmataPro
     ] ++ (with pkgs; [
       anonymousPro

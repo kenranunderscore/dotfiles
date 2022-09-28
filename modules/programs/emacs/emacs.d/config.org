@@ -325,6 +325,15 @@ respective font.
             :org-height
             1.0
             :weight
+            regular))
+        (lucida-console
+         . (:family
+            "Lucida Console"
+            :default-height
+            160
+            :org-height
+            0.8
+            :weight
             regular))))
 #+end_src
 
