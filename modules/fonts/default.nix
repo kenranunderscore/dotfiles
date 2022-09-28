@@ -24,31 +24,31 @@ in {
         inherit (inputs) sf-mono;
       })
       pragmataPro
-    ] ++ [
-      pkgs.anonymousPro
-      pkgs.camingo-code
-      pkgs.cantarell-fonts
-      pkgs.cascadia-code
-      pkgs.courier-prime
-      pkgs.fantasque-sans-mono
-      pkgs.fira-code
-      pkgs.font-awesome_5
-      pkgs.go-font
-      pkgs.gohufont
-      pkgs.hack-font
-      pkgs.hasklig
-      pkgs.ibm-plex
-      pkgs.inconsolata
-      pkgs.iosevka
-      pkgs.jetbrains-mono
-      pkgs.liberation_ttf
-      pkgs.lmodern
-      pkgs.nerdfonts
-      pkgs.noto-fonts
-      pkgs.roboto-mono
-      pkgs.source-code-pro
-      pkgs.terminus_font
-      pkgs.ubuntu_font_family
-    ];
+    ] ++ (with pkgs; [
+      anonymousPro
+      camingo-code
+      cantarell-fonts
+      cascadia-code
+      courier-prime
+      fantasque-sans-mono
+      fira-code
+      font-awesome_5
+      go-font
+      gohufont
+      hack-font
+      hasklig
+      ibm-plex
+      inconsolata
+      iosevka
+      jetbrains-mono
+      liberation_ttf
+      lmodern
+      nerdfonts
+      noto-fonts
+      roboto-mono
+      source-code-pro
+      terminus_font
+      ubuntu_font_family
+    ]);
   };
 }
