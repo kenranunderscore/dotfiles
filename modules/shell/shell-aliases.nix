@@ -58,6 +58,7 @@
   nd = "nix develop";
   nr = "nix run";
   ns = "nix shell";
+  nsn = "nix search nixpkgs";
 
   # systemd
   sy = "systemctl";
