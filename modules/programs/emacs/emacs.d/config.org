@@ -1939,9 +1939,9 @@ and battle-tested package, so my hopes are high.
                   "#haskell"
                   "#nim"
                   "#zig"
-                  "##crawl")))
+                  "#crawl")))
   (setq erc-track-exclude
-        '("#org-mode" "#haskell" "#nim" "#zig" "##crawl"))
+        '("#org-mode" "#crawl"))
   (setq erc-track-exclude-types '("333" "353"))
   (setq erc-hide-list '("NICK" "MODE" "AWAY" "JOIN" "PART" "QUIT" "AWAY"))
   (setq erc-track-exclude-server-buffer t)
