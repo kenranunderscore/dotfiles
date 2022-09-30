@@ -93,7 +93,7 @@ in {
           }
           {
             command = ''
-              i3-msg "workspace 5:chat; exec emacs --eval '(start-irc)'"
+              i3-msg "workspace 5:chat; exec emacs -f start-irc"
             '';
             notification = false;
           }
