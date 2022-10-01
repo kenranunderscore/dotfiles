@@ -729,7 +729,6 @@ anyway.  =Use-package= has built-in support for this available with the
 #+end_src
 
 * Vim emulation
-
 ** Leader keys
 
 Having a dedicated leader key (=SPC= in my case) is one of the most
@@ -762,39 +761,38 @@ ones.  I used =,= for this in Vim; same here now.
   :prefix ",")
 #+end_src
 
-** Non-evil ("holy") modes
-
-This is a list of modes that I do not want =evil= mode (defined below)
-to be enabled in by default.  It's mostly a preference of mine to use
-Emacs mode in REPL, terminal and shell buffers.
-
-#+begin_src emacs-lisp
-(setq kenran/holy-modes
-      '(ediff
-        erc-mode
-        eshell-mode
-        haskell-interactive-mode
-        mu4e
-        notmuch-hello-mode
-        racket-repl-mode
-        racket-stepper-mode
-        shell-mode
-        sly-mrepl-mode
-        term-mode
-        vterm-mode))
-#+end_src
-
 ** =Evil= and supporting packages
 
 The evil package offers a very complete vim experience inside of
-Emacs.
+Emacs.  I've borrowed some pieces of configuration from
+[[https://depp.brause.cc/dotemacs][wasamasa's Emacs configuration]], specifically the part where I default
+to =emacs= mode.  The reason is that (sometimes due to =evil=, other times
+=evil-collection=) some buffers, like popups in =special-mode=,  don't
+behave the way I'd expect them to.  If this experiment goes well I
+think I'll gradually remove =evil= / =evil-motion-state= from more and
+more things.  I'm very used to =evil= integration and keybindings in
+things like =magit=, =dired= and others, though.  If I end up going
+"vanilla" except for editing, I might have to think about how I want
+to move consistently so I don't get caught up between =C-n= and =C-p=
+versus =C-j= and =C-k=.
 
 #+begin_src emacs-lisp
 (use-package evil
   :config
   (evil-mode 1)
-  (dolist (mode kenran/holy-modes)
-    (evil-set-initial-state mode 'emacs))
+  (setq evil-default-state 'emacs)
+  (setq evil-emacs-state-modes nil)
+  (setq evil-insert-state-modes nil)
+  (setq evil-motion-state-modes nil)
+  (setq evil-normal-state-modes
+        '(text-mode
+          prog-mode
+          fundamental-mode
+          css-mode
+          conf-mode
+          TeX-mode
+          LaTeX-mode
+          diff-mode))
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
@@ -835,21 +833,13 @@ instance with =mu4e=).
      eldoc
      ;; corfu/embark/vertico?
      ;; grep
-     help
-     helpful
      ibuffer
-     imenu
-     man
      magit
      (package-menu package)
      proced
-     vc-annotate
-     vc-dir
-     vc-git
      wgrep
      ;; which-key
-     )
-)
+     ))
   :custom
   (evil-collection-want-unimpaired-p nil))
 #+end_src
