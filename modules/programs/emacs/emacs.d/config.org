@@ -269,7 +269,7 @@ respective font.
             :default-height
             150
             :org-height
-            0.9
+            0.8
             :weight
             regular))
         (input-mono
