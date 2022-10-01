@@ -804,6 +804,7 @@ versus =C-j= and =C-k=.
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-respect-visual-line-mode t)
   (add-hook 'server-after-make-frame-hook
             #'kenran/set-evil-state-cursors))
 #+end_src
