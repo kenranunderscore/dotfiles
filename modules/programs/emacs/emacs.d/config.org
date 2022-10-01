@@ -296,7 +296,7 @@ respective font.
             :default-height
             150
             :org-height
-            1.0
+            0.85
             :weight
             regular))
         (fantasque-sans-mono
