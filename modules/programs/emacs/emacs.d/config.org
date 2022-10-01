@@ -1400,18 +1400,7 @@ elements.  Also increase org header size."
   (kenran/inherit-fixed-pitch 'org-done)
   (kenran/inherit-fixed-pitch 'org-drawer)
   (kenran/inherit-fixed-pitch 'org-property-value)
-  (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold)
-  (dolist (face '((org-level-1 . 1.15)
-                  (org-level-2 . 1.15)
-                  (org-level-3 . 1.15)
-                  (org-level-4 . 1.15)
-                  (org-level-5 . 1.15)
-                  (org-level-6 . 1.15)
-                  (org-level-7 . 1.15)
-                  (org-level-8 . 1.15)))
-    (set-face-attribute (car face) nil
-                        :height (cdr face)
-                        :weight 'bold)))
+  (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold))
 
 (add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
 #+end_src
