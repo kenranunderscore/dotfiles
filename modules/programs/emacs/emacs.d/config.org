@@ -1685,11 +1685,20 @@ completions don't show up in 'emacs-lisp-mode' by default."
                 cape-file))
   (setq-local cape-dabbrev-min-length 4))
 
-(use-package cape
-  :hook (emacs-lisp-mode . kenran/setup-elisp-capfs)
-  :init
+(defun kenran/register-default-capfs ()
+  "I use 'cape-dabbrev' and 'cape-file' everywhere as they are
+generally useful.  This function needs to be called in certain
+mode hooks, as some modes fill the buffer-local capfs with
+exclusive completion functions, so that the global ones don't get
+called at all."
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file))
+
+(use-package cape
+  :hook ((emacs-lisp-mode . kenran/setup-elisp-capfs)
+         (haskell-mode . kenran/register-default-capfs))
+  :init
+  (kenran/register-default-capfs))
 #+end_src
 
 * E-Mail configuration
