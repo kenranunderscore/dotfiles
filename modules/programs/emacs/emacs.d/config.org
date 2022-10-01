@@ -1667,7 +1667,26 @@ child frame for the completion popup and thus does not clash with
 ** More completion-at-point backends via =cape=
 
 #+begin_src emacs-lisp
+(defun kenran/ignore-elisp-keywords (cand)
+  "Do not show Emacs Lisp keywords in completions in
+'emacs-lisp-mode'."
+  (or (not (keywordp cand))
+      (eq (char-after (car completion-in-region--data)) ?:)))
+
+(defun kenran/setup-elisp-capfs ()
+  "Uses 'cape-super-capf' to work around the problem that dabbrev
+completions don't show up in 'emacs-lisp-mode' by default."
+  (setq-local completion-at-point-functions
+              `(,(cape-super-capf
+                  (cape-capf-predicate
+                   #'elisp-completion-at-point
+                   #'kenran/ignore-elisp-keywords)
+                  #'cape-dabbrev)
+                cape-file))
+  (setq-local cape-dabbrev-min-length 4))
+
 (use-package cape
+  :hook (emacs-lisp-mode . kenran/setup-elisp-capfs)
   :init
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file))
