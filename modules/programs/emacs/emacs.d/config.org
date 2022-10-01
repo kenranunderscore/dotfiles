@@ -1436,7 +1436,8 @@ loading =org=, a custom font setup might run to adjust the headers.
    (org-indent-mode . (lambda ()
                         (kenran/inherit-fixed-pitch 'org-indent)
                         (kenran/inherit-fixed-pitch 'org-hide)))
-   (org-mode . (lambda () (text-scale-increase 1))))
+   (org-mode . (lambda () (text-scale-increase 1)))
+   (org-capture-mode . evil-insert-state))
   :diminish org-indent-mode
   :custom
   ((org-startup-indented t)
