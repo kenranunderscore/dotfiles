@@ -341,7 +341,7 @@ respective font.
             :default-height
             160
             :org-height
-            1.0
+            0.9
             :weight
             regular))))
 #+end_src
