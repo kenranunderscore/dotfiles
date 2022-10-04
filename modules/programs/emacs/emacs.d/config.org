@@ -2101,6 +2101,7 @@ official [[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emac
 #+begin_src emacs-lisp
 (use-package editorconfig
   :config
+  (setq editorconfig-mode-lighter " EC")
   (editorconfig-mode 1))
 #+end_src
 
