@@ -1683,6 +1683,60 @@ called at all."
   (kenran/register-default-capfs))
 #+end_src
 
+** Integration with =evil-repeat=
+
+Usually when completing something with =corfu= and then using
+=evil-repeat= leads to unexpected behavior (see [[https://github.com/minad/corfu/pull/225][this GitHub issue]]).
+This is the workaround mentioned there; hopefully it won't break too
+often.
+
+#+begin_src emacs-lisp
+(defun corfu--unread-this-command-keys ()
+  (when (> (length (this-command-keys)) 0)
+    (setq unread-command-events (nconc
+                                 (listify-key-sequence (this-command-keys))
+                                 unread-command-events))
+    (clear-this-command-keys t)))
+
+(defun corfu--pre-command ()
+  "Insert selected candidate unless command is marked to continue completion."
+  (when corfu--preview-ov
+    (delete-overlay corfu--preview-ov)
+    (setq corfu--preview-ov nil))
+  (when (and (eq corfu-preview-current 'insert)
+             (/= corfu--index corfu--preselect)
+             ;; See the comment about `overriding-local-map' in `corfu--post-command'.
+             (not (or overriding-terminal-local-map
+                      (corfu--match-symbol-p corfu-continue-commands this-command))))
+    (corfu--unread-this-command-keys)
+    (setq this-command 'corfu-insert-exact)))
+
+(defun corfu-insert-exact ()
+  "Insert current candidate with the `exact' status.
+Quit if no candidate is selected."
+  (interactive)
+  (if (>= corfu--index 0)
+      (corfu--insert 'exact)
+    (corfu-quit)))
+#+end_src
+
+Now ignore moving through the completion list when determining what
+constitutes a repeatable change, and in turn mark insertion and
+completion as a repeatable change.
+
+#+begin_src emacs-lisp
+(mapc #'evil-declare-ignore-repeat
+      '(corfu-next
+        corfu-previous
+        corfu-first
+        corfu-last))
+
+(mapc #'evil-declare-change-repeat
+      '(corfu-insert
+        corfu-insert-exact
+        corfu-complete))
+#+end_src
+
 * E-Mail configuration
 
 There are some different ways to "do e-mail in Emacs".  Over the last
