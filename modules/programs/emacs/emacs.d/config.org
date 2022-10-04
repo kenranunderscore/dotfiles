@@ -1146,6 +1146,27 @@ reverts such changes.
   :init (winner-mode))
 #+end_src
 
+** Correct typos while typing with =abbrev=
+
+=Abbrev-mode= is a nice built-in minor mode that silently replaces some
+things I type with other things.  It is mostly used for correcting
+typos, though I haven't really "trained" my self-made list of abbrevs
+-- I've just started using it.
+
+Since it doesn't come with a global mode itself, I use =setq-default= to
+enable it everywhere.
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :diminish abbrev-mode
+  :init
+  (setq-default abbrev-mode t)
+  :config
+  (setq save-abbrevs 'silent)
+  (setq abbrev-file-name
+        (concat user-emacs-directory "abbrev_defs")))
+#+end_src
+
 * Incremental narrowing
 
 I started with =helm= in [[https://www.spacemacs.org/][spacemacs]], then later switched to [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
