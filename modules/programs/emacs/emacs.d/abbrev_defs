@@ -1,9 +1,14 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("aciton" "action" nil :count 1)
+    ("citon" "ction" nil :count 3)
     ("configuraion" "configuration" nil :count 1)
     ("conifguration" "configuration" nil :count 1)
+    ("deteciton" "detection" nil :count 2)
+    ("embod" "embed" nil :count 1)
     ("everywheer" "everywhere" nil :count 0)
+    ("tehre" "there" nil :count 0)
     ("verison" "version" nil :count 6)
     ("wirte" "write" nil :count 0)
     ("wriet" "write" nil :count 0)
