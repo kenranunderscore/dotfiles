@@ -343,6 +343,24 @@ respective font.
             :org-height
             0.9
             :weight
+            regular))
+        (noto
+         . (:family
+            "Noto Sans Mono"
+            :default-height
+            160
+            :org-height
+            0.9
+            :weight
+            regular))
+        (droid
+         . (:family
+            "DroidSansMono Nerd Font Mono"
+            :default-height
+            160
+            :org-height
+            0.9
+            :weight
             regular))))
 #+end_src
 
