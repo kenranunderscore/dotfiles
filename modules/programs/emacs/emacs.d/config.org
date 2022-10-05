@@ -2367,6 +2367,19 @@ using the local leader key.
   "h r" '(haskell-process-restart :which-key "restart")
   "h k" 'haskell-session-kill)
 #+end_src
+
+Some =haskell-mode= operations like compiling, or jumping to errors,
+interfere with the =evil-repeat= mechanism (that is, =.=).  I try to make
+=evil= ignore those.
+
+#+begin_src emacs-lisp
+(mapc #'evil-declare-ignore-repeat
+      '(haskell-process-load-file
+        haskell-process-reload
+        haskell-goto-first-error
+        haskell-goto-next-error
+        haskell-goto-prev-error))
+#+end_src
   
 ** Dhall
 
