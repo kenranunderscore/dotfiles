@@ -1434,8 +1434,7 @@ loading =org=, a custom font setup might run to adjust the headers.
    (org-edit-src-content-indentation 0)
    (org-default-notes-file "~/org/notes.org")
    (org-agenda-files '("~/org/inbox.org"
-                       "~/org/gtd.org"
-                       "~/org/someday.org"))
+                       "~/org/gtd.org"))
    (org-agenda-restore-windows-after-quit t)
    (org-refile-targets `(("~/org/gtd.org" :maxlevel . 3)
                          ("~/org/someday.org" :level . 1)))
