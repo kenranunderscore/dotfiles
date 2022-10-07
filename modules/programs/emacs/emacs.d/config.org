@@ -767,7 +767,7 @@ mode-sensitive.
   :keymaps 'override
   :states '(normal insert emacs visual motion)
   :prefix "SPC"
-  :non-normal-prefix "C-SPC")
+  :non-normal-prefix "C-;")
 #+end_src
 
 A local leader key is something that is usually used to access
