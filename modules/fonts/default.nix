@@ -27,6 +27,7 @@ in {
       pragmataPro
     ] ++ (with pkgs; [
       anonymousPro
+      borg-sans-mono
       camingo-code
       cantarell-fonts
       cascadia-code

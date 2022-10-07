@@ -353,11 +353,11 @@ respective font.
             0.9
             :weight
             regular))
-        (droid
+        (borg
          . (:family
-            "DroidSansMono Nerd Font Mono"
+            "Borg Sans Mono"
             :default-height
-            160
+            150
             :org-height
             0.9
             :weight
