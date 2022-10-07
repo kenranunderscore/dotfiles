@@ -828,42 +828,6 @@ versus =C-j= and =C-k=.
             #'kenran/set-evil-state-cursors))
 #+end_src
 
-*** Evilify nearly everything (=evil-collection=)
-
-This package makes it possible to enable =evil= in lots of (mostly
-minor) modes.  This usually includes some sort of streamlined
-keybinding scheme, where the vim movement keys =h=, =j=, =k=, =l=, and often
-=C-j= and =C-k= are used for navigation.
-
-However, I've been in the situation where "something didn't quite
-work" quite some times, and =evil-collection= has often been the
-culprit.  Checking =evil-collection-mode-list= to see whether any
-current mode was evilified with =evil-collection=, and subsequently
-removing them from this list, has often fixed some problems (for
-instance with =mu4e=).
-
-#+begin_src emacs-lisp
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init
-   '(dired
-     ;; docker
-     ;; eglot
-     eldoc
-     ;; corfu/embark/vertico?
-     ;; grep
-     ibuffer
-     magit
-     (package-menu package)
-     proced
-     wgrep
-     ;; which-key
-     ))
-  :custom
-  (evil-collection-want-unimpaired-p nil))
-#+end_src
-
 *** Surrounding things
 
 The analogue of [[https://github.com/tpope/vim-surround][Tim Pope's vim-surround plugin]] in Emacs.  Now I can
