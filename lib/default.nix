@@ -9,9 +9,9 @@
     let
       inherit (inputs) home-manager nixpkgs;
       dir = ../hosts + "/${hostname}";
-      customConfig = import (dir + /customConfig.nix);
-      username = customConfig.username;
-      specialArgs = { inherit inputs customConfig; };
+      custom = import (dir + /custom.nix);
+      username = custom.username;
+      specialArgs = { inherit inputs custom; };
     in nixpkgs.lib.nixosSystem {
       inherit system pkgs specialArgs;
       modules = [

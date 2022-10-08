@@ -1,6 +1,6 @@
-{ config, pkgs, customConfig, ... }:
+{ config, pkgs, custom, ... }:
 
-let username = customConfig.username;
+let username = custom.username;
 in {
   nix = {
     package = pkgs.nixUnstable;

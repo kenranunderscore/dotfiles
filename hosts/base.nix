@@ -1,4 +1,4 @@
-{ inputs, customConfig, config, lib, pkgs, ... }:
+{ inputs, custom, config, lib, pkgs, ... }:
 
 let
   cfg = config.hosts.base;
@@ -53,7 +53,7 @@ in {
       mime.enable = true;
     };
 
-    home = let inherit (customConfig) username;
+    home = let inherit (custom) username;
     in {
       inherit username;
       homeDirectory = "/home/${username}";
