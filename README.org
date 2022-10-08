@@ -39,7 +39,10 @@ using [[https://orgmode.org/][Org Mode]] to configure Emacs itself) can be found
 Note that there is a corresponding [[file:modules/programs/emacs/default.nix][default.nix]] which specifies the
 version of Emacs I use (usually a quite recent one, made possible by
 [[https://github.com/nix-community/emacs-overlay][emacs-overlay]]), as well as some pre-built packages, all "obeying" my
-current pin of =nixpkgs= (see [[file:flake.lock][flake.lock]]).
+current pin of =nixpkgs= (see [[file:flake.lock][flake.lock]]).  I used to use Nix to manage
+all of my Emacs packages, but have since switched to [[https://github.com/radian-software/straight.el][straight.el]], as
+it allows me to more quickly change my config, try out new packages on
+the fly without cluttering anything, and even debug packages.
 
 * TODO Document the rest [0/3]
 - [ ] Flakes setup
