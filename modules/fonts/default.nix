@@ -18,7 +18,6 @@ in {
     fonts.fontconfig.enable = lib.mkForce true;
 
     home.packages = lib.optionals cfg.withCustomBuilds [
-      (import ./input-mono.nix { inherit pkgs; })
       (import ./sf-mono.nix {
         inherit (pkgs) runCommand;
         inherit (inputs) sf-mono;
