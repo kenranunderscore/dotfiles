@@ -7,7 +7,8 @@
 
 This repository represents the current state of the environment(s) I'm
 currently using for development, learning and, to some degree,
-entertainment.  Currently there are three machines I manage this way:
+entertainment.  Currently there are four NixOS machines (plus one WSL2
+environment that I need to include at some point) I manage this way:
 
 - [[file:hosts/atuan/][atuan]]: my home PC
 - [[file:hosts/zangief/][zangief]]: my beefy [[https://www.tuxedocomputers.com/][TUXEDO]] work laptop
