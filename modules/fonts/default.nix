@@ -44,7 +44,9 @@ in {
       jetbrains-mono
       liberation_ttf
       lmodern
-      nerdfonts
+      (nerdfonts.override {
+        fonts = [ "Gohu" "Iosevka" "CodeNewRoman" "FiraCode" "FiraMono" ];
+      })
       noto-fonts
       roboto-mono
       source-code-pro
