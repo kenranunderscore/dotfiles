@@ -189,7 +189,6 @@ certain attributes that need to be applied when switching to the
 respective font.
 
 #+begin_src emacs-lisp
-;; FIXME: tweak org-height values
 (setq kenran/font-alist
       '((pragmata-pro
          . (:family
@@ -254,15 +253,6 @@ respective font.
             0.9
             :weight
             regular))
-        (terminus
-         . (:family
-            "Terminus"
-            :default-height
-            170
-            :org-height
-            0.9
-            :weight
-            regular))
         (jetbrains-mono
          . (:family
             "JetBrains Mono"
@@ -272,22 +262,13 @@ respective font.
             0.8
             :weight
             regular))
-        (input-mono
-         . (:family
-            "Input Mono"
-            :default-height
-            150
-            :org-height
-            0.9
-            :weight
-            regular))
         (courier-prime
          . (:family
             "Courier Prime"
             :default-height
             150
             :org-height
-            1.5
+            0.95
             :weight
             regular))
         (sf-mono
@@ -303,9 +284,9 @@ respective font.
          . (:family
             "Fantasque Sans Mono"
             :default-height
-            170
+            160
             :org-height
-            1.0
+            0.9
             :weight
             regular))
         (code-new-roman
@@ -314,7 +295,7 @@ respective font.
             :default-height
             160
             :org-height
-            1.0
+            0.9
             :weight
             regular))
         (gohu
@@ -323,7 +304,7 @@ respective font.
             :default-height
             160
             :org-height
-            1.0
+            0.9
             :weight
             regular))
         (lucida-console
@@ -348,7 +329,7 @@ respective font.
          . (:family
             "Noto Sans Mono"
             :default-height
-            160
+            150
             :org-height
             0.9
             :weight
