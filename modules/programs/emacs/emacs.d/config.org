@@ -1894,7 +1894,8 @@ and battle-tested package, so my hopes are high.
                   "#haskell"
                   "#nim"
                   "#zig"
-                  "#crawl")))
+                  "#crawl"
+                  "#guix")))
   (setq erc-track-exclude
         '("#org-mode" "#crawl" "#nim" "#zig"))
   (setq erc-track-exclude-types '("333" "353"))
