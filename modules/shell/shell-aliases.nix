@@ -63,8 +63,8 @@
   # systemd
   sy = "systemctl";
   syu = "systemctl --user";
-  jo = "journalctl";
-  jou = "journalctl --user";
+  jo = "journalctl -u";
+  jou = "journalctl --user -u";
 
   # docker
   drun = "docker run -it --rm";

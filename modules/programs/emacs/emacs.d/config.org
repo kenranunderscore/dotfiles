@@ -1546,6 +1546,7 @@ child frame for the completion popup and thus does not clash with
   (setq corfu-cycle t)
   (setq corfu-auto t)
   (setq corfu-auto-delay 0.1)
+  (setq corfu-excluded-modes '(erc-mode))
   :bind
   (:map corfu-map
         ("TAB" . corfu-next)
