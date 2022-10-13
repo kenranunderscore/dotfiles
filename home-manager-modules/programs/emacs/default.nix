@@ -18,7 +18,7 @@ in {
       activation = {
         symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -e $HOME/.emacs.d ]; then
-            $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/programs/emacs/emacs.d $HOME/.emacs.d
+            $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/programs/emacs/emacs.d $HOME/.emacs.d
           fi
         '';
       };

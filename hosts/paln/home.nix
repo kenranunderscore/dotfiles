@@ -1,7 +1,7 @@
 { custom, config, lib, pkgs, ... }:
 
 {
-  imports = [ ../../modules ];
+  imports = [ ../../home-manager-modules ];
 
   config = {
     modules = {

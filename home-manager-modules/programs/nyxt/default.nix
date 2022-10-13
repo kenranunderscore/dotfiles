@@ -22,7 +22,7 @@ in {
 
           if [ ! -e "$config_file" ]; then
             mkdir -p "$(dirname "$config_file")"
-            $DRY_RUN_CMD ln -s $HOME/dotfiles/modules/programs/nyxt/config.lisp "$config_file"
+            $DRY_RUN_CMD ln -s $HOME/dotfiles/home-manager-modules/programs/nyxt/config.lisp "$config_file"
           fi
         '';
     };

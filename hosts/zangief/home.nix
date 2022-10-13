@@ -2,7 +2,7 @@
 
 let email = "johannes.maier@active-group.de";
 in {
-  imports = [ ../../modules/base.nix ../../modules ];
+  imports = [ ../../home-manager-modules/base.nix ../../home-manager-modules ];
 
   targets.genericLinux = { enable = true; };
 
