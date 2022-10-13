@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-  cfg = config.modules.desktop.polybar;
-  i3 = config.modules.desktop.i3.enable;
+let cfg = config.modules.desktop.polybar;
 in {
   options.modules.desktop.polybar = {
     enable = lib.mkEnableOption "polybar";
@@ -26,13 +24,11 @@ in {
       package = myPolybar;
       script = ''
         for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-          ${if i3 then "true" else "false"} && MONITOR=$m polybar -r top &
+          MONITOR=$m polybar -r top &
           MONITOR=$m polybar -r bottom &
         done
       '';
-      config = let
-        configFile = if i3 then ./config-i3.nix else ./config-herbstluftwm.nix;
-      in import configFile cfg.withBattery pkgs;
+      config = import ./config-i3.nix cfg.withBattery pkgs;
     };
   };
 }

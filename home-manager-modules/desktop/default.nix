@@ -1,6 +1,5 @@
 { ... }:
 
 {
-  imports =
-    [ ./herbstluftwm ./i3 ./polybar ./picom.nix ./rofi ./x-configuration ];
+  imports = [ ./i3 ./polybar ./picom.nix ./rofi ./x-configuration ];
 }

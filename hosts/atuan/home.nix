@@ -7,7 +7,6 @@
 
   modules = {
     desktop = {
-      herbstluftwm.enable = false;
       rofi.enable = true;
       i3 = {
         enable = true;
