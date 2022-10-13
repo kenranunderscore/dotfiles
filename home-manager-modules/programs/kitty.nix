@@ -1,27 +1,18 @@
-{ config, lib, pkgs, ... }:
+{ custom, config, lib, pkgs, ... }:
 
 let
   cfg = config.modules.programs.kitty;
   types = lib.types;
 in {
-  options.modules.programs.kitty = {
-    enable = lib.mkEnableOption "kitty";
-
-    fontSize = lib.mkOption {
-      type = types.str;
-      default = "15.0";
-    };
-  };
+  options.modules.programs.kitty = { enable = lib.mkEnableOption "kitty"; };
 
   config = lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      # font.name = "Pragmata Pro Mono Liga";
-      font.name = "JetBrains Mono";
+      font = { inherit (custom.font) name size; };
       settings = {
         term = "xterm-256color";
         macos_option_as_alt = true;
-        font_size = cfg.fontSize;
         disable_ligatures = "always";
         adjust_line_height = 1;
         scrollback_lines = 50000;

@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, custom, config, lib, pkgs, ... }:
 
 let
   cfg = config.modules.fonts;
@@ -17,42 +17,46 @@ in {
   config = lib.mkIf cfg.enable {
     fonts.fontconfig.enable = lib.mkForce true;
 
-    home.packages = lib.optionals cfg.withCustomBuilds [
-      (import ./sf-mono.nix {
-        inherit (pkgs) runCommand;
-        inherit (inputs) sf-mono;
-      })
-      (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
-      pragmataPro
-    ] ++ (with pkgs; [
-      anonymousPro
-      borg-sans-mono
-      camingo-code
-      cantarell-fonts
-      cascadia-code
-      courier-prime
-      fantasque-sans-mono
-      fira-code
-      font-awesome_5
-      go-font
-      gohufont
-      hack-font
-      hasklig
-      ibm-plex
-      inconsolata
-      iosevka
-      jetbrains-mono
-      liberation_ttf
-      lmodern
-      (nerdfonts.override {
-        fonts = [ "Gohu" "Iosevka" "CodeNewRoman" "FiraCode" "FiraMono" ];
-      })
-      noto-fonts
-      roboto-mono
-      source-code-pro
-      terminus_font
-      ubuntu_font_family
-      vistafonts
-    ]);
+    home = {
+      sessionVariables.KENRAN_DEFAULT_FONT = custom.font.name;
+
+      packages = lib.optionals cfg.withCustomBuilds [
+        (import ./sf-mono.nix {
+          inherit (pkgs) runCommand;
+          inherit (inputs) sf-mono;
+        })
+        (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
+        pragmataPro
+      ] ++ (with pkgs; [
+        anonymousPro
+        borg-sans-mono
+        camingo-code
+        cantarell-fonts
+        cascadia-code
+        courier-prime
+        fantasque-sans-mono
+        fira-code
+        font-awesome_5
+        go-font
+        gohufont
+        hack-font
+        hasklig
+        ibm-plex
+        inconsolata
+        iosevka
+        jetbrains-mono
+        liberation_ttf
+        lmodern
+        (nerdfonts.override {
+          fonts = [ "Gohu" "Iosevka" "CodeNewRoman" "FiraCode" "FiraMono" ];
+        })
+        noto-fonts
+        roboto-mono
+        source-code-pro
+        terminus_font
+        ubuntu_font_family
+        vistafonts
+      ]);
+    };
   };
 }

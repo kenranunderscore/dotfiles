@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ custom, config, lib, pkgs, ... }:
 
 let cfg = config.modules.desktop.polybar;
 in {
@@ -28,7 +28,11 @@ in {
           MONITOR=$m polybar -r bottom &
         done
       '';
-      config = import ./config-i3.nix cfg.withBattery pkgs;
+      config = import ./config-i3.nix {
+        inherit (cfg) withBattery;
+        inherit (custom) font;
+        inherit pkgs;
+      };
     };
   };
 }

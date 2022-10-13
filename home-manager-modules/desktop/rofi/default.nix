@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ custom, config, lib, pkgs, ... }:
 
 let cfg = config.modules.desktop.rofi;
 in {
@@ -9,7 +9,7 @@ in {
       rofi = {
         enable = true;
         cycle = true;
-        font = "JetBrains Mono 15";
+        font = "${custom.font.name} ${toString custom.font.size}";
         location = "center";
         terminal = "${lib.getExe pkgs.kitty}";
         theme = ./kenran.rasi;

@@ -1,4 +1,4 @@
-withBattery: pkgs:
+{ withBattery, font, pkgs }:
 
 let
   colors = {
@@ -20,9 +20,9 @@ let
     background = "${colors.transparent}";
     foreground = "${colors.foreground}";
     fixed-center = true;
-    font-0 = "Iosevka Nerd Font:size=15;4";
-    font-1 = "Iosevka Nerd Font:style=Bold:size=15;4";
-    font-2 = "Iosevka Nerd Font:style=Bold:size=15;4";
+    font-0 = "${font.nerdFont}:size=${toString font.size};4";
+    font-1 = "${font.nerdFont}:style=Bold:size=${toString font.size};4";
+    font-2 = "${font.nerdFont}:style=Bold:size=${toString font.size};4";
     height = "30";
     locale = "en_US.UTF-8";
     offset-x = "1%";
