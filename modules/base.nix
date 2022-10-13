@@ -11,7 +11,7 @@ in {
     };
   };
 
-  imports = [ ../modules ];
+  imports = [ ./. ];
 
   config = {
     modules = {
