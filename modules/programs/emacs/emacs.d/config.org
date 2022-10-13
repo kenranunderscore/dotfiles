@@ -638,6 +638,20 @@ anyway.  =Use-package= has built-in support for this available with the
 (use-package diminish)
 #+end_src
 
+** Yank (paste) at point with the mouse
+
+The default Emacs behavior when yanking (in the Emacs sense of the
+word) things from the clipboard by clicking the middle mouse button is
+to insert those at the mouse cursor position.  I wish to be able to
+carelessly click anywhere and have it insert at point, similar to how
+it's done in most terminal emulators.
+
+Of course there's an existing Emacs options for this:
+
+#+begin_src emacs-lisp
+(setq mouse-yank-at-point t)
+#+end_src
+
 * Vim emulation
 ** Leader keys
 
