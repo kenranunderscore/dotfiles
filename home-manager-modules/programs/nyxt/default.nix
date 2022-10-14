@@ -20,7 +20,7 @@ in {
         lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           config_file=$HOME/.config/nyxt/config.lisp
 
-          if [ ! -e "$config_file" ]; then
+          if [ ! -h "$config_file" ]; then
             mkdir -p "$(dirname "$config_file")"
             $DRY_RUN_CMD ln -s $HOME/dotfiles/home-manager-modules/programs/nyxt/config.lisp "$config_file"
           fi
