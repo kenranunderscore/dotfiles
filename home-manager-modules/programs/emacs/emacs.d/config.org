@@ -1515,6 +1515,38 @@ approach yet, but might in the future.  My synchronization setup with
   :after ox)
 #+end_src
 
+* "Menus" with =hydra=
+
+TODO
+
+#+begin_src emacs-lisp
+(use-package hydra
+  :defer t)
+#+end_src
+
+** "Error" navigation
+
+Commands like =next-error= provide navigation for more than just errors
+in the strict sense of the word.  For instance, they also work with
+=occur= and =grep= type buffers (this holds for the variants of those that
+I use as well: =embark= and =ripgrep=, with or without =consult=).
+
+#+begin_src emacs-lisp
+(defhydra hydra-navigate-errors (:hint nil)
+  "
+  Navigate the error list.\n
+  _f_: first  _n_: next  _p_: previous\n
+  "
+  ("n" next-error)
+  ("p" previous-error)
+  ("f" first-error)
+  ("q" nil "exit"))
+
+(with-leader
+  "n" '(:ignore t :which-key "navigate")
+  "n e" '(hydra-navigate-errors/body :which-key "error list"))
+#+end_src
+
 * On-the-fly syntax checking (and other things): Flymake
 
 #+begin_src emacs-lisp
@@ -2751,14 +2783,6 @@ to use =C-w= like in a terminal or in vim.  I used to bind
  :states '(normal visual motion operator insert emacs)
  :keymaps 'override
  "C-l" 'ace-window)
-#+end_src
-
-** Hydra
-
-TODO
-
-#+begin_src emacs-lisp
-(use-package hydra)
 #+end_src
 
 ** Global font scaling
