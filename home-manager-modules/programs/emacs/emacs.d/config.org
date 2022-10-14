@@ -210,7 +210,9 @@ respective font.
             "Source Code Pro"))
         (fira-code
          . (:family
-            "Fira Code"))
+            "Fira Code"
+            :org-height
+            0.8))
         (jetbrains-mono
          . (:family
             "JetBrains Mono"
@@ -255,11 +257,36 @@ respective font.
             "Borg Sans Mono"))))
 #+end_src
 
-The currently selected font (key of =kenran/font-alist=).  Setting this
-value only changes the default; it is reset when switching fonts.
+=kenran/current-font= contains a symbol pointing to one of the fonts
+specified in =kenran/font-alist=.  Since I can now globally "set" and
+change a font I like for my system, Emacs should try to adapt to this
+(at startup) as well.  The function =kenran/load-font-from-env= does
+just that, as the global font -- if it exists -- can be read from an
+environment variable.  If a setting for this font is found in Emacs,
+that is taken, unless there's a =kenran/default-font= set, which always
+"wins".
+
+If neither default font nor environment variable are set/found, I fall
+back to DejaVu Sans Mono.
 
 #+begin_src emacs-lisp
-(setq kenran/current-monospace-font 'jetbrains-mono)
+(setq kenran/default-font nil)
+
+(defun kenran/load-font-from-env ()
+  "See whether an environment variable specifying a 'system font' is
+set, and translate that to one of the font symbols."
+  (when-let ((f (getenv "KENRAN_DEFAULT_FONT"))
+             (font (seq-find
+                    (lambda (x)
+                      (equal (plist-get (cdr x) :family)
+                             f))
+                    kenran/font-alist)))
+    (car font)))
+
+(setq kenran/current-font
+      (or kenran/default-font
+          (kenran/load-font-from-env)
+          'dejavu))
 #+end_src
 
 For =org-mode= I (sometimes) like using a non-monospace font.  This is
@@ -280,14 +307,14 @@ applies the attributes of its value in =kenran/font-alist=.
           (completing-read
            "Font: "
            (mapcar #'car
-                   (assoc-delete-all kenran/current-monospace-font
+                   (assoc-delete-all kenran/current-font
                                      (copy-alist kenran/font-alist)))))))
   (let* ((attrs (alist-get font kenran/font-alist))
          (family (plist-get attrs :family))
          (height (or (plist-get attrs :default-height) 160))
          (org-height (or (plist-get attrs :org-height) 0.9))
          (weight (or (plist-get attrs :weight) 'regular)))
-    (setq kenran/current-monospace-font font)
+    (setq kenran/current-font font)
     (setq kenran/default-font-height height)
     (set-face-attribute
      'default nil
@@ -314,10 +341,10 @@ sure that these also work when using the Emacs daemon together with
 =emacsclient=.
 
 #+begin_src emacs-lisp
-(kenran/switch-font kenran/current-monospace-font)
+(kenran/switch-font kenran/current-font)
 (add-hook 'server-after-make-frame-hook
           (defun kenran/switch-to-current-font ()
-            (kenran/switch-font kenran/current-monospace-font)
+            (kenran/switch-font kenran/current-font)
             (remove-hook 'server-after-make-frame-hook
                          #'kenran/switch-to-current-font)))
 #+end_src
