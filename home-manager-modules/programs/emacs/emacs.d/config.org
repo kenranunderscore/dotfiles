@@ -240,6 +240,8 @@ respective font.
         (lucida-console
          . (:family
             "Lucida Console"
+            :default-height
+            166
             :org-height
             0.8))
         (consolas
