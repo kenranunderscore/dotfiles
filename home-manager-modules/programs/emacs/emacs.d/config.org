@@ -256,7 +256,9 @@ respective font.
             0.8))
         (borg
          . (:family
-            "Borg Sans Mono"))))
+            "Borg Sans Mono"
+            :org-height
+            0.85))))
 #+end_src
 
 =kenran/current-font= contains a symbol pointing to one of the fonts
