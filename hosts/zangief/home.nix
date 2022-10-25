@@ -167,6 +167,7 @@ in {
     mattermost-desktop
     pavucontrol
     polymc
+    racket
     sieve-connect
     subversion
     thunderbird
