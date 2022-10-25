@@ -172,6 +172,14 @@ in {
     subversion
     thunderbird
     wireshark
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        bbenoist.nix
+        haskell.haskell
+        justusadam.language-haskell
+        mkhl.direnv
+      ];
+    })
   ];
 
   home.stateVersion = "22.05";
