@@ -22,6 +22,9 @@ in {
         ''100:class_i = "VirtualBox Manager"''
         ''100:class_i = "urxvt"''
         ''100:class_i = "element"''
+        ''100:class_i = "DrRacket"''
+        ''100:class_i = ".drracket-wrapped"''
+        ''100:class_i = "code"''
       ];
       backend = "glx";
       experimentalBackends = true;
