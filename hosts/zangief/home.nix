@@ -175,9 +175,13 @@ in {
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         bbenoist.nix
+        dhall.dhall-lang
+        dhall.vscode-dhall-lsp-server
         haskell.haskell
         justusadam.language-haskell
         mkhl.direnv
+        ms-azuretools.vscode-docker
+        vscodevim.vim
       ];
     })
   ];
