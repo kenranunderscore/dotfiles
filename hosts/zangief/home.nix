@@ -166,7 +166,7 @@ in {
     linphone
     mattermost-desktop
     pavucontrol
-    polymc
+    prismlauncher
     racket
     sieve-connect
     subversion
