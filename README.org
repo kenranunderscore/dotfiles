@@ -67,6 +67,15 @@ The =--flake ~/dotfiles= part work becaus of two reason:
   =flake.nix= contains an output =nixosConfigurations.<hostname>=, this is
   the configuration that will be used.
 
+Note that it's also possible to only switch into the next =home-manager=
+generation for the current user without adding a new system generation
+using the following command (which is yet another shell alias):
+
+#+begin_src shell
+nix shell "~/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users.$USER.home.activationPackage" \
+          --command home-manager-generation
+#+end_src
+
 * Emacs configuration
 
 A special case of a program with a relatively huge accompanying
