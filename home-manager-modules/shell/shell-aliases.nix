@@ -4,7 +4,7 @@
   # nixos
   nrs = "nixos-rebuild switch --use-remote-sudo --flake ~/dotfiles/";
   hs = ''
-    nix shell "~/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users.$USER.home.activationPackage" --command home-manager-generation'';
+    nix shell "$HOME/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users.$USER.home.activationPackage" --command home-manager-generation'';
 
   # direnv
   dea = "direnv allow";
