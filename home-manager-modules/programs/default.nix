@@ -6,7 +6,7 @@
     ./firefox.nix
     ./imwheel
     ./kitty.nix
-    ./neovim.nix
+    ./neovim
     ./nyxt
     ./qutebrowser.nix
     ./sbcl
