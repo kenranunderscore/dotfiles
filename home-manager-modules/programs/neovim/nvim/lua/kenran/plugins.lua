@@ -13,7 +13,8 @@ local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
-    use "folke/tokyonight.nvim"
+    use "bluz71/vim-moonfly-colors"
+    use "ray-x/aurora"
 
     use {
         "nvim-telescope/telescope.nvim",
@@ -21,8 +22,21 @@ return require("packer").startup(function(use)
     }
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
+    use "glepnir/dashboard-nvim"
+    use "nvim-treesitter/nvim-treesitter"
+    use "kylechui/nvim-surround"
+    use "editorconfig/editorconfig-vim"
+
+    use "neovim/nvim-lspconfig"
 
     if packer_bootstrap then
         require("packer").sync()
     end
 end)
+
+--vim.cmd([[
+--    augroup packer_user_config
+--        autocmd!
+--        autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+--    augroup end
+--]])
