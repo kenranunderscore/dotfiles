@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./alacritty
     ./emacs
     ./firefox.nix
     ./imwheel

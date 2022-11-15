@@ -17,6 +17,7 @@ in {
     modules = {
       email.enable = true;
       programs = {
+        alacritty.enable = true;
         emacs.enable = true;
         firefox.enable = true;
         kitty.enable = true;
