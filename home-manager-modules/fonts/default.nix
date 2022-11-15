@@ -48,7 +48,17 @@ in {
         liberation_ttf
         lmodern
         (nerdfonts.override {
-          fonts = [ "Gohu" "Iosevka" "CodeNewRoman" "FiraCode" "FiraMono" ];
+          fonts = [
+            "CodeNewRoman"
+            "DroidSansMono"
+            "FiraCode"
+            "FiraMono"
+            "Gohu"
+            "Inconsolata"
+            "Iosevka"
+            "Meslo"
+            "VictorMono"
+          ];
         })
         noto-fonts
         roboto-mono
