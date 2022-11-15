@@ -25,6 +25,7 @@ in {
         ''100:class_i = "DrRacket"''
         ''100:class_i = ".drracket-wrapped"''
         ''100:class_i = "code"''
+        ''100:class_i = "Alacritty"''
       ];
       backend = "glx";
       experimentalBackends = true;
