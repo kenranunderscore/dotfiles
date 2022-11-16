@@ -20,6 +20,7 @@
   # Try using emacs/magit as replacement for CLI git
   eg =
     "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'";
+  v = "nvim";
 
   # git
   g = "git";
