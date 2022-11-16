@@ -11,7 +11,14 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require("packer").startup(function(use)
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
+
+return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
     use "bluz71/vim-moonfly-colors"
     use "ray-x/aurora"
@@ -33,10 +40,3 @@ return require("packer").startup(function(use)
         require("packer").sync()
     end
 end)
-
---vim.cmd([[
---    augroup packer_user_config
---        autocmd!
---        autocmd BufWritePost plugins.lua source <afile> | PackerCompile
---    augroup end
---]])
