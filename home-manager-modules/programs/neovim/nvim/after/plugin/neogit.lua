@@ -8,4 +8,4 @@ neogit.setup {
 
 local nnoremap = require("kenran.remap").nnoremap
 
-nnoremap("<leader>gs", function() neogit.open({}) end)
+nnoremap("<leader>gs", neogit.open)
