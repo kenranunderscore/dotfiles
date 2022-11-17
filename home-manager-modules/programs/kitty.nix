@@ -21,7 +21,7 @@ in {
         initial_window_width = 800;
         initial_window_height = 520;
         enable_audio_bell = false;
-        window_padding_width = "0 10 0 10";
+        window_padding_width = "0";
         # Set custom color scheme that is used nearly everywhere.
         background = "#040404";
         foreground = "#0ac30a";
