@@ -1,8 +1,20 @@
 require("telescope").setup{
     pickers = { 
+        git_files = {
+            theme = "dropdown",
+        },
+        find_files = {
+            theme = "dropdown",
+        },
+        buffers = {
+            theme = "dropdown",
+        },
+        man_pages = {
+            theme = "dropdown",
+        },
         live_grep = {
             theme = "dropdown",
-        }
+        },
     }
 }
 
@@ -16,7 +28,7 @@ end)
 nnoremap("<leader>ff", function()
     require("telescope.builtin").find_files()
 end)
-nnoremap("<leader>fb", function()
+nnoremap("<leader>bb", function()
     require("telescope.builtin").buffers()
 end)
 nnoremap("<leader>fg", function()
