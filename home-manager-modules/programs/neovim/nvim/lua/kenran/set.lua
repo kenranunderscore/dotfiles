@@ -21,4 +21,6 @@ opt.wrap = false
 opt.guicursor = ""
 opt.termguicolors = true
 
+opt.signcolumn = "yes"
+
 opt.completeopt = "menu,menuone,noselect"

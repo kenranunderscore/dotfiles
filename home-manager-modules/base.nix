@@ -79,6 +79,7 @@ in {
         gh
         htop
         jq
+        luaPackages.lua-lsp
         man-pages
         neofetch
         nixfmt
