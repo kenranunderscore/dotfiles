@@ -35,10 +35,13 @@ return require('packer').startup(function(use)
     use "editorconfig/editorconfig-vim"
 
     use "neovim/nvim-lspconfig"
-
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
     use "hrsh7th/nvim-cmp"
+
+    use "l3mon4d3/luasnip"
+    use "saadparwaiz1/cmp_luasnip"
 
     if packer_bootstrap then
         require("packer").sync()
