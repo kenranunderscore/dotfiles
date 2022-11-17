@@ -8,3 +8,5 @@ nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
 nnoremap("*", "*zz")
 nnoremap("#", "#zz")
+
+nnoremap("<leader>bq", "<cmd>bd<cr>")
