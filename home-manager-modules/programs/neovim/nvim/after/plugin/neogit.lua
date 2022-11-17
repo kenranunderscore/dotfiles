@@ -10,7 +10,7 @@ neogit.setup {
         recent = false,
     },
     signs = {
-        section = { "", "" },
+        section = { "", "" },
         item = { "", "" },
         hunk = { "", "" },
     },
