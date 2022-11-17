@@ -20,3 +20,5 @@ opt.wrap = false
 
 opt.guicursor = ""
 opt.termguicolors = true
+
+opt.completeopt = "menu,menuone,noselect"

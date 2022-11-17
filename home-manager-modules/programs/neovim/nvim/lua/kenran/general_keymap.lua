@@ -10,3 +10,5 @@ nnoremap("*", "*zz")
 nnoremap("#", "#zz")
 
 nnoremap("<leader>bq", "<cmd>bd<cr>")
+
+nnoremap("<esc>", "<cmd>noh<cr>")
