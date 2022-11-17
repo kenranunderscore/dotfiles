@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
     use "nvim-treesitter/nvim-treesitter"
     use "kylechui/nvim-surround"
     use "editorconfig/editorconfig-vim"
+    use "windwp/nvim-autopairs"
 
     use "neovim/nvim-lspconfig"
     use "hrsh7th/cmp-nvim-lsp"
@@ -42,6 +43,9 @@ return require('packer').startup(function(use)
 
     use "l3mon4d3/luasnip"
     use "saadparwaiz1/cmp_luasnip"
+
+    use "kyazdani42/nvim-web-devicons"
+    use "nvim-lualine/lualine.nvim"
 
     if packer_bootstrap then
         require("packer").sync()

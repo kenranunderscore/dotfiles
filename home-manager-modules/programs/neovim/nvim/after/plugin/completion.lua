@@ -2,6 +2,9 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 cmp.setup {
+    completion = {
+        keyword_length = 3,
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -19,5 +22,6 @@ cmp.setup {
         ["<cr>"] = cmp.mapping.confirm({ select = false }),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-space>"] = cmp.mapping.complete(),
     }),
 }
