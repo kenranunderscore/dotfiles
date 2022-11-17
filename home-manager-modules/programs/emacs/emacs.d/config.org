@@ -2564,6 +2564,7 @@ One tricky thing was making it possible to bind the keymap
   :bind (:map project-prefix-map
               ("t" . kenran/project-vterm)
               ("d" . project-dired)
+              ("s" . consult-ripgrep)
               ("D" . kenran/project-edit-dir-local-variable)))
 
 (with-leader
