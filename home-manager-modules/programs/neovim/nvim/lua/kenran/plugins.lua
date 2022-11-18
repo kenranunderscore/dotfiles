@@ -28,6 +28,10 @@ return require('packer').startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" }, { "nvim-treesitter/nvim-treesitter" } }
     }
     use "nvim-telescope/telescope-ui-select.nvim"
+    use {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make" 
+    }
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
     use "glepnir/dashboard-nvim"

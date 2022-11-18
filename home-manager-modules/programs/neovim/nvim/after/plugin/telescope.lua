@@ -22,6 +22,9 @@ telescope.setup {
         ["ui-select"] = {
             require("telescope.themes").get_cursor {}
         },
+        fzf = {
+            fuzzy = false,
+        },
     },
 }
 
@@ -54,3 +57,4 @@ nnoremap("<leader>hm", function()
 end)
 
 telescope.load_extension("ui-select")
+telescope.load_extension("fzf")
