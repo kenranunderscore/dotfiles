@@ -1,1 +1,4 @@
-require("Comment").setup {}
+require("Comment").setup {
+    sticky = true,
+    ignore = "^$",
+}
