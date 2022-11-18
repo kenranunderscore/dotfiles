@@ -53,6 +53,8 @@ return require('packer').startup(function(use)
 
     use "numtostr/comment.nvim"
 
+    use "nvim-orgmode/orgmode"
+
     if packer_bootstrap then
         require("packer").sync()
     end
