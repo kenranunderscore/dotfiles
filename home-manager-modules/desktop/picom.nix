@@ -7,8 +7,8 @@ in {
   config = lib.mkIf cfg.enable {
     services.picom = {
       enable = true;
-      activeOpacity = 0.95;
-      inactiveOpacity = 0.7;
+      activeOpacity = 0.97;
+      inactiveOpacity = 0.8;
       opacityRules = [
         ''100:role = "browser"''
         ''100:class_i = "mattermost"''
@@ -26,7 +26,7 @@ in {
         ''100:class_i = ".drracket-wrapped"''
         ''100:class_i = "code"''
         ''100:class_i = "Alacritty"''
-        ''100:class_i = "kitty"''
+        # ''80:class_i = "kitty"''
       ];
       backend = "glx";
       experimentalBackends = true;

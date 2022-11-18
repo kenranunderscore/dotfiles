@@ -20,8 +20,11 @@ vim.cmd([[
 
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
+
+    -- colorschemes
     use "bluz71/vim-moonfly-colors"
-    use "ray-x/aurora"
+    use "rockerboo/boo-colorscheme-nvim"
+    use "tiagovla/tokyodark.nvim"
 
     use {
         "nvim-telescope/telescope.nvim",
