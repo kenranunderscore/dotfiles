@@ -27,6 +27,7 @@ return require('packer').startup(function(use)
         "nvim-telescope/telescope.nvim",
         requires = { { "nvim-lua/plenary.nvim" }, { "nvim-treesitter/nvim-treesitter" } }
     }
+    use "nvim-telescope/telescope-ui-select.nvim"
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
     use "glepnir/dashboard-nvim"

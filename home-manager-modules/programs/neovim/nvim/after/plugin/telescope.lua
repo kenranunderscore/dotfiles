@@ -1,4 +1,6 @@
-require("telescope").setup{
+local telescope = require("telescope")
+
+telescope.setup {
     pickers = { 
         git_files = {
             theme = "dropdown",
@@ -15,7 +17,12 @@ require("telescope").setup{
         live_grep = {
             theme = "dropdown",
         },
-    }
+    },
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_cursor {}
+        },
+    },
 }
 
 local nnoremap = require("kenran.remap").nnoremap
@@ -34,8 +41,16 @@ end)
 nnoremap("<leader>fg", function()
     require("telescope.builtin").live_grep()
 end)
+nnoremap("<leader>fs", function()
+    require("telescope.builtin").grep_string()
+end)
+nnoremap("<leader>fq", function()
+    require("telescope.builtin").quickfix()
+end)
 
 -- Misc
 nnoremap("<leader>hm", function()
     require("telescope.builtin").man_pages()
 end)
+
+telescope.load_extension("ui-select")
