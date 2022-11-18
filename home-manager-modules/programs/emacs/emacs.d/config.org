@@ -247,13 +247,6 @@ respective font.
         (consolas
          . (:family
             "Consolas"))
-        (noto
-         . (:family
-            "Noto Sans Mono"
-            :default-height
-            150
-            :org-height
-            0.8))
         (borg
          . (:family
             "Borg Sans Mono"

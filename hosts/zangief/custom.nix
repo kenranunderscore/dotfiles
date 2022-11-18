@@ -1,7 +1,7 @@
 {
   username = "johannes";
   font = rec {
-    name = "Borg Sans Mono";
+    name = "Julia Mono";
     size = 15;
     nerdFont = "Iosevka Nerd Font";
   };

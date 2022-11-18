@@ -28,23 +28,20 @@ in {
         (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
         pragmataPro
       ] ++ (with pkgs; [
-        anonymousPro
         borg-sans-mono
-        camingo-code
         cantarell-fonts
         cascadia-code
         courier-prime
         fantasque-sans-mono
         fira-code
-        font-awesome_5
         go-font
-        gohufont
         hack-font
         hasklig
         ibm-plex
         inconsolata
         iosevka
         jetbrains-mono
+        julia-mono
         liberation_ttf
         lmodern
         (nerdfonts.override {
@@ -56,15 +53,11 @@ in {
             "Gohu"
             "Inconsolata"
             "Iosevka"
-            "Meslo"
-            "VictorMono"
           ];
         })
         noto-fonts
         roboto-mono
         source-code-pro
-        terminus_font
-        ubuntu_font_family
         vistafonts
       ]);
     };
