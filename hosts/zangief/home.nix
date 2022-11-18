@@ -152,7 +152,11 @@ in {
     syncthing.enable = true;
   };
 
-  home.packages = with pkgs; [
+  home.packages = let
+    googleChromeBin = pkgs.writeShellScriptBin "google-chrome" ''
+      google-chrome-stable $@
+    '';
+  in with pkgs; [
     citrix_workspace
     cloc
     dbeaver
@@ -160,6 +164,7 @@ in {
     discord
     element-desktop
     google-chrome-beta
+    googleChromeBin
     keepass
     keepassx
     leiningen
@@ -173,16 +178,22 @@ in {
     thunderbird
     wireshark
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        bbenoist.nix
-        dhall.dhall-lang
-        dhall.vscode-dhall-lsp-server
-        haskell.haskell
-        justusadam.language-haskell
-        mkhl.direnv
-        ms-azuretools.vscode-docker
-        vscodevim.vim
-      ];
+      vscodeExtensions = with vscode-extensions;
+        [
+          bbenoist.nix
+          dhall.dhall-lang
+          dhall.vscode-dhall-lsp-server
+          haskell.haskell
+          justusadam.language-haskell
+          mkhl.direnv
+          ms-azuretools.vscode-docker
+          vscodevim.vim
+        ] ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+          name = "remote-containers";
+          publisher = "ms-vscode-remote";
+          version = "0.262.3";
+          sha256 = "sha256-pdkjO8aYmfw1PcqQaRwnlyuau7AdYOky8cOc2/1t+10=";
+        }]);
     })
   ];
 
