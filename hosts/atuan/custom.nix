@@ -1,7 +1,7 @@
 {
   username = "kenran";
   font = {
-    name = "Lucida Console";
+    name = "Julia Mono";
     size = 16;
     nerdFont = "Iosevka Nerd Font";
   };
