@@ -30,11 +30,19 @@ telescope.setup {
 
 local nnoremap = require("kenran.remap").nnoremap
 
+project_files = function()
+    local opts = {}
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 then
+        require("telescope.builtin").git_files(opts)
+    else
+        require("telescope.builtin").find_files(opts)
+    end
+end
+
 -- Things I use often; trying out a key scheme different from what I'm used to
 -- in Emacs
-nnoremap("<leader>fp", function()
-    require("telescope.builtin").git_files()
-end)
+nnoremap("<leader>fp", project_files)
 nnoremap("<leader>ff", function()
     require("telescope.builtin").find_files()
 end)
