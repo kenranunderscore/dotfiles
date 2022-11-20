@@ -12,18 +12,12 @@ in {
           name = "autopair.fish";
           src = inputs."autopair.fish";
         }
-        {
-          name = "z";
-          src = inputs.z;
-        }
-        {
-          name = "fzf.fish";
-          src = inputs."fzf.fish";
-        }
       ];
       shellAbbrs = import ../shell-aliases.nix { inherit pkgs; };
       interactiveShellInit = ''
         set fish_greeting
+        bind \cp navigate_to_project
+        bind \cr command_history_search
       '';
       shellAliases = {
         ls = "exa";
