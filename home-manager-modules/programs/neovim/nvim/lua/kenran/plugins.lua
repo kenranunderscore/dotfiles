@@ -37,7 +37,6 @@ return require('packer').startup(function(use)
     }
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
-    -- use "glepnir/dashboard-nvim"
     use "nvim-treesitter/nvim-treesitter"
     use "kylechui/nvim-surround"
     use "editorconfig/editorconfig-vim"
