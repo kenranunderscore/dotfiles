@@ -5,7 +5,7 @@ function navigate_to_project \
                      ~/tmpdev \
                      ~/projects/forks
     set fd fd --type d --max-depth 1 . --color never
-    set fzf fzf --layout reverse --height 30% --border sharp --prompt "Navigate to project: "
+    set fzf fzf --prompt "Navigate to project: "
     
     for i in (seq (count $project_dirs))
         set -a projects $($fd $project_dirs[$i] 2>/dev/null || true)
