@@ -24,3 +24,11 @@ opt.termguicolors = true
 opt.signcolumn = "yes"
 
 opt.completeopt = "menu,menuone,noselect"
+
+-- .dir-locals.el-like behavior
+-- NOTE: declared as unsafe, but IMHO less unsafe than just downloading and
+-- executing plugin code
+vim.exrc = true
+
+-- formatting
+vim.autoformat = true
