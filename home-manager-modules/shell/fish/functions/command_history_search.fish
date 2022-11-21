@@ -5,4 +5,5 @@ function command_history_search \
     if test -n $command
         commandline $command
     end
+    commandline -f repaint
 end
