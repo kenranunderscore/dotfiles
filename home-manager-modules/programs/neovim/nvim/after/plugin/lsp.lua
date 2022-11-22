@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
-lspconfig.util.default_config = vim.tbl_deep_extend('force', lspconfig.util.default_config, {
+lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
     capabilities = capabilities,
 })
 
@@ -21,7 +21,7 @@ local on_attach = function(_, bufnr)
     nnoremap("<leader>lp", vim.diagnostic.goto_prev)
     nnoremap("<leader>ld", vim.diagnostic.open_float)
     nnoremap("<leader>lw", vim.lsp.buf.workspace_symbol)
-    nnoremap("<leader>lh", vim.lsp.buf.hover)
+    nnoremap("K", vim.lsp.buf.hover)
     nnoremap("<leader>lf", vim.lsp.buf.references)
     nnoremap("<leader>lr", vim.lsp.buf.rename)
     nnoremap("<C-h>", vim.lsp.buf.signature_help)

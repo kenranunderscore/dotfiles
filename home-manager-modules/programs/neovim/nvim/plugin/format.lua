@@ -1,4 +1,4 @@
-local group = vim.api.nvim_create_augroup("autofmt", {})
+vim.api.nvim_create_augroup("autofmt", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
         if vim.g.autoformat == 1 and vim.bo.formatprg ~= "" then
