@@ -1,12 +1,18 @@
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+local capabilities = cmp_nvim_lsp.default_capabilities()
+lspconfig.util.default_config = vim.tbl_deep_extend('force', lspconfig.util.default_config, {
+    capabilities = capabilities,
+})
+
 require("lspsaga").init_lsp_saga()
 
 local nnoremap = require("kenran.remap").nnoremap
 nnoremap("<leader>e", vim.diagnostic.open_float)
 nnoremap("<leader>e", vim.diagnostic.goto_prev)
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     nnoremap("gd", vim.lsp.buf.definition)
     nnoremap("gD", vim.lsp.buf.declaration)
@@ -21,29 +27,34 @@ local on_attach = function(client, bufnr)
     nnoremap("<C-h>", vim.lsp.buf.signature_help)
 end
 
-lspconfig["rust_analyzer"].setup {
+lspconfig.rust_analyzer.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
 }
 
-lspconfig["ocamllsp"].setup {
+lspconfig.ocamllsp.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
 }
 
-lspconfig["sumneko_lua"].setup {
-    cmd = { "lua-lsp" },
+lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
-        runtime = {
-            version = "LuaJIT",
-        },
-        diagnostics = {
-            globals = { "vim" },
-        },
-        workspace = {
-            library = vim.api.nvim_get_runtime_file("", true),
-        },
-        telemetry = {
-            enable = false,
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
+            telemetry = {
+                enable = false,
+            }
         }
     }
 }
