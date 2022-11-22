@@ -1,5 +1,10 @@
+local contents = nil
 if vim.loop.fs_stat('.nvimrc') then
-    vim.cmd("sandbox source .nvimrc")
+    contents = vim.secure.read('.nvimrc')
 elseif vim.loop.fs_stat('.exrc') then
-    vim.cmd("sandbox source .exrc")
+    contents = vim.secure.read('.exrc')
+end
+
+if contents then
+    vim.api.nvim_exec(contents, nil)
 end
