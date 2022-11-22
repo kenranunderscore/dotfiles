@@ -1,1 +1,1 @@
-require("kenran")
+-- everything is loaded automatically from ./plugin/
