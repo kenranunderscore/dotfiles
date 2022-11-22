@@ -1,6 +1,0 @@
-- formatting on save
-- different tab size for different filetypes
-- local variables per project
-- dashboard config
-- commenting
-- emmet?
