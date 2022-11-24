@@ -26,15 +26,9 @@ return require("packer").startup(function(use)
     use "rockerboo/boo-colorscheme-nvim"
     use "tiagovla/tokyodark.nvim"
 
-    use {
-        "nvim-telescope/telescope.nvim",
-        requires = { { "nvim-lua/plenary.nvim" }, { "nvim-treesitter/nvim-treesitter" } }
-    }
-    use "nvim-telescope/telescope-ui-select.nvim"
-    use {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        run = "make"
-    }
+    use "kyazdani42/nvim-web-devicons"
+
+    use "ibhagwan/fzf-lua"
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
     use "nvim-treesitter/nvim-treesitter"
@@ -54,7 +48,6 @@ return require("packer").startup(function(use)
     use "l3mon4d3/luasnip"
     use "saadparwaiz1/cmp_luasnip"
 
-    use "kyazdani42/nvim-web-devicons"
     use "nvim-lualine/lualine.nvim"
 
     use "numtostr/comment.nvim"
