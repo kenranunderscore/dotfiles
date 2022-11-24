@@ -141,6 +141,7 @@ in {
         ".\\#*"
         ".dir-locals.el"
       ];
+      aliases = { p = "pull -u"; };
     };
   };
 
