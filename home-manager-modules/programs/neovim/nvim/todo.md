@@ -1,6 +1,5 @@
 # Neovim configuration todos
 
-- FIXME: clipboard: pasting from + possible? marking with mouse should copy to clipboard
 - `dap`
 - `one-small-step-for-vimkind`
 - `emmet`, maybe?

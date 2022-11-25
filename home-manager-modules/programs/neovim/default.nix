@@ -11,6 +11,7 @@ in {
         lua
         sumneko-lua-language-server
         stylua
+        xclip
       ];
 
       activation = {
