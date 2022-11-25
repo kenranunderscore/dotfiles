@@ -54,6 +54,9 @@ return require("packer").startup(function(use)
 
     use "nvim-orgmode/orgmode"
 
+    use "Olical/conjure"
+    use "Olical/aniseed"
+
     if packer_bootstrap then
         require("packer").sync()
     end
