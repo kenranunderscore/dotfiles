@@ -20,9 +20,11 @@ let
     background = "${colors.transparent}";
     foreground = "${colors.foreground}";
     fixed-center = true;
-    font-0 = "${font.nerdFont}:size=${toString font.size};4";
-    font-1 = "${font.nerdFont}:style=Bold:size=${toString font.size};4";
-    font-2 = "${font.nerdFont}:style=Bold:size=${toString font.size};4";
+    font-0 = "${font.name}:size=15;4";
+    font-1 = "${font.name}:style=Bold:size=15;4";
+    # TODO: maybe Material is a better fit?
+    font-2 = "Font Awesome 6 Free:size=17;5";
+    font-3 = "Font Awesome 6 Free Solid:style=Solid:size=17;5";
     height = "30";
     locale = "en_US.UTF-8";
     offset-x = "1%";
@@ -34,7 +36,7 @@ let
     inherit interface;
     type = "internal/network";
     accumulate-stats = "true";
-    format-connected = "<label-connected>";
+    format-connected = " <label-connected>";
     format-connected-background = "${colors.background}";
     format-connected-foreground = "${colors.foreground}";
     format-connected-margin = 0;
@@ -64,20 +66,20 @@ in {
       + "wlan1 wlan2 wlan3 audio powermenu");
 
   "module/date" = {
-    format = "<label>";
     format-foreground = "${colors.foreground}";
     format-background = "${colors.background}";
     format-padding = 2;
     format-margin = 0;
     interval = 1;
-    label = "%date% %time%";
+    label = " %date%   %time%";
     time = "%H:%M:%S";
     date = "%d %b %Y";
     type = "internal/date";
   };
 
   "module/cpu" = {
-    format = "  <label>";
+    # format = "%{T-2} %{T-}<label>";
+    format = "%{T3} %{T-}<label>";
     format-background = "${colors.background}";
     format-foreground = "${colors.foreground}";
     format-padding = 2;
@@ -128,9 +130,9 @@ in {
     format-muted-overline = "${colors.transparent}";
     format-muted-padding = 2;
     format-muted-margin = 0;
-    format-muted-prefix = "婢  ";
+    format-muted-prefix = "%{T4} %{T-}";
     format-muted-prefix-foreground = "${colors.urgent}";
-    format-volume = "墳  VOL <label-volume>";
+    format-volume = "%{T4} %{T-}VOL <label-volume>";
     format-volume-background = "${colors.background}";
     format-volume-foreground = "${colors.foreground}";
     format-volume-padding = 2;
@@ -161,7 +163,7 @@ in {
     label-focused-foreground = "${colors.foreground}";
     label-focused-padding = 1;
     label-focused-margin = 0;
-    label-focused-font = 3;
+    label-focused-font = 2;
     label-unfocused = "%name%";
     label-unfocused-background = "${colors.background}";
     label-unfocused-foreground = "#707070";
@@ -218,7 +220,7 @@ in {
   "module/wlan3" = mkWlanModule "wlp1s0";
 
   "module/memory" = {
-    format = "  <label>";
+    format = "%{T4} %{T-}<label>";
     format-background = "${colors.background}";
     format-foreground = "${colors.foreground}";
     format-padding = 2;
@@ -230,7 +232,7 @@ in {
 
   "module/distro-icon" = {
     exec = "${pkgs.coreutils}/bin/uname -r | ${pkgs.coreutils}/bin/cut -d- -f1";
-    format = "   <label>";
+    format = "%{T3} %{T-}<label>";
     format-background = "${colors.background}";
     format-foreground = "${colors.foreground}";
     format-padding = 2;

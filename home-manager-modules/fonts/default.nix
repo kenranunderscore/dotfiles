@@ -34,6 +34,7 @@ in {
         courier-prime
         fantasque-sans-mono
         fira-code
+        font-awesome_6
         go-font
         hack-font
         hasklig
@@ -42,23 +43,9 @@ in {
         iosevka
         jetbrains-mono
         julia-mono
-        liberation_ttf
-        lmodern
-        (nerdfonts.override {
-          fonts = [
-            "CodeNewRoman"
-            "DroidSansMono"
-            "FiraCode"
-            "FiraMono"
-            "Gohu"
-            "Inconsolata"
-            "Iosevka"
-          ];
-        })
         noto-fonts
         roboto-mono
         source-code-pro
-        vistafonts
       ]);
     };
   };
