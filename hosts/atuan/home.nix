@@ -40,7 +40,7 @@
             notification = false;
           }
           {
-            command = "i3-msg 'workspace 1:main/emacs; exec kitty'";
+            command = "i3-msg 'workspace 1:main; exec kitty'";
             notification = false;
           }
           {

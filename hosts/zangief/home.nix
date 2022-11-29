@@ -15,7 +15,7 @@ in {
         enable = true;
         workspaces = [
           {
-            name = "1:main/emacs";
+            name = "1:main";
             output = "HDMI-0";
           }
           {

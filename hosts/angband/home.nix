@@ -12,7 +12,7 @@
         enable = true;
         withGaps = false;
         workspaces = [
-          { name = "1:main/emacs"; }
+          { name = "1:main"; }
           {
             name = "2:web";
             assigns = [{ class = "firefox"; }];
