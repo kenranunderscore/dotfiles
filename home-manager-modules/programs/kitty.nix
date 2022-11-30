@@ -10,6 +10,11 @@ in {
     programs.kitty = {
       enable = true;
       font = { inherit (custom.font) name size; };
+      keybindings = {
+        "ctrl+shift+equal" = "change_font_size all +0.5";
+        "ctrl+shift+plus" = "change_font_size all +0.5";
+        "ctrl+shift+minus" = "change_font_size all -0.5";
+      };
       settings = {
         term = "xterm-256color";
         macos_option_as_alt = true;
