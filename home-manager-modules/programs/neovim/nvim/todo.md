@@ -10,3 +10,9 @@
 - something like abbrev?
 - fennel/aniseed with LSP
 - `fzf`-powered directory search -> `netrw`
+- snippets: `deriving Show` etc.
+- Haskell `import` command
+- `vim-dispatch`
+- `vim-eunuch`
+- `vim-unimpaired`
+- `vim-vinegar`?
