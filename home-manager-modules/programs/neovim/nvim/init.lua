@@ -31,3 +31,7 @@ opt.completeopt = "menu,menuone,noselect"
 vim.g.autoformat = 1
 
 opt.exrc = true
+
+-- Show some special characters, like carriage returns, tabs etc.
+opt.list = true
+opt.listchars = "tab:» ,nbsp:+,eol:⏎"
