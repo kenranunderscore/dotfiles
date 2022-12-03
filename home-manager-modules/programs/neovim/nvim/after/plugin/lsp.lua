@@ -8,26 +8,25 @@ lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.defa
 
 require("lspsaga").init_lsp_saga()
 
-local nnoremap = require("kenran.remap").nnoremap
-nnoremap("<leader>e", vim.diagnostic.open_float)
-nnoremap("<leader>e", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_prev)
 
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     local bufopts = { silent = true, buffer = bufnr }
-    nnoremap("gd", vim.lsp.buf.definition, bufopts)
-    nnoremap("gD", vim.lsp.buf.declaration, bufopts)
-    nnoremap("gt", vim.lsp.buf.type_definition, bufopts)
-    nnoremap("gi", vim.lsp.buf.implementation, bufopts)
-    nnoremap("<leader>la", vim.lsp.buf.code_action, bufopts)
-    nnoremap("<leader>ln", vim.diagnostic.goto_next, bufopts)
-    nnoremap("<leader>lp", vim.diagnostic.goto_prev, bufopts)
-    nnoremap("<leader>ld", vim.diagnostic.open_float, bufopts)
-    nnoremap("<leader>lw", vim.lsp.buf.workspace_symbol, bufopts)
-    nnoremap("K", vim.lsp.buf.hover, bufopts)
-    nnoremap("<leader>lf", vim.lsp.buf.references, bufopts)
-    nnoremap("<leader>lr", vim.lsp.buf.rename, bufopts)
-    nnoremap("<C-h>", vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "<leader>ln", vim.diagnostic.goto_next, bufopts)
+    vim.keymap.set("n", "<leader>lp", vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, bufopts)
+    vim.keymap.set("n", "<leader>lw", vim.lsp.buf.workspace_symbol, bufopts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "<leader>lf", vim.lsp.buf.references, bufopts)
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, bufopts)
 end
 
 lspconfig.rust_analyzer.setup {

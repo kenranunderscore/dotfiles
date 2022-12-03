@@ -16,6 +16,4 @@ neogit.setup {
     },
 }
 
-local nnoremap = require("kenran.remap").nnoremap
-
-nnoremap("<leader>gs", neogit.open)
+vim.keymap.set("n", "<leader>gs", neogit.open)

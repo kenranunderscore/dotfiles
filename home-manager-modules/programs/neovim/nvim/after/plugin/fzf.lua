@@ -65,10 +65,9 @@ fzf.setup {
 
 fzf.register_ui_select()
 
-local nnoremap = require("kenran.remap").nnoremap
-nnoremap("<leader>fp", fzf.git_files)
-nnoremap("<leader>ff", fzf.files)
-nnoremap("<leader>bb", fzf.buffers)
-nnoremap("<leader>fg", fzf.live_grep_native)
-nnoremap("<leader>fs", fzf.grep_cword)
-nnoremap("<leader>fq", fzf.quickfix)
+vim.keymap.set("n", "<leader>fp", fzf.git_files)
+vim.keymap.set("n", "<leader>ff", fzf.files)
+vim.keymap.set("n", "<leader>bb", fzf.buffers)
+vim.keymap.set("n", "<leader>fg", fzf.live_grep_native)
+vim.keymap.set("n", "<leader>fs", fzf.grep_cword)
+vim.keymap.set("n", "<leader>fq", fzf.quickfix)

@@ -1,23 +1,21 @@
-local nnoremap = require("kenran.remap").nnoremap
-
 -- vertically center the current line after certain jumps (thanks prime)
-nnoremap("<C-u>", "<C-u>zz")
-nnoremap("<C-d>", "<C-d>zz")
-nnoremap("n", "nzz")
-nnoremap("N", "Nzz")
-nnoremap("*", "*zz")
-nnoremap("#", "#zz")
-nnoremap("G", "Gzz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "*", "*zz")
+vim.keymap.set("n", "#", "#zz")
+vim.keymap.set("n", "G", "Gzz")
 
 -- quickly delete the current buffer
-nnoremap("<leader>bq", "<cmd>bd<cr>")
+vim.keymap.set("n", "<leader>bq", "<cmd>bd<cr>")
 
 -- open netrw in the current pwd
-nnoremap("<leader>pd", "<cmd>Ex<cr>")
+vim.keymap.set("n", "<leader>pd", "<cmd>Ex<cr>")
 
 -- remove search highlighting on ESC
-nnoremap("<esc>", "<cmd>noh<cr>")
+vim.keymap.set("n", "<esc>", "<cmd>noh<cr>")
 
 -- windows
-nnoremap("<C-l>", "<C-w><C-w>")
-nnoremap("<C-w><C-d>", "<C-w>q")
+vim.keymap.set("n", "<C-l>", "<C-w><C-w>")
+vim.keymap.set("n", "<C-w><C-d>", "<C-w>q")
