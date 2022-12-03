@@ -16,3 +16,4 @@
 - `vim-eunuch`
 - `vim-unimpaired`
 - `vim-vinegar`?
+- `vim-sneak`, snipe??
