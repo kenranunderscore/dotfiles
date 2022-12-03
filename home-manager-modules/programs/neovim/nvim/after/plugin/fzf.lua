@@ -1,5 +1,10 @@
 local fzf = require("fzf-lua")
 
+local small_win = {
+    height = 0.30,
+    row = 0.5,
+}
+
 fzf.setup {
     winopts = {
         border = "single",
@@ -16,6 +21,7 @@ fzf.setup {
     files = {
         prompt = "File: ",
         previewer = false,
+        winopts = small_win,
         fzf_opts = {
             ["--info"] = "inline",
         },
@@ -23,6 +29,7 @@ fzf.setup {
     git = {
         files = {
             prompt = "File (git): ",
+            winopts = small_win,
             previewer = false,
             fzf_opts = {
                 ["--info"] = "inline",
@@ -37,6 +44,8 @@ fzf.setup {
     },
     buffers = {
         prompt = "Buffer: ",
+        previewer = false,
+        winopts = small_win,
     },
     oldfiles = {
         prompt = "Oldfile: ",
