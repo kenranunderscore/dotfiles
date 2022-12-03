@@ -31,7 +31,6 @@ return require("packer").startup(function(use)
     use "ibhagwan/fzf-lua"
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
-    use "nvim-treesitter/nvim-treesitter"
     use "kylechui/nvim-surround"
     use "editorconfig/editorconfig-vim"
     use "windwp/nvim-autopairs"

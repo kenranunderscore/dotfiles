@@ -1,4 +1,9 @@
-require("nvim-treesitter.configs").setup {
+local result, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+if not result then
+    return
+end
+
+treesitter_configs.configs.setup {
     ensure_installed = {
         "awk",
         "bash",
