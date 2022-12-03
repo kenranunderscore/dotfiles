@@ -52,8 +52,6 @@ return require("packer").startup(function(use)
 
     use "numtostr/comment.nvim"
 
-    use "nvim-orgmode/orgmode"
-
     use "Olical/conjure"
     use "Olical/aniseed"
 
