@@ -19,6 +19,5 @@ vim.keymap.set("n", "<leader>pd", "<cmd>Ex<cr>")
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>")
 
 -- windows
--- FIXME(Johannes): make C-l work in netwr
 vim.keymap.set("n", "<C-l>", "<C-w><C-w>")
 vim.keymap.set("n", "<C-w><C-d>", "<C-w>q")
