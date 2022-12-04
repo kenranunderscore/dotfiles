@@ -33,7 +33,6 @@ return require("packer").startup(function(use)
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
     use "kylechui/nvim-surround"
     use "editorconfig/editorconfig-vim"
-    use "windwp/nvim-autopairs"
 
     use "neovim/nvim-lspconfig"
     use "hrsh7th/cmp-nvim-lsp"
