@@ -17,3 +17,6 @@
 - `vim-unimpaired`
 - `vim-vinegar`?
 - `vim-sneak`, snipe??
+- whitespace cleanup?
+- more snippets!! they're awesome
+- make `C-l` work in `netrw` as well
