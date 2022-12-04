@@ -6,6 +6,8 @@ vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "*", "*zz")
 vim.keymap.set("n", "#", "#zz")
 vim.keymap.set("n", "G", "Gzz")
+vim.keymap.set("n", "<C-i>", "<C-i>zz")
+vim.keymap.set("n", "<C-o>", "<C-o>zz")
 
 -- quickly delete the current buffer
 vim.keymap.set("n", "<leader>bq", "<cmd>bd<cr>")
@@ -17,5 +19,6 @@ vim.keymap.set("n", "<leader>pd", "<cmd>Ex<cr>")
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>")
 
 -- windows
+-- FIXME(Johannes): make C-l work in netwr
 vim.keymap.set("n", "<C-l>", "<C-w><C-w>")
 vim.keymap.set("n", "<C-w><C-d>", "<C-w>q")
