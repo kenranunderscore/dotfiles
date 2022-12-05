@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.desktop.i3;
+let cfg = config.modules.i3;
 in {
-  options.modules.desktop.i3 = {
+  options.modules.i3 = {
     enable = lib.mkEnableOption "i3";
 
     terminal = lib.mkOption {

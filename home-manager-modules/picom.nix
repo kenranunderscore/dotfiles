@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.desktop.picom;
+let cfg = config.modules.picom;
 in {
-  options.modules.desktop.picom = { enable = lib.mkEnableOption "picom"; };
+  options.modules.picom = { enable = lib.mkEnableOption "picom"; };
 
   config = lib.mkIf cfg.enable {
     services.picom = {

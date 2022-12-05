@@ -1,8 +1,8 @@
 { custom, config, lib, pkgs, ... }:
 
-let cfg = config.modules.desktop.polybar;
+let cfg = config.modules.polybar;
 in {
-  options.modules.desktop.polybar = {
+  options.modules.polybar = {
     enable = lib.mkEnableOption "polybar";
 
     withBattery = lib.mkOption {
