@@ -15,13 +15,11 @@ in {
 
   config = {
     modules = {
-      programs = {
-        alacritty.enable = true;
-        emacs.enable = true;
-        firefox.enable = true;
-        kitty.enable = true;
-        neovim.enable = true;
-      };
+      alacritty.enable = true;
+      emacs.enable = true;
+      firefox.enable = true;
+      kitty.enable = true;
+      neovim.enable = true;
       bash.enable = true;
       bat.enable = true;
       direnv.enable = true;

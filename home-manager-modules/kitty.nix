@@ -1,10 +1,10 @@
 { custom, config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.programs.kitty;
+  cfg = config.modules.kitty;
   types = lib.types;
 in {
-  options.modules.programs.kitty = { enable = lib.mkEnableOption "kitty"; };
+  options.modules.kitty = { enable = lib.mkEnableOption "kitty"; };
 
   config = lib.mkIf cfg.enable {
     programs.kitty = {

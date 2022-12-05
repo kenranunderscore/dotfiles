@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.games.dwarfFortress;
+let cfg = config.modules.dwarfFortress;
 in {
-  options.modules.games.dwarfFortress = {
+  options.modules.dwarfFortress = {
     enable = lib.mkEnableOption "dwarfFortress";
   };
 

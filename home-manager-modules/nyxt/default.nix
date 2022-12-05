@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.programs.nyxt;
+  cfg = config.modules.nyxt;
 
   # To get the most recent version I build Nyxt from source locally.
   # This wrapper script assumes that the repo is cloned at
@@ -11,7 +11,7 @@ let
     nix-shell ~/projects/forks/nyxt/build-scripts/shell.nix --run "~/projects/forks/nyxt/nyxt $@"
   '';
 in {
-  options.modules.programs.nyxt.enable = lib.mkEnableOption "nyxt";
+  options.modules.nyxt.enable = lib.mkEnableOption "nyxt";
 
   config = lib.mkIf cfg.enable {
     home = {
@@ -22,7 +22,7 @@ in {
 
           if [ ! -h "$config_file" ]; then
             mkdir -p "$(dirname "$config_file")"
-            $DRY_RUN_CMD ln -s $HOME/dotfiles/home-manager-modules/programs/nyxt/config.lisp "$config_file"
+            $DRY_RUN_CMD ln -s $HOME/dotfiles/home-manager-modules/nyxt/config.lisp "$config_file"
           fi
         '';
     };

@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.programs.qutebrowser;
+  cfg = config.modules.qutebrowser;
   types = lib.types;
 in {
-  options.modules.programs.qutebrowser = {
+  options.modules.qutebrowser = {
     enable = lib.mkEnableOption "qutebrowser";
 
     package = lib.mkOption {

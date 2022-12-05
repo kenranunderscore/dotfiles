@@ -1,8 +1,8 @@
 { custom, config, lib, pkgs, ... }:
 
-let cfg = config.modules.programs.alacritty;
+let cfg = config.modules.alacritty;
 in {
-  options.modules.programs.alacritty = {
+  options.modules.alacritty = {
     enable = lib.mkEnableOption "alacritty";
   };
 

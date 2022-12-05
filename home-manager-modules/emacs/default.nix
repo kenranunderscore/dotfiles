@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.programs.emacs;
+  cfg = config.modules.emacs;
   types = lib.types;
 in {
-  options.modules.programs.emacs = {
+  options.modules.emacs = {
     enable = lib.mkEnableOption "emacs";
 
     emacsVersion = lib.mkOption {
@@ -18,7 +18,7 @@ in {
       activation = {
         symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -h $HOME/.emacs.d ]; then
-            $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/programs/emacs/emacs.d $HOME/.emacs.d
+            $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/emacs/emacs.d $HOME/.emacs.d
           fi
         '';
       };

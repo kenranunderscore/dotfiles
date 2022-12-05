@@ -60,10 +60,8 @@
       enable = true;
       withCustomBuilds = false;
     };
-    programs = {
-      emacs.emacsVersion = "stable";
-      nyxt.enable = true;
-    };
+    emacs.emacsVersion = "stable";
+    nyxt.enable = true;
     sbcl.enable = true;
     git.email = "johannes.maier@mailbox.org";
   };

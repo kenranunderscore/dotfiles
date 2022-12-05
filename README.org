@@ -81,9 +81,9 @@ nix shell "~/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users
 A special case of a program with a relatively huge accompanying
 configuration is GNU Emacs.  My literate Emacs configuration (very
 much a work-in-progress, as I've only recently started going back to
-using [[https://orgmode.org/][Org Mode]] to configure Emacs itself) can be found [[file:modules/programs/emacs/emacs.d/config.org][here]].
+using [[https://orgmode.org/][Org Mode]] to configure Emacs itself) can be found [[file:home-manager-modules/emacs/emacs.d/config.org][here]].
 
-Note that there is a corresponding [[file:modules/programs/emacs/default.nix][default.nix]] which specifies the
+Note that there is a corresponding [[file:home-manager-modules/emacs/default.nix][default.nix]] which specifies the
 version of Emacs I use (usually a quite recent one, made possible by
 [[https://github.com/nix-community/emacs-overlay][emacs-overlay]]), as well as some pre-built packages, all "obeying" my
 current pin of =nixpkgs= (see [[file:flake.lock][flake.lock]]).  I used to use Nix to manage

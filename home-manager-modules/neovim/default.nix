@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.programs.neovim;
+let cfg = config.modules.neovim;
 in {
-  options.modules.programs.neovim.enable = lib.mkEnableOption "neovim";
+  options.modules.neovim.enable = lib.mkEnableOption "neovim";
 
   config = lib.mkIf cfg.enable {
     home = {
@@ -18,7 +18,7 @@ in {
         symlinkNeovimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           if [ ! -h $HOME/.config/nvim ]; then
               $DRY_RUN_CMD mkdir -p $HOME/.config
-              $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/programs/neovim/nvim $HOME/.config/nvim
+              $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/neovim/nvim $HOME/.config/nvim
           fi
         '';
       };

@@ -110,11 +110,9 @@ in {
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    programs = {
-      emacs.emacsVersion = "git";
-      imwheel.enable = true;
-      nyxt.enable = true;
-    };
+    emacs.emacsVersion = "git";
+    imwheel.enable = true;
+    nyxt.enable = true;
     git.email = email;
   };
 

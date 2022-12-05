@@ -62,11 +62,9 @@
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    games.dwarfFortress.enable = true;
-    programs = {
-      emacs.emacsVersion = "git";
-      nyxt.enable = true;
-    };
+    dwarfFortress.enable = true;
+    emacs.emacsVersion = "git";
+    nyxt.enable = true;
     sbcl.enable = true;
     git.email = "johannes.maier@mailbox.org";
   };
