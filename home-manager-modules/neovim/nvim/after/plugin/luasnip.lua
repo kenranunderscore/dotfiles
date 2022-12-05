@@ -27,7 +27,7 @@ end, { silent = true })
 luasnip.config.set_config {
     history = false,
     updateevents = "TextChanged,TextChangedI",
-    -- FIXME(Johannes): see if I really this
+    -- FIXME(Johannes): see if I really need this
     enable_autosnippets = true,
 }
 
