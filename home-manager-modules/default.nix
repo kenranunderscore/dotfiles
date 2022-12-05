@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./desktop ./email ./programs ./shell ./games ./fonts ];
+  imports = [ ./desktop ./email ./programs ./games ./fonts ];
 }
