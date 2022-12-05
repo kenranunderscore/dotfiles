@@ -8,9 +8,6 @@ lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.defa
 
 require("lspsaga").init_lsp_saga()
 
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_prev)
-
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     local bufopts = { silent = true, buffer = bufnr }
