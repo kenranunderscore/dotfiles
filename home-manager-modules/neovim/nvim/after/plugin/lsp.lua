@@ -59,7 +59,12 @@ lspconfig.sumneko_lua.setup {
     }
 }
 
-local haskell_tools = require("haskell-tools")
+local haskell_tools_setup, haskell_tools = pcall(require, "haskell-tools")
+if not haskell_tools_setup then
+    print("haskell-tools setup failed")
+    return
+end
+
 haskell_tools.setup {
     hls = {
         on_attach = on_attach,
