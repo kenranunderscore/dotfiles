@@ -23,6 +23,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "<leader>lf", vim.lsp.buf.references, bufopts)
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", bufopts)
     vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, bufopts)
 end
 
