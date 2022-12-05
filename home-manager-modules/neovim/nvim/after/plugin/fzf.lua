@@ -67,7 +67,7 @@ fzf.register_ui_select()
 
 vim.keymap.set("n", "<leader>fp", fzf.git_files)
 vim.keymap.set("n", "<leader>ff", fzf.files)
-vim.keymap.set("n", "<leader>bb", fzf.buffers)
+vim.keymap.set("n", "<leader>b", fzf.buffers)
 vim.keymap.set("n", "<leader>fg", fzf.live_grep_native)
 vim.keymap.set("n", "<leader>fs", fzf.grep_cword)
 vim.keymap.set("n", "<leader>fq", fzf.quickfix)
