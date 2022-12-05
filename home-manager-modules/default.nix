@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  imports = [ ./desktop ./email ./programs ./games ./fonts ];
+  imports = [ ./desktop ./dwarf-fortress.nix ./email ./programs ./fonts ];
 }
