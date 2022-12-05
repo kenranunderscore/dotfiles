@@ -1,5 +1,7 @@
 vim.cmd("ab trainign training")
 vim.cmd("ab Trainign Training")
+vim.cmd("ab trainig training")
+vim.cmd("ab Trainig Training")
 
 vim.cmd("ab aciton action")
 vim.cmd("ab Aciton Action")
