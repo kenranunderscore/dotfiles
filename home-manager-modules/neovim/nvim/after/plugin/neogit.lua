@@ -1,4 +1,9 @@
-local neogit = require("neogit")
+local setup, neogit = pcall(require, "neogit")
+if not setup then
+    print("neogit setup failed")
+    return
+end
+
 neogit.setup {
     disable_signs = false,
     disable_hints = false,
