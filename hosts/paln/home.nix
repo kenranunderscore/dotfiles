@@ -5,20 +5,18 @@
 
   config = {
     modules = {
+      bash.enable = true;
       email = {
         enable = true;
         certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       };
-      shell = {
-        bash.enable = true;
-        zsh.enable = true;
-        pass = {
-          enable = true;
-          # FIXME customize GPG key in "user environment" module
-          gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
-        };
-        tmux.enable = true;
+      zsh.enable = true;
+      pass = {
+        enable = true;
+        # FIXME customize GPG key in "user environment" module
+        gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
       };
+      tmux.enable = true;
     };
 
     programs = {

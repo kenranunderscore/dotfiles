@@ -117,7 +117,7 @@ in {
       imwheel.enable = true;
       nyxt.enable = true;
     };
-    shell.git.email = email;
+    git.email = email;
   };
 
   programs = {

@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.shell.bat;
+let cfg = config.modules.bat;
 in {
-  options.modules.shell.bat.enable = lib.mkEnableOption "bat";
+  options.modules.bat.enable = lib.mkEnableOption "bat";
 
   config = lib.mkIf cfg.enable {
     programs.bat = {

@@ -1,8 +1,8 @@
 { inputs, config, lib, pkgs, ... }:
 
-let cfg = config.modules.shell.zsh;
+let cfg = config.modules.zsh;
 in {
-  options.modules.shell.zsh.enable = lib.mkEnableOption "zsh";
+  options.modules.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
     # Packages that I want aliases to use, like 'exa' as 'ls'

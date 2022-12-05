@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.shell.pass;
+  cfg = config.modules.pass;
   types = lib.types;
 in {
-  options.modules.shell.pass = {
+  options.modules.pass = {
     enable = lib.mkEnableOption "pass module";
 
     gpgKey = lib.mkOption {

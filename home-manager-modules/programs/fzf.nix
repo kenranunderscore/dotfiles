@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.shell.fzf;
+let cfg = config.modules.fzf;
 in {
-  options.modules.shell.fzf.enable = lib.mkEnableOption "fzf";
+  options.modules.fzf.enable = lib.mkEnableOption "fzf";
 
   config = lib.mkIf cfg.enable {
     home = {

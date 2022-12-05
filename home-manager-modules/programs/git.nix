@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.shell.git;
+  cfg = config.modules.git;
   types = lib.types;
 in {
-  options.modules.shell.git = {
+  options.modules.git = {
     email = lib.mkOption {
       type = types.str;
       default = "";

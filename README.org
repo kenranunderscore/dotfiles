@@ -52,7 +52,7 @@ per-machine basis).
 
 ** Building/switching to a new generation
 
-I usually use an [[file:modules/shell/shell-aliases.nix][alias]] in my shell to switch to the next generation
+I usually use an [[file:home-manager-modules/shell-aliases.nix][alias]] in my shell to switch to the next generation
 after changing things in my configuration.  The actual command is the
 following:
 

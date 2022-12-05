@@ -147,7 +147,6 @@ font:
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
     family: Julia Mono
-    style: Bold Italic
 
   # Point size
   size: 18.0

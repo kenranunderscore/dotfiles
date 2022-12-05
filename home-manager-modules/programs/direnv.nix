@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.shell.direnv;
+let cfg = config.modules.direnv;
 in {
-  options.modules.shell.direnv.enable = lib.mkEnableOption "direnv";
+  options.modules.direnv.enable = lib.mkEnableOption "direnv";
 
   config = lib.mkIf cfg.enable {
     programs.direnv = {

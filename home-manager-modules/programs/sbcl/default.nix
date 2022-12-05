@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.shell.zsh;
+let cfg = config.modules.sbcl;
 in {
-  options.modules.programs.sbcl.enable = lib.mkEnableOption "sbcl";
+  options.modules.sbcl.enable = lib.mkEnableOption "sbcl";
 
   config = lib.mkIf cfg.enable {
     home = {

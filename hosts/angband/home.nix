@@ -65,9 +65,9 @@
     programs = {
       emacs.emacsVersion = "stable";
       nyxt.enable = true;
-      sbcl.enable = true;
     };
-    shell.git.email = "johannes.maier@mailbox.org";
+    sbcl.enable = true;
+    git.email = "johannes.maier@mailbox.org";
   };
 
   services = {

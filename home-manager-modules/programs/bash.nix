@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.modules.shell.bash;
+let cfg = config.modules.bash;
 in {
-  options.modules.shell.bash.enable = lib.mkEnableOption "bash";
+  options.modules.bash.enable = lib.mkEnableOption "bash";
 
   config = lib.mkIf cfg.enable {
     programs.bash = {

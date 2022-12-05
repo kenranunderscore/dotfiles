@@ -15,7 +15,6 @@ in {
 
   config = {
     modules = {
-      email.enable = true;
       programs = {
         alacritty.enable = true;
         emacs.enable = true;
@@ -23,20 +22,19 @@ in {
         kitty.enable = true;
         neovim.enable = true;
       };
-      shell = {
-        bash.enable = true;
-        bat.enable = true;
-        direnv.enable = true;
-        fish.enable = true;
-        fzf.enable = true;
-        pass = {
-          enable = true;
-          inherit (cfg) gpgKey;
-        };
-        ssh.enable = true;
-        tmux.enable = true;
-        zsh.enable = true;
+      bash.enable = true;
+      bat.enable = true;
+      direnv.enable = true;
+      email.enable = true;
+      fish.enable = true;
+      fzf.enable = true;
+      pass = {
+        enable = true;
+        inherit (cfg) gpgKey;
       };
+      ssh.enable = true;
+      tmux.enable = true;
+      zsh.enable = true;
     };
 
     fonts.fontconfig.enable = lib.mkForce true;
