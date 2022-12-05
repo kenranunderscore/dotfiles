@@ -11,7 +11,7 @@
       i3 = {
         enable = true;
         workspaces = [
-          { name = "1:main/emacs"; }
+          { name = "1:main"; }
           {
             name = "2:web";
             assigns = [{ class = "firefox"; }];
