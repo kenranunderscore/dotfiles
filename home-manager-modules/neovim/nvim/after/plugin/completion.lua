@@ -1,6 +1,13 @@
-local cmp = require("cmp")
+local setup, cmp = pcall(require, "cmp")
+if not setup then
+    print("Loading nvim-cmp failed")
+    return
+end
+
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
+
+local border = "single"
 
 cmp.setup {
     completion = {
@@ -31,5 +38,13 @@ cmp.setup {
             maxwidth = 50,
             ellipsis_char = "...",
         })
+    },
+    window = {
+        completion = {
+            border = border,
+        },
+        documentation = {
+            border = border,
+        },
     },
 }
