@@ -54,9 +54,9 @@ lspconfig.sumneko_lua.setup {
             },
             telemetry = {
                 enable = false,
-            }
-        }
-    }
+            },
+        },
+    },
 }
 
 lspconfig.hls.setup {

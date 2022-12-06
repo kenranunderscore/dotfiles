@@ -1,4 +1,4 @@
--- thanks to TJ's series I finally managed to get started porting my Emacs 
+-- thanks to TJ's series I finally managed to get started porting my Emacs
 -- yasnippet snippets over to LuaSnip
 
 local result, luasnip = pcall(require, "luasnip")
@@ -45,39 +45,48 @@ luasnip.add_snippets("all", {
 
 luasnip.add_snippets("haskell", {
     snippet("ds", {
-        text_node("deriving stock (Eq, Show)")
+        text_node("deriving stock (Eq, Show)"),
     }),
     snippet("dsg", {
-        text_node("deriving stock (Eq, Show, Generic)")
+        text_node("deriving stock (Eq, Show, Generic)"),
     }),
     snippet("impl", {
-        text_node('error "TODO: implement this"')
+        text_node('error "TODO: implement this"'),
     }),
-    snippet("nt", fmt("newtype {name} = {name} {{ un{name} :: {type} }}", {
-        name = insert_node(1, "Name"),
-        type = insert_node(2, "Type"),
-    }, {
-        repeat_duplicates = true
-    })),
+    snippet(
+        "nt",
+        fmt("newtype {name} = {name} {{ un{name} :: {type} }}", {
+            name = insert_node(1, "Name"),
+            type = insert_node(2, "Type"),
+        }, {
+            repeat_duplicates = true,
+        })
+    ),
 })
 
 luasnip.add_snippets("lua", {
-    snippet({
+    snippet(
+        {
             trig = "preq",
             dscr = {
                 "Add Lua code to pcall(require, '<package>'), as well as",
                 "print a message and return if the require fails.",
             },
         },
-        fmt([[
-        local {package}_setup, {package} = pcall(require, "{package}")
-        if not {package}_setup then
-            print("Package '{package}' failed to load")
-            return
-        end
-        ]], {
-            package = insert_node(1, "package"),
-        }, {
-            repeat_duplicates = true,
-        }))
+        fmt(
+            [[
+            local {package}_setup, {package} = pcall(require, "{package}")
+            if not {package}_setup then
+                print("Package '{package}' failed to load")
+                return
+            end
+            ]],
+            {
+                package = insert_node(1, "package"),
+            },
+            {
+                repeat_duplicates = true,
+            }
+        )
+    ),
 })
