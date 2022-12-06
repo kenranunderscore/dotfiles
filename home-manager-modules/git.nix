@@ -27,13 +27,18 @@ in {
         pushf = "push --force-with-lease";
       };
       ignores = [
-        # Vim
+        # (n)vim
         "*.swp"
+        ".exrc"
+        ".nvimrc"
+
         # Direnv
         ".direnv/"
         ".envrc"
+
         # macOS
         ".DS_Store"
+
         # Emacs: backup, auto-save, lock files, directory-local
         # variables
         "*~"
