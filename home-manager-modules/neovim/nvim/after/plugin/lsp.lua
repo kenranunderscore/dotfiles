@@ -62,3 +62,7 @@ lspconfig.sumneko_lua.setup {
 lspconfig.hls.setup {
     on_attach = on_attach,
 }
+
+lspconfig.clojure_lsp.setup {
+    on_attach = on_attach,
+}
