@@ -62,16 +62,21 @@ luasnip.add_snippets("haskell", {
 })
 
 luasnip.add_snippets("lua", {
-    snippet(
-        "preq",
+    snippet({
+            trig = "preq",
+            dscr = {
+                "Add Lua code to pcall(require, '<package>'), as well as",
+                "print a message and return if the require fails.",
+            },
+        },
         fmt([[
-        local {package_name}_setup, {package_name} = pcall(require, "{package_name}")
-        if not {package_name}_setup then
-            print("Package '{package_name}' failed to load")
+        local {package}_setup, {package} = pcall(require, "{package}")
+        if not {package}_setup then
+            print("Package '{package}' failed to load")
             return
         end
         ]], {
-            package_name = insert_node(1, "package_name"),
+            package = insert_node(1, "package"),
         }, {
             repeat_duplicates = true,
         }))
