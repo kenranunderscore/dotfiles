@@ -48,12 +48,6 @@ in {
       ];
       signing.signByDefault = cfg.gpgKey != null;
       signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
-      difftastic = {
-        enable = true;
-        display = "inline";
-        background = "light";
-        color = "auto";
-      };
       extraConfig = {
         core.askPass = "";
         init.defaultBranch = "main";
