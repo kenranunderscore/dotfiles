@@ -60,3 +60,19 @@ luasnip.add_snippets("haskell", {
         repeat_duplicates = true
     })),
 })
+
+luasnip.add_snippets("lua", {
+    snippet(
+        "preq",
+        fmt([[
+        local {package_name}_setup, {package_name} = pcall(require, "{package_name}")
+        if not {package_name}_setup then
+            print("Package '{package_name}' failed to load")
+            return
+        end
+        ]], {
+            package_name = insert_node(1, "package_name"),
+        }, {
+            repeat_duplicates = true,
+        }))
+})
