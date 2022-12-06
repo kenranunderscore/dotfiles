@@ -50,8 +50,10 @@ return require("packer").startup(function(use)
 
     use "numtostr/comment.nvim"
 
+    -- lispy languages
     use "Olical/conjure"
     use "Olical/aniseed"
+    use "gpanders/nvim-parinfer"
 
     if packer_bootstrap then
         require("packer").sync()
