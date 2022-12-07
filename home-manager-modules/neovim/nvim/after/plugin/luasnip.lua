@@ -62,6 +62,22 @@ luasnip.add_snippets("haskell", {
             repeat_duplicates = true,
         })
     ),
+    snippet(
+        "fn",
+        fmt(
+            [[
+            {name} :: {types}
+            {name} =
+                {impl}
+            ]],
+            {
+                name = insert_node(1, "functionName"),
+                types = insert_node(2, "a"),
+                impl = insert_node(0, 'error "TODO: implement this"'),
+            },
+            { repeat_duplicates = true }
+        )
+    ),
 })
 
 luasnip.add_snippets("lua", {
