@@ -33,3 +33,6 @@ vim.cmd("ab wirte write")
 vim.cmd("ab Wirte Write")
 vim.cmd("ab wriet write")
 vim.cmd("ab Wriet Write")
+
+vim.cmd("ab withing within")
+vim.cmd("ab Withing Within")
