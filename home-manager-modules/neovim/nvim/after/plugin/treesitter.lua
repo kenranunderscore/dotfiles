@@ -3,7 +3,7 @@ if not result then
     return
 end
 
-treesitter_configs.configs.setup {
+treesitter_configs.setup {
     ensure_installed = {
         "awk",
         "bash",
@@ -49,7 +49,6 @@ treesitter_configs.configs.setup {
         "regex",
         "rust",
         "scheme",
-        "sql",
         "toml",
         "vim",
         "yaml",
