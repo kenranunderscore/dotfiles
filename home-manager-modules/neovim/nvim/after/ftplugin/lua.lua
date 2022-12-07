@@ -1,1 +1,1 @@
-vim.opt_local.formatprg = "stylua --stdin-filepath % -"
+vim.opt_local.formatprg = "stylua --config-path ./.stylua.toml --stdin-filepath % -"
