@@ -10,7 +10,7 @@ vim.keymap.set("n", "<C-i>", "<C-i>zz")
 vim.keymap.set("n", "<C-o>", "<C-o>zz")
 
 -- quickly delete the current buffer
-vim.keymap.set("n", "<leader>bq", "<cmd>bd<cr>")
+vim.keymap.set("n", "<leader>bq", "<cmd>b#|bd#<cr>")
 
 -- open netrw in the current pwd
 vim.keymap.set("n", "<leader>pd", "<cmd>Ex<cr>")
