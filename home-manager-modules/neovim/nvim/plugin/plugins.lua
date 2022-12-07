@@ -54,6 +54,9 @@ return require("packer").startup(function(use)
     use("Olical/aniseed")
     use("gpanders/nvim-parinfer")
 
+    use("tpope/vim-repeat")
+    use("ggandor/leap.nvim")
+
     if packer_bootstrap then
         require("packer").sync()
     end
