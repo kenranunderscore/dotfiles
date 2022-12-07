@@ -1,7 +1,7 @@
 {
   username = "johannes";
   font = rec {
-    name = "Julia Mono";
-    size = 15;
+    name = "JetBrains Mono";
+    size = 17;
   };
 }
