@@ -21,6 +21,8 @@ vim.cmd([[
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
 
+    use("lewis6991/impatient.nvim")
+
     -- colorschemes
     use("bluz71/vim-moonfly-colors")
     use("rockerboo/boo-colorscheme-nvim")

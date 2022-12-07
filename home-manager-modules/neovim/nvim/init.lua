@@ -1,3 +1,8 @@
+local impatient_setup, _ = pcall(require, "impatient")
+if not impatient_setup then
+    print("Package 'impatient' failed to load")
+end
+
 -- These settings should be loaded before everything else.  Hopefully that's
 -- the case.
 
