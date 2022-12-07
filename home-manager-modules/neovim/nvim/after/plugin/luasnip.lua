@@ -43,6 +43,7 @@ luasnip.add_snippets("all", {
     }),
 })
 
+local haskell_impl_with_error = 'error "TODO: implement"'
 luasnip.add_snippets("haskell", {
     snippet("ds", {
         text_node("deriving stock (Eq, Show)"),
@@ -51,7 +52,7 @@ luasnip.add_snippets("haskell", {
         text_node("deriving stock (Eq, Show, Generic)"),
     }),
     snippet("impl", {
-        text_node('error "TODO: implement this"'),
+        text_node(haskell_impl_with_error),
     }),
     snippet(
         "nt",
@@ -67,13 +68,30 @@ luasnip.add_snippets("haskell", {
         fmt(
             [[
             {name} :: {types}
-            {name} =
+            {name} {arguments} =
                 {impl}
             ]],
             {
                 name = insert_node(1, "functionName"),
-                types = insert_node(2, "a"),
-                impl = insert_node(0, 'error "TODO: implement this"'),
+                types = insert_node(2, "type"),
+                arguments = insert_node(3, "args"),
+                impl = insert_node(0, haskell_impl_with_error),
+            },
+            { repeat_duplicates = true }
+        )
+    ),
+    snippet(
+        "inst",
+        fmt(
+            [[
+            instance {typeclass} {type} where
+                {method} = {body}
+            ]],
+            {
+                typeclass = insert_node(1, "typeclass"),
+                type = insert_node(2, "type"),
+                method = insert_node(3, "method"),
+                body = insert_node(0, haskell_impl_with_error),
             },
             { repeat_duplicates = true }
         )
