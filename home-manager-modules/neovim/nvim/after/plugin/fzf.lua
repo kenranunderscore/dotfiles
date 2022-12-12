@@ -63,8 +63,6 @@ fzf.setup {
     },
 }
 
-fzf.register_ui_select()
-
 vim.keymap.set("n", "<leader>fp", fzf.git_files)
 vim.keymap.set("n", "<leader>ff", fzf.files)
 vim.keymap.set("n", "<leader>b", fzf.buffers)
