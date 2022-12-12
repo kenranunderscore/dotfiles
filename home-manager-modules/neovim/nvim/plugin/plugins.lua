@@ -23,6 +23,8 @@ return require("packer").startup(function(use)
 
     use("lewis6991/impatient.nvim")
 
+    use("nvim-lua/plenary.nvim")
+
     -- colorschemes
     use("bluz71/vim-moonfly-colors")
     use("rockerboo/boo-colorscheme-nvim")
@@ -34,7 +36,7 @@ return require("packer").startup(function(use)
 
     use("ibhagwan/fzf-lua")
 
-    use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
+    use("tpope/vim-fugitive")
     use("lewis6991/gitsigns.nvim")
 
     use("kylechui/nvim-surround")
@@ -60,7 +62,11 @@ return require("packer").startup(function(use)
     use("Olical/aniseed")
     use("gpanders/nvim-parinfer")
 
+    -- utils
     use("tpope/vim-repeat")
+    use("tpope/vim-unimpaired")
+
+    -- clever jumping/sniping with s/S
     use("ggandor/leap.nvim")
 
     use("vmchale/dhall-vim")
