@@ -6,7 +6,6 @@ lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.defa
     capabilities = capabilities,
 })
 
-require("lspsaga").init_lsp_saga()
 
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")

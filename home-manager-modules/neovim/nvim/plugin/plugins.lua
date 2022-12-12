@@ -42,7 +42,6 @@ return require("packer").startup(function(use)
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-path")
     use("hrsh7th/nvim-cmp")
-    use { "glepnir/lspsaga.nvim", branch = "main" }
     use("onsails/lspkind.nvim")
 
     use("l3mon4d3/luasnip")
