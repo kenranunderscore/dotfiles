@@ -35,6 +35,10 @@ in {
     interfaces.wlp4s0.useDHCP = true;
     hostName = "zangief";
     networkmanager.enable = true;
+    firewall = {
+      allowedTCPPorts = [ 25565 ];
+      allowedUDPPorts = [ 25565 ];
+    };
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
