@@ -35,7 +35,10 @@ return require("packer").startup(function(use)
     use("ibhagwan/fzf-lua")
 
     use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
+    use("lewis6991/gitsigns.nvim")
+
     use("kylechui/nvim-surround")
+
     use("editorconfig/editorconfig-vim")
 
     use("neovim/nvim-lspconfig")
