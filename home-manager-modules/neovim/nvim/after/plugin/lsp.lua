@@ -6,6 +6,21 @@ lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.defa
     capabilities = capabilities,
 })
 
+-- Perform 'zz' after the actual LSP action.
+local function add_zz_after_handler(handler_name)
+    local handler = vim.lsp.handlers[handler_name]
+    vim.lsp.handlers[handler_name] = vim.lsp.with(function(...)
+        handler(...)
+        vim.cmd("norm! zz")
+    end, {})
+end
+
+add_zz_after_handler("textDocument/definition")
+add_zz_after_handler("textDocument/declaration")
+add_zz_after_handler("textDocument/typeDefinition")
+add_zz_after_handler("textDocument/implementation")
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -15,8 +30,14 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set("n", "<leader>ln", vim.diagnostic.goto_next, bufopts)
-    vim.keymap.set("n", "<leader>lp", vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set("n", "<leader>ln", function()
+        vim.diagnostic.goto_next()
+        vim.cmd("norm! zz")
+    end, bufopts)
+    vim.keymap.set("n", "<leader>lp", function()
+        vim.diagnostic.goto_prev()
+        vim.cmd("norm! zz")
+    end, bufopts)
     vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, bufopts)
     vim.keymap.set("n", "<leader>lw", vim.lsp.buf.workspace_symbol, bufopts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
