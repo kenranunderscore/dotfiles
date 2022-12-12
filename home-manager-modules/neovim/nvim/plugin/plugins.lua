@@ -27,6 +27,7 @@ return require("packer").startup(function(use)
     use("bluz71/vim-moonfly-colors")
     use("rockerboo/boo-colorscheme-nvim")
     use("tiagovla/tokyodark.nvim")
+
     use("nvim-treesitter/nvim-treesitter")
 
     use("kyazdani42/nvim-web-devicons")
@@ -58,6 +59,8 @@ return require("packer").startup(function(use)
 
     use("tpope/vim-repeat")
     use("ggandor/leap.nvim")
+
+    use("vmchale/dhall-vim")
 
     if packer_bootstrap then
         require("packer").sync()
