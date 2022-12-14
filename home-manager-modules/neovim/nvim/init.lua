@@ -40,3 +40,8 @@ opt.exrc = true
 -- Show some special characters, like carriage returns, tabs etc.
 opt.list = true
 opt.listchars = "tab:» ,nbsp:+,eol:⏎"
+
+-- Load the plugins
+-- NOTE: can I solve the bootstrapping problem with aniseed?  Maybe shipping
+-- aniseed with neovim via nix is an option.
+require("kenran.plugins")
