@@ -65,6 +65,7 @@ return require("packer").startup(function(use)
     -- utils
     use("tpope/vim-repeat")
     use("tpope/vim-unimpaired")
+    use("tpope/vim-vinegar")
 
     -- clever jumping/sniping with s/S
     use("ggandor/leap.nvim")
