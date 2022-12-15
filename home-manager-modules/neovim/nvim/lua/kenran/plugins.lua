@@ -26,8 +26,6 @@ return require("packer").startup(function(use)
     use("nvim-lua/plenary.nvim")
 
     -- colorschemes
-    use("bluz71/vim-moonfly-colors")
-    use("rockerboo/boo-colorscheme-nvim")
     use("tiagovla/tokyodark.nvim")
 
     use("nvim-treesitter/nvim-treesitter")
