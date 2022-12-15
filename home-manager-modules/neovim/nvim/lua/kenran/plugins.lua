@@ -1,16 +1,3 @@
-local function ensure_packer()
-    local fn = vim.fn
-    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
-        vim.cmd("packadd packer.nvim")
-        return true
-    end
-    return false
-end
-
-local packer_bootstrap = ensure_packer()
-
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -18,59 +5,67 @@ vim.cmd([[
   augroup end
 ]])
 
-return require("packer").startup(function(use)
-    use("wbthomason/packer.nvim")
+local packer = require("packer")
+local use = packer.use
 
-    use("lewis6991/impatient.nvim")
+packer.reset()
+packer.init {
+    -- FIXME: loading of snapshots doesn't really work yet; also don't know the
+    -- workflow yet, as the interactive commands still need an argument, which
+    -- I'd like to be taken from these configured value automatically. maybe
+    -- have to write my own Lua function
+    snapshot_path = "$HOME/.config/nvim",
+    snapshot = "packer.lock",
+    autoremove = true,
+}
 
-    use("nvim-lua/plenary.nvim")
+use("wbthomason/packer.nvim")
 
-    -- colorschemes
-    use("tiagovla/tokyodark.nvim")
+use("lewis6991/impatient.nvim")
 
-    use("nvim-treesitter/nvim-treesitter")
+use("nvim-lua/plenary.nvim")
 
-    use("kyazdani42/nvim-web-devicons")
+-- colorschemes
+use("tiagovla/tokyodark.nvim")
 
-    use("ibhagwan/fzf-lua")
+use("nvim-treesitter/nvim-treesitter")
 
-    use("tpope/vim-fugitive")
-    use("lewis6991/gitsigns.nvim")
+use("kyazdani42/nvim-web-devicons")
 
-    use("kylechui/nvim-surround")
+use("ibhagwan/fzf-lua")
 
-    use("editorconfig/editorconfig-vim")
+use("tpope/vim-fugitive")
+use("lewis6991/gitsigns.nvim")
 
-    use("neovim/nvim-lspconfig")
-    use("hrsh7th/cmp-nvim-lsp")
-    use("hrsh7th/cmp-buffer")
-    use("hrsh7th/cmp-path")
-    use("hrsh7th/nvim-cmp")
-    use("onsails/lspkind.nvim")
+use("kylechui/nvim-surround")
 
-    use("l3mon4d3/luasnip")
-    use("saadparwaiz1/cmp_luasnip")
+use("editorconfig/editorconfig-vim")
 
-    use("nvim-lualine/lualine.nvim")
+use("neovim/nvim-lspconfig")
+use("hrsh7th/cmp-nvim-lsp")
+use("hrsh7th/cmp-buffer")
+use("hrsh7th/cmp-path")
+use("hrsh7th/nvim-cmp")
+use("onsails/lspkind.nvim")
 
-    use("numtostr/comment.nvim")
+use("l3mon4d3/luasnip")
+use("saadparwaiz1/cmp_luasnip")
 
-    -- lispy languages
-    use("Olical/conjure")
-    use("Olical/aniseed")
-    use("gpanders/nvim-parinfer")
+use("nvim-lualine/lualine.nvim")
 
-    -- utils
-    use("tpope/vim-repeat")
-    use("tpope/vim-unimpaired")
-    use("tpope/vim-vinegar")
+use("numtostr/comment.nvim")
 
-    -- clever jumping/sniping with s/S
-    use("ggandor/leap.nvim")
+-- lispy languages
+use("Olical/conjure")
+use("Olical/aniseed")
+use("gpanders/nvim-parinfer")
 
-    use("vmchale/dhall-vim")
+-- utils
+use("tpope/vim-repeat")
+use("tpope/vim-unimpaired")
+use("tpope/vim-vinegar")
 
-    if packer_bootstrap then
-        require("packer").sync()
-    end
-end)
+-- clever jumping/sniping with s/S
+use("ggandor/leap.nvim")
+
+use("vmchale/dhall-vim")
