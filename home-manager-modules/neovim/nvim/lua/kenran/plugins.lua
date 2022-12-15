@@ -21,51 +21,56 @@ packer.init {
 
 use("wbthomason/packer.nvim")
 
+-- speed up the startup of neovim
 use("lewis6991/impatient.nvim")
 
+-- used in almost all Lua plugins
 use("nvim-lua/plenary.nvim")
 
 -- colorschemes
 use("tiagovla/tokyodark.nvim")
 
-use("nvim-treesitter/nvim-treesitter")
+-- general utils/QoL
+use("tpope/vim-repeat")
+use("tpope/vim-unimpaired")
+use("tpope/vim-vinegar")
+use("kylechui/nvim-surround")
+use("numtostr/comment.nvim")
 
-use("kyazdani42/nvim-web-devicons")
-
+-- fuzzy search interface via fzf, like in the shell
 use("ibhagwan/fzf-lua")
 
+-- git integration
 use("tpope/vim-fugitive")
 use("lewis6991/gitsigns.nvim")
 
-use("kylechui/nvim-surround")
+-- cool snippets, with completion
+use("l3mon4d3/luasnip")
+use("saadparwaiz1/cmp_luasnip")
 
+-- working in projects that use EditorConfig
 use("editorconfig/editorconfig-vim")
 
+-- LSP stuff, autocompletion, treesitter
 use("neovim/nvim-lspconfig")
 use("hrsh7th/cmp-nvim-lsp")
 use("hrsh7th/cmp-buffer")
 use("hrsh7th/cmp-path")
 use("hrsh7th/nvim-cmp")
 use("onsails/lspkind.nvim")
+use("nvim-treesitter/nvim-treesitter")
+use("kyazdani42/nvim-web-devicons")
 
-use("l3mon4d3/luasnip")
-use("saadparwaiz1/cmp_luasnip")
-
+-- status line
 use("nvim-lualine/lualine.nvim")
 
-use("numtostr/comment.nvim")
+-- clever jumping/sniping with s/S
+use("ggandor/leap.nvim")
+
+-- Dhall
+use("vmchale/dhall-vim")
 
 -- lispy languages
 use("Olical/conjure")
 use("Olical/aniseed")
 use("gpanders/nvim-parinfer")
-
--- utils
-use("tpope/vim-repeat")
-use("tpope/vim-unimpaired")
-use("tpope/vim-vinegar")
-
--- clever jumping/sniping with s/S
-use("ggandor/leap.nvim")
-
-use("vmchale/dhall-vim")
