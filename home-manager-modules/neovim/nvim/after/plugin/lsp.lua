@@ -86,3 +86,7 @@ lspconfig.hls.setup {
 lspconfig.clojure_lsp.setup {
     on_attach = on_attach,
 }
+
+lspconfig.erlangls.setup {
+    on_attach = on_attach,
+}
