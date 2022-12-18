@@ -1,7 +1,7 @@
 {
   username = "kenran";
   font = {
-    name = "Julia Mono";
-    size = 16;
+    name = "Iosevka";
+    size = 18;
   };
 }
