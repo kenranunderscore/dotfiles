@@ -34,7 +34,7 @@ opt.signcolumn = "yes"
 
 opt.completeopt = "menu,menuone,noselect"
 
-vim.g.autoformat = 1
+vim.g.autoformat = 0
 
 opt.exrc = true
 
