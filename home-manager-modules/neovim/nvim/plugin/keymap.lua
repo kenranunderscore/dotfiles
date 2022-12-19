@@ -24,3 +24,6 @@ vim.keymap.set("n", "<C-w><C-d>", "<C-w>q")
 
 -- format the whole file
 vim.keymap.set({ "n", "v" }, "<leader>bf", "gggqG")
+
+-- heresy: alternatively save with C-x C-s
+vim.keymap.set({ "n", "v" }, "<C-x><C-s>", "<cmd>w<cr>")
