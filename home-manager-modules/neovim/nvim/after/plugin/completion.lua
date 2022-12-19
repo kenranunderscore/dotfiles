@@ -10,9 +10,6 @@ local lspkind = require("lspkind")
 local border = "single"
 
 cmp.setup {
-    completion = {
-        keyword_length = 3,
-    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
