@@ -36,6 +36,7 @@ use("tpope/vim-unimpaired")
 use("tpope/vim-vinegar")
 use("kylechui/nvim-surround")
 use("numtostr/comment.nvim")
+use("lukas-reineke/indent-blankline.nvim")
 
 -- fuzzy search interface via fzf, like in the shell
 use("ibhagwan/fzf-lua")
