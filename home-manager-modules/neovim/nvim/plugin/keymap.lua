@@ -21,3 +21,6 @@ vim.keymap.set("n", "<esc>", "<cmd>noh<cr>")
 -- windows
 vim.keymap.set("n", "<C-l>", "<C-w><C-w>")
 vim.keymap.set("n", "<C-w><C-d>", "<C-w>q")
+
+-- format the whole file
+vim.keymap.set({ "n", "v" }, "<leader>bf", "gggqG")
