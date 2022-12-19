@@ -8,6 +8,7 @@ end
 
 -- SPC as leader key
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 local opt = vim.opt
 
