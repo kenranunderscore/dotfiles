@@ -12,6 +12,5 @@
 - `vim-eunuch`
 - `vim-unimpaired`
 - `vim-vinegar`?
-- `vim-sneak`, snipe??
-- whitespace cleanup?
-- more snippets!! they're awesome
+- port naga to treesitter-enabled neovim
+- keybindings for quickfix navigation
