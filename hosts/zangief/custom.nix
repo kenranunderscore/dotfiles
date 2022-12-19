@@ -2,6 +2,6 @@
   username = "johannes";
   font = rec {
     name = "JetBrains Mono";
-    size = 17;
+    size = 16;
   };
 }
