@@ -1,10 +1,13 @@
 -- Plugin management
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerInstall
-  augroup end
-]])
+vim.api.nvim_create_augroup("packer_user_config", {})
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "plugins.lua",
+    group = "packer_user_config",
+    callback = function(args)
+        vim.cmd("source " .. args.file)
+        vim.cmd("PackerInstall")
+    end
+})
 
 local packer = require("packer")
 local use = packer.use
