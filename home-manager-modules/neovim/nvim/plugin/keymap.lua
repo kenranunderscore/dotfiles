@@ -27,3 +27,4 @@ vim.keymap.set({ "n", "v" }, "<leader>bf", "gggqG")
 
 -- heresy: alternatively save with C-x C-s
 vim.keymap.set({ "n", "v" }, "<C-x><C-s>", "<cmd>w<cr>")
+vim.keymap.set("i", "<C-x><C-s>", "<esc><cmd>w<cr>")
