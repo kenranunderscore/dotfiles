@@ -69,6 +69,7 @@ in {
         curl
         fd
         feh
+        fennel
         file
         gnumake
         graphviz
