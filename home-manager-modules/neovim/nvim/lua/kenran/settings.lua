@@ -37,3 +37,11 @@ opt.exrc = true
 -- Show some special characters, like carriage returns, tabs etc.
 opt.list = true
 opt.listchars = "tab:» ,nbsp:+,eol:⏎"
+
+-- Don't continue comments when inserting new lines with `o` (hacky, but seems
+-- like the only way, from a discussion in Matrix)
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        vim.opt.formatoptions:remove("o")
+    end,
+})
