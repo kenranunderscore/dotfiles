@@ -10,7 +10,7 @@ return {
     purple = "#cc59d2",
     orange = "#ff9000",
     comment = "#707370",
-    comment_light = "#099590",
+    comment_light = "#808580",
     comment_dark = "#353835",
     docstring = "#698b22",
     gray = "#aabaaa",
