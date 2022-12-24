@@ -4,7 +4,7 @@ function navigate_to_project \
                      ~/ag \
                      ~/tmpdev \
                      ~/projects/forks
-    set fd fd --type d --max-depth 1 . --color never
+    set fd fd --type d --max-depth 1 --color never .
     set fzf fzf --prompt "Navigate to project: "
     
     for i in (seq (count $project_dirs))
@@ -12,7 +12,7 @@ function navigate_to_project \
     end
     set -a projects ~/dotfiles
     
-    set target (echo -e (string join "\n" $projects) | $fzf)
+    set target $(echo -e (string join "\n" $projects) | $fzf)
     if test -n "$target"
         cd $target
     end
