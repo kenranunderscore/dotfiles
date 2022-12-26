@@ -30,22 +30,8 @@
           notification = false;
         }
         {
-          command = "firefox";
-          notification = false;
-        }
-        {
           # Workaround: otherwise i3 module will be empty at first
           command = "systemctl --user restart polybar";
-          notification = false;
-        }
-        {
-          command = "i3-msg 'workspace 1:main; exec kitty'";
-          notification = false;
-        }
-        {
-          command = ''
-            i3-msg "workspace 5:chat; exec emacs -f start-irc"
-          '';
           notification = false;
         }
         {
