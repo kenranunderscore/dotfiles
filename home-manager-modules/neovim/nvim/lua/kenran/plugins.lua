@@ -46,6 +46,7 @@ use("lukas-reineke/indent-blankline.nvim")
 -- Fuzzy search interface
 use("nvim-telescope/telescope.nvim")
 use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+use("nvim-telescope/telescope-ui-select.nvim")
 
 -- Git integration
 use("tpope/vim-fugitive")

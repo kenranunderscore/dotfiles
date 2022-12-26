@@ -26,10 +26,16 @@ telescope.setup {
             override_file_sorter = true,
             case_mode = "smart_case",
         },
+        ["ui-select"] = {
+            require("telescope.themes").get_cursor {
+                borderchars = borderchars,
+            },
+        },
     },
 }
 
 telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
 
 local function git_files_with_fallback()
     vim.fn.system("git rev-parse --is-inside-work-tree")
