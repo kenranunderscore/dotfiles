@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     callback = function(args)
         vim.cmd("source " .. args.file)
         vim.cmd("PackerInstall")
-    end
+    end,
 })
 
 local packer = require("packer")
@@ -43,8 +43,9 @@ use("kylechui/nvim-surround")
 use("numtostr/comment.nvim")
 use("lukas-reineke/indent-blankline.nvim")
 
--- Fuzzy search interface via fzf, like in the shell
-use("ibhagwan/fzf-lua")
+-- Fuzzy search interface
+use("nvim-telescope/telescope.nvim")
+use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
 -- Git integration
 use("tpope/vim-fugitive")
