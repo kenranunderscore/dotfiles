@@ -25,7 +25,7 @@ in {
 
       packages = let
         targetEmacs = if cfg.emacsVersion == "git" then
-          pkgs.emacsGitNativeComp
+          pkgs.emacsGit
         else
           pkgs.emacs;
         emacsWithPackages =

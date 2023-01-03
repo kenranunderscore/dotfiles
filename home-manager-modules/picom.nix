@@ -28,7 +28,6 @@ in {
         ''100:class_i = "Alacritty"''
       ];
       backend = "glx";
-      experimentalBackends = true;
       fade = false;
       fadeDelta = 5;
       vSync = true;
