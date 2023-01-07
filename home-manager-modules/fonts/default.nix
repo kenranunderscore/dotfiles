@@ -46,6 +46,7 @@ in {
         noto-fonts
         roboto-mono
         source-code-pro
+        victor-mono
       ]);
     };
   };
