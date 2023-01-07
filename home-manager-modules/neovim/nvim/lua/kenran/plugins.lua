@@ -18,7 +18,7 @@ packer.init {
     -- workflow yet, as the interactive commands still need an argument, which
     -- I'd like to be taken from these configured value automatically. maybe
     -- have to write my own Lua function
-    snapshot_path = "$HOME/.config/nvim",
+    snapshot_path = vim.fn.stdpath("config"),
     snapshot = "packer.lock",
     autoremove = true,
 }
