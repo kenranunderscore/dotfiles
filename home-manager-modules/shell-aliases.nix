@@ -16,6 +16,8 @@
   e = "emacsclient --alternate-editor '' --create-frame --no-wait";
   # Attach to existing emacs frame
   ec = "emacsclient --alternate-editor '' --no-wait";
+  # Open a new emacsclient in the current terminal window
+  et = "emacsclient --alternate-editor '' --tty";
   # Kill the emacs daemon
   ekill = "emacsclient --eval '(kill-emacs)'";
   # Try using emacs/magit as replacement for CLI git
