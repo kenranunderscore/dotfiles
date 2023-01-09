@@ -811,15 +811,6 @@ this brings with it, but I'm not writing enough with =org=
   (evil-org-agenda-set-keys))
 #+end_src
 
-*** Highlight vim marks
-
-#+begin_src emacs-lisp
-(use-package evil-visual-mark-mode
-  :defer t
-  :after evil
-  :init (evil-visual-mark-mode))
-#+end_src
-
 ** Keybindings
 
 Create nice custom mappings for normal mode (and others) that are
