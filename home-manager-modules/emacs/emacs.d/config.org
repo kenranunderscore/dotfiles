@@ -773,24 +773,24 @@ Selected regions can be surround with e.g. =S`=.
   (global-evil-surround-mode))
 #+end_src
 
-*** 2-character searching in one line
+*** 2-character searching/jumping
+**** =avy=
 
-[[https://github.com/hlissner/evil-snipe][Henrik Lissner's evil-snipe]] replaces the default vim =s= binding by a
-2-character incremental forward/backward search.  In addition,
-=evil-snipe-override-mode= makes the =f=, =F=, =t=, and =T= searches repeatable
-by pressing the respective key again to jump by one match.  It also
-adds highlighting to those motions.
-
-It's also possible to configure/increase the scope of these searches,
-but for the moment I'm content with just using it on one line.
+After using [[https://github.com/ggandor/leap.nvim][leap.nvim]] in =neovim= for a while now, I really prefer this
+way of jumping, as I can get to the correct candidate faster (while
+losing out on =;= and =,=, but maybe it's possible to get both).  So let's
+give [[https://github.com/abo-abo/avy][avy]] a try.
 
 #+begin_src emacs-lisp
-(use-package evil-snipe
+(use-package avy
   :after evil
-  :diminish evil-snipe-local-mode
   :config
-  (evil-snipe-mode 1)
-  (evil-snipe-override-mode 1))
+  (setq avy-timeout-seconds 0.3)
+  (general-define-key
+   :states 'normal
+   "s" #'evil-avy-goto-char-2-below
+   "S" #'evil-avy-goto-char-2-above
+   "g s" #'evil-avy-goto-char-timer))
 #+end_src
 
 *** Evilify =org=
