@@ -799,7 +799,7 @@ give [[https://github.com/abo-abo/avy][avy]] a try.
 it adds some keybindings and text objects for =org= files as well.
 
 TODO: It's surely worth spending some more time to find out what else
-this brings with it, but I'm not writing enough with =org=
+this brings with it, but I'm not writing enough with =org=.
 
 #+begin_src emacs-lisp
 (use-package evil-org
@@ -809,6 +809,29 @@ this brings with it, but I'm not writing enough with =org=
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+#+end_src
+
+*** Evilify other packages
+
+I have a love/hate relationship with [[https://github.com/emacs-evil/evil-collection][evil-collection]]: on one hand, it
+gives all the awesome Emacs packages a more unified and vimish
+interface, thus removing the need for a mental switch between, as an
+example, using =C-n= or =C-p= for navigation instead of =j= and =k=, but on
+the other hand obscuring some default Emacs keybindings of those
+packages, effectively hiding some "default" functionality.
+
+In the past I decided to move away from this full evilified Emacs
+experience, and follow the doctrine "vim is for editing, everything
+else can be used Emacs style".  But it didn't really feel great either
+due to the above-mentioned context switches all the time.  So after
+spending some time in =neovim= (where everything is "evil" of course)
+but missing my precious Emacs, I now give =evil-collection= another try.
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 #+end_src
 
 ** Keybindings
