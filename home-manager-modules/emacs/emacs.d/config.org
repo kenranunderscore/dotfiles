@@ -1083,7 +1083,8 @@ The built-in =electric-pair-mode= does just that (by default).
 (use-package emacs
   :straight (:type built-in)
   :init
-  (electric-pair-mode)
+  ;; disabled for now
+  (electric-pair-mode -1)
   :config
   (setq electric-pair-open-newline-between-pairs t))
 #+end_src
