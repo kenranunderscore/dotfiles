@@ -484,6 +484,53 @@ Emacs packages.
   :defer t)
 #+end_src
 
+** Modeline
+
+I can live with the default mode line just fine, but over time (and
+from using a neovim mode line) I have learned two things:
+
+- I don't care about the shown modes anymore, especially since using
+  =diminish= hides most of the active modes anyway.  If I really need to
+  check whether some mode is enabled there's always =C-h m=.
+- I like having a visual, i.e. colorful and very visible, indicator of
+  which =evil= state/mode I'm in.
+
+  So let's try to fiddle with the default mode line to make it work
+  the way I like.
+
+#+begin_src emacs-lisp
+(setq mode-line-percent-position nil)
+
+(setq-default mode-line-format
+              '("%e"
+                (:eval
+                 (let ((fg (face-attribute 'default :foreground))
+                       (bg (face-attribute 'default :background))
+                       (error-fg (face-attribute 'error :foreground)))
+                  (cond
+                   ((eq evil-state 'insert)
+                    (propertize " INSERT " 'face `(:foreground ,bg :background ,error-fg)))
+                   ((eq evil-state 'normal)
+                    (propertize " NORMAL " 'face `(:foreground ,bg :background ,fg)))
+                   ((eq evil-state 'motion)
+                    (propertize " MOTION " 'face `(:foreground ,bg :background ,fg)))
+                   ((eq evil-state 'visual)
+                    (propertize " VISUAL "
+                                'face
+                                `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground))))
+                   ((eq evil-state 'emacs)
+                    (propertize " EMACS "
+                                'face
+                                `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground))))
+                   (t "        "))))
+                "   "
+                mode-line-buffer-identification
+                "   "
+                mode-line-position
+                "   "
+                mode-line-modes))
+#+end_src
+
 * Basic options
 ** Startup
 
@@ -729,7 +776,8 @@ versus =C-j= and =C-k=.
    (evil-want-Y-yank-to-eol t)
    (evil-undo-system 'undo-redo)
    (evil-symbol-word-search t)
-   (evil-jumps-cross-buffers nil))
+   (evil-jumps-cross-buffers nil)
+   (evil-mode-line-format nil))
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
