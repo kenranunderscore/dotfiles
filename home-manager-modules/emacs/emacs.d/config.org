@@ -1999,7 +1999,9 @@ and battle-tested package, so my hopes are high.
                   "#nim"
                   "#zig"
                   "#crawl"
-                  "#guix")))
+                  "#guix"
+                  "#commonlisp"
+                  "#lisp")))
   (setq erc-track-exclude
         '("#org-mode" "#crawl" "#nim" "#zig"))
   (setq erc-track-exclude-types '("333" "353"))
