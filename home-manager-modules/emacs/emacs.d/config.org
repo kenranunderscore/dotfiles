@@ -722,20 +722,6 @@ versus =C-j= and =C-k=.
 (use-package evil
   :config
   (evil-mode 1)
-  (setq evil-default-state 'emacs)
-  (setq evil-emacs-state-modes nil)
-  (setq evil-insert-state-modes nil)
-  (setq evil-motion-state-modes nil)
-  (setq evil-normal-state-modes
-        '(text-mode
-          prog-mode
-          fundamental-mode
-          css-mode
-          conf-mode
-          TeX-mode
-          LaTeX-mode
-          diff-mode
-          haskell-cabal-mode))
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
