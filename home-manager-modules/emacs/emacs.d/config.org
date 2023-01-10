@@ -231,12 +231,6 @@ respective font.
         (fantasque-sans-mono
          . (:family
             "Fantasque Sans Mono"))
-        (code-new-roman
-         . (:family
-            "CodeNewRoman Nerd Font Mono"))
-        (gohu
-         . (:family
-            "GohuFont Nerd Font Mono"))
         (lucida-console
          . (:family
             "Lucida Console"
