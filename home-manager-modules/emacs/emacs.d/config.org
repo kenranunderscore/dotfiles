@@ -2615,38 +2615,28 @@ Like its readme proposes it's also possible to reuse the
                (cons "/.dockerignore\\'" 'gitignore-mode)))
 #+end_src
 
-** LISP editing with Lispy and Lispyville
+** LISP editing
+
+Time to give =parinfer= another try.  =lispy= / =lispyville= take a while to really
+grok, while =parinfer= should theoretically work more nicely with vim
+motions by default.
 
 #+begin_src emacs-lisp
-(use-package lispy
-  :hook
-  ((emacs-lisp-mode
-    lisp-mode
-    clojure-mode
-    clojurec-mode
-    clojurescript-mode
-    common-lisp-mode
-    racket-mode
-    racket-repl-mode
-    sly-mrepl-mode)
-   . lispy-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package lispyville
-  :hook
-  (lispy-mode . lispyville-mode)
+(use-package parinfer-rust-mode
+  :hook ((emacs-lisp-mode
+          clojure-mode
+          scheme-mode
+          racket-mode
+          common-lisp-mode
+          hy-mode) . parinfer-rust-mode)
   :config
-  (with-eval-after-load 'lispyville
-    (lispyville-set-key-theme
-     '(operators
-       c-w
-       c-u
-       prettify
-       slurp/barf-cp
-       text-objects
-       additional
-       additional-insert))))
+  (setq parinfer-rust-auto-download t)
+  (with-local-leader
+    :states '(normal visual)
+    :keymaps 'parinfer-rust-mode-map
+    "p" '(:ignore t :which-key "parinfer")
+    "p m" '(parinfer-rust-switch-mode :which-key "switch mode")
+    "p t" '(parinfer-rust-toggle-disable :which-key "toggle")))
 #+end_src
 
 ** Highlight "todo", "fixme" and other keywords everywhere.
