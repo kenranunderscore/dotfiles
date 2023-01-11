@@ -2002,7 +2002,7 @@ guess is that they probably go well together.
   :init (popper-mode))
 #+end_src
 
-*** TODO What kinds of popups to try and tame? [0/6]
+*** TODO What kinds of popups to try and tame? [0/7]
 - [ ] REPLs
 - [ ] =helpful=
 - [ ] =apropos=
