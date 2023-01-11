@@ -501,28 +501,34 @@ from using a neovim mode line) I have learned two things:
 #+begin_src emacs-lisp
 (setq mode-line-percent-position nil)
 
+(defcustom kenran/evil-state-mode-line-format
+  '(:eval
+    (let ((fg (face-attribute 'default :foreground))
+          (bg (face-attribute 'default :background))
+          (error-fg (face-attribute 'error :foreground)))
+     (cond
+      ((eq evil-state 'insert)
+       (propertize " INSERT " 'face `(:foreground ,bg :background ,error-fg)))
+      ((eq evil-state 'normal)
+       (propertize " NORMAL " 'face `(:foreground ,bg :background ,fg)))
+      ((eq evil-state 'motion)
+       (propertize " MOTION " 'face `(:foreground ,bg :background ,fg)))
+      ((eq evil-state 'visual)
+       (propertize " VISUAL "
+                   'face
+                   `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground))))
+      ((eq evil-state 'emacs)
+       (propertize " EMACS "
+                   'face
+                   `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground))))
+      (t "        "))))
+  "Specifies how to display the current `evil-state' in the mode
+line."
+  :risky t)
+
 (setq-default mode-line-format
               '("%e"
-                (:eval
-                 (let ((fg (face-attribute 'default :foreground))
-                       (bg (face-attribute 'default :background))
-                       (error-fg (face-attribute 'error :foreground)))
-                  (cond
-                   ((eq evil-state 'insert)
-                    (propertize " INSERT " 'face `(:foreground ,bg :background ,error-fg)))
-                   ((eq evil-state 'normal)
-                    (propertize " NORMAL " 'face `(:foreground ,bg :background ,fg)))
-                   ((eq evil-state 'motion)
-                    (propertize " MOTION " 'face `(:foreground ,bg :background ,fg)))
-                   ((eq evil-state 'visual)
-                    (propertize " VISUAL "
-                                'face
-                                `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground))))
-                   ((eq evil-state 'emacs)
-                    (propertize " EMACS "
-                                'face
-                                `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground))))
-                   (t "        "))))
+                kenran/evil-state-mode-line-format
                 "   "
                 mode-line-buffer-identification
                 "   "
