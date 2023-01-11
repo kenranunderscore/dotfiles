@@ -1,7 +1,7 @@
 #+TITLE: My GNU Emacs configuration
 #+AUTHOR: Johannes Maier
 #+EMAIL: johannes.maier@mailbox.org
-#+STARTUP: show2levels indent
+#+STARTUP: showall
 
 * Package management
 
