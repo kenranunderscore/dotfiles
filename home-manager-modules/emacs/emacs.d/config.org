@@ -554,8 +554,10 @@ line."
   :risky t)
 
 (setq-default mode-line-format
-              '("%e"
+              '(""
                 kenran/evil-state-mode-line-format
+                (flymake-mode ("  " flymake-mode-line-counters))
+                (compilation-in-progress (:propertize "  [Compiling...]" (:foreground )))
                 "  "
                 kenran/major-mode-mode-line-format
                 "  "
@@ -1624,7 +1626,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
 (use-package flymake
   :straight (:type built-in)
   :config
-  (setq flymake-suppress-zero-counters t)
+  (setq flymake-suppress-zero-counters nil)
   (setq flymake-fringe-indicator-position 'left-fringe)
   (setq flymake-no-changes-timeout 1.0)
   (setq flymake-mode-line-lighter ""))
