@@ -10,6 +10,7 @@ auto-save-list/
 elpa/
 eshell/
 meghanada/
+parinfer-rust/
 racket-mode/
 transient/
 custom.el
