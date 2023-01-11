@@ -556,12 +556,12 @@ line."
 (setq-default mode-line-format
               '("%e"
                 kenran/evil-state-mode-line-format
-                "   "
+                "  "
+                ("(" (:eval (symbol-name major-mode)) ")")
+                "  "
                 mode-line-buffer-identification
-                "   "
-                mode-line-position
-                "   "
-                mode-line-modes))
+                "  "
+                mode-line-position))
 #+end_src
 
 * Basic options
