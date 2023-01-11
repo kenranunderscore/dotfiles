@@ -32,10 +32,7 @@ The script below is taken right from =straight.el='s readme.
   (load bootstrap-file nil 'nomessage))
 #+end_src
 
-Install [[https://github.com/jwiegley/use-package][use-package]].  The =nixpkgs= version of Emacs on my systems
-already contains most packages, including =use-package= itself, but when
-self-compiling Emacs or on Windows I rely on =use-package= for the
-installation of most/all the packages.
+Install [[https://github.com/jwiegley/use-package][use-package]]; it integrates well with =straight=.
 
 #+begin_src emacs-lisp
 (straight-use-package 'use-package)
