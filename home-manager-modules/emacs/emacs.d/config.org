@@ -548,11 +548,16 @@ the `mode-line-inactive' face otherwise."
 line."
   :risky t)
 
+(defcustom kenran/major-mode-mode-line-format
+  '("(" (:eval (symbol-name major-mode)) ")")
+  "How to display the active major mode in the mode line."
+  :risky t)
+
 (setq-default mode-line-format
               '("%e"
                 kenran/evil-state-mode-line-format
                 "  "
-                ("(" (:eval (symbol-name major-mode)) ")")
+                kenran/major-mode-mode-line-format
                 "  "
                 mode-line-buffer-identification
                 "  "
