@@ -304,7 +304,7 @@ applies the attributes of its value in =kenran/font-alist=.
          ;; `variable-pitch-mode'
          (org-height (if (bound-and-true-p buffer-face-mode)
                          (or (plist-get attrs :org-height) 0.9)
-                       height))
+                       1.0))
          (weight (or (plist-get attrs :weight) 'regular)))
     (setq kenran/current-font font)
     (setq kenran/default-font-height height)
