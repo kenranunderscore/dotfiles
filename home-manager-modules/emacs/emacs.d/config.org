@@ -553,14 +553,13 @@ line."
 (setq-default mode-line-format
               '(""
                 kenran/evil-state-mode-line-format
-                (flymake-mode ("  " flymake-mode-line-counters))
-                (compilation-in-progress (:propertize "  [Compiling...]" (:foreground )))
-                "  "
-                kenran/major-mode-mode-line-format
-                "  "
-                mode-line-buffer-identification
-                "  "
-                mode-line-position))
+                (compilation-in-progress (:propertize "  [Compiling...]" (:foreground)))
+                (flymake-mode
+                 (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
+                          `("  " ,counters))))
+                ("  " kenran/major-mode-mode-line-format)
+                ("  " mode-line-buffer-identification)
+                ("  " mode-line-position)))
 #+end_src
 
 * Basic options
