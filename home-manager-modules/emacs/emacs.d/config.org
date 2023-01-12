@@ -550,15 +550,29 @@ line."
   "How to display the active major mode in the mode line."
   :risky t)
 
+(defcustom kenran/mode-line-buffer-format
+  '(compilation-in-progress
+     (:eval (propertize
+             "  [Compiling...]"
+             'face
+             (kenran/with-active-face compilation-mode-line-run))))
+  "How to display the name of the current buffer in the mode line."
+  :risky t)
+
+(defcustom kenran/mode-line-flymake-format
+  '(flymake-mode
+    (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
+             `("  " ,counters))))
+  "How to display the name of the current buffer in the mode line."
+  :risky t)
+
 (setq-default mode-line-format
               '(""
                 kenran/evil-state-mode-line-format
-                (compilation-in-progress (:propertize "  [Compiling...]" (:foreground)))
-                (flymake-mode
-                 (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
-                          `("  " ,counters))))
+                kenran/mode-line-flymake-format
+                kenran/mode-line-buffer-format
                 ("  " kenran/major-mode-mode-line-format)
-                ("  " mode-line-buffer-identification)
+                (:propertize "  %b" face mode-line-buffer-id)
                 ("  " mode-line-position)))
 #+end_src
 
