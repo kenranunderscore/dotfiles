@@ -2717,6 +2717,7 @@ motions by default.
           scheme-mode
           racket-mode
           common-lisp-mode
+          lisp-mode
           hy-mode) . parinfer-rust-mode)
   :config
   (setq parinfer-rust-auto-download t)
