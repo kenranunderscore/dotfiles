@@ -553,7 +553,7 @@ line."
 (defcustom kenran/mode-line-buffer-format
   '(compilation-in-progress
      (:eval (propertize
-             "  [Compiling...]"
+             "   [Compiling...]"
              'face
              (kenran/with-active-face compilation-mode-line-run))))
   "How to display the name of the current buffer in the mode line."
@@ -562,18 +562,22 @@ line."
 (defcustom kenran/mode-line-flymake-format
   '(flymake-mode
     (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
-             `("  " ,counters))))
+             `("   " ,counters))))
   "How to display the name of the current buffer in the mode line."
   :risky t)
+
+;; Slightly change the default left padding of the mode line indicator
+;; for the current line and column numbers
+(setq mode-line-position-column-line-format '("   (%c,%l)"))
 
 (setq-default mode-line-format
               '(""
                 kenran/evil-state-mode-line-format
                 kenran/mode-line-flymake-format
                 kenran/mode-line-buffer-format
-                ("  " kenran/major-mode-mode-line-format)
-                (:propertize "  %b" face mode-line-buffer-id)
-                ("  " mode-line-position)))
+                ("   " kenran/major-mode-mode-line-format)
+                (:propertize "   %b" face mode-line-buffer-id)
+                mode-line-position))
 #+end_src
 
 * Basic options
