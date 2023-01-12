@@ -2619,6 +2619,17 @@ current project."
     (modify-dir-local-variable mode variable value 'add-or-replace)))
 #+end_src
 
+Another thing I sometimes need is quickly navigate into my project
+directory, so why not write something to open =dired= there and then add
+this function to =project-prefix-map=?
+
+#+begin_src emacs-lisp
+(defun kenran/navigate-to-projects ()
+  "Open a `dired' buffer in my personal project directory."
+  (interactive)
+  (dired "~/projects"))
+#+end_src
+
 One tricky thing was making it possible to bind the keymap
 =project-prefix-map= to a key.  One needs to make it callable via =fset=.
 
@@ -2637,7 +2648,8 @@ One tricky thing was making it possible to bind the keymap
               ("t" . kenran/project-vterm)
               ("d" . project-dired)
               ("s" . consult-ripgrep)
-              ("D" . kenran/project-edit-dir-local-variable)))
+              ("D" . kenran/project-edit-dir-local-variable)
+              ("n" . kenran/navigate-to-projects)))
 
 (with-leader
   "p" '(project-prefix-map :which-key "project"))
