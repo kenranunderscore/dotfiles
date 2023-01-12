@@ -1406,7 +1406,7 @@ elements.  Also increase org header size."
   (kenran/inherit-fixed-pitch 'org-done)
   (kenran/inherit-fixed-pitch 'org-drawer)
   (kenran/inherit-fixed-pitch 'org-property-value)
-  (set-face-attribute 'org-document-title nil :height 1.4 :weight 'bold))
+  (kenran/inherit-fixed-pitch 'org-document-title))
 
 (add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
 #+end_src
