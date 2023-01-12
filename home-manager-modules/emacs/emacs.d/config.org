@@ -300,7 +300,11 @@ applies the attributes of its value in =kenran/font-alist=.
   (let* ((attrs (alist-get font kenran/font-alist))
          (family (plist-get attrs :family))
          (height (or (plist-get attrs :default-height) 160))
-         (org-height (or (plist-get attrs :org-height) 0.9))
+         ;; `buffer-face-mode' is enabled when calling
+         ;; `variable-pitch-mode'
+         (org-height (if (bound-and-true-p buffer-face-mode)
+                         (or (plist-get attrs :org-height) 0.9)
+                       height))
          (weight (or (plist-get attrs :weight) 'regular)))
     (setq kenran/current-font font)
     (setq kenran/default-font-height height)
