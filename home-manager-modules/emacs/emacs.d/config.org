@@ -496,8 +496,6 @@ from using a neovim mode line) I have learned two things:
   the way I like.
 
 #+begin_src emacs-lisp
-(setq mode-line-percent-position nil)
-
 (defgroup kenran/faces nil
   "A group for custom faces."
   :group 'faces)
@@ -566,18 +564,17 @@ line."
   "How to display the name of the current buffer in the mode line."
   :risky t)
 
-;; Slightly change the default left padding of the mode line indicator
-;; for the current line and column numbers
-(setq mode-line-position-column-line-format '("   (%c,%l)"))
-
-(setq-default mode-line-format
-              '(""
-                kenran/evil-state-mode-line-format
-                kenran/mode-line-flymake-format
-                kenran/mode-line-buffer-format
-                ("   " kenran/major-mode-mode-line-format)
-                (:propertize "   %b" face mode-line-buffer-id)
-                mode-line-position))
+(setq-default
+ mode-line-format
+ '(""
+   kenran/evil-state-mode-line-format
+   kenran/mode-line-flymake-format
+   kenran/mode-line-buffer-format
+   ("   " kenran/major-mode-mode-line-format)
+   (:propertize "   %b" face mode-line-buffer-id)
+   ;; Always show current line and column, without checking
+   ;; `column-number-mode' and `line-number-mode'
+   ("   (%c,%l)")))
 #+end_src
 
 * Basic options
@@ -682,12 +679,6 @@ is used.  It's enabled by default in all programming modes.
          (conf-mode . display-line-numbers-mode)
          (evil-insert-state-entry . kenran/switch-to-absolute-line-numbers)
          (evil-insert-state-exit . kenran/switch-to-hybrid-line-numbers)))
-#+end_src
-
-Show column numbers in the modeline.
-
-#+begin_src emacs-lisp
-(column-number-mode)
 #+end_src
 
 Toggle line numbers interactively.  I've tried simply binding
