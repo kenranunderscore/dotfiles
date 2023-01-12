@@ -2021,14 +2021,15 @@ guess is that they probably go well together.
 - [ ] Shell command results
 - [ ] LSP / =eglot=
 
-* IRC with ERC (WIP)
+* IRC with ERC
 
 I've been using [[https://weechat.org][weechat]] for IRC communication in the past.  And while
 my usage of IRC has decreased quite a bit due to a lot of things
 moving over to Discord, there are some channels and communities that
 have their sole online presence in IRC.  As with anything, it's worth
-trying whether just using Emacs might be preferable.  ERC is an old
-and battle-tested package, so my hopes are high.
+trying whether just using Emacs might be preferable.  So far my
+experience with ERC has been quite smooth and I don't regret it yet,
+so I've fully switched over.
 
 #+begin_src emacs-lisp
 (use-package erc
