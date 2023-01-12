@@ -189,7 +189,7 @@ respective font.
 (setq kenran/font-alist
       '((pragmata-pro
          . (:family
-            "Pragmata Pro Mono Liga"))
+            "Pragmata Pro Mono"))
         (iosevka
          . (:family
             "Iosevka"))
