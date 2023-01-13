@@ -88,8 +88,7 @@ file.  Use a separate file instead and load that one on startup.
   (load custom-file 'no-error))
 #+end_src
 
-A quick way to get to my =init.el= file.  FIXME: This should be changed
-when the switch to the literate config is complete.
+A quick way to jump to this file.
 
 #+begin_src emacs-lisp
 (defun kenran/open-init-file ()
