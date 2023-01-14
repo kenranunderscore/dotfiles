@@ -365,8 +365,8 @@ disables all other enabled themes."
           (completing-read
            "Theme: "
            (mapcar #'symbol-name
-                   (-difference (custom-available-themes)
-                                custom-enabled-themes))))))
+                   (seq-difference (custom-available-themes)
+                                   custom-enabled-themes))))))
   (progn
     (mapc #'disable-theme
           custom-enabled-themes)
