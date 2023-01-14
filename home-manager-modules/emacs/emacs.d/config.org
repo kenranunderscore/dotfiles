@@ -379,7 +379,7 @@ disables all other enabled themes."
       (kenran/set-evil-state-cursors t))))
 #+end_src
 
-When developing a theme, like I did with my custom one, it's handy to
+When developing a theme, like I did with =naga=, it's handy to
 be able to reload it on the fly.
 
 #+begin_src emacs-lisp
