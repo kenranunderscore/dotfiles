@@ -474,6 +474,17 @@ contrast, overall darker look, and beautiful accent colors.
   :defer t)
 #+end_src
 
+**** Danneskjold
+
+I've just discovered
+[[https://github.com/rails-to-cosmos/danneskjold-theme][danneskjold]] and wish to try it out for a little bit.  Its feel is very
+similar to =modus-vivendi= for me.  I especially love its =magit= theme.
+
+#+begin_src emacs-lisp
+(use-package danneskjold-theme
+  :defer t)
+#+end_src
+
 ** Render color names/codes with as their respective color
 
 It's an ELPA package, so no need/use to put it in the nix-managed
