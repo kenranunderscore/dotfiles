@@ -14,6 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.polybar = let
       myPolybar = pkgs.polybar.override {
+        i3Support = true;
         alsaSupport = true;
         githubSupport = true;
         pulseSupport = true;
