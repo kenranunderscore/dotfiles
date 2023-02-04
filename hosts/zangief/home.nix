@@ -10,6 +10,7 @@ in {
 
   modules = {
     rofi.enable = true;
+    neovim.enable = lib.mkForce false;
     i3 = {
       enable = true;
       workspaces = [
@@ -139,6 +140,7 @@ in {
       ];
       aliases = { p = "pull -u"; };
     };
+    vim.enable = lib.mkForce false;
   };
 
   services = {

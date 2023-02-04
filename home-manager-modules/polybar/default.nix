@@ -17,7 +17,6 @@ in {
         alsaSupport = true;
         githubSupport = true;
         pulseSupport = true;
-        i3GapsSupport = true;
       };
     in {
       enable = true;
