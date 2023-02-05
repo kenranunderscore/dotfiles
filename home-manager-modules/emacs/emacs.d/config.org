@@ -456,7 +456,8 @@ packages, as one might imagine.
 
 #+begin_src emacs-lisp
 (use-package doom-themes
-  :defer t)
+  :defer t
+  :disabled t)
 #+end_src
 
 **** Tomorrow
