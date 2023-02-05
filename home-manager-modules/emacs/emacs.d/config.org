@@ -1235,10 +1235,7 @@ extensions I want to use in which context precisely.
         '((file flat)
           (t reverse)))
   (setq vertico-multiform-commands
-        '((consult-grep buffer)
-          (consult-git-grep buffer)
-          (consult-ripgrep buffer)
-          (kenran/switch-theme grid reverse))))
+        '((kenran/switch-theme grid reverse))))
 #+end_src
 
 *** Remembering command history
