@@ -2278,6 +2278,7 @@ header.
 #+begin_src emacs-lisp
 (with-local-leader
   :states 'normal
+  :keymaps 'markdown-mode-map
   "t" '(:ignore t :which-key "table")
   "t a" '(markdown-table-align :which-key "align")
   "t t" '(markdown-table-transpose :which-key "transpose")
@@ -2489,6 +2490,19 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 #+begin_src emacs-lisp
 (use-package sly-asdf
   :defer t)
+#+end_src
+
+*** Keybindings
+
+No really necessary to bind this, but why not...
+
+#+begin_src emacs-lisp
+(with-local-leader
+  :states 'normal
+  :keymaps 'lisp-mode-map
+  "s" '(:ignore t :which-key "SLY")
+  "s s" 'sly
+  "s c" 'sly-connect)
 #+end_src
 
 ** Racket
