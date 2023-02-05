@@ -2060,7 +2060,8 @@ so I've fully switched over.
                   "#crawl"
                   "#guix"
                   "#commonlisp"
-                  "#lisp")))
+                  "#lisp"
+                  "#herrhotzenplotz")))
   (setq erc-track-exclude
         '("#org-mode" "#crawl" "#nim" "#zig"))
   (setq erc-track-exclude-types '("333" "353"))
