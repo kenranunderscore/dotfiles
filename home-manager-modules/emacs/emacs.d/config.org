@@ -644,6 +644,16 @@ just =y= or =n=.
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
+** No annoying bell sounds
+
+If =ring-bell-function= is =nil=, Emacs will still make a sound on, for
+instance, =C-g=.  Since this annoys me to no end, I disable this by
+customizing the function to essentially "do nothing".
+
+#+begin_src emacs-lisp
+(setq ring-bell-function #'ignore)
+#+end_src
+
 ** Mode-sensitive completion for extended commands
 
 Make commands shown with M-x depend on the active major mode.  Note:
