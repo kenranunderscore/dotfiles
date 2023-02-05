@@ -58,8 +58,9 @@ in {
       file.".crawlrc".source = "${inputs.crawlrc}/.crawlrc";
 
       sessionVariables = rec {
-        EDITOR = "nvim";
+        EDITOR = "emacsclient -c";
         VISUAL = EDITOR;
+        ALTERNATE_EDITOR = "";
         KENRAN_IRC_CERTS = "${privateDir}/irc";
       };
 
