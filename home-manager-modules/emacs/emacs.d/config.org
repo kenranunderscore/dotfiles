@@ -234,9 +234,6 @@ respective font.
             166
             :org-height
             0.8))
-        (consolas
-         . (:family
-            "Consolas"))
         (borg
          . (:family
             "Borg Sans Mono"
