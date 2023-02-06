@@ -234,11 +234,23 @@ respective font.
             166
             :org-height
             0.8))
+        (inconsolata
+         . (:family
+            "Inconsolata"
+            :default-height
+            170
+            :org-height
+            0.9))
         (borg
          . (:family
             "Borg Sans Mono"
             :org-height
-            0.85))))
+            0.85))
+        (terminus
+         . (:family
+            "Terminus (TTF)"
+            :default-height
+            160))))
 #+end_src
 
 =kenran/current-font= contains a symbol pointing to one of the fonts

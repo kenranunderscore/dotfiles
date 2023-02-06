@@ -46,6 +46,7 @@ in {
         noto-fonts
         roboto-mono
         source-code-pro
+        terminus_font_ttf
         victor-mono
       ]);
     };
