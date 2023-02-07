@@ -2512,6 +2512,11 @@ No really necessary to bind this, but why not...
   "s" '(:ignore t :which-key "SLY")
   "s s" 'sly
   "s c" 'sly-connect)
+
+(with-local-leader
+  :states 'normal
+  :keymaps 'sly-mrepl-mode-map
+  "p" '(sly-mrepl-set-package :which-key "in-package"))
 #+end_src
 
 ** Racket
