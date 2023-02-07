@@ -2029,6 +2029,7 @@ guess is that they probably go well together.
                         (apropos-mode :align t :select t)
                         ("^\\*eldoc" :regexp t :align below :select t)
                         ("^\\*Occur" :regexp t :align t :select t)
+                        ("^\\*sly-description" :regexp t :align t :select t)
                         ("^\\*lispy" :regexp t :align t :noselect t)))
   (setq shackle-default-rule nil))
 #+end_src
