@@ -2581,6 +2581,16 @@ its dependencies.
   (setq inferior-fsharp-program "dotnet fsi --readline-"))
 #+end_src
 
+** Go
+
+I neither like nor normally use Go, but it's nice to have some syntax
+highlighting at least for when I /do/ have to read it.
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :defer t)
+#+end_src
+
 ** LSP integration
 
 I've used =lsp-mode= in the past and while it's nice, I feel like it's
