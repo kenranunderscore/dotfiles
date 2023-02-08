@@ -13,6 +13,7 @@ meghanada/
 parinfer-rust/
 racket-mode/
 transient/
+url/
 custom.el
 projectile.cache
 projects
