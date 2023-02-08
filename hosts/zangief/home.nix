@@ -195,6 +195,7 @@ in {
           sha256 = "sha256-pdkjO8aYmfw1PcqQaRwnlyuau7AdYOky8cOc2/1t+10=";
         }]);
     })
+    zoom-us
   ];
 
   home.stateVersion = "22.05";
