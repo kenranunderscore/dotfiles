@@ -16,7 +16,7 @@ in {
         set fish_greeting
         bind \cp navigate_to_project
         bind \cr command_history_search
-        bind \cv open_file_in_neovim
+        bind \cv open_file_in_emacs
       '';
       shellAliases = {
         ls = "exa";
