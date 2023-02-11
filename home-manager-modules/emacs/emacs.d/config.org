@@ -2440,8 +2440,19 @@ interfere with the =evil-repeat= mechanism (that is, =.=).  I try to make
 
 ** Docker
 
+I still have to semi-regularly write Dockerfiles.  This package comes
+with syntax highlighting for those.
+
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
+  :defer t)
+#+end_src
+
+I'm trying out this package, as it provides a =magit=-like UI to control
+images, containers, volumes, networks, etc. from inside Emacs.
+
+#+begin_src emacs-lisp
+(use-package docker
   :defer t)
 #+end_src
 
