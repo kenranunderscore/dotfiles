@@ -933,6 +933,8 @@ but missing my precious Emacs, I now give =evil-collection= another try.
 (use-package evil-collection
   :after evil
   :config
+  (dolist (feature '(lispy corfu))
+    (delete feature evil-collection-mode-list))
   (evil-collection-init))
 #+end_src
 
