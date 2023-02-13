@@ -61,7 +61,7 @@ in {
     margin-top = 0;
   };
 
-  "bar/bottom" = mkBar true "date distro-icon cpu memory" "i3"
+  "bar/main" = mkBar true "date distro-icon cpu memory" "i3"
     (pkgs.lib.optionalString withBattery "battery "
       + "wlan1 wlan2 wlan3 audio powermenu");
 

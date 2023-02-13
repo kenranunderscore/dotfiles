@@ -23,9 +23,9 @@ in {
       enable = true;
       package = myPolybar;
       script = ''
+
         for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-          MONITOR=$m polybar -r top &
-          MONITOR=$m polybar -r bottom &
+          MONITOR=$m polybar -r main &
         done
       '';
       config = import ./config-i3.nix {
