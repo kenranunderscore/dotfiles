@@ -2719,7 +2719,8 @@ One tricky thing was making it possible to bind the keymap
            ?g)
           (project-dired "dired")
           (kenran/project-vterm "vterm" ?t)
-          (project-switch-to-buffer "find buffer" ?b)))
+          (project-switch-to-buffer "find buffer" ?b)
+          (project-vc-dir "vc")))
   :bind (:map project-prefix-map
               ("t" . kenran/project-vterm)
               ("d" . project-dired)
