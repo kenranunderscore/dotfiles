@@ -2712,7 +2712,11 @@ One tricky thing was making it possible to bind the keymap
   (setq project-switch-commands
         '((project-find-file "find file")
           (consult-ripgrep "search/grep" ?s)
-          (magit-status "git status" ?g)
+          ((lambda ()
+             (interactive)
+             (magit-status (project-root (project-current t))))
+           "git status"
+           ?g)
           (project-dired "dired")
           (kenran/project-vterm "vterm" ?t)
           (project-switch-to-buffer "find buffer" ?b)))
