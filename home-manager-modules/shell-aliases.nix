@@ -56,6 +56,9 @@
   gst = "git status";
   gsw = "git switch";
   gpra = "git pull --rebase --autostash";
+  gw = "git worktree";
+  gwa = "git worktree add";
+  gwl = "git worktree list";
 
   # nix
   n = "nix";
