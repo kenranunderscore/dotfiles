@@ -341,12 +341,13 @@ sure that these also work when using the Emacs daemon together with
 =emacsclient=.
 
 #+begin_src emacs-lisp
-(kenran/switch-font kenran/current-font)
-(add-hook 'server-after-make-frame-hook
-          (defun kenran/switch-to-current-font ()
-            (kenran/switch-font kenran/current-font)
-            (remove-hook 'server-after-make-frame-hook
-                         #'kenran/switch-to-current-font)))
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook
+              (defun kenran/switch-to-current-font ()
+                (kenran/switch-font kenran/current-font)
+                (remove-hook 'server-after-make-frame-hook
+                             #'kenran/switch-to-current-font)))
+  (kenran/switch-font kenran/current-font))
 #+end_src
 
 ** Color theme
