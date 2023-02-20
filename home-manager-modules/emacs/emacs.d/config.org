@@ -833,23 +833,25 @@ versus =C-j= and =C-k=.
 
 #+begin_src emacs-lisp
 (use-package evil
-  :config
-  (evil-mode 1)
-  :custom
-  ((evil-want-C-u-scroll t)
-   (evil-want-C-u-delete nil)
-   (evil-want-C-w-delete t)
-   (evil-want-Y-yank-to-eol t)
-   (evil-undo-system 'undo-redo)
-   (evil-symbol-word-search t)
-   (evil-jumps-cross-buffers nil)
-   (evil-mode-line-format nil))
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (setq evil-respect-visual-line-mode t)
   (add-hook 'server-after-make-frame-hook
-            #'kenran/set-evil-state-cursors))
+            #'kenran/set-evil-state-cursors)
+  :config
+  (evil-mode 1)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-u-delete nil)
+  (setq evil-want-C-w-delete t)
+  (setq evil-want-Y-yank-to-eol t)
+  (setq evil-undo-system 'undo-redo)
+  (setq evil-symbol-word-search t)
+  (setq evil-jumps-cross-buffers nil)
+  (setq evil-mode-line-format nil)
+  :bind
+  (:map evil-insert-state-map
+        ("C-k" . nil)))
 #+end_src
 
 *** Surrounding things
@@ -2114,6 +2116,19 @@ so I've fully switched over.
 (use-package yasnippet
   :init (yas-global-mode 1)
   :diminish yas-minor-mode)
+
+(use-package tempel
+  :init
+  (add-hook 'evil-insert-state-exit-hook #'tempel-done)
+  :config
+  (setq tempel-path
+        (expand-file-name "templates.eld"
+                          user-emacs-directory))
+  :bind
+  (("M-*" . tempel-expand)
+   (:map tempel-map
+         ("C-j" . tempel-next)
+         ("C-k" . tempel-previous))))
 #+end_src
 
 ** Unified interface for creating code formatters
