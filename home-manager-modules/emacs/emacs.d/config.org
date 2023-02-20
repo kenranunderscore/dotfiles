@@ -110,9 +110,11 @@ emacsclient -a ''
 #+end_src
 
 Setting some things at this point often results in the changes not
-being applied correctly.  I think it's due to them happening in a
-technical, visible Emacs frame.  See also
-=kenran/is-initial-daemon-frame= below.
+being applied correctly.  It's due to them happening in a technical,
+invisible Emacs frame.  So you'll often see =(daemonp)= being called,
+checking whether this instance of Emacs is using the daemon, then
+adding some initializer function to =server-after-make-frame-hook= if it
+is.
 
 ** Cursor
 
@@ -165,17 +167,6 @@ is true, then always set the colors anew."
       (setq evil-insert-state-cursor insert-cursor)
       (remove-hook 'server-after-make-frame-hook
                    #'kenran/set-evil-state-cursors))))
-#+end_src
-
-** Check whether the current frame is the initial daemon frame
-
-#+begin_src emacs-lisp
-(defun kenran/is-initial-daemon-frame-p ()
-  "Check whether the selected frame is the one that seems to be
-automatically created when the daemon starts.  If this is the
-selected frame we don't want to do certain things, like modifying
-faces."
-  (string= (frame-parameter (selected-frame) 'name) "F1"))
 #+end_src
 
 ** Fonts
@@ -336,9 +327,9 @@ applies the attributes of its value in =kenran/font-alist=.
      :height 1.0)))
 #+end_src
 
-Finally, set all the face attributes, and register a hook that makes
-sure that these also work when using the Emacs daemon together with
-=emacsclient=.
+Finally, set all the face attributes synchronously, or register a hook
+that makes sure that these also work when using the Emacs daemon
+together with =emacsclient=.
 
 #+begin_src emacs-lisp
 (if (daemonp)
@@ -382,7 +373,7 @@ disables all other enabled themes."
           custom-enabled-themes)
     (load-theme name t)
     (kenran/switch-theme-hook)
-    (unless (kenran/is-initial-daemon-frame-p)
+    (unless (daemonp)
       ;; If it's the initial "daemon frame" then hooks in
       ;; `server-after-make-frame-hook' will be executed, including
       ;; one that calls `kenran/set-evil-state-cursor-colors'.
@@ -1393,7 +1384,7 @@ I want my headers to stand out by being really big.  I also like using
 other things are written with my current monospace / fixed-width font,
 and the rest uses a serif font more suitable for longer texts.  But
 customizing these faces with =set-face-attribute= has the usual problems
-with the initial daemon frame, and doesn't hold up when switching
+with the initial daemon startup, and doesn't hold up when switching
 fonts or themes.  That's why I've put those changes into the following
 functions which I can call whenever these sorts of changes happen,
 either through hooks or manual trigger.
