@@ -2734,9 +2734,6 @@ One tricky thing was making it possible to bind the keymap
   ;; such.
   (setq magit-save-repository-buffers nil)
   (setq magit-diff-refine-hunk t)
-  ;; NOTE: I'll have to try
-  ;; `magit-display-buffer-fullframe-status-v1' as well, which
-  ;; always opens up the status buffer using the full frame.
   (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (setq magit-bury-buffer-function #'magit-restore-window-configuration)
   ;; I frequently pull with the autostash option, so add that to the
