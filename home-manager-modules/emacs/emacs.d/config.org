@@ -1451,6 +1451,7 @@ loading =org=, a custom font setup might run to adjust the headers.
   :straight (:type built-in)
   :hook
   ((org-mode . auto-fill-mode)
+   (org-mode . kenran/org-font-setup)
    ;; (org-mode . variable-pitch-mode)
    (org-trigger . save-buffer)
    ;; Inheriting fixed-pitch in kenran/org-font-setup doesn't work; the
@@ -1492,7 +1493,6 @@ loading =org=, a custom font setup might run to adjust the headers.
                          "CANCELLED(c)")))
    (org-html-htmlize-output-type 'css))
   :config
-  (kenran/org-font-setup)
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
