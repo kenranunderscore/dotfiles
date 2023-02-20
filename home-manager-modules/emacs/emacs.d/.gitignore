@@ -1,7 +1,6 @@
 *~
 \#*\#
 *.elc
-*.eld
 .org-id-locations
 bookmarks
 config.el
@@ -15,6 +14,7 @@ racket-mode/
 transient/
 url/
 custom.el
+projectile-bookmarks.eld
 projectile.cache
 projects
 tramp
