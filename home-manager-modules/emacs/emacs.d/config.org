@@ -2122,6 +2122,7 @@ so I've fully switched over.
   :diminish yas-minor-mode)
 
 (use-package tempel
+  :commands (tempel-done)
   :init
   (add-hook 'evil-insert-state-exit-hook #'tempel-done)
   :config
