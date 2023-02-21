@@ -841,14 +841,15 @@ versus =C-j= and =C-k=.
             #'kenran/set-evil-state-cursors)
   :config
   (evil-mode 1)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-u-delete nil)
-  (setq evil-want-C-w-delete t)
-  (setq evil-want-Y-yank-to-eol t)
-  (setq evil-undo-system 'undo-redo)
-  (setq evil-symbol-word-search t)
-  (setq evil-jumps-cross-buffers nil)
-  (setq evil-mode-line-format nil)
+  :custom
+  ((evil-want-C-u-scroll t)
+   (evil-want-C-u-delete nil)
+   (evil-want-C-w-delete t)
+   (evil-want-Y-yank-to-eol t)
+   (evil-undo-system 'undo-redo)
+   (evil-symbol-word-search t)
+   (evil-jumps-cross-buffers nil)
+   (evil-mode-line-format nil))
   :bind
   (:map evil-insert-state-map
         ("C-k" . nil)))
