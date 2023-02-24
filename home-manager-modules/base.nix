@@ -92,7 +92,6 @@ in {
         tree
         unzip
         watchexec
-        wezterm
         wget
       ];
 
