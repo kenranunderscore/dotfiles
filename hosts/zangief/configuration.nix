@@ -47,6 +47,8 @@ in {
     keyMap = "us";
   };
 
+  fonts.fontconfig.allowBitmaps = true;
+
   services = {
     openssh = {
       enable = true;
