@@ -11,6 +11,7 @@ in {
   modules = {
     rofi.enable = true;
     neovim.enable = lib.mkForce false;
+    sbcl.enable = true;
     i3 = {
       enable = true;
       workspaces = [
