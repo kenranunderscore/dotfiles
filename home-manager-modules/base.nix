@@ -14,6 +14,14 @@ in {
   imports = [ ./. ];
 
   config = {
+    nix.registry = {
+      this.flake = inputs.nixpkgs;
+      n.to = {
+        id = "nixpkgs";
+        type = "indirect";
+      };
+    };
+
     modules = {
       alacritty.enable = true;
       emacs.enable = true;
