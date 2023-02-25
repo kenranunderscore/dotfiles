@@ -1011,6 +1011,18 @@ and also when Emacs is reading user input in the minibuffer.
 #+end_src
 
 * Built-in packages with extensions
+** Emacs Lisp
+
+I like evaluating the top-level form I'm currently on by pressing =C-c
+C-c=, similar to how one compiles in SLY/SLIME.
+
+#+begin_src emacs-lisp
+(general-define-key
+ :states '(normal visual emacs)
+ :keymaps 'emacs-lisp-mode-map
+ "C-c C-c" 'eval-defun)
+#+end_src
+ 
 ** Display whitespace
 
 Make whitespace symbols visible.
