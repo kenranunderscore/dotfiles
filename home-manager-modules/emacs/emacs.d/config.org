@@ -1711,6 +1711,7 @@ child frame for the completion popup and thus does not clash with
 
 #+begin_src emacs-lisp
 (use-package corfu
+  :straight (corfu :files (:defaults "extensions/*.el"))
   :init (global-corfu-mode)
   :hook (evil-insert-state-exit . corfu-quit)
   :config
@@ -1728,6 +1729,19 @@ child frame for the completion popup and thus does not clash with
 (general-define-key
  :states '(insert emacs)
  "C-t" 'completion-at-point)
+#+end_src
+
+** Show documentation in a separate popup
+
+I'll have to figure out whether I like this or not.  At the moment it
+seems great.
+
+#+begin_src emacs-lisp
+(use-package corfu-popupinfo
+  :straight nil
+  :config
+  (corfu-popupinfo-mode)
+  (setq corfu-popupinfo-delay 0.5))
 #+end_src
 
 ** More completion-at-point backends via =cape=

@@ -19,7 +19,8 @@
   # Open a new emacsclient in the current terminal window
   et = "emacsclient --alternate-editor '' --tty";
   # Kill the emacs daemon
-  ekill = "emacsclient --eval '(kill-emacs)'";
+  ekill =
+    "env -u ALTERNATE_EDITOR emacsclient --eval '(kill-emacs)' 2>/dev/null";
   # Try using emacs/magit as replacement for CLI git
   eg =
     "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'";
