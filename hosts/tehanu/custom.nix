@@ -2,6 +2,6 @@
   username = "johannes";
   font = {
     name = "Pragmata Pro Mono";
-    size = 16;
+    size = 15;
   };
 }

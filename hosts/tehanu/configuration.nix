@@ -31,8 +31,8 @@ in {
 
   networking = {
     useDHCP = false;
-    #interfaces.enp3s0f1.useDHCP = true;
-    #interfaces.wlp4s0.useDHCP = true;
+    interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp0s20f3.useDHCP = true;
     hostName = "tehanu";
     networkmanager.enable = true;
     firewall = {
