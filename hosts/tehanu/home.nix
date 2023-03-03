@@ -60,7 +60,7 @@ in {
       startupCommands = [
         {
           command =
-            "xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0; exec ~/.fehbg";
+            "xrandr --output HDMI-0 --primary --output eDP-1 --mode 1920x1080 --right-of HDMI-0; exec ~/.fehbg";
           always = false;
           notification = false;
         }
@@ -90,12 +90,6 @@ in {
         {
           command = "i3-msg 'workspace 1:main'";
           always = false;
-          notification = false;
-        }
-        {
-          command = ''
-            i3-msg "workspace 5:chat; exec emacs -f start-irc"
-          '';
           notification = false;
         }
         {
@@ -157,7 +151,7 @@ in {
       google-chrome-stable $@
     '';
   in with pkgs; [
-    citrix_workspace
+    # citrix_workspace
     cloc
     dbeaver
     dhall

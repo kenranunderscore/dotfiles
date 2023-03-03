@@ -31,9 +31,9 @@ in {
 
   networking = {
     useDHCP = false;
-    interfaces.enp3s0f1.useDHCP = true;
-    interfaces.wlp4s0.useDHCP = true;
-    hostName = "zangief";
+    #interfaces.enp3s0f1.useDHCP = true;
+    #interfaces.wlp4s0.useDHCP = true;
+    hostName = "tehanu";
     networkmanager.enable = true;
     firewall = {
       allowedTCPPorts = [ 25565 ];
@@ -56,8 +56,8 @@ in {
     };
     xserver = {
       enable = true;
-      videoDrivers = [ "nvidia" ];
-      dpi = 96;
+      #videoDrivers = [ "nvidia" ];
+      #dpi = 96;
       libinput = {
         enable = true;
         mouse.naturalScrolling = true;
@@ -94,7 +94,7 @@ in {
   };
 
   hardware = {
-    nvidia.modesetting.enable = false;
+    #nvidia.modesetting.enable = false;
     opengl.enable = true;
   };
 
@@ -118,7 +118,7 @@ in {
   };
 
   environment = {
-    systemPackages = with pkgs; [ ];
+    systemPackages = with pkgs; [ git ];
     pathsToLink = [ "/share/zsh" ];
   };
 
