@@ -161,7 +161,7 @@ in {
     google-chrome-beta
     googleChromeBin
     keepass
-    keepassx
+    keepassxc
     leiningen
     linphone
     mattermost-desktop
