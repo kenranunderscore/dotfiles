@@ -44,9 +44,6 @@ in {
         source ${inputs.zsh-syntax-highlighting}/zsh-syntax-highlighting.zsh
         # Needs to be sourced _after_ z-sy-h
         source ${inputs.zsh-history-substring-search}/zsh-history-substring-search.zsh
-        # Need to source zsh-abbr after z-sy-h, otherwise there's subtle
-        # breakage with the way autosuggestions are highlighted (?).
-        source ${inputs.zsh-abbr}/zsh-abbr.zsh
 
         # Autoload custom functions
         fpath+=$ZDOTDIR/functions
@@ -93,14 +90,6 @@ in {
     };
 
     xdg.configFile = {
-      # Create shell abbreviations (akin to what fish does) from the
-      # set of shell aliases via zsh-abbr.
-      "zsh/abbreviations".text =
-        let aliases = import ../shell-aliases.nix { inherit pkgs; };
-        in lib.concatStringsSep "\n"
-        (lib.mapAttrsToList (alias: cmd: ''abbr -g ${alias}="${cmd}"'')
-          aliases);
-
       # My custom functions live here.  They get added to fpath and
       # autoloaded as part of .zshrc above.
       "zsh/functions" = {

@@ -263,22 +263,6 @@
         "type": "github"
       }
     },
-    "zsh-abbr": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1677208693,
-        "narHash": "sha256-LprS2cabTFn08CyPOhVQfQ8Y7CjCk3SEoqk5KCLk2Hc=",
-        "owner": "olets",
-        "repo": "zsh-abbr",
-        "rev": "49fd62953d2b6a7c8cabe0eae2f429ddc174d354",
-        "type": "github"
-      },
-      "original": {
-        "owner": "olets",
-        "repo": "zsh-abbr",
-        "type": "github"
-      }
-    },
     "zsh-autopair": {
       "flake": false,
       "locked": {
