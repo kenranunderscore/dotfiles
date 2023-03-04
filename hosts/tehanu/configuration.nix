@@ -56,8 +56,8 @@ in {
     };
     xserver = {
       enable = true;
-      #videoDrivers = [ "nvidia" ];
-      #dpi = 96;
+      videoDrivers = [ "nvidia" ];
+      dpi = 96;
       libinput = {
         enable = true;
         mouse.naturalScrolling = true;
@@ -94,7 +94,12 @@ in {
   };
 
   hardware = {
-    #nvidia.modesetting.enable = false;
+    # nvidia.modesetting.enable = false;
+    nvidia.prime = {
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
     opengl.enable = true;
   };
 
