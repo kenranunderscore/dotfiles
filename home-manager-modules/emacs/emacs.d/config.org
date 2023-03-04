@@ -36,7 +36,7 @@ The script below is taken right from =straight.el='s readme.
 Install [[https://github.com/jwiegley/use-package][use-package]]; it integrates well with =straight=.
 
 #+begin_src emacs-lisp
-(straight-use-package 'use-package)
+(straight-use-package '(use-package :type built-in))
 #+end_src
 
 Now make every =use-package= block below behave as if I had specified
@@ -2662,6 +2662,7 @@ comes into play.
 
 #+begin_src emacs-lisp
 (use-package eglot
+  :straight (:type built-in)
   :defer t)
 
 (with-local-leader
