@@ -413,6 +413,8 @@ quick iteration.
 Enable =naga=:
 
 #+begin_src emacs-lisp
+(setq naga-theme-use-lighter-org-block-background nil)
+(setq naga-theme-modeline-style 'green-box)
 (kenran/switch-theme 'naga)
 #+end_src
 
