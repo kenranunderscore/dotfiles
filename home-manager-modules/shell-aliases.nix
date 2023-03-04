@@ -64,6 +64,8 @@
   # nix
   n = "nix";
   nf = "nix flake";
+  nfl = "nix flake lock";
+  nfu = "nix flake update";
   nb = "nix build";
   nd = "nix develop";
   nr = "nix run";
