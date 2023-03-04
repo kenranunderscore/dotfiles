@@ -112,7 +112,7 @@ in {
     full-at = 101;
     label-charging = "%percentage%%";
     label-discharging = "%percentage%%";
-    label-full = "  100%";
+    label-full = " 100%";
     poll-interval = 2;
     ramp-capacity-0 = " ";
     ramp-capacity-0-foreground = "#e74c3c";
