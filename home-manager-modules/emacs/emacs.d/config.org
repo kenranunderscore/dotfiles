@@ -17,6 +17,7 @@ automatically loaded even though I don't use them anymore) into Emacs.
 The script below is taken right from =straight.el='s readme.
 
 #+begin_src emacs-lisp
+(setq straight-repository-branch "develop")
 (defvar bootstrap-version)
 
 (let ((bootstrap-file
