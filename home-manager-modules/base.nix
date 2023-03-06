@@ -89,6 +89,7 @@ in {
         neofetch
         nixfmt
         openssl
+        pciutils
         perl
         ripgrep
         rlwrap
