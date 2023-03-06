@@ -11,6 +11,7 @@ entertainment.  Currently there are four NixOS machines (plus one WSL2
 environment that I need to include at some point) I manage this way:
 
 - [[file:hosts/atuan/][atuan]]: my home PC
+- [[file:hosts/tehanu/][tehanu]]: my new work laptop (WIP)
 - [[file:hosts/zangief/][zangief]]: my beefy [[https://www.tuxedocomputers.com/][TUXEDO]] work laptop
 - [[file:hosts/angband/][angband]]: a tiny notebook (64 GB of disk space only) I use when
   traveling

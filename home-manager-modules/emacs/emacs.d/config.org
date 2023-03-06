@@ -17,6 +17,7 @@ automatically loaded even though I don't use them anymore) into Emacs.
 The script below is taken right from =straight.el='s readme.
 
 #+begin_src emacs-lisp
+(setq straight-repository-branch "develop")
 (defvar bootstrap-version)
 
 (let ((bootstrap-file
@@ -35,7 +36,7 @@ The script below is taken right from =straight.el='s readme.
 Install [[https://github.com/jwiegley/use-package][use-package]]; it integrates well with =straight=.
 
 #+begin_src emacs-lisp
-(straight-use-package 'use-package)
+(straight-use-package '(use-package :type built-in))
 #+end_src
 
 Now make every =use-package= block below behave as if I had specified
@@ -412,6 +413,8 @@ quick iteration.
 Enable =naga=:
 
 #+begin_src emacs-lisp
+(setq naga-theme-use-lighter-org-block-background nil)
+(setq naga-theme-modeline-style 'green-box)
 (kenran/switch-theme 'naga)
 #+end_src
 
@@ -473,17 +476,6 @@ contrast, overall darker look, and beautiful accent colors.
 
 #+begin_src emacs-lisp
 (use-package color-theme-sanityinc-tomorrow
-  :defer t)
-#+end_src
-
-**** Danneskjold
-
-I've just discovered
-[[https://github.com/rails-to-cosmos/danneskjold-theme][danneskjold]] and wish to try it out for a little bit.  Its feel is very
-similar to =modus-vivendi= for me.  I especially love its =magit= theme.
-
-#+begin_src emacs-lisp
-(use-package danneskjold-theme
   :defer t)
 #+end_src
 
@@ -2661,6 +2653,7 @@ comes into play.
 
 #+begin_src emacs-lisp
 (use-package eglot
+  :straight (:type built-in)
   :defer t)
 
 (with-local-leader

@@ -1,17 +1,19 @@
 path:
-{ lib, fetchzip }:
+{ stdenv, lib, fetchurl, unzip }:
 
 let version = "0.829";
-in fetchzip {
+in stdenv.mkDerivation {
   name = "pragmata-pro-${version}";
+  src = fetchurl {
+    url = "file://${path}/pragmatapro_${version}.zip";
+    sha256 = "sha256-/DgsOMHi/bAE55SDgf5f59q81yvuVERSn/K5Y+D3Pyw=";
+  };
+  unpackPhase = "${lib.getExe unzip} $src";
+  dontBuild = true;
+  installPhase = ''
+    mkdir -p $out/share/fonts/{truetype,opentype}
 
-  url = "file://${path}/pragmatapro_${version}.zip";
-
-  sha256 = "sha256-IFrS/u68vf2xmjWSjQCFAz7uTuT6lUj7zJYajSJWEtw=";
-
-  postFetch = ''
-    mkdir -p $out/share/fonts/
-    unzip -j $downloadedFile \*.otf -d $out/share/fonts/opentype
-    unzip -j $downloadedFile \*.ttf -d $out/share/fonts/truetype
+    cd PragmataPro${version}
+    cp *.ttf $out/share/fonts/truetype/
   '';
 }

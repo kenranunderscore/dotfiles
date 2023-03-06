@@ -23,10 +23,6 @@
     };
 
     # zsh plugins
-    zsh-abbr = {
-      url = "github:olets/zsh-abbr";
-      flake = false;
-    };
     zsh-autopair = {
       url = "github:hlissner/zsh-autopair";
       flake = false;

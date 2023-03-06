@@ -31,9 +31,9 @@ in {
 
   networking = {
     useDHCP = false;
-    interfaces.enp3s0f1.useDHCP = true;
-    interfaces.wlp4s0.useDHCP = true;
-    hostName = "zangief";
+    interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp0s20f3.useDHCP = true;
+    hostName = "tehanu";
     networkmanager.enable = true;
     firewall = {
       allowedTCPPorts = [ 25565 ];
@@ -94,7 +94,12 @@ in {
   };
 
   hardware = {
-    nvidia.modesetting.enable = false;
+    # nvidia.modesetting.enable = false;
+    nvidia.prime = {
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
     opengl.enable = true;
   };
 
@@ -118,7 +123,7 @@ in {
   };
 
   environment = {
-    systemPackages = with pkgs; [ ];
+    systemPackages = with pkgs; [ git ];
     pathsToLink = [ "/share/zsh" ];
   };
 
