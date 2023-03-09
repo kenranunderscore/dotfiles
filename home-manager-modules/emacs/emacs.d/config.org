@@ -2286,6 +2286,11 @@ header.
   :defer t
   :config
   (setq js-indent-level 2))
+
+(with-local-leader
+  :states 'normal
+  :keymaps 'js-json-mode-map
+  "p" '(json-pretty-print-buffer :which-key "prettify buffer"))
 #+end_src
 
 ** Purescript
