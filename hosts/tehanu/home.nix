@@ -40,27 +40,27 @@ in {
         }
         {
           name = "6";
-          output = "DP-2";
+          output = "eDP-1-1";
         }
         {
           name = "7";
-          output = "DP-2";
+          output = "eDP-1-1";
         }
         {
           name = "8:calendar";
-          output = "DP-2";
+          output = "eDP-1-1";
           assigns = [{ class = "thunderbird"; }];
         }
         {
           name = "9:mattermost";
-          output = "DP-2";
+          output = "eDP-1-1";
           assigns = [{ class = "Mattermost"; }];
         }
       ];
       startupCommands = [
         {
           command =
-            "xrandr --output HDMI-0 --primary --output eDP-1 --mode 1920x1080 --right-of HDMI-0; exec ~/.fehbg";
+            "xrandr --output HDMI-1-1 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0; exec ~/.fehbg";
           always = false;
           notification = false;
         }
@@ -99,7 +99,10 @@ in {
         }
       ];
     };
-    polybar.enable = true;
+    polybar = {
+      enable = true;
+      withBattery = true;
+    };
     picom.enable = true;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
