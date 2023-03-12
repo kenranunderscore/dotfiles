@@ -2595,16 +2595,19 @@ Interpreters]] uses it for the first part.  It's actually quite OK to
 write Java with =meghanada,= but it takes a long time to download all
 its dependencies.
 
+It's currently commented out as it's the last remaining package
+pulling in =yasnippet=.
+
 #+begin_src emacs-lisp
-(use-package meghanada
-  :defer t
-  :init
-  (add-hook 'java-mode-hook
-            (lambda ()
-              (meghanada-mode t)
-              (flycheck-mode +1)
-              (setq c-basic-offset 2)
-              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
+;; (use-package meghanada
+;;   :defer t
+;;   :init
+;;   (add-hook 'java-mode-hook
+;;             (lambda ()
+;;               (meghanada-mode t)
+;;               (flycheck-mode +1)
+;;               (setq c-basic-offset 2)
+;;               (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
 #+end_src
 
 ** Python
