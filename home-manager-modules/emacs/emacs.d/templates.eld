@@ -10,3 +10,18 @@ lisp-mode emacs-lisp-mode
 emacs-lisp-mode
 
 (fun "(defun " p " (" p ")\n  \"" p "\"" n> r> ")")
+
+haskell-mode
+
+(nt "newtype " (p "TypeName" name) " = " name " { " (concat "un" name) " :: " (p "Type") " }")
+(main "main :: IO ()" n "main = do" n> p)
+(mod "module " p " where" n n)
+(gadt "data " p " where" n> p " :: ")
+(prag "{-# " p "#-}")
+(rec "data " (s name) " = " name n>
+     "{ " p " :: " p " }")
+(fun (s name) " :: " p n name " = " p)
+(ds "deriving (Eq, Show)")
+(dsg "deriving (Eq, Show, Generic)")
+(impl "error \"TODO: " (p "not implemented") "\"")
+(st "data " p n> "= " p)

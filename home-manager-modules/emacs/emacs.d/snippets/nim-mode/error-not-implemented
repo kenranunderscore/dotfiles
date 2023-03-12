@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: error-not-implemented
-# key: impl
-# --
-assert(false, "TODO: implement this")

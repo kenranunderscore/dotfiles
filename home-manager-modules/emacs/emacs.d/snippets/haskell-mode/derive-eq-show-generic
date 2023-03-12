@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: derive-eq-show-generic
-# key: dsg
-# expand-env: ((yas-indent-line 'fixed))
-# --
-deriving stock (Eq, Show, Generic)

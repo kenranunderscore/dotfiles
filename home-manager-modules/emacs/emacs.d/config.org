@@ -2135,10 +2135,6 @@ so I've fully switched over.
 ** Mode-specific code snippets
 
 #+begin_src emacs-lisp
-(use-package yasnippet
-  :init (yas-global-mode 1)
-  :diminish yas-minor-mode)
-
 (use-package tempel
   :commands (tempel-done)
   :init
@@ -2151,6 +2147,7 @@ so I've fully switched over.
   (("M-*" . tempel-expand)
    (:map tempel-map
          ("C-j" . tempel-next)
+         ("TAB" . tempel-next)
          ("C-k" . tempel-previous))))
 #+end_src
 

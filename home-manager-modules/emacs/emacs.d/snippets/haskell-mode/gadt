@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: gadt
-# key: gadt
-# expand-env: ((yas-indent-line 'fixed))
-# --
-data ${1:record-name} where
-  $0
