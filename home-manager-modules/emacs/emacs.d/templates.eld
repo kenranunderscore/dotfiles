@@ -23,7 +23,7 @@ haskell-mode
 (fun (s name) " :: " p n name " = " p)
 (ds "deriving (Eq, Show)")
 (dsg "deriving (Eq, Show, Generic)")
-(impl "error \"TODO: " (p "not implemented") "\"")
+(impl "(error \"TODO: " (p "not implemented") "\")")
 (st "data " p n> "= " p)
 (toj "instance Aeson.ToJSON " p " where" n> "toJSON " p)
 (fromj "instance Aeson.FromJSON " p " where" n> "parseJSON " p)
