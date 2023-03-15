@@ -48,6 +48,27 @@ configuration of built-in packages explicitly, usually by adding
 (setq straight-use-package-by-default t)
 #+end_src
 
+#+begin_src emacs-lisp
+(setq kenran/want-evil nil)
+
+(defmacro when-evil (body)
+  "Only evaluate BODY when `kenran/want-evil' is set."
+  (when kenran/want-evil
+    body))
+#+end_src
+
+#+begin_src emacs-lisp
+(defmacro use-package-when-evil (&rest args)
+  "Like the normal `use-package' invocation, but disables the
+package if `kenran/want-evil' is set."
+  (declare (indent defun))
+  (if kenran/want-evil
+      `(use-package ,@args)
+    `(use-package
+       ,@args
+       :disabled)))
+#+end_src
+
 * Keybinding management
 
 The [[https://github.com/noctuid/general][general]] package allows me to define keybindings in a more
@@ -56,7 +77,7 @@ its =evil-mode= integration, where I have to bind keys according to the
 current mode.
 
 #+begin_src emacs-lisp
-(use-package general)
+(use-package-when-evil general)
 #+end_src
 
 Some additional and modified basic Emacs keybindings go here (evil-
@@ -64,11 +85,12 @@ and mode-specific ones can be found in the evil section or the one for
 the respective mode).
 
 #+begin_src emacs-lisp
-(general-define-key
- :states '(normal visual motion emacs operator)
- "C-h F" 'describe-face
- "C-h M" 'describe-keymap
- "C-h V" 'set-variable)
+(when-evil
+ (general-define-key
+  :states '(normal visual motion emacs operator)
+  "C-h F" 'describe-face
+  "C-h M" 'describe-keymap
+  "C-h V" 'set-variable))
 #+end_src
 
 * Loading additional ELisp configuration files
@@ -155,7 +177,8 @@ colors for normal and insert mode.
 and emacs mode.  The default color should be the one that the
 current theme uses as background for the 'cursor face.  If FORCE
 is true, then always set the colors anew."
-  (when (or force (not kenran/has-set-cursor-colors))
+  (when (and kenran/want-evil
+             (or force (not kenran/has-set-cursor-colors)))
     (setq kenran/has-set-cursor-colors t)
     (let* ((default-cursor 'box)
            (insert-cursor '(hbar . 5)))
@@ -776,6 +799,15 @@ Of course there's an existing Emacs options for this:
 #+end_src
 
 * Vim emulation
+
+I'm usually using =evil-mode= for vim emulation, with varying degrees
+(over time) of how much of =evil-collection= I sprinkle in -- either
+nearly everything or nearly nothing.  For now, I'm thinking of going
+back to vanilla Emacs bindings to finally /really/ grasp them and see if
+it clicks for me.  I cannot put my finger on why exactly, but in my
+heart of hearts I'm not a modal editing person, even though I use lots
+of it.
+
 ** Leader keys
 
 Having a dedicated leader key (=SPC= in my case) is one of the most
@@ -792,11 +824,17 @@ the =:bind= one.  I sometimes use the latter for bindings that are not
 mode-sensitive.
 
 #+begin_src emacs-lisp
-(general-create-definer with-leader
+(when-evil
+ (general-create-definer
+  leader
   :keymaps 'override
   :states '(normal insert emacs visual motion)
   :prefix "SPC"
-  :non-normal-prefix "C-;")
+  :non-normal-prefix "C-;"))
+
+(defmacro with-leader (&rest args)
+  (when-evil
+   `(leader ,@args)))
 #+end_src
 
 A local leader key is something that is usually used to access
@@ -804,8 +842,13 @@ situational commands, for instance language-specific or mode-specific
 ones.  I used =,= for this in Vim; same here now.
 
 #+begin_src emacs-lisp
-(general-create-definer with-local-leader
-  :prefix ",")
+(when-evil
+  (general-create-definer local-leader
+  :prefix ","))
+
+(defmacro with-local-leader (&rest args)
+  (when-evil
+   `(local-leader ,@args)))
 #+end_src
 
 ** =Evil= and supporting packages
@@ -824,7 +867,7 @@ to move consistently so I don't get caught up between =C-n= and =C-p=
 versus =C-j= and =C-k=.
 
 #+begin_src emacs-lisp
-(use-package evil
+(use-package-when-evil evil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -856,7 +899,7 @@ surrounding brackets to curly braces with whitespace padding.
 Selected regions can be surround with e.g. =S`=.
 
 #+begin_src emacs-lisp
-(use-package evil-surround
+(use-package-when-evil evil-surround
   :after evil
   :config
   (global-evil-surround-mode))
@@ -871,7 +914,7 @@ losing out on =;= and =,=, but maybe it's possible to get both).  So let's
 give [[https://github.com/abo-abo/avy][avy]] a try.
 
 #+begin_src emacs-lisp
-(use-package avy
+(use-package-when-evil avy
   :after evil
   :config
   (setq avy-timeout-seconds 0.3)
@@ -891,7 +934,7 @@ TODO: It's surely worth spending some more time to find out what else
 this brings with it, but I'm not writing enough with =org=.
 
 #+begin_src emacs-lisp
-(use-package evil-org
+(use-package-when-evil evil-org
   :after (evil org)
   :hook (org-mode . evil-org-mode)
   :diminish evil-org-mode
@@ -917,7 +960,7 @@ spending some time in =neovim= (where everything is "evil" of course)
 but missing my precious Emacs, I now give =evil-collection= another try.
 
 #+begin_src emacs-lisp
-(use-package evil-collection
+(use-package-when-evil evil-collection
   :after evil
   :config
   (dolist (feature '(lispy corfu))
@@ -978,28 +1021,31 @@ mode).  This means that I need to override the Emacs default binding,
 which can be done via =general='s =:keymaps 'override=.
 
 #+begin_src emacs-lisp
-(general-define-key
- :states '(normal visual motion operator)
- :keymaps 'override
- "C-w" 'evil-window-map
- "C-w C-h" 'evil-window-left
- "C-w C-k" 'evil-window-up
- "C-w C-j" 'evil-window-down
- "C-w C-l" 'evil-window-right
- "C-w C-d" 'evil-quit)
+(when-evil
+ (general-define-key
+  :states '(normal visual motion operator)
+  :keymaps 'override
+  "C-w" 'evil-window-map
+  "C-w C-h" 'evil-window-left
+  "C-w C-k" 'evil-window-up
+  "C-w C-j" 'evil-window-down
+  "C-w C-l" 'evil-window-right
+  "C-w C-d" 'evil-quit))
 #+end_src
 
 Enable =C-w= to delete backward (like in vim or bash) in insert mode,
 and also when Emacs is reading user input in the minibuffer.
 
 #+begin_src emacs-lisp
-(general-define-key
- :keymaps 'minibuffer-local-map
- "C-w" 'evil-delete-backward-word)
+(when-evil
+ (general-define-key
+  :keymaps 'minibuffer-local-map
+  "C-w" 'evil-delete-backward-word))
 
-(general-define-key
- :states '(emacs)
- "C-w" 'evil-delete-backward-word)
+(when-evil
+ (general-define-key
+  :states '(emacs)
+  "C-w" 'evil-delete-backward-word))
 #+end_src
 
 * Built-in packages with extensions
@@ -1009,10 +1055,11 @@ I like evaluating the top-level form I'm currently on by pressing =C-c
 C-c=, similar to how one compiles in SLY/SLIME.
 
 #+begin_src emacs-lisp
-(general-define-key
- :states '(normal visual emacs)
- :keymaps 'emacs-lisp-mode-map
- "C-c C-c" 'eval-defun)
+  (when-evil
+   (general-define-key
+    :states '(normal visual emacs)
+    :keymaps 'emacs-lisp-mode-map
+    "C-c C-c" 'eval-defun))
 #+end_src
  
 ** Display whitespace
@@ -1718,9 +1765,10 @@ child frame for the completion popup and thus does not clash with
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous)))
 
-(general-define-key
- :states '(insert emacs)
- "C-t" 'completion-at-point)
+(when-evil
+ (general-define-key
+  :states '(insert emacs)
+  "C-t" 'completion-at-point))
 #+end_src
 
 ** Show documentation in a separate popup
@@ -1815,16 +1863,18 @@ constitutes a repeatable change, and in turn mark insertion and
 completion as a repeatable change.
 
 #+begin_src emacs-lisp
-(mapc #'evil-declare-ignore-repeat
-      '(corfu-next
-        corfu-previous
-        corfu-first
-        corfu-last))
+(when-evil
+ (mapc #'evil-declare-ignore-repeat
+       '(corfu-next
+         corfu-previous
+         corfu-first
+         corfu-last)))
 
-(mapc #'evil-declare-change-repeat
-      '(corfu-insert
-        corfu-insert-exact
-        corfu-complete))
+(when-evil
+ (mapc #'evil-declare-change-repeat
+       '(corfu-insert
+         corfu-insert-exact
+         corfu-complete)))
 #+end_src
 
 * E-Mail configuration
@@ -2175,10 +2225,11 @@ for instance in the top-level directory of a project.
   :commands (vterm)
   :defer t
   :config
-  (general-define-key
-   :keymaps 'vterm-mode-map
-   :states 'emacs
-   "C-w" 'vterm-send-C-w))
+  (when-evil
+   (general-define-key
+    :keymaps 'vterm-mode-map
+    :states 'emacs
+    "C-w" 'vterm-send-C-w)))
 #+end_src
 
 ** C/C++
@@ -2334,13 +2385,14 @@ header.
   "t a" '(markdown-table-align :which-key "align")
   "t t" '(markdown-table-transpose :which-key "transpose"))
 
-(general-define-key
- :states 'normal
- :keymaps 'markdown-mode-map
- "TAB" 'markdown-cycle
- "S-TAB" 'markdown-shifttab
- "{" 'markdown-backward-paragraph
- "}" 'markdown-forward-paragraph)
+(when-evil
+ (general-define-key
+  :states 'normal
+  :keymaps 'markdown-mode-map
+  "TAB" 'markdown-cycle
+  "S-TAB" 'markdown-shifttab
+  "{" 'markdown-backward-paragraph
+  "}" 'markdown-forward-paragraph))
 #+end_src
 
 ** Haskell
@@ -2459,12 +2511,13 @@ interfere with the =evil-repeat= mechanism (that is, =.=).  I try to make
 =evil= ignore those.
 
 #+begin_src emacs-lisp
-(mapc #'evil-declare-ignore-repeat
-      '(haskell-process-load-file
-        haskell-process-reload
-        haskell-goto-first-error
-        haskell-goto-next-error
-        haskell-goto-prev-error))
+(when-evil
+ (mapc #'evil-declare-ignore-repeat
+       '(haskell-process-load-file
+         haskell-process-reload
+         haskell-goto-first-error
+         haskell-goto-next-error
+         haskell-goto-prev-error)))
 #+end_src
   
 ** Dhall
@@ -2849,7 +2902,7 @@ Like its readme proposes it's also possible to reuse the
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package lispyville
+(use-package-when-evil lispyville
   :hook
   (lispy-mode . lispyville-mode)
   :config
@@ -2979,10 +3032,11 @@ to use =C-w= like in a terminal or in vim.  I used to bind
 ='ace-window= on as in most cases it's what I'd use anyway.
 
 #+begin_src emacs-lisp
-(general-define-key
- :states '(normal visual motion operator insert emacs)
- :keymaps 'override
- "C-l" 'ace-window)
+(when-evil
+ (general-define-key
+  :states '(normal visual motion operator insert emacs)
+  :keymaps 'override
+  "C-l" 'ace-window))
 #+end_src
 
 ** Global font scaling
