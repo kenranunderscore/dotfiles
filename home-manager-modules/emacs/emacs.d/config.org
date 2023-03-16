@@ -48,49 +48,20 @@ configuration of built-in packages explicitly, usually by adding
 (setq straight-use-package-by-default t)
 #+end_src
 
-#+begin_src emacs-lisp
-(setq kenran/want-evil nil)
-
-(defmacro when-evil (body)
-  "Only evaluate BODY when `kenran/want-evil' is set."
-  (when kenran/want-evil
-    body))
-#+end_src
-
-#+begin_src emacs-lisp
-(defmacro use-package-when-evil (&rest args)
-  "Like the normal `use-package' invocation, but disables the
-package if `kenran/want-evil' is set."
-  (declare (indent defun))
-  (if kenran/want-evil
-      `(use-package ,@args)
-    `(use-package
-       ,@args
-       :disabled)))
-#+end_src
-
 * Keybinding management
 
-The [[https://github.com/noctuid/general][general]] package allows me to define keybindings in a more
-straightforward and declarative way.  This is especially useful for
-its =evil-mode= integration, where I have to bind keys according to the
-current mode.
+I used to use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more
+straightforward and declarative way.  But since this is especially
+useful =evil-mode=, where I have to bind keys according to the current
+mode, I decided to drop this as well while trying to live without
+=evil= for a while.
 
 #+begin_src emacs-lisp
-(use-package-when-evil general)
-#+end_src
-
-Some additional and modified basic Emacs keybindings go here (evil-
-and mode-specific ones can be found in the evil section or the one for
-the respective mode).
-
-#+begin_src emacs-lisp
-(when-evil
- (general-define-key
-  :states '(normal visual motion emacs operator)
-  "C-h F" 'describe-face
-  "C-h M" 'describe-keymap
-  "C-h V" 'set-variable))
+(use-package emacs
+  :bind
+  ("C-h F" . describe-face)
+  ("C-h M" . describe-keymap)
+  ("C-h V" . set-variable))
 #+end_src
 
 * Loading additional ELisp configuration files
@@ -159,38 +130,10 @@ found myself searching for the cursor a couple of times lately.
 (blink-cursor-mode 1)
 #+end_src
 
-Don't show a cursor in inactive windows.  The default, hollow cursor
-in inactive windows changes colors when switching evil modes as well;
-that's kind of annoying.
+Don't show a cursor in inactive windows.
 
 #+begin_src emacs-lisp
 (setq-default cursor-in-non-selected-windows nil)
-#+end_src
-
-Set the cursor to my preferred style, a box, and some very visible
-colors for normal and insert mode.
-
-#+begin_src emacs-lisp
-(setq kenran/has-set-cursor-colors nil)
-(defun kenran/set-evil-state-cursors (&optional force)
-  "Set the cursor to a box, and use a different color for insert
-and emacs mode.  The default color should be the one that the
-current theme uses as background for the 'cursor face.  If FORCE
-is true, then always set the colors anew."
-  (when (and kenran/want-evil
-             (or force (not kenran/has-set-cursor-colors)))
-    (setq kenran/has-set-cursor-colors t)
-    (let* ((default-cursor 'box)
-           (insert-cursor '(hbar . 5)))
-      (setq evil-operator-state-cursor default-cursor)
-      (setq evil-normal-state-cursor default-cursor)
-      (setq evil-replace-state-cursor default-cursor)
-      (setq evil-visual-state-cursor default-cursor)
-      (setq evil-motion-state-cursor default-cursor)
-      (setq evil-emacs-state-cursor default-cursor)
-      (setq evil-insert-state-cursor insert-cursor)
-      (remove-hook 'server-after-make-frame-hook
-                   #'kenran/set-evil-state-cursors))))
 #+end_src
 
 ** Fonts
@@ -374,34 +317,29 @@ theme active at all times, so I use =disable-theme= on all themes in
 =custom-enabled-themes= before enabling the target theme.
 
 #+begin_src emacs-lisp
-(defvar kenran/switch-theme-hook nil
-  "Functions to be called after switching the current (default)
-font.")
+  (defvar kenran/switch-theme-hook nil
+    "Functions to be called after switching the current (default)
+  font.")
 
-(defun kenran/switch-theme-hook ()
-  "Run `kenran/switch-theme-hook'."
-  (run-hook-with-args 'kenran/switch-theme-hook))
+  (defun kenran/switch-theme-hook ()
+    "Run `kenran/switch-theme-hook'."
+    (run-hook-with-args 'kenran/switch-theme-hook))
 
-(defun kenran/switch-theme (name)
-  "Switch themes interactively.  Similar to `load-theme' but also
-disables all other enabled themes."
-  (interactive
-   (list (intern
-          (completing-read
-           "Theme: "
-           (mapcar #'symbol-name
-                   (seq-difference (custom-available-themes)
-                                   custom-enabled-themes))))))
-  (progn
-    (mapc #'disable-theme
-          custom-enabled-themes)
-    (load-theme name t)
-    (kenran/switch-theme-hook)
-    (unless (daemonp)
-      ;; If it's the initial "daemon frame" then hooks in
-      ;; `server-after-make-frame-hook' will be executed, including
-      ;; one that calls `kenran/set-evil-state-cursor-colors'.
-      (kenran/set-evil-state-cursors t))))
+  (defun kenran/switch-theme (name)
+    "Switch themes interactively.  Similar to `load-theme' but also
+  disables all other enabled themes."
+    (interactive
+     (list (intern
+	    (completing-read
+	     "Theme: "
+	     (mapcar #'symbol-name
+		     (seq-difference (custom-available-themes)
+				     custom-enabled-themes))))))
+    (progn
+      (mapc #'disable-theme
+	    custom-enabled-themes)
+      (load-theme name t)
+      (kenran/switch-theme-hook)))
 #+end_src
 
 When developing a theme, like I did with =naga=, it's handy to
@@ -520,92 +458,53 @@ from using a neovim mode line) I have learned two things:
 - I don't care about the shown modes anymore, especially since using
   =diminish= hides most of the active modes anyway.  If I really need to
   check whether some mode is enabled there's always =C-h m=.
-- I like having a visual, i.e. colorful and very visible, indicator of
-  which =evil= state/mode I'm in.
 
   So let's try to fiddle with the default mode line to make it work
   the way I like.
 
 #+begin_src emacs-lisp
-(defgroup kenran/faces nil
-  "A group for custom faces."
-  :group 'faces)
+  (defgroup kenran/faces nil
+    "A group for custom faces."
+    :group 'faces)
 
-(defmacro kenran/with-active-face (face)
-  "Return FACE if we're in the mode line of the active window, and
-the `mode-line-inactive' face otherwise."
-  `(if (mode-line-window-selected-p)
-       ,face
-     'mode-line-inactive)) 
+  (defmacro kenran/with-active-face (face)
+    "Return FACE if we're in the mode line of the active window, and
+  the `mode-line-inactive' face otherwise."
+    `(if (mode-line-window-selected-p)
+	 ,face
+       'mode-line-inactive)) 
 
-(defcustom kenran/evil-state-mode-line-format
-  '(:eval
-    (let ((fg (face-attribute 'default :foreground))
-          (bg (face-attribute 'default :background))
-          (error-fg (face-attribute 'error :foreground)))
-      (cond
-       ((eq evil-state 'insert)
-        (propertize
-         " INSERT "
-         'face
-         (kenran/with-active-face `(:foreground ,bg :background ,error-fg))))
-       ((eq evil-state 'normal)
-        (propertize
-         " NORMAL "
-         'face
-         (kenran/with-active-face `(:foreground ,bg :background ,fg))))
-       ((eq evil-state 'motion)
-        (propertize
-         " MOTION "
-         'face
-         (kenran/with-active-face `(:foreground ,bg :background ,fg))))
-       ((eq evil-state 'visual)
-        (propertize
-         " VISUAL "
-         'face
-         (kenran/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground)))))
-       ((eq evil-state 'emacs)
-        (propertize
-         " EMACS "
-         'face
-         (kenran/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground)))))
-       (t "        "))))
-  "Specifies how to display the current `evil-state' in the mode
-line."
-  :risky t)
+  (defcustom kenran/major-mode-mode-line-format
+    '("(" (:eval (symbol-name major-mode)) ")")
+    "How to display the active major mode in the mode line."
+    :risky t)
 
-(defcustom kenran/major-mode-mode-line-format
-  '("(" (:eval (symbol-name major-mode)) ")")
-  "How to display the active major mode in the mode line."
-  :risky t)
+  (defcustom kenran/mode-line-buffer-format
+    '(compilation-in-progress
+       (:eval (propertize
+	       "   [Compiling...]"
+	       'face
+	       (kenran/with-active-face compilation-mode-line-run))))
+    "How to display the name of the current buffer in the mode line."
+    :risky t)
 
-(defcustom kenran/mode-line-buffer-format
-  '(compilation-in-progress
-     (:eval (propertize
-             "   [Compiling...]"
-             'face
-             (kenran/with-active-face compilation-mode-line-run))))
-  "How to display the name of the current buffer in the mode line."
-  :risky t)
+  (defcustom kenran/mode-line-flymake-format
+    '(flymake-mode
+      (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
+	       `("   " ,counters))))
+    "How to display the name of the current buffer in the mode line."
+    :risky t)
 
-(defcustom kenran/mode-line-flymake-format
-  '(flymake-mode
-    (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
-             `("   " ,counters))))
-  "How to display the name of the current buffer in the mode line."
-  :risky t)
-
-(setq-default
- mode-line-format
- '(""
-   kenran/evil-state-mode-line-format
-   kenran/mode-line-flymake-format
-   kenran/mode-line-buffer-format
-   ("   " kenran/major-mode-mode-line-format)
-   (:propertize "   %b" face mode-line-buffer-id)
-   ;; Always show current line and column, without checking
-   ;; `column-number-mode' and `line-number-mode'
-   ("   (%l,%c)")))
+  (setq-default
+   mode-line-format
+   '(""
+     kenran/mode-line-flymake-format
+     kenran/mode-line-buffer-format
+     ("   " kenran/major-mode-mode-line-format)
+     (:propertize "   %b" face mode-line-buffer-id)
+     ;; Always show current line and column, without checking
+     ;; `column-number-mode' and `line-number-mode'
+     ("   (%l,%c)")))
 #+end_src
 
 * Basic options
@@ -717,9 +616,7 @@ is used.  It's enabled by default in all programming modes.
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t)
   :hook ((prog-mode . display-line-numbers-mode)
-         (conf-mode . display-line-numbers-mode)
-         (evil-insert-state-entry . kenran/switch-to-absolute-line-numbers)
-         (evil-insert-state-exit . kenran/switch-to-hybrid-line-numbers)))
+         (conf-mode . display-line-numbers-mode)))
 #+end_src
 
 Toggle line numbers interactively.  I've tried simply binding
@@ -798,256 +695,6 @@ Of course there's an existing Emacs options for this:
 (setq mouse-yank-at-point t)
 #+end_src
 
-* Vim emulation
-
-I'm usually using =evil-mode= for vim emulation, with varying degrees
-(over time) of how much of =evil-collection= I sprinkle in -- either
-nearly everything or nearly nothing.  For now, I'm thinking of going
-back to vanilla Emacs bindings to finally /really/ grasp them and see if
-it clicks for me.  I cannot put my finger on why exactly, but in my
-heart of hearts I'm not a modal editing person, even though I use lots
-of it.
-
-** Leader keys
-
-Having a dedicated leader key (=SPC= in my case) is one of the most
-important things to me as it opens up a lot of possibilities for
-creating custom keymaps.  The keybindings naturally do not clash with
-the default Emacs-style bindings many packages introduce.  I will use
-this to try and create more vim-inspired mnemonic keybindings (say, =p=
-for project-specific commands, =g= for git etc.)
-
-In general I try to keep package-specific keybindings next to the
-configuration of the respective packages.  However with =use-package=
-there seems to be a =:general= keyword, which probably works similar to
-the =:bind= one.  I sometimes use the latter for bindings that are not
-mode-sensitive.
-
-#+begin_src emacs-lisp
-(when-evil
- (general-create-definer
-  leader
-  :keymaps 'override
-  :states '(normal insert emacs visual motion)
-  :prefix "SPC"
-  :non-normal-prefix "C-;"))
-
-(defmacro with-leader (&rest args)
-  (when-evil
-   `(leader ,@args)))
-#+end_src
-
-A local leader key is something that is usually used to access
-situational commands, for instance language-specific or mode-specific
-ones.  I used =,= for this in Vim; same here now.
-
-#+begin_src emacs-lisp
-(when-evil
-  (general-create-definer local-leader
-  :prefix ","))
-
-(defmacro with-local-leader (&rest args)
-  (when-evil
-   `(local-leader ,@args)))
-#+end_src
-
-** =Evil= and supporting packages
-
-The evil package offers a very complete vim experience inside of
-Emacs.  I've borrowed some pieces of configuration from
-[[https://depp.brause.cc/dotemacs][wasamasa's Emacs configuration]], specifically the part where I default
-to =emacs= mode.  The reason is that (sometimes due to =evil=, other times
-=evil-collection=) some buffers, like popups in =special-mode=,  don't
-behave the way I'd expect them to.  If this experiment goes well I
-think I'll gradually remove =evil= / =evil-motion-state= from more and
-more things.  I'm very used to =evil= integration and keybindings in
-things like =magit=, =dired= and others, though.  If I end up going
-"vanilla" except for editing, I might have to think about how I want
-to move consistently so I don't get caught up between =C-n= and =C-p=
-versus =C-j= and =C-k=.
-
-#+begin_src emacs-lisp
-(use-package-when-evil evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-respect-visual-line-mode t)
-  (add-hook 'server-after-make-frame-hook
-            #'kenran/set-evil-state-cursors)
-  :config
-  (evil-mode 1)
-  :custom
-  ((evil-want-C-u-scroll t)
-   (evil-want-C-u-delete nil)
-   (evil-want-C-w-delete t)
-   (evil-want-Y-yank-to-eol t)
-   (evil-undo-system 'undo-redo)
-   (evil-symbol-word-search t)
-   (evil-jumps-cross-buffers nil)
-   (evil-mode-line-format nil))
-  :bind
-  (:map evil-insert-state-map
-        ("C-k" . nil)))
-#+end_src
-
-*** Surrounding things
-
-The analogue of [[https://github.com/tpope/vim-surround][Tim Pope's vim-surround plugin]] in Emacs.  Now I can
-use things like =ysiw)= to surround an inner word with non-padded normal
-parentheses, =ds]= to delete surrounding brackets, or =cs[{= to change
-surrounding brackets to curly braces with whitespace padding.
-Selected regions can be surround with e.g. =S`=.
-
-#+begin_src emacs-lisp
-(use-package-when-evil evil-surround
-  :after evil
-  :config
-  (global-evil-surround-mode))
-#+end_src
-
-*** 2-character searching/jumping
-**** =avy=
-
-After using [[https://github.com/ggandor/leap.nvim][leap.nvim]] in =neovim= for a while now, I really prefer this
-way of jumping, as I can get to the correct candidate faster (while
-losing out on =;= and =,=, but maybe it's possible to get both).  So let's
-give [[https://github.com/abo-abo/avy][avy]] a try.
-
-#+begin_src emacs-lisp
-(use-package-when-evil avy
-  :after evil
-  :config
-  (setq avy-timeout-seconds 0.3)
-  (general-define-key
-   :states 'normal
-   "s" #'evil-avy-goto-char-2-below
-   "S" #'evil-avy-goto-char-2-above
-   "g s" #'evil-avy-goto-char-timer))
-#+end_src
-
-*** Evilify =org=
-
-=Evil-org= enables me to use =evil= keybindings in =org-agenda=.  As a bonus
-it adds some keybindings and text objects for =org= files as well.
-
-TODO: It's surely worth spending some more time to find out what else
-this brings with it, but I'm not writing enough with =org=.
-
-#+begin_src emacs-lisp
-(use-package-when-evil evil-org
-  :after (evil org)
-  :hook (org-mode . evil-org-mode)
-  :diminish evil-org-mode
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-#+end_src
-
-*** Evilify other packages
-
-I have a love/hate relationship with [[https://github.com/emacs-evil/evil-collection][evil-collection]]: on one hand, it
-gives all the awesome Emacs packages a more unified and vimish
-interface, thus removing the need for a mental switch between, as an
-example, using =C-n= or =C-p= for navigation instead of =j= and =k=, but on
-the other hand obscuring some default Emacs keybindings of those
-packages, effectively hiding some "default" functionality.
-
-In the past I decided to move away from this full evilified Emacs
-experience, and follow the doctrine "vim is for editing, everything
-else can be used Emacs style".  But it didn't really feel great either
-due to the above-mentioned context switches all the time.  So after
-spending some time in =neovim= (where everything is "evil" of course)
-but missing my precious Emacs, I now give =evil-collection= another try.
-
-#+begin_src emacs-lisp
-(use-package-when-evil evil-collection
-  :after evil
-  :config
-  (dolist (feature '(lispy corfu))
-    (delete feature evil-collection-mode-list))
-  (evil-collection-init))
-#+end_src
-
-** Keybindings
-
-Create nice custom mappings for normal mode (and others) that are
-accessed with the leader key, =SPC=.
-
-#+begin_src emacs-lisp
-(with-leader
-  ;; Give SPC SPC one more chance
-  "SPC" '(execute-extended-command :which-key "M-x")
-  ;; Different ways to quit Emacs
-  "q" '(:ignore t :which-key "quit")
-  "q f" 'evil-save-and-quit
-  "q k" 'save-buffers-kill-emacs
-  ;; Buffer-related commands
-  "b" '(:ignore t :which-key "buffer")
-  "b b" 'consult-buffer
-  "b q" 'kill-current-buffer
-  "b i" 'ibuffer
-  "b k" 'kill-buffer
-  "b n" 'next-buffer
-  "b p" 'previous-buffer
-  ;; Toggles/switches
-  "t" '(:ignore t :which-key "toggle/switch")
-  "t l" '(kenran/toggle-line-numbers :which-key "line numbers")
-  "t t" '(kenran/switch-theme :which-key "switch theme")
-  "t r" '(kenran/reload-theme :which-key "reload theme")
-  "t f" '(kenran/switch-font :which-key "switch font")
-  "t w" 'global-whitespace-mode
-  ;; Language-agnostic code-related commands
-  "c" '(:ignore t :which-key "code")
-  "c l" 'comment-line
-  "c r" 'comment-or-uncomment-region
-  ;; Searching
-  "s" '(:ignore t :which-key "search/switch")
-  "s g" 'consult-git-grep
-  "s p" 'consult-ripgrep
-  ;; Window management (redundant)
-  "w" '(evil-window-map :which-key "windows")
-  ;; Emacs config
-  "e" '(:ignore t :which-key "emacs")
-  "e e" '(kenran/open-init-file :which-key "edit config.org")
-  ;; Additional help commands
-  "h" '(:ignore t :which-key "help")
-  "h m" 'man)
-#+end_src
-
-*** =C-w=
-
-Enable =C-w= for vim-like window management (when not in insert or Emacs
-mode).  This means that I need to override the Emacs default binding,
-which can be done via =general='s =:keymaps 'override=.
-
-#+begin_src emacs-lisp
-(when-evil
- (general-define-key
-  :states '(normal visual motion operator)
-  :keymaps 'override
-  "C-w" 'evil-window-map
-  "C-w C-h" 'evil-window-left
-  "C-w C-k" 'evil-window-up
-  "C-w C-j" 'evil-window-down
-  "C-w C-l" 'evil-window-right
-  "C-w C-d" 'evil-quit))
-#+end_src
-
-Enable =C-w= to delete backward (like in vim or bash) in insert mode,
-and also when Emacs is reading user input in the minibuffer.
-
-#+begin_src emacs-lisp
-(when-evil
- (general-define-key
-  :keymaps 'minibuffer-local-map
-  "C-w" 'evil-delete-backward-word))
-
-(when-evil
- (general-define-key
-  :states '(emacs)
-  "C-w" 'evil-delete-backward-word))
-#+end_src
-
 * Built-in packages with extensions
 ** Emacs Lisp
 
@@ -1055,11 +702,10 @@ I like evaluating the top-level form I'm currently on by pressing =C-c
 C-c=, similar to how one compiles in SLY/SLIME.
 
 #+begin_src emacs-lisp
-  (when-evil
-   (general-define-key
-    :states '(normal visual emacs)
-    :keymaps 'emacs-lisp-mode-map
-    "C-c C-c" 'eval-defun))
+  (use-package emacs
+    :bind
+    (:map emacs-lisp-mode-map
+	  ("C-c C-c" . eval-defun)))
 #+end_src
  
 ** Display whitespace
@@ -1163,14 +809,6 @@ keys bound.
 (use-package dired-narrow
   :defer t
   :after dired)
-
-(with-local-leader
-  :states 'normal
-  :keymaps 'dired-mode-map
-  "n" '(:ignore t :which-key "dired-narrow")
-  "n n" 'dired-narrow
-  "n f" 'dired-narrow-fuzzy
-  "n r" 'dired-narrow-regexp)
 #+end_src
 
 ** Ediff
@@ -1261,10 +899,7 @@ I've been happy with it ever since.
   (vertico-mode +1)
   :custom
   (vertico-cycle t)
-  (vertico-resize t)
-  :bind
-  (:map vertico-map
-        ("C-w" . evil-delete-backward-word)))
+  (vertico-resize t))
 #+end_src
 
 =Vertico-reverse= is an extension of =vertico= that shows the
@@ -1513,9 +1148,7 @@ loading =org=, a custom font setup might run to adjust the headers.
    ;; face is not yet known there, so use a hook.
    (org-indent-mode . (lambda ()
                         (kenran/inherit-fixed-pitch 'org-indent)
-                        (kenran/inherit-fixed-pitch 'org-hide)))
-   ;; (org-mode . (lambda () (text-scale-increase 1)))
-   (org-capture-mode . evil-insert-state))
+                        (kenran/inherit-fixed-pitch 'org-hide))))
   :diminish org-indent-mode
   :custom
   ((org-startup-indented t)
@@ -1562,15 +1195,15 @@ Add some globally useful =org= keybindings under =SPC o=, like for
 capturing, storing links etc.
 
 #+begin_src emacs-lisp
-(with-leader
-  "o" '(:which-key "org-mode" :ignore t)
-  "o a" 'org-agenda
-  "o c" 'org-capture
-  "o l" 'org-store-link
-  "o f" 'org-cycle-agenda-files
-  "o s" 'org-save-all-org-buffers
-  "o p" '((lambda () (interactive) (org-publish-all t)) :which-key "publish all")
-  "o t" '(:which-key "toggle" :ignore t))
+;; (with-leader
+;;   "o" '(:which-key "org-mode" :ignore t)
+;;   "o a" 'org-agenda
+;;   "o c" 'org-capture
+;;   "o l" 'org-store-link
+;;   "o f" 'org-cycle-agenda-files
+;;   "o s" 'org-save-all-org-buffers
+;;   "o p" '((lambda () (interactive) (org-publish-all t)) :which-key "publish all")
+;;   "o t" '(:which-key "toggle" :ignore t))
 #+end_src
 
 ** Beautiful bullet points
@@ -1601,12 +1234,6 @@ to toggle it.
 
 Thankfully a new package has appeared recently: [[https://github.com/awth13/org-appear][org-appear]]. It reacts
 to the position of point to automatically show surrounding markup.
-
-Since I'm using =evil-mode= I set the =org-appear-trigger= to ='manual=, and
-add hooks that show/hide the markers to entering/leaving insert mode.
-This might turn out to be a hindrance after all, since bindings like
-=ciw= become a bit weird to work with.  I might end up actually using
-the ='always= option value after all.
 
 #+begin_src emacs-lisp
 (use-package org-appear
@@ -1644,11 +1271,11 @@ approach yet, but might in the future.  My synchronization setup with
 *** Keybindings for =org-roam=
 
 #+begin_src emacs-lisp
-(with-leader
-  "o r" '(:which-key "roam" :ignore t)
-  "o r c" 'org-roam-capture
-  "o r f" 'org-roam-node-find
-  "o r i" 'org-roam-node-insert)
+;; (with-leader
+;;   "o r" '(:which-key "roam" :ignore t)
+;;   "o r c" 'org-roam-capture
+;;   "o r f" 'org-roam-node-find
+;;   "o r i" 'org-roam-node-insert)
 #+end_src
 
 ** Short presentations with org
@@ -1702,9 +1329,9 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
   ("f" first-error)
   ("q" nil "exit"))
 
-(with-leader
-  "n" '(:ignore t :which-key "navigate")
-  "n e" '(hydra-navigate-errors/body :which-key "error list"))
+;; (with-leader
+;;   "n" '(:ignore t :which-key "navigate")
+;;   "n e" '(hydra-navigate-errors/body :which-key "error list"))
 #+end_src
 
 * On-the-fly syntax checking (and other things): Flymake
@@ -1752,10 +1379,9 @@ child frame for the completion popup and thus does not clash with
 (use-package corfu
   :straight (corfu :files (:defaults "extensions/*.el"))
   :init (global-corfu-mode)
-  :hook (evil-insert-state-exit . corfu-quit)
   :config
   (setq corfu-cycle t)
-  (setq corfu-auto t)
+  (setq corfu-auto nil)
   (setq corfu-auto-delay 0.0)
   (setq corfu-excluded-modes '(erc-mode))
   :bind
@@ -1764,11 +1390,6 @@ child frame for the completion popup and thus does not clash with
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous)))
-
-(when-evil
- (general-define-key
-  :states '(insert emacs)
-  "C-t" 'completion-at-point))
 #+end_src
 
 ** Show documentation in a separate popup
@@ -1819,62 +1440,6 @@ called at all."
          (haskell-mode . kenran/register-default-capfs))
   :init
   (kenran/register-default-capfs))
-#+end_src
-
-** Integration with =evil-repeat=
-
-Usually when completing something with =corfu= and then using
-=evil-repeat= leads to unexpected behavior (see [[https://github.com/minad/corfu/pull/225][this GitHub issue]]).
-This is the workaround mentioned there; hopefully it won't break too
-often.
-
-#+begin_src emacs-lisp
-(defun corfu--unread-this-command-keys ()
-  (when (> (length (this-command-keys)) 0)
-    (setq unread-command-events (nconc
-                                 (listify-key-sequence (this-command-keys))
-                                 unread-command-events))
-    (clear-this-command-keys t)))
-
-(defun corfu--pre-command ()
-  "Insert selected candidate unless command is marked to continue completion."
-  (when corfu--preview-ov
-    (delete-overlay corfu--preview-ov)
-    (setq corfu--preview-ov nil))
-  (when (and (eq corfu-preview-current 'insert)
-             (/= corfu--index corfu--preselect)
-             ;; See the comment about `overriding-local-map' in `corfu--post-command'.
-             (not (or overriding-terminal-local-map
-                      (corfu--match-symbol-p corfu-continue-commands this-command))))
-    (corfu--unread-this-command-keys)
-    (setq this-command 'corfu-insert-exact)))
-
-(defun corfu-insert-exact ()
-  "Insert current candidate with the `exact' status.
-Quit if no candidate is selected."
-  (interactive)
-  (if (>= corfu--index 0)
-      (corfu--insert 'exact)
-    (corfu-quit)))
-#+end_src
-
-Now ignore moving through the completion list when determining what
-constitutes a repeatable change, and in turn mark insertion and
-completion as a repeatable change.
-
-#+begin_src emacs-lisp
-(when-evil
- (mapc #'evil-declare-ignore-repeat
-       '(corfu-next
-         corfu-previous
-         corfu-first
-         corfu-last)))
-
-(when-evil
- (mapc #'evil-declare-change-repeat
-       '(corfu-insert
-         corfu-insert-exact
-         corfu-complete)))
 #+end_src
 
 * E-Mail configuration
@@ -1961,9 +1526,6 @@ of it is due to its concept of /contexts/.  Usually there's one context
 for each of my e-mail addresses, and switching between them I may set
 some context-specific variables, or even change the =mu4e= UI
 accordingly.
-
-Note that =mu4e= is one of those packages that would behave strangely
-when using the =evil-collection= integration.
 
 #+begin_src emacs-lisp
   (use-package mu4e
@@ -2060,13 +1622,6 @@ when using the =evil-collection= integration.
     (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
 #+end_src
 
-Bind e-mail management to the global hotkey =SPC m=.
-
-#+begin_src emacs-lisp
-(with-leader
-  "m" '(mu4e :which-key "mail"))
-#+end_src
-  
 * Window management: taming popups
 
 One thing I'm missing from Doom Emacs is the way it handled all sorts
@@ -2187,8 +1742,6 @@ so I've fully switched over.
 #+begin_src emacs-lisp
 (use-package tempel
   :commands (tempel-done)
-  :init
-  (add-hook 'evil-insert-state-exit-hook #'tempel-done)
   :config
   (setq tempel-path
         (expand-file-name "templates.eld"
@@ -2223,13 +1776,7 @@ for instance in the top-level directory of a project.
 (use-package vterm
   :straight nil
   :commands (vterm)
-  :defer t
-  :config
-  (when-evil
-   (general-define-key
-    :keymaps 'vterm-mode-map
-    :states 'emacs
-    "C-w" 'vterm-send-C-w)))
+  :defer t)
 #+end_src
 
 ** C/C++
@@ -2334,11 +1881,6 @@ header.
   :defer t
   :config
   (setq js-indent-level 2))
-
-(with-local-leader
-  :states 'normal
-  :keymaps 'js-json-mode-map
-  "p" '(json-pretty-print-buffer :which-key "prettify buffer"))
 #+end_src
 
 ** Purescript
@@ -2375,24 +1917,6 @@ header.
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc")
   :hook ((markdown-mode gfm-mode) . auto-fill-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-(with-local-leader
-  :states 'normal
-  :keymaps 'markdown-mode-map
-  "t" '(:ignore t :which-key "table")
-  "t a" '(markdown-table-align :which-key "align")
-  "t t" '(markdown-table-transpose :which-key "transpose"))
-
-(when-evil
- (general-define-key
-  :states 'normal
-  :keymaps 'markdown-mode-map
-  "TAB" 'markdown-cycle
-  "S-TAB" 'markdown-shifttab
-  "{" 'markdown-backward-paragraph
-  "}" 'markdown-forward-paragraph))
 #+end_src
 
 ** Haskell
@@ -2487,39 +2011,25 @@ Define some keybindings that are local to the =interactive-haskell-mode=
 using the local leader key.
 
 #+begin_src emacs-lisp
-(with-local-leader
-  :states 'normal
-  :keymaps 'interactive-haskell-mode-map
-  "e" '(:ignore t :which-key "errors")
-  "e f" '(haskell-goto-first-error :which-key "first")
-  "e n" '(haskell-goto-next-error :which-key "next")
-  "e p" '(haskell-goto-prev-error :which-key "previous")
-  "i" '(:ignore t :which-key "imports")
-  "i i" '(haskell-navigate-imports-go :which-key "navigate to imports")
-  "i r" '(haskell-navigate-imports-return :which-key "return from imports")
-  "i a" '(kenran/haskell-add-import :which-key "add import")
-  "p" '(:ignore t :which-key "pragmas")
-  "p l" '(kenran/haskell-add-language-extension :which-key "add language extension")
-  "p o" '(kenran/haskell-add-ghc-option :which-key "add GHC option")
-  "h" '(:ignore t :which-key "haskell-process")
-  "h r" '(haskell-process-restart :which-key "restart")
-  "h k" 'haskell-session-kill)
+;; (with-local-leader
+;;   :states 'normal
+;;   :keymaps 'interactive-haskell-mode-map
+;;   "e" '(:ignore t :which-key "errors")
+;;   "e f" '(haskell-goto-first-error :which-key "first")
+;;   "e n" '(haskell-goto-next-error :which-key "next")
+;;   "e p" '(haskell-goto-prev-error :which-key "previous")
+;;   "i" '(:ignore t :which-key "imports")
+;;   "i i" '(haskell-navigate-imports-go :which-key "navigate to imports")
+;;   "i r" '(haskell-navigate-imports-return :which-key "return from imports")
+;;   "i a" '(kenran/haskell-add-import :which-key "add import")
+;;   "p" '(:ignore t :which-key "pragmas")
+;;   "p l" '(kenran/haskell-add-language-extension :which-key "add language extension")
+;;   "p o" '(kenran/haskell-add-ghc-option :which-key "add GHC option")
+;;   "h" '(:ignore t :which-key "haskell-process")
+;;   "h r" '(haskell-process-restart :which-key "restart")
+;;   "h k" 'haskell-session-kill)
 #+end_src
 
-Some =haskell-mode= operations like compiling, or jumping to errors,
-interfere with the =evil-repeat= mechanism (that is, =.=).  I try to make
-=evil= ignore those.
-
-#+begin_src emacs-lisp
-(when-evil
- (mapc #'evil-declare-ignore-repeat
-       '(haskell-process-load-file
-         haskell-process-reload
-         haskell-goto-first-error
-         haskell-goto-next-error
-         haskell-goto-prev-error)))
-#+end_src
-  
 ** Dhall
 
 #+begin_src emacs-lisp
@@ -2602,24 +2112,6 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 #+begin_src emacs-lisp
 (use-package sly-asdf
   :defer t)
-#+end_src
-
-*** Keybindings
-
-No really necessary to bind this, but why not...
-
-#+begin_src emacs-lisp
-(with-local-leader
-  :states 'normal
-  :keymaps 'lisp-mode-map
-  "s" '(:ignore t :which-key "SLY")
-  "s s" 'sly
-  "s c" 'sly-connect)
-
-(with-local-leader
-  :states 'normal
-  :keymaps 'sly-mrepl-mode-map
-  "p" '(sly-mrepl-set-package :which-key "in-package"))
 #+end_src
 
 ** Racket
@@ -2713,12 +2205,6 @@ comes into play.
 (use-package eglot
   :straight (:type built-in)
   :defer t)
-
-(with-local-leader
-  :states 'normal
-  :keymaps 'eglot-mode-map
-  "l" '(:ignore t :which-key "LSP")
-  "l r" 'eglot-rename)
 #+end_src
 
 ** Better Emacs help and documentation
@@ -2728,12 +2214,9 @@ some built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 (use-package helpful
-  :after evil
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key))
-  :config
-  (evil-set-initial-state 'helpful-mode 'motion))
+         ("C-h k" . helpful-key)))
 #+end_src
 
 ** Project management
@@ -2816,16 +2299,12 @@ One tricky thing was making it possible to bind the keymap
               ("s" . consult-ripgrep)
               ("D" . kenran/project-edit-dir-local-variable)
               ("n" . kenran/navigate-to-projects)))
-
-(with-leader
-  "p" '(project-prefix-map :which-key "project"))
 #+end_src
 
 ** Magit
 
 #+begin_src emacs-lisp
 (use-package magit
-  :hook (git-commit-mode . evil-insert-state)
   :config
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
@@ -2854,18 +2333,18 @@ One tricky thing was making it possible to bind the keymap
 be accessed under =SPC g=.
 
 #+begin_src emacs-lisp
-(with-leader
-  "g" '(:ignore t :which-key "git")
-  "g b" '(magit-branch-checkout :which-key "switch branch")
-  "g i" '(magit-gitignore :which-key "ignore")
-  "g I" '(magit-init :which-key "init")
-  "g s" '(magit-project-status :which-key "status")
-  "g S" '(magit-status-here :which-key "status here")
-  "g l" '(magit-log :which-key "log")
-  "g f" '(magit-pull-from-upstream :which-key "pull")
-  "g p" '(magit-push :which-key "pull")
-  "g d" '(magit-dispatch :which-key "show dispatch popup")
-  "g t" '(magit-todos-list :which-key "todos"))
+  ;; (with-leader
+  ;;   "g" '(:ignore t :which-key "git")
+  ;;   "g b" '(magit-branch-checkout :which-key "switch branch")
+  ;;   "g i" '(magit-gitignore :which-key "ignore")
+  ;;   "g I" '(magit-init :which-key "init")
+  ;;   "g s" '(magit-project-status :which-key "status")
+  ;;   "g S" '(magit-status-here :which-key "status here")
+  ;;   "g l" '(magit-log :which-key "log")
+  ;;   "g f" '(magit-pull-from-upstream :which-key "pull")
+  ;;   "g p" '(magit-push :which-key "pull")
+  ;;   "g d" '(magit-dispatch :which-key "show dispatch popup")
+  ;;   "g t" '(magit-todos-list :which-key "todos"))
 #+end_src
 
 *** Modes for other kinds of =git=-related files
@@ -2899,23 +2378,6 @@ Like its readme proposes it's also possible to reuse the
     racket-repl-mode
     sly-mrepl-mode)
    . lispy-mode))
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package-when-evil lispyville
-  :hook
-  (lispy-mode . lispyville-mode)
-  :config
-  (with-eval-after-load 'lispyville
-    (lispyville-set-key-theme
-     '(operators
-       c-w
-       c-u
-       prettify
-       slurp/barf-cp
-       text-objects
-       additional
-       additional-insert))))
 #+end_src
 
 ** Highlight "todo", "fixme" and other keywords everywhere.
@@ -3021,24 +2483,6 @@ comfortably usable from within Emacs.
   (set-face-attribute 'aw-leading-char-face nil :height 2.5))
 #+end_src
 
-*** Keybindings
-
-=C-l= is a normal Emacs hotkey that I don't need or use because of =evil=,
-and in the modes that I've disabled =evil= for I don't use it either.
-It thus seems like a good choice to have as a fallback for window
-management, as especially in terminal or shell modes I like being able
-to use =C-w= like in a terminal or in vim.  I used to bind
-='evil-window-map= to =C-l=, but perhaps it's also a good key to have
-='ace-window= on as in most cases it's what I'd use anyway.
-
-#+begin_src emacs-lisp
-(when-evil
- (general-define-key
-  :states '(normal visual motion operator insert emacs)
-  :keymaps 'override
-  "C-l" 'ace-window))
-#+end_src
-
 ** Global font scaling
 
 #+begin_src emacs-lisp
@@ -3069,9 +2513,6 @@ to use =C-w= like in a terminal or in vim.  I used to bind
                              :height height))
    "set size" :color blue)
   ("q" nil "exit"))
-
-(with-leader
-  "s s" '(hydra-global-zoom/body :which-key "font zoom"))
 #+end_src
 
 ** Edit =grep= results over multiple buffers
