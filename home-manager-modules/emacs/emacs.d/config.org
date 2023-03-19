@@ -2277,6 +2277,16 @@ One tricky thing was making it possible to bind the keymap
 
 ** Magit
 
+Not much to say here: =magit= is awesome and in my top 3 reasons why I
+can't ever switch to anything that doesn't have this.  I've tried
+=vim-fugitive= and =neogit= for (neo)vim, and while they're great, I still
+missed =magit=.  I'm in the process of getting used to the non-=evil=
+keybindings (again); once that is finished, I might add some custom
+bindings here.  =magit-status-here= is surely the one I use the most,
+but I have a hunch it's not used nearly often enough to warrant a
+custom key chord; I can just use =M-x=, where I don't have to enter
+much due to =savehist-mode=.
+
 #+begin_src emacs-lisp
 (use-package magit
   :config
@@ -2297,26 +2307,6 @@ One tricky thing was making it possible to bind the keymap
 #+begin_src emacs-lisp
 (use-package git-timemachine
   :defer t)
-#+end_src
-
-*** Keybindings
-
-=Magit=-specific keybindings are useful in a global scope, thus they may
-be accessed under =SPC g=.
-
-#+begin_src emacs-lisp
-  ;; (with-leader
-  ;;   "g" '(:ignore t :which-key "git")
-  ;;   "g b" '(magit-branch-checkout :which-key "switch branch")
-  ;;   "g i" '(magit-gitignore :which-key "ignore")
-  ;;   "g I" '(magit-init :which-key "init")
-  ;;   "g s" '(magit-project-status :which-key "status")
-  ;;   "g S" '(magit-status-here :which-key "status here")
-  ;;   "g l" '(magit-log :which-key "log")
-  ;;   "g f" '(magit-pull-from-upstream :which-key "pull")
-  ;;   "g p" '(magit-push :which-key "pull")
-  ;;   "g d" '(magit-dispatch :which-key "show dispatch popup")
-  ;;   "g t" '(magit-todos-list :which-key "todos"))
 #+end_src
 
 *** Modes for other kinds of =git=-related files
