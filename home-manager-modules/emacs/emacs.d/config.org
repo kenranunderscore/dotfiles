@@ -544,7 +544,7 @@ from using a neovim mode line) I have learned two things:
      (:propertize "   %b" face mode-line-buffer-id)
      ;; Always show current line and column, without checking
      ;; `column-number-mode' and `line-number-mode'
-     ("   (%l,%c)")))
+     ("   L%l C%c")))
 #+end_src
 
 * Basic options
