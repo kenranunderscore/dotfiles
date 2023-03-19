@@ -902,16 +902,6 @@ I've been happy with it ever since.
   (vertico-resize t))
 #+end_src
 
-=Vertico-reverse= is an extension of =vertico= that shows the
-completion candidates above the prompt.  This has the nice effect of
-the prompt always being in the same location, so that I don't have to
-change where I look.
-
-#+begin_src emacs-lisp
-(use-package vertico-reverse
-  :straight nil)
-#+end_src
-
 Directory navigation in =C-x d= or =C-x C-f= is something else that I
 liked in Doom Emacs, as Doom had a notion of "directory name", that
 is, =DEL= would delete one level in the directory hierarchy, including
@@ -927,23 +917,7 @@ the slash symbol.  The following extension to =vertico= does just that.
               ("RET" . vertico-directory-enter)))
 #+end_src
 
-The reversed vertical display is not ideal for every context in my
-opinion.  The =vertico-multiform= extension lets me choose which
-extensions I want to use in which context precisely.
-
-#+begin_src emacs-lisp
-(use-package vertico-multiform
-  :straight nil
-  :init (vertico-multiform-mode 1)
-  :config
-  (setq vertico-multiform-categories
-        '((file flat)
-          (t reverse)))
-  (setq vertico-multiform-commands
-        '((kenran/switch-theme grid reverse))))
-#+end_src
-
-*** Remembering command history
+** Remembering command history
 
 =savehist-mode= keeps a history of commands and inputs I've done in a
 context-sensitive way, and then shows those at the top when presented
