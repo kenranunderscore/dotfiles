@@ -882,7 +882,7 @@ enable it everywhere.
         (concat user-emacs-directory "abbrev_defs")))
 #+end_src
 
-* Incremental narrowing
+* Incremental narrowing with =vertico=
 
 I started with =helm= in [[https://www.spacemacs.org/][spacemacs]], then later switched to [[https://github.com/hlissner/doom-emacs][Doom Emacs]]
 where after a while I tried out =ivy= and loved it.  Configuring Emacs
