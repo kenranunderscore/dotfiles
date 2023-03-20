@@ -1995,7 +1995,7 @@ using the local leader key.
 (with-eval-after-load 'haskell
   (keymap-set interactive-haskell-mode-map "C-c e f" 'haskell-goto-first-error)
   (keymap-set interactive-haskell-mode-map "C-c e n" 'haskell-goto-next-error)
-  (keymap-set interactive-haskell-mode-map "C-c e p" 'haskell-goto-previous-error)
+  (keymap-set interactive-haskell-mode-map "C-c e p" 'haskell-goto-prev-error)
   (keymap-set interactive-haskell-mode-map "C-c i" 'kenran/haskell-add-import)
   (keymap-set interactive-haskell-mode-map "C-c p l" 'kenran/haskell-add-language-extension)
   (keymap-set interactive-haskell-mode-map "C-c p o" 'kenran/haskell-add-ghc-option)
