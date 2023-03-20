@@ -62,6 +62,7 @@ mode, I decided to drop this as well while trying to live without
   ("C-h F" . describe-face)
   ("C-h M" . describe-keymap)
   ("C-h V" . set-variable)
+  ("C-x C-o" . other-window)
   ("C-. b k" . kill-current-buffer)
   ("C-. b i" . ibuffer)
   ("C-. b p" . previous-buffer)
