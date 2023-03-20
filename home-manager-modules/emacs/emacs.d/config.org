@@ -756,6 +756,7 @@ Make whitespace symbols visible.
 
 #+begin_src emacs-lisp
 (use-package whitespace
+  :defer t
   :config
   (setq whitespace-line-column 100)
   (setq whitespace-global-modes
@@ -867,6 +868,7 @@ single-frame, circumventing the problem.
 
 #+begin_src emacs-lisp
 (use-package ediff-wind
+  :defer t
   :straight (:type built-in)
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
@@ -1665,6 +1667,7 @@ so I've fully switched over.
 
 #+begin_src emacs-lisp
 (use-package erc
+  :defer t
   :config
   (setq erc-autojoin-channels-alist
         '((libera "#emacs"
@@ -1783,6 +1786,7 @@ for Haskell.
 
 #+begin_src emacs-lisp
 (use-package tuareg
+  :defer t
   :hook (tuareg-mode . (lambda () (setq mode-name "🐫")))
   :config
   (setq tuareg-indent-align-with-first-arg nil)
@@ -2284,6 +2288,7 @@ much due to =savehist-mode=.
 
 #+begin_src emacs-lisp
 (use-package magit
+  :defer t
   :config
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
