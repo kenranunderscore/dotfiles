@@ -1274,7 +1274,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
   ("f" first-error)
   ("q" nil "exit"))
 
-(keymap-global-set "C-. e" 'hydra-navigate-errors/body)
+(keymap-global-set "C-. n e" 'hydra-navigate-errors/body)
 #+end_src
 
 * On-the-fly syntax checking (and other things): Flymake
@@ -1954,23 +1954,15 @@ Define some keybindings that are local to the =interactive-haskell-mode=
 using the local leader key.
 
 #+begin_src emacs-lisp
-;; (with-local-leader
-;;   :states 'normal
-;;   :keymaps 'interactive-haskell-mode-map
-;;   "e" '(:ignore t :which-key "errors")
-;;   "e f" '(haskell-goto-first-error :which-key "first")
-;;   "e n" '(haskell-goto-next-error :which-key "next")
-;;   "e p" '(haskell-goto-prev-error :which-key "previous")
-;;   "i" '(:ignore t :which-key "imports")
-;;   "i i" '(haskell-navigate-imports-go :which-key "navigate to imports")
-;;   "i r" '(haskell-navigate-imports-return :which-key "return from imports")
-;;   "i a" '(kenran/haskell-add-import :which-key "add import")
-;;   "p" '(:ignore t :which-key "pragmas")
-;;   "p l" '(kenran/haskell-add-language-extension :which-key "add language extension")
-;;   "p o" '(kenran/haskell-add-ghc-option :which-key "add GHC option")
-;;   "h" '(:ignore t :which-key "haskell-process")
-;;   "h r" '(haskell-process-restart :which-key "restart")
-;;   "h k" 'haskell-session-kill)
+(with-eval-after-load 'haskell
+  (keymap-set interactive-haskell-mode-map "C-c e f" 'haskell-goto-first-error)
+  (keymap-set interactive-haskell-mode-map "C-c e n" 'haskell-goto-next-error)
+  (keymap-set interactive-haskell-mode-map "C-c e p" 'haskell-goto-previous-error)
+  (keymap-set interactive-haskell-mode-map "C-c i" 'kenran/haskell-add-import)
+  (keymap-set interactive-haskell-mode-map "C-c p l" 'kenran/haskell-add-language-extension)
+  (keymap-set interactive-haskell-mode-map "C-c p o" 'kenran/haskell-add-ghc-option)
+  (keymap-set interactive-haskell-mode-map "C-c h k" 'haskell-session-kill)
+  (keymap-set interactive-haskell-mode-map "C-c h r" 'haskell-process-restart))
 #+end_src
 
 ** Dhall
