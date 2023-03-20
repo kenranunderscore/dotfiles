@@ -1169,15 +1169,10 @@ Add some globally useful =org= keybindings under =SPC o=, like for
 capturing, storing links etc.
 
 #+begin_src emacs-lisp
-;; (with-leader
-;;   "o" '(:which-key "org-mode" :ignore t)
-;;   "o a" 'org-agenda
-;;   "o c" 'org-capture
-;;   "o l" 'org-store-link
-;;   "o f" 'org-cycle-agenda-files
-;;   "o s" 'org-save-all-org-buffers
-;;   "o p" '((lambda () (interactive) (org-publish-all t)) :which-key "publish all")
-;;   "o t" '(:which-key "toggle" :ignore t))
+(keymap-global-set "C-. o a" 'org-agenda)
+(keymap-global-set "C-. o c" 'org-capture)
+(keymap-global-set "C-. o l" 'org-store-link)
+(keymap-global-set "C-. o f" 'org-cycle-agenda-files)
 #+end_src
 
 ** Beautiful bullet points
