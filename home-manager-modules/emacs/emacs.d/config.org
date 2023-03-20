@@ -1220,54 +1220,6 @@ to the position of point to automatically show surrounding markup.
   (setq org-appear-trigger 'always))
 #+end_src
 
-** Org as a Zettelkasten implementation
-
-This is a very basic setup for =org-roam=.  I don't use the Zettelkasten
-approach yet, but might in the future.  My synchronization setup with
-=syncthing= should handle this well.
-
-#+begin_src emacs-lisp
-(use-package org-roam
-  :defer t
-  :after org
-  :init
-  (setq org-roam-v2-ack t)
-  ;; Didn't work for the initial setup when set in :custom.
-  (setq org-roam-directory (file-truename "~/org/roam/"))
-  :custom
-  (org-roam-db-location (expand-file-name
-                         (concat (system-name) "-roam" ".db")
-                         org-roam-directory))
-  :config
-  (org-roam-setup))
-#+end_src
-
-*** Keybindings for =org-roam=
-
-#+begin_src emacs-lisp
-;; (with-leader
-;;   "o r" '(:which-key "roam" :ignore t)
-;;   "o r c" 'org-roam-capture
-;;   "o r f" 'org-roam-node-find
-;;   "o r i" 'org-roam-node-insert)
-#+end_src
-
-** Short presentations with org
-
-#+begin_src emacs-lisp
-(use-package org-present
-  :hook ((org-present-mode . (lambda ()
-                               (org-present-big)
-                               (org-display-inline-images)
-                               (org-present-hide-cursor)
-                               (org-present-read-only)))
-         (org-present-mode-quit . (lambda ()
-                                    (org-present-small)
-                                    (org-remove-inline-images)
-                                    (org-present-show-cursor)
-                                    (org-present-read-write)))))
-#+end_src
-
 ** Enable syntax highlighting when exporting to HTML
 
 #+begin_src emacs-lisp
