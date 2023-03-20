@@ -48,6 +48,23 @@ configuration of built-in packages explicitly, usually by adding
 (setq straight-use-package-by-default t)
 #+end_src
 
+* Profiling the startup time
+
+For no real reason whatsoever I like it when my Emacs starts up
+quickly.  The =benchmark-init= package nicely profiles where the time
+during startup went, and if a culprit is found, the "fix" is usually
+to add =:defer t= to a =use-package= call.
+
+Note that this block is not tangled; I only run this when I encounter
+weird behavior.
+
+#+begin_src emacs-lisp :tangle no
+(use-package benchmark-init
+  :defer nil
+  :config (benchmark-init/activate)
+  :hook (after-init . benchmark-init/deactivate))
+#+end_src
+
 * Keybinding management
 
 I used to use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more
