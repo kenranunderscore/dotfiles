@@ -1067,6 +1067,22 @@ Integrate =embark= with =consult=.
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
 #+end_src
 
+* Jumping and sniping with =avy=
+
+Try out =avy= to quickly jump to specific locations in the currently
+visible area of the buffer.  This is similar to =evil-snipe= in Emacs,
+or (neo)vim plugins like =vim-snipe=, =easymotion=, =leap.nvim=, =hop.nvim=,
+=lightspeed.nvim=, etc.
+
+#+begin_src emacs-lisp
+(use-package avy
+  :defer t
+  :config
+  (setq avy-timeout-seconds 0.3)
+  :bind
+  ("C-'" . avy-goto-char-timer))
+#+end_src
+
 * Org mode
 
 I want my headers to stand out by being really big.  I also like using
