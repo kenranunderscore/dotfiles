@@ -61,7 +61,11 @@ mode, I decided to drop this as well while trying to live without
   :bind
   ("C-h F" . describe-face)
   ("C-h M" . describe-keymap)
-  ("C-h V" . set-variable))
+  ("C-h V" . set-variable)
+  ("C-. b k" . kill-current-buffer)
+  ("C-. b i" . ibuffer)
+  ("C-. b p" . previous-buffer)
+  ("C-. b n" . next-buffer))
 #+end_src
 
 * Loading additional ELisp configuration files
@@ -82,13 +86,16 @@ file.  Use a separate file instead and load that one on startup.
   (load custom-file 'no-error))
 #+end_src
 
-A quick way to jump to this file.
+A quick way to jump to this file, and an accompanying keybinding, as I
+do this /very often/.
 
 #+begin_src emacs-lisp
 (defun kenran/open-init-file ()
   "Open my config.org file."
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
+
+(keymap-global-set "C-. e" 'kenran/open-init-file)
 #+end_src
 
 * Custom Emacs look
@@ -308,6 +315,13 @@ together with =emacsclient=.
   (kenran/switch-font kenran/current-font))
 #+end_src
 
+I find myself switching fonts /all the time/; I just seem to need that
+kind of visual refreshment.  So let's bind it to a "leader" key.
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-. t f" 'kenran/switch-font)
+#+end_src
+
 ** Color theme
 *** Utilities
 
@@ -351,6 +365,14 @@ be able to reload it on the fly.
   (interactive)
   (let ((active-theme (car custom-enabled-themes)))
     (kenran/switch-theme active-theme)))
+#+end_src
+
+As with fonts, I like changing visuals regularly, as in, multiple
+times a day usually.  So keybindings for this come in useful:
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-. t t" 'kenran/switch-theme)
+(keymap-global-set "C-. t r" 'kenran/reload-theme)
 #+end_src
 
 *** My favorite Emacs themes
@@ -629,6 +651,8 @@ toggle.  This is more stable so far.
 keybinding."
   (interactive)
   (display-line-numbers-mode 'toggle))
+
+(keymap-global-set "C-. t l" 'kenran/toggle-line-numbers)
 #+end_src
 
 ** Insert a newline at the end of files
@@ -1165,7 +1189,7 @@ loading =org=, a custom font setup might run to adjust the headers.
 
 ** Keybindings
 
-Add some globally useful =org= keybindings under =SPC o=, like for
+Add some globally useful =org= keybindings under =C-. o=, like for
 capturing, storing links etc.
 
 #+begin_src emacs-lisp
@@ -1250,9 +1274,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
   ("f" first-error)
   ("q" nil "exit"))
 
-;; (with-leader
-;;   "n" '(:ignore t :which-key "navigate")
-;;   "n e" '(hydra-navigate-errors/body :which-key "error list"))
+(keymap-global-set "C-. e" 'hydra-navigate-errors/body)
 #+end_src
 
 * On-the-fly syntax checking (and other things): Flymake
@@ -2249,6 +2271,14 @@ much due to =savehist-mode=.
     '("-a" "Autostash" "--autostash")))
 #+end_src
 
+I used to have way more =magit= keybindings when I used =evil=, but as
+mentioned above =M-x= seems like the way to go.  I was missing
+=magit-status-here= a lot, though, so add it in an accessible spot.
+
+#+begin_src emacs-lisp
+(keymap-global-set "C-. g" 'magit-status-here)
+#+end_src
+
 *** Interactively browse =git= history
 
 #+begin_src emacs-lisp
@@ -2422,6 +2452,8 @@ comfortably usable from within Emacs.
                              :height height))
    "set size" :color blue)
   ("q" nil "exit"))
+
+(keymap-global-set "C-. s s" 'hydra-global-zoom/body)
 #+end_src
 
 ** Edit =grep= results over multiple buffers
