@@ -2484,7 +2484,7 @@ comfortably usable from within Emacs.
    "set size" :color blue)
   ("q" nil "exit"))
 
-(keymap-global-set "C-. s s" 'hydra-global-zoom/body)
+(keymap-global-set "C-. z" 'hydra-global-zoom/body)
 #+end_src
 
 ** Edit =grep= results over multiple buffers
