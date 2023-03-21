@@ -468,18 +468,6 @@ packages, as one might imagine.
   :disabled t)
 #+end_src
 
-**** Tomorrow
-
-Steve Purcell (author of many Emacs packages) has ported the
-well-known =tomorrow= themes [[https://github.com/purcell/color-theme-sanityinc-tomorrow][to Emacs]].  I haven't used them much, but I
-really like the =sanityinc-tomorrow-bright= variant for its higher
-contrast, overall darker look, and beautiful accent colors.
-
-#+begin_src emacs-lisp
-(use-package color-theme-sanityinc-tomorrow
-  :defer t)
-#+end_src
-
 ** Render color names/codes with as their respective color
 
 It's an ELPA package, so no need/use to put it in the nix-managed
