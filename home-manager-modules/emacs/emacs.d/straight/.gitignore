@@ -1,6 +1,0 @@
-*
-!.gitignore
-!versions
-
-versions/*
-!versions/*.el

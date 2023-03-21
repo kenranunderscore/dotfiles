@@ -1,9 +1,4 @@
-(use-package haskell-mode
-  :diminish interactive-haskell-mode
-  :custom
-  (haskell-process-type 'cabal-repl)
-  (haskell-interactive-popup-errors nil)
-  :hook (haskell-mode . interactive-haskell-mode))
+(require 'use-package)
 
 ;; A couple of Emacs Lisp functions that help me to make quick changes
 ;; to Haskell files (adding pragmas, language extensions, GHC
@@ -74,17 +69,22 @@ and alias."
       (haskell-navigate-imports-go)
       (insert import-line))))
 
-;; Define some keybindings that are local to the
-;; =interactive-haskell-mode= using the local leader key.
-
-(with-eval-after-load 'haskell
-  (keymap-set interactive-haskell-mode-map "C-c e f" 'haskell-goto-first-error)
-  (keymap-set interactive-haskell-mode-map "C-c e n" 'haskell-goto-next-error)
-  (keymap-set interactive-haskell-mode-map "C-c e p" 'haskell-goto-prev-error)
-  (keymap-set interactive-haskell-mode-map "C-c i" 'kenran/haskell-add-import)
-  (keymap-set interactive-haskell-mode-map "C-c p l" 'kenran/haskell-add-language-extension)
-  (keymap-set interactive-haskell-mode-map "C-c p o" 'kenran/haskell-add-ghc-option)
-  (keymap-set interactive-haskell-mode-map "C-c h k" 'haskell-session-kill)
-  (keymap-set interactive-haskell-mode-map "C-c h r" 'haskell-process-restart))
+(use-package haskell-mode
+  :defer
+  :custom
+  (haskell-process-type 'cabal-repl)
+  (haskell-interactive-popup-errors nil)
+  :hook
+  (haskell-mode . interactive-haskell-mode)
+  :bind
+  (:map haskell-mode-map
+        ("C-c e f" . haskell-goto-first-error)
+        ("C-c e n" . haskell-goto-next-error)
+        ("C-c e p" . haskell-goto-prev-error)
+        ("C-c i" . kenran/haskell-add-import)
+        ("C-c p l" . kenran/haskell-add-language-extension)
+        ("C-c p o" . kenran/haskell-add-ghc-option)
+        ("C-c h k" . haskell-session-kill)
+        ("C-c h r" . haskell-process-type)))
 
 (provide 'my-haskell)

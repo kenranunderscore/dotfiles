@@ -6,46 +6,30 @@
 * Package management
 
 I'm specifying the Emacs I'm using via [[https://github.com/nixos/nixpkgs][nixpkgs]] / my [[https://github.com/nix-community/home-manager][home-manager]]
-setup, but for package management I'm currently test driving
-[[https://github.com/radian-software/straight.el][straight.el]].  Having the packages come from =nixpkgs= (marked as
+setup, but for package management I'm currently using the now-built-in
+=use-package= macro.  Having the packages come from =nixpkgs= (marked as
 =external= in =list-packages=) is nice, but requires a =nixos-rebuild= and
-restarting Emacs after making some changes.  =straight.el= should make
-the process of quickly trying out packages much simpler, and
-afterwards they're neither gone nor silently "leaking" (i.e.,
-automatically loaded even though I don't use them anymore) into Emacs.
+restarting Emacs after making some changes.
 
-The script below is taken right from =straight.el='s readme.
+FIXME: note on =straight=
+
+Set up MELPA.
 
 #+begin_src emacs-lisp
-(setq straight-repository-branch "develop")
-(defvar bootstrap-version)
-
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+(require 'package)
+(package-initialize)
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")))
 #+end_src
 
-Install [[https://github.com/jwiegley/use-package][use-package]]; it integrates well with =straight=.
+And set up =use-package= itself in a way such that the =:ensure= keyword
+is by default set to =t=, that is, =use-packages= ensures that the package
+will be installed if it isn't already.
 
 #+begin_src emacs-lisp
-(straight-use-package '(use-package :type built-in))
-#+end_src
-
-Now make every =use-package= block below behave as if I had specified
-=:straight t= by default.  Note that this requires me to handle
-configuration of built-in packages explicitly, usually by adding
-=:straight (:type built-in)=.
-
-#+begin_src emacs-lisp
-(setq straight-use-package-by-default t)
+(require 'use-package)
+(setq use-package-always-ensure t)
 #+end_src
 
 * Profiling the startup time
@@ -87,14 +71,6 @@ mode, I decided to drop this as well while trying to live without
 #+end_src
 
 * Loading additional ELisp configuration files
-
-Custom ELisp files (locally defined Emacs packages for instance)
-should be going into =~/.emacs.d/lisp/=, so that has to be in the
-=load-path=.
-
-#+begin_src emacs-lisp
-(add-to-list 'load-path (locate-user-emacs-file "lisp/"))
-#+end_src
 
 I do not want customizations done via =customize= to end up in this
 file.  Use a separate file instead and load that one on startup.
@@ -787,7 +763,7 @@ Make whitespace symbols visible.
 
 #+begin_src emacs-lisp
 (use-package simple
-  :straight (:type built-in)
+  :ensure nil
   :diminish auto-fill-function
   :config
   (setq eval-expression-print-length nil)
@@ -811,7 +787,7 @@ Make whitespace symbols visible.
 
 #+begin_src emacs-lisp
 (use-package dired
-  :straight (:type built-in)
+  :ensure nil
   :defer
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
@@ -858,7 +834,7 @@ single-frame, circumventing the problem.
 #+begin_src emacs-lisp
 (use-package ediff-wind
   :defer
-  :straight (:type built-in)
+  :ensure nil
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
@@ -874,7 +850,7 @@ The built-in =electric-pair-mode= does just that (by default).
 
 #+begin_src emacs-lisp
 (use-package emacs
-  :straight (:type built-in)
+  :ensure nil
   :init
   ;; disabled for now
   (electric-pair-mode -1)
@@ -890,7 +866,7 @@ reverts such changes.
 
 #+begin_src emacs-lisp
 (use-package emacs
-  :straight (:type built-in)
+  :ensure nil
   :init (winner-mode))
 #+end_src
 
@@ -927,7 +903,6 @@ I've been happy with it ever since.
 
 #+begin_src emacs-lisp
 (use-package vertico
-  :straight (vertico :files (:defaults "extensions/*.el"))
   :init
   (vertico-mode +1)
   :custom
@@ -942,7 +917,7 @@ the slash symbol.  The following extension to =vertico= does just that.
 
 #+begin_src emacs-lisp
 (use-package vertico-directory
-  :straight nil
+  :ensure nil
   :after vertico
   :bind (:map vertico-map
               ("DEL" . vertico-directory-delete-char)
@@ -1161,7 +1136,7 @@ loading =org=, a custom font setup might run to adjust the headers.
   ;; Use the built-in version of org (which is quite up-to-date as I'm
   ;; always using emacs HEAD).  This circumvents problems with
   ;; 'org-compat of the older version having been loaded.
-  :straight (:type built-in)
+  :ensure nil
   :hook
   ((org-mode . auto-fill-mode)
    (org-mode . kenran/org-font-setup)
@@ -1306,7 +1281,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
 
 #+begin_src emacs-lisp
 (use-package flymake
-  :straight (:type built-in)
+  :ensure nil
   :defer
   :config
   (setq flymake-suppress-zero-counters nil)
@@ -1325,6 +1300,7 @@ via hooks to =sh-mode=.
 
 #+begin_src emacs-lisp
 (use-package flymake-shellcheck
+  :after flymake
   :commands (flymake-shellcheck-load)
   :hook ((sh-mode . flymake-shellcheck-load)
          (sh-mode . flymake-mode)))
@@ -1346,7 +1322,6 @@ child frame for the completion popup and thus does not clash with
 
 #+begin_src emacs-lisp
 (use-package corfu
-  :straight (corfu :files (:defaults "extensions/*.el"))
   :init (global-corfu-mode)
   :config
   (setq corfu-cycle t)
@@ -1368,7 +1343,7 @@ seems great.
 
 #+begin_src emacs-lisp
 (use-package corfu-popupinfo
-  :straight nil
+  :ensure nil
   :config
   (corfu-popupinfo-mode)
   (setq corfu-popupinfo-delay 0.5))
@@ -1497,98 +1472,96 @@ some context-specific variables, or even change the =mu4e= UI
 accordingly.
 
 #+begin_src emacs-lisp
-  (use-package mu4e
-    :straight
-    (:local-repo "~/.nix-profile/share/emacs/site-lisp/mu4e"
-     :type built-in)
-    :defer
-    :commands (mu4e)
-    :config
-    (setq mail-user-agent 'mu4e-user-agent)
-    (setq mu4e-completing-read-function #'completing-read)
-    ;; I don't sync drafts to either of the accounts
-    (setq mu4e-confirm-quit nil)
-    (setq mu4e-change-filenames-when-moving t)
-    (setq mu4e-drafts-folder "/drafts")
-    (setq mu4e-attachment-dir "~/Downloads/")
-    (setq mu4e-contexts
-          `(,(make-mu4e-context
-              :name "mailbox"
-              :match-func (lambda (msg)
-                            (when msg
-                              (string-prefix-p "/mailbox"
-                                               (mu4e-message-field msg :maildir)
-                                               t)))
-              :vars '((user-mail-address . "johannes.maier@mailbox.org")
-                      (mu4e-compose-signature . nil)
-                      (mu4e-sent-folder . "/mailbox/Sent")
-                      (mu4e-trash-folder . "/mailbox/Trash")
-                      (mu4e-refile-folder . (lambda (msg)
-                                              (let* ((date (mu4e-message-field-at-point :date))
-                                                     (year (decoded-time-year (decode-time date))))
-                                                (concat "/mailbox/Archive/"
-                                                        (number-to-string year)))))))
-            ,(make-mu4e-context
-              :name "ag"
-              :match-func (lambda (msg)
-                            (when msg
-                              (string-prefix-p "/ag"
-                                               (mu4e-message-field msg :maildir)
-                                               t)))
-              :vars `((user-mail-address . "johannes.maier@active-group.de")
-                      ;; FIXME: Signature in a file?
-                      (mu4e-compose-signature . ,(concat
-                                                  "Johannes Maier\n"
-                                                  "johannes.maier@active-group.de\n\n"
-                                                  "+49 (7071) 70896-67\n\n"
-                                                  "Active Group GmbH\n"
-                                                  "Hechinger Str. 12/1\n"
-                                                  "72072 Tübingen\n"
-                                                  "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-                                                  "Geschäftsführer: Dr. Michael Sperber"))
-                      (mu4e-sent-folder . "/ag/Sent")
-                      (mu4e-refile-folder . (lambda (msg)
-                                              (let* ((date (mu4e-message-field-at-point :date))
-                                                     (year (decoded-time-year (decode-time date))))
-                                                (concat "/ag/Archives/"
-                                                        (number-to-string year)))))
-                      (mu4e-trash-folder . "/ag/Trash")))))
-    (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
-                           (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
-                           (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
-                           (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
-    (setf (alist-get 'trash mu4e-marks)
-          (list :char '("d" . "▼")
-                :prompt "dtrash"
-                :dyn-target (lambda (target msg)
-                              (mu4e-get-trash-folder msg))
-                :action (lambda (docid msg target)
-                          (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
-    (setq mu4e-headers-fields '((:human-date . 12)
-                                (:flags . 6)
-                                (:maildir . 15)
-                                (:mailing-list . 10)
-                                (:from . 22)
-                                (:subject)))
-    (setq mu4e-context-policy 'pick-first)
-    (setq mu4e-compose-policy 'ask)
-    ;; Getting mail via mbsync
-    (setq mu4e-get-mail-command "mbsync -a")
-    ;; Composing emails
-    (setq message-send-mail-function #'message-send-mail-with-sendmail)
-    (setq send-mail-function #'message-send-mail-with-sendmail)
-    (setq message-sendmail-envelope-from 'header)
-    (setq mail-envelope-from 'header)
-    (setq mail-specify-envelope-from 'header)
-    (setq message-kill-buffer-on-exit t)
-    ;; Visuals
-    (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
-    (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
-    (setq mu4e-headers-thread-child-prefix '("├> " . "├▶"))
-    (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
-    (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
-    (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
-    (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
+(use-package mu4e
+  :load-path "~/.nix-profile/share/emacs/site-lisp/mu4e"
+  :defer
+  :commands (mu4e)
+  :config
+  (setq mail-user-agent 'mu4e-user-agent)
+  (setq mu4e-completing-read-function #'completing-read)
+  ;; I don't sync drafts to either of the accounts
+  (setq mu4e-confirm-quit nil)
+  (setq mu4e-change-filenames-when-moving t)
+  (setq mu4e-drafts-folder "/drafts")
+  (setq mu4e-attachment-dir "~/Downloads/")
+  (setq mu4e-contexts
+        `(,(make-mu4e-context
+            :name "mailbox"
+            :match-func (lambda (msg)
+                          (when msg
+                            (string-prefix-p "/mailbox"
+                                             (mu4e-message-field msg :maildir)
+                                             t)))
+            :vars '((user-mail-address . "johannes.maier@mailbox.org")
+                    (mu4e-compose-signature . nil)
+                    (mu4e-sent-folder . "/mailbox/Sent")
+                    (mu4e-trash-folder . "/mailbox/Trash")
+                    (mu4e-refile-folder . (lambda (msg)
+                                            (let* ((date (mu4e-message-field-at-point :date))
+                                                   (year (decoded-time-year (decode-time date))))
+                                              (concat "/mailbox/Archive/"
+                                                      (number-to-string year)))))))
+          ,(make-mu4e-context
+            :name "ag"
+            :match-func (lambda (msg)
+                          (when msg
+                            (string-prefix-p "/ag"
+                                             (mu4e-message-field msg :maildir)
+                                             t)))
+            :vars `((user-mail-address . "johannes.maier@active-group.de")
+                    ;; FIXME: Signature in a file?
+                    (mu4e-compose-signature . ,(concat
+                                                "Johannes Maier\n"
+                                                "johannes.maier@active-group.de\n\n"
+                                                "+49 (7071) 70896-67\n\n"
+                                                "Active Group GmbH\n"
+                                                "Hechinger Str. 12/1\n"
+                                                "72072 Tübingen\n"
+                                                "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+                                                "Geschäftsführer: Dr. Michael Sperber"))
+                    (mu4e-sent-folder . "/ag/Sent")
+                    (mu4e-refile-folder . (lambda (msg)
+                                            (let* ((date (mu4e-message-field-at-point :date))
+                                                   (year (decoded-time-year (decode-time date))))
+                                              (concat "/ag/Archives/"
+                                                      (number-to-string year)))))
+                    (mu4e-trash-folder . "/ag/Trash")))))
+  (setq mu4e-bookmarks '((:name "Active-Group inbox" :query "maildir:/ag/Inbox" :key ?a)
+                         (:name "Mailbox inbox" :query "maildir:/mailbox/Inbox" :key ?m)
+                         (:name "Unread messages" :query "flag:unread AND NOT flag:trashed" :key ?u)
+                         (:name "Sent" :query "maildir:/ag/Sent OR maildir:/mailbox/Sent" :key ?s)))
+  (setf (alist-get 'trash mu4e-marks)
+        (list :char '("d" . "▼")
+              :prompt "dtrash"
+              :dyn-target (lambda (target msg)
+                            (mu4e-get-trash-folder msg))
+              :action (lambda (docid msg target)
+                        (mu4e~proc-move docid (mu4e~mark-check-target target)) "-N")))
+  (setq mu4e-headers-fields '((:human-date . 12)
+                              (:flags . 6)
+                              (:maildir . 15)
+                              (:mailing-list . 10)
+                              (:from . 22)
+                              (:subject)))
+  (setq mu4e-context-policy 'pick-first)
+  (setq mu4e-compose-policy 'ask)
+  ;; Getting mail via mbsync
+  (setq mu4e-get-mail-command "mbsync -a")
+  ;; Composing emails
+  (setq message-send-mail-function #'message-send-mail-with-sendmail)
+  (setq send-mail-function #'message-send-mail-with-sendmail)
+  (setq message-sendmail-envelope-from 'header)
+  (setq mail-envelope-from 'header)
+  (setq mail-specify-envelope-from 'header)
+  (setq message-kill-buffer-on-exit t)
+  ;; Visuals
+  (setq mu4e-headers-thread-single-orphan-prefix '("─> " . "─▶"))
+  (setq mu4e-headers-thread-orphan-prefix '("┬> " . "┬▶ "))
+  (setq mu4e-headers-thread-child-prefix '("├> " . "├▶"))
+  (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
+  (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
+  (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
+  (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
 #+end_src
 
 * Window management: taming popups
@@ -1744,7 +1717,6 @@ for instance in the top-level directory of a project.
 
 #+begin_src emacs-lisp
 (use-package vterm
-  :straight nil
   :commands (vterm)
   :defer)
 #+end_src
@@ -1900,8 +1872,8 @@ contains everything.
 
 #+begin_src emacs-lisp
 (use-package my-haskell
-  :straight nil
-  :defer)
+  :demand
+  :load-path "lisp/")
 #+end_src
 
 ** Dhall
@@ -2077,7 +2049,7 @@ comes into play.
 
 #+begin_src emacs-lisp
 (use-package eglot
-  :straight (:type built-in)
+  :ensure nil
   :defer)
 #+end_src
 
