@@ -1889,7 +1889,7 @@ contains everything.
 #+begin_src emacs-lisp
 (use-package my-haskell
   :demand
-  :load-path "my-packages/")
+  :load-path kenran/custom-package-dir)
 #+end_src
 
 ** Dhall
