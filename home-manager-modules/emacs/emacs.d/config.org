@@ -753,9 +753,11 @@ Make whitespace symbols visible.
 
 #+begin_src emacs-lisp
 (use-package face-remap
+  :defer
   :diminish buffer-face-mode)
 
 (use-package autorevert
+  :defer
   :diminish auto-revert-mode)
 #+end_src
 
