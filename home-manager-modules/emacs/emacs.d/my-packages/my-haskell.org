@@ -1,3 +1,8 @@
+#+TITLE: Haskell configuration and utilities
+#+AUTHOR: Johannes Maier
+#+EMAIL: johannes.maier@mailbox.org
+#+STARTUP: showall
+
 * Haskell
 
 This package contains A couple of Emacs Lisp functions that help me to

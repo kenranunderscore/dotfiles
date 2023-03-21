@@ -1883,7 +1883,7 @@ header.
 Provide an interactive mode for writing Haskell.  I can work with a
 REPL, get feedback and compilation errors shown in the code, and so
 on.  I've also added a bunch of utility functions and want to load
-everything lazily, so I've created a custom local Emacs package than
+everything lazily, so I've created a [[file:my-packages/my-haskell.org][custom local Emacs package]] that
 contains everything.
 
 #+begin_src emacs-lisp
