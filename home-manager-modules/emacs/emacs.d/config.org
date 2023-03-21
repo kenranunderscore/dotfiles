@@ -267,7 +267,7 @@ applies the attributes of its value in =kenran/font-alist=.
                                      (copy-alist kenran/font-alist)))))))
   (let* ((attrs (alist-get font kenran/font-alist))
          (family (plist-get attrs :family))
-         (height (or (plist-get attrs :default-height) 160))
+         (height (or (plist-get attrs :default-height) 180))
          ;; `buffer-face-mode' is enabled when calling
          ;; `variable-pitch-mode'
          (org-height (if (bound-and-true-p buffer-face-mode)
@@ -393,7 +393,7 @@ Enable =naga=:
 #+begin_src emacs-lisp
 (setq naga-theme-use-lighter-org-block-background nil)
 (setq naga-theme-modeline-style 'green-box)
-(kenran/switch-theme 'naga)
+(kenran/switch-theme 'wheatgrass)
 #+end_src
 
 **** Modus themes
