@@ -53,14 +53,14 @@ configuration of built-in packages explicitly, usually by adding
 For no real reason whatsoever I like it when my Emacs starts up
 quickly.  The =benchmark-init= package nicely profiles where the time
 during startup went, and if a culprit is found, the "fix" is usually
-to add =:defer t= to a =use-package= call.
+to add =:defer= to a =use-package= call.
 
 Note that this block is not tangled; I only run this when I encounter
 weird behavior.
 
 #+begin_src emacs-lisp :tangle no
 (use-package benchmark-init
-  :defer nil
+  :demand
   :config (benchmark-init/activate)
   :hook (after-init . benchmark-init/deactivate))
 #+end_src
@@ -431,7 +431,7 @@ anything that Prot makes available).
 
 #+begin_src emacs-lisp
 (use-package modus-themes
-  :defer t
+  :defer
   :config
   (setq modus-themes-subtle-line-numbers t)
   (setq modus-themes-bold-constructs t)
@@ -464,7 +464,7 @@ packages, as one might imagine.
 
 #+begin_src emacs-lisp
 (use-package doom-themes
-  :defer t
+  :defer
   :disabled t)
 #+end_src
 
@@ -475,7 +475,7 @@ Emacs packages.
 
 #+begin_src emacs-lisp
 (use-package rainbow-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** Modeline
@@ -744,7 +744,7 @@ Make whitespace symbols visible.
 
 #+begin_src emacs-lisp
 (use-package whitespace
-  :defer t
+  :defer
   :config
   (setq whitespace-line-column 100)
   (setq whitespace-global-modes
@@ -765,7 +765,7 @@ Make whitespace symbols visible.
 
 #+begin_src emacs-lisp
 (use-package man
-  :defer t
+  :defer
   :config
   ;; As soon as it is ready open the manpage in a separate, focused
   ;; window.
@@ -811,7 +811,7 @@ Make whitespace symbols visible.
 #+begin_src emacs-lisp
 (use-package dired
   :straight (:type built-in)
-  :defer t
+  :defer
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-create-destination-dirs 'ask)
@@ -824,7 +824,7 @@ Beautify =dired= a bit.
 
 #+begin_src emacs-lisp
 (use-package diredfl
-  :defer t
+  :defer
   :after dired
   :hook (dired-mode . diredfl-mode))
 #+end_src
@@ -838,7 +838,7 @@ keys bound.
 
 #+begin_src emacs-lisp
 (use-package dired-narrow
-  :defer t
+  :defer
   :after dired)
 #+end_src
 
@@ -856,7 +856,7 @@ single-frame, circumventing the problem.
 
 #+begin_src emacs-lisp
 (use-package ediff-wind
-  :defer t
+  :defer
   :straight (:type built-in)
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
@@ -1071,7 +1071,7 @@ Integrate =embark= with =consult=.
 #+begin_src emacs-lisp
 (use-package embark-consult
   :after (embark consult)
-  :demand t
+  :demand
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
 #+end_src
 
@@ -1084,7 +1084,7 @@ or (neo)vim plugins like =vim-snipe=, =easymotion=, =leap.nvim=, =hop.nvim=,
 
 #+begin_src emacs-lisp
 (use-package avy
-  :defer t
+  :defer
   :config
   (setq avy-timeout-seconds 0.3)
   :bind
@@ -1267,7 +1267,7 @@ to the position of point to automatically show surrounding markup.
 
 #+begin_src emacs-lisp
 (use-package htmlize
-  :defer t
+  :defer
   :after ox)
 #+end_src
 
@@ -1277,7 +1277,7 @@ TODO
 
 #+begin_src emacs-lisp
 (use-package hydra
-  :defer t)
+  :defer)
 #+end_src
 
 ** "Error" navigation
@@ -1306,6 +1306,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
 #+begin_src emacs-lisp
 (use-package flymake
   :straight (:type built-in)
+  :defer
   :config
   (setq flymake-suppress-zero-counters nil)
   (setq flymake-fringe-indicator-position 'left-fringe)
@@ -1499,7 +1500,7 @@ accordingly.
     :straight
     (:local-repo "~/.nix-profile/share/emacs/site-lisp/mu4e"
      :type built-in)
-    :defer t
+    :defer
     :commands (mu4e)
     :config
     (setq mail-user-agent 'mu4e-user-agent)
@@ -1631,7 +1632,7 @@ guess is that they probably go well together.
 #+begin_src emacs-lisp
 (use-package popper
   :disabled t
-  :defer t
+  :defer
   :init (popper-mode))
 #+end_src
 
@@ -1655,7 +1656,7 @@ so I've fully switched over.
 
 #+begin_src emacs-lisp
 (use-package erc
-  :defer t
+  :defer
   :config
   (setq erc-autojoin-channels-alist
         '((libera "#emacs"
@@ -1731,7 +1732,7 @@ save.
 
 #+begin_src emacs-lisp
 (use-package reformatter
-  :defer t)
+  :defer)
 #+end_src
 
 ** Terminal emulator in Emacs
@@ -1744,7 +1745,7 @@ for instance in the top-level directory of a project.
 (use-package vterm
   :straight nil
   :commands (vterm)
-  :defer t)
+  :defer)
 #+end_src
 
 ** C/C++
@@ -1763,7 +1764,7 @@ great defaults.  The community is very welcoming so far, as well!
 
 #+begin_src emacs-lisp
 (use-package zig-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** OCaml
@@ -1774,7 +1775,7 @@ for Haskell.
 
 #+begin_src emacs-lisp
 (use-package tuareg
-  :defer t
+  :defer
   :hook (tuareg-mode . (lambda () (setq mode-name "🐫")))
   :config
   (setq tuareg-indent-align-with-first-arg nil)
@@ -1811,7 +1812,7 @@ nice to have syntax highlighting, though.
 
 #+begin_src emacs-lisp
 (use-package fish-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** EditorConfig
@@ -1840,14 +1841,14 @@ header.
 
 #+begin_src emacs-lisp
 (use-package ini-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** JavaScript
 
 #+begin_src emacs-lisp
 (use-package js
-  :defer t
+  :defer
   :config
   (setq js-indent-level 2))
 #+end_src
@@ -2007,7 +2008,7 @@ with syntax highlighting for those.
 
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
-  :defer t)
+  :defer)
 #+end_src
 
 I'm trying out this package, as it provides a =magit=-like UI to control
@@ -2015,14 +2016,14 @@ images, containers, volumes, networks, etc. from inside Emacs.
 
 #+begin_src emacs-lisp
 (use-package docker
-  :defer t)
+  :defer)
 #+end_src
 
 ** YAML
 
 #+begin_src emacs-lisp
 (use-package yaml-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** Clojure
@@ -2031,25 +2032,25 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 #+begin_src emacs-lisp
 (use-package clojure-mode
-  :defer t)
+  :defer)
 
 (use-package cider
   :after clojure-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** CSV
 
 #+begin_src emacs-lisp
 (use-package csv-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** PlantUML
 
 #+begin_src emacs-lisp
 (use-package plantuml-mode
-  :defer t
+  :defer
   :init
   (add-to-list 'auto-mode-alist
                '("\\.\\(plantuml\\|puml\\)\\'" . plantuml-mode))
@@ -2063,7 +2064,7 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 #+begin_src emacs-lisp
 (use-package sly
-  :defer t
+  :defer
   :config
   (setq inferior-lisp-program "sbcl"))
 #+end_src
@@ -2072,14 +2073,14 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 #+begin_src emacs-lisp
 (use-package sly-asdf
-  :defer t)
+  :defer)
 #+end_src
 
 ** Racket
 
 #+begin_src emacs-lisp
 (use-package racket-mode
-  :defer t
+  :defer
   :hook ((racket-mode . racket-xp-mode)
          (racket-mode . racket-unicode-input-method-enable)
          (racket-repl-mode . racket-unicode-input-method-enable)))
@@ -2089,7 +2090,7 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 
 #+begin_src emacs-lisp
 (use-package rust-mode
-  :defer t
+  :defer
   :config
   (setq rust-format-on-save t))
 #+end_src
@@ -2106,7 +2107,7 @@ pulling in =yasnippet=.
 
 #+begin_src emacs-lisp
 ;; (use-package meghanada
-;;   :defer t
+;;   :defer
 ;;   :init
 ;;   (add-hook 'java-mode-hook
 ;;             (lambda ()
@@ -2120,25 +2121,25 @@ pulling in =yasnippet=.
 
 #+begin_src emacs-lisp
 (use-package anaconda-mode
-  :defer t
+  :defer
   :hook (python-mode . anaconda-mode))
 
 (use-package pyimport
-  :defer t)
+  :defer)
 #+end_src
 
 ** Nim
 
 #+begin_src emacs-lisp
 (use-package nim-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** F#
 
 #+begin_src emacs-lisp
 (use-package fsharp-mode
-  :defer t
+  :defer
   :config
   (setq fsharp-indent-offset 2)
   (setq fsharp-continuation-offset 2)
@@ -2152,7 +2153,7 @@ highlighting at least for when I /do/ have to read it.
 
 #+begin_src emacs-lisp
 (use-package go-mode
-  :defer t)
+  :defer)
 #+end_src
 
 ** LSP integration
@@ -2165,7 +2166,7 @@ comes into play.
 #+begin_src emacs-lisp
 (use-package eglot
   :straight (:type built-in)
-  :defer t)
+  :defer)
 #+end_src
 
 ** Better Emacs help and documentation
@@ -2276,7 +2277,7 @@ much due to =savehist-mode=.
 
 #+begin_src emacs-lisp
 (use-package magit
-  :defer t
+  :defer
   :config
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
@@ -2302,7 +2303,7 @@ mentioned above =M-x= seems like the way to go.  I was missing
 
 #+begin_src emacs-lisp
 (use-package git-timemachine
-  :defer t)
+  :defer)
 #+end_src
 
 *** Modes for other kinds of =git=-related files
@@ -2315,7 +2316,7 @@ Like its readme proposes it's also possible to reuse the
 
 #+begin_src emacs-lisp
 (use-package git-modes
-  :defer t
+  :defer
   :init
   (add-to-list 'auto-mode-alist
                (cons "/.dockerignore\\'" 'gitignore-mode)))
@@ -2353,7 +2354,7 @@ displays the possible completions and associated functions.
 
 #+begin_src emacs-lisp
 (use-package which-key
-  :defer t
+  :defer
   :custom
   (which-key-idle-delay 0.3)
   :diminish which-key-mode
@@ -2373,13 +2374,13 @@ Attach beautiful symbols to, for instance, file names in a =dired= or
 (use-package all-the-icons)
 
 (use-package all-the-icons-dired
-  :defer t
+  :defer
   :diminish all-the-icons-dired-mode
   :init
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode))
 
 (use-package all-the-icons-ibuffer
-  :defer t
+  :defer
   :init
   (all-the-icons-ibuffer-mode 1))
 #+end_src
@@ -2416,7 +2417,7 @@ modes to ensure =direnv= integration is working as expected.
 
 #+begin_src emacs-lisp
 (use-package envrc
-  :defer t
+  :defer
   :init (envrc-global-mode))
 #+end_src
 
@@ -2427,14 +2428,14 @@ comfortably usable from within Emacs.
 
 #+begin_src emacs-lisp
 (use-package ripgrep
-  :defer t)
+  :defer)
 #+end_src
 
 ** Interactive window switching
 
 #+begin_src emacs-lisp
 (use-package ace-window
-  :defer t
+  :defer
   :init
   (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r))
   :config
@@ -2445,7 +2446,7 @@ comfortably usable from within Emacs.
 
 #+begin_src emacs-lisp
 (use-package default-text-scale
-  :defer t
+  :defer
   :after hydra
   :config
   (setq default-text-scale-amount 10))
@@ -2479,7 +2480,7 @@ comfortably usable from within Emacs.
 
 #+begin_src emacs-lisp
 (use-package wgrep
-  :defer t
+  :defer
   :custom
   ((wgrep-auto-save-buffer t)
    (wgrep-change-readonly-file nil)
