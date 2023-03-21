@@ -88,13 +88,6 @@ mode, I decided to drop this as well while trying to live without
 
 * Loading additional ELisp configuration files
 
-#+begin_src emacs-lisp
-(defmacro kenran/load-config-file (file)
-  "Load FILE relative to the .emacs.d directory."
-  `(load (locate-user-emacs-file ,file)
-         'no-error))
-#+end_src
-
 I do not want customizations done via =customize= to end up in this
 file.  Use a separate file instead and load that one on startup.
 
