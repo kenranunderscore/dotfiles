@@ -1,9 +1,10 @@
-(require 'use-package)
+* Haskell
 
-;; A couple of Emacs Lisp functions that help me to make quick changes
-;; to Haskell files (adding pragmas, language extensions, GHC
-;; options).
+This package contains A couple of Emacs Lisp functions that help me to
+make quick changes to Haskell files (adding pragmas, language
+extensions, GHC options).
 
+#+begin_src emacs-lisp
 (defun kenran/make-pragma (pragma content)
   "Create a pragma line of type `pragma' containing `content'."
   (concat "{-# " pragma " " content " #-}\n"))
@@ -40,14 +41,16 @@ string, return nil instead."
   (let ((str (read-string prompt)))
     (unless (string-empty-p str)
       str)))
+#+end_src
 
-;; This function is the one is use the most (by far).  It makes it
-;; somewhat easy to add =import= statements to Haskell files.  It's
-;; surely not perfect, but fits my preferences well; that is, I almost
-;; never use the combinations that are harder to add with this
-;; template.  For instance, adding a qualified import with import
-;; list, or an unqualified one with an alias, would require "tricks".
+This function is the one is use by far the most It makes it somewhat
+easy to add =import= statements to Haskell files.  It's surely not
+perfect, but fits my preferences well; that is, I almost never use the
+combinations that are harder to add with this template.  For instance,
+adding a qualified import with import list, or an unqualified one with
+an alias, would require "tricks".
 
+#+begin_src emacs-lisp
 (defun kenran/haskell-add-import (module &optional qualified? alias)
   "Add an import to the import list.  Prompts for qualified import
 and alias."
@@ -68,7 +71,14 @@ and alias."
     (save-excursion
       (haskell-navigate-imports-go)
       (insert import-line))))
+#+end_src
 
+Now load the actual =haskell-mode= package, and put some often-used
+functions as well as some of the above utilities into a local keymap
+for easy access.
+
+#+begin_src emacs-lisp
+(require 'use-package)
 (use-package haskell-mode
   :defer
   :custom
@@ -88,3 +98,4 @@ and alias."
         ("C-c h r" . haskell-process-type)))
 
 (provide 'my-haskell)
+#+end_src

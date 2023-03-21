@@ -1,11 +1,18 @@
 (require 'org)
 
+(defun kenran/tangle-org-file (path)
+  "Tangle an org file at PATH relative to the `user-emacs-directory'
+to an ELisp file."
+  (let* ((absolute-path (locate-user-emacs-file path))
+         (target (replace-regexp-in-string "\.org$" ".el" absolute-path)))
+    (when (or (not (file-exists-p target))
+              (file-newer-than-file-p absolute-path target))
+      (org-babel-tangle-file absolute-path target))))
+
 ;; Load my org-mode configuration.  If its timestamp is newer than
 ;; that of the result of tangling it into ELisp, then trigger a
 ;; recreation of the ELisp config.
-(let* ((config-org (concat user-emacs-directory "config.org"))
-       (config-el (concat user-emacs-directory "config.el")))
-  (when (or (not (file-exists-p config-el))
-            (file-newer-than-file-p config-org config-el))
-    (org-babel-tangle-file config-org config-el))
-  (load-file config-el))
+(kenran/tangle-org-file "my-packages/my-haskell.org")
+(kenran/tangle-org-file "config.org")
+
+(load-file (locate-user-emacs-file "config.el"))
