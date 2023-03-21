@@ -749,6 +749,20 @@ Make whitespace symbols visible.
   (setq Man-notify-method 'aggressive))
 #+end_src
 
+** =Isearch=
+
+It hasn't been long since I switched from =evil= with its standard vim
+search via =/=.  For many things I use =avy= now, but can't get around
+the de-facto standard =isearch=.  I haven't gotten around to configuring
+it a lot, but this will probably grow in the coming weeks or months.
+
+#+begin_src emacs-lisp
+(use-package isearch
+  :ensure nil
+  :config
+  (setq-default isearch-lazy-count t))
+#+end_src
+
 ** Diminish only
 
 #+begin_src emacs-lisp
