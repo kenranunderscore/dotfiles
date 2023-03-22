@@ -50,6 +50,7 @@ in {
   fonts.fontconfig.allowBitmaps = true;
 
   services = {
+    udev.packages = [ pkgs.qmk-udev-rules ];
     openssh = {
       enable = true;
       ports = [ 22 ];

@@ -56,6 +56,7 @@ in {
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
+    udev.packages = [ pkgs.qmk-udev-rules ];
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
