@@ -468,48 +468,48 @@ from using a neovim mode line) I have learned two things:
   the way I like.
 
 #+begin_src emacs-lisp
-  (defgroup kenran/faces nil
-    "A group for custom faces."
-    :group 'faces)
+(defgroup kenran/faces nil
+  "A group for custom faces."
+  :group 'faces)
 
-  (defmacro kenran/with-active-face (face)
-    "Return FACE if we're in the mode line of the active window, and
-  the `mode-line-inactive' face otherwise."
-    `(if (mode-line-window-selected-p)
-	 ,face
-       'mode-line-inactive)) 
+(defmacro kenran/with-active-face (face)
+  "Return FACE if we're in the mode line of the active window, and
+the `mode-line-inactive' face otherwise."
+  `(if (mode-line-window-selected-p)
+   ,face
+     'mode-line-inactive)) 
 
-  (defcustom kenran/major-mode-mode-line-format
-    '("(" (:eval (symbol-name major-mode)) ")")
-    "How to display the active major mode in the mode line."
-    :risky t)
+(defcustom kenran/major-mode-mode-line-format
+  '("(" (:eval (symbol-name major-mode)) ")")
+  "How to display the active major mode in the mode line."
+  :risky t)
 
-  (defcustom kenran/mode-line-buffer-format
-    '(compilation-in-progress
-       (:eval (propertize
-	       "   [Compiling...]"
-	       'face
-	       (kenran/with-active-face compilation-mode-line-run))))
-    "How to display the name of the current buffer in the mode line."
-    :risky t)
+(defcustom kenran/mode-line-buffer-format
+  '(compilation-in-progress
+     (:eval (propertize
+	     "   [Compiling...]"
+	     'face
+	     (kenran/with-active-face compilation-mode-line-run))))
+  "How to display the name of the current buffer in the mode line."
+  :risky t)
 
-  (defcustom kenran/mode-line-flymake-format
-    '(flymake-mode
-      (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
-	       `("   " ,counters))))
-    "How to display the name of the current buffer in the mode line."
-    :risky t)
+(defcustom kenran/mode-line-flymake-format
+  '(flymake-mode
+    (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
+	     `("   " ,counters))))
+  "How to display the name of the current buffer in the mode line."
+  :risky t)
 
-  (setq-default
-   mode-line-format
-   '(""
-     kenran/mode-line-flymake-format
-     kenran/mode-line-buffer-format
-     ("   " kenran/major-mode-mode-line-format)
-     (:propertize "   %b" face mode-line-buffer-id)
-     ;; Always show current line and column, without checking
-     ;; `column-number-mode' and `line-number-mode'
-     ("   L%l C%c")))
+(setq-default
+ mode-line-format
+ '(""
+   kenran/mode-line-flymake-format
+   kenran/mode-line-buffer-format
+   ("   " kenran/major-mode-mode-line-format)
+   (:propertize "   %b" face mode-line-buffer-id)
+   ;; Always show current line and column, without checking
+   ;; `column-number-mode' and `line-number-mode'
+   ("   L%l C%c")))
 #+end_src
 
 * Basic options
