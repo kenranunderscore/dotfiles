@@ -8,8 +8,8 @@ target."
   (let* ((target (replace-regexp-in-string "\.org$" ".el" path)))
     (when (or (not (file-exists-p target))
               (file-newer-than-file-p path target))
-      (message "Tangling config file: "
-               (file-name-nondirectory path))
+      (message (concat "Tangling config file: "
+                       (file-name-nondirectory path)))
       (org-babel-tangle-file path target))))
 
 ;; Tangle all my custom packages.
