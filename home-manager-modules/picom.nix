@@ -7,7 +7,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.picom = {
       enable = true;
-      activeOpacity = 0.92;
+      activeOpacity = 0.9;
       inactiveOpacity = 0.8;
       opacityRules = [
         ''100:role = "browser"''

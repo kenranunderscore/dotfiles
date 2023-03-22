@@ -103,7 +103,7 @@ in {
       enable = true;
       withBattery = true;
     };
-    picom.enable = true;
+    picom.enable = false;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";
