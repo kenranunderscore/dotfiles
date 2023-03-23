@@ -590,36 +590,13 @@ seems to return the modes in an unexpected format.
 
 ** Line and column numbers
 
-I like to use a hybrid mode for displaying line numbers.  That is,
-line numbers are shown in a relative way, but the current line
-displays as its absolute line number.  But when switching to normal
-mode, line numbers should all be absolute.  That's what these two
-functions are used for.
-
-#+begin_src emacs-lisp
-(defun kenran/switch-to-absolute-line-numbers ()
-  "Enable absolute line numbers."
-  (interactive)
-  (when display-line-numbers-mode
-    (setq display-line-numbers t)))
-
-(defun kenran/switch-to-hybrid-line-numbers ()
-  "Enable relative line numbers, but with the current line
-showing its absolute line number."
-  (interactive)
-  (when display-line-numbers-mode
-    (setq display-line-numbers 'relative)
-    (setq display-line-numbers-current-absolute t)))
-#+end_src
-
 To display line numbers, the aptly named =display-line-numbers= package
 is used.  It's enabled by default in all programming modes.
 
 #+begin_src emacs-lisp
 (use-package display-line-numbers
   :config
-  (setq display-line-numbers-type 'relative)
-  (setq display-line-numbers-current-absolute t)
+  (setq display-line-numbers-type 'absolute)
   :hook ((prog-mode . display-line-numbers-mode)
          (conf-mode . display-line-numbers-mode)))
 #+end_src
