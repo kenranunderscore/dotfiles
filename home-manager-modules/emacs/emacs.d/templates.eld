@@ -20,7 +20,7 @@ haskell-mode
 (prag "{-# " p "#-}")
 (rec "data " (s name) " = " name n>
      "{ " p " :: " p " }")
-(fun (s name) " :: " p n name " = " p)
+(fun (s name) " :: " p n name " " p " = ")
 (ds "deriving (Eq, Show)")
 (dsg "deriving (Eq, Show, Generic)")
 (impl "(error \"TODO: " (p "not implemented") "\")")
