@@ -10,7 +10,8 @@ target."
               (file-newer-than-file-p path target))
       (message (concat "Tangling config file: "
                        (file-name-nondirectory path)))
-      (org-babel-tangle-file path target))))
+      (org-babel-tangle-file path target)
+      (set-file-times target))))
 
 ;; Tangle all my custom packages.
 (setq kenran/custom-package-dir
