@@ -477,15 +477,14 @@ Emacs packages.
 
 ** Modeline
 
-I can live with the default mode line just fine, but over time (and
-from using a neovim mode line) I have learned two things:
+I can live with the default mode line just fine, but I sometimes
+(usually when sharing my screen) stupidly click on the modes and
+something annoying happens.  So let's try to fiddle with the default
+mode line to make it work the way I like:
 
-- I don't care about the shown modes anymore, especially since using
-  =diminish= hides most of the active modes anyway.  If I really need to
-  check whether some mode is enabled there's always =C-h m=.
-
-  So let's try to fiddle with the default mode line to make it work
-  the way I like.
+- No context/mouse menus
+- Major mode separate from the list of minor modes I want to see
+- Nothing I don't look at anyway
 
 #+begin_src emacs-lisp
 (defmacro kenran/with-active-face (face)
@@ -494,11 +493,6 @@ the `mode-line-inactive' face otherwise."
   `(if (mode-line-window-selected-p)
    ,face
      'mode-line-inactive)) 
-
-(defcustom kenran/major-mode-mode-line-format
-  '("(" (:eval (symbol-name major-mode)) ")")
-  "How to display the active major mode in the mode line."
-  :risky t)
 
 (defcustom kenran/mode-line-buffer-format
   '(compilation-in-progress
@@ -516,16 +510,30 @@ the `mode-line-inactive' face otherwise."
   "How to display the name of the current buffer in the mode line."
   :risky t)
 
+(defcustom kenran/major-mode-mode-line-format
+  '("" (:eval (string-replace "-mode" "" (symbol-name major-mode))))
+  "How to display the active major mode in the mode line."
+  :risky t)
+
+(defcustom kenran/minor-modes-mode-line-format
+  '("("
+    (:eval (let ((s (format-mode-line 'minor-mode-alist)))
+             (substring s 1)))
+    ")")
+  "How to display the active minor modes in the mode line."
+  :risky t)
+
 (setq-default
  mode-line-format
  '(""
    kenran/mode-line-flymake-format
    kenran/mode-line-buffer-format
-   ("   " kenran/major-mode-mode-line-format)
    (:propertize "   %b" face mode-line-buffer-id)
    ;; Always show current line and column, without checking
    ;; `column-number-mode' and `line-number-mode'
-   ("   L%l C%c")))
+   ("   L%l C%c")
+   ("   " kenran/major-mode-mode-line-format)
+   ("   " kenran/minor-modes-mode-line-format)))
 #+end_src
 
 * Basic options
