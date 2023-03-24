@@ -2223,14 +2223,6 @@ Like its readme proposes it's also possible to reuse the
    . lispy-mode))
 #+end_src
 
-** Highlight "todo", "fixme" and other keywords everywhere.
-
-#+begin_src emacs-lisp
-(use-package hl-todo
-  :init
-  (add-hook 'after-init-hook 'global-hl-todo-mode))
-#+end_src
-
 ** Display commands bound to keys in the minibuffer
 
 When pressing the first key in a hotkey chain, show a popup that
