@@ -67,7 +67,8 @@ mode, I decided to drop this as well while trying to live without
   ("C-. b k" . kill-current-buffer)
   ("C-. b i" . ibuffer)
   ("C-. b p" . previous-buffer)
-  ("C-. b n" . next-buffer))
+  ("C-. b n" . next-buffer)
+  ("C-. c" . comment-or-uncomment-region))
 #+end_src
 
 * Loading additional ELisp configuration files
