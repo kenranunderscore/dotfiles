@@ -591,19 +591,9 @@ seems to return the modes in an unexpected format.
 ** Line and column numbers
 
 To display line numbers, the aptly named =display-line-numbers= package
-is used.  It's enabled by default in all programming modes.
-
-#+begin_src emacs-lisp
-(use-package display-line-numbers
-  :config
-  (setq display-line-numbers-type 'absolute)
-  :hook ((prog-mode . display-line-numbers-mode)
-         (conf-mode . display-line-numbers-mode)))
-#+end_src
-
-Toggle line numbers interactively.  I've tried simply binding
-=display-line-numbers-mode=, but I had to use it twice for the /first/
-toggle.  This is more stable so far.
+is used.  I used to always show line numbers when programming with
+=evil=, but with vanilla Emacs bindings absolute numbers make more
+sense.  It's no real use showing them by default anymore though.
 
 #+begin_src emacs-lisp
 (defun kenran/toggle-line-numbers ()
@@ -612,7 +602,10 @@ keybinding."
   (interactive)
   (display-line-numbers-mode 'toggle))
 
-(keymap-global-set "C-. t l" 'kenran/toggle-line-numbers)
+(use-package display-line-numbers
+  :defer
+  :bind
+  ("C-. t l" . kenran/toggle-line-numbers))
 #+end_src
 
 ** Insert a newline at the end of files
