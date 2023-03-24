@@ -27,6 +27,7 @@ in {
         })
         (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
         pragmataPro
+        (import ./termingus.nix { inherit (pkgs) runCommand fetchFromGitHub; })
       ] ++ (with pkgs; [
         borg-sans-mono
         cantarell-fonts
@@ -46,7 +47,6 @@ in {
         noto-fonts
         roboto-mono
         source-code-pro
-        terminus_font_ttf
         victor-mono
       ]);
     };
