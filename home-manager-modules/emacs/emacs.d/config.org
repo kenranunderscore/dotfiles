@@ -475,7 +475,7 @@ Emacs packages.
   :defer)
 #+end_src
 
-** Modeline
+** Mode line
 
 I can live with the default mode line just fine, but I sometimes
 (usually when sharing my screen) stupidly click on the modes and
@@ -515,10 +515,27 @@ the `mode-line-inactive' face otherwise."
   "How to display the active major mode in the mode line."
   :risky t)
 
+(defun kenran/visible-minor-modes ()
+  "Return `minor-mode-alist', but with certain modes I don't want to
+see filtered out."
+  (let ((hidden-modes '(gcmh-mode
+                        which-key-mode
+                        buffer-face-mode
+                        eldoc-mode
+                        org-indent-mode
+                        auto-revert-mode
+                        auto-fill-function)))
+    (seq-difference minor-mode-alist
+                    hidden-modes
+                    (lambda (hidden cell)
+                      (eq (car cell)
+                          hidden)))))
+
 (defcustom kenran/minor-modes-mode-line-format
   '("("
-    (:eval (let ((s (format-mode-line 'minor-mode-alist)))
-             (substring s 1)))
+    (:eval
+     (let ((s (format-mode-line (kenran/visible-minor-modes))))
+       (substring s 1)))
     ")")
   "How to display the active minor modes in the mode line."
   :risky t)
@@ -671,17 +688,6 @@ Looking at you, [[https://go.dev/][Go]].
 (setq read-file-name-completion-ignore-case t)
 #+end_src
 
-** Hide minor modes from the modeline
-
-The =diminish= package enables us to hide minor modes from the modeline.
-It's especially useful for certain modes that are globally enabled
-anyway.  =Use-package= has built-in support for this available with the
-=:diminish= keyword.
-
-#+begin_src emacs-lisp
-(use-package diminish)
-#+end_src
-
 ** Yank (paste) at point with the mouse
 
 The default Emacs behavior when yanking (in the Emacs sense of the
@@ -757,24 +763,11 @@ it a lot, but this will probably grow in the coming weeks or months.
   (setq-default isearch-lazy-count t))
 #+end_src
 
-** Diminish only
-
-#+begin_src emacs-lisp
-(use-package face-remap
-  :defer
-  :diminish buffer-face-mode)
-
-(use-package autorevert
-  :defer
-  :diminish auto-revert-mode)
-#+end_src
-
 ** Don't trim ELisp evaluation results
 
 #+begin_src emacs-lisp
 (use-package simple
   :ensure nil
-  :diminish auto-fill-function
   :config
   (setq eval-expression-print-length nil)
   (setq eval-expression-print-level nil))
@@ -784,7 +777,6 @@ it a lot, but this will probably grow in the coming weeks or months.
 
 #+begin_src emacs-lisp
 (use-package eldoc
-  :diminish eldoc-mode
   :config
   (advice-add 'eldoc-doc-buffer
               :after
@@ -892,7 +884,6 @@ enable it everywhere.
 
 #+begin_src emacs-lisp
 (use-package emacs
-  :diminish abbrev-mode
   :init
   (setq-default abbrev-mode t)
   :config
@@ -1157,7 +1148,6 @@ loading =org=, a custom font setup might run to adjust the headers.
    (org-indent-mode . (lambda ()
                         (kenran/inherit-fixed-pitch 'org-indent)
                         (kenran/inherit-fixed-pitch 'org-hide))))
-  :diminish org-indent-mode
   :custom
   ((org-startup-indented t)
    (org-startup-folded 'content)
@@ -2251,7 +2241,6 @@ displays the possible completions and associated functions.
   :defer
   :custom
   (which-key-idle-delay 0.3)
-  :diminish which-key-mode
   :init
   ;; See https://github.com/justbur/emacs-which-key/issues/306
   (if (daemonp)
@@ -2365,7 +2354,6 @@ comfortably usable from within Emacs.
 
 #+begin_src emacs-lisp
 (use-package gcmh
-  :diminish gcmh-mode
   :init
   (gcmh-mode 1))
 #+end_src
