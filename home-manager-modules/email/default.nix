@@ -45,6 +45,7 @@ in {
             enable = true;
             extraConfig = { "syslog" = "LOG_USER"; };
           };
+          notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -73,6 +74,7 @@ in {
             enable = true;
             extraConfig = { "syslog" = "LOG_USER"; };
           };
+          notmuch.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
@@ -91,10 +93,15 @@ in {
       };
     };
 
+    home.packages = [ pkgs.muchsync ];
     programs = {
       mbsync.enable = true;
       msmtp.enable = true;
       mu.enable = true;
+      notmuch = {
+        enable = true;
+        new.tags = [ "new" ];
+      };
     };
   };
 }
