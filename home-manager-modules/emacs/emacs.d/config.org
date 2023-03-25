@@ -1765,6 +1765,7 @@ so I've fully switched over.
                   "#org-mode"
                   "#haskell"
                   "#nim"
+                  "#notmuch"
                   "#zig"
                   "#crawl"
                   "#guix"
