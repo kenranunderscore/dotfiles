@@ -1449,6 +1449,39 @@ pushed to the server after the first call, if I am correct.  So I'll
 have to experiment and probably live with =notmuch new= being called
 twice (which is fine as it's blazingly fast).
 
+Let's first define some utility functions that I'll then bind to
+special keys later.
+
+#+begin_src emacs-lisp
+(defun kenran/notmuch-search-toggle-unread ()
+  "Toggle unread tag at point in `notmuch-search-mode'."
+  (interactive)
+  (if (member "unread" (notmuch-search-get-tags))
+      (notmuch-search-tag '("-unread"))
+    (notmuch-search-tag '("+unread")))
+  (notmuch-search-next-thread))
+
+(defun kenran/notmuch-search-toggle-deleted ()
+  "Toggle deleted tag at point in `notmuch-search-mode'."
+  (interactive)
+  (if (member "deleted" (notmuch-search-get-tags))
+      (notmuch-search-tag '("-deleted"))
+    (notmuch-search-tag '("+deleted")))
+  (notmuch-search-next-thread))
+
+(defun kenran/notmuch-show-toggle-deleted ()
+  "Toggle deleted tag at point in `notmuch-show-mode'."
+  (interactive)
+  (if (member "deleted" (notmuch-show-get-tags))
+      (notmuch-show-tag '("-deleted"))
+    (notmuch-show-tag '("+deleted")))
+  (notmuch-show-next-thread t))
+#+end_src
+
+Now pull in and configure the actual =notmuch= package.  Note that same
+options here rather belong to built-in functionality, but they fit in
+here very well.
+
 #+begin_src emacs-lisp
 (use-package notmuch
   :defer
@@ -1464,13 +1497,32 @@ twice (which is fine as it's blazingly fast).
   (mail-envelope-from 'header)
   (mail-user-agent 'message-user-agent)
   ;; Settings for notmuch itself
+  (notmuch-show-all-multipart/alternative-parts nil)
+  (notmuch-hello-sections
+   '(notmuch-hello-insert-header
+     notmuch-hello-insert-saved-searches
+     notmuch-hello-insert-footer))
   (notmuch-always-prompt-for-sender t)
   (notmuch-search-oldest-first nil)
   (notmuch-maildir-use-notmuch-insert t)
+  (notmuch-archive-tags '("-inbox" "-unread"))
+  (notmuch-message-replied-tags '("+replied" "+sent"))
   (notmuch-fcc-dirs
    '(("johannes.maier@mailbox.org" . "mailbox/Sent -new +sent +private")
      ("johannes.maier@active-group.de" . "ag/Sent -new +sent +work")
-     (".*" . "sent"))))
+     (".*" . "sent")))
+  (notmuch-saved-searches
+   '((:name "inbox" :query "tag:inbox" :key "i")
+     (:name "sent" :query "tag:sent" :key "s")
+     (:name "work" :query "tag:inbox and tag:work" :key "w")
+     (:name "private" :query "tag:inbox and tag:private" :key "p")
+     (:name "all mail" :query "*" :key "a")))
+  :bind
+  (:map notmuch-show-mode-map
+        ("d" . kenran/notmuch-show-toggle-deleted)
+        :map notmuch-search-mode-map
+        ("d" . kenran/notmuch-search-toggle-deleted)
+        ("u" . kenran/notmuch-search-toggle-unread)))
 #+end_src
 
 =Gnus-alias= makes it possible to use different identities when
