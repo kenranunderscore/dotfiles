@@ -1,6 +1,7 @@
 +new -- not tag:work and not tag:private
 +deleted -- tag:new and (folder:ag/Trash or folder:ag/Trash)
--new +sent +work -- tag:new and from:johannes.maier@active-group.de
+-new -inbox +sent +work -- tag:new and from:johannes.maier@active-group.de
 -new +work -- tag:new and (to:active-group.de or from:active-group.de)
--new +sent +private -- tag:new and (from:johb.maier@mailbox.org or from:johannes.maier@mailbox.org)
+-new -inbox +sent +private -- tag:new and (from:johb.maier@mailbox.org or from:johannes.maier@mailbox.org)
 -new +private -- tag:new and (to:johb.maier@gmail.com or to:johannes.maier@mailbox.org)
+-inbox -- tag:inbox and (path:mailbox/Archive/** or path:ag/Archives/**)
