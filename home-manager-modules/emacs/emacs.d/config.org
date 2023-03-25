@@ -1508,8 +1508,8 @@ here very well.
   (notmuch-archive-tags '("-inbox" "-unread"))
   (notmuch-message-replied-tags '("+replied" "+sent"))
   (notmuch-fcc-dirs
-   '(("johannes.maier@mailbox.org" . "mailbox/Sent -new +sent +private")
-     ("johannes.maier@active-group.de" . "ag/Sent -new +sent +work")
+   '(("johannes.maier@mailbox.org" . "mailbox/Sent -inbox -unread +sent +private")
+     ("johannes.maier@active-group.de" . "ag/Sent -inbox -unread +sent +work")
      (".*" . "sent")))
   (notmuch-saved-searches
    '((:name "inbox" :query "tag:inbox" :key "i")
