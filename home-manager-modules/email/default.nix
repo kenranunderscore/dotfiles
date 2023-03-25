@@ -103,13 +103,13 @@ in {
         search.excludeTags = [ "deleted" "spam" ];
         hooks = {
           postNew = ''
+            notmuch tag --batch --input=${./notmuch-initial-tags}
             if [ $(hostname) != "paln" ]; then
-                notmuch tag --batch --input=${./notmuch-initial-tags}
-                muchsync --nonew sync
+                muchsync -vv --nonew sync
             fi'';
           preNew = ''
             if [ $(hostname) != "paln" ]; then
-                muchsync --nonew sync
+                muchsync -vv --nonew sync
             else
                 mbsync --all
             fi'';
