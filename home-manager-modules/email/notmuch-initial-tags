@@ -1,0 +1,11 @@
+-new +list +notmuch +unread -- tag:new and to:notmuchmail.org
+-new +list +emacs +unread -- tag:new and to:emacs-devel@gnu.org
+-new +list +emacs +unread -- tag:new and to:bug-gnu-emacs@gnu.org
++work -- tag:new and to:active-group.de
++work -- tag:new and from:active-group.de
+-new +sent -- tag:new and from:johannes.maier@active-group.de
++private -- tag:new and to:johb.maier@gmail.com
++private -- tag:new and to:johannes.maier@mailbox.org
+-new +sent +private -- tag:new and from:johb.maier@mailbox.org
+-new +sent +private -- tag:new and from:johannes.maier@mailbox.org
+-new +unread +inbox -- tag:new

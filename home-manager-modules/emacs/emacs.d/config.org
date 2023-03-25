@@ -1419,24 +1419,97 @@ well-documented =notmuch= CLI, or via =afew=.
 
 For sending mail I use =msmtp=.
 
-Synchronization is where it broke down for me.  I have a PC at home,
-and a laptop at work, and I'd like those two machines to have
-identical state with respect to e-mail at all times.  I've tried using
-=muchsync= on my personal server to be the "source of truth".  This
-means that only the server downloads e-mail via IMAP, and the machines
-are simply its /clients/; they use =muchsync= to download mail from the
-server.
+I'm using =muchsync= on my personal server to be the "source of truth".
+This means that only the server downloads e-mail via IMAP, and the
+machines are simply its /clients/; they use =muchsync= to download mail
+from the server.
 
-This sounds great on paper but it presents a problem with sent mail,
+This sounds great on paper but is a little finicky with sent mail,
 which I'd also like to sync back via IMAP to my accounts.  The client
-machine sends this and puts it into a special =sent= directory, which is
-then synchronized/uploaded to the server via =muchsync=.  I've had
-problems with mails appearing twice, or appearing not at all on the
-respective "other" machine.
+machine sends this and puts it into respective =sent= directories;
+=muchsync= synchronizes these directories as well, but I've had problems
+with mails appearing twice, or appearing not at all on the respective
+"other" machine, at least in the past.  It looks or feels like my
+usage of =muchsync --nonew= on the clients was a potential problem: I've
+verified that after sending a mail and it having landed in the correct
+=sent= directory, a simple =muchsync my-server= didn't lead to the mail
+appearing on my servers.  It worked after executing =notmuch new= once,
+though, so I guess =muchsync= only synchronizes those mails that are
+part of the current =notmuch= database state.
 
-If I only used one machine, =notmuch= would definitely be my preference,
-but debugging this situation was very tedious and I just didn't have
-the energy or time to do it.
+One solution would be to make sure that whenever I'm polling from
+within Emacs, both =muchsync my-server= and =notmuch new= are executed.
+Since =notmuch= has deprecated the =notmuch-poll-script= variable in their
+Emacs client, I have to use the hooks it provides to make sure
+=muchsync= is executed.  Putting =muchsync --nonew= into the =preNew= hook
+while having an unsynchronized sent mail on the client sounds correct
+on paper in order to not execute =notmuch new= twice, but it means that
+in the case of an unsynchronized sent mail, this mail won't have been
+pushed to the server after the first call, if I am correct.  So I'll
+have to experiment and probably live with =notmuch new= being called
+twice (which is fine as it's blazingly fast).
+
+#+begin_src emacs-lisp
+(use-package notmuch
+  :defer
+  :init
+  (setq user-mail-address "johannes.maier@mailbox.org")
+  :custom
+  ;; msmtp is registered as sendmail
+  (message-send-mail-function 'message-send-mail-with-sendmail)
+  (message-kill-buffer-on-exit t)
+  ;; When replying to mail, choose the account to use
+  ;; based on the recipient address
+  (message-sendmail-envelope-from 'header)
+  (mail-envelope-from 'header)
+  (mail-user-agent 'message-user-agent)
+  ;; Settings for notmuch itself
+  (notmuch-always-prompt-for-sender t)
+  (notmuch-search-oldest-first nil)
+  (notmuch-maildir-use-notmuch-insert t)
+  (notmuch-fcc-dirs
+   '(("johannes.maier@mailbox.org" . "mailbox/Sent -new +sent +private")
+     ("johannes.maier@active-group.de" . "ag/Sent -new +sent +work")
+     (".*" . "sent"))))
+#+end_src
+
+=Gnus-alias= makes it possible to use different identities when
+composing mail.  I mostly use it to make sure that replies to a mail
+are sent from the address I've received it at.
+
+#+begin_src emacs-lisp
+(use-package gnus-alias
+  :defer t
+  :config
+  (setq gnus-alias-identity-alist
+        `(("mailbox"
+           nil
+           "Johannes Maier <johannes.maier@mailbox.org>"
+           nil
+           nil
+           nil
+           nil)
+          ("ag"
+           nil
+           "Johannes Maier <johannes.maier@active-group.de>"
+           "Active Group GmbH"
+           nil
+           nil
+           ,(concat
+             "Johannes Maier\n"
+             "johannes.maier@active-group.de\n\n"
+             "+49 (7071) 70896-67\n\n"
+             "Active Group GmbH\n"
+             "Hechinger Str. 12/1\n"
+             "72072 Tübingen\n"
+             "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+             "Geschäftsführer: Dr. Michael Sperber"))))
+  (setq gnus-alias-default-identity "mailbox")
+  (setq gnus-alias-identity-rules
+        '(("ag" ("any" "@active-group.de" both) "ag")))
+  :hook
+  (message-setup . gnus-alias-determine-identity))
+#+end_src
 
 ** Gnus
 
@@ -1473,6 +1546,7 @@ accordingly.
 
 #+begin_src emacs-lisp
 (use-package mu4e
+  :disabled
   :load-path "~/.nix-profile/share/emacs/site-lisp/mu4e"
   :defer
   :commands (mu4e)

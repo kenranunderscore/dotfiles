@@ -97,10 +97,21 @@ in {
     programs = {
       mbsync.enable = true;
       msmtp.enable = true;
-      mu.enable = true;
       notmuch = {
         enable = true;
         new.tags = [ "new" ];
+        hooks = {
+          postNew = ''
+            if [ $(hostname) != "paln" ]; then
+                notmuch tag --batch --input=${./notmuch-initial-tags}
+            fi'';
+          preNew = ''
+            if [ $(hostname) != "paln" ]; then
+                muchsync --nonew
+            else
+                mbsync --all
+            fi'';
+        };
       };
     };
   };
