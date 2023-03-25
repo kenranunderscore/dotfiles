@@ -104,10 +104,11 @@ in {
           postNew = ''
             if [ $(hostname) != "paln" ]; then
                 notmuch tag --batch --input=${./notmuch-initial-tags}
+                muchsync --nonew sync
             fi'';
           preNew = ''
             if [ $(hostname) != "paln" ]; then
-                muchsync --nonew
+                muchsync --nonew sync
             else
                 mbsync --all
             fi'';
