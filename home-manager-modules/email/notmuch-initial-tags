@@ -1,4 +1,4 @@
-+deleted -- (folder:ag/Sent or folder:ag/Trash) and not tag:deleted
++deleted -- (folder:ag/Trash or folder:ag/Trash) and not tag:deleted
 +new -- not tag:work and not tag:private
 -new +work -- tag:new and (to:active-group.de or from:active-group.de)
 +sent -- not tag:sent and from:johannes.maier@active-group.de
