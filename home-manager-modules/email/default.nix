@@ -99,7 +99,12 @@ in {
       msmtp.enable = true;
       notmuch = {
         enable = true;
-        new.tags = [ "new" ];
+        new = {
+          tags = [ "new" ];
+          ignore = [ ];
+        };
+        maildir.synchronizeFlags = true;
+        search.excludeTags = [ "deleted" "spam" ];
         hooks = {
           postNew = ''
             if [ $(hostname) != "paln" ]; then
