@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, custom, ... }:
 
 let
   types = lib.types;
   realName = "Johannes Maier";
   cfg = config.modules.email;
+  isSyncRoot = custom.hostname == "paln";
 in {
   options.modules.email = {
     enable = lib.mkEnableOption "email module";
@@ -101,19 +102,12 @@ in {
         enable = true;
         maildir.synchronizeFlags = true;
         search.excludeTags = [ "deleted" "spam" ];
-        hooks = {
-          postNew = ''
-            if [ $(hostname) != "paln" ]; then
-                muchsync -vv --nonew sync
-            else
-                notmuch tag --batch --input=${./notmuch-initial-tags}
-            fi'';
-          preNew = ''
-            if [ $(hostname) != "paln" ]; then
-                muchsync -vv --nonew sync
-            else
-                mbsync --all
-            fi'';
+        hooks = if isSyncRoot then {
+          preNew = "mbsync --all";
+          postNew = "notmuch tag --batch --input=${./notmuch-initial-tags}";
+        } else rec {
+          preNew = "muchsync -vv --nonew sync";
+          postNew = preNew;
         };
       };
     };
