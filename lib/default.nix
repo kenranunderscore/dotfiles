@@ -9,7 +9,7 @@
     let
       inherit (inputs) home-manager nixpkgs;
       dir = ../hosts + "/${hostname}";
-      custom = import (dir + /custom.nix);
+      custom = (import (dir + /custom.nix)) // { inherit hostname; };
       username = custom.username;
       specialArgs = { inherit inputs custom; };
     in nixpkgs.lib.nixosSystem {
