@@ -99,10 +99,6 @@ in {
       msmtp.enable = true;
       notmuch = {
         enable = true;
-        new = {
-          tags = [ "new" ];
-          ignore = [ ];
-        };
         maildir.synchronizeFlags = true;
         search.excludeTags = [ "deleted" "spam" ];
         hooks = {
