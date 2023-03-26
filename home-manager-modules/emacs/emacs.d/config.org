@@ -1181,6 +1181,10 @@ capturing, storing links etc.
 #+begin_src emacs-lisp
 (keymap-global-set "C-. o a" 'org-agenda)
 (keymap-global-set "C-. o c" 'org-capture)
+(keymap-global-set "C-. o t"
+                   (lambda ()
+                     (interactive)
+                     (org-capture nil "t")))
 (keymap-global-set "C-. o l" 'org-store-link)
 (keymap-global-set "C-. o f" 'org-cycle-agenda-files)
 #+end_src
