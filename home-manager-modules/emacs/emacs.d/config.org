@@ -2337,6 +2337,7 @@ displays the possible completions and associated functions.
 
 #+begin_src emacs-lisp
 (use-package which-key
+  :disabled
   :defer
   :custom
   (which-key-idle-delay 0.3)
