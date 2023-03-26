@@ -73,18 +73,7 @@ mode, I decided to drop this as well while trying to live without
 
 * The region
 
-While I like seeing the active region (which =transient-mark-mode=
-highlights), commands still use the region anyway even if it's not
-visible.  So I'll try living without this for now and see how it goes.
-
-#+begin_src emacs-lisp
-(setq-default transient-mark-mode nil)
-#+end_src
-
-One potential problem could be that I'm used to acting on the visible
-region with things like =M-%=, but that's also one thing that comes from
-=transient-mark-mode=.  I could instead choose to narrow to the region,
-should I need this.  Let's just see how it goes...
+I sometimes like to narrow to the region.
 
 #+begin_src emacs-lisp
 (put 'narrow-to-region 'disabled nil)
