@@ -1182,7 +1182,7 @@ capturing, storing links etc.
 (keymap-global-set "C-. o a" 'org-agenda)
 (keymap-global-set "C-. o c" 'org-capture)
 (keymap-global-set "C-. o t"
-                   (lambda ()
+                   (defun kenran/capture-todo ()
                      (interactive)
                      (org-capture nil "t")))
 (keymap-global-set "C-. o l" 'org-store-link)
