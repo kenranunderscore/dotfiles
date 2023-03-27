@@ -2411,13 +2411,25 @@ comfortably usable from within Emacs.
 
 ** Global font scaling
 
+The =default-text-scale= package (again by Steve Purcell) makes it a
+breeze to "globally" scale text in Emacs.  That is, it won't only
+increase the font size in the current buffer as the
+=text-scale-increase= command does, but rather do it everywhere.
+
 #+begin_src emacs-lisp
 (use-package default-text-scale
   :defer
   :after hydra
   :config
-  (setq default-text-scale-amount 10))
+  (setq default-text-scale-amount 15))
+#+end_src
 
+Now I like increasing/decreasing the font, for instance when
+presenting or pair programming, untit it "fits".  Let's create a =hydra=
+for this, so that I can press single keys until it quits -- either
+after =q= or a timeout.
+
+#+begin_src emacs-lisp
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "
   Change the font size globally.\n
