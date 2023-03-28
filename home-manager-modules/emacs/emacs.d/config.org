@@ -475,14 +475,17 @@ RET= whenever I see fit.
 
 ** Mode line
 
-I can live with the default mode line just fine, but I sometimes
-(usually when sharing my screen) stupidly click on the modes and
-something annoying happens.  So let's try to fiddle with the default
-mode line to make it work the way I like:
+I could (and can) live with the default mode line just fine, but I
+sometimes (usually when sharing my screen) stupidly click on the modes
+and something annoying happens.  So let's try to fiddle with it to
+make it work the way I like:
 
 - No context/mouse menus
 - Major mode separate from the list of minor modes I want to see
-- Nothing I don't look at anyway
+- Render the major mode with its "real" (but shortened through
+  stripping the always-present =-mode= ending) name, i.e., in this file
+  it should just show =org=
+- Strip stuff away that I don't look at anyway
 
 #+begin_src emacs-lisp
 (defmacro kenran/with-active-face (face)
