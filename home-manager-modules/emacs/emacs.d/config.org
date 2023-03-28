@@ -457,10 +457,16 @@ themes.
   :disabled)
 #+end_src
 
-** Render color names/codes with as their respective color
+** Render color names/codes in their respective color
 
-It's an ELPA package, so no need/use to put it in the nix-managed
-Emacs packages.
+=Rainbow-mode= does what the (org) title says: whenever you see a color
+in text in Emacs, say, the nice orange #ff9000, then it will be
+rendered with the respective background color.  The package will even
+pick a fitting light or dark foreground for you.
+
+Note that I load this deferred, and it won't be automatically started
+when a color is encountered; I'll activate it with =M-x rainbow-mode
+RET= whenever I see fit.
 
 #+begin_src emacs-lisp
 (use-package rainbow-mode
