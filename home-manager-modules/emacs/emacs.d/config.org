@@ -840,14 +840,15 @@ and other pairs in non-lispy modes.  One thing I was missing from
 Neovim, though, was the newlines and indentation that it inserted
 automatically when pressing =RET= with point between braces.
 
-The built-in =electric-pair-mode= does just that (by default).
+The built-in =electric-pair-mode= does just that (by default).  I just
+realized that I don't really need it after all (neither with =evil= nor
+without it).
 
 #+begin_src emacs-lisp
 (use-package emacs
   :ensure nil
   :init
-  ;; disabled for now
-  (electric-pair-mode -1)
+  (electric-pair-mode -1) ; disabled
   :config
   (setq electric-pair-open-newline-between-pairs t))
 #+end_src
