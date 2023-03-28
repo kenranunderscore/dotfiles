@@ -67,7 +67,10 @@ in {
     };
   };
 
-  programs.ssh.startAgent = true;
+  programs = {
+    ssh.startAgent = true;
+    fish.enable = true;
+  };
 
   documentation = {
     enable = true;

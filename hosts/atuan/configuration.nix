@@ -117,6 +117,8 @@ in {
     shell = pkgs.fish;
   };
 
+  programs.fish.enable = true;
+
   environment = {
     systemPackages = with pkgs; [ ];
     pathsToLink = [ "/share/zsh" ];

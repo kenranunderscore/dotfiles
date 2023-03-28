@@ -116,7 +116,10 @@ in {
   };
   users.extraGroups.vboxusers.members = [ username ];
 
-  programs.ssh.startAgent = true;
+  programs = {
+    ssh.startAgent = true;
+    fish.enable = true;
+  };
 
   virtualisation = {
     docker.enable = true;
