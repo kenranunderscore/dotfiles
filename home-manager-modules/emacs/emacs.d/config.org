@@ -1067,6 +1067,17 @@ or (neo)vim plugins like =vim-snipe=, =easymotion=, =leap.nvim=, =hop.nvim=,
   ("C-'" . avy-goto-char-timer))
 #+end_src
 
+The =C-'= binding for =avy= clashes with the default binding for
+=org-cycle-agenda-files= in the =org-mode-map=.  Removing it via hook
+doesn't seem like a good way to do it, but it does the job.
+
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook
+          (defun kenran/remove-shadowing-org-bindings ()
+            (keymap-unset org-mode-map "C-'" t)
+            (remove-hook 'org-mode-hook #'kenran/remove-shadowing-org-bindings)))
+#+end_src
+
 * Org mode
 
 I want my headers to stand out by being really big.  I also like using
