@@ -1814,6 +1814,47 @@ so I've fully switched over.
                                    ,(concat cert-dir "/kenran.crt")))))
 #+end_src
 
+* Repeating the last edit with =dot-mode=
+
+One thing I found myself missing from my time with vim or =evil= was the
+=.= operator, which repeats the previous "edit".  Since vim uses
+separate modes for "inserting text" and "movement and other commands",
+it is always intuitively clear what "the last thing I've done" means
+in any context.
+
+With =dot-mode=, I'm concerned about two things:
+
+- I don't have any intuition for what constitutes "the last edit", and
+  I also don't have a mental model of what I should expect here, yet.
+- Built-in functionality might be better, or at least suffice!  In
+  vim, my most frequent uses of the =.= operator where actually edits
+  combined with going through search (via =/=) results, say, doing
+  =/fooBar= followed by =ctB baz <esc>= and repeated applications of =n.=.
+  This usually isn't even the most efficient way to do this in vim, as
+  you have tools like =:s.../c= and =:g= at your disposal.  Now in Emacs
+  I'm also trying out multiple cursors, which might remove the need
+  for the =.= operator in another whole class of situations.
+
+So I'll add this package for now; but I will try to stop and think
+when attempting to use it, and compare it with region-restricted usage
+of =query-replace= (or similar), multiple cursors, and maybe rectangular
+selection/edits.  This way I hope I can /really/ understand if and when
+to use it.
+
+#+begin_src emacs-lisp
+(use-package dot-mode
+  :init
+  (global-dot-mode 1)
+  :config
+  (setq dot-mode-ignore-undo t)
+  :bind
+  (:map dot-mode-map
+        ("C-." . nil)
+        ("C-c ." . nil)
+        ("C-M-." . nil)
+        ("C-q" . dot-mode-execute)))
+#+end_src
+
 * Package-specific configuration
 ** Mode-specific code snippets
 
