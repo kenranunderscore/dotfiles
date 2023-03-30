@@ -1855,6 +1855,17 @@ to use it.
         ("C-q" . dot-mode-execute)))
 #+end_src
 
+* Multiple cursors
+
+I'm still new to this, and have only scratched the surface of when to
+successfully use them.  In particular I'm not sure about what my
+most-used commands will be, and if and where to bind those.
+
+#+begin_src emacs-lisp
+(use-package multiple-cursors
+  :defer)
+#+end_src
+
 * Package-specific configuration
 ** Mode-specific code snippets
 
