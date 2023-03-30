@@ -2,8 +2,9 @@
 #+AUTHOR: Johannes Maier
 #+EMAIL: johannes.maier@mailbox.org
 #+STARTUP: showall
+#+OPTIONS: toc:nil
 
-* Haskell
+* Insert language extensions and GHC options
 
 This package contains A couple of Emacs Lisp functions that help me to
 make quick changes to Haskell files (adding pragmas, language
@@ -48,6 +49,8 @@ string, return nil instead."
       str)))
 #+end_src
 
+* Insert imports
+
 This function is the one is use by far the most It makes it somewhat
 easy to add =import= statements to Haskell files.  It's surely not
 perfect, but fits my preferences well; that is, I almost never use the
@@ -77,6 +80,8 @@ and alias."
       (haskell-navigate-imports-go)
       (insert import-line))))
 #+end_src
+
+* =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used
 functions as well as some of the above utilities into a local keymap
