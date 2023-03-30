@@ -11,11 +11,11 @@ make quick changes to Haskell files (adding pragmas, language
 extensions, GHC options).
 
 #+begin_src emacs-lisp
-(defun kenran/make-pragma (pragma content)
+(defun my/make-pragma (pragma content)
   "Create a pragma line of type `pragma' containing `content'."
   (concat "{-# " pragma " " content " #-}\n"))
 
-(defun kenran/haskell-add-language-extension (ext-name)
+(defun my/haskell-add-language-extension (ext-name)
   "Add an extension from the list of available language extensions
 to the top of the file."
   (interactive
@@ -23,12 +23,12 @@ to the top of the file."
     (completing-read
      "Extension: "
      haskell-ghc-supported-extensions)))
-  (let ((pragma (kenran/make-pragma "LANGUAGE" ext-name)))
+  (let ((pragma (my/make-pragma "LANGUAGE" ext-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
 
-(defun kenran/haskell-add-ghc-option (opt-name)
+(defun my/haskell-add-ghc-option (opt-name)
   "Add a GHC option from the list of options to the top of the
 file."
   (interactive
@@ -36,12 +36,12 @@ file."
     (completing-read
      "GHC option: "
      haskell-ghc-supported-options)))
-  (let ((pragma (kenran/make-pragma "OPTIONS_GHC" opt-name)))
+  (let ((pragma (my/make-pragma "OPTIONS_GHC" opt-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
 
-(defun kenran/read-non-empty-string (prompt)
+(defun my/read-non-empty-string (prompt)
   "Read a string from the minibuffer.  When the result is the empty
 string, return nil instead."
   (let ((str (read-string prompt)))
@@ -59,7 +59,7 @@ adding a qualified import with import list, or an unqualified one with
 an alias, would require "tricks".
 
 #+begin_src emacs-lisp
-(defun kenran/haskell-add-import (module &optional qualified? alias)
+(defun my/haskell-add-import (module &optional qualified? alias)
   "Add an import to the import list.  Prompts for qualified import
 and alias."
   (interactive
@@ -68,7 +68,7 @@ and alias."
            (unless (string-match-p "(" module)
              (y-or-n-p (concat "Import " module " qualified?"))))
           (alias (when qualified?
-                   (kenran/read-non-empty-string "Alias [or leave empty]: "))))
+                   (my/read-non-empty-string "Alias [or leave empty]: "))))
      (list module qualified? alias)))
   (let ((import-line
          (concat "import "
@@ -101,9 +101,9 @@ for easy access.
         ("C-c e f" . haskell-goto-first-error)
         ("C-c e n" . haskell-goto-next-error)
         ("C-c e p" . haskell-goto-prev-error)
-        ("C-c i" . kenran/haskell-add-import)
-        ("C-c p l" . kenran/haskell-add-language-extension)
-        ("C-c p o" . kenran/haskell-add-ghc-option)
+        ("C-c i" . my/haskell-add-import)
+        ("C-c p l" . my/haskell-add-language-extension)
+        ("C-c p o" . my/haskell-add-ghc-option)
         ("C-c h k" . haskell-session-kill)
         ("C-c h r" . haskell-process-type)))
 

@@ -95,12 +95,12 @@ A quick way to jump to this file, and an accompanying keybinding, as I
 do this /very often/.
 
 #+begin_src emacs-lisp
-(defun kenran/open-init-file ()
+(defun my/open-init-file ()
   "Open my config.org file."
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
 
-(keymap-global-set "C-. e" 'kenran/open-init-file)
+(keymap-global-set "C-. e" 'my/open-init-file)
 #+end_src
 
 * Custom Emacs look
@@ -155,7 +155,7 @@ certain attributes that need to be applied when switching to the
 respective font.
 
 #+begin_src emacs-lisp
-(setq kenran/font-alist
+(setq my/font-alist
       '((pragmata-pro
          . (:family
             "Pragmata Pro Mono"))
@@ -223,22 +223,21 @@ respective font.
             200))))
 #+end_src
 
-=kenran/current-font= contains a symbol pointing to one of the fonts
-specified in =kenran/font-alist=.  Since I can now globally "set" and
-change a font I like for my system, Emacs should try to adapt to this
-(at startup) as well.  The function =kenran/load-font-from-env= does
-just that, as the global font -- if it exists -- can be read from an
-environment variable.  If a setting for this font is found in Emacs,
-that is taken, unless there's a =kenran/default-font= set, which always
-"wins".
+=my/current-font= contains a symbol pointing to one of the fonts
+specified in =my/font-alist=.  Since I can now globally "set" and change
+a font I like for my system, Emacs should try to adapt to this (at
+startup) as well.  The function =my/load-font-from-env= does just that,
+as the global font -- if it exists -- can be read from an environment
+variable.  If a setting for this font is found in Emacs, that is
+taken, unless there's a =my/default-font= set, which always "wins".
 
 If neither default font nor environment variable are set/found, I fall
 back to DejaVu Sans Mono.
 
 #+begin_src emacs-lisp
-(setq kenran/default-font nil)
+(setq my/default-font nil)
 
-(defun kenran/load-font-from-env ()
+(defun my/load-font-from-env ()
   "See whether an environment variable specifying a 'system font' is
 set, and translate that to one of the font symbols."
   (when-let ((f (getenv "KENRAN_DEFAULT_FONT"))
@@ -246,12 +245,12 @@ set, and translate that to one of the font symbols."
                     (lambda (x)
                       (equal (plist-get (cdr x) :family)
                              f))
-                    kenran/font-alist)))
+                    my/font-alist)))
     (car font)))
 
-(setq kenran/current-font
-      (or kenran/default-font
-          (kenran/load-font-from-env)
+(setq my/current-font
+      (or my/default-font
+          (my/load-font-from-env)
           'dejavu))
 #+end_src
 
@@ -259,23 +258,23 @@ For =org-mode= I (sometimes) like using a non-monospace font.  This is
 it.
 
 #+begin_src emacs-lisp
-(defconst kenran/variable-pitch-font "Cantarell")
+(defconst my/variable-pitch-font "Cantarell")
 #+end_src
 
 The function I use to switch between the various fonts I like.  It
-applies the attributes of its value in =kenran/font-alist=.
+applies the attributes of its value in =my/font-alist=.
 
 #+begin_src emacs-lisp
-(defun kenran/switch-font (font)
-  "Apply the attributes stored for FONT in `kenran/font-alist'."
+(defun my/switch-font (font)
+  "Apply the attributes stored for FONT in `my/font-alist'."
   (interactive
    (list (intern
           (completing-read
            "Font: "
            (mapcar #'car
-                   (assoc-delete-all kenran/current-font
-                                     (copy-alist kenran/font-alist)))))))
-  (let* ((attrs (alist-get font kenran/font-alist))
+                   (assoc-delete-all my/current-font
+                                     (copy-alist my/font-alist)))))))
+  (let* ((attrs (alist-get font my/font-alist))
          (family (plist-get attrs :family))
          (height (or (plist-get attrs :default-height) 180))
          ;; `buffer-face-mode' is enabled when calling
@@ -284,8 +283,8 @@ applies the attributes of its value in =kenran/font-alist=.
                          (or (plist-get attrs :org-height) 0.9)
                        1.0))
          (weight (or (plist-get attrs :weight) 'regular)))
-    (setq kenran/current-font font)
-    (setq kenran/default-font-height height)
+    (setq my/current-font font)
+    (setq my/default-font-height height)
     (set-face-attribute
      'default nil
      :font family
@@ -297,7 +296,7 @@ applies the attributes of its value in =kenran/font-alist=.
      :height org-height)
     (set-face-attribute
      'variable-pitch nil
-     :font kenran/variable-pitch-font
+     :font my/variable-pitch-font
      :height 1.0)
     (set-face-attribute
      'fixed-pitch-serif nil
@@ -313,18 +312,18 @@ together with =emacsclient=.
 #+begin_src emacs-lisp
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook
-              (defun kenran/switch-to-current-font ()
-                (kenran/switch-font kenran/current-font)
+              (defun my/switch-to-current-font ()
+                (my/switch-font my/current-font)
                 (remove-hook 'server-after-make-frame-hook
-                             #'kenran/switch-to-current-font)))
-  (kenran/switch-font kenran/current-font))
+                             #'my/switch-to-current-font)))
+  (my/switch-font my/current-font))
 #+end_src
 
 I find myself switching fonts /all the time/; I just seem to need that
 kind of visual refreshment.  So let's bind it to a "leader" key.
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-. t f" 'kenran/switch-font)
+(keymap-global-set "C-. t f" 'my/switch-font)
 #+end_src
 
 ** Color theme
@@ -336,15 +335,15 @@ theme active at all times, so I use =disable-theme= on all themes in
 =custom-enabled-themes= before enabling the target theme.
 
 #+begin_src emacs-lisp
-  (defvar kenran/switch-theme-hook nil
+  (defvar my/switch-theme-hook nil
     "Functions to be called after switching the current (default)
   font.")
 
-  (defun kenran/switch-theme-hook ()
-    "Run `kenran/switch-theme-hook'."
-    (run-hook-with-args 'kenran/switch-theme-hook))
+  (defun my/switch-theme-hook ()
+    "Run `my/switch-theme-hook'."
+    (run-hook-with-args 'my/switch-theme-hook))
 
-  (defun kenran/switch-theme (name)
+  (defun my/switch-theme (name)
     "Switch themes interactively.  Similar to `load-theme' but also
   disables all other enabled themes."
     (interactive
@@ -358,26 +357,26 @@ theme active at all times, so I use =disable-theme= on all themes in
       (mapc #'disable-theme
 	    custom-enabled-themes)
       (load-theme name t)
-      (kenran/switch-theme-hook)))
+      (my/switch-theme-hook)))
 #+end_src
 
 When developing a theme, like I did with =naga=, it's handy to
 be able to reload it on the fly.
 
 #+begin_src emacs-lisp
-(defun kenran/reload-theme ()
+(defun my/reload-theme ()
   "Reload the currently active theme."
   (interactive)
   (let ((active-theme (car custom-enabled-themes)))
-    (kenran/switch-theme active-theme)))
+    (my/switch-theme active-theme)))
 #+end_src
 
 As with fonts, I like changing visuals regularly, as in, multiple
 times a day usually.  So keybindings for this come in useful:
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-. t t" 'kenran/switch-theme)
-(keymap-global-set "C-. t r" 'kenran/reload-theme)
+(keymap-global-set "C-. t t" 'my/switch-theme)
+(keymap-global-set "C-. t r" 'my/reload-theme)
 #+end_src
 
 *** My favorite Emacs themes
@@ -403,7 +402,7 @@ Enable =naga=:
 #+begin_src emacs-lisp
 (setq naga-theme-use-lighter-org-block-background nil)
 (setq naga-theme-modeline-style 'green-box)
-(kenran/switch-theme 'wheatgrass)
+(my/switch-theme 'wheatgrass)
 #+end_src
 
 **** Modus themes
@@ -488,35 +487,35 @@ make it work the way I like:
 - Strip stuff away that I don't look at anyway
 
 #+begin_src emacs-lisp
-(defmacro kenran/with-active-face (face)
+(defmacro my/with-active-face (face)
   "Return FACE if we're in the mode line of the active window, and
 the `mode-line-inactive' face otherwise."
   `(if (mode-line-window-selected-p)
    ,face
      'mode-line-inactive)) 
 
-(defcustom kenran/mode-line-buffer-format
+(defcustom my/mode-line-buffer-format
   '(compilation-in-progress
      (:eval (propertize
 	     "   [Compiling...]"
 	     'face
-	     (kenran/with-active-face compilation-mode-line-run))))
+	     (my/with-active-face compilation-mode-line-run))))
   "How to display the name of the current buffer in the mode line."
   :risky t)
 
-(defcustom kenran/mode-line-flymake-format
+(defcustom my/mode-line-flymake-format
   '(flymake-mode
     (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
 	     `("   " ,counters))))
   "How to display the name of the current buffer in the mode line."
   :risky t)
 
-(defcustom kenran/major-mode-mode-line-format
+(defcustom my/major-mode-mode-line-format
   '("" (:eval (string-replace "-mode" "" (symbol-name major-mode))))
   "How to display the active major mode in the mode line."
   :risky t)
 
-(defun kenran/visible-minor-modes ()
+(defun my/visible-minor-modes ()
   "Return `minor-mode-alist', but with certain modes I don't want to
 see filtered out."
   (let ((hidden-modes '(gcmh-mode
@@ -532,10 +531,10 @@ see filtered out."
                       (eq (car cell)
                           hidden)))))
 
-(defcustom kenran/minor-modes-mode-line-format
+(defcustom my/minor-modes-mode-line-format
   '("("
     (:eval
-     (let ((s (format-mode-line (kenran/visible-minor-modes))))
+     (let ((s (format-mode-line (my/visible-minor-modes))))
        (substring s 1)))
     ")")
   "How to display the active minor modes in the mode line."
@@ -544,14 +543,14 @@ see filtered out."
 (setq-default
  mode-line-format
  '(""
-   kenran/mode-line-flymake-format
-   kenran/mode-line-buffer-format
+   my/mode-line-flymake-format
+   my/mode-line-buffer-format
    (:propertize "   %b" face mode-line-buffer-id)
    ;; Always show current line and column, without checking
    ;; `column-number-mode' and `line-number-mode'
    ("   L%l C%c")
-   ("   " kenran/major-mode-mode-line-format)
-   ("   " kenran/minor-modes-mode-line-format)))
+   ("   " my/major-mode-mode-line-format)
+   ("   " my/minor-modes-mode-line-format)))
 #+end_src
 
 * Basic options
@@ -638,7 +637,7 @@ is used.  I used to always show line numbers when programming with
 sense.  It's no real use showing them by default anymore though.
 
 #+begin_src emacs-lisp
-(defun kenran/toggle-line-numbers ()
+(defun my/toggle-line-numbers ()
   "Toggle `display-line-numbers-mode'.  Meant to be used in a
 keybinding."
   (interactive)
@@ -647,7 +646,7 @@ keybinding."
 (use-package display-line-numbers
   :defer
   :bind
-  ("C-. t l" . kenran/toggle-line-numbers))
+  ("C-. t l" . my/toggle-line-numbers))
 #+end_src
 
 ** Insert a newline at the end of files
@@ -781,7 +780,7 @@ it a lot, but this will probably grow in the coming weeks or months.
   :config
   (advice-add 'eldoc-doc-buffer
               :after
-              (defun kenran/focus-eldoc-buffer ()
+              (defun my/focus-eldoc-buffer ()
                 (message (buffer-name (current-buffer)))
                 (pop-to-buffer eldoc--doc-buffer))))
 #+end_src
@@ -953,7 +952,7 @@ Prepending an equals sign to a search term will search for literal
 matches of the preceding string.
 
 #+begin_src emacs-lisp
-(defun kenran/literal-if-= (pattern _index _total)
+(defun my/literal-if-= (pattern _index _total)
   (when (string-prefix-p "=" pattern)
     `(orderless-literal . ,(substring pattern 1))))
 #+end_src
@@ -962,7 +961,7 @@ A prepended bang discards everything that matches the preceding
 literal string.
 
 #+begin_src emacs-lisp
-(defun kenran/without-if-! (pattern _index _total)
+(defun my/without-if-! (pattern _index _total)
   (when (string-prefix-p "!" pattern)
     `(orderless-without-literal . ,(substring pattern 1))))
 #+end_src
@@ -970,7 +969,7 @@ literal string.
 The tilde sign gives me a way to have "fuzzy" search, if needed.
 
 #+begin_src emacs-lisp
-(defun kenran/flex-if-~ (pattern _index _total)
+(defun my/flex-if-~ (pattern _index _total)
   (when (string-prefix-p "~" pattern)
     `(orderless-flex . ,(substring pattern 1))))
 #+end_src
@@ -979,9 +978,9 @@ The tilde sign gives me a way to have "fuzzy" search, if needed.
 (use-package orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
-   '(kenran/literal-if-=
-     kenran/without-if-!
-     kenran/flex-if-~)))
+   '(my/literal-if-=
+     my/without-if-!
+     my/flex-if-~)))
 #+end_src
 
 ** Consult
@@ -1073,9 +1072,9 @@ doesn't seem like a good way to do it, but it does the job.
 
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook
-          (defun kenran/remove-shadowing-org-bindings ()
+          (defun my/remove-shadowing-org-bindings ()
             (keymap-unset org-mode-map "C-'" t)
-            (remove-hook 'org-mode-hook #'kenran/remove-shadowing-org-bindings)))
+            (remove-hook 'org-mode-hook #'my/remove-shadowing-org-bindings)))
 #+end_src
 
 * Org mode
@@ -1098,7 +1097,7 @@ function that appends a single new value to the current =:inherit=
 attribute value of a face.
 
 #+begin_src emacs-lisp
-(defun kenran/inherit-fixed-pitch (face)
+(defun my/inherit-fixed-pitch (face)
   "Append `fixed-pitch' to the `:inherit' attribute of FACE."
   (let* ((current (face-attribute face :inherit))
          (new (cond
@@ -1112,29 +1111,29 @@ attribute value of a face.
                 (list 'fixed-pitch current)))))
     (set-face-attribute face nil :inherit new)))
 
-(defun kenran/org-font-setup ()
+(defun my/org-font-setup ()
   "Set the face attributes for code, verbatim, and other markup
 elements.  Also increase org header size."
   (interactive)
-  (kenran/inherit-fixed-pitch 'org-block)
-  (kenran/inherit-fixed-pitch 'org-block-begin-line)
-  (kenran/inherit-fixed-pitch 'org-block-end-line)
-  (kenran/inherit-fixed-pitch 'org-document-info-keyword)
-  (kenran/inherit-fixed-pitch 'org-document-info)
-  (kenran/inherit-fixed-pitch 'org-code)
-  (kenran/inherit-fixed-pitch 'org-table)
-  (kenran/inherit-fixed-pitch 'org-verbatim)
-  (kenran/inherit-fixed-pitch 'org-checkbox)
-  (kenran/inherit-fixed-pitch 'org-meta-line)
-  (kenran/inherit-fixed-pitch 'org-special-keyword)
-  (kenran/inherit-fixed-pitch 'org-link)
-  (kenran/inherit-fixed-pitch 'org-todo)
-  (kenran/inherit-fixed-pitch 'org-done)
-  (kenran/inherit-fixed-pitch 'org-drawer)
-  (kenran/inherit-fixed-pitch 'org-property-value)
-  (kenran/inherit-fixed-pitch 'org-document-title))
+  (my/inherit-fixed-pitch 'org-block)
+  (my/inherit-fixed-pitch 'org-block-begin-line)
+  (my/inherit-fixed-pitch 'org-block-end-line)
+  (my/inherit-fixed-pitch 'org-document-info-keyword)
+  (my/inherit-fixed-pitch 'org-document-info)
+  (my/inherit-fixed-pitch 'org-code)
+  (my/inherit-fixed-pitch 'org-table)
+  (my/inherit-fixed-pitch 'org-verbatim)
+  (my/inherit-fixed-pitch 'org-checkbox)
+  (my/inherit-fixed-pitch 'org-meta-line)
+  (my/inherit-fixed-pitch 'org-special-keyword)
+  (my/inherit-fixed-pitch 'org-link)
+  (my/inherit-fixed-pitch 'org-todo)
+  (my/inherit-fixed-pitch 'org-done)
+  (my/inherit-fixed-pitch 'org-drawer)
+  (my/inherit-fixed-pitch 'org-property-value)
+  (my/inherit-fixed-pitch 'org-document-title))
 
-(add-hook 'kenran/switch-theme-hook #'kenran/org-font-setup)
+(add-hook 'my/switch-theme-hook #'my/org-font-setup)
 #+end_src
 
 When writing text with =org=, =auto-fill-mode= should be enabled to
@@ -1150,14 +1149,14 @@ loading =org=, a custom font setup might run to adjust the headers.
   :ensure nil
   :hook
   ((org-mode . auto-fill-mode)
-   (org-mode . kenran/org-font-setup)
+   (org-mode . my/org-font-setup)
    ;; (org-mode . variable-pitch-mode)
    (org-trigger . save-buffer)
-   ;; Inheriting fixed-pitch in kenran/org-font-setup doesn't work; the
+   ;; Inheriting fixed-pitch in my/org-font-setup doesn't work; the
    ;; face is not yet known there, so use a hook.
    (org-indent-mode . (lambda ()
-                        (kenran/inherit-fixed-pitch 'org-indent)
-                        (kenran/inherit-fixed-pitch 'org-hide))))
+                        (my/inherit-fixed-pitch 'org-indent)
+                        (my/inherit-fixed-pitch 'org-hide))))
   :custom
   ((org-startup-indented t)
    (org-startup-folded 'content)
@@ -1206,7 +1205,7 @@ capturing, storing links etc.
 (keymap-global-set "C-. o a" 'org-agenda)
 (keymap-global-set "C-. o c" 'org-capture)
 (keymap-global-set "C-. o t"
-                   (defun kenran/capture-todo ()
+                   (defun my/capture-todo ()
                      (interactive)
                      (org-capture nil "t")))
 (keymap-global-set "C-. o l" 'org-store-link)
@@ -1360,25 +1359,25 @@ seems great.
 ** More completion-at-point backends via =cape=
 
 #+begin_src emacs-lisp
-(defun kenran/ignore-elisp-keywords (cand)
+(defun my/ignore-elisp-keywords (cand)
   "Do not show Emacs Lisp keywords in completions in
 'emacs-lisp-mode'."
   (or (not (keywordp cand))
       (eq (char-after (car completion-in-region--data)) ?:)))
 
-(defun kenran/setup-elisp-capfs ()
+(defun my/setup-elisp-capfs ()
   "Uses 'cape-super-capf' to work around the problem that dabbrev
 completions don't show up in 'emacs-lisp-mode' by default."
   (setq-local completion-at-point-functions
               `(,(cape-super-capf
                   (cape-capf-predicate
                    #'elisp-completion-at-point
-                   #'kenran/ignore-elisp-keywords)
+                   #'my/ignore-elisp-keywords)
                   #'cape-dabbrev)
                 cape-file))
   (setq-local cape-dabbrev-min-length 4))
 
-(defun kenran/register-default-capfs ()
+(defun my/register-default-capfs ()
   "I use 'cape-dabbrev' and 'cape-file' everywhere as they are
 generally useful.  This function needs to be called in certain
 mode hooks, as some modes fill the buffer-local capfs with
@@ -1388,10 +1387,10 @@ called at all."
   (add-to-list 'completion-at-point-functions #'cape-file))
 
 (use-package cape
-  :hook ((emacs-lisp-mode . kenran/setup-elisp-capfs)
-         (haskell-mode . kenran/register-default-capfs))
+  :hook ((emacs-lisp-mode . my/setup-elisp-capfs)
+         (haskell-mode . my/register-default-capfs))
   :init
-  (kenran/register-default-capfs))
+  (my/register-default-capfs))
 #+end_src
 
 * E-mail configuration
@@ -1461,7 +1460,7 @@ Let's first define some utility functions that I'll then bind to
 special keys later.
 
 #+begin_src emacs-lisp
-(defun kenran/notmuch-search-toggle-unread ()
+(defun my/notmuch-search-toggle-unread ()
   "Toggle unread tag at point in `notmuch-search-mode'."
   (interactive)
   (if (member "unread" (notmuch-search-get-tags))
@@ -1469,7 +1468,7 @@ special keys later.
     (notmuch-search-tag '("+unread")))
   (notmuch-search-next-thread))
 
-(defun kenran/notmuch-search-toggle-deleted ()
+(defun my/notmuch-search-toggle-deleted ()
   "Toggle deleted tag at point in `notmuch-search-mode'."
   (interactive)
   (if (member "deleted" (notmuch-search-get-tags))
@@ -1477,7 +1476,7 @@ special keys later.
     (notmuch-search-tag '("+deleted")))
   (notmuch-search-next-thread))
 
-(defun kenran/notmuch-show-toggle-deleted ()
+(defun my/notmuch-show-toggle-deleted ()
   "Toggle deleted tag at point in `notmuch-show-mode'."
   (interactive)
   (if (member "deleted" (notmuch-show-get-tags))
@@ -1527,10 +1526,10 @@ here very well.
      (:name "all mail" :query "*" :key "a")))
   :bind
   (:map notmuch-show-mode-map
-        ("d" . kenran/notmuch-show-toggle-deleted)
+        ("d" . my/notmuch-show-toggle-deleted)
         :map notmuch-search-mode-map
-        ("d" . kenran/notmuch-search-toggle-deleted)
-        ("u" . kenran/notmuch-search-toggle-unread)))
+        ("d" . my/notmuch-search-toggle-deleted)
+        ("u" . my/notmuch-search-toggle-unread)))
 #+end_src
 
 =Gnus-alias= makes it possible to use different identities when
@@ -2028,14 +2027,14 @@ header.
 ** Nix
 
 #+begin_src emacs-lisp
-(reformatter-define kenran/nix-format
+(reformatter-define my/nix-format
   :program "nixfmt"
   :args '()
   :lighter " k/nixfmt")
 
 (use-package nix-mode
   :mode "\\.nix\\'"
-  :hook (nix-mode . kenran/nix-format-on-save-mode))
+  :hook (nix-mode . my/nix-format-on-save-mode))
 #+end_src
 
 ** Markdown
@@ -2060,7 +2059,7 @@ contains everything.
 #+begin_src emacs-lisp
 (use-package my-haskell
   :demand
-  :load-path kenran/custom-package-dir)
+  :load-path my/custom-package-dir)
 #+end_src
 
 ** Dhall
@@ -2264,7 +2263,7 @@ top-level directory of a known project.  =project.el= is making this
 possible in a straightforward way.
 
 #+begin_src emacs-lisp
-(defun kenran/add-nix-envrc-file ()
+(defun my/add-nix-envrc-file ()
   "If it doesn't already exist create a .envrc file containing 'use
 nix' in the current directory."
   (interactive)
@@ -2273,14 +2272,14 @@ nix' in the current directory."
         (message "Envrc file already exists")
       (write-region "use nix" nil envrc))))
 
-(defun kenran/project-vterm ()
+(defun my/project-vterm ()
   "Open a `vterm' session in the project root of the current
 project.  Prompt if no project can be found."
   (interactive)
   (let ((default-directory (project-root (project-current t))))
     (vterm)))
 
-(defun kenran/project-edit-dir-local-variable (mode variable value)
+(defun my/project-edit-dir-local-variable (mode variable value)
   "Edit directory-local variables in the root directory of the
 current project."
   (interactive
@@ -2301,7 +2300,7 @@ directory, so why not write something to open =dired= there and then add
 this function to =project-prefix-map=?
 
 #+begin_src emacs-lisp
-(defun kenran/navigate-to-projects ()
+(defun my/navigate-to-projects ()
   "Open a `dired' buffer in my personal project directory."
   (interactive)
   (dired "~/projects"))
@@ -2323,15 +2322,15 @@ One tricky thing was making it possible to bind the keymap
            "git status"
            ?g)
           (project-dired "dired")
-          (kenran/project-vterm "vterm" ?t)
+          (my/project-vterm "vterm" ?t)
           (project-switch-to-buffer "find buffer" ?b)
           (project-vc-dir "vc")))
   :bind (:map project-prefix-map
-              ("t" . kenran/project-vterm)
+              ("t" . my/project-vterm)
               ("d" . project-dired)
               ("s" . consult-ripgrep)
-              ("D" . kenran/project-edit-dir-local-variable)
-              ("n" . kenran/navigate-to-projects)))
+              ("D" . my/project-edit-dir-local-variable)
+              ("n" . my/navigate-to-projects)))
 #+end_src
 
 ** Magit
@@ -2516,9 +2515,9 @@ after =q= or a timeout.
   ("r" (lambda ()
          (interactive)
          (setq default-text-scale--complement 0)
-         (face-spec-set 'default `((t (:height ,kenran/default-font-height))))
+         (face-spec-set 'default `((t (:height ,my/default-font-height))))
          (set-face-attribute 'default nil
-                             :height kenran/default-font-height))
+                             :height my/default-font-height))
    "reset" :color blue)
   ("s" (lambda (height)
          (interactive "nFont size: ")
