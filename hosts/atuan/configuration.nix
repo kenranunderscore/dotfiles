@@ -95,7 +95,10 @@ in {
     };
   };
 
-  programs.ssh.startAgent = true;
+  programs = {
+    ssh.startAgent = true;
+    fish.enable = true;
+  };
 
   documentation = {
     enable = true;
@@ -116,8 +119,6 @@ in {
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.fish;
   };
-
-  programs.fish.enable = true;
 
   environment = {
     systemPackages = with pkgs; [ ];
