@@ -47,6 +47,7 @@ in {
         noto-fonts
         roboto-mono
         source-code-pro
+        unifont
         victor-mono
       ]);
     };

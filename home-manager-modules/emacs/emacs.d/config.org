@@ -220,6 +220,11 @@ respective font.
          . (:family
             "Termingus"
             :default-height
+            200))
+        (unifont
+         . (:family
+            "Unifont"
+            :default-height
             200))))
 #+end_src
 
