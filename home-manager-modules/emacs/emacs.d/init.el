@@ -1,10 +1,9 @@
 (require 'org)
 
 (defun my/tangle-org-file (path)
-  "Tangle an org file at PATH relative to the `user-emacs-directory'
-to an ELisp file.  Will only tangle if no target file exists yet,
-or if the source file has been touched more recently than the
-target."
+  "Tangle an org file at PATH (absolute) to an ELisp file.  Will
+only tangle if no target file exists yet, or if the source file
+has been touched more recently than the target."
   (let* ((target (replace-regexp-in-string "\.org$" ".el" path)))
     (when (or (not (file-exists-p target))
               (file-newer-than-file-p path target))
