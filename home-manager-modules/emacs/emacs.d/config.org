@@ -2409,8 +2409,7 @@ Like its readme proposes it's also possible to reuse the
     clojurescript-mode
     common-lisp-mode
     racket-mode
-    racket-repl-mode
-    sly-mrepl-mode)
+    racket-repl-mode)
    . lispy-mode))
 #+end_src
 
