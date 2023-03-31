@@ -100,6 +100,7 @@ in {
         shfmt
         tree
         unzip
+        usbutils
         watchexec
         wget
       ];
