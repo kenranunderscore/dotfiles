@@ -25,17 +25,33 @@ function below.
 
 #+begin_src common-lisp
 (load-module "ttf-fonts")
+#+end_src
+
+Now add the Nix-installed fonts to the search path of =clx-truetype=.
+
+#+begin_src common-lisp
 (setq clx-truetype::*font-dirs*
-      (append (list (namestring "~/.nix-profile/share/fonts")
-                    (namestring "~/.nix-profile/share/fonts/truetype")
-                    (namestring "~/.nix-profile/share/fonts/opentype"))
+      (append (list (namestring "~/.nix-profile/share/fonts"))
               clx-truetype::*font-dirs*))
-(when (not (find "JetBrains Mono Regular" (xft:get-font-families)
+#+end_src
+
+If a font that should be installed cannot be found by =xft=, we renew
+the cache (or at least that's my understanding of what happens here --
+I've taken this from somewhere I don't remember).
+
+#+begin_src common-lisp
+(when (not (find "Unifont Regular" (xft:get-font-families)
                  :test #'equal))
   (xft:cache-fonts))
+#+end_src
 
+After all this trouble is done, we can finally set the actual font.  I
+can see myself adding a command to switch fonts or themes later on,
+like I did in Emacs.
+
+#+begin_src common-lisp
 (set-font (make-instance 'xft:font
-                         :family "JetBrains Mono"
+                         :family "Unifont"
                          :subfamily "Regular"
                          :size 20
                          :antialias t))
