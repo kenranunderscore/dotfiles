@@ -74,7 +74,10 @@ in {
         session = [{
           manage = "window";
           name = "stumpwm";
-          start = "$HOME/projects/stumpwm/stumpwm";
+          start = ''
+            export SBCL_HOME=${pkgs.sbcl}/lib/sbcl
+            $HOME/projects/stumpwm/stumpwm
+          '';
         }];
         defaultSession = "none+stumpwm";
         autoLogin = {
