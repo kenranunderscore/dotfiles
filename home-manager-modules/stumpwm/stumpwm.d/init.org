@@ -1,16 +1,31 @@
-(in-package :stumpwm)
+#+TITLE: My StumpWM configuration
+#+AUTHOR: Johannes Maier
+#+EMAIL: johannes.maier@mailbox.org
+#+STARTUP: showall
 
+* StumpWM configuration
+
+#+begin_src common-lisp
+(in-package :stumpwm)
+#+end_src
+
+Load and start a slynk server in a background thread.  At a later
+date, this should be made into a command in order to only start it
+whenever I want to connect to StumpWM via SLY REPL.
+
+#+begin_src common-lisp
 (ql:quickload :slynk)
 (defparameter *slynk-port* 4444)
 
-;; Start slynk in a background thread
 (sb-thread:make-thread
  (lambda ()
    (slynk:create-server
     :port *slynk-port*
     :dont-close t))
  :name "slynk-auto")
+#+end_src
 
+#+begin_src common-lisp
 (load-module "ttf-fonts")
 (setq clx-truetype::*font-dirs*
       (append (list (namestring "~/.nix-profile/share/fonts")
@@ -28,5 +43,13 @@
                          :antialias t))
 
 (setf *message-window-gravity* :center
-      *message-window-padding* 5)
+      ,*message-window-padding* 5)
 (setf *input-window-gravity* :center)
+#+end_src
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook
+;;                 (lambda () (if (y-or-n-p "Tangle?")
+;;                   (org-babel-tangle nil "init.lisp")))
+;;                 nil t)
+;; End:

@@ -1,0 +1,4 @@
+*.lisp
+*.log
+*.log.*
+modules/
