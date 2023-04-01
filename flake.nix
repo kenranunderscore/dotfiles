@@ -55,6 +55,12 @@
       url = "github:supercomputra/sf-mono-font";
       flake = false;
     };
+
+    # StumpWM
+    stumpwm-contrib = {
+      url = "github:stumpwm/stumpwm-contrib";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:

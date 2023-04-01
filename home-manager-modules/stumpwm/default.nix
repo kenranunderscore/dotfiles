@@ -1,14 +1,21 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let cfg = config.modules.stumpwm;
 in {
   options.modules.stumpwm.enable = lib.mkEnableOption "stumpwm";
 
   config = lib.mkIf cfg.enable {
-    home.activation = {
+    home.activation = let stumpDir = "$HOME/.stumpwm.d";
+    in {
       symlinkDotStumpWM = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        if [ ! -e $HOME/.stumpwm.d ]; then
-          $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/stumpwm/stumpwm.d $HOME/.stumpwm.d
+        if [ ! -e ${stumpDir} ]; then
+          $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/stumpwm/stumpwm.d ${stumpDir}
+        fi
+      '';
+      symlinkStumpWMContrib = lib.hm.dag.entryAfter [ "symlinkDotStumpWM" ] ''
+        if [ ! -e ${stumpDir}/modules ]; then
+          $DRY_RUN_CMD mkdir -p ${stumpDir}/modules
+          $DRY_RUN_CMD ln -snf ${inputs.stumpwm-contrib} ${stumpDir}/modules/stumpwm-contrib
         fi
       '';
     };

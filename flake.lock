@@ -208,6 +208,7 @@
         "nixpkgs": "nixpkgs",
         "privateConfig": "privateConfig",
         "sf-mono": "sf-mono",
+        "stumpwm-contrib": "stumpwm-contrib",
         "zsh-autopair": "zsh-autopair",
         "zsh-autosuggestions": "zsh-autosuggestions",
         "zsh-history-substring-search": "zsh-history-substring-search",
@@ -227,6 +228,22 @@
       "original": {
         "owner": "supercomputra",
         "repo": "sf-mono-font",
+        "type": "github"
+      }
+    },
+    "stumpwm-contrib": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680294301,
+        "narHash": "sha256-ZXg9qqnpZJleut0jKJxdnDw1GVI1bOM+xXVl1V8zi1U=",
+        "owner": "stumpwm",
+        "repo": "stumpwm-contrib",
+        "rev": "f5af33375ae1dbb699cd6c7d02c1af38020a5269",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stumpwm",
+        "repo": "stumpwm-contrib",
         "type": "github"
       }
     },
