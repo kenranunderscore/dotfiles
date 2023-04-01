@@ -61,7 +61,8 @@ like I did in Emacs.
 
 #+begin_src common-lisp
 (setf *message-window-gravity* :center
-      ,*message-window-padding* 5)
+      ,*message-window-padding* 25
+      ,*message-window-y-padding* 10)
 (setf *input-window-gravity* :center)
 #+end_src
 
