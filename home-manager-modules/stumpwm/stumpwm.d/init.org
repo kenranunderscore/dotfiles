@@ -15,14 +15,17 @@ whenever I want to connect to StumpWM via SLY REPL.
 
 #+begin_src common-lisp
 (ql:quickload :slynk)
-(defparameter *slynk-port* 4444)
 
-(sb-thread:make-thread
- (lambda ()
-   (slynk:create-server
-    :port *slynk-port*
-    :dont-close t))
- :name "slynk-auto")
+(defcommand my/start-slynk-server (port)
+    ((:number "Enter the port [default = 4444]: "))
+  (let ((actual-port (or port 4444)))
+    (sb-thread:make-thread
+     (lambda ()
+       (slynk:create-server
+        :port actual-port
+        :dont-close t))
+     :name "slynk-auto")
+    (message "Slynk server running on port ~a" actual-port)))
 #+end_src
 
 #+begin_src common-lisp
