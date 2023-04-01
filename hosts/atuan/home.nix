@@ -7,8 +7,9 @@
 
   modules = {
     rofi.enable = true;
+    stumpwm.enable = true;
     i3 = {
-      enable = true;
+      enable = false;
       workspaces = [
         { name = "1:main"; }
         {
@@ -41,8 +42,8 @@
         }
       ];
     };
-    polybar.enable = true;
-    picom.enable = true;
+    polybar.enable = false;
+    picom.enable = false;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";

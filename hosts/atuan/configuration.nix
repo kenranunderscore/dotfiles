@@ -73,10 +73,10 @@ in {
       displayManager = {
         session = [{
           manage = "window";
-          name = "fake";
-          start = "";
+          name = "stumpwm";
+          start = "$HOME/projects/stumpwm/stumpwm";
         }];
-        defaultSession = "none+fake";
+        defaultSession = "none+stumpwm";
         autoLogin = {
           enable = true;
           user = username;
