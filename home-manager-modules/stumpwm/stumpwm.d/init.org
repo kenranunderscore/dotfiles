@@ -60,7 +60,7 @@ shell:
 
 ;; Local Variables:
 ;; eval: (add-hook 'after-save-hook
-;;                 (lambda () (if (y-or-n-p "Tangle?")
-;;                   (org-babel-tangle nil "init.lisp")))
+;;                 (lambda () 
+;;                   (org-babel-tangle nil "init.lisp"))
 ;;                 nil t)
 ;; End:
