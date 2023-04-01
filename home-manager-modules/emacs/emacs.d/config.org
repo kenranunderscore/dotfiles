@@ -1867,7 +1867,10 @@ most-used commands will be, and if and where to bind those.
 
 #+begin_src emacs-lisp
 (use-package multiple-cursors
-  :defer)
+  ;; FIXME: https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_29060/
+  ;; Remove as soon as the bug is fixed somewhere
+  :init
+  (load "multiple-cursors-core.el"))
 #+end_src
 
 * Package-specific configuration
