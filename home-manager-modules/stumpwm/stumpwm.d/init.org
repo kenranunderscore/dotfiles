@@ -49,6 +49,19 @@ function below.
 (setf *input-window-gravity* :center)
 #+end_src
 
+** Borders
+
+I like thin, barely visible borders around my windows, mainly just to
+see where the current focus is.  The color should be a bit more flashy
+as well, but that should come as soon as I think about theming.
+
+#+begin_src common-lisp
+(setf *window-border-style* :thin)
+(setf *normal-border-width* 1)
+(setf *maxsize-border-width* 1)
+(setf *transient-border-width* 1)
+#+end_src
+
 * Interactive development with Emacs and SLY
 
 Load and start a slynk server in a background thread.  At a later
