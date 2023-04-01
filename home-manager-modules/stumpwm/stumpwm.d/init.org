@@ -3,11 +3,53 @@
 #+EMAIL: johannes.maier@mailbox.org
 #+STARTUP: showall
 
-* StumpWM configuration
+* Initialization
+
+Before being able to do anything else, we enter the =stumpwm= package.
 
 #+begin_src common-lisp
 (in-package :stumpwm)
 #+end_src
+
+* Theme and other visuals
+** Using TrueType fonts / =xft=
+
+Sadly, StumpWM relies on server-side fonts under X; but my fonts are
+installed via [[https://github.com/nix-community/home-manager][home-manager]], and cannot be seen by the X server.  In
+order to use =xft=, we have to rely on the =clx-truetype= package, which
+is deprecated but being kept alive on GitHub.  It needs to be
+installed on the system, which I did by cloning it into my
+=$HOME/.quicklisp/local-packages/= directory; =(ql:quickload
+:clx-truetype)= then succeeds when being called by the =load-module=
+function below.
+
+#+begin_src common-lisp
+(load-module "ttf-fonts")
+(setq clx-truetype::*font-dirs*
+      (append (list (namestring "~/.nix-profile/share/fonts")
+                    (namestring "~/.nix-profile/share/fonts/truetype")
+                    (namestring "~/.nix-profile/share/fonts/opentype"))
+              clx-truetype::*font-dirs*))
+(when (not (find "JetBrains Mono Regular" (xft:get-font-families)
+                 :test #'equal))
+  (xft:cache-fonts))
+
+(set-font (make-instance 'xft:font
+                         :family "JetBrains Mono"
+                         :subfamily "Regular"
+                         :size 20
+                         :antialias t))
+#+end_src
+
+** Message and input windows
+
+#+begin_src common-lisp
+(setf *message-window-gravity* :center
+      ,*message-window-padding* 5)
+(setf *input-window-gravity* :center)
+#+end_src
+
+* Interactive development with Emacs and SLY
 
 Load and start a slynk server in a background thread.  At a later
 date, this should be made into a command in order to only start it
@@ -28,27 +70,12 @@ whenever I want to connect to StumpWM via SLY REPL.
     (message "Slynk server running on port ~a" actual-port)))
 #+end_src
 
-#+begin_src common-lisp
-(load-module "ttf-fonts")
-(setq clx-truetype::*font-dirs*
-      (append (list (namestring "~/.nix-profile/share/fonts")
-                    (namestring "~/.nix-profile/share/fonts/truetype")
-                    (namestring "~/.nix-profile/share/fonts/opentype"))
-              clx-truetype::*font-dirs*))
-(when (not (find "JetBrains Mono Regular" (xft:get-font-families)
-                 :test #'equal))
-  (xft:cache-fonts))
+After executing the command =my/start-slynk-server= and entering a port
+number, from within Emacs I can =sly-connect=.  Inside the resulting
+SLY REPL I have to do =(in-package :stumpwm)= and can then interactively
+develop this configuration.
 
-(set-font (make-instance 'xft:font
-                         :family "JetBrains Mono"
-                         :subfamily "Regular"
-                         :size 20
-                         :antialias t))
-
-(setf *message-window-gravity* :center
-      ,*message-window-padding* 5)
-(setf *input-window-gravity* :center)
-#+end_src
+* Startup commands, scripts, programs, etc.
 
 The default repeat rate of keys is way too low for my taste, so I
 usually increase it.  In StumpWM, those things are just executed in a
