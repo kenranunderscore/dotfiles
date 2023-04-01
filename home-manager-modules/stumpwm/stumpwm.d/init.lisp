@@ -1,15 +1,15 @@
 (in-package :stumpwm)
 
-;; (ql:quickload :slynk)
-;; (defparameter *slynk-port* 4444)
+(ql:quickload :slynk)
+(defparameter *slynk-port* 4444)
 
-;; ;; Start slynk in a background thread
-;; (sb-thread:make-thread
-;;  (lambda ()
-;;    (slynk:create-server
-;;     :port *slynk-port*
-;;     :dont-close t))
-;;  :name "slynk-auto")
+;; Start slynk in a background thread
+(sb-thread:make-thread
+ (lambda ()
+   (slynk:create-server
+    :port *slynk-port*
+    :dont-close t))
+ :name "slynk-auto")
 
 (load-module "ttf-fonts")
 (setq clx-truetype::*font-dirs*
