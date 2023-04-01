@@ -40,12 +40,6 @@
       flake = false;
     };
 
-    # fish plugins
-    "autopair.fish" = {
-      url = "github:jorgebucaran/autopair.fish";
-      flake = false;
-    };
-
     # DCSS
     crawlrc = {
       url = "github:kenranunderscore/crawlrc";

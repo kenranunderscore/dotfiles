@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "autopair.fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1656950411,
-        "narHash": "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=",
-        "owner": "jorgebucaran",
-        "repo": "autopair.fish",
-        "rev": "4d1752ff5b39819ab58d7337c69220342e9de0e2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jorgebucaran",
-        "repo": "autopair.fish",
-        "type": "github"
-      }
-    },
     "crawl": {
       "flake": false,
       "locked": {
@@ -216,7 +200,6 @@
     },
     "root": {
       "inputs": {
-        "autopair.fish": "autopair.fish",
         "crawl": "crawl",
         "crawlrc": "crawlrc",
         "emacs-overlay": "emacs-overlay",
