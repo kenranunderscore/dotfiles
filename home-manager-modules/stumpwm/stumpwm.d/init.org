@@ -47,6 +47,14 @@ whenever I want to connect to StumpWM via SLY REPL.
 (setf *input-window-gravity* :center)
 #+end_src
 
+The default repeat rate of keys is way too low for my taste, so I
+usually increase it.  In StumpWM, those things are just executed in a
+shell:
+
+#+begin_src common-lisp
+(run-shell-command "xset r rate 200 55")
+#+end_src
+
 ;; Local Variables:
 ;; eval: (add-hook 'after-save-hook
 ;;                 (lambda () (if (y-or-n-p "Tangle?")
