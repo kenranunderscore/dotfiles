@@ -79,6 +79,18 @@ as well, but that should come as soon as I think about theming.
 (setf *transient-border-width* 1)
 #+end_src
 
+** Pretty gaps between and windows
+
+Sometimes I like them, sometimes I don't.  Let's try them out in
+StumpWM.
+
+#+begin_src common-lisp
+(load-module "swm-gaps")
+(setf swm-gaps::*inner-gaps-size* 20)
+(setf swm-gaps::*outer-gaps-size* 10)
+(setf swm-gaps::*head-gaps-size* 0)
+#+end_src
+
 * Interactive development with Emacs and SLY
 
 Load and start a slynk server in a background thread.  At a later
