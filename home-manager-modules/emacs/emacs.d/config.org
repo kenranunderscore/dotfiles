@@ -1717,7 +1717,10 @@ accordingly.
   (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
 #+end_src
 
-* Window management: taming popups
+* Window management
+** Taming popups
+
+TODO: reevaluate whether I need this after switching away from =evil=
 
 One thing I'm missing from Doom Emacs is the way it handled all sorts
 of popup-like buffers.  When using vanilla Emacs with packages, there
@@ -1770,6 +1773,29 @@ guess is that they probably go well together.
 - [ ] Compilation results
 - [ ] Shell command results
 - [ ] LSP / =eglot=
+
+** Resizing windows in splits
+
+Resizing windows is one of those things that still make me use a
+mouse, as I find the default bindings awkward to use and especially
+chain.  A =hydra= might just remedy that:
+
+#+begin_src emacs-lisp
+(defhydra hydra-window-size (:hint nil)
+  "
+  Adjust window sizes.\n
+  height   + [_g_]   - [_l_]
+  width    + [_w_]   - [_n_]\n
+  "
+  ("b" balance-windows "balance windows" :color blue)
+  ("g" enlarge-window)
+  ("l" shrink-window)
+  ("w" enlarge-window-horizontally)
+  ("n" shrink-window-horizontally)
+  ("q" nil "exit"))
+
+(keymap-global-set "C-t w" 'hydra-window-size/body)
+#+end_src
 
 * IRC with ERC
 
