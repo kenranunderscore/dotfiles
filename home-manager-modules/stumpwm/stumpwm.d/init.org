@@ -1,13 +1,14 @@
 #+TITLE: My StumpWM configuration
 #+AUTHOR: Johannes Maier
 #+EMAIL: johannes.maier@mailbox.org
+#+PROPERTY: header-args :tangle init.lisp
 #+STARTUP: showall
 
 * Initialization
 
 Before being able to do anything else, we enter the =stumpwm= package.
 
-#+begin_src common-lisp
+#+begin_src lisp
 (in-package :stumpwm)
 #+end_src
 
@@ -23,13 +24,13 @@ installed on the system, which I did by cloning it into my
 :clx-truetype)= then succeeds when being called by the =load-module=
 function below.
 
-#+begin_src common-lisp
+#+begin_src lisp
 (load-module "ttf-fonts")
 #+end_src
 
 Now add the Nix-installed fonts to the search path of =clx-truetype=.
 
-#+begin_src common-lisp
+#+begin_src lisp
 (setq clx-truetype::*font-dirs*
       (append (list (namestring "~/.nix-profile/share/fonts"))
               clx-truetype::*font-dirs*))
@@ -39,7 +40,7 @@ If a font that should be installed cannot be found by =xft=, we renew
 the cache (or at least that's my understanding of what happens here --
 I've taken this from somewhere I don't remember).
 
-#+begin_src common-lisp
+#+begin_src lisp
 (when (not (find "Unifont Regular" (xft:get-font-families)
                  :test #'equal))
   (xft:cache-fonts))
@@ -49,7 +50,7 @@ After all this trouble is done, we can finally set the actual font.  I
 can see myself adding a command to switch fonts or themes later on,
 like I did in Emacs.
 
-#+begin_src common-lisp
+#+begin_src lisp
 (set-font (make-instance 'xft:font
                          :family "Unifont"
                          :subfamily "Regular"
@@ -59,10 +60,10 @@ like I did in Emacs.
 
 ** Message and input windows
 
-#+begin_src common-lisp
+#+begin_src lisp
 (setf *message-window-gravity* :center
-      ,*message-window-padding* 25
-      ,*message-window-y-padding* 10)
+      *message-window-padding* 25
+      *message-window-y-padding* 10)
 (setf *input-window-gravity* :center)
 #+end_src
 
@@ -72,7 +73,7 @@ I like thin, barely visible borders around my windows, mainly just to
 see where the current focus is.  The color should be a bit more flashy
 as well, but that should come as soon as I think about theming.
 
-#+begin_src common-lisp
+#+begin_src lisp
 (setf *window-border-style* :thin)
 (setf *normal-border-width* 1)
 (setf *maxsize-border-width* 1)
@@ -84,11 +85,20 @@ as well, but that should come as soon as I think about theming.
 Sometimes I like them, sometimes I don't.  Let's try them out in
 StumpWM.
 
-#+begin_src common-lisp
+Load the module and set the actual sizes of the gaps.
+
+#+begin_src lisp
 (load-module "swm-gaps")
 (setf swm-gaps::*inner-gaps-size* 20)
 (setf swm-gaps::*outer-gaps-size* 10)
 (setf swm-gaps::*head-gaps-size* 0)
+#+end_src
+
+Now turn on the gaps on StumpWM startup.
+
+#+begin_src lisp
+(when *initializing*
+  (swm-gaps::toggle-gaps))
 #+end_src
 
 * Interactive development with Emacs and SLY
@@ -97,7 +107,7 @@ Load and start a slynk server in a background thread.  At a later
 date, this should be made into a command in order to only start it
 whenever I want to connect to StumpWM via SLY REPL.
 
-#+begin_src common-lisp
+#+begin_src lisp
 (ql:quickload :slynk)
 
 (defcommand my/start-slynk-server (port)
@@ -123,19 +133,25 @@ The default repeat rate of keys is way too low for my taste, so I
 usually increase it.  In StumpWM, those things are just executed in a
 shell:
 
-#+begin_src common-lisp
+#+begin_src lisp
 (run-shell-command "xset r rate 200 55")
 #+end_src
 
 * Keybindings
 
-#+begin_src common-lisp
-(set-prefix-key (kbd "C-;"))
+#+begin_src lisp
+(set-prefix-key (kbd "C-."))
 #+end_src
 
 ;; Local Variables:
+;; eval: (require 'sly)
+;; eval: (org-babel-do-load-languages
+;;        'org-babel-load-languages
+;;        '((emacs-lisp . t)
+;;          (common-lisp . t)
+;;          (lisp . t)))
+;; org-babel-lisp-eval-fn: #'sly-eval
 ;; eval: (add-hook 'after-save-hook
-;;                 (lambda () 
-;;                   (org-babel-tangle nil "init.lisp"))
+;;                 #'org-babel-tangle
 ;;                 nil t)
 ;; End:
