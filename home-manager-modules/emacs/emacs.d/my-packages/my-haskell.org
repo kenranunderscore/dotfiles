@@ -81,6 +81,21 @@ and alias."
       (insert import-line))))
 #+end_src
 
+* Navigating errors
+
+As always, =hydra= is highly capable of simplifying all sorts of
+navigational sets of commands.
+
+#+begin_src emacs-lisp
+(defhydra hydra-haskell-error-navigation (:hint nil)
+  "\n
+  Move through Haskell errors.\n
+  _f_: first  _n_: next  _p_: previous"
+  ("f" haskell-goto-first-error)
+  ("n" haskell-goto-next-error)
+  ("p" haskell-goto-previous-error))
+#+end_src
+
 * =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used
@@ -98,9 +113,7 @@ for easy access.
   (haskell-mode . interactive-haskell-mode)
   :bind
   (:map haskell-mode-map
-        ("C-c e f" . haskell-goto-first-error)
-        ("C-c e n" . haskell-goto-next-error)
-        ("C-c e p" . haskell-goto-prev-error)
+        ("C-c e" . hydra-haskell-error-navigation/body)
         ("C-c i" . my/haskell-add-import)
         ("C-c p l" . my/haskell-add-language-extension)
         ("C-c p o" . my/haskell-add-ghc-option)
