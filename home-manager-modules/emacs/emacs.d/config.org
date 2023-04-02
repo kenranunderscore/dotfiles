@@ -1958,29 +1958,30 @@ contains lots of hydras, so I took heavy inspiration there.
 #+begin_src emacs-lisp
 (defhydra hydra-multiple-cursors (:hint nil)
   "\n
-  Spawn multiple cursors.\n
-  ^^forward       ^^backward      ^^region-based
-  ----------------------------------------------
-  [_n_]   next    [_p_]   next    [_l_]   edit lines
-  [_N_]   skip    [_P_]   skip    [_a_]   mark all
-  [_M-n_] unmark  [_M-p_] unmark  [_r_]   mark by regexp
-  [_w_]   word    [_W_]   word    [_M-w_] all words
-  ^^              ^^              [_C-w_] words in defun\n
+  ^^forward       ^^backward        region-based
+  ^^--------------^^-------------   ^^-------------------^^---------------------
+  [_n_]   next    [_p_]   next      [_l_]   lines        [_C-a_] beg. of lines
+  [_N_]   skip    [_P_]   skip      [_a_]   all          [_C-e_] end. of lines
+  [_M-n_] unmark  [_M-p_] unmark    [_M-w_] all words    [_M-w_] words in defun
+  [_w_]   word    [_W_]   word      [_r_]   regexp
+
   "
-  ("l" mc/edit-lines :exit t)
-  ("a" mc/mark-all-like-this :exit t)
   ("n" mc/mark-next-like-this)
   ("N" mc/skip-to-next-like-this)
   ("M-n" mc/unmark-next-like-this)
   ("p" mc/mark-previous-like-this)
   ("P" mc/skip-to-previous-like-this)
   ("M-p" mc/unmark-previous-like-this)
-  ("r" mc/mark-all-in-region-regexp :exit t)
   ("w" mc/mark-next-like-this-word)
   ("W" mc/mark-previous-like-this-word)
+  ("r" mc/mark-all-in-region-regexp :exit t)
+  ("l" mc/edit-lines :exit t)
+  ("a" mc/mark-all-like-this :exit t)
   ("M-w" mc/mark-all-words-like-this :exit t)
   ("C-w" mc/mark-all-words-like-this-in-defun :exit t)
-  ("q" nil "exit" :color blue))
+  ("C-a" mc/edit-beginnings-of-lines :exit t)
+  ("C-e" mc/edit-endings-of-lines :exit t)
+  ("q" nil "exit"))
 
 (keymap-global-set "C-z" #'hydra-multiple-cursors/body)
 #+end_src

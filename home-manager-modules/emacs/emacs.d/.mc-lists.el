@@ -6,9 +6,11 @@
         kill-region
         lispy-braces
         lispy-brackets
+        lispy-colon
         lispy-delete
         lispy-delete-backward
         lispy-kill
+        lispy-kill-word
         lispy-move-beginning-of-line
         lispy-move-end-of-line
         lispy-parens
