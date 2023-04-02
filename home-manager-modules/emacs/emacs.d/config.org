@@ -1012,7 +1012,7 @@ basic bindings mostly taken from an example in its readme.
 #+begin_src emacs-lisp
 (use-package consult
   :bind (("C-x b" . consult-buffer)
-         ("C-z" . consult-buffer)
+         ("C-x C-b" . consult-buffer)
          ("C-x 4 b" . consult-buffer-other-window)
          ("C-x 5 b" . consult-buffer-other-frame)
          ("C-h a" . consult-apropos)
@@ -1958,6 +1958,8 @@ contains lots of hydras, so I took heavy inspiration there.
   ("M-w" mc/mark-all-words-like-this :exit t)
   ("C-w" mc/mark-all-words-like-this-in-defun :exit t)
   ("q" nil :color blue))
+
+(keymap-global-set "C-z" #'hydra-multiple-cursors/body)
 #+end_src
 
 * Package-specific configuration
