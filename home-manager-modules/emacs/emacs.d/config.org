@@ -2488,10 +2488,25 @@ Like its readme proposes it's also possible to reuse the
                (cons "/.dockerignore\\'" 'gitignore-mode)))
 #+end_src
 
-** LISP editing with Lispy and Lispyville
+** "Modal" Lisp editing with =lispy=
+
+I've grown very fond of the way the [[https://github.com/abo-abo/lispy][lispy]] package works, especially
+without =evil=.  The basic idea is that there are certain /special/
+positions in Lisp code where it's *very* uncommon to insert any letter.
+When point is in such a /special/ position -- most commonly on an
+opening parenthesis or directly behind a closing parenthesis --
+letters that you enter execute special Lisp editing commands: =>= slurps
+s-expressions, =j= and =k= move down and up on the same level, =r= raises
+and lots and lots more.  After getting used to it for a bit, it feels
+/absolutely great/ and I continue to discover new bindings gradually.
+There's also an awesome video by abo-abo, linked in the readme, where
+they showcase many things =lispy= has to offer.
 
 #+begin_src emacs-lisp
 (use-package lispy
+  :defer
+  :config
+  (setq lispy-colon-p nil)
   :hook
   ((emacs-lisp-mode
     lisp-mode
@@ -2500,7 +2515,9 @@ Like its readme proposes it's also possible to reuse the
     clojurescript-mode
     common-lisp-mode
     racket-mode
-    racket-repl-mode)
+    racket-repl-mode
+    sly-repl-mode
+    slime-repl-mode)
    . lispy-mode))
 #+end_src
 
