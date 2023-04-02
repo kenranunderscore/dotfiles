@@ -1298,7 +1298,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
 
 #+begin_src emacs-lisp
 (defhydra hydra-navigate-errors (:hint nil)
-  "
+  "\n
   Navigate the error list.\n
   _f_: first  _n_: next  _p_: previous\n
   "
@@ -1782,10 +1782,10 @@ chain.  A =hydra= might just remedy that:
 
 #+begin_src emacs-lisp
 (defhydra hydra-window-size (:hint nil)
-  "
+  "\n
   Adjust window sizes.\n
-  height   + [_g_]   - [_l_]
-  width    + [_w_]   - [_n_]\n
+  height   +: [_g_]   -: [_l_]
+  width    +: [_w_]   -: [_n_]\n
   "
   ("b" balance-windows "balance windows" :color blue)
   ("g" enlarge-window)
@@ -1918,7 +1918,46 @@ most-used commands will be, and if and where to bind those.
 time), which makes the cursors work again.  See
 https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_29060/."
               (load "multiple-cursors-core.el")
+              (message "removing the hook now...")
               (remove-hook 'multiple-cursors-mode #'my/work-around-multiple-cursors-issue))))
+#+end_src
+
+I'm still not used to using hydras for lots of things, but in the case
+of =multiple-cursors=, I could not decide which of all the very useful
+commands should be bound to easily accessible keys.  Due to the nature
+of =mc/mark-next-like-this= and consorts, a hydra should lend itself
+very well to this package.  It can then be bound to a top-level
+keybinding for the best of both worlds.
+
+Credit: I found [[https://github.com/ejmr/DotEmacs][ejmr's archived Emacs configuration]] on GitHub; it
+contains lots of hydras, so I took heavy inspiration there.
+
+#+begin_src emacs-lisp
+(defhydra hydra-multiple-cursors (:hint nil)
+  "\n
+  Spawn multiple cursors.\n
+  ^^forward       ^^backward      ^^region-based
+  ----------------------------------------------
+  [_n_]   next    [_p_]   next    [_l_]   edit lines
+  [_N_]   skip    [_P_]   skip    [_a_]   mark all
+  [_M-n_] unmark  [_M-p_] unmark  [_r_]   mark by regexp
+  [_w_]   word    [_W_]   word    [_M-w_] all words
+  ^^              ^^              [_C-w_] words in defun
+"
+  ("l" mc/edit-lines :exit t)
+  ("a" mc/mark-all-like-this :exit t)
+  ("n" mc/mark-next-like-this)
+  ("N" mc/skip-to-next-like-this)
+  ("M-n" mc/unmark-next-like-this)
+  ("p" mc/mark-previous-like-this)
+  ("P" mc/skip-to-previous-like-this)
+  ("M-p" mc/unmark-previous-like-this)
+  ("r" mc/mark-all-in-region-regexp :exit t)
+  ("w" mc/mark-next-like-this-word)
+  ("W" mc/mark-previous-like-this-word)
+  ("M-w" mc/mark-all-words-like-this :exit t)
+  ("C-w" mc/mark-all-words-like-this-in-defun :exit t)
+  ("q" nil :color blue))
 #+end_src
 
 * Package-specific configuration
@@ -2561,7 +2600,9 @@ after =q= or a timeout.
 #+begin_src emacs-lisp
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "
-  Change the font size globally.\n
+
+  Globally adjust the font size.
+
   _g_: increase
   _l_: decrease\n
   "
