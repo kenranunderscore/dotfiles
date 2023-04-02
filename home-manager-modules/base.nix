@@ -73,6 +73,8 @@ in {
       };
 
       packages = with pkgs; [
+        autoconf
+        automake
         binutils
         cacert
         curl
