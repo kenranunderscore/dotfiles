@@ -1918,8 +1918,7 @@ most-used commands will be, and if and where to bind those.
 time), which makes the cursors work again.  See
 https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_29060/."
               (load "multiple-cursors-core.el")
-              (message "removing the hook now...")
-              (remove-hook 'multiple-cursors-mode #'my/work-around-multiple-cursors-issue))))
+              (remove-hook 'multiple-cursors-mode-hook #'my/work-around-multiple-cursors-issue))))
 #+end_src
 
 I'm still not used to using hydras for lots of things, but in the case
