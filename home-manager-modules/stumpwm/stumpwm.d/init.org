@@ -127,6 +127,12 @@ shell:
 (run-shell-command "xset r rate 200 55")
 #+end_src
 
+* Keybindings
+
+#+begin_src common-lisp
+(set-prefix-key (kbd "C-;"))
+#+end_src
+
 ;; Local Variables:
 ;; eval: (add-hook 'after-save-hook
 ;;                 (lambda () 
