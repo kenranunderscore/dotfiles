@@ -1909,6 +1909,8 @@ most-used commands will be, and if and where to bind those.
 #+begin_src emacs-lisp
 (use-package multiple-cursors
   :defer
+  :config
+  (keymap-unset mc/keymap "<return>")
   :init
   (add-hook 'multiple-cursors-mode-hook
             (defun my/work-around-multiple-cursors-issue ()
