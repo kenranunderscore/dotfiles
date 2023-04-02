@@ -1310,7 +1310,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
 (keymap-global-set "C-t n e" 'hydra-navigate-errors/body)
 #+end_src
 
-* On-the-fly syntax checking (and other things): Flymake
+* On-the-fly syntax checking (and other things): =Flymake=
 
 #+begin_src emacs-lisp
 (use-package flymake
