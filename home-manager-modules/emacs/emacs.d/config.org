@@ -1156,6 +1156,16 @@ elements.  Also increase org header size."
 (add-hook 'my/switch-theme-hook #'my/org-font-setup)
 #+end_src
 
+I capture mostly =TODO= items, so it's convenient to have a special
+shortcut for that.
+
+#+begin_src emacs-lisp
+(defun my/capture-todo ()
+  "Capture a TODO item with `org-capture'."
+  (interactive)
+  (org-capture nil "t"))
+#+end_src
+
 When writing text with =org=, =auto-fill-mode= should be enabled to
 automatically break overly long lines into smaller pieces when typing.
 One may still use =M-q= to re-fill paragraphs when editing text.  After
@@ -1211,25 +1221,14 @@ loading =org=, a custom font setup might run to adjust the headers.
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
-  :bind (:map org-mode-map
-              ("M-n" . org-next-visible-heading)
-              ("M-p" . org-previous-visible-heading)))
-#+end_src
-
-** Keybindings
-
-Add some globally useful =org= keybindings under =C-t o=, like for
-capturing, storing links etc.
-
-#+begin_src emacs-lisp
-(keymap-global-set "C-t o a" 'org-agenda)
-(keymap-global-set "C-t o c" 'org-capture)
-(keymap-global-set "C-t o t"
-                   (defun my/capture-todo ()
-                     (interactive)
-                     (org-capture nil "t")))
-(keymap-global-set "C-t o l" 'org-store-link)
-(keymap-global-set "C-t o f" 'org-cycle-agenda-files)
+  :bind (("C-t o a" . org-agenda)
+         ("C-t o c" . org-capture)
+         ("C-t o t" . my/capture-todo)
+         ("C-t o l" . org-store-link)
+         ("C-t o f" . org-cycle-agenda-files)
+         :map org-mode-map
+         ("M-n" . org-next-visible-heading)
+         ("M-p" . org-previous-visible-heading)))
 #+end_src
 
 ** Beautiful bullet points
