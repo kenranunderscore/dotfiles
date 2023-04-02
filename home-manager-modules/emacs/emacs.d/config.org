@@ -606,13 +606,6 @@ splash screen, and others.
 (setq inhibit-splash-screen nil)
 #+end_src
 
-Ignore the =X= resources.  Now Emacs doesn't use the terminal
-background/foreground colors.
-
-#+begin_src emacs-lisp
-(setq inhibit-x-resources t)
-#+end_src
-
 ** Resize proportionally after deleting windows
 
 #+begin_src emacs-lisp
