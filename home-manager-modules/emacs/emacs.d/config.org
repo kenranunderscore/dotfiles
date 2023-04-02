@@ -53,9 +53,24 @@ weird behavior.
 
 I used to use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more
 straightforward and declarative way.  But since this is especially
-useful =evil-mode=, where I have to bind keys according to the current
-mode, I decided to drop this as well while trying to live without
-=evil= for a while.
+useful in =evil-mode=, where I have to bind keys according to the
+current mode, I decided to drop this as well while trying to live
+without =evil=.
+
+The concept of a /prefix key/ (or /leader key/) is still quite useful in
+my opinion: decide on a key that should hold all custom or built-in
+functionality I often need, but that's not specific to a major mode
+(where =C-c <letter>= would be the appropriate place to bind things to).
+
+I had already decided to use =C-.= as my leader, but am now changing
+that to use the even more accessible =C-t=.  =C-t= is used by my window
+manager StumpWM by default, but having the more comfortable key in
+Emacs is the better tradeoff I think.
+
+#+begin_src emacs-lisp
+(define-prefix-command 'my/prefix-map)
+(keymap-global-set "C-t" 'my/prefix-map)
+#+end_src
 
 #+begin_src emacs-lisp
 (use-package emacs
@@ -64,12 +79,12 @@ mode, I decided to drop this as well while trying to live without
   ("C-h M" . describe-keymap)
   ("C-h V" . set-variable)
   ("C-x C-o" . other-window)
-  ("C-. b k" . kill-current-buffer)
-  ("C-. b i" . ibuffer)
-  ("C-. b p" . previous-buffer)
-  ("C-. b n" . next-buffer)
-  ("C-. b s" . scratch-buffer)
-  ("C-. c" . comment-or-uncomment-region))
+  ("C-t b k" . kill-current-buffer)
+  ("C-t b i" . ibuffer)
+  ("C-t b p" . previous-buffer)
+  ("C-t b n" . next-buffer)
+  ("C-t b s" . scratch-buffer)
+  ("C-t c" . comment-or-uncomment-region))
 #+end_src
 
 * The region
@@ -100,7 +115,7 @@ do this /very often/.
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
 
-(keymap-global-set "C-. e" 'my/open-init-file)
+(keymap-global-set "C-t e" 'my/open-init-file)
 #+end_src
 
 * Custom Emacs look
@@ -328,7 +343,7 @@ I find myself switching fonts /all the time/; I just seem to need that
 kind of visual refreshment.  So let's bind it to a "leader" key.
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-. t f" 'my/switch-font)
+(keymap-global-set "C-t t f" 'my/switch-font)
 #+end_src
 
 ** Color theme
@@ -380,8 +395,8 @@ As with fonts, I like changing visuals regularly, as in, multiple
 times a day usually.  So keybindings for this come in useful:
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-. t t" 'my/switch-theme)
-(keymap-global-set "C-. t r" 'my/reload-theme)
+(keymap-global-set "C-t t t" 'my/switch-theme)
+(keymap-global-set "C-t t r" 'my/reload-theme)
 #+end_src
 
 *** My favorite Emacs themes
@@ -651,7 +666,7 @@ keybinding."
 (use-package display-line-numbers
   :defer
   :bind
-  ("C-. t l" . my/toggle-line-numbers))
+  ("C-t t l" . my/toggle-line-numbers))
 #+end_src
 
 ** Insert a newline at the end of files
@@ -1203,18 +1218,18 @@ loading =org=, a custom font setup might run to adjust the headers.
 
 ** Keybindings
 
-Add some globally useful =org= keybindings under =C-. o=, like for
+Add some globally useful =org= keybindings under =C-t o=, like for
 capturing, storing links etc.
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-. o a" 'org-agenda)
-(keymap-global-set "C-. o c" 'org-capture)
-(keymap-global-set "C-. o t"
+(keymap-global-set "C-t o a" 'org-agenda)
+(keymap-global-set "C-t o c" 'org-capture)
+(keymap-global-set "C-t o t"
                    (defun my/capture-todo ()
                      (interactive)
                      (org-capture nil "t")))
-(keymap-global-set "C-. o l" 'org-store-link)
-(keymap-global-set "C-. o f" 'org-cycle-agenda-files)
+(keymap-global-set "C-t o l" 'org-store-link)
+(keymap-global-set "C-t o f" 'org-cycle-agenda-files)
 #+end_src
 
 ** Beautiful bullet points
@@ -1292,7 +1307,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
   ("f" first-error)
   ("q" nil "exit"))
 
-(keymap-global-set "C-. n e" 'hydra-navigate-errors/body)
+(keymap-global-set "C-t n e" 'hydra-navigate-errors/body)
 #+end_src
 
 * On-the-fly syntax checking (and other things): Flymake
@@ -2379,7 +2394,7 @@ mentioned above =M-x= seems like the way to go.  I was missing
 =magit-status-here= a lot, though, so add it in an accessible spot.
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-. g" 'magit-status-here)
+(keymap-global-set "C-t g" 'magit-status-here)
 #+end_src
 
 *** Interactively browse =git= history
@@ -2476,7 +2491,7 @@ modes to ensure =direnv= integration is working as expected.
 
 ** Fast grepping via =ripgrep=
 
-I use [[https://github.com/BurntSushi/ripgrep][ripgrep]] on the command line a lot.  This packages makes it
+I use [[https://github.com/BurntSushi/ripgrep][ripgrep]] on the command line a lot.  This package makes it
 comfortably usable from within Emacs.
 
 #+begin_src emacs-lisp
@@ -2538,7 +2553,7 @@ after =q= or a timeout.
    "set size" :color blue)
   ("q" nil "exit"))
 
-(keymap-global-set "C-. z" 'hydra-global-zoom/body)
+(keymap-global-set "C-t z" 'hydra-global-zoom/body)
 #+end_src
 
 ** Edit =grep= results over multiple buffers
