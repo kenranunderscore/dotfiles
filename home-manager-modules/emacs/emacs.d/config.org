@@ -1166,6 +1166,30 @@ shortcut for that.
   (org-capture nil "t"))
 #+end_src
 
+For navigation and other =org=-specific stuff I'm going to try out
+another =hydra=.
+
+#+begin_src emacs-lisp
+(defhydra hydra-org (:hint nil)
+  "\n
+  Common commands to navigate and use in org-mode.\n
+  ^^forward                    ^^backward
+  ---------------------------------------------------------
+  _n_:   next visible header   _p_:   previous visible header
+  _N_:   next sibling header   _P_:   previous sibling header
+  _b_:   next block            _B_:   previous block
+
+  [_q_]: exit.
+"
+  ("n" org-next-visible-heading)
+  ("p" org-previous-visible-heading)
+  ("b" org-next-block)
+  ("B" org-previous-block)
+  ("N" org-forward-heading-same-level)
+  ("P" org-backward-heading-same-level)
+  ("q" nil))
+#+end_src
+
 When writing text with =org=, =auto-fill-mode= should be enabled to
 automatically break overly long lines into smaller pieces when typing.
 One may still use =M-q= to re-fill paragraphs when editing text.  After
@@ -1225,10 +1249,7 @@ loading =org=, a custom font setup might run to adjust the headers.
          ("C-t o c" . org-capture)
          ("C-t o t" . my/capture-todo)
          ("C-t o l" . org-store-link)
-         ("C-t o f" . org-cycle-agenda-files)
-         :map org-mode-map
-         ("M-n" . org-next-visible-heading)
-         ("M-p" . org-previous-visible-heading)))
+         ("C-t o f" . org-cycle-agenda-files)))
 #+end_src
 
 ** Beautiful bullet points
