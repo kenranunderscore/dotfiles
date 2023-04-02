@@ -1172,22 +1172,30 @@ another =hydra=.
 #+begin_src emacs-lisp
 (defhydra hydra-org (:hint nil)
   "\n
-  Common commands to navigate and use in org-mode.\n
-  ^^forward                    ^^backward
-  ---------------------------------------------------------
-  _n_:   next visible header   _p_:   previous visible header
-  _N_:   next sibling header   _P_:   previous sibling header
-  _b_:   next block            _B_:   previous block
+  navigational commands
+  ^^----------------------^^----------------------------
+  visible header:  [_n_] / [_p_]
+  sibling header:  [_N_] / [_P_]
+  block:           [_b_] / [_B_]
 
-  [_q_]: exit.
-"
+  misc commands
+  ^^----------------------^^----------------------------
+  [_t_]:   capture todo     [_c_]:   capture
+  [_a_]:   agenda           [_f_]:   cycle agenda files
+  [_l_]:   store link\n
+  "
   ("n" org-next-visible-heading)
   ("p" org-previous-visible-heading)
   ("b" org-next-block)
   ("B" org-previous-block)
   ("N" org-forward-heading-same-level)
   ("P" org-backward-heading-same-level)
-  ("q" nil))
+  ("t" my/capture-todo :exit t)
+  ("c" org-capture :exit t)
+  ("a" org-agenda :exit t)
+  ("f" org-cycle-agenda-files :exit t)
+  ("l" org-store-link :exit t)
+  ("q" nil "exit"))
 #+end_src
 
 When writing text with =org=, =auto-fill-mode= should be enabled to
@@ -1245,11 +1253,7 @@ loading =org=, a custom font setup might run to adjust the headers.
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
-  :bind (("C-t o a" . org-agenda)
-         ("C-t o c" . org-capture)
-         ("C-t o t" . my/capture-todo)
-         ("C-t o l" . org-store-link)
-         ("C-t o f" . org-cycle-agenda-files)))
+  :bind (("C-t o" . hydra-org/body)))
 #+end_src
 
 ** Beautiful bullet points
@@ -1961,8 +1965,8 @@ contains lots of hydras, so I took heavy inspiration there.
   [_N_]   skip    [_P_]   skip    [_a_]   mark all
   [_M-n_] unmark  [_M-p_] unmark  [_r_]   mark by regexp
   [_w_]   word    [_W_]   word    [_M-w_] all words
-  ^^              ^^              [_C-w_] words in defun
-"
+  ^^              ^^              [_C-w_] words in defun\n
+  "
   ("l" mc/edit-lines :exit t)
   ("a" mc/mark-all-like-this :exit t)
   ("n" mc/mark-next-like-this)
@@ -1976,7 +1980,7 @@ contains lots of hydras, so I took heavy inspiration there.
   ("W" mc/mark-previous-like-this-word)
   ("M-w" mc/mark-all-words-like-this :exit t)
   ("C-w" mc/mark-all-words-like-this-in-defun :exit t)
-  ("q" nil :color blue))
+  ("q" nil "exit" :color blue))
 
 (keymap-global-set "C-z" #'hydra-multiple-cursors/body)
 #+end_src
@@ -2637,10 +2641,8 @@ after =q= or a timeout.
 
 #+begin_src emacs-lisp
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
-  "
-
-  Globally adjust the font size.
-
+  "\n
+  Globally adjust the font size.\n
   _g_: increase
   _l_: decrease\n
   "
