@@ -2638,8 +2638,8 @@ after =q= or a timeout.
 #+begin_src emacs-lisp
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "\n
-  _g_: increase    _l_: decrease
-  _s_: set         _r_: reset\n
+  [_g_]: [+]     [_s_]: set
+  [_l_]: [-]     [_r_]: reset\n
   "
   ("g" default-text-scale-increase)
   ("l" default-text-scale-decrease)
