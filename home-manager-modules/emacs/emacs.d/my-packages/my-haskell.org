@@ -89,11 +89,10 @@ navigational sets of commands.
 #+begin_src emacs-lisp
 (defhydra hydra-haskell-error-navigation (:hint nil)
   "\n
-  Move through Haskell errors.\n
-  _f_: first  _n_: next  _p_: previous"
+  [_f_]: first   [_n_]: next   [_p_]: previous"
   ("f" haskell-goto-first-error)
   ("n" haskell-goto-next-error)
-  ("p" haskell-goto-previous-error))
+  ("p" haskell-goto-prev-error))
 #+end_src
 
 * =Haskell-mode= configuration
