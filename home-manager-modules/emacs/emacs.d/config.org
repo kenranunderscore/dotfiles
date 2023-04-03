@@ -1316,8 +1316,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
 #+begin_src emacs-lisp
 (defhydra hydra-navigate-errors (:hint nil)
   "\n
-  Navigate the error list.\n
-  _f_: first  _n_: next  _p_: previous\n
+  _f_: first   _n_: next   _p_: previous\n
   "
   ("n" next-error)
   ("p" previous-error)
@@ -1800,7 +1799,6 @@ chain.  A =hydra= might just remedy that:
 #+begin_src emacs-lisp
 (defhydra hydra-window-size (:hint nil)
   "\n
-  Adjust window sizes.\n
   height   +: [_g_]   -: [_l_]
   width    +: [_w_]   -: [_n_]\n
   "
@@ -2636,9 +2634,8 @@ after =q= or a timeout.
 #+begin_src emacs-lisp
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
   "\n
-  Globally adjust the font size.\n
-  _g_: increase
-  _l_: decrease\n
+  _g_: increase    _l_: decrease
+  _s_: set         _r_: reset\n
   "
   ("g" default-text-scale-increase)
   ("l" default-text-scale-decrease)
@@ -2648,12 +2645,12 @@ after =q= or a timeout.
          (face-spec-set 'default `((t (:height ,my/default-font-height))))
          (set-face-attribute 'default nil
                              :height my/default-font-height))
-   "reset" :color blue)
+   :color blue)
   ("s" (lambda (height)
          (interactive "nFont size: ")
          (set-face-attribute 'default nil
                              :height height))
-   "set size" :color blue)
+   :color blue)
   ("q" nil "exit"))
 
 (keymap-global-set "C-t z" 'hydra-global-zoom/body)
