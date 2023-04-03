@@ -1845,7 +1845,8 @@ so I've fully switched over.
                   "#guix"
                   "#commonlisp"
                   "#lisp"
-                  "#herrhotzenplotz")))
+                  "#herrhotzenplotz"
+                  "#stumpwm")))
   (setq erc-track-exclude
         '("#org-mode" "#crawl" "#nim" "#zig"))
   (setq erc-track-exclude-types '("333" "353"))
