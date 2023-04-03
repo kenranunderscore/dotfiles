@@ -1799,8 +1799,10 @@ chain.  A =hydra= might just remedy that:
 #+begin_src emacs-lisp
 (defhydra hydra-window-size (:hint nil)
   "\n
-  height   +: [_g_]   -: [_l_]
-  width    +: [_w_]   -: [_n_]\n
+  action:   [+]^^     [+]^^
+  ----------^^--------^^----
+  height:   [_g_]     [_l_]
+  width:    [_w_]     [_n_]\n
   "
   ("b" balance-windows "balance windows" :color blue)
   ("g" enlarge-window)
