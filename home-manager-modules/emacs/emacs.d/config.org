@@ -1504,7 +1504,7 @@ twice (which is fine as it's blazingly fast).
 Let's first define some utility functions that I'll then bind to
 special keys later.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun my/notmuch-search-toggle-unread ()
   "Toggle unread tag at point in `notmuch-search-mode'."
   (interactive)
@@ -1534,9 +1534,10 @@ Now pull in and configure the actual =notmuch= package.  Note that same
 options here rather belong to built-in functionality, but they fit in
 here very well.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package notmuch
   :defer
+  :disabled
   :init
   (setq user-mail-address "johannes.maier@mailbox.org")
   :custom
@@ -1617,14 +1618,63 @@ are sent from the address I've received it at.
 
 ** Gnus
 
-I've not given =gnus= the trial it deserves.  Reading newsgroups and
-mailing lists is something I can image using =gnus= for in the future.
-Using it for e-mail, though, would require another synchronization
-process of the =gnus= state.
+As I've written before, I've never given the mighty =gnus= the trial it
+deserves.  Getting into this package is really quite scary, for lack
+of a better word.  The reason is that =gnus= defines abstractions over
+"news", where the word nowadays can incorporate everything from feeds,
+reddit, usenet, email, etc.  The result is that one has to learn lots
+of specialized and often confusing terminology before being able to
+use =gnus= (especially for email).  Due to the length and
+comprehensiveness of the manual the learning curve is quite steep.
 
-I could utilize =syncthing=, which I use for synchronization of my =org=
-files, to do this as well, but I've given it a couple of tries and
-couldn't do it.  An experiment for another time, for sure.
+Plus, I feel like you cannot "just start using =gnus=" and get used to
+it, whereas that is an actual path to succees in something like =mu4e=,
+for instance.  With =gnus= there's a lot of configuration to be done
+before even being able to do anything.
+
+I'm not sure yet what I will have to sync between machines; the
+automatically created =.newsrc.eld= file is the most likely candidate.
+It seems like that the path to this file can (only?) be configured by
+setting the path to the /startup file/, meaning the newsreader-agnostic
+=.newsrc= file -- that I'm not actually using, as I will only be using
+=gnus=.
+
+#+begin_src emacs-lisp
+(use-package gnus
+  :init
+  (setq gnus-directory "~/.gnus/")
+  (setq gnus-home-directory "~/.gnus/")
+  (setq gnus-startup-file "~/org/newsrc")
+  (setq gnus-init-file (locate-user-emacs-file "gnus.el"))
+  :config
+  (setq user-full-name "Johannes Maier")
+  (setq user-mail-address "johannes.maier@mailbox.org")
+  (setq message-directory "~/.gnus")
+  (setq message-send-mail-function 'message-send-mail-with-sendmail)
+  (setq send-mail-function 'message-send-mail-with-sendmail)
+  (setq message-sendmail-envelope-from 'header)
+  (setq mail-envelope-from 'header)
+  (setq mail-specify-envelope-from 'header)
+  (setq gnus-check-new-newsgroups t)
+  (setq gnus-gcc-mark-as-read t)
+  (setq nnml-directory "~/.gnus")
+  (setq gnus-interactive-exit t)
+  (setq gnus-asynchronous t)
+  (setq gnus-use-article-prefetch 15)
+  (setq gnus-select-method '(nnnil ""))
+  (setq gnus-secondary-select-methods
+        '((nntp "news.gwene.org")
+          (nnimap "ag"
+                  (nnimap-address "imap.active-group.de")
+                  (nnimap-server-port 993)
+                  (nnimap-stream ssl)
+                  (nnimap-inbox "INBOX"))
+          (nnimap "mailbox"
+                  (nnimap-address "imap.mailbox.org")
+                  (nnimap-server-port 993)
+                  (nnimap-stream ssl)
+                  (nnimap-inbox "INBOX")))))
+#+end_src
 
 ** Mu for Emacs
 
