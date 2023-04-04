@@ -1631,12 +1631,12 @@ couldn't do it.  An experiment for another time, for sure.
 
 ** Mu for Emacs
 
-[[https://www.djcbsoftware.nl/code/mu/][Mu]] is what I'm currently using, and =mu4e= is its Emacs frontend.  It's
-not as customizable as =notmuch=, but part of its charme is that I don't
-need to sync anything between my machines, at the cost of =mu= touching
-my e-mail (adding custom headers I believe).  I don't mind this at
-all, and I can use =isync= and =msmtp= to receive and send mail on any
-host.
+[[https://www.djcbsoftware.nl/code/mu/][Mu]] is what I was using for the longest period of time, with =mu4e= being
+its Emacs frontend.  It's not as customizable as =notmuch=, but part of
+its charm is that I don't need to sync anything between my machines,
+at the cost of =mu= touching my e-mail (adding custom headers I
+believe).  I don't mind this at all, and I can use =isync= and =msmtp= to
+receive and send mail on any host.
 
 For writing e-mails =mu4e= uses =message-mode= like the other tools.  This
 checks the =user-full-name= variable to fill in my name.
