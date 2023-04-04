@@ -176,7 +176,19 @@ respective font.
             "Pragmata Pro Mono"))
         (iosevka
          . (:family
-            "Iosevka"))
+            "Iosevka Term"))
+        (iosevka-slab
+         . (:family
+            "Iosevka Slab"))
+        (iosevka-curly
+         . (:family
+            "Iosevka Curly"))
+        (iosevka-curly-slab
+         . (:family
+            "Iosevka Curly Slab"))
+        (iosevka-etoile
+         . (:family
+            "Iosevka Etoile"))
         (dejavu
          . (:family
             "DejaVu Sans Mono"))
