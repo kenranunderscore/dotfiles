@@ -2,8 +2,7 @@
 
 {
   programs.vim = {
-    enable = true;
-    plugins = with pkgs.vimPlugins; [ auto-pairs vim-sneak ];
+    enable = false;
     settings = {
       background = "dark";
       copyindent = true;
