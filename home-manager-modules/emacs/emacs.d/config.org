@@ -2447,17 +2447,14 @@ One tricky thing was making it possible to bind the keymap
   (setq project-switch-commands
         '((project-find-file "find file")
           (consult-ripgrep "search/grep" ?s)
-          ((lambda ()
-             (interactive)
-             (magit-status (project-root (project-current t))))
-           "git status"
-           ?g)
+          (magit-project-status "git status" ?g)
           (project-dired "dired")
           (my/project-vterm "vterm" ?t)
           (project-switch-to-buffer "find buffer" ?b)
           (project-vc-dir "vc")))
   :bind (:map project-prefix-map
               ("t" . my/project-vterm)
+              ("g" . magit-project-status)
               ("d" . project-dired)
               ("s" . consult-ripgrep)
               ("D" . my/project-edit-dir-local-variable)
