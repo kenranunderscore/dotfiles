@@ -27,7 +27,7 @@ in {
       emacs.enable = true;
       firefox.enable = true;
       kitty.enable = true;
-      neovim.enable = true;
+      neovim.enable = false;
       bash.enable = true;
       bat.enable = true;
       direnv.enable = true;
