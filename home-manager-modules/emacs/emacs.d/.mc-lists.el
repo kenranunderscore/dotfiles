@@ -92,13 +92,17 @@
       '(
         helpful-key
         helpful-variable
+        hydra-multiple-cursors/mc/edit-beginnings-of-lines-and-exit
         hydra-multiple-cursors/mc/edit-lines-and-exit
+        hydra-multiple-cursors/mc/mark-all-like-this-and-exit
         hydra-multiple-cursors/mc/mark-all-words-like-this-and-exit
         hydra-multiple-cursors/mc/mark-all-words-like-this-in-defun-and-exit
         hydra-multiple-cursors/mc/mark-next-like-this
         hydra-multiple-cursors/mc/mark-next-like-this-word
         hydra-multiple-cursors/mc/mark-previous-like-this
         hydra-multiple-cursors/mc/mark-previous-like-this-word
+        hydra-multiple-cursors/mc/skip-to-next-like-this
+        hydra-multiple-cursors/mc/skip-to-previous-like-this
         hydra-multiple-cursors/mc/unmark-next-like-this
         hydra-multiple-cursors/mc/unmark-previous-like-this
         lispy-cursor-down
