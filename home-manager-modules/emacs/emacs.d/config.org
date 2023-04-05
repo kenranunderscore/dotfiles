@@ -95,6 +95,24 @@ I sometimes like to narrow to the region.
 (put 'narrow-to-region 'disabled nil)
 #+end_src
 
+* Copying the current line
+
+It's awkward to have to do =C-S-<backspace>= or =C-k C-k=, followed by
+yanking, to "just" copy the line point is on to the kill ring.
+
+#+begin_src emacs-lisp
+(defun my/copy-line-at-point ()
+  "Copy the current line without killing it first."
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (let ((start (point)))
+      (forward-line 1)
+      (kill-ring-save start (point)))))
+
+(keymap-global-set "M-W" #'my/copy-line-at-point)
+#+end_src
+
 * Loading additional ELisp configuration files
 
 I do not want customizations done via =customize= to end up in this
