@@ -89,7 +89,20 @@ Emacs is the better tradeoff I think.
 
 * The region
 
-I sometimes like to narrow to the region.
+The command to narrow the view to the current region is disabled by
+default, as it might actually confuse people new to Emacs who invoke
+it by accident.
+
+Narrowing is a concept used in many areas of Emacs, but I now mostly
+use it when writing =org= files like this one right here.  Narrowing
+means restricting what can be seen of the current buffer to a smaller
+area; marking the whole buffer with =C-x h= or similar commands then
+only affect that restricted area.  In =org-mode= there are built-in
+commands to narrow to a subtree/section, or blocks, for instance; but
+narrowing is also used by Emacs itself.  An example would be capturing
+todo items (with =org-capture=), where you on see the item(s) you wish
+to add, but are actually editing your whole inbox =.org= file within a
+narrowed view.
 
 #+begin_src emacs-lisp
 (put 'narrow-to-region 'disabled nil)
