@@ -1213,6 +1213,7 @@ another =hydra=.
 
   misc commands
   ^^----------------------^^----------------------------
+  [_<tab>_]:                       ^^toggle header
   [_t_]:   capture todo     [_c_]:   capture
   [_a_]:   agenda           [_f_]:   cycle agenda files
   [_l_]:   store link\n
@@ -1223,6 +1224,7 @@ another =hydra=.
   ("B" org-previous-block)
   ("N" org-forward-heading-same-level)
   ("P" org-backward-heading-same-level)
+  ("<tab>" org-cycle)
   ("t" my/capture-todo :exit t)
   ("c" org-capture :exit t)
   ("a" org-agenda :exit t)
