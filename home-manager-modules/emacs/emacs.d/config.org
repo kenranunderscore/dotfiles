@@ -1209,6 +1209,7 @@ another =hydra=.
   ^^----------------------^^----------------------------
   visible header:  [_n_] / [_p_]
   sibling header:  [_N_] / [_P_]
+  parent header:   [_k_]
   block:           [_b_] / [_B_]
 
   misc commands
@@ -1224,6 +1225,7 @@ another =hydra=.
   ("B" org-previous-block)
   ("N" org-forward-heading-same-level)
   ("P" org-backward-heading-same-level)
+  ("k" org-up-element)
   ("<tab>" org-cycle)
   ("t" my/capture-todo :exit t)
   ("c" org-capture :exit t)
