@@ -81,6 +81,55 @@ and alias."
       (insert import-line))))
 #+end_src
 
+* Templates
+
+While I'm using =TempEL= for templates in Emacs, some things are just a
+tad bit too complex to handle in a template language, and much easier
+to do in ELisp.  These go here.
+
+** Newtypes
+
+In Haskell, =newtype= is a mechanism I use all the time.  These are
+different (but not all) scenarios that need to be possible to output
+with a utility command:
+
+#+begin_src haskell :tangle no
+newtype Foo = Foo Int
+newtype Foo a = Foo (IO a)
+newtype Foo = Foo { unFoo :: Int } -- the default
+newtype Foo = SomeCtor { unFoo :: Int }
+newtype Foo = SomeCtor { custom :: Int }
+newtype Foo a = SomeCtor { unFoo :: ReaderT Config IO a }
+#+end_src
+
+The following command /can/ handle all the cases above, albeit with a
+drawback: the cases with a type parameter are harder to enter.  I will
+try and add some logic to "calculate" that case from the =type= argument
+later on.
+
+#+begin_src emacs-lisp
+(defun my/haskell-newtype-template (arg name type &optional ctor accessor)
+  "Create a Haskell newtype declaration.  This will ask you for the
+type NAME, the inner TYPE, and optionally for constructor and
+accessor name.  If called with a non-nil prefix ARG then it won't
+create and accessor and omit the curly braces."
+  (interactive
+   (let* ((name (my/read-non-empty-string "Name: "))
+          (type (my/read-non-empty-string "Inner type: "))
+          (ctor (or (my/read-non-empty-string
+                     (concat "Constructor [default " name "]: "))
+                    name))
+          (accessor-def (concat "un" name))
+          (accessor (unless current-prefix-arg
+                      (or (my/read-non-empty-string
+                           (concat "Accessor [default " accessor-def "]: "))
+                          accessor-def))))
+     (list current-prefix-arg name type ctor accessor)))
+  (let ((content (concat "{ " accessor " :: " type " }")))
+    (insert
+     (concat "newtype " name " = " ctor " " content))))
+#+end_src
+
 * Navigating errors
 
 As always, =hydra= is highly capable of simplifying all sorts of

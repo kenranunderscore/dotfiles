@@ -13,7 +13,6 @@ emacs-lisp-mode
 
 haskell-mode
 
-(nt "newtype " (p "TypeName" name) " = " name " { " (concat "un" name) " :: " (p "Type") " }")
 (main "main :: IO ()" n "main = do" n> p)
 (mod "module " p " where" n n)
 (gadt "data " p " where" n> p " :: ")
