@@ -40,13 +40,6 @@ file."
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
-
-(defun my/read-non-empty-string (prompt)
-  "Read a string from the minibuffer.  When the result is the empty
-string, return nil instead."
-  (let ((str (read-string prompt)))
-    (unless (string-empty-p str)
-      str)))
 #+end_src
 
 * Insert imports
@@ -59,6 +52,13 @@ adding a qualified import with import list, or an unqualified one with
 an alias, would require "tricks".
 
 #+begin_src emacs-lisp
+(defun my/read-non-empty-string (prompt)
+  "Read a string from the minibuffer.  When the result is the empty
+string, return nil instead."
+  (let ((str (read-string prompt)))
+    (unless (string-empty-p str)
+      str)))
+
 (defun my/haskell-add-import (module &optional qualified? alias)
   "Add an import to the import list.  Prompts for qualified import
 and alias."
