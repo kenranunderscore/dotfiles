@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        dabbrev-expand
         kill-region
         lispy-braces
         lispy-brackets
@@ -92,6 +93,7 @@
       '(
         helpful-key
         helpful-variable
+        hydra-multiple-cursors/body
         hydra-multiple-cursors/mc/edit-beginnings-of-lines-and-exit
         hydra-multiple-cursors/mc/edit-lines-and-exit
         hydra-multiple-cursors/mc/mark-all-like-this-and-exit
@@ -105,6 +107,7 @@
         hydra-multiple-cursors/mc/skip-to-previous-like-this
         hydra-multiple-cursors/mc/unmark-next-like-this
         hydra-multiple-cursors/mc/unmark-previous-like-this
+        hydra-multiple-cursors/nil
         lispy-cursor-down
         lispy-mark-symbol
         mc/mark-previous-lines
