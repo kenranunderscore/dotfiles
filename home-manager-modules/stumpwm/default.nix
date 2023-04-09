@@ -13,9 +13,10 @@ in {
         fi
       '';
       symlinkStumpWMContrib = lib.hm.dag.entryAfter [ "symlinkDotStumpWM" ] ''
-        if [ ! -e ${stumpDir}/modules ]; then
+        contribDir=${stumpDir}/modules/stumpwm-contrib
+        if [ ! -e $contribDir ]; then
           $DRY_RUN_CMD mkdir -p ${stumpDir}/modules
-          $DRY_RUN_CMD ln -snf ${inputs.stumpwm-contrib} ${stumpDir}/modules/stumpwm-contrib
+          $DRY_RUN_CMD ln -snf ${inputs.stumpwm-contrib} $contribDir
         fi
       '';
     };
