@@ -1122,17 +1122,6 @@ or (neo)vim plugins like =vim-snipe=, =easymotion=, =leap.nvim=, =hop.nvim=,
   ("C-'" . avy-goto-char-timer))
 #+end_src
 
-The =C-'= binding for =avy= clashes with the default binding for
-=org-cycle-agenda-files= in the =org-mode-map=.  Removing it via hook
-doesn't seem like a good way to do it, but it does the job.
-
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook
-          (defun my/remove-shadowing-org-bindings ()
-            (keymap-unset org-mode-map "C-'" t)
-            (remove-hook 'org-mode-hook #'my/remove-shadowing-org-bindings)))
-#+end_src
-
 * Org mode
 
 I want my headers to stand out by being really big.  I also like using
@@ -1293,7 +1282,10 @@ loading =org=, a custom font setup might run to adjust the headers.
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
-  :bind (("C-t o" . hydra-org/body)))
+  :bind
+  (("C-t o" . hydra-org/body)
+   :map org-mode-map
+   ("C-'" . nil)))
 #+end_src
 
 ** Beautiful bullet points
