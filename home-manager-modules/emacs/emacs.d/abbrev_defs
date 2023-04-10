@@ -1,22 +1,34 @@
-;;-*-coding: utf-8;-*-
-(define-abbrev-table 'global-abbrev-table
-  '(
-    ("aciton" "action" nil :count 1)
-    ("cilent" "client" nil :count 2)
-    ("configuraion" "configuration" nil :count 3)
-    ("configuraiton" "configuraiton" nil :count 3)
-    ("conifguration" "configuration" nil :count 1)
-    ("deteciton" "detection" nil :count 2)
-    ("embod" "embed" nil :count 1)
-    ("everywheer" "everywhere" nil :count 0)
-    ("messgae" "message" nil :count 2)
-    ("sevrer" "server" nil :count 0)
-    ("simulaion" "simulation" nil :count 1)
-    ("simulaiton" "simulaiton" nil :count 1)
-    ("tehre" "there" nil :count 0)
-    ("updtae" "update" nil :count 1)
-    ("verison" "version" nil :count 6)
-    ("wirte" "write" nil :count 0)
-    ("wriet" "write" nil :count 0)
-   ))
+;; -*- mode: emacs-lisp; coding: utf-8; -*-
 
+;; NOTE: I don't let this file be automatically created and written
+;; to.  This is a tradeoff, as I now have to add things in here
+;; manually whenever I need an abbrev.  But I can then have
+;; mode-specific abbreviations next to their configs without clashing
+;; with this file.  Hence only global abbrevs go here, which are
+;; mostly typos I often make.
+
+(define-abbrev-table 'global-abbrev-table
+  '(;; templates
+    ("td" "TODO:")
+    ("tdj" "TODO(Johannes):")
+    ("fm" "FIXME:")
+    ("fmj" "FIXME(Johannes):")
+
+    ;; typos
+    ("aciton" "action")
+    ("cilent" "client")
+    ("configuraion" "configuration")
+    ("configuraiton" "configuraiton")
+    ("conifguration" "configuration")
+    ("deteciton" "detection")
+    ("embod" "embed")
+    ("everywheer" "everywhere")
+    ("messgae" "message")
+    ("sevrer" "server")
+    ("simulaion" "simulation")
+    ("simulaiton" "simulaiton")
+    ("tehre" "there")
+    ("updtae" "update")
+    ("verison" "version")
+    ("wirte" "write")
+    ("wriet" "write")))

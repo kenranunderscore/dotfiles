@@ -148,6 +148,19 @@ create and accessor and omit the curly braces."
      (concat "newtype " lhs " = " ctor " " content "\n"))))
 #+end_src
 
+** =Abbrev= table
+
+I use explicit TempEL expansion in some places.  But for my custom
+commands I want to try out using =abbrev= with some short identifiers.
+
+#+begin_src emacs-lisp
+(define-abbrev-table 'haskell-mode-abbrev-table
+  '(("nt" "" (lambda ()
+               (call-interactively #'my/haskell-newtype-template)))
+    ("dsg" "deriving stock (Eq, Show, Generic)")
+    ("ds" "deriving stock (Eq, Show)")))
+#+end_src
+
 * Navigating errors
 
 As always, =hydra= is highly capable of simplifying all sorts of

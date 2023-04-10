@@ -947,7 +947,7 @@ enable it everywhere.
   :init
   (setq-default abbrev-mode t)
   :config
-  (setq save-abbrevs t)
+  (setq save-abbrevs nil)
   (setq abbrev-file-name
         (locate-user-emacs-file "abbrev_defs")))
 #+end_src
