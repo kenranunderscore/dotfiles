@@ -2080,7 +2080,14 @@ contains lots of hydras, so I took heavy inspiration there.
 #+end_src
 
 * Package-specific configuration
-** Mode-specific code snippets
+** Mode-specific templates/snippets
+
+I've tried =yasnippet= in the past, but I now prefer more lightweight
+solutions to templates.  =TempEL= is a package by minad, so I have high
+expectations.  So far I like using it, but I've only later read about
+=tempo= and =skeleton=, which are both built-in.  Maybe for my purposes
+those would suffice as well, as anything reasonably complex would have
+to be a command anyway.
 
 #+begin_src emacs-lisp
 (use-package tempel
@@ -2092,9 +2099,7 @@ contains lots of hydras, so I took heavy inspiration there.
   :bind
   (("M-*" . tempel-expand)
    (:map tempel-map
-         ("C-j" . tempel-next)
-         ("TAB" . tempel-next)
-         ("C-k" . tempel-previous))))
+         ("TAB" . tempel-next))))
 #+end_src
 
 ** Unified interface for creating code formatters
