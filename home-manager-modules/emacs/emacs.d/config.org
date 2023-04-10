@@ -945,9 +945,9 @@ enable it everywhere.
   :init
   (setq-default abbrev-mode t)
   :config
-  (setq save-abbrevs 'silent)
+  (setq save-abbrevs t)
   (setq abbrev-file-name
-        (concat user-emacs-directory "abbrev_defs")))
+        (locate-user-emacs-file "abbrev_defs")))
 #+end_src
 
 * Incremental narrowing with =vertico=
