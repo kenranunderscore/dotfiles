@@ -588,7 +588,9 @@ see filtered out."
                         eldoc-mode
                         org-indent-mode
                         auto-revert-mode
-                        auto-fill-function)))
+                        auto-fill-function
+                        dot-mode
+                        editorconfig-mode)))
     (seq-difference minor-mode-alist
                     hidden-modes
                     (lambda (hidden cell)
