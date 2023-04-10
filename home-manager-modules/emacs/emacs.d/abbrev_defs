@@ -20,8 +20,3 @@
     ("wriet" "write" nil :count 0)
    ))
 
-(define-abbrev-table 'haskell-mode-abbrev-table
-  '(
-    ("newt" "" (lambda nil (call-interactively #'my/haskell-newtype-template)) :count 3)
-   ))
-
