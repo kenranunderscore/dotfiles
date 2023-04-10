@@ -67,26 +67,26 @@ URxvt.internalBorder: 10
 URxvt.visualBell:     False
 URxvt.scrollBar:      False
 URxvt.saveLines:      50000
-URxvt.font:           xft:Courier Prime:pixelsize=26:antialias=true
-URxvt.boldFont:       xft:Courier Prime:style=Bold:pixelsize=26:antialias=true
+URxvt.font:           xft:DejaVu Sans Mono:pixelsize=32:antialias=true
+URxvt.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=32:antialias=true
 URxvt.keysym.C-plus:  font-size:increase
 URxvt.keysym.C-minus: font-size:decrease
-URxvt.foreground:  #ffffff
-URxvt.background:  #000000
-URxvt.cursorColor: #ffffff
-URxvt.color0:      #000000
+URxvt.foreground:  #f8f8f8
+URxvt.background:  #080808
+URxvt.cursorColor: #f8f8f8
+URxvt.color0:      #080808
 URxvt.color8:      #525252
-URxvt.color1:      #ff3000
-URxvt.color9:      #ff5252
-URxvt.color2:      #64b946
-URxvt.color10:     #52ff52
-URxvt.color3:      #a55b00
-URxvt.color11:     #ffff52
-URxvt.color4:      #0052ff
-URxvt.color12:     #5266ff
-URxvt.color5:      #ee5cee
-URxvt.color13:     #ff52ff
-URxvt.color6:      #00b4b4
-URxvt.color14:     #52ffff
+URxvt.color1:      #df4420
+URxvt.color9:      #e96868
+URxvt.color2:      #6bab54
+URxvt.color10:     #68e968
+URxvt.color3:      #905915
+URxvt.color11:     #e9e968
+URxvt.color4:      #205ddf
+URxvt.color12:     #6877e9
+URxvt.color5:      #dc6edc
+URxvt.color13:     #e968e9
+URxvt.color6:      #169d9d
+URxvt.color14:     #68e9e9
 URxvt.color7:      #a2a2a2
-URxvt.color15:     #ffffff
+URxvt.color15:     #f8f8f8
