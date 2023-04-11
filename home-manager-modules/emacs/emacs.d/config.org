@@ -329,10 +329,13 @@ The function I use to switch between the various fonts I like.  It
 applies the attributes of its value in =my/font-alist=.
 
 #+begin_src emacs-lisp
-(defun my/switch-font (font)
-  "Apply the attributes stored for FONT in `my/font-alist'."
+(defun my/switch-font (arg font)
+  "Apply the attributes stored for FONT in `my/font-alist'.  When
+called with non-nil prefix argument ARG the current height is
+reset to the default height for the selected font."
   (interactive
-   (list (intern
+   (list current-prefix-arg
+         (intern
           (completing-read
            "Font: "
            (mapcar #'car
@@ -340,7 +343,8 @@ applies the attributes of its value in =my/font-alist=.
                                      (copy-alist my/font-alist)))))))
   (let* ((attrs (alist-get font my/font-alist))
          (family (plist-get attrs :family))
-         (height (or (plist-get attrs :default-height) 180))
+         (height (or (and arg (or (plist-get attrs :default-height) 180))
+                     (face-attribute 'default :height)))
          ;; `buffer-face-mode' is enabled when calling
          ;; `variable-pitch-mode'
          (org-height (if (bound-and-true-p buffer-face-mode)
