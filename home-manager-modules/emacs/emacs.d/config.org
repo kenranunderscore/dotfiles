@@ -85,7 +85,8 @@ Emacs is the better tradeoff I think.
   ("C-t b n" . next-buffer)
   ("C-t b s" . scratch-buffer)
   ("C-t c" . comment-or-uncomment-region)
-  ("C-t C-c" . comment-or-uncomment-region))
+  ("C-t C-c" . comment-or-uncomment-region)
+  ("M-z" . zap-up-to-char))
 #+end_src
 
 * The region
