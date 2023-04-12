@@ -381,10 +381,10 @@ together with =emacsclient=.
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook
               (defun my/switch-to-current-font ()
-                (my/switch-font my/current-font)
+                (my/switch-font t my/current-font)
                 (remove-hook 'server-after-make-frame-hook
                              #'my/switch-to-current-font)))
-  (my/switch-font my/current-font))
+  (my/switch-font t my/current-font))
 #+end_src
 
 I find myself switching fonts /all the time/; I just seem to need that
