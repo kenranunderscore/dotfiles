@@ -1,0 +1,114 @@
+##### TODO/FIXME
+
+# autoinscribe more stuff
+# forced (more) prompts
+# better colors for scrolls/potions/wands in menu + item list
+# read the options guide and adapt
+
+##### Travel and Exploration
+
+travel_delay = -1
+explore_delay = -1
+rest_delay = -1
+view_delay = 500
+show_travel_trail = true
+travel_key_stop = true
+rest_wait_both = false
+
+# Stop traveling whenever Xom does _anything_
+: if you.god() == "Xom" then
+    runrest_stop_message += god:
+: else
+    runrest_ignore_message += god:
+: end
+
+##### General Gameplay
+
+default_manual_training = true
+
+easy_confirm = safe
+allow_self_target = prompt
+
+autofight_warning = 50
+autofight_stop = 50
+
+easy_door = true
+warn_hatches = true
+
+##### Colours and Glyphs
+
+allow_extended_colours = true
+bold_brightens_foreground = true
+best_effort_brighten_background = false
+
+# Render the player @ green
+mon_glyph += player:green
+
+##### Inscriptions
+
+autoinscribe += (bad|dangerous)_item.*potion:!q
+autoinscribe += (bad|dangerous)_item.*scroll:!r
+autoinscribe += potion.*(berserk rage):!q
+
+autoinscribe += of (faith|harm):!P
+
+autoinscribe += curing:@q1
+autoinscribe += potions? of heal wounds:@q2
+
+autoinscribe += identify:@r1
+
+##### (more) Prompts
+
+show_more = false
+
+##### Webtiles
+
+tile_font_crt_family = Courier Prime
+tile_font_stat_family = Courier Prime
+tile_font_msg_family = Courier Prime
+tile_font_lbl_family = Courier Prime
+
+##### Console
+
+# Stole some stuff from ebering
+
+feature += crystal wall {░}
+feature += stone wall {≣}
+feature += metal wall {▓}
+feature += runelight {◊}
+feature += Golubria {Ω}
+feature += collapsed entrance {∧,∧,lightgrey}
+feature += escape hatch in the ceiling {«}
+feature += escape hatch in the floor {»}
+feature += web {✳}
+
+feature += Ashenzari {※}
+feature += Beogh {⁂}
+feature += Cheibriados {◴}
+feature += Dithmenos {ᚤ}
+feature += Elyvilon {⚕}
+feature += Fedhas {❀}
+feature += Gozag {₪}
+feature += Hepliaklqana {⚱}
+feature += Ignis {♨}
+feature += Jiyva {☣}
+feature += Kikubaaqudgha {☠}
+feature += Lugonu {▚}
+feature += Makhleb {ω}
+feature += Nemelex Xobeh {⚜}
+feature += Okawaru {⚔}
+feature += Qazlal {☈}
+feature += Ru {⚖}
+feature += Sif Muna {♟}
+feature += Trog {†}
+feature += Uskayaw {♪}
+feature += Vehumet {✺}
+feature += Wu Jian {ॻ}
+feature += Xom {⸘}
+feature += Yredelemnul {☗}
+feature += Zin {☽}
+feature += Shining One {☉}
+
+# Monsters
+mons := mon_glyph
+mons += * : ✱

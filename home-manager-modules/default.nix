@@ -5,6 +5,7 @@
     ./alacritty
     ./bash.nix
     ./bat.nix
+    ./dcss
     ./direnv.nix
     ./dwarf-fortress.nix
     ./emacs

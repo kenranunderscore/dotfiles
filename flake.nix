@@ -40,16 +40,6 @@
       flake = false;
     };
 
-    # DCSS
-    crawlrc = {
-      url = "github:kenranunderscore/crawlrc";
-      flake = false;
-    };
-    crawl = {
-      url = "github:crawl/crawl";
-      flake = false;
-    };
-
     # Fonts
     sf-mono = {
       url = "github:supercomputra/sf-mono-font";

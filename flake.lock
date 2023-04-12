@@ -1,37 +1,5 @@
 {
   "nodes": {
-    "crawl": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1680706285,
-        "narHash": "sha256-+yRlTqcCmgW/doxXwAOScl43l4uFoF6siU3gGGQkvqc=",
-        "owner": "crawl",
-        "repo": "crawl",
-        "rev": "6f0cfe7724548d318f1a6c8654d01d03689ba696",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crawl",
-        "repo": "crawl",
-        "type": "github"
-      }
-    },
-    "crawlrc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1651342378,
-        "narHash": "sha256-pmq0MoS23SwBS/nvm5NKbBw7vsBzuQ/TQh8trptFxJI=",
-        "owner": "kenranunderscore",
-        "repo": "crawlrc",
-        "rev": "7742aba7b48aad1bc60ea89596c983d608351ad2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kenranunderscore",
-        "repo": "crawlrc",
-        "type": "github"
-      }
-    },
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -200,8 +168,6 @@
     },
     "root": {
       "inputs": {
-        "crawl": "crawl",
-        "crawlrc": "crawlrc",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "neovim-overlay": "neovim-overlay",

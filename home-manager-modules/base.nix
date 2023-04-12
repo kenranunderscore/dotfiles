@@ -63,8 +63,6 @@ in {
       inherit username;
       homeDirectory = "/home/${username}";
 
-      file.".crawlrc".source = "${inputs.crawlrc}/.crawlrc";
-
       sessionVariables = rec {
         EDITOR = "emacsclient -c";
         VISUAL = EDITOR;
