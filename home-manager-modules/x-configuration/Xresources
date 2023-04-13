@@ -4,33 +4,34 @@ Xft.hinting:    true
 Xft.hintstyle:  hintfull
 Xft.rgba:       rgb
 
-*.termName:       xterm-256color
-*.skipScroll:     False
-*.fading:         10
-*.internalBorder: 10
-*.visualBell:     False
-*.scrollBar:      False
-*.saveLines:      50000
-*.font:           xft:DejaVu Sans Mono:pixelsize=40:antialias=true
-*.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=40:antialias=true
-*.keysym.C-plus:  font-size:increase
-*.keysym.C-minus: font-size:decrease
-*.foreground:     #f8f8f8
-*.background:     #080808
-*.cursorColor:    #f8f8f8
-*.color0:         #080808
-*.color8:         #525252
-*.color1:         #df4420
-*.color9:         #e96868
-*.color2:         #6bab54
-*.color10:        #68e968
-*.color3:         #905915
-*.color11:        #e9e968
-*.color4:         #205ddf
-*.color12:        #6877e9
-*.color5:         #dc6edc
-*.color13:        #e968e9
-*.color6:         #169d9d
-*.color14:        #68e9e9
-*.color7:         #a2a2a2
-*.color15:        #f8f8f8
+urxvt.termName:       xterm-256color
+urxvt.skipScroll:     False
+urxvt.fading:         10
+urxvt.internalBorder: 10
+urxvt.visualBell:     False
+urxvt.scrollBar:      False
+urxvt.saveLines:      50000
+urxvt.font:           xft:DejaVu Sans Mono:pixelsize=40:antialias=true
+urxvt.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=40:antialias=true
+urxvt.keysym.C-plus:  font-size:increase
+urxvt.keysym.C-minus: font-size:decrease
+
+*.foreground:  #f8f8f8
+*.background:  #050505
+*.cursorColor: #f8f8f8
+*.color0:      #050505
+*.color8:      #525252
+*.color1:      #ff3000
+*.color9:      #ff5252
+*.color2:      #64b946
+*.color10:     #52ff52
+*.color3:      #a8b900
+*.color11:     #ffff52
+*.color4:      #0052ff
+*.color12:     #5266ff
+*.color5:      #ee5cee
+*.color13:     #ff52ff
+*.color6:      #00b4b4
+*.color14:     #52ffff
+*.color7:      #a2a2a2
+*.color15:     #f8f8f8

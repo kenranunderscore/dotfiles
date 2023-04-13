@@ -654,7 +654,8 @@ splash screen, and others.
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tooltip-mode -1)
-(setq inhibit-splash-screen nil)
+(setq inhibit-splash-screen t)
+(setq inhibit-x-resources t)
 #+end_src
 
 ** Resize proportionally after deleting windows
