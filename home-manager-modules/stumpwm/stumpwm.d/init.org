@@ -139,18 +139,25 @@ shell:
 
 * Keybindings
 
+Use =C-.= as the prefix key instead of =C-t=, which I already use as Emacs
+"leader" key.
+
 #+begin_src lisp
 (set-prefix-key (kbd "C-."))
 #+end_src
 
+Changes to keybindings in the =*root-map*=:
+
+#+begin_src lisp
+(define-key *root-map* (kbd "C-o") "fnext")
+#+end_src
+
 ;; Local Variables:
-;; eval: (require 'sly)
 ;; eval: (org-babel-do-load-languages
 ;;        'org-babel-load-languages
 ;;        '((emacs-lisp . t)
 ;;          (common-lisp . t)
-;;          (lisp . t)))
-;; org-babel-lisp-eval-fn: #'sly-eval
+;;          (lisp . ;; org-babel-lisp-eval-fn: #'sly-eval))
 ;; eval: (add-hook 'after-save-hook
 ;;                 #'org-babel-tangle
 ;;                 nil t)
