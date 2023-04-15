@@ -344,7 +344,8 @@ reset to the default height for the selected font."
                                      (copy-alist my/font-alist)))))))
   (let* ((attrs (alist-get font my/font-alist))
          (family (plist-get attrs :family))
-         (height (or (and arg (or (plist-get attrs :default-height) 180))
+         (default-height (or (plist-get attrs :default-height) 180))
+         (height (or (and arg default-height)
                      (face-attribute 'default :height)))
          ;; `buffer-face-mode' is enabled when calling
          ;; `variable-pitch-mode'
@@ -353,7 +354,7 @@ reset to the default height for the selected font."
                        1.0))
          (weight (or (plist-get attrs :weight) 'regular)))
     (setq my/current-font font)
-    (setq my/default-font-height height)
+    (setq my/default-font-height default-height)
     (set-face-attribute
      'default nil
      :font family
