@@ -11,9 +11,9 @@ in {
       enable = true;
       font = { inherit (custom.font) name size; };
       keybindings = {
-        "ctrl+shift+equal" = "change_font_size all +0.5";
-        "ctrl+shift+plus" = "change_font_size all +0.5";
-        "ctrl+shift+minus" = "change_font_size all -0.5";
+        "ctrl+shift+equal" = "change_font_size all +1.0";
+        "ctrl+shift+plus" = "change_font_size all +1.0";
+        "ctrl+shift+minus" = "change_font_size all -1.0";
       };
       settings = {
         term = "xterm-256color";
