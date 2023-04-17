@@ -59,17 +59,19 @@ string, return nil instead."
     (unless (string-empty-p str)
       str)))
 
-(defun my/haskell-add-import (module &optional qualified? alias)
-  "Add an import to the import list.  Prompts for qualified import
-and alias."
+(defun my/haskell-add-import (arg module &optional qualified? alias)
+  "Add an import to the import list.  When no prefix ARG is set, the
+user will be prompted whether the import should be qualified, and
+what the identifier should be in that case."
   (interactive
-   (let* ((module (read-string "Module: "))
+   (let* ((arg current-prefix-arg)
+          (module (read-string "Module: "))
           (qualified?
-           (unless (string-match-p "(" module)
+           (unless (or arg (string-match-p "(" module))
              (y-or-n-p (concat "Import " module " qualified?"))))
           (alias (when qualified?
                    (my/read-non-empty-string "Alias [or leave empty]: "))))
-     (list module qualified? alias)))
+     (list arg module qualified? alias)))
   (let ((import-line
          (concat "import "
                  (when qualified? "qualified ")
