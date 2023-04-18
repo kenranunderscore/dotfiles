@@ -472,6 +472,7 @@ Enable =naga=:
 #+begin_src emacs-lisp
 (setq naga-theme-use-lighter-org-block-background nil)
 (setq naga-theme-modeline-style 'green-box)
+(setq naga-theme-use-red-cursor t)
 (my/switch-theme 'wheatgrass)
 #+end_src
 
