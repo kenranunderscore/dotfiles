@@ -160,7 +160,8 @@ commands I want to try out using =abbrev= with some short identifiers.
   '(("nt" "" (lambda ()
                (call-interactively #'my/haskell-newtype-template)))
     ("dsg" "deriving stock (Eq, Show, Generic)")
-    ("ds" "deriving stock (Eq, Show)")))
+    ("ds" "deriving stock (Eq, Show)")
+    ("ud" "undefined")))
 #+end_src
 
 * Navigating errors
