@@ -1396,7 +1396,6 @@ via hooks to =sh-mode=.
 
 #+begin_src emacs-lisp
 (use-package flymake-shellcheck
-  :after flymake
   :commands (flymake-shellcheck-load)
   :hook ((sh-mode . flymake-shellcheck-load)
          (sh-mode . flymake-mode)))
