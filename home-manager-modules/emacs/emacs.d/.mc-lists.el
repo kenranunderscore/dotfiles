@@ -4,7 +4,13 @@
 (setq mc/cmds-to-run-for-all
       '(
         dabbrev-expand
+        downcase-dwim
+        downcase-region
+        haskell-indentation-common-electric-command
+        hydra--negative-argument
+        indent-for-tab-command
         kill-region
+        lispy-backward-kill-word
         lispy-braces
         lispy-brackets
         lispy-colon
@@ -17,6 +23,7 @@
         lispy-parens
         lispy-quotes
         lispy-space
+        org-delete-char
         special-digit-argument
         special-lh-knight/body
         special-lispy-ace-char
@@ -95,7 +102,9 @@
         helpful-variable
         hydra-multiple-cursors/body
         hydra-multiple-cursors/mc/edit-beginnings-of-lines-and-exit
+        hydra-multiple-cursors/mc/edit-ends-of-lines-and-exit
         hydra-multiple-cursors/mc/edit-lines-and-exit
+        hydra-multiple-cursors/mc/mark-all-in-region-regexp-and-exit
         hydra-multiple-cursors/mc/mark-all-like-this-and-exit
         hydra-multiple-cursors/mc/mark-all-words-like-this-and-exit
         hydra-multiple-cursors/mc/mark-all-words-like-this-in-defun-and-exit
@@ -108,6 +117,7 @@
         hydra-multiple-cursors/mc/unmark-next-like-this
         hydra-multiple-cursors/mc/unmark-previous-like-this
         hydra-multiple-cursors/nil
+        lispy-cursor-ace
         lispy-cursor-down
         lispy-mark-symbol
         mc/mark-previous-lines
