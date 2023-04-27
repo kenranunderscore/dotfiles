@@ -52,9 +52,9 @@ like I did in Emacs.
 
 #+begin_src lisp
 (set-font (make-instance 'xft:font
-                         :family "Unifont"
+                         :family "JetBrains Mono"
                          :subfamily "Regular"
-                         :size 20
+                         :size 16
                          :antialias t))
 #+end_src
 
@@ -134,7 +134,7 @@ usually increase it.  In StumpWM, those things are just executed in a
 shell:
 
 #+begin_src lisp
-(run-shell-command "xset r rate 200 55")
+(run-shell-command "xset r rate 200 65")
 #+end_src
 
 * Keybindings
@@ -153,11 +153,6 @@ Changes to keybindings in the =*root-map*=:
 #+end_src
 
 ;; Local Variables:
-;; eval: (org-babel-do-load-languages
-;;        'org-babel-load-languages
-;;        '((emacs-lisp . t)
-;;          (common-lisp . t)
-;;          (lisp . ;; org-babel-lisp-eval-fn: #'sly-eval))
 ;; eval: (add-hook 'after-save-hook
 ;;                 #'org-babel-tangle
 ;;                 nil t)
