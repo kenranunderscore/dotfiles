@@ -200,7 +200,7 @@ for easy access.
         ("C-c p l" . my/haskell-add-language-extension)
         ("C-c p o" . my/haskell-add-ghc-option)
         ("C-c h k" . haskell-session-kill)
-        ("C-c h r" . haskell-process-type)
+        ("C-c h r" . haskell-process-restart)
         ("C-c n" . my/haskell-newtype-template)))
 
 (provide 'my-haskell)
