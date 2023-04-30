@@ -11,8 +11,8 @@ urxvt.internalBorder: 10
 urxvt.visualBell:     False
 urxvt.scrollBar:      False
 urxvt.saveLines:      50000
-urxvt.font:           xft:DejaVu Sans Mono:pixelsize=40:antialias=true
-urxvt.boldFont:       xft:DejaVu Sans Mono:style=Bold:pixelsize=40:antialias=true
+urxvt.font:           xft:Lucida Console:pixelsize=40:antialias=true
+urxvt.boldFont:       xft:Lucida Console:style=Bold:pixelsize=40:antialias=true
 urxvt.keysym.C-plus:  font-size:increase
 urxvt.keysym.C-minus: font-size:decrease
 
