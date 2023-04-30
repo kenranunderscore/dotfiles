@@ -832,8 +832,8 @@ expect them to.
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  :config
   (evil-mode 1)
+  :config
   (setq evil-default-state 'emacs)
   (setq evil-insert-state-modes nil)
   (setq evil-emacs-state-modes nil)
@@ -851,6 +851,13 @@ expect them to.
   (general-define-key
    :states 'normal
    "U" 'evil-redo)
+  ;; Don't make certain commands repeatable with '.'
+  (mapc #'evil-declare-ignore-repeat
+        '(haskell-process-load-file
+          haskell-process-reload
+          haskell-goto-first-error
+          haskell-goto-next-error
+          haskell-goto-prev-error))
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)

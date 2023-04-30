@@ -178,21 +178,6 @@ navigational sets of commands.
   ("p" haskell-goto-prev-error))
 #+end_src
 
-* Improve integration with =evil=
-
-Some =haskell-mode= commands are being "repeated" with =evil='s =.=
-operator.  We can ignore these kinds of actions using
-=evil-declare-ignore-repeat=.
-
-#+begin_src emacs-lisp
-(mapc #'evil-declare-ignore-repeat
-      '(haskell-process-load-file
-        haskell-process-reload
-        haskell-goto-first-error
-        haskell-goto-next-error
-        haskell-goto-prev-error))
-#+end_src
-
 * =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used
