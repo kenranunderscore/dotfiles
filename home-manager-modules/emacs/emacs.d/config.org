@@ -834,6 +834,23 @@ expect them to.
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
+  (setq evil-default-state 'emacs)
+  (setq evil-insert-state-modes nil)
+  (setq evil-emacs-state-modes nil)
+  (setq evil-motion-state-modes nil)
+  (setq evil-normal-state-modes
+        '(text-mode
+          prog-mode
+          fundamental-mode
+          css-mode
+          conf-mode
+          TeX-mode
+          LaTeX-mode
+          haskell-cabal-mode))
+  (setq evil-insert-state-cursor '(hbar . 5))
+  (general-define-key
+   :states 'normal
+   "U" 'evil-redo)
   :custom
   ((evil-want-C-u-scroll t)
    (evil-want-C-u-delete nil)
@@ -842,8 +859,18 @@ expect them to.
    (evil-undo-system 'undo-redo)
    (evil-symbol-word-search t)
    (evil-jumps-cross-buffers nil)
-   (evil-mode-line-format nil)))
+   (evil-mode-line-format nil)
+   (evil-move-beyond-eol t))
+  :bind
+  (:map evil-window-map
+        ("C-h" . evil-window-left)
+        ("C-k" . evil-window-up)
+        ("C-j" . evil-window-down)
+        ("C-l" . evil-window-right)
+        ("C-d" . evil-window-delete)))
 #+end_src
+
+** Local leader key
 
 A local leader key is something that can be used to bind situational
 commands to, usually mode-specific ones. I used =,= for this in Vim;
@@ -1340,7 +1367,8 @@ loading =org=, a custom font setup might run to adjust the headers.
    ;; face is not yet known there, so use a hook.
    (org-indent-mode . (lambda ()
                         (my/inherit-fixed-pitch 'org-indent)
-                        (my/inherit-fixed-pitch 'org-hide))))
+                        (my/inherit-fixed-pitch 'org-hide)))
+   (org-capture-mode . evil-insert-state))
   :custom
   ((org-startup-indented t)
    (org-startup-folded 'content)
@@ -1378,7 +1406,7 @@ loading =org=, a custom font setup might run to adjust the headers.
   (leader "o" 'hydra-org/body)
   :bind
   (:map org-mode-map
-   ("C-'" . nil)))
+        ("C-'" . nil)))
 #+end_src
 
 ** Beautiful bullet points
@@ -2611,6 +2639,7 @@ much due to =savehist-mode=.
 #+begin_src emacs-lisp
 (use-package magit
   :defer
+  :hook (git-commit-mode . evil-insert-state)
   :config
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
