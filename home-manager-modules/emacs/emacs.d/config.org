@@ -51,25 +51,32 @@ weird behavior.
 
 * Keybinding management
 
-I used to use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more
-straightforward and declarative way.  But since this is especially
-useful in =evil-mode=, where I have to bind keys according to the
-current mode, I decided to drop this as well while trying to live
-without =evil=.
-
-The concept of a /prefix key/ (or /leader key/) is still quite useful in
-my opinion: decide on a key that should hold all custom or built-in
-functionality I often need, but that's not specific to a major mode
-(where =C-c <letter>= would be the appropriate place to bind things to).
-
-I had already decided to use =C-.= as my leader, but am now changing
-that to use the even more accessible =C-t=.  =C-t= is used by my window
-manager StumpWM by default, but having the more comfortable key in
-Emacs is the better tradeoff I think.
+I use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more
+straightforward and declarative way.  This is especially useful for
+Vim emulation with =evil-mode=, where keys have to be bound according to
+the current (Vim) mode.
 
 #+begin_src emacs-lisp
-(define-prefix-command 'my/prefix-map)
-(keymap-global-set "C-t" 'my/prefix-map)
+(use-package general)
+#+end_src
+
+The concept of a /prefix key/ (or /leader key/) is quite useful in my
+opinion: decide on a key that should hold all custom or built-in
+functionality (not specific to a major mode, where =C-c <letter>= would
+be the appropriate place to bind things to).  With this mechanism you
+basically create your own custom mode-agnostic keymap, accessible
+almost everywhere.
+
+I used to use =C-t= as my prefix key when not using =evil=.  With Vim
+emulation =SPC= becomes is more attractive as leader key.  (That's why
+Spacemacs, Doom Emacs, Helix etc. are also using it by default.)
+
+#+begin_src emacs-lisp
+(general-create-definer leader
+  :keymaps 'override
+  :states '(normal insert emacs visual motion)
+  :prefix "SPC"
+  :non-normal-prefix "C-t")
 #+end_src
 
 #+begin_src emacs-lisp
@@ -79,14 +86,18 @@ Emacs is the better tradeoff I think.
   ("C-h M" . describe-keymap)
   ("C-h V" . set-variable)
   ("C-x C-o" . other-window)
-  ("C-t b k" . kill-current-buffer)
-  ("C-t b i" . ibuffer)
-  ("C-t b p" . previous-buffer)
-  ("C-t b n" . next-buffer)
-  ("C-t b s" . scratch-buffer)
-  ("C-t c" . comment-or-uncomment-region)
-  ("C-t C-c" . comment-or-uncomment-region)
-  ("M-z" . zap-up-to-char))
+  :config
+  (leader
+    "SPC" '(execute-extended-command :which-key "M-x")
+    "b" '(:ignore t :which-key "buffer")
+    "b b" 'consult-buffer
+    "b k" 'kill-current-buffer
+    "b i" 'ibuffer
+    "b p" 'previous-buffer
+    "b n" 'next-buffer
+    "b s" 'scratch-buffer
+    "c" 'comment-or-uncomment-region
+    "t" '(:ignore t :which-key "toggles"))) ;; TODO: comment-line?  or do it with evil?
 #+end_src
 
 * The region
@@ -113,9 +124,11 @@ narrowed view.
 * Copying the current line
 
 It's awkward to have to do =C-S-<backspace>= or =C-k C-k=, followed by
-yanking, to "just" copy the line point is on to the kill ring.
+yanking, to "just" copy the line point is on to the kill ring.  Note
+that when using =evil=, this command is obsolete, as Vim bindings make
+this quite easy.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun my/copy-line-at-point ()
   "Copy the current line without killing it first."
   (interactive)
@@ -124,8 +137,6 @@ yanking, to "just" copy the line point is on to the kill ring.
     (let ((start (point)))
       (forward-line 1)
       (kill-ring-save start (point)))))
-
-(keymap-global-set "M-W" #'my/copy-line-at-point)
 #+end_src
 
 * Loading additional ELisp configuration files
@@ -148,7 +159,7 @@ do this /very often/.
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
 
-(keymap-global-set "C-t e" 'my/open-init-file)
+(leader "e" '(my/open-init-file :which-key "edit emacs config"))
 #+end_src
 
 * Custom Emacs look
@@ -393,7 +404,7 @@ I find myself switching fonts /all the time/; I just seem to need that
 kind of visual refreshment.  So let's bind it to a "leader" key.
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-t t f" 'my/switch-font)
+(leader "t f" '(my/switch-font :which-key "switch font"))
 #+end_src
 
 ** Color theme
@@ -445,8 +456,9 @@ As with fonts, I like changing visuals regularly, as in, multiple
 times a day usually.  So keybindings for this come in useful:
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-t t t" 'my/switch-theme)
-(keymap-global-set "C-t t r" 'my/reload-theme)
+(leader
+  "t t" '(my/switch-theme :which-key "choose theme")
+  "t r" '(my/reload-theme :which-key "reload theme"))
 #+end_src
 
 *** My favorite Emacs themes
@@ -565,12 +577,48 @@ the `mode-line-inactive' face otherwise."
    ,face
      'mode-line-inactive)) 
 
+(defcustom my/evil-state-mode-line-format
+  '(:eval
+    (let ((fg (face-attribute 'default :foreground))
+          (bg (face-attribute 'default :background))
+          (error-fg (face-attribute 'error :foreground)))
+      (cond
+       ((eq evil-state 'insert)
+        (propertize
+         " INSERT "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,error-fg))))
+       ((eq evil-state 'normal)
+        (propertize
+         " NORMAL "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,fg))))
+       ((eq evil-state 'motion)
+        (propertize
+         " MOTION "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,fg))))
+       ((eq evil-state 'visual)
+        (propertize
+         " VISUAL "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground)))))
+       ((eq evil-state 'emacs)
+        (propertize
+         " EMACS "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground)))))
+       (t "        "))))
+  "Specifies how to display the current `evil-state' in the mode
+line."
+  :risky t)
+
 (defcustom my/mode-line-buffer-format
   '(compilation-in-progress
-     (:eval (propertize
-	     "   [Compiling...]"
-	     'face
-	     (my/with-active-face compilation-mode-line-run))))
+    (:eval (propertize
+	        "   [Compiling...]"
+	        'face
+	        (my/with-active-face compilation-mode-line-run))))
   "How to display the name of the current buffer in the mode line."
   :risky t)
 
@@ -616,6 +664,7 @@ see filtered out."
 (setq-default
  mode-line-format
  '(""
+   my/evil-state-mode-line-format
    my/mode-line-flymake-format
    my/mode-line-buffer-format
    (:propertize "   %b" face mode-line-buffer-id)
@@ -704,16 +753,16 @@ is used.  I used to always show line numbers when programming with
 sense.  It's no real use showing them by default anymore though.
 
 #+begin_src emacs-lisp
-(defun my/toggle-line-numbers ()
-  "Toggle `display-line-numbers-mode'.  Meant to be used in a
-keybinding."
-  (interactive)
-  (display-line-numbers-mode 'toggle))
+  (defun my/toggle-line-numbers ()
+    "Toggle `display-line-numbers-mode'.  Meant to be used in a
+  keybinding."
+    (interactive)
+    (display-line-numbers-mode 'toggle))
 
-(use-package display-line-numbers
-  :defer
-  :bind
-  ("C-t t l" . my/toggle-line-numbers))
+  (use-package display-line-numbers
+    :defer
+    :config
+    (leader ("t l" . my/toggle-line-numbers)))
 #+end_src
 
 ** Insert a newline at the end of files
@@ -767,6 +816,42 @@ Of course there's an existing Emacs options for this:
 
 #+begin_src emacs-lisp
 (setq mouse-yank-at-point t)
+#+end_src
+
+* Vim emulation with =evil=
+
+The =evil= package offers a very complete Vim experience inside of
+Emacs.  I've borrowed some pieces of configuration from
+[[https://depp.brause.cc/dotemacs][wasamasa]], specifically the part where I default to =emacs= mode.  The
+reason is that (sometimes due to =evil=, other times =evil-collection=)
+some buffers, like popups in =special-mode=, don't behave the way I'd
+expect them to.
+
+#+begin_src emacs-lisp
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  :custom
+  ((evil-want-C-u-scroll t)
+   (evil-want-C-u-delete nil)
+   (evil-want-C-w-delete t)
+   (evil-want-Y-yank-to-eol t)
+   (evil-undo-system 'undo-redo)
+   (evil-symbol-word-search t)
+   (evil-jumps-cross-buffers nil)
+   (evil-mode-line-format nil)))
+#+end_src
+
+A local leader key is something that can be used to bind situational
+commands to, usually mode-specific ones. I used =,= for this in Vim;
+same here now.
+
+#+begin_src emacs-lisp
+(general-create-definer local-leader
+  :prefix ",")
 #+end_src
 
 * Built-in packages with extensions
@@ -1290,9 +1375,9 @@ loading =org=, a custom font setup might run to adjust the headers.
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
+  (leader "o" 'hydra-org/body)
   :bind
-  (("C-t o" . hydra-org/body)
-   :map org-mode-map
+  (:map org-mode-map
    ("C-'" . nil)))
 #+end_src
 
@@ -1370,7 +1455,7 @@ I use as well: =embark= and =ripgrep=, with or without =consult=).
   ("f" first-error)
   ("q" nil "exit"))
 
-(keymap-global-set "C-t n e" 'hydra-navigate-errors/body)
+(leader "n e" '(hydra-navigate-errors/body :which-key "navigate errors"))
 #+end_src
 
 * On-the-fly syntax checking (and other things): =Flymake=
@@ -1911,7 +1996,7 @@ chain.  A =hydra= might just remedy that:
          (shrink-window-horizontally 2)))
   ("q" nil "exit"))
 
-(keymap-global-set "C-t w" 'hydra-window-size/body)
+(leader "w" '(hydra-window-size/body :which-key "adjust window size"))
 #+end_src
 
 * IRC with ERC
@@ -1975,47 +2060,6 @@ so I've fully switched over.
            :client-certificate (let ((cert-dir (getenv "KENRAN_IRC_CERTS")))
                                  `(,(concat cert-dir "/kenran.key")
                                    ,(concat cert-dir "/kenran.crt")))))
-#+end_src
-
-* Repeating the last edit with =dot-mode=
-
-One thing I found myself missing from my time with vim or =evil= was the
-=.= operator, which repeats the previous "edit".  Since vim uses
-separate modes for "inserting text" and "movement and other commands",
-it is always intuitively clear what "the last thing I've done" means
-in any context.
-
-With =dot-mode=, I'm concerned about two things:
-
-- I don't have any intuition for what constitutes "the last edit", and
-  I also don't have a mental model of what I should expect here, yet.
-- Built-in functionality might be better, or at least suffice!  In
-  vim, my most frequent uses of the =.= operator where actually edits
-  combined with going through search (via =/=) results, say, doing
-  =/fooBar= followed by =ctB baz <esc>= and repeated applications of =n.=.
-  This usually isn't even the most efficient way to do this in vim, as
-  you have tools like =:s.../c= and =:g= at your disposal.  Now in Emacs
-  I'm also trying out multiple cursors, which might remove the need
-  for the =.= operator in another whole class of situations.
-
-So I'll add this package for now; but I will try to stop and think
-when attempting to use it, and compare it with region-restricted usage
-of =query-replace= (or similar), multiple cursors, and maybe rectangular
-selection/edits.  This way I hope I can /really/ understand if and when
-to use it.
-
-#+begin_src emacs-lisp
-(use-package dot-mode
-  :init
-  (global-dot-mode 1)
-  :config
-  (setq dot-mode-ignore-undo t)
-  :bind
-  (:map dot-mode-map
-        ("C-." . nil)
-        ("C-c ." . nil)
-        ("C-M-." . nil)
-        ("C-q" . dot-mode-execute)))
 #+end_src
 
 * Multiple cursors
@@ -2541,13 +2585,15 @@ One tricky thing was making it possible to bind the keymap
           (my/project-vterm "vterm" ?t)
           (project-switch-to-buffer "find buffer" ?b)
           (project-vc-dir "vc")))
-  :bind (:map project-prefix-map
-              ("t" . my/project-vterm)
-              ("g" . magit-project-status)
-              ("d" . project-dired)
-              ("s" . consult-ripgrep)
-              ("D" . my/project-edit-dir-local-variable)
-              ("n" . my/navigate-to-projects)))
+  (leader "p" project-prefix-map)
+  :bind
+  (:map project-prefix-map
+        ("t" . my/project-vterm)
+        ("g" . magit-project-status)
+        ("d" . project-dired)
+        ("s" . consult-ripgrep)
+        ("D" . my/project-edit-dir-local-variable)
+        ("n" . my/navigate-to-projects)))
 #+end_src
 
 ** Magit
@@ -2583,7 +2629,7 @@ mentioned above =M-x= seems like the way to go.  I was missing
 =magit-status-here= a lot, though, so add it in an accessible spot.
 
 #+begin_src emacs-lisp
-(keymap-global-set "C-t g" 'magit-status-here)
+(leader "g" 'magit-status-here)
 #+end_src
 
 *** Interactively browse =git= history
@@ -2758,7 +2804,7 @@ after =q= or a timeout.
    :color blue)
   ("q" nil "exit"))
 
-(keymap-global-set "C-t z" 'hydra-global-zoom/body)
+(leader "z" '(hydra-global-zoom/body :which-key "zoom"))
 #+end_src
 
 ** Edit =grep= results over multiple buffers
