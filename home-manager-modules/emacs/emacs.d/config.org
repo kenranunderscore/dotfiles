@@ -1240,26 +1240,36 @@ visible area of the buffer.  This is similar to =evil-snipe= in Emacs,
 or (neo)vim plugins like =vim-snipe=, =easymotion=, =leap.nvim=, =hop.nvim=,
 =lightspeed.nvim=, etc.
 
+One cool thing about =avy= is that it is well-integrated with =evil=,
+meaning that it's possible to use =avy= operations in conjunction with
+Vim commands.  For instance, deleting up until the next
+=avy-goto-char-timer= match can be done with =ds= (where I bind =s= to the
+=avy= operation below) and then sniping the correct result.
+
 #+begin_src emacs-lisp
 (use-package avy
   :defer
   :config
   (setq avy-timeout-seconds 0.3)
+  (setq avy-all-windows nil)
+  (general-define-key
+   :states 'normal
+   "s" 'evil-avy-goto-char-timer)
   :bind
   ("C-'" . avy-goto-char-timer))
 #+end_src
 
 * Org mode
 
-I want my headers to stand out by being really big.  I also like using
-=variable-pitch-mode=, which makes it so only code, verbatim, and some
-other things are written with my current monospace / fixed-width font,
-and the rest uses a serif font more suitable for longer texts.  But
-customizing these faces with =set-face-attribute= has the usual problems
-with the initial daemon startup, and doesn't hold up when switching
-fonts or themes.  That's why I've put those changes into the following
-functions which I can call whenever these sorts of changes happen,
-either through hooks or manual trigger.
+I sometimes like using =variable-pitch-mode=, which makes it so only
+code, verbatim, and some other things are written with my current
+monospace / fixed-width font, and the rest uses a serif font more
+suitable for longer texts.  but customizing these faces with
+=set-face-attribute= has the usual problems with the initial daemon
+startup, and doesn't hold up when switching fonts or themes.  that's
+why i've put those changes into the following functions which i can
+call whenever these sorts of changes happen, either through hooks or
+manual trigger.
 
 Note that some themes, like =modus-{vivendi,operandi}=, might set the
 =:inherit= attribute on a face, in which case a naive
