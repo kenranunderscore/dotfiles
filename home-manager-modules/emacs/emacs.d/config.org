@@ -1548,9 +1548,10 @@ child frame for the completion popup and thus does not clash with
 #+begin_src emacs-lisp
 (use-package corfu
   :init (global-corfu-mode)
+  :hook (evil-insert-state-exit . corfu-quit)
   :config
   (setq corfu-cycle t)
-  (setq corfu-auto nil)
+  (setq corfu-auto t)
   (setq corfu-auto-delay 0.0)
   (setq corfu-excluded-modes '(erc-mode)))
 #+end_src
