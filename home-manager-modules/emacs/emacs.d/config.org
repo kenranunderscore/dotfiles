@@ -2805,6 +2805,10 @@ comfortably usable from within Emacs.
   :defer
   :init
   (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r))
+  (general-define-key
+   :keymaps 'override
+   :states '(normal insert emacs visual motion)
+   "C-l" 'ace-window)
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 2.5))
 #+end_src
