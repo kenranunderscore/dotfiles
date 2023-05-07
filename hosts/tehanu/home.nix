@@ -87,6 +87,7 @@ in {
     racket
     sieve-connect
     subversion
+    teams
     thunderbird
     wireshark
     (vscode-with-extensions.override {
