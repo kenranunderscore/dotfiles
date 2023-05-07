@@ -15,6 +15,7 @@
     ./fonts
     ./fzf.nix
     ./git.nix
+    ./herbstluftwm
     ./i3
     ./imwheel
     ./kitty.nix

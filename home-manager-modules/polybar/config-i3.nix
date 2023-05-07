@@ -27,7 +27,7 @@ let
     font-3 = "Font Awesome 6 Free Solid:style=Solid:size=17;5";
     height = "30";
     locale = "en_US.UTF-8";
-    offset-x = "1%";
+    offset-x = "0%";
     padding = "0";
     radius-top = "0";
     width = "100%";
@@ -61,9 +61,36 @@ in {
     margin-top = 0;
   };
 
-  "bar/main" = mkBar true "date distro-icon cpu memory" "i3"
+  "bar/main" = mkBar true "date distro-icon cpu memory" "xworkspaces"
     (pkgs.lib.optionalString withBattery "battery "
       + "wlan1 wlan2 wlan3 wlan4 audio powermenu");
+
+  "module/xworkspaces" = {
+    type = "internal/xworkspaces";
+    enable-scroll = false;
+    pin-workspaces = true;
+    format = "<label-state>";
+    label-monitor = "";
+    label-active = "%name%";
+    label-active-background = "${colors.background}";
+    label-active-foreground = "${colors.foreground}";
+    label-active-padding = 1;
+    label-active-margin = 0;
+    label-active-font = 2;
+    label-occupied = "%name%";
+    label-occupied-background = "${colors.background}";
+    label-occupied-foreground = "#707070";
+    label-occupied-padding = 1;
+    label-occupied-margin = 0;
+    label-empty = "";
+    label-empty-padding = 0;
+    label-empty-margin = 0;
+    label-urgent = "%name%";
+    label-urgent-background = "${colors.background}";
+    label-urgent-foreground = "${colors.urgent}";
+    label-urgent-padding = 1;
+    label-urgent-margin = 0;
+  };
 
   "module/date" = {
     format-foreground = "${colors.foreground}";
@@ -140,45 +167,6 @@ in {
     label-muted = "MUTED";
     label-volume = "%percentage%%";
     type = "internal/pulseaudio";
-  };
-
-  "module/i3" = {
-    type = "internal/i3";
-    pin-workspaces = true;
-    strip-wsnumbers = true;
-    index-sort = true;
-    enable-click = true;
-    enable-scroll = false;
-    format = "<label-state><label-mode>";
-    label-separator = "";
-    label-separator-padding = 0;
-    label-separator-margin = 0;
-    label-mode = "%mode%";
-    label-mode-background = "${colors.background}";
-    label-mode-foreground = "${colors.urgent}";
-    label-mode-padding = 1;
-    label-mode-margin = 0;
-    label-focused = "%name%";
-    label-focused-background = "${colors.background}";
-    label-focused-foreground = "${colors.foreground}";
-    label-focused-padding = 1;
-    label-focused-margin = 0;
-    label-focused-font = 2;
-    label-unfocused = "%name%";
-    label-unfocused-background = "${colors.background}";
-    label-unfocused-foreground = "#707070";
-    label-unfocused-padding = 1;
-    label-unfocused-margin = 0;
-    label-visible = "%name%";
-    label-visible-background = "${colors.background}";
-    label-visible-foreground = "#3cb371";
-    label-visible-padding = 1;
-    label-visible-margin = 0;
-    label-urgent = "%name%";
-    label-urgent-background = "${colors.background}";
-    label-urgent-foreground = "${colors.urgent}";
-    label-urgent-padding = 1;
-    label-urgent-margin = 0;
   };
 
   "settings" = {
