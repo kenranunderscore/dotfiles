@@ -73,13 +73,10 @@ in {
       displayManager = {
         session = [{
           manage = "window";
-          name = "stumpwm";
-          start = ''
-            export SBCL_HOME=${pkgs.sbcl}/lib/sbcl
-            $HOME/projects/stumpwm/stumpwm
-          '';
+          name = "fake";
+          start = "";
         }];
-        defaultSession = "none+stumpwm";
+        defaultSession = "none+fake";
         autoLogin = {
           enable = true;
           user = username;
