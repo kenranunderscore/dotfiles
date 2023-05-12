@@ -3,6 +3,7 @@ function navigate_to_project \
     set project_dirs ~/projects \
                      ~/ag \
                      ~/tmpdev \
+                     ~/ag/schulungen \
                      ~/projects/forks
     set fd fd --type d --max-depth 1 --color never .
     set fzf fzf --prompt "Navigate to project: "
