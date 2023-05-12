@@ -641,6 +641,7 @@ see filtered out."
                         which-key-mode
                         buffer-face-mode
                         eldoc-mode
+                        evil-org-mode
                         org-indent-mode
                         auto-revert-mode
                         auto-fill-function
@@ -1436,7 +1437,7 @@ well.
 
 #+begin_src emacs-lisp
 (use-package evil-org
-  :after (evil org)
+  :defer t
   :hook (org-mode . evil-org-mode)
   :config
   (require 'evil-org-agenda)
