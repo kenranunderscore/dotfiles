@@ -1426,6 +1426,24 @@ loading =org=, a custom font setup might run to adjust the headers.
         ("C-'" . nil)))
 #+end_src
 
+** Integrating =evil= with =org-mode=
+
+Some things don't quite work when =evil= is enabled, like the header
+cycling.  =Evil-org= fixes these small issue, and also adds some bonus
+functionality like =o= and =O= being slightly "smart", for instance,
+adding new bullet points when inside lists.  Additionally, it
+configures the =org-agenda= view to be more compatible with =evil= as
+well.
+
+#+begin_src emacs-lisp
+(use-package evil-org
+  :after (evil org)
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+#+end_src
+
 ** Beautiful bullet points
 
 #+begin_src emacs-lisp
