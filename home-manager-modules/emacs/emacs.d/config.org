@@ -866,8 +866,7 @@ expect them to.
    (evil-undo-system 'undo-redo)
    (evil-symbol-word-search t)
    (evil-jumps-cross-buffers nil)
-   (evil-mode-line-format nil)
-   (evil-move-beyond-eol t))
+   (evil-mode-line-format nil))
   :bind
   (:map evil-window-map
         ("C-h" . evil-window-left)
