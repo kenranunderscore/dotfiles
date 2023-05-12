@@ -121,15 +121,7 @@ in {
     fish.enable = true;
   };
 
-  virtualisation = {
-    docker.enable = true;
-    virtualbox = {
-      host = {
-        enable = true;
-        enableExtensionPack = true;
-      };
-    };
-  };
+  virtualisation = { docker.enable = true; };
 
   environment = {
     systemPackages = with pkgs; [ git ];
