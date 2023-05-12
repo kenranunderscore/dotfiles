@@ -877,6 +877,21 @@ expect them to.
         ("C-d" . evil-window-delete)))
 #+end_src
 
+** Interacting with "surrounding things"
+
+The analogue of Tim Pope's =vim-surround= plugin in Emacs.  Now I can
+use things like =ysiw=) to surround an inner word with non-padded normal
+parentheses, =ds]= to delete surrounding brackets, or =cs[{= to change
+surrounding brackets to curly braces with whitespace padding.
+Selected regions can be surround with e.g. =S`=.
+
+#+begin_src emacs-lisp
+(use-package evil-surround
+  :after evil
+  :config
+  (global-evil-surround-mode))
+#+end_src
+
 ** Local leader key
 
 A local leader key is something that can be used to bind situational
