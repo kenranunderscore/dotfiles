@@ -1,14 +1,22 @@
-##### TODO/FIXME
+# TEAMCAPTAIN DeadOnArrival
 
-# autoinscribe more stuff
-# forced (more) prompts
-# better colors for scrolls/potions/wands in menu + item list
-# read the options guide and adapt
+##### Lua utils (credits to gammafunk and magus.rc)
+
+{
+function matches(table, thing)
+   for k, v in ipairs(table) do
+      if v == thing then
+         return true
+      end
+   end
+   return false
+end
+}
 
 ##### Travel and Exploration
 
 travel_delay = -1
-explore_delay = -1
+explore_delay = 1
 rest_delay = -1
 view_delay = 500
 show_travel_trail = true
@@ -29,8 +37,8 @@ default_manual_training = true
 easy_confirm = safe
 allow_self_target = prompt
 
-autofight_warning = 50
-autofight_stop = 50
+autofight_warning = 70
+autofight_stop = 70
 
 easy_door = true
 warn_hatches = true
@@ -49,26 +57,115 @@ mon_glyph += player:green
 autoinscribe += (bad|dangerous)_item.*potion:!q
 autoinscribe += (bad|dangerous)_item.*scroll:!r
 autoinscribe += potion.*(berserk rage):!q
-
 autoinscribe += of (faith|harm):!P
-
 autoinscribe += curing:@q1
 autoinscribe += potions? of heal wounds:@q2
-
 autoinscribe += identify:@r1
-
-##### (more) Prompts
 
 show_more = false
 
+##### Colors for potions and scrolls
+
+# Menu colors behave like cond, stopping on first match.  That's why
+# the more general things, like equipped items, have to be matched
+# first.
+
+menu := menu_colour
+menu =
+
+menu += darkgrey:(melded)
+menu += darkgrey:.*useless.*
+menu += magenta:.*equipped.* cursed
+menu += inventory:lightgreen:.*equipped.*
+menu += lightmagenta:manual
+menu += lightblue:unidentified.*weapon.*(runed|enchanted|glowing)
+menu += lightblue:unidentified.*armour.*(runed|glowing|shiny|embroidered|dyed)
+menu += cyan:unidentified.*artefact.*
+menu += white:.*artefact.*
+
+menu += lightblue:(puce|coppery|smoky|dark|clear|gluggy) potions?
+menu += lightgrey:potions? of.*(flight|stabbing)
+menu += brown:potions? of.*berserk
+menu += yellow:potions? of.*might
+menu += cyan:potions? of.*cancellation
+menu += blue:potions? of.*(lignification|ambrosia)
+menu += lightred:potions? of.*experience
+menu += white:potions? of.*(heal wounds|curing)
+menu += green:potions? of.*resistance
+menu += lightgreen:potions? of.*(haste|invisibility)
+menu += lightcyan:potions? of.*mutation
+menu += magenta:potions? of.*brilliance
+menu += lightmagenta:potions? of.*magic
+
+menu += lightblue:scrolls? labelled
+: if matches({"Vampire", "Mummy", "Ghoul"}, you.race()) then
+  menu += darkgrey:scroll.*holy word
+  menu += brown:scroll.*torment
+: else
+  menu += brown:scroll.*holy word
+  menu += darkgrey:scroll.*torment
+: end
+menu += white:scroll.*acquirement
+menu += yellow:scroll.*(summoning)
+menu += cyan:scroll.*identify
+menu += lightcyan:scroll.*magic mapping
+menu += blue:scroll.*(noise|silence|vulnerability|immolation|poison)
+menu += green:scroll.*(fog|teleport|butterflies)
+menu += lightgreen:scroll.*(fear|blink)
+menu += lightmagenta:scroll.*(enchant|brand weapon)
+
 ##### Webtiles
 
-tile_font_crt_family = Courier Prime
-tile_font_stat_family = Courier Prime
-tile_font_msg_family = Courier Prime
-tile_font_lbl_family = Courier Prime
+tile_viewport_scale = 1.7
+tile_map_scale = 1.0
 
 ##### Console
+
+# This works differently than menu_item, in that it the last match
+# wins.  Hence default values go first in this section.
+
+item := item_glyph
+
+item += potion:lightgrey
+item += scroll:lightgrey
+item += wand:lightgrey
+item += dangerous_item:blue
+item += useless_item:darkgrey
+
+item += potions? of.*(flight|stabbing):lightgrey
+item += potions? of.*berserk:brown
+item += potions? of.*might:yellow
+item += potions? of.*cancellation:cyan
+item += potions? of.*(lignification|ambrosia):blue
+item += potions? of.*experience:lightred
+item += potions? of.*(heal wounds|curing):white
+item += potions? of.*resistance:green
+item += potions? of.*(haste|invisibility):lightgreen
+item += potions? of.*mutation:lightcyan
+item += potions? of.*brilliance:magenta
+item += potions? of.*magic:lightmagenta
+
+: if matches({"Vampire", "Mummy", "Ghoul"}, you.race()) then
+  item += scroll.*holy word:darkgrey
+  item += scroll.*torment:brown
+: else
+  item += scroll.*holy word:brown
+  item += scroll.*torment:darkgrey
+: end
+
+item += scroll.*acquirement:white
+item += scroll.*(summoning):yellow
+item += scroll.*identify:cyan
+item += scroll.*magic mapping:lightcyan
+item += scroll.*(noise|silence|vulnerability|immolation):blue
+item += scroll.*(fog|teleport):green
+item += scroll.*(fear|blink):lightgreen
+item += scroll.*(enchant|brand weapon):lightmagenta
+
+item += unidentified.*(potion|scroll|jewellery|wand|magical staff).*:lightblue
+item += manual:lightcyan
+
+item += useless:darkgrey
 
 # Stole some stuff from ebering
 
