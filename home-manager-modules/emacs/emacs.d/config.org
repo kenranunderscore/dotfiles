@@ -889,6 +889,24 @@ Selected regions can be surround with e.g. =S`=.
   (global-evil-surround-mode))
 #+end_src
 
+** Commenting code
+
+By default. Emacs distinguishes between commenting a single line and
+commenting a region.  Its built-in commands are =C-x C-;= and
+=comment-or-uncomment-region=.  Using these with =evil= is in my opinion a
+little clunky.  The =evil-commentary= packages aims to make this easier
+and comes with a couple more useful functions, like commenting out a
+selection while also copying it into a register.  Let's try it out and
+see whether it's more useful than, say, just writing some ELisp to
+call the correct Emacs command depending on the visual selection.
+
+#+begin_src emacs-lisp
+(use-package evil-commentary
+  :after evil
+  :config
+  (evil-commentary-mode))
+#+end_src
+
 ** Local leader key
 
 A local leader key is something that can be used to bind situational
