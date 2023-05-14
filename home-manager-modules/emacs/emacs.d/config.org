@@ -230,9 +230,6 @@ respective font.
         (iosevka-curly-slab
          . (:family
             "Iosevka Curly Slab"))
-        (iosevka-etoile
-         . (:family
-            "Iosevka Etoile"))
         (dejavu
          . (:family
             "DejaVu Sans Mono"))

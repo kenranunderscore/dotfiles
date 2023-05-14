@@ -45,7 +45,6 @@ in {
         (iosevka-bin.override { variant = "slab"; })
         (iosevka-bin.override { variant = "curly-slab"; })
         (iosevka-bin.override { variant = "curly"; })
-        (iosevka-bin.override { variant = "etoile"; })
         jetbrains-mono
         julia-mono
         noto-fonts
