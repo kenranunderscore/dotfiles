@@ -2,7 +2,7 @@
 
 {
   programs.vim = {
-    enable = false;
+    enable = true;
     settings = {
       background = "dark";
       copyindent = true;
