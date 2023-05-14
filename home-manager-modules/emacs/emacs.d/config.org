@@ -2545,6 +2545,17 @@ pulling in =yasnippet=.
 ;;               (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
 #+end_src
 
+** Lua
+
+From time to time I need to write some Lua code, like for DCSS RC
+files.  I haven't used much from =lua-mode= yet, but having syntax
+highlighting at least is nice.
+
+#+begin_src emacs-lisp
+(use-package lua-mode
+  :defer t)
+#+end_src
+
 ** Python
 
 #+begin_src emacs-lisp
