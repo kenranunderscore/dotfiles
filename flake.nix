@@ -17,10 +17,6 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # zsh plugins
     zsh-autopair = {
@@ -63,7 +59,6 @@
           lib = prev.lib // { my = import ./lib { inherit (final) lib; }; };
         })
         inputs.emacs-overlay.overlay
-        inputs.neovim-overlay.overlay
       ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
