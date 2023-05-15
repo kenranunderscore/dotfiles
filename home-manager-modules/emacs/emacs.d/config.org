@@ -352,7 +352,7 @@ reset to the default height for the selected font."
                                      (copy-alist my/font-alist)))))))
   (let* ((attrs (alist-get font my/font-alist))
          (family (plist-get attrs :family))
-         (default-height (or (plist-get attrs :default-height) 180))
+         (default-height (or (plist-get attrs :default-height) 160))
          (height (or (and arg default-height)
                      (face-attribute 'default :height)))
          ;; `buffer-face-mode' is enabled when calling
