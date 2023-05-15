@@ -31,6 +31,11 @@ in {
         background = "#040404";
         foreground = "#0ac30a";
         cursor = "#f00000";
+        cursor_text_color = "background";
+        cursor_shape = "block";
+        cursor_blink_interval = "-1";
+        cursor_stop_blinking_after = "0";
+        shell_integration = "no-cursor";
         selection_background = "#a4c5ef";
         color0 = "#707370";
         color8 = "#545454";
