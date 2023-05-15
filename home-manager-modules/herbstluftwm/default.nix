@@ -25,14 +25,27 @@ in {
         h = "focus left";
         k = "focus up";
         j = "focus down";
+        Right = "focus right";
+        Left = "focus left";
+        Up = "focus up";
+        Down = "focus down";
+        q = "close";
         Shift-l = "shift right";
         Shift-h = "shift left";
         Shift-k = "shift up";
         Shift-j = "shift down";
+        Shift-Right = "shift right";
+        Shift-Left = "shift left";
+        Shift-Up = "shift up";
+        Shift-Down = "shift down";
         Control-l = "resize right 0.05";
         Control-h = "resize left 0.05";
         Control-k = "resize up 0.05";
         Control-j = "resize down 0.05";
+        Control-Right = "resize right 0.05";
+        Control-Left = "resize left 0.05";
+        Control-Up = "resize up 0.05";
+        Control-Down = "resize down 0.05";
       };
       mousebinds = withModKey {
         B1 = "move";
