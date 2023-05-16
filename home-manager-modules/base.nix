@@ -1,10 +1,10 @@
 { inputs, custom, config, lib, pkgs, ... }:
 
 let
-  cfg = config.hosts.base;
+  cfg = config.modules.base;
   privateDir = "${inputs.privateConfig}";
 in {
-  options.hosts.base = {
+  options.modules.base = {
     gpgKey = lib.mkOption {
       type = lib.types.str;
       default = null;

@@ -6,9 +6,8 @@ in {
 
   targets.genericLinux = { enable = true; };
 
-  hosts.base.gpgKey = "9AC78C1A48681583";
-
   modules = {
+    base.gpgKey = "9AC78C1A48681583";
     herbstluftwm.enable = true;
     rofi.enable = true;
     neovim.enable = lib.mkForce false;
