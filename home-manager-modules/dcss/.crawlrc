@@ -43,6 +43,17 @@ autofight_stop = 70
 easy_door = true
 warn_hatches = true
 
+show_more = false
+
+autopickup = $?!+"/}
+
+##### Stopping me from doing stupid stuff
+
+more := force_more_message
+
+more += You hear the sound of
+more += You hear the.* rusting
+
 ##### Colours and Glyphs
 
 allow_extended_colours = true
@@ -62,8 +73,6 @@ autoinscribe += curing:@q1
 autoinscribe += potions? of heal wounds:@q2
 autoinscribe += identify:@r1
 
-show_more = false
-
 ##### Colors for potions and scrolls
 
 # Menu colors behave like cond, stopping on first match.  That's why
@@ -76,19 +85,18 @@ menu =
 menu += darkgrey:(melded)
 menu += darkgrey:.*useless.*
 menu += magenta:.*equipped.* cursed
-menu += inventory:lightgreen:.*equipped.*
+menu += inventory:green:.*equipped.*
 menu += lightmagenta:manual
 menu += lightblue:unidentified.*weapon.*(runed|enchanted|glowing)
 menu += lightblue:unidentified.*armour.*(runed|glowing|shiny|embroidered|dyed)
 menu += cyan:unidentified.*artefact.*
 menu += white:.*artefact.*
 
-menu += lightblue:(puce|coppery|smoky|dark|clear|gluggy) potions?
 menu += lightgrey:potions? of.*(flight|stabbing)
 menu += brown:potions? of.*berserk
 menu += yellow:potions? of.*might
 menu += cyan:potions? of.*cancellation
-menu += blue:potions? of.*(lignification|ambrosia)
+menu += blue:potions? of.*(lignification|ambrosia|attraction)
 menu += lightred:potions? of.*experience
 menu += white:potions? of.*(heal wounds|curing)
 menu += green:potions? of.*resistance
@@ -96,6 +104,7 @@ menu += lightgreen:potions? of.*(haste|invisibility)
 menu += lightcyan:potions? of.*mutation
 menu += magenta:potions? of.*brilliance
 menu += lightmagenta:potions? of.*magic
+menu += lightblue:potions?
 
 menu += lightblue:scrolls? labelled
 : if matches({"Vampire", "Mummy", "Ghoul"}, you.race()) then
