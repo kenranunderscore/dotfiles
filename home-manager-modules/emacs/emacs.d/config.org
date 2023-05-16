@@ -252,6 +252,11 @@ respective font.
             "JetBrains Mono"
             :org-height
             0.8))
+        (julia-mono
+         . (:family
+            "JuliaMono"
+            :org-height
+            0.9))
         (courier-prime
          . (:family
             "Courier Prime"

@@ -1,7 +1,7 @@
 {
   username = "johannes";
   font = {
-    name = "JetBrains Mono";
+    name = "JuliaMono";
     size = 14;
   };
 }
