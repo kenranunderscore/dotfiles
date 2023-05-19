@@ -1995,6 +1995,9 @@ accordingly.
                               (:subject)))
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-policy 'ask)
+  ;; Always show duplicates (so I can clean them up)
+  (setq mu4e-search-skip-duplicates nil)
+  (setq mu4e-headers-skip-duplicates nil)
   ;; Getting mail via mbsync
   (setq mu4e-get-mail-command "mbsync -a")
   ;; Composing emails
