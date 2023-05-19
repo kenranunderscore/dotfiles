@@ -26,6 +26,7 @@ in {
     loader = {
       grub = {
         enable = true;
+        configurationLimit = 20;
         default = "saved";
         useOSProber = true;
         efiSupport = true;
