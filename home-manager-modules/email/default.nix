@@ -46,7 +46,8 @@ in {
             enable = true;
             extraConfig = { "syslog" = "LOG_USER"; };
           };
-          notmuch.enable = true;
+          notmuch.enable = false;
+          mu.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -75,7 +76,8 @@ in {
             enable = true;
             extraConfig = { "syslog" = "LOG_USER"; };
           };
-          notmuch.enable = true;
+          notmuch.enable = false;
+          mu.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
@@ -94,22 +96,10 @@ in {
       };
     };
 
-    home.packages = [ pkgs.muchsync ];
     programs = {
       mbsync.enable = true;
       msmtp.enable = true;
-      notmuch = {
-        enable = true;
-        maildir.synchronizeFlags = true;
-        search.excludeTags = [ "deleted" "spam" ];
-        hooks = if isSyncRoot then {
-          preNew = "mbsync --all";
-          postNew = "notmuch tag --batch --input=${./notmuch-initial-tags}";
-        } else rec {
-          preNew = "muchsync -vv --nonew sync";
-          postNew = preNew;
-        };
-      };
+      mu.enable = true;
     };
   };
 }

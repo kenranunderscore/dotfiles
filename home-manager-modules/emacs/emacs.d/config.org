@@ -1863,6 +1863,7 @@ setting the path to the /startup file/, meaning the newsreader-agnostic
 
 #+begin_src emacs-lisp
 (use-package gnus
+  :disabled
   :init
   (setq gnus-directory "~/.gnus/")
   (setq gnus-home-directory "~/.gnus/")
@@ -1920,9 +1921,8 @@ for each of my e-mail addresses, and switching between them I may set
 some context-specific variables, or even change the =mu4e= UI
 accordingly.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package mu4e
-  :disabled
   :load-path "~/.nix-profile/share/emacs/site-lisp/mu4e"
   :defer
   :commands (mu4e)
