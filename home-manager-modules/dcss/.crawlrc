@@ -23,13 +23,6 @@ show_travel_trail = true
 travel_key_stop = true
 rest_wait_both = false
 
-# Stop traveling whenever Xom does _anything_
-: if you.god() == "Xom" then
-    runrest_stop_message += god:
-: else
-    runrest_ignore_message += god:
-: end
-
 ##### General Gameplay
 
 default_manual_training = true
@@ -53,6 +46,28 @@ more := force_more_message
 
 more += You hear the sound of
 more += You hear the.* rusting
+more += You hear the.* hiss.* sand
+more += You hear the roar of battle
+more += You hear the.* creaking
+more += A sourceless malevolence
+more += A sentinel's mark forms upon you
+more += hell-effect:
+more += You now have enough gold
+
+stop := runrest_stop_message
+
+stop += You hear the sound of
+stop += You hear the.* rusting
+stop += You hear the.* hiss.* sand
+stop += You hear the roar of battle
+stop += You hear the.* creaking
+stop += You now have enough gold
+
+: if you.god() == "Xom" then
+    stop += god:
+: else
+    runrest_ignore_message += god:
+: end
 
 ##### Colours and Glyphs
 
@@ -89,10 +104,11 @@ menu += inventory:green:.*equipped.*
 menu += lightmagenta:manual
 menu += lightblue:unidentified.*weapon.*(runed|enchanted|glowing)
 menu += lightblue:unidentified.*armour.*(runed|glowing|shiny|embroidered|dyed)
-menu += cyan:unidentified.*artefact.*
+menu += lightcyan:unrand.*artefact
+menu += white:unidentified.*artefact.*
 menu += white:.*artefact.*
 
-menu += lightgrey:potions? of.*(flight|stabbing)
+menu += lightgrey:potions? of.*(flight|enlightenment)
 menu += brown:potions? of.*berserk
 menu += yellow:potions? of.*might
 menu += cyan:potions? of.*cancellation
@@ -114,7 +130,7 @@ menu += lightblue:scrolls? labelled
   menu += brown:scroll.*holy word
   menu += darkgrey:scroll.*torment
 : end
-menu += white:scroll.*acquirement
+menu += lightred:scroll.*acquirement
 menu += yellow:scroll.*(summoning)
 menu += cyan:scroll.*identify
 menu += lightcyan:scroll.*magic mapping
