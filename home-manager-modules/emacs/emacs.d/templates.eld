@@ -19,5 +19,5 @@ haskell-mode
 (dsg "deriving (Eq, Show, Generic)")
 (impl "(error \"TODO: " (p "not implemented") "\")")
 (st "data " p n> "= " p)
-(toj "instance Aeson.ToJSON " p " where" n> "toJSON " p)
-(fromj "instance Aeson.FromJSON " p " where" n> "parseJSON " p)
+(toj "instance Json.ToJSON " p " where" n> "toJSON " p)
+(fromj "instance Json.FromJSON " p " where" n> "parseJSON " p)
