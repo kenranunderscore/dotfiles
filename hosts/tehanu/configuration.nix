@@ -15,14 +15,7 @@ in {
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelPatches = [{
-      name = "fix-memory-allocation-issue";
-      patch = pkgs.fetchpatch {
-        url =
-          "https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm.git/patch/?id=0257d9908d38c0b1669af4bb1bc4dbca1f273fe6";
-        sha256 = "sha256-JHEFq+Gw8Dtl0M8pXcKXpwkaHhbbl5NwTSzvV5qP4hk=";
-      };
-    }];
+    kernelPatches = [ ];
     loader = {
       grub = {
         enable = true;
