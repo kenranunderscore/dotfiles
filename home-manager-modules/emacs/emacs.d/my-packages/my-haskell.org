@@ -52,10 +52,10 @@ adding a qualified import with import list, or an unqualified one with
 an alias, would require "tricks".
 
 #+begin_src emacs-lisp
-(defun my/read-non-empty-string (prompt)
+(defun my/read-non-empty-string (prompt &optional initial-input)
   "Read a string from the minibuffer.  When the result is the empty
 string, return nil instead."
-  (let ((str (read-string prompt)))
+  (let ((str (read-string prompt initial-input)))
     (unless (string-empty-p str)
       str)))
 
@@ -69,8 +69,10 @@ what the identifier should be in that case."
           (qualified?
            (unless (or arg (string-match-p "(" module))
              (y-or-n-p (concat "Import " module " qualified?"))))
+          (default-alias
+           (last (split-string module "[\.]" t)))
           (alias (when qualified?
-                   (my/read-non-empty-string "Alias [or leave empty]: "))))
+                   (my/read-non-empty-string "Alias: " default-alias))))
      (list arg module qualified? alias)))
   (let ((import-line
          (concat "import "
