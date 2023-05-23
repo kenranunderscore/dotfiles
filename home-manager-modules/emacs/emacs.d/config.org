@@ -1996,6 +1996,9 @@ accordingly.
                               (:subject)))
   (setq mu4e-context-policy 'pick-first)
   (setq mu4e-compose-policy 'ask)
+  ;; No search limit
+  (setq mu4e-search-results-limit -1)
+  (setq mu4e-headers-results-limit -1)
   ;; Always show duplicates (so I can clean them up)
   (setq mu4e-search-skip-duplicates nil)
   (setq mu4e-headers-skip-duplicates nil)
