@@ -39,6 +39,7 @@
       element-desktop
       obs-studio
       pavucontrol
+      rustup
     ];
     stateVersion = "21.03";
   };
