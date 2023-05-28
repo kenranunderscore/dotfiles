@@ -67,6 +67,7 @@ in {
         VISUAL = EDITOR;
         ALTERNATE_EDITOR = "";
         KENRAN_IRC_CERTS = "${privateDir}/irc";
+        OPENSSL_DIR = "${pkgs.openssl.dev}";
       };
 
       packages = with pkgs; [
@@ -87,9 +88,10 @@ in {
         man-pages
         neofetch
         nixfmt
-        openssl
+        openssl.dev
         pciutils
         perl
+        pkg-config
         ripgrep
         rlwrap
         rsync
