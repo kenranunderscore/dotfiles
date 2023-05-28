@@ -27,7 +27,6 @@
     ./rofi
     ./sbcl
     ./ssh.nix
-    ./stumpwm
     ./tmux.nix
     ./vim.nix
     ./x-configuration
