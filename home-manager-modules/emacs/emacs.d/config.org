@@ -648,7 +648,8 @@ see filtered out."
                         auto-revert-mode
                         auto-fill-function
                         dot-mode
-                        editorconfig-mode)))
+                        editorconfig-mode
+                        flymake-mode)))
     (seq-difference minor-mode-alist
                     hidden-modes
                     (lambda (hidden cell)
