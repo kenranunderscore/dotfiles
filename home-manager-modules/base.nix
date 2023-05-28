@@ -80,6 +80,7 @@ in {
         feh
         fennel
         file
+        fontconfig.dev
         gnumake
         graphviz
         gh
