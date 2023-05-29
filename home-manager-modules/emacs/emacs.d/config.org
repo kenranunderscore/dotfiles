@@ -2642,14 +2642,14 @@ top-level directory of a known project.  =project.el= is making this
 possible in a straightforward way.
 
 #+begin_src emacs-lisp
-(defun my/add-nix-envrc-file ()
+(defun my/add-nix-flakes-envrc-file ()
   "If it doesn't already exist create a .envrc file containing 'use
-nix' in the current directory."
+flake in the current directory."
   (interactive)
   (let ((envrc (expand-file-name ".envrc")))
     (if (file-exists-p envrc)
         (message "Envrc file already exists")
-      (write-region "use nix" nil envrc))))
+      (write-region "use flake" nil envrc))))
 
 (defun my/project-vterm ()
   "Open a `vterm' session in the project root of the current
