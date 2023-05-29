@@ -172,6 +172,7 @@ navigational sets of commands.
 #+begin_src emacs-lisp
 (defhydra hydra-haskell-error-navigation (:hint nil)
   "\n
+  Navigate Haskell compilation errors\n
   [_f_]: first   [_n_]: next   [_p_]: previous"
   ("f" haskell-goto-first-error)
   ("n" haskell-goto-next-error)
