@@ -89,24 +89,6 @@ in {
     teams
     thunderbird
     wireshark
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
-        [
-          bbenoist.nix
-          dhall.dhall-lang
-          dhall.vscode-dhall-lsp-server
-          haskell.haskell
-          justusadam.language-haskell
-          mkhl.direnv
-          ms-azuretools.vscode-docker
-          vscodevim.vim
-        ] ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-          name = "remote-containers";
-          publisher = "ms-vscode-remote";
-          version = "0.262.3";
-          sha256 = "sha256-pdkjO8aYmfw1PcqQaRwnlyuau7AdYOky8cOc2/1t+10=";
-        }]);
-    })
     zoom-us
   ];
 
