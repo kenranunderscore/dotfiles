@@ -194,6 +194,7 @@ for easy access.
   :custom
   (haskell-process-type 'cabal-repl)
   (haskell-interactive-popup-errors nil)
+  (haskell-process-args-cabal-repl '("--repl-options=-ferror-spans"))
   :hook
   (haskell-mode . interactive-haskell-mode)
   :bind
