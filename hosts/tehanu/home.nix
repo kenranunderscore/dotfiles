@@ -88,6 +88,7 @@ in {
     subversion
     teams
     thunderbird
+    vlc
     wireshark
     zoom-us
   ];
