@@ -71,6 +71,7 @@
   nr = "nix run";
   ns = "nix shell";
   nsn = "nix search nixpkgs";
+  nst = "nix search this";
 
   # systemd
   sy = "systemctl";
