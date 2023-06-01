@@ -220,10 +220,14 @@ respective font.
             "Pragmata Pro Mono"))
         (ibm-vga-8x14
          . (:family
-            "MxPlus IBM VGA 8x14"))
+            "MxPlus IBM VGA 8x14"
+            :default-height
+            200))
         (ibm-vga-9x16
          . (:family
-            "MxPlus IBM VGA 9x16"))
+            "MxPlus IBM VGA 9x16"
+            :default-height
+            200))
         (dos-16
          . (:family
             "Mx437 DOS/V TWN16"
