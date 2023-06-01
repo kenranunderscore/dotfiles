@@ -1,5 +1,8 @@
 { runCommand, fetchurl, unzip }:
 
+# This is an ABSOLUTELY AWESOME collection of (afaict hand-made
+# remakes of) classic PC fonts, made by VileR.  Check it out at
+# https://int10h.org/oldschool-pc-fonts
 let
   font = fetchurl {
     url =
