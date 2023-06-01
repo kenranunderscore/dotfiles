@@ -13,6 +13,7 @@ in {
       settings = { window_border_width = 0; };
       tags = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
       keybinds = withModKey {
+        e = "spawn emacs";
         t = "spawn kitty";
         space = "spawn rofi -disable-history -show run";
         r = "remove";
