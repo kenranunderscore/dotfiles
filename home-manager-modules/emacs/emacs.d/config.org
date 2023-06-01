@@ -1251,7 +1251,8 @@ basic bindings mostly taken from an example in its readme.
             (project-root project))))
   (setq consult-ripgrep-args
         (concat consult-ripgrep-args
-                " --hidden")))
+                " --hidden"
+                " -g \"!.git\"")))
 ;; TODO other isearch integration?
 ;; TODO :init narrowing, preview delay
 #+end_src
