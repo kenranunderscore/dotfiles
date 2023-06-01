@@ -1,0 +1,17 @@
+{ runCommand, fetchurl, unzip }:
+
+let
+  font = fetchurl {
+    url =
+      "https://int10h.org/oldschool-pc-fonts/download/oldschool_pc_font_pack_v2.2_linux.zip";
+    sha256 = "sha256-sw3D7MmTGtLdi+dRfdAYE8iDShkRtYKrdkMZG0Gj11k=";
+  };
+in runCommand "install_oldschool_fonts" { } ''
+  dest=$out/share/fonts/oldschool
+  mkdir -p $dest
+  ${unzip}/bin/unzip ${font} -d font
+  cp -R font/"otb - Bm (linux bitmap)"/* $dest/
+  cp -R font/"ttf - Ac (aspect-corrected)"/* $dest/
+  cp -R font/"ttf - Mx (mixed outline+bitmap)"/* $dest/
+  cp -R font/"ttf - Px (pixel outline)"/* $dest/
+''

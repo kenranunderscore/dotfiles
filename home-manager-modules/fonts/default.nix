@@ -28,6 +28,7 @@ in {
         (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
         pragmataPro
         (import ./termingus.nix { inherit (pkgs) runCommand fetchFromGitHub; })
+        (pkgs.callPackage (import ./oldschool.nix) { })
       ] ++ (with pkgs; [
         borg-sans-mono
         cantarell-fonts
