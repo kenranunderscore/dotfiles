@@ -78,7 +78,9 @@ what the identifier should be in that case."
          (concat "import "
                  (when qualified? "qualified ")
                  module
-                 (when alias (concat " as " alias))
+                 (when (and alias
+                            (not (string= alias module)))
+                   (concat " as " alias))
                  "\n")))
     (save-excursion
       (haskell-navigate-imports-go)
