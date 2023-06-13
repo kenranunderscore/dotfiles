@@ -24,10 +24,8 @@ in {
       };
 
       packages = let
-        targetEmacs = if cfg.emacsVersion == "git" then
-          pkgs.emacsGit
-        else
-          pkgs.emacs;
+        targetEmacs =
+          if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs;
         emacsWithPackages =
           (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
         # Empty package list as I use straight.el now to try it out.
