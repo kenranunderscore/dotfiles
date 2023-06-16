@@ -767,21 +767,43 @@ seems to return the modes in an unexpected format.
 ** Line and column numbers
 
 To display line numbers, the aptly named =display-line-numbers= package
-is used.  I used to always show line numbers when programming with
-=evil=, but with vanilla Emacs bindings absolute numbers make more
-sense.  It's no real use showing them by default anymore though.
+is used. I prefer a hybrid mode for displaying line numbers.  That is,
+line numbers are shown in a relative way, but the current line
+displays its absolute line number.  In insert mode, line numbers
+should be disabled altogether.  That's what these two functions are
+used for.
 
 #+begin_src emacs-lisp
-  (defun my/toggle-line-numbers ()
-    "Toggle `display-line-numbers-mode'.  Meant to be used in a
-  keybinding."
-    (interactive)
-    (display-line-numbers-mode 'toggle))
+(defun my/switch-to-absolute-line-numbers ()
+  "Enable absolute line numbers."
+  (interactive)
+  (when display-line-numbers-mode
+    (setq display-line-numbers t)))
 
-  (use-package display-line-numbers
-    :defer
-    :config
-    (leader ("t l" . my/toggle-line-numbers)))
+(defun my/switch-to-hybrid-line-numbers ()
+  "Enable relative line numbers, but with the current line
+showing its absolute line number."
+  (interactive)
+  (when display-line-numbers-mode
+    (setq display-line-numbers 'relative)
+    (setq display-line-numbers-current-absolute t)))
+
+(defun my/toggle-line-numbers ()
+  "Toggle `display-line-numbers-mode'.  Meant to be used in a
+keybinding."
+  (interactive)
+  (display-line-numbers-mode 'toggle))
+
+(use-package display-line-numbers
+  :defer
+  :hook ((prog-mode . display-line-numbers-mode)
+         (conf-mode . display-line-numbers-mode)
+         (evil-insert-state-entry . my/switch-to-absolute-line-numbers)
+         (evil-insert-state-exit . my/switch-to-hybrid-line-numbers))
+  :config
+  (setq display-line-numbers-type 'relative)
+  (setq display-line-numbers-current-absolute t)
+  (leader "t l" 'my/toggle-line-numbers))
 #+end_src
 
 ** Insert a newline at the end of files
