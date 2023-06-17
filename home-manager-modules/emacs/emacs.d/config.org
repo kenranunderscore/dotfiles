@@ -875,19 +875,6 @@ expect them to.
   (setq evil-want-keybinding nil)
   (evil-mode 1)
   :config
-  (setq evil-default-state 'emacs)
-  (setq evil-insert-state-modes nil)
-  (setq evil-emacs-state-modes nil)
-  (setq evil-motion-state-modes nil)
-  (setq evil-normal-state-modes
-        '(text-mode
-          prog-mode
-          fundamental-mode
-          css-mode
-          conf-mode
-          TeX-mode
-          LaTeX-mode
-          haskell-cabal-mode))
   (setq evil-insert-state-cursor '(hbar . 5))
   (general-define-key
    :states 'normal
@@ -960,6 +947,54 @@ same here now.
 #+begin_src emacs-lisp
 (general-create-definer local-leader
   :prefix ",")
+#+end_src
+
+** =Evil= integration with other packages: =evil-collection=
+
+This is a package I have a love/hate relationship with.
+=evil-collection= in principle is a great idea, but I've found it to be
+"slightly buggy" at times, and I also don't need or like =evil= to be
+integrated /everywhere/.  The most prominent example for this might be
+terminal-like things, but I might be coming around to that.
+
+In the past, whenever I had any misbehavior after a package update,
+it felt like a 50:50 chance of =evil-collection= being the reason behind
+it.  This is not meant to be a stab in their direction, as I think
+that this just lies in the nature of all things =evil=: the community
+will usually follow up with a solution, but there will be a period of
+time between underlying package changes and that solution where it
+just does not really work.
+
+For these reasons I have (twice now) tried to live without this
+package, but that doesn't seem to satisfy me either; the context
+switching between traditional =C-n= or =C-p= bindings (or =n= and =p=, which
+are often used in special modes) starts to be frustrating after a
+month or so.  So here goes another try, this time selectively enabling
+packages instead of /evilify everything/.
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init
+   '(dired
+     docker
+     eldoc
+     evil-mc
+     git-timemachine
+     grep
+     help
+     helpful
+     ibuffer
+     imenu
+     magit
+     markdown-mode
+     mu4e
+     mu4e-conversation
+     pass
+     proced
+     vterm ; let's try this once more
+     )))
 #+end_src
 
 * Built-in packages with extensions
