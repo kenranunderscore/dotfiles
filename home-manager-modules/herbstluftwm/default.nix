@@ -63,6 +63,7 @@ in {
         done
         herbstclient use_index 0
 
+        herbstclient set_attr settings.frame_gap 75
         xset r rate 200 55
         ~/.fehbg
       '';
