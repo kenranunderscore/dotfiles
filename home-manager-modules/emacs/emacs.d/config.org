@@ -529,6 +529,7 @@ Enable and configure =naga=:
 (setq naga-theme-modeline-style 'green-box)
 (setq naga-theme-use-red-cursor t)
 (setq naga-theme-surround-org-blocks t)
+(setq naga-theme-use-lighter-org-block-background t)
 (my/switch-theme 'wheatgrass)
 #+end_src
 
