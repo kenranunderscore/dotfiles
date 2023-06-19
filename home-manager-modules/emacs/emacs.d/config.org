@@ -469,6 +469,15 @@ disables all other enabled themes."
   (my/switch-theme
    (intern
     (seq-random-elt (my/available-themes)))))
+
+(defhydra hydra-random-theme (:hint nil)
+  "\n
+  Choose a random theme
+
+  [_n_]:   next\n
+  "
+  ("n" my/enable-random-theme)
+  ("q" nil "exit"))
 #+end_src
 
 When developing a theme, like I did with =naga=, it's handy to
@@ -488,7 +497,8 @@ times a day usually.  So keybindings for this come in useful:
 #+begin_src emacs-lisp
 (leader
   "t t" '(my/switch-theme :which-key "choose theme")
-  "t r" '(my/reload-theme :which-key "reload theme"))
+  "t r" '(my/reload-theme :which-key "reload theme")
+  "t R" '(hydra-random-theme/body :which-key "random theme"))
 #+end_src
 
 *** My favorite Emacs themes
