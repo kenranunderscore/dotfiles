@@ -441,21 +441,34 @@ font.")
   "Run `my/switch-theme-hook'."
   (run-hook-with-args 'my/switch-theme-hook))
 
+(defun my/available-themes ()
+  "Get a list of the names of all available themes, excluding the
+currently enabled one(s)."
+  (mapcar #'symbol-name
+          (seq-difference (custom-available-themes)
+                          custom-enabled-themes)))
+
 (defun my/switch-theme (name)
   "Switch themes interactively.  Similar to `load-theme' but also
 disables all other enabled themes."
   (interactive
    (list (intern
-    (completing-read
-     "Theme: "
-     (mapcar #'symbol-name
-	     (seq-difference (custom-available-themes)
-			     custom-enabled-themes))))))
+          (completing-read
+           "Theme: "
+           (my/available-themes)))))
   (progn
     (mapc #'disable-theme
-    custom-enabled-themes)
+          custom-enabled-themes)
+    (princ name)
     (load-theme name t)
     (my/switch-theme-hook)))
+
+(defun my/enable-random-theme ()
+  "Randomly choose and enable a theme."
+  (interactive)
+  (my/switch-theme
+   (intern
+    (seq-random-elt (my/available-themes)))))
 #+end_src
 
 When developing a theme, like I did with =naga=, it's handy to
