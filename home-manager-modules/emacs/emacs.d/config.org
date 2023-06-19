@@ -485,23 +485,27 @@ themes, or theme collections, loaded here.
 
 **** Custom theme: =naga=
 
-I usually use [[https://github.com/kenranunderscore/emacs-naga-theme][my own /naga/ theme]].  It is currently in the process of
-being made ready to be put on MELPA.
+I usually use [[https://github.com/kenranunderscore/emacs-naga-theme][my own /naga/ theme]].  It can be found on MELPA nowadays,
+though it's still only "finished" for the parts I really use.  Should
+there be enough interest, I could style some more parts, but it's not
+anything I plan on doing for now.
 
-While that is still going on I'm using a "mutable" path, assuming I've
+I'm using a "mutable" path to the theme repository, assuming I've
 cloned my project repository to a fixed location.  This allows for
-quick iteration.
+quick iteration by changing stuff in the theme, followed by
+=my/reload-theme=.
 
 #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/projects/emacs-naga-theme")
 #+end_src
 
-Enable =naga=:
+Enable and configure =naga=:
 
 #+begin_src emacs-lisp
 (setq naga-theme-use-lighter-org-block-background nil)
 (setq naga-theme-modeline-style 'green-box)
 (setq naga-theme-use-red-cursor t)
+(setq naga-theme-surround-org-blocks t)
 (my/switch-theme 'wheatgrass)
 #+end_src
 
