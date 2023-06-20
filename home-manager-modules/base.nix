@@ -75,15 +75,16 @@ in {
         automake
         binutils
         cacert
+        cmake
         curl
         fd
         feh
         fennel
         file
         fontconfig.dev
+        gh
         gnumake
         graphviz
-        gh
         htop
         jq
         man-pages

@@ -73,7 +73,6 @@ in {
     dhall
     discord
     element-desktop
-    entr
     google-chrome-beta
     googleChromeBin
     keepass
