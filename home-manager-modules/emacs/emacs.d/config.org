@@ -1019,6 +1019,7 @@ packages instead of /evilify everything/.
      markdown-mode
      mu4e
      mu4e-conversation
+     (package-menu package)
      pass
      proced
      vterm ; let's try this once more
