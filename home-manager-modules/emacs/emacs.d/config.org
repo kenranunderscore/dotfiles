@@ -474,10 +474,10 @@ disables all other enabled themes."
   "\n
   Choose a random theme
 
-  [_n_]:   next\n
+  [_n_]: next    [_q_]: exit\n
   "
   ("n" my/enable-random-theme)
-  ("q" nil "exit"))
+  ("q" nil))
 #+end_src
 
 When developing a theme, like I did with =naga=, it's handy to
