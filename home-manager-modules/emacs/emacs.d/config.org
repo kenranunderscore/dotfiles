@@ -1023,6 +1023,7 @@ packages instead of /evilify everything/.
      pass
      proced
      vterm ; let's try this once more
+     xref
      )))
 #+end_src
 
