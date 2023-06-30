@@ -2004,7 +2004,7 @@ setting the path to the /startup file/, meaning the newsreader-agnostic
                   (nnimap-inbox "INBOX")))))
 #+end_src
 
-** Mu for Emacs
+** Mu for Emacs (=mu4e=)
 
 [[https://www.djcbsoftware.nl/code/mu/][Mu]] is what I was using for the longest period of time, with =mu4e= being
 its Emacs frontend.  It's not as customizable as =notmuch=, but part of
@@ -2123,6 +2123,23 @@ accordingly.
   (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
   (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
   (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
+#+end_src
+
+*** Warn/confirm when trying to send with empty subject
+
+=mu4e= uses the built-in =message-mode= for composing mail.  In order to
+receive a warning or yes/no question whenever I try sending without
+having specified a subject header, I have to hook into this.
+
+#+begin_src emacs-lisp
+(defun my/confirm-empty-mail-subject ()
+  "Check whether the subject header of the current message is empty,
+and abort in this case (https://emacs.stackexchange.com/a/41176)."
+  (or (message-field-value "Subject")
+      (y-or-n-p "Really send without subject? ")
+      (keyboard-quit)))
+
+(add-hook 'message-send-mail-hook #'my/confirm-empty-mail-subject)
 #+end_src
 
 * Window management
