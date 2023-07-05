@@ -2522,7 +2522,7 @@ header.
 (reformatter-define my/nix-format
   :program "nixfmt"
   :args '()
-  :lighter " k/nixfmt")
+  :lighter " my/nixfmt")
 
 (use-package nix-mode
   :mode "\\.nix\\'"

@@ -183,6 +183,25 @@ navigational sets of commands.
   ("p" haskell-goto-prev-error))
 #+end_src
 
+* Formatting
+
+Several formatters are in use in different Haskell projects, like
+=fourmolu=, =ormolu=, =brittany= and several more.  =Haskell-mode= comes with
+builtin integration for =stylish-haskell=, which often works for other
+formatters but is sometimes a little flaky.  =Reformatter= is a better
+solution, as I can define modes for different formatters here and then
+use =eval= in =.dir-locals.el= on a per-project basis to enable the
+fitting mode there.
+
+** Fourmolu
+
+#+begin_src emacs-lisp
+(reformatter-define my/fourmolu-format
+  :program "fourmolu"
+  :args (list "--stdin-input-file" (buffer-file-name))
+  :lighter " my/fourmolu")
+#+end_src
+
 * =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used
