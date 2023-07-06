@@ -2523,8 +2523,10 @@ header.
 
 #+begin_src emacs-lisp
 (reformatter-define my/nix-format
-  :program "nixfmt"
-  :args '()
+  :program "nix"
+  :args (list "fmt" input-file)
+  :stdin nil
+  :stdout nil
   :lighter " my/nixfmt")
 
 (use-package nix-mode
