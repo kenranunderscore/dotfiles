@@ -198,7 +198,7 @@ fitting mode there.
 #+begin_src emacs-lisp
 (reformatter-define my/fourmolu-format
   :program "fourmolu"
-  :args (list "--stdin-input-file" (buffer-file-name))
+  :args (list "--stdin-input-file" input-file)
   :lighter " my/fourmolu")
 #+end_src
 
