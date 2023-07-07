@@ -200,6 +200,10 @@ fitting mode there.
   :program "fourmolu"
   :args (list "--stdin-input-file" input-file)
   :lighter " my/fourmolu")
+
+(local-leader
+  :keymaps 'haskell-mode-map
+  "f" 'my/fourmolu-format-buffer)
 #+end_src
 
 ** Cabal files
@@ -211,6 +215,10 @@ fitting mode there.
   :stdin nil
   :stdout nil
   :lighter " my/cabal-fmt")
+
+(local-leader
+  :keymaps 'haskell-cabal-mode-map
+  "f" 'my/cabal-fmt-format-buffer)
 #+end_src
 
 * =Haskell-mode= configuration
