@@ -202,6 +202,17 @@ fitting mode there.
   :lighter " my/fourmolu")
 #+end_src
 
+** Cabal files
+
+#+begin_src emacs-lisp
+(reformatter-define my/cabal-fmt-format
+  :program "cabal-fmt"
+  :args (list "-i" input-file)
+  :stdin nil
+  :stdout nil
+  :lighter " my/cabal-fmt")
+#+end_src
+
 * =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used
