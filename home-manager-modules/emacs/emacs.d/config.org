@@ -978,6 +978,7 @@ same here now.
 
 #+begin_src emacs-lisp
 (general-create-definer local-leader
+  :states '(normal visual motion)
   :prefix ",")
 #+end_src
 
