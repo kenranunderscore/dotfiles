@@ -62,11 +62,7 @@ in {
     syncthing.enable = true;
   };
 
-  home.packages = let
-    googleChromeBin = pkgs.writeShellScriptBin "google-chrome" ''
-      google-chrome-stable $@
-    '';
-  in with pkgs; [
+  home.packages = with pkgs; [
     # citrix_workspace
     cloc
     dbeaver
@@ -74,7 +70,6 @@ in {
     discord
     element-desktop
     google-chrome-beta
-    googleChromeBin
     keepass
     keepassxc
     leiningen
