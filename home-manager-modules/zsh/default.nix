@@ -19,7 +19,7 @@ in {
       # over the versions and makes the ordering explicit.  These
       # enable* options are sugar for enabling certain plugins, so
       # don't set them.
-      enableSyntaxHighlighting = false;
+      syntaxHighlighting.enable = false;
       enableAutosuggestions = false;
       history = {
         path = "${config.xdg.dataHome}/zsh/zsh_history";
