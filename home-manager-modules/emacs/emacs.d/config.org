@@ -926,6 +926,16 @@ Of course there's an existing Emacs options for this:
 (setq mouse-yank-at-point t)
 #+end_src
 
+** Breaking long lines
+
+When writing prose I often use =auto-fill-mode= to automatically break
+long lines.  Emacs uses the =fill-column= variable to determine when to
+break.  Its default of 70 is a little low for my taste, though.
+
+#+begin_src emacs-lisp
+(setq-default fill-column 80)
+#+end_src
+
 * Vim emulation with =evil=
 
 The =evil= package offers a very complete Vim experience inside of
