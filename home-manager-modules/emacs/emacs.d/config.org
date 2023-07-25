@@ -11,25 +11,34 @@ setup, but for package management I'm currently using the now-built-in
 =external= in =list-packages=) is nice, but requires a =nixos-rebuild= and
 restarting Emacs after making some changes.
 
-FIXME: note on =straight=
+** =Straight.el=
 
-Set up MELPA.
+Install [[https://github.com/radian-software/straight.el#features][straight.el]] if it isn't installed already.
 
 #+begin_src emacs-lisp
-(require 'package)
-(package-initialize)
-(setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 #+end_src
 
-And set up =use-package= itself in a way such that the =:ensure= keyword
-is by default set to =t=, that is, =use-packages= ensures that the package
-will be installed if it isn't already.
+Then set up =use-package= (which is nowadays built-in) in a way such
+that the =:ensure= keyword is unset by default, that is, =use-package=
+does not install packages on its own, as =straight.el= is responsible
+for doing so.
 
 #+begin_src emacs-lisp
 (require 'use-package)
-(setq use-package-always-ensure t)
+(setq straight-use-package-by-default t)
+(setq use-package-always-ensure nil)
 #+end_src
 
 * Profiling the startup time
@@ -160,6 +169,35 @@ do this /very often/.
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
 
 (leader "e" '(my/open-init-file :which-key "edit emacs config"))
+#+end_src
+
+* "Menus" with =hydra=
+
+TODO
+
+#+begin_src emacs-lisp
+(use-package hydra
+  :defer)
+#+end_src
+
+** "Error" navigation
+
+Commands like =next-error= provide navigation for more than just errors
+in the strict sense of the word.  For instance, they also work with
+=occur= and =grep= type buffers (this holds for the variants of those that
+I use as well: =embark= and =ripgrep=, with or without =consult=).
+
+#+begin_src emacs-lisp
+(defhydra hydra-navigate-errors (:hint nil)
+  "\n
+  _f_: first   _n_: next   _p_: previous\n
+  "
+  ("n" next-error)
+  ("p" previous-error)
+  ("f" first-error)
+  ("q" nil "exit"))
+
+(leader "n e" '(hydra-navigate-errors/body :which-key "navigate errors"))
 #+end_src
 
 * Custom Emacs look
@@ -1088,7 +1126,7 @@ it a lot, but this will probably grow in the coming weeks or months.
 
 #+begin_src emacs-lisp
 (use-package isearch
-  :ensure nil
+  :straight (:type built-in)
   :config
   (setq-default isearch-lazy-count t))
 #+end_src
@@ -1097,7 +1135,7 @@ it a lot, but this will probably grow in the coming weeks or months.
 
 #+begin_src emacs-lisp
 (use-package simple
-  :ensure nil
+  :straight (:type built-in)
   :config
   (setq eval-expression-print-length nil)
   (setq eval-expression-print-level nil))
@@ -1119,7 +1157,7 @@ it a lot, but this will probably grow in the coming weeks or months.
 
 #+begin_src emacs-lisp
 (use-package dired
-  :ensure nil
+  :straight (:type built-in)
   :defer
   :config
   (setq dired-kill-when-opening-new-dired-buffer t)
@@ -1166,7 +1204,7 @@ single-frame, circumventing the problem.
 #+begin_src emacs-lisp
 (use-package ediff-wind
   :defer
-  :ensure nil
+  :straight (:type built-in)
   :config
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
@@ -1184,7 +1222,7 @@ without it).
 
 #+begin_src emacs-lisp
 (use-package emacs
-  :ensure nil
+  :straight (:type built-in)
   :init
   (electric-pair-mode -1) ; disabled
   :config
@@ -1199,7 +1237,7 @@ reverts such changes.
 
 #+begin_src emacs-lisp
 (use-package emacs
-  :ensure nil
+  :straight (:type built-in)
   :init (winner-mode))
 #+end_src
 
@@ -1215,6 +1253,7 @@ enable it everywhere.
 
 #+begin_src emacs-lisp
 (use-package emacs
+  :straight (:type built-in)
   :init
   (setq-default abbrev-mode t)
   :config
@@ -1235,6 +1274,7 @@ I've been happy with it ever since.
 
 #+begin_src emacs-lisp
 (use-package vertico
+  :straight (vertico :files (:defaults "extensions/*.el"))
   :init
   (vertico-mode +1)
   :custom
@@ -1249,7 +1289,7 @@ the slash symbol.  The following extension to =vertico= does just that.
 
 #+begin_src emacs-lisp
 (use-package vertico-directory
-  :ensure nil
+  :straight nil
   :after vertico
   :bind (:map vertico-map
               ("DEL" . vertico-directory-delete-char)
@@ -1519,7 +1559,7 @@ loading =org=, a custom font setup might run to adjust the headers.
   ;; Use the built-in version of org (which is quite up-to-date as I'm
   ;; always using emacs HEAD).  This circumvents problems with
   ;; 'org-compat of the older version having been loaded.
-  :ensure nil
+  :straight (:type built-in)
   :hook
   ((org-mode . auto-fill-mode)
    (org-mode . my/org-font-setup)
@@ -1637,40 +1677,11 @@ to the position of point to automatically show surrounding markup.
   :after ox)
 #+end_src
 
-* "Menus" with =hydra=
-
-TODO
-
-#+begin_src emacs-lisp
-(use-package hydra
-  :defer)
-#+end_src
-
-** "Error" navigation
-
-Commands like =next-error= provide navigation for more than just errors
-in the strict sense of the word.  For instance, they also work with
-=occur= and =grep= type buffers (this holds for the variants of those that
-I use as well: =embark= and =ripgrep=, with or without =consult=).
-
-#+begin_src emacs-lisp
-(defhydra hydra-navigate-errors (:hint nil)
-  "\n
-  _f_: first   _n_: next   _p_: previous\n
-  "
-  ("n" next-error)
-  ("p" previous-error)
-  ("f" first-error)
-  ("q" nil "exit"))
-
-(leader "n e" '(hydra-navigate-errors/body :which-key "navigate errors"))
-#+end_src
-
 * On-the-fly syntax checking (and other things): =Flymake=
 
 #+begin_src emacs-lisp
 (use-package flymake
-  :ensure nil
+  :straight (:type built-in)
   :defer
   :config
   (setq flymake-suppress-zero-counters nil)
@@ -1710,6 +1721,7 @@ child frame for the completion popup and thus does not clash with
 
 #+begin_src emacs-lisp
 (use-package corfu
+  :straight (corfu :files (:defaults "extensions/*.el"))
   :init (global-corfu-mode)
   :hook (evil-insert-state-exit . corfu-quit)
   :config
@@ -1726,7 +1738,8 @@ seems great.
 
 #+begin_src emacs-lisp
 (use-package corfu-popupinfo
-  :ensure nil
+  :straight nil
+  :after corfu
   :config
   (corfu-popupinfo-mode)
   (setq corfu-popupinfo-delay 0.5))
@@ -2032,7 +2045,9 @@ accordingly.
 
 #+begin_src emacs-lisp
 (use-package mu4e
-  :load-path "~/.nix-profile/share/emacs/site-lisp/mu4e"
+  :straight
+  (:local-repo "~/.nix-profile/share/emacs/site-lisp/mu4e"
+               :type built-in)
   :defer
   :commands (mu4e)
   :config
@@ -2556,6 +2571,7 @@ contains everything.
 
 #+begin_src emacs-lisp
 (use-package my-haskell
+  :straight nil
   :demand
   :load-path my/custom-package-dir)
 #+end_src
@@ -2744,7 +2760,6 @@ comes into play.
 
 #+begin_src emacs-lisp
 (use-package eglot
-  :ensure nil
   :defer)
 #+end_src
 

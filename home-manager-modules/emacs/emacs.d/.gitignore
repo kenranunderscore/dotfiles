@@ -11,6 +11,7 @@ eshell/
 meghanada/
 parinfer-rust/
 racket-mode/
+straight/
 transient/
 url/
 custom.el
