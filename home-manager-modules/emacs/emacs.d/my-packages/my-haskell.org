@@ -6,9 +6,9 @@
 
 * Insert language extensions and GHC options
 
-This package contains A couple of Emacs Lisp functions that help me to
-make quick changes to Haskell files (adding pragmas, language
-extensions, GHC options).
+This package contains A couple of Emacs Lisp functions that help me to make
+quick changes to Haskell files (adding pragmas, language extensions, GHC
+options).
 
 #+begin_src emacs-lisp
 (defun my/make-pragma (pragma content)
@@ -44,12 +44,11 @@ file."
 
 * Insert imports
 
-This function is the one is use by far the most It makes it somewhat
-easy to add =import= statements to Haskell files.  It's surely not
-perfect, but fits my preferences well; that is, I almost never use the
-combinations that are harder to add with this template.  For instance,
-adding a qualified import with import list, or an unqualified one with
-an alias, would require "tricks".
+This function is the one is use by far the most It makes it somewhat easy to add
+=import= statements to Haskell files.  It's surely not perfect, but fits my
+preferences well; that is, I almost never use the combinations that are harder
+to add with this template.  For instance, adding a qualified import with import
+list, or an unqualified one with an alias, would require "tricks".
 
 #+begin_src emacs-lisp
 (defun my/read-non-empty-string (prompt &optional initial-input)
@@ -89,15 +88,14 @@ what the identifier should be in that case."
 
 * Templates
 
-While I'm using =TempEL= for templates in Emacs, some things are just a
-tad bit too complex to handle in a template language, and much easier
-to do in ELisp.  These go here.
+While I'm using =TempEL= for templates in Emacs, some things are just a tad bit
+too complex to handle in a template language, and much easier to do in ELisp.
+These go here.
 
 ** Newtypes
 
-In Haskell, =newtype= is a mechanism I use all the time.  These are
-different (but not all) scenarios that need to be possible to output
-with a utility command:
+In Haskell, =newtype= is a mechanism I use all the time.  These are different (but
+not all) scenarios that need to be possible to output with a utility command:
 
 #+begin_src haskell :tangle no
 newtype Foo = Foo Int
@@ -109,8 +107,7 @@ newtype Foo a = SomeCtor { unFoo :: ReaderT Config IO a }
 -- etc.
 #+end_src
 
-The following rather complicated command /should/ handle all the cases
-above.
+The following rather complicated command /should/ handle all the cases above.
 
 #+begin_src emacs-lisp
 (defun my/haskell-newtype-template (arg name ctor accessor type)
@@ -156,8 +153,8 @@ create and accessor and omit the curly braces."
 
 ** =Abbrev= table
 
-I use explicit TempEL expansion in some places.  But for my custom
-commands I want to try out using =abbrev= with some short identifiers.
+I use explicit TempEL expansion in some places.  But for my custom commands I
+want to try out using =abbrev= with some short identifiers.
 
 #+begin_src emacs-lisp
 (define-abbrev-table 'haskell-mode-abbrev-table
@@ -170,8 +167,8 @@ commands I want to try out using =abbrev= with some short identifiers.
 
 * Navigating errors
 
-As always, =hydra= is highly capable of simplifying all sorts of
-navigational sets of commands.
+As always, =hydra= is highly capable of simplifying all sorts of navigational sets
+of commands.
 
 #+begin_src emacs-lisp
 (defhydra hydra-haskell-error-navigation (:hint nil)
@@ -185,13 +182,12 @@ navigational sets of commands.
 
 * Formatting
 
-Several formatters are in use in different Haskell projects, like
-=fourmolu=, =ormolu=, =brittany= and several more.  =Haskell-mode= comes with
-builtin integration for =stylish-haskell=, which often works for other
-formatters but is sometimes a little flaky.  =Reformatter= is a better
-solution, as I can define modes for different formatters here and then
-use =eval= in =.dir-locals.el= on a per-project basis to enable the
-fitting mode there.
+Several formatters are in use in different Haskell projects, like =fourmolu=,
+=ormolu=, =brittany= and several more.  =Haskell-mode= comes with builtin integration
+for =stylish-haskell=, which often works for other formatters but is sometimes a
+little flaky.  =Reformatter= is a better solution, as I can define modes for
+different formatters here and then use =eval= in =.dir-locals.el= on a per-project
+basis to enable the fitting mode there.
 
 ** Fourmolu
 
@@ -223,9 +219,8 @@ fitting mode there.
 
 * =Haskell-mode= configuration
 
-Now load the actual =haskell-mode= package, and put some often-used
-functions as well as some of the above utilities into a local keymap
-for easy access.
+Now load the actual =haskell-mode= package, and put some often-used functions as
+well as some of the above utilities into a local keymap for easy access.
 
 #+begin_src emacs-lisp
 (require 'use-package)
