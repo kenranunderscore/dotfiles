@@ -2881,7 +2881,8 @@ much due to =savehist-mode=.
 #+begin_src emacs-lisp
 (use-package magit
   :defer
-  :hook (git-commit-mode . evil-insert-state)
+  :hook ((git-commit-mode . evil-insert-state)
+         (git-commit-mode . (lambda () (set-fill-column 70))))
   :config
   ;; No autosave for open buffers, as that might trigger hooks and
   ;; such.
