@@ -2,9 +2,7 @@ function navigate_to_project \
     --description 'Navigate to one of the known project directories'
     set project_dirs ~/projects \
                      ~/ag \
-                     ~/tmpdev \
-                     ~/ag/schulungen \
-                     ~/projects/forks
+                     ~/tmpdev
     set fd fd --type d --max-depth 1 --color never .
     set fzf fzf --prompt "Navigate to project: "
     
