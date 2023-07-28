@@ -112,6 +112,7 @@ in {
         usbutils
         watchexec
         wget
+        xorg.xkill
       ];
 
       activation = {
