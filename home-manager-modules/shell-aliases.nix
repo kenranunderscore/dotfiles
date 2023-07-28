@@ -90,6 +90,6 @@
   d = "cd ~/dotfiles";
   serve-this = "${pkgs.lib.getExe pkgs.python3} -m http.server";
   dual-monitor-setup =
-    "xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output DP-2 --mode 1920x1080 --rate 72.01 --right-of HDMI-0 && systemctl --user restart polybar";
+    "xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0";
   hc = "herbstclient";
 }

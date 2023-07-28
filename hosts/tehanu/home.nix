@@ -8,7 +8,37 @@ in {
 
   modules = {
     base.gpgKey = "9AC78C1A48681583";
-    herbstluftwm.enable = true;
+    herbstluftwm.enable = false;
+    i3 = {
+      enable = true;
+      withGaps = true;
+      workspaces = [
+        { name = "1:main"; }
+        {
+          name = "2:web";
+          assigns = [{ class = "firefox"; }];
+        }
+        { name = "3"; }
+        { name = "4"; }
+        { name = "5"; }
+        { name = "6"; }
+        { name = "7"; }
+        { name = "8"; }
+        { name = "9"; }
+      ];
+      startupCommands = [
+        {
+          command = "~/.fehbg";
+          always = false;
+          notification = false;
+        }
+        {
+          command = "xset r rate 200 65";
+          always = true;
+          notification = false;
+        }
+      ];
+    };
     rofi.enable = true;
     neovim.enable = lib.mkForce false;
     sbcl.enable = true;
@@ -16,7 +46,7 @@ in {
       enable = true;
       withBattery = true;
     };
-    picom.enable = false;
+    picom.enable = true;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";

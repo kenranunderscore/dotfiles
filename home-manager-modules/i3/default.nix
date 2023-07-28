@@ -91,6 +91,7 @@ in {
           "${modifier}+space" = lib.mkForce "exec ${menu}";
           "${modifier}+d" =
             lib.mkForce "exec rofi -disable-history -show-icons -show drun";
+          "${modifier}+e" = "exec emacsclient -a '' --create-frame --no-wait";
         } // workspaceKeybindings);
         workspaceOutputAssign = builtins.map (w: {
           inherit (w) output;
@@ -134,7 +135,7 @@ in {
             text = "#ff4500";
           };
         };
-        gaps = let val = 0;
+        gaps = let val = 70;
         in lib.mkIf cfg.withGaps {
           inner = val;
           outer = 0;
