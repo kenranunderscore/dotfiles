@@ -6,7 +6,8 @@
   modules = {
     base.gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
     rofi.enable = true;
-    herbstluftwm.enable = true;
+    herbstluftwm.enable = false;
+    i3.enable = true;
     polybar.enable = true;
     picom.enable = false;
     email = {
