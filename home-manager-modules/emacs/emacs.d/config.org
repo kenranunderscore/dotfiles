@@ -2742,6 +2742,9 @@ built-in =C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 (use-package helpful
+  :defer
+  :config
+  (setq helpful-max-buffers 1)
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)))
