@@ -1416,9 +1416,34 @@ result.
   (setq avy-all-windows nil)
   (general-define-key
    :states 'normal
-   "s" 'evil-avy-goto-char-timer)
+   "S" 'evil-avy-goto-char-timer)
+  (general-define-key
+   :states 'normal
+   "s" 'evil-avy-goto-char-in-line-timer)
   :bind
   ("C-'" . avy-goto-char-timer))
+#+end_src
+
+The command =avy-goto-char-timer= is the perfect solution for my jumping needs in
+almost every case.  I still find myself trying to navigate to multi-character
+sequences in the current line quite often, and would like to have the same
+behavior there; that is:
+
+- Incrementally narrowing and highlighting the possible results
+- Immediately jumping to unique matches, so I can type until it's unique and "be
+  there"
+
+The following snippet was handed to me [[https://www.reddit.com/r/emacs/comments/15f41le/scoping_avygotochartimer_to_the_current_line/][on reddit]].
+
+#+begin_src emacs-lisp
+(defun avy-goto-char-in-line-timer ()
+  (interactive)
+  (let ((avy-all-windows nil))
+    (cl-letf (((symbol-function 'avy--find-visible-regions)
+               (lambda (&rest args)
+                 `((,(point-at-bol) . ,(point-at-eol))))))
+      (call-interactively 'avy-goto-char-timer))))
+(evil-define-avy-motion avy-goto-char-in-line-timer inclusive)
 #+end_src
 
 * Org mode
