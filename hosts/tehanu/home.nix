@@ -13,18 +13,43 @@ in {
       enable = true;
       withGaps = true;
       workspaces = [
-        { name = "1:main"; }
+        {
+          name = "1:main";
+          output = "HDMI-0";
+        }
         {
           name = "2:web";
-          assigns = [{ class = "firefox"; }];
+          output = "HDMI-0";
         }
-        { name = "3"; }
-        { name = "4"; }
-        { name = "5"; }
-        { name = "6"; }
-        { name = "7"; }
-        { name = "8"; }
-        { name = "9"; }
+        {
+          name = "3";
+          output = "HDMI-0";
+        }
+        {
+          name = "4";
+          output = "HDMI-0";
+        }
+        {
+          name = "5";
+          output = "HDMI-0";
+        }
+        {
+          name = "6";
+          output = "eDP-1-1";
+        }
+        {
+          name = "7";
+          output = "eDP-1-1";
+        }
+        {
+          name = "8";
+          output = "eDP-1-1";
+        }
+        {
+          name = "9:mattermost";
+          output = "eDP-1-1";
+          assigns = [{ class = "Mattermost"; }];
+        }
       ];
       startupCommands = [
         {
