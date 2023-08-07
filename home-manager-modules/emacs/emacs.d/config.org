@@ -2922,6 +2922,20 @@ awesome video by abo-abo, linked in the readme, where they showcase many things
    . lispy-mode))
 #+end_src
 
+*** Integration with =evil=: =lispyville=
+
+When I was not using =evil= for a couple of months, I learned how to use =lispy=.  I
+really loved that, but going fully "holy" now feels wrong when writing Lisp
+code.  So I'll try reverting to =lispyville=, which changes some =lispy= keybindings
+(which I don't like) but also integrates =lispy= with =evil=, making it so that
+keybindings like =C=, deletions and pastes don't interfere with the balanced
+parentheses.
+
+#+begin_src emacs-lisp
+(use-package lispyville
+  :hook ((lispy-mode . lispyville-mode)))
+#+end_src
+
 ** Display commands bound to keys in the minibuffer
 
 When pressing the first key in a hotkey chain, show a popup that displays the
