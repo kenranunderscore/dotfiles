@@ -30,7 +30,7 @@ in {
       backend = "glx";
       fade = false;
       fadeDelta = 5;
-      vSync = true;
+      vSync = false;
       settings = { xrender-sync-fence = true; };
     };
   };
