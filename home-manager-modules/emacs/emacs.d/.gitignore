@@ -9,6 +9,7 @@ auto-save-list/
 elpa/
 eshell/
 meghanada/
+multisession/
 parinfer-rust/
 racket-mode/
 straight/
