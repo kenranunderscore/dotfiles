@@ -102,7 +102,7 @@ Helix etc. are also using it by default.)
     "b n" 'next-buffer
     "b s" 'scratch-buffer
     "c" 'comment-or-uncomment-region
-    "t" '(:ignore t :which-key "toggles"))) ;; TODO: comment-line?  or do it with evil?
+    "t" '(:ignore t :which-key "toggles")))
 #+end_src
 
 * The region
