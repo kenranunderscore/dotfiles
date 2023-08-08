@@ -341,7 +341,10 @@ attributes that need to be applied when switching to the respective font.
          . (:family
             "Unifont"
             :default-height
-            200))))
+            200))
+        (twilio-sans-mono
+         . (:family
+            "Twilio Sans Mono"))))
 #+end_src
 
 =my/current-font= contains a symbol pointing to one of the fonts specified in

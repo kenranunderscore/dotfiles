@@ -29,6 +29,10 @@ in {
         pragmataPro
         (import ./termingus.nix { inherit (pkgs) runCommand fetchFromGitHub; })
         (pkgs.callPackage (import ./oldschool.nix) { })
+        (pkgs.callPackage (import ./twilio-sans-mono.nix) {
+          inherit (pkgs) runCommand unzip;
+          inherit (inputs) twilio-sans-mono;
+        })
       ] ++ (with pkgs; [
         borg-sans-mono
         cantarell-fonts
