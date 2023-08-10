@@ -593,6 +593,16 @@ available).
   (setq modus-themes-org-blocks nil))
 #+end_src
 
+**** Gruber darker
+
+Whenever you want or need to channel your inner [[https://twitch.tv/tsoding][Tsoding]], switch to Iosevka and
+turn on:
+
+#+begin_src emacs-lisp
+(use-package gruber-darker-theme
+  :defer)
+#+end_src
+
 **** Doom themes
 
 [[https://github.com/hlissner/doom-emacs][This package]] used to be my go-to source of different themes.  It's a megapack,
