@@ -36,7 +36,7 @@ in {
           followMouse = false;
           mouseWarping = true;
         };
-        menu = "rofi -disable-history -show run";
+        menu = "rofi -show run";
         window = {
           titlebar = false;
           border = 2;
