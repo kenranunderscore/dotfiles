@@ -1736,7 +1736,9 @@ does.
   (setq corfu-cycle t)
   (setq corfu-auto t)
   (setq corfu-auto-delay 0.0)
-  (setq corfu-excluded-modes '(erc-mode)))
+  (setq corfu-exclude-modes
+        '(erc-mode
+          haskell-interactive-mode)))
 #+end_src
 
 ** Show documentation in a separate popup
