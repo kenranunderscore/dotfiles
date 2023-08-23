@@ -135,7 +135,6 @@ in {
     racket
     sieve-connect
     subversion
-    teams
     thunderbird
     vlc
     wireshark
