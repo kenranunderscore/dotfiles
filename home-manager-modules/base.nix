@@ -96,6 +96,7 @@ in {
         man-pages
         neofetch
         nixfmt
+        nixpkgs-review
         openssl.dev
         pciutils
         perl
