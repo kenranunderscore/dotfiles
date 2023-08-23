@@ -106,7 +106,6 @@ in {
       ];
       aliases = { p = "pull -u"; };
     };
-    vim.enable = lib.mkForce false;
   };
 
   services = {
