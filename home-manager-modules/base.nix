@@ -59,7 +59,6 @@ in {
 
     xdg = {
       enable = true;
-      configFile = { };
       mime.enable = true;
     };
 

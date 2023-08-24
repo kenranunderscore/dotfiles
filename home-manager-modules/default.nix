@@ -29,6 +29,7 @@
     ./ssh.nix
     ./tmux.nix
     ./vim.nix
+    ./xdg-config-files
     ./x-configuration
     ./zsh
   ];
