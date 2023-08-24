@@ -2533,11 +2533,18 @@ one, too, plus sometimes the previous section header.
   :args (list "fmt" input-file)
   :stdin nil
   :stdout nil
+  :lighter " my/nix-fmt")
+
+(reformatter-define my/nixfmt-format
+  :program "nixfmt"
   :lighter " my/nixfmt")
 
+(reformatter-define my/alejandra-format
+  :program "alejandra"
+  :lighter " my/alejandra")
+
 (use-package nix-mode
-  :mode "\\.nix\\'"
-  :hook (nix-mode . my/nix-format-on-save-mode))
+  :mode "\\.nix\\'")
 #+end_src
 
 ** Markdown
