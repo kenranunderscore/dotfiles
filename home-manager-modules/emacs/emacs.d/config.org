@@ -622,6 +622,16 @@ out newly added doom themes.
   :disabled)
 #+end_src
 
+**** Srcery
+
+I discovered this package by accident, while randomly selecting themes to try
+out via =straight-use-package=.
+
+#+begin_src emacs-lisp
+(use-package srcery-theme
+  :defer)
+#+end_src
+
 ** Render color names/codes in their respective color
 
 =Rainbow-mode= does what the (org) title says: whenever you see a color in text in
