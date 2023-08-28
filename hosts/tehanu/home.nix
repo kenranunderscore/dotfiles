@@ -129,6 +129,7 @@ in {
     leiningen
     linphone
     mattermost-desktop
+    obs-studio
     pavucontrol
     prismlauncher
     racket
