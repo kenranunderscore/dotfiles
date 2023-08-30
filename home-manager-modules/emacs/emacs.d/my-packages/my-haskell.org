@@ -194,7 +194,7 @@ basis to enable the fitting mode there.
 #+begin_src emacs-lisp
 (reformatter-define my/fourmolu-format
   :program "fourmolu"
-  :args (list "--stdin-input-file" input-file)
+  :args (list "--stdin-input-file" (or (buffer-file-name) input-file))
   :lighter " my/fourmolu")
 
 (local-leader
