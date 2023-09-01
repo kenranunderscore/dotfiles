@@ -1230,7 +1230,7 @@ that I don't really need it after all (neither with =evil= nor without it).
 (use-package emacs
   :straight (:type built-in)
   :init
-  (electric-pair-mode -1) ; disabled
+  (electric-pair-mode 1) ; disabled
   :config
   (setq electric-pair-open-newline-between-pairs t))
 #+end_src
