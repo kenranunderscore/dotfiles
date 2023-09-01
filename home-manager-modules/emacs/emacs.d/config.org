@@ -285,6 +285,11 @@ attributes that need to be applied when switching to the respective font.
         (source-code-pro
          . (:family
             "Source Code Pro"))
+        (consolas
+         . (:family
+            "Consolas"
+            :default-height
+            180))
         (fira-code
          . (:family
             "Fira Code"

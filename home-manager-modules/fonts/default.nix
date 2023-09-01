@@ -57,6 +57,7 @@ in {
         source-code-pro
         unifont
         victor-mono
+        vistafonts
       ]);
     };
   };
