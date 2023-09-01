@@ -2214,7 +2214,8 @@ where the differences are.  My guess is that they probably go well together.
                         ("^\\*eldoc" :regexp t :align below :select t)
                         ("^\\*Occur" :regexp t :align t :select t)
                         ("^\\*sly-description" :regexp t :align t :select t)
-                        ("^\\*lispy" :regexp t :align t :noselect t)))
+                        ("^\\*lispy" :regexp t :align t :noselect t)
+                        ("^\\*mu4e-main" :same t :regexp t)))
   (setq shackle-default-rule nil))
 #+end_src
 
