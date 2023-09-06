@@ -78,7 +78,8 @@ in {
     };
     fonts.enable = true;
     emacs.emacsVersion = "git";
-    imwheel.enable = true;
+    # imwheel seems to be responsible for stuttering scrolling
+    imwheel.enable = false;
     nyxt.enable = true;
     git.email = email;
   };
