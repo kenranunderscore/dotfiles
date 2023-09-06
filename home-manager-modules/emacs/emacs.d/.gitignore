@@ -1,6 +1,8 @@
 *~
 \#*\#
 *.elc
+.cache/
+.lsp-session*
 .org-id-locations
 bookmarks
 config.el
@@ -10,6 +12,7 @@ elpa/
 eshell/
 meghanada/
 multisession/
+network-security.data
 parinfer-rust/
 racket-mode/
 straight/
