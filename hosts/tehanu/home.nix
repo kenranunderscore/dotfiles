@@ -118,10 +118,12 @@ in {
 
   home.packages = with pkgs; [
     # citrix_workspace
+    brave
     cloc
     dbeaver
     dhall
     discord
+    dmenu
     element-desktop
     google-chrome-beta
     keepass
@@ -129,13 +131,16 @@ in {
     leiningen
     linphone
     mattermost-desktop
+    nushell
     obs-studio
     pavucontrol
     prismlauncher
     racket
     sieve-connect
+    steam
     subversion
     thunderbird
+    twitch-cli
     vlc
     wireshark
     zoom-us
