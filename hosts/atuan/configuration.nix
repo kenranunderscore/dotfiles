@@ -114,6 +114,7 @@ in {
   };
 
   users.users.${username} = {
+    uid = 1000;
     isNormalUser = true;
     home = "/home/${username}";
     extraGroups = [ "wheel" "networkmanager" "docker" ];
