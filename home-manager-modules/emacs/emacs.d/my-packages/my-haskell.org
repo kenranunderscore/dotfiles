@@ -75,8 +75,8 @@ what the identifier should be in that case."
      (list arg module qualified? alias)))
   (let ((import-line
          (concat "import "
-                 (when qualified? "qualified ")
                  module
+                 (when qualified? " qualified")
                  (when (and alias
                             (not (string= alias module)))
                    (concat " as " alias))
