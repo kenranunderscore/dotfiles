@@ -14,6 +14,8 @@ in {
         bind \cp navigate_to_project
         bind \cr command_history_search
         bind \cv open_file_in_emacs
+
+        fish_add_path --path $HOME/.config/emacs/bin
       '';
       shellAliases = {
         ls = "exa";
