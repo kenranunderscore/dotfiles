@@ -7,6 +7,7 @@
     ./bat.nix
     ./dcss
     ./direnv.nix
+    ./doom
     ./dwarf-fortress.nix
     ./emacs
     ./email

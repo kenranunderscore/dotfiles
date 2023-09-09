@@ -1,0 +1,5 @@
+* My Doom Emacs configuration
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-homage-black)
+#+end_src

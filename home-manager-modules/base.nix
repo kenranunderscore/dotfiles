@@ -24,7 +24,7 @@ in {
 
     modules = {
       alacritty.enable = true;
-      emacs.enable = true;
+      emacs.enable = false;
       firefox.enable = true;
       kitty.enable = true;
       bash.enable = true;
