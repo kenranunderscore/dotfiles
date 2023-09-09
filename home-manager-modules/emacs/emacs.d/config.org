@@ -621,10 +621,9 @@ it's quite a bit of work to style lots of packages, as one might imagine.  I'll
 leave this here for posterity and also to from time to time enable it and check
 out newly added doom themes.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package doom-themes
-  :defer
-  :disabled)
+  :defer)
 #+end_src
 
 **** Srcery
