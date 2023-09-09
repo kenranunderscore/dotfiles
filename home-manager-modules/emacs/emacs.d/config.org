@@ -961,7 +961,7 @@ I'd expect them to.
   (setq evil-want-keybinding nil)
   (evil-mode 1)
   :config
-  (setq evil-insert-state-cursor 'box)
+  (setq evil-insert-state-cursor '(bar . 5))
   (general-define-key
    :states 'normal
    "U" 'evil-redo)
