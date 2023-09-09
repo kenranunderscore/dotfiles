@@ -1444,10 +1444,10 @@ result.
   (setq avy-timeout-seconds 0.3)
   (setq avy-all-windows nil)
   (general-define-key
-   :states 'normal
+   :states '(normal motion)
    "S" 'evil-avy-goto-char-timer)
   (general-define-key
-   :states 'normal
+   :states '(normal motion)
    "s" 'evil-avy-goto-char-in-line-timer)
   :bind
   ("C-'" . avy-goto-char-timer))
