@@ -34,15 +34,24 @@ in {
       packages = let
         targetEmacs =
           if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs;
+        emacsWithPackages =
+          (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
+        # Doom manages packages itself, but vterm is an exception as it
+        # sometimes does not build in a naive way. Also have Emacs know all
+        # treesit grammars by default, so we don't have to install them
+        # externally later on.
+        myEmacs = emacsWithPackages (p: [ p.vterm p.treesit-grammars.with-all-grammars ]);
       in with pkgs; [
-        targetEmacs
+        myEmacs
 
         # Programs needed at runtime
         cmake
+        fd
         gcc
         libtool
         meson
         ninja
+        ripgrep
         shellcheck
       ];
     };
