@@ -53,7 +53,7 @@ the point is currently on), but Doom does. I don't like it, so let's turn it off
 again.
 
 #+begin_src emacs-lisp
-(global-hl-line-mode -1)
+(remove-hook 'doom-first-buffer-hook #'global-hl-line-mode)
 #+end_src
 
 ** Cursor
