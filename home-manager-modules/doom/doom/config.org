@@ -1,5 +1,500 @@
-* My Doom Emacs configuration
+#+TITLE: My Doom Emacs configuration
+#+AUTHOR: Johannes Maier
+#+EMAIL: johannes.maier@mailbox.org
+#+STARTUP: showall
+
+* Quickly jumping to this Doom Emacs configuration
+
+I /very often/ jump into /this/ file to quickly tweak things. So let's make this
+even more convenient than the default binding =SPC f P=.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-homage-black)
+(defun my/open-init-file ()
+  "Open my config.org file."
+  (interactive)
+  (find-file (concat doom-user-dir "config.org")))
+
+(map! :leader :desc "Open config" :n "e" #'my/open-init-file)
+#+end_src
+
+* Custom Emacs look
+
+Load themes and other improvements over the default Emacs look.
+
+One thing to pay attention to is that nearly all those operations on "visuals"
+work slightly differently when starting Emacs as =emacsclient=, for instance via
+
+#+begin_src shell :tangle no
+emacsclient -a ''
+#+end_src
+
+Setting some things at this point often results in the changes not being applied
+correctly. It's due to them happening in a technical, invisible Emacs frame. So
+you'll often see =(daemonp)= being called, checking whether this instance of
+Emacs is using the daemon, then adding some initializer function to
+=server-after-make-frame-hook= if it is.
+
+** Add an SVG splash screen image
+
+An awesome source for ELisp bits and Doom/Emacs configuration is [[https://tecosaur.github.io/emacs-config/config.html][tecosaur's Doom
+Emacs configuration]]. That's where I got the splash screen from and I love this
+crisp Emacs =E=.
+
+#+begin_src emacs-lisp
+(setq fancy-splash-image (concat doom-private-dir "splash.svg"))
+#+end_src
+
+FIXME: add MIT license to dotfiles in order to use the splash screen
+
+** Don't highlight the current line
+
+Vanilla Emacs does not enable =hl-line-mode= (which always highlights the line
+the point is currently on), but Doom does. I don't like it, so let's turn it off
+again.
+
+#+begin_src emacs-lisp
+(global-hl-line-mode -1)
+#+end_src
+
+** Cursor
+
+The default cursor is black, which interferes with mostly using a dark theme.
+Brighten it up a bit.
+
+#+begin_src emacs-lisp
+(set-mouse-color "white")
+(add-hook 'server-after-make-frame-hook
+          (lambda () (set-mouse-color "white")))
+#+end_src
+
+Enable a forever-blinking cursor. I used to disable this mode but I found myself
+searching for the cursor a couple of times lately.
+
+#+begin_src emacs-lisp
+(setq blink-cursor-delay 0.5)
+(setq blink-cursor-blinks -1)
+(blink-cursor-mode 1)
+#+end_src
+
+Don't show a cursor in inactive windows.
+
+#+begin_src emacs-lisp
+(setq-default cursor-in-non-selected-windows nil)
+#+end_src
+
+** Fonts
+
+FIXME: use =font-spec=?
+FIXME: switching works after the initial start, but doesn't change
+       =doom-font= yet, so there might be strange things happening down the line
+FIXME: default font from environment needs to be redone
+
+An alist of my preferred font families, together with a plist of certain
+attributes that need to be applied when switching to the respective font.
+
+#+begin_src emacs-lisp
+(setq my/font-alist
+      '((pragmata-pro
+         . (:family
+            "Pragmata Pro Mono"))
+        (ibm-vga-8x14
+         . (:family
+            "MxPlus IBM VGA 8x14"
+            :default-height
+            200))
+        (ibm-vga-9x16
+         . (:family
+            "MxPlus IBM VGA 9x16"
+            :default-height
+            200))
+        (dos-16
+         . (:family
+            "Mx437 DOS/V TWN16"
+            :default-height
+            200))
+        (iosevka
+         . (:family
+            "Iosevka Term"))
+        (iosevka-slab
+         . (:family
+            "Iosevka Slab"))
+        (iosevka-curly
+         . (:family
+            "Iosevka Curly"))
+        (iosevka-curly-slab
+         . (:family
+            "Iosevka Curly Slab"))
+        (dejavu
+         . (:family
+            "DejaVu Sans Mono"))
+        (ibm-plex
+         . (:family
+            "IBM Plex Mono"))
+        (cascadia
+         . (:family
+            "Cascadia Code"))
+        (source-code-pro
+         . (:family
+            "Source Code Pro"))
+        (consolas
+         . (:family
+            "Consolas"
+            :default-height
+            180))
+        (fira-code
+         . (:family
+            "Fira Code"
+            :org-height
+            0.8))
+        (jetbrains-mono
+         . (:family
+            "JetBrains Mono"
+            :org-height
+            0.8))
+        (julia-mono
+         . (:family
+            "JuliaMono"
+            :org-height
+            0.9))
+        (courier-prime
+         . (:family
+            "Courier Prime"
+            :org-height
+            0.95))
+        (sf-mono
+         . (:family
+            "SFMono"
+            :org-height
+            0.85))
+        (fantasque-sans-mono
+         . (:family
+            "Fantasque Sans Mono"))
+        (lucida-console
+         . (:family
+            "Lucida Console"
+            :default-height
+            166
+            :org-height
+            0.8))
+        (inconsolata
+         . (:family
+            "Inconsolata"
+            :default-height
+            170
+            :org-height
+            0.9))
+        (borg
+         . (:family
+            "Borg Sans Mono"
+            :org-height
+            0.85))
+        (termingus
+         . (:family
+            "Termingus"
+            :default-height
+            200))
+        (unifont
+         . (:family
+            "Unifont"
+            :default-height
+            200))
+        (twilio-sans-mono
+         . (:family
+            "Twilio Sans Mono"))))
+#+end_src
+
+=my/current-font= contains a symbol pointing to one of the fonts specified in
+=my/font-alist=. Since I can now globally "set" and change a font I like for my
+system, Emacs should try to adapt to this (at startup) as well. The function
+=my/load-font-from-env= does just that, as the global font -- if it exists --
+can be read from an environment variable. If a setting for this font is found in
+Emacs, that is taken, unless there's a =my/default-font= set, which always
+"wins".
+
+If neither default font nor environment variable are set/found, I fall back to
+DejaVu Sans Mono.
+
+#+begin_src emacs-lisp
+(setq my/default-font nil)
+
+;; FIXME: for now, until the rest is repaired
+(setq doom-font (font-spec :family "JetBrains Mono" :size 20))
+
+(defun my/load-font-from-env ()
+  "See whether an environment variable specifying a 'system font' is
+set, and translate that to one of the font symbols."
+  (when-let ((f (getenv "KENRAN_DEFAULT_FONT"))
+             (font (seq-find
+                    (lambda (x)
+                      (equal (plist-get (cdr x) :family)
+                             f))
+                    my/font-alist)))
+    (car font)))
+
+(setq my/current-font
+      (or my/default-font
+          (my/load-font-from-env)
+          'dejavu))
+#+end_src
+
+The function I use to switch between the various fonts I like. It applies the
+attributes of its value in =my/font-alist=.
+
+#+begin_src emacs-lisp
+(defun my/switch-font (arg font)
+  "Apply the attributes stored for FONT in `my/font-alist'.  When
+called with non-nil prefix argument ARG the current height is
+reset to the default height for the selected font."
+  (interactive
+   (list current-prefix-arg
+         (intern
+          (completing-read
+           "Font: "
+           (mapcar #'car
+                   (assoc-delete-all my/current-font
+                                     (copy-alist my/font-alist)))))))
+  (let* ((attrs (alist-get font my/font-alist))
+         (family (plist-get attrs :family))
+         (default-height (or (plist-get attrs :default-height) 160))
+         (height (or (and arg default-height)
+                     (face-attribute 'default :height)))
+         ;; `buffer-face-mode' is enabled when calling
+         ;; `variable-pitch-mode'
+         (org-height (if (bound-and-true-p buffer-face-mode)
+                         (or (plist-get attrs :org-height) 0.9)
+                       1.0))
+         (weight (or (plist-get attrs :weight) 'regular)))
+    (setq my/current-font font)
+    (setq my/default-font-height default-height)
+    (set-face-attribute
+     'default nil
+     :font family
+     :weight weight
+     :height height)
+    (set-face-attribute
+     'fixed-pitch nil
+     :font family
+     :height org-height)
+    (set-face-attribute
+     'fixed-pitch-serif nil
+     :font family
+     :inherit 'fixed-pitch
+     :height 1.0)))
+#+end_src
+
+Finally, set all the face attributes synchronously, or register a hook that
+makes sure that these also work when using the Emacs daemon together with
+=emacsclient=.
+
+FIXME: might be obsolete with doom
+
+#+begin_src emacs-lisp :tangle no
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook
+              (defun my/switch-to-current-font ()
+                (my/switch-font t my/current-font)
+                (remove-hook 'server-after-make-frame-hook
+                             #'my/switch-to-current-font)))
+  (my/switch-font t my/current-font))
+#+end_src
+
+I find myself switching fonts /all the time/; I just seem to need that kind of
+visual refreshment. So let's bind it to a "leader" key. FIXME(doom)
+
+#+begin_src emacs-lisp :tangle no
+(leader "t f" '(my/switch-font :which-key "switch font"))
+#+end_src
+
+** Color theme(s)
+
+Since I cannot ever decide which theme I like best, there are a few themes, or
+theme collections, loaded here.
+
+**** Custom theme: =naga=
+
+I usually use [[https://github.com/kenranunderscore/emacs-naga-theme][my own /naga/ theme]]. It can be found on MELPA nowadays, though
+it's still only "finished" for the parts I really use. Should there be enough
+interest, I could style some more parts, but it's not anything I plan on doing
+for now.
+
+This theme is loaded directly from GitHub via [[file:packages.el][packages.el]], but I have to see
+whether this suffices for quick iteration. I don't know what the workflow is
+going to look like yet.
+
+FIXME: how to configure this now? some options don't seem to be respected, like
+the red cursor
+
+#+begin_src emacs-lisp
+(use-package! naga-theme
+  :defer
+  :init
+  (setq naga-theme-modeline-style 'green-box)
+  (setq naga-theme-use-red-cursor t)
+  (setq naga-theme-surround-org-blocks t)
+  (setq naga-theme-use-lighter-org-block-background t))
+#+end_src
+
+**** Modus themes
+
+[[https://protesilaos.com/emacs/modus-themes][This package]] by Protesilaos Stavrou is my first choice of "external" themes. I
+find myself going back to =modus-vivendi= in the evening, even though I keep
+saying that I don't like that high of a contrast.
+
+These two themes are very customizable and come with the most comprehensive and
+extensive documentation (same as with basically anything that Prot makes
+available).
+
+#+begin_src emacs-lisp
+(use-package! modus-themes
+  :defer
+  :config
+  (setq modus-themes-subtle-line-numbers t)
+  (setq modus-themes-bold-constructs t)
+  (setq modus-themes-italic-constructs nil)
+  (setq modus-themes-syntax '(green-strings alt-syntax))
+  (setq modus-themes-prompts '(background bold))
+  (setq modus-themes-mode-line nil)
+  (setq modus-themes-completions
+        '((matches . (intense background))
+          (selection . (intense accented))
+          (popup . (intense accented))))
+  (setq modus-themes-fringes nil)
+  (setq modus-themes-paren-match '(bold intense))
+  (setq modus-themes-region '(accented bg-only))
+  ;; TODO: org agenda, mail citations
+  (setq modus-themes-org-blocks nil))
+#+end_src
+
+**** Gruber darker
+
+Whenever you want or need to channel your inner [[https://twitch.tv/tsoding][Tsoding]], switch to Iosevka and
+turn on:
+
+#+begin_src emacs-lisp
+(use-package! gruber-darker-theme
+  :defer)
+#+end_src
+
+**** Srcery
+
+I discovered this package by accident, while randomly selecting themes to try
+out via =straight-use-package=.
+
+#+begin_src emacs-lisp
+(use-package! srcery-theme
+  :defer)
+#+end_src
+
+**** Default theme
+
+Doom comes with the =doom-themes= package which contains lots of great themes
+(even though in some themes I dislike the low contrast between the mode line and
+buffers).  Let's use one of those for now until everything else is up and
+running.  =Gruvbox= is always a good choice, anywhere.
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-gruvbox)
+#+end_src
+
+** Mode line (TODO: port and conditionalize with =featurep!=)
+
+* Basic options
+** Use =SPC SPC= as an alias for =M-x=
+
+Doom by default sets =SPC SPC= to =projective-find-file=, which I am used to
+invoking via =SPC p f= (that's also bound by default).
+
+I'd like to get used to just pressing =M-x= for extended commands, but =SPC SPC=
+is ingrained in my muscle memory. Remapping it for when I "accidentally" press
+it seems like a good idea.
+
+#+begin_src emacs-lisp
+(map! :leader :desc "M-x" :nmg "SPC" #'execute-extended-command)
+#+end_src
+
+** Mode-sensitive completion for extended commands
+
+Make commands shown with M-x depend on the active major mode. Note: this doesn't
+work correctly yet, as =(command-modes 'some-command)= seems to return the modes
+in an unexpected format.
+
+#+begin_src emacs-lisp
+(setq read-extended-command-predicate
+      #'command-completion-default-include-p)
+#+end_src
+
+** Line and column numbers
+
+To display line numbers, the aptly named =display-line-numbers= package is used.
+I prefer a hybrid mode for displaying line numbers. That is, line numbers are
+shown in a relative way, but the current line displays its absolute line number.
+In insert mode, line numbers should be disabled altogether. That's what these
+two functions are used for.
+
+#+begin_src emacs-lisp
+(defun my/switch-to-absolute-line-numbers ()
+  "Enable absolute line numbers."
+  (interactive)
+  (when display-line-numbers-mode
+    (setq display-line-numbers t)))
+
+(defun my/switch-to-hybrid-line-numbers ()
+  "Enable relative line numbers, but with the current line
+showing its absolute line number."
+  (interactive)
+  (when display-line-numbers-mode
+    (setq display-line-numbers 'relative)
+    (setq display-line-numbers-current-absolute t)))
+
+(defun my/toggle-line-numbers ()
+  "Toggle `display-line-numbers-mode'.  Meant to be used in a
+keybinding."
+  (interactive)
+  (display-line-numbers-mode 'toggle))
+
+(use-package! display-line-numbers
+  :defer
+  :hook ((evil-insert-state-entry . my/switch-to-absolute-line-numbers)
+         (evil-insert-state-exit . my/switch-to-hybrid-line-numbers))
+  :config
+  (setq display-line-numbers-type 'relative)
+  (setq display-line-numbers-current-absolute t)
+  (map! :leader :desc "Line numbers" :nmg "t l" #'my/toggle-line-numbers))
+#+end_src
+
+** If I have to use tabs, at least make them smaller
+
+Looking at you, [[https://go.dev/][Go]].
+
+#+begin_src emacs-lisp
+(setq-default tab-width 4)
+#+end_src
+
+** File name searches should be case-insensitive
+
+#+begin_src emacs-lisp
+(setq read-file-name-completion-ignore-case t)
+#+end_src
+
+** Yank (paste) at point with the mouse
+
+The default Emacs behavior when yanking (in the Emacs sense of the word) things
+from the clipboard by clicking the middle mouse button is to insert those at the
+mouse cursor position.  I wish to be able to carelessly click anywhere and have
+it insert at point, similar to how it's done in most terminal emulators.
+
+Of course there's an existing Emacs options for this:
+
+#+begin_src emacs-lisp
+(setq mouse-yank-at-point t)
+#+end_src
+
+** Breaking long lines
+
+When writing prose I often use =auto-fill-mode= to automatically break long lines.
+Emacs uses the =fill-column= variable to determine when to break.  Its default of
+70 is a little low for my taste, though.
+
+#+begin_src emacs-lisp
+(setq-default fill-column 80)
 #+end_src
