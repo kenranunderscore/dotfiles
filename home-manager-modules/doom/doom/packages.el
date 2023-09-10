@@ -12,3 +12,7 @@
 (package! gruber-darker-theme)
 
 (package! srcery-theme)
+
+;;; Org mode
+
+(package! org-appear)

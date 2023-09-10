@@ -543,3 +543,231 @@ also used to my =C-l= rebind to more comfortably switch than =C-w C-w=.
   (set-face-attribute 'aw-leading-char-face nil :height 2.5)
   (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r)))
 #+end_src
+
+* Built-in packages with extensions
+** Emacs Lisp
+*** Evaluating with =C-c C-c=
+
+I like evaluating the top-level form I'm currently on by pressing =C-c C-c=,
+similar to how one compiles in SLY/SLIME.
+
+FIXME: this destroys the nice bindings in =org-src= buffers.  fix possible?
+
+#+begin_src emacs-lisp
+(map! :map emacs-lisp-mode-map
+      :desc "Eval defun" :egin "C-c C-c" #'eval-defun)
+#+end_src
+
+*** Don't trim ELisp evaluation results
+
+#+begin_src emacs-lisp
+(setq eval-expression-print-length nil)
+(setq eval-expression-print-level nil)
+#+end_src
+
+** Display whitespace
+
+Make whitespace symbols visible using =whitespace-mode=. I don't use this often
+anymore, but sometimes it's helpful.
+
+#+begin_src emacs-lisp
+(use-package! whitespace
+  :defer
+  :config
+  (setq whitespace-line-column 100)
+  (setq whitespace-global-modes
+        '(not magit-status-mode
+              org-mode))
+  (setq whitespace-style
+        '(face newline newline-mark missing-newline-at-eof
+               trailing empty tabs tab-mark))
+  (setq whitespace-display-mappings
+        '((newline-mark 10
+                        [9166 10])
+          (tab-mark 9
+                    [187 9]
+                    [92 9]))))
+#+end_src
+
+** Render manpages in Emacs
+
+#+begin_src emacs-lisp
+(after! man
+  ;; As soon as it is ready open the manpage in a separate, focused window.
+  (setq Man-notify-method 'aggressive))
+#+end_src
+
+** Directory editor: =dired=
+
+#+begin_src emacs-lisp
+(after! dired
+  (setq dired-kill-when-opening-new-dired-buffer t))
+#+end_src
+
+** Ediff
+
+=Ediff= is a great way to diff and/or merge files or buffers. By default it
+creates a new frame containing a "control buffer" used to navigate the diff and
+manipulate the output. Unfortunately for the longest time this behaved weirdly
+for me: whenever I'd tab to the frame containing the diff, do something, then
+tab back, the next navigational command from the control frame would work but
+drop me back in the diff frame. It's possible to use =ediff-setup-windows-plain=
+as setup function, which makes =ediff= single-frame, circumventing the problem.
+
+#+begin_src emacs-lisp
+(after! ediff-wind
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain))
+#+end_src
+
+** Disabling =smartparens=
+
+I don't use or need =smartparens=. If I want auto-closing parentheses then
+=electric-pair-mode= is great, and for LISPy languages there's =lispy-mode= and
+=lispyville-mode=.
+
+#+begin_src emacs-lisp
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+#+end_src
+
+** Correct typos while typing with =abbrev=
+
+=Abbrev-mode= is a nice built-in minor mode that silently replaces some things I
+type with other things. It is mostly used for correcting typos, though I haven't
+really "trained" my self-made list of abbrevs -- I've just started using it.
+
+Since it doesn't come with a global mode itself, I use =setq-default= to enable
+it everywhere.
+
+#+begin_src emacs-lisp
+(use-package! emacs
+  :init
+  (setq-default abbrev-mode t)
+  :config
+  (setq save-abbrevs nil
+        abbrev-file-name (locate-user-emacs-file "abbrev_defs")))
+#+end_src
+
+* Incremental narrowing etc.
+** =Vertico=
+
+Doom does it well out of the box. I should probably look into configuring
+=embark= here later on, maybe to even obsolete =which-key=.
+
+*** =Consult=
+
+The [[https://github.com/minad/consult][consult]] package is the analogue of =counsel=, which I used for quite some
+time, though not in any extent close to full. This only defines some basic
+bindings that Doom doesn't use by default.
+
+#+begin_src emacs-lisp
+(after! consult
+  (map! :eginm "M-g o" #'consult-outline))
+#+end_src
+
+*** =Embark=
+
+I haven't really grokked [[https://github.com/oantolin/embark][Embark]] yet. It seems to be amazing, though! What I
+mostly use it for at the moment is its =embark-act= command in conjunction with
+=embark-export=. With this I often push the results of some =grep=-like command
+into a separate buffer, where I can then utilize =wgrep= to bulk-modify the
+original buffers.
+
+* TODO Jumping around with =avy=
+* TODO Org mode
+** Show emphasis markers depending on point
+
+In my =org= configuration I'm setting =org-hide-emphasis-markers= to =t=, thus
+hiding certain markup elements around text. Unfortunately it seem to be
+currently impossible to switch this interactively, or I just don't know how,
+which prevents me from simply adding a keybinding to toggle it.
+
+Thankfully a new package has appeared recently: [[https://github.com/awth13/org-appear][org-appear]]. It reacts to the
+position of point to automatically show surrounding markup.
+
+#+begin_src emacs-lisp
+(use-package! org-appear
+  :defer
+  :hook ((org-mode . org-appear-mode))
+  :config
+  (setq org-appear-autolinks t
+        org-appear-autosubmarkers t
+        org-appear-autoentities t
+        org-appear-autokeywords t
+        org-appear-trigger 'always))
+#+end_src
+
+* On-the-fly syntax checking (and other things): =Flymake=
+
+#+begin_src emacs-lisp
+(after! flymake
+  (setq flymake-suppress-zero-counters nil
+        flymake-fringe-indicator-position 'left-fringe
+        flymake-no-changes-timeout 1.0
+        flymake-mode-line-lighter ""))
+
+(add-hook! sh-mode #'flymake-mode)
+#+end_src
+
+** Static analysis of shell scripts
+
+[[https://github.com/koalaman/shellcheck][ShellCheck]] is a great little program providing feedback when writing shell
+scripts.  The Emacs package [[https://github.com/federicotdn/flymake-shellcheck][flymake-shellcheck]] integrates ShellCheck with
+Flymake.  We have to trigger =flymake-shellcheck-load= when loading shell scripts,
+and also enable Flymake itself, both done via hooks to =sh-mode=.
+
+#+begin_src emacs-lisp :tangle no
+(use-package! flymake-shellcheck
+  :commands (flymake-shellcheck-load)
+  :hook ((sh-mode . flymake-shellcheck-load)
+         (sh-mode . flymake-mode)))
+#+end_src
+
+* TODO E-mail configuration
+* TODO IRC with =erc=
+* TODO Project management
+* =Magit=
+
+Not much to say here: =magit= is awesome and in my top 3 reasons why I can't
+ever switch to any editor that doesn't have anything remotely comparable. I've
+tried =vim-fugitive= and =neogit= for (neo)vim, and while they're great, I still
+missed =magit=.
+
+Once again, the default Doom configuration already does most of what I
+previously did (and more), like:
+
+- Setting a smaller =fill-column= for commit messages
+- Opening commit message buffers in insert mode
+- Adding a transient =autostash= flag
+- Making windows/popups behave etc.
+
+#+begin_src emacs-lisp
+(after! magit
+  (map! :leader
+        :desc "Magit status here" :gnvm "g g" #'magit-status-here
+        :desc "Magit status" :gnvm "g G" #'magit-status))
+#+end_src
+
+** Interactively browse =git= history
+
+The =git-timemachine= plugin lets me go back and forth in a file's history.
+
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Git timemachine" :gnvm "g t" #'git-timemachine)
+#+end_src
+
+* TODO Modal LISP editing with =lispy= and =lispyville=
+* Discovering keybindings with =which-key=
+
+When pressing the first key in a hotkey chain, =which-key= displays a popup
+showing the possible completions and associated functions. I stopped using this
+for my custom Emacs configuration as I had gotten used to all my own
+keybindings. With Doom that's a different story, and discovery has become
+important once again, because why not leech off of someone else's keybinding
+work :)
+
+#+begin_src emacs-lisp
+(setq which-key-idle-delay 0.2)
+#+end_src
+
+** TODO check out =embark-prefix-help-command=
