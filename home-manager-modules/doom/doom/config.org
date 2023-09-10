@@ -501,7 +501,31 @@ Emacs uses the =fill-column= variable to determine when to break.  Its default o
 
 * Vim emulation with =evil=
 
-FIXME
+The =evil= package offers a very complete Vim experience inside of Emacs. Most
+of the configuration is done by Doom already, so I only need to slightly tweak
+some things to my liking.
+
+#+begin_src emacs-lisp
+(after! evil
+  ;; Use a special cursor for insert mode
+  (setq evil-insert-state-cursor '(bar . 5))
+  ;; Don't make certain commands repeatable with '.'
+  (mapc #'evil-declare-ignore-repeat
+        '(haskell-process-load-file
+          haskell-process-reload
+          haskell-goto-first-error
+          haskell-goto-next-error
+          haskell-goto-prev-error
+          hydra-haskell-error-navigation/body
+          my/haskell-add-import
+          my/haskell-add-ghc-option
+          my/haskell-add-language-extension))
+  (add-to-list 'evil-emacs-state-modes 'sieve-manage-mode)
+  ;; U for `redo' is easier to type than C-r for me
+  (map! :desc "Redo" :n "U" #'evil-redo
+        :map evil-window-map
+        :nmg "C-d" #'evil-window-delete))
+#+end_src
 
 * Window management
 ** Interactive window switching
