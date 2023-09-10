@@ -16,3 +16,7 @@
 ;;; Org mode
 
 (package! org-appear)
+
+;;; E-mail
+
+(package! mu4e-alert :disable t)
