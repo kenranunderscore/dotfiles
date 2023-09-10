@@ -498,3 +498,24 @@ Emacs uses the =fill-column= variable to determine when to break.  Its default o
 #+begin_src emacs-lisp
 (setq-default fill-column 80)
 #+end_src
+
+* Vim emulation with =evil=
+
+FIXME
+
+* Window management
+** Interactive window switching
+
+The =ace-window= package comes with Doom's =window-select= module.  I need a
+couple of customizations due to using the alternative keyboard layout MTGAP; I'm
+also used to my =C-l= rebind to more comfortably switch than =C-w C-w=.
+
+#+begin_src emacs-lisp
+(use-package! ace-window
+  :defer
+  :init
+  (map! :desc "Switch window" :egnmv "C-l" #'ace-window)
+  :config
+  (set-face-attribute 'aw-leading-char-face nil :height 2.5)
+  (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r)))
+#+end_src
