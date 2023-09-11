@@ -849,9 +849,25 @@ still works as intended, but let's give it a try.
      (mu4e-refile-folder . (lambda (msg)
                              (let* ((date (mu4e-message-field-at-point :date))
                                     (year (decoded-time-year (decode-time date))))
-                               (concat "/ag/Archive/"
+                               (concat "/ag/Archives/"
                                        (number-to-string year))))))
    t))
+#+end_src
+
+I also want to use a slightly wider =fill-column= in e-mails.
+
+#+begin_src emacs-lisp
+(setq-hook! mml-mode fill-column 80)
+#+end_src
+
+=Mu4e= buffers are recognized as popups by Doom, so the initial buffer opens up
+very small at the bottom of the frame; subsequent buffers do the same. Now that
+it's easier to handle popup, I'm not entirely certain what kind of behavior I'd
+like to have, but let's try some things out:
+
+#+begin_src emacs-lisp
+(set-popup-rule! "^\\*mu4e"
+  :ignore t)
 #+end_src
 
 *** Warn/confirm when trying to send with empty subject
