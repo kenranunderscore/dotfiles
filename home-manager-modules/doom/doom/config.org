@@ -544,6 +544,25 @@ also used to my =C-l= rebind to more comfortably switch than =C-w C-w=.
   (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r)))
 #+end_src
 
+* Centering the screen after jumps
+
+In neovim I used to remap lots of movement keybindings to execute =zz= after, so
+that the result of the jump would be centered in the target window. I'll try and
+reproduce that in Emacs.
+
+#+begin_src emacs-lisp
+(add-hook 'imenu-after-jump-hook #'recenter)
+(add-hook 'evil-jumps-post-jump-hook #'recenter)
+(add-hook 'better-jumper-post-jump-hook #'recenter)
+
+(defun my/recenter-advice (&rest _) (recenter nil))
+(advice-add 'evil-ex-search-next :after #'my/recenter-advice)
+(advice-add 'evil-ex-search-previous :after #'my/recenter-advice)
+(advice-add 'evil-scroll-up :after #'my/recenter-advice)
+(advice-add 'evil-scroll-down :after #'my/recenter-advice)
+(advice-add '+lookup/definition :after #'my/recenter-advice)
+#+end_src
+
 * Built-in packages with extensions
 ** Emacs Lisp
 *** Evaluating with =C-c C-c=
