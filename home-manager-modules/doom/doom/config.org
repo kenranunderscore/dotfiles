@@ -409,7 +409,7 @@ is ingrained in my muscle memory. Remapping it for when I "accidentally" press
 it seems like a good idea.
 
 #+begin_src emacs-lisp
-(map! :leader :desc "M-x" :nmg "SPC" #'execute-extended-command)
+(map! :leader :desc "M-x" :nmv "SPC" #'execute-extended-command)
 #+end_src
 
 ** Mode-sensitive completion for extended commands
@@ -459,7 +459,7 @@ keybinding."
   :config
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t)
-  (map! :leader :desc "Line numbers" :nmg "t l" #'my/toggle-line-numbers))
+  (map! :leader :desc "Line numbers" :nmv "t l" #'my/toggle-line-numbers))
 #+end_src
 
 ** If I have to use tabs, at least make them smaller
@@ -524,7 +524,7 @@ some things to my liking.
   ;; U for `redo' is easier to type than C-r for me
   (map! :desc "Redo" :n "U" #'evil-redo
         :map evil-window-map
-        :nmg "C-d" #'evil-window-delete))
+        :n "C-d" #'evil-window-delete))
 #+end_src
 
 * Window management
@@ -538,7 +538,7 @@ also used to my =C-l= rebind to more comfortably switch than =C-w C-w=.
 (use-package! ace-window
   :defer
   :init
-  (map! :desc "Switch window" :egnmv "C-l" #'ace-window)
+  (map! :desc "Switch window" :inmve "C-l" #'ace-window)
   :config
   (set-face-attribute 'aw-leading-char-face nil :height 2.5)
   (setq aw-keys '(?i ?n ?e ?a ?h ?t ?s ?r)))
@@ -555,7 +555,7 @@ FIXME: this destroys the nice bindings in =org-src= buffers.  fix possible?
 
 #+begin_src emacs-lisp :tangle no
 (map! :map emacs-lisp-mode-map
-      :desc "Eval defun" :egin "C-c C-c" #'eval-defun)
+      :desc "Eval defun" :g "C-c C-c" #'eval-defun)
 #+end_src
 
 *** Don't trim ELisp evaluation results
@@ -661,7 +661,7 @@ bindings that Doom doesn't use by default.
 
 #+begin_src emacs-lisp
 (after! consult
-  (map! :eginm "M-g o" #'consult-outline))
+  (map! :g "M-g o" #'consult-outline))
 #+end_src
 
 *** =Embark=
@@ -1134,8 +1134,8 @@ previously did (and more), like:
 #+begin_src emacs-lisp
 (after! magit
   (map! :leader
-        :desc "Magit status here" :gnvm "g g" #'magit-status-here
-        :desc "Magit status" :gnvm "g G" #'magit-status))
+        :desc "Magit status here" :nvm "g g" #'magit-status-here
+        :desc "Magit status" :nvm "g G" #'magit-status))
 #+end_src
 
 ** Interactively browse =git= history
@@ -1144,7 +1144,7 @@ The =git-timemachine= plugin lets me go back and forth in a file's history.
 
 #+begin_src emacs-lisp
 (map! :leader
-      :desc "Git timemachine" :gnvm "g t" #'git-timemachine)
+      :desc "Git timemachine" :nvm "g t" #'git-timemachine)
 #+end_src
 
 * TODO Modal LISP editing with =lispy= and =lispyville=
