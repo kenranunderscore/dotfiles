@@ -679,8 +679,7 @@ time, though not in any extent close to full. This only defines some basic
 bindings that Doom doesn't use by default.
 
 #+begin_src emacs-lisp
-(after! consult
-  (map! :g "M-g o" #'consult-outline))
+(map! :g "M-g o" #'consult-outline)
 #+end_src
 
 *** =Embark=
