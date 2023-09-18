@@ -132,7 +132,7 @@ in {
     google-chrome-beta
     keepass
     keepassxc
-    leiningen
+    libreoffice
     linphone
     mattermost-desktop
     nushell
@@ -146,8 +146,8 @@ in {
     thunderbird
     twitch-cli
     vlc
+    wine
     wireshark
-    zoom-us
   ];
 
   home.stateVersion = "22.05";
