@@ -306,6 +306,23 @@ visual refreshment. So let's bind it to a "leader" key. FIXME(doom)
 (leader "t f" '(my/switch-font :which-key "switch font"))
 #+end_src
 
+*** Changing the font size
+
+#+begin_src emacs-lisp
+(setq my/font-resize-map
+      (define-keymap
+        (kbd "g") #'doom/increase-font-size
+        (kbd "l") #'doom/decrease-font-size
+        (kbd "r") #'doom/reset-font-size))
+
+(hercules-def
+ :toggle-funs #'my/font-resize
+ :keymap 'my/font-resize-map
+ :transient t)
+
+(map! :leader :desc "Font zoom" :g "z" #'my/font-resize)
+#+end_src
+
 ** Color theme(s)
 
 Since I cannot ever decide which theme I like best, there are a few themes, or

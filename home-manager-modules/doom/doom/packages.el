@@ -18,3 +18,7 @@
 ;;; E-mail
 
 (package! mu4e-alert :disable t)
+
+;;; Keybindings
+
+(package! hercules)
