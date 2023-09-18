@@ -219,6 +219,7 @@ DejaVu Sans Mono.
 
 ;; FIXME: for now, until the rest is repaired
 (setq doom-font (font-spec :family "JetBrains Mono" :size 20))
+(setq doom-font-increment 1)
 
 (defun my/load-font-from-env ()
   "See whether an environment variable specifying a 'system font' is
