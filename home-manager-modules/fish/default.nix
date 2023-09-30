@@ -5,6 +5,8 @@ in {
   options.modules.fish.enable = lib.mkEnableOption "fish";
 
   config = lib.mkIf cfg.enable {
+    home.packages = [ pkgs.eza ];
+
     programs.fish = {
       enable = true;
       plugins = [ ];
@@ -18,11 +20,11 @@ in {
         fish_add_path --path $HOME/.config/emacs/bin
       '';
       shellAliases = {
-        ls = "exa";
-        l = "exa -lbF --group-directories-first --icons";
-        ll = "exa -lbGF --group-directories-first --icons";
-        la = "exa -labF --group-directories-first --icons";
-        lla = "exa -labGF --group-directories-first --icons";
+        ls = "eza";
+        l = "eza -lbF --group-directories-first --icons";
+        ll = "eza -lbGF --group-directories-first --icons";
+        la = "eza -labF --group-directories-first --icons";
+        lla = "eza -labGF --group-directories-first --icons";
       };
     };
 

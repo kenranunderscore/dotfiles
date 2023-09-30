@@ -5,9 +5,9 @@ in {
   options.modules.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
-    # Packages that I want aliases to use, like 'exa' as 'ls'
+    # Packages that I want aliases to use, like 'eza' as 'ls'
     # replacement.
-    home.packages = with pkgs; [ exa ];
+    home.packages = with pkgs; [ eza ];
 
     programs.zsh = {
       enable = true;
@@ -81,11 +81,11 @@ in {
         HISTORY_IGNORE_ALL_DUPS = "1";
       };
       shellGlobalAliases = {
-        ls = "exa";
-        l = "exa -lbF --group-directories-first --icons";
-        ll = "exa -lbGF --group-directories-first --icons";
-        la = "exa -labF --group-directories-first --icons";
-        lla = "exa -labGF --group-directories-first --icons";
+        ls = "eza";
+        l = "eza -lbF --group-directories-first --icons";
+        ll = "eza -lbGF --group-directories-first --icons";
+        la = "eza -labF --group-directories-first --icons";
+        lla = "eza -labGF --group-directories-first --icons";
       };
     };
 
