@@ -79,7 +79,7 @@ in {
     fonts.enable = true;
     doom = {
       enable = true;
-      emacsVersion = "git";
+      emacsVersion = "stable";
     };
     # imwheel seems to be responsible for stuttering scrolling
     imwheel.enable = false;

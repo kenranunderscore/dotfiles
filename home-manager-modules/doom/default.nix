@@ -33,7 +33,7 @@ in {
 
       packages = let
         targetEmacs =
-          if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs;
+          if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs29;
         emacsWithPackages =
           (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
         # Doom manages packages itself, but vterm is an exception as it
