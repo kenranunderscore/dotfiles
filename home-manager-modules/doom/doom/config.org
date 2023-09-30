@@ -436,7 +436,7 @@ some things to my liking.
 #+begin_src emacs-lisp
 (after! evil
   ;; Use a special cursor for insert mode
-  (setq evil-insert-state-cursor '(bar . 5))
+  (setq evil-insert-state-cursor '(hbar . 5))
   ;; Don't make certain commands repeatable with '.'
   (mapc #'evil-declare-ignore-repeat
         '(haskell-process-load-file
