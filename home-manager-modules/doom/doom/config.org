@@ -84,11 +84,6 @@ Don't show a cursor in inactive windows.
 
 ** Fonts
 
-FIXME: use =font-spec=?
-FIXME: switching works after the initial start, but doesn't change
-       =doom-font= yet, so there might be strange things happening down the line
-FIXME: default font from environment needs to be redone
-
 An alist of my preferred font families, together with a plist of certain
 attributes that need to be applied when switching to the respective font.
 
@@ -99,19 +94,13 @@ attributes that need to be applied when switching to the respective font.
             "Pragmata Pro Mono"))
         (ibm-vga-8x14
          . (:family
-            "MxPlus IBM VGA 8x14"
-            :default-height
-            200))
+            "MxPlus IBM VGA 8x14"))
         (ibm-vga-9x16
          . (:family
-            "MxPlus IBM VGA 9x16"
-            :default-height
-            200))
+            "MxPlus IBM VGA 9x16"))
         (dos-16
          . (:family
-            "Mx437 DOS/V TWN16"
-            :default-height
-            200))
+            "Mx437 DOS/V TWN16"))
         (iosevka
          . (:family
             "Iosevka Term"))
@@ -138,182 +127,103 @@ attributes that need to be applied when switching to the respective font.
             "Source Code Pro"))
         (consolas
          . (:family
-            "Consolas"
-            :default-height
-            180))
+            "Consolas"))
         (fira-code
          . (:family
-            "Fira Code"
-            :org-height
-            0.8))
+            "Fira Code"))
         (jetbrains-mono
          . (:family
-            "JetBrains Mono"
-            :org-height
-            0.8))
+            "JetBrains Mono"))
         (julia-mono
          . (:family
-            "JuliaMono"
-            :org-height
-            0.9))
+            "JuliaMono"))
         (courier-prime
          . (:family
-            "Courier Prime"
-            :org-height
-            0.95))
+            "Courier Prime"))
         (sf-mono
          . (:family
-            "SFMono"
-            :org-height
-            0.85))
+            "SFMono"))
         (fantasque-sans-mono
          . (:family
             "Fantasque Sans Mono"))
         (lucida-console
          . (:family
-            "Lucida Console"
-            :default-height
-            166
-            :org-height
-            0.8))
+            "Lucida Console"))
         (inconsolata
          . (:family
-            "Inconsolata"
-            :default-height
-            170
-            :org-height
-            0.9))
+            "Inconsolata"))
         (borg
          . (:family
-            "Borg Sans Mono"
-            :org-height
-            0.85))
+            "Borg Sans Mono"))
         (termingus
          . (:family
-            "Termingus"
-            :default-height
-            200))
+            "Termingus"))
         (unifont
          . (:family
-            "Unifont"
-            :default-height
-            200))
+            "Unifont"))
         (twilio-sans-mono
          . (:family
             "Twilio Sans Mono"))))
 #+end_src
 
-=my/current-font= contains a symbol pointing to one of the fonts specified in
-=my/font-alist=. Since I can now globally "set" and change a font I like for my
-system, Emacs should try to adapt to this (at startup) as well. The function
-=my/load-font-from-env= does just that, as the global font -- if it exists --
-can be read from an environment variable. If a setting for this font is found in
-Emacs, that is taken, unless there's a =my/default-font= set, which always
-"wins".
+#+begin_src emacs-lisp
+(setq my/current-font 'borg)
+(setq my/default-font-size 20)
+(setq doom-font (apply #'font-spec
+                       (plist-put (alist-get my/current-font my/font-alist) :size my/default-font-size)))
+#+end_src
 
-If neither default font nor environment variable are set/found, I fall back to
-DejaVu Sans Mono.
+The default text scaling increment produces jumps in font size that are way too
+big for me. Let's tune it down a bit.
 
 #+begin_src emacs-lisp
-(setq my/default-font nil)
-
-;; FIXME: for now, until the rest is repaired
-(setq doom-font (font-spec :family "JetBrains Mono" :size 20))
 (setq doom-font-increment 1)
+#+end_src
 
-(defun my/load-font-from-env ()
-  "See whether an environment variable specifying a 'system font' is
-set, and translate that to one of the font symbols."
-  (when-let ((f (getenv "KENRAN_DEFAULT_FONT"))
-             (font (seq-find
-                    (lambda (x)
-                      (equal (plist-get (cdr x) :family)
-                             f))
-                    my/font-alist)))
-    (car font)))
+When streaming or just showing something to colleagues at work, there's no need
+to manually zoom due to =doom-big-font-mode= now! I don't specify a different
+font; =doom-big-font-increment= then controls how much the current font size is
+increased.
 
-(setq my/current-font
-      (or my/default-font
-          (my/load-font-from-env)
-          'dejavu))
+#+begin_src emacs-lisp
+(setq doom-big-font-increment 10)
 #+end_src
 
 The function I use to switch between the various fonts I like. It applies the
 attributes of its value in =my/font-alist=.
 
 #+begin_src emacs-lisp
-(defun my/switch-font (arg font)
-  "Apply the attributes stored for FONT in `my/font-alist'.  When
-called with non-nil prefix argument ARG the current height is
-reset to the default height for the selected font."
+(defun my/switch-font (font)
+  "Apply the attributes stored for FONT in `my/font-alist'."
   (interactive
-   (list current-prefix-arg
-         (intern
-          (completing-read
-           "Font: "
-           (mapcar #'car
-                   (assoc-delete-all my/current-font
-                                     (copy-alist my/font-alist)))))))
-  (let* ((attrs (alist-get font my/font-alist))
-         (family (plist-get attrs :family))
-         (default-height (or (plist-get attrs :default-height) 160))
-         (height (or (and arg default-height)
-                     (face-attribute 'default :height)))
-         ;; `buffer-face-mode' is enabled when calling
-         ;; `variable-pitch-mode'
-         (org-height (if (bound-and-true-p buffer-face-mode)
-                         (or (plist-get attrs :org-height) 0.9)
-                       1.0))
-         (weight (or (plist-get attrs :weight) 'regular)))
+   (list
+    (intern
+     (completing-read
+      "Font: "
+      (mapcar #'car
+              (assoc-delete-all my/current-font
+                                (copy-alist my/font-alist)))))))
+  (let* ((size (font-get doom-font :size))
+         (attrs (plist-put (alist-get font my/font-alist) :size size)))
     (setq my/current-font font)
-    (setq my/default-font-height default-height)
-    (set-face-attribute
-     'default nil
-     :font family
-     :weight weight
-     :height height)
-    (set-face-attribute
-     'fixed-pitch nil
-     :font family
-     :height org-height)
-    (set-face-attribute
-     'fixed-pitch-serif nil
-     :font family
-     :inherit 'fixed-pitch
-     :height 1.0)))
-#+end_src
-
-Finally, set all the face attributes synchronously, or register a hook that
-makes sure that these also work when using the Emacs daemon together with
-=emacsclient=.
-
-FIXME: might be obsolete with doom
-
-#+begin_src emacs-lisp :tangle no
-(if (daemonp)
-    (add-hook 'server-after-make-frame-hook
-              (defun my/switch-to-current-font ()
-                (my/switch-font t my/current-font)
-                (remove-hook 'server-after-make-frame-hook
-                             #'my/switch-to-current-font)))
-  (my/switch-font t my/current-font))
-#+end_src
-
-I find myself switching fonts /all the time/; I just seem to need that kind of
-visual refreshment. So let's bind it to a "leader" key. FIXME(doom)
-
-#+begin_src emacs-lisp :tangle no
-(leader "t f" '(my/switch-font :which-key "switch font"))
+    (setq doom-font (apply #'font-spec attrs))
+    (doom/reload-font)))
 #+end_src
 
 *** Changing the font size
 
 #+begin_src emacs-lisp
+(defun my/set-font-size (size)
+  "Set the font size of the current font to a fixed value SIZE."
+  (interactive "nSize: ")
+  (doom-adjust-font-size size t))
+
 (setq my/font-resize-map
       (define-keymap
         (kbd "g") #'doom/increase-font-size
         (kbd "l") #'doom/decrease-font-size
-        (kbd "r") #'doom/reset-font-size))
+        (kbd "r") #'doom/reset-font-size
+        (kbd "s") #'my/set-font-size))
 
 (hercules-def
  :toggle-funs #'my/font-resize
