@@ -687,10 +687,9 @@ position of point to automatically show surrounding markup.
 
 #+begin_src emacs-lisp
 (after! flymake
-  (setq flymake-suppress-zero-counters nil
-        flymake-fringe-indicator-position 'left-fringe
-        flymake-no-changes-timeout 1.0
-        flymake-mode-line-lighter ""))
+  ;; HACK: This variable is needed for helpful or haskell-mode to start up for
+  ;; some reason
+  (setq flymake-allowed-file-name-masks nil))
 
 (add-hook! sh-mode #'flymake-mode)
 #+end_src
