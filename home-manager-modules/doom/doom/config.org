@@ -363,14 +363,14 @@ two functions are used for.
 (defun my/switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
   (interactive)
-  (when display-line-numbers-mode
+  (when (and (boundp 'display-line-numbers-mode) display-line-numbers-mode)
     (setq display-line-numbers t)))
 
 (defun my/switch-to-hybrid-line-numbers ()
   "Enable relative line numbers, but with the current line
 showing its absolute line number."
   (interactive)
-  (when display-line-numbers-mode
+  (when (and (boundp 'display-line-numbers-mode) display-line-numbers-mode)
     (setq display-line-numbers 'relative)
     (setq display-line-numbers-current-absolute t)))
 
