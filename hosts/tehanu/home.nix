@@ -4,8 +4,6 @@ let email = "johannes.maier@active-group.de";
 in {
   imports = [ ../../home-manager-modules/base.nix ../../home-manager-modules ];
 
-  targets.genericLinux = { enable = true; };
-
   modules = {
     base.gpgKey = "9AC78C1A48681583";
     herbstluftwm.enable = false;
