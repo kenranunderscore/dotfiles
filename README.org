@@ -1,7 +1,7 @@
 #+TITLE: My User Environment
 #+AUTHOR: Johannes Maier
 #+EMAIL: johannes.maier@mailbox.org
-#+STARTUP: show2levels indent
+#+STARTUP: showeverything
 
 * Overview
 
