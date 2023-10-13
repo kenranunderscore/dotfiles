@@ -77,8 +77,7 @@ in {
         defaultSession = "none+fake";
         lightdm = {
           enable = true;
-          greeters.mini.enable = true;
-          greeters.mini.user = username;
+          greeters.slick.enable = true;
         };
       };
     };
