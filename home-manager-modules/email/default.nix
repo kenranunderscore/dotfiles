@@ -101,5 +101,7 @@ in {
       msmtp.enable = true;
       mu.enable = true;
     };
+
+    home.packages = [ pkgs.emacs.pkgs.mu4e ];
   };
 }
