@@ -1059,7 +1059,34 @@ using, as I will only be using =gnus=.
                   (nnimap-inbox "INBOX")))))
 #+end_src
 
-* TODO IRC with =erc=
+* IRC with =circe=
+
+TODO: docs
+
+#+begin_src emacs-lisp
+(after! circe
+  (set-irc-server! "irc.libera.chat"
+    `(:tls t
+      :port 6697
+      :nick "kenran"
+      :tls-keylist ,(let ((cert-dir (getenv "KENRAN_IRC_CERTS")))
+                      `((,(concat cert-dir "/kenran.key")
+                         ,(concat cert-dir "/kenran.crt"))))
+      :channels ("#emacs"
+                 "#nyxt"
+                 "#systemcrafters"
+                 "#org-mode"
+                 "#haskell"
+                 "#nim"
+                 "#notmuch"
+                 "#zig"
+                 "#crawl"
+                 "#guix"
+                 "#commonlisp"
+                 "#lisp"
+                 "#herrhotzenplotz"))))
+#+end_src
+
 * TODO Project management
 * =Magit=
 
