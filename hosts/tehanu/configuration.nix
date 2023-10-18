@@ -101,6 +101,7 @@ in {
   };
 
   hardware = {
+    nvidia.modesetting.enable = true;
     nvidia.prime = {
       sync.enable = true;
       intelBusId = "PCI:0:2:0";
