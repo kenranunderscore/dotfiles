@@ -51,12 +51,18 @@ in {
       ];
       startupCommands = [
         {
-          command = "~/.fehbg";
-          always = false;
+          command = "xset r rate 200 70";
+          always = true;
           notification = false;
         }
         {
-          command = "xset r rate 200 65";
+          command = ''
+            xrandr --output HDMI-0 --off \
+            && xrandr --auto \
+            && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0 \
+            && systemctl --user restart polybar \
+            && ~/.fehbg
+          '';
           always = true;
           notification = false;
         }
@@ -110,6 +116,8 @@ in {
     };
   };
 
+  xsession.enable = true;
+
   services = {
     gpg-agent = {
       enable = true;
@@ -149,6 +157,4 @@ in {
   ];
 
   home.stateVersion = "22.05";
-
-  xsession.enable = true;
 }
