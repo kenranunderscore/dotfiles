@@ -40,7 +40,8 @@ in {
         # sometimes does not build in a naive way. Also have Emacs know all
         # treesit grammars by default, so we don't have to install them
         # externally later on.
-        myEmacs = emacsWithPackages (p: [ p.vterm p.treesit-grammars.with-all-grammars ]);
+        myEmacs = emacsWithPackages
+          (p: [ p.vterm p.treesit-grammars.with-all-grammars p.mu4e ]);
       in with pkgs; [
         myEmacs
 

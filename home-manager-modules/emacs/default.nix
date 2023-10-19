@@ -28,10 +28,10 @@ in {
           if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs;
         emacsWithPackages =
           (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
-        # Empty package list as I use straight.el now to try it out.
-        # vterm is an exception as it does not currently build in a
-        # naive way, which makes straight.el support difficult.
-        myEmacs = emacsWithPackages (p: [ p.vterm ]);
+        # Empty package list as I use straight.el now to try it out. vterm is an
+        # exception as it does not currently build in a naive way, which makes
+        # straight.el support difficult.
+        myEmacs = emacsWithPackages (p: [ p.vterm p.mu4e ]);
       in with pkgs; [
         myEmacs
 
