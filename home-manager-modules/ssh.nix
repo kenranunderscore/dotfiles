@@ -49,6 +49,13 @@ in {
           user = "terminal";
           compression = true;
         };
+
+        "trevor" = {
+          host = "trevor";
+          hostname = "trevor-x";
+          user = "root";
+          proxyCommand = "ssh root@leibniz.active-group.de -W %h:%p";
+        };
       };
     };
   };
