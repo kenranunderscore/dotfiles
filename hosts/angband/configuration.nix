@@ -9,7 +9,6 @@ in {
     '';
     settings.trusted-users = [ "root" username ];
   };
-  nixpkgs.config.allowUnfree = true;
 
   imports = [ ./hardware-configuration.nix ];
 

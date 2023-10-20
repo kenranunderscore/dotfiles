@@ -4,7 +4,6 @@ let username = custom.username;
 in {
   imports = [ ./hardware-configuration.nix ];
 
-  nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
