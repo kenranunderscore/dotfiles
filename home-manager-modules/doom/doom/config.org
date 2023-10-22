@@ -63,8 +63,6 @@ Brighten it up a bit.
 
 #+begin_src emacs-lisp
 (set-mouse-color "white")
-(add-hook 'server-after-make-frame-hook
-          (lambda () (set-mouse-color "white")))
 #+end_src
 
 Enable a forever-blinking cursor. I used to disable this mode but I found myself
