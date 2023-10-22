@@ -329,6 +329,11 @@ running.  =Gruvbox= is always a good choice, anywhere.
 
 ** Mode line (TODO: port and conditionalize with =featurep!=)
 
+#+begin_src emacs-lisp
+(after! doom-modeline
+  (setq doom-modeline-buffer-file-name-style 'buffer-name))
+#+end_src
+
 * Basic options
 ** Use a POSIX-compliant shell for processes started via Emacs
 
