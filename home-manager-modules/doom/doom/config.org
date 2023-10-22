@@ -165,10 +165,10 @@ attributes that need to be applied when switching to the respective font.
 #+end_src
 
 #+begin_src emacs-lisp
-(setq my/current-font 'borg)
-(setq my/default-font-size 20)
+(setq my/current-font 'jetbrains-mono)
 (setq doom-font (apply #'font-spec
-                       (plist-put (alist-get my/current-font my/font-alist) :size my/default-font-size)))
+                       (plist-put (alist-get my/current-font my/font-alist)
+                                  :size 23)))
 #+end_src
 
 The default text scaling increment produces jumps in font size that are way too
@@ -213,22 +213,27 @@ attributes of its value in =my/font-alist=.
 #+begin_src emacs-lisp
 (defun my/set-font-size (size)
   "Set the font size of the current font to a fixed value SIZE."
-  (interactive "nSize: ")
+  (interactive "nFont size: ")
   (doom-adjust-font-size size t))
 
 (setq my/font-resize-map
       (define-keymap
         (kbd "g") #'doom/increase-font-size
         (kbd "l") #'doom/decrease-font-size
-        (kbd "r") #'doom/reset-font-size
-        (kbd "s") #'my/set-font-size))
+        (kbd "r") #'doom/reset-font-size))
 
-(hercules-def
- :toggle-funs #'my/font-resize
- :keymap 'my/font-resize-map
- :transient t)
+(defhydra hydra-global-zoom (:hint nil :timeout 3)
+  "\n
+  [_g_]: [+]     [_s_]: set
+  [_l_]: [-]     [_r_]: reset\n
+  "
+  ("g" doom/increase-font-size)
+  ("l" doom/decrease-font-size)
+  ("r" doom/reset-font-size :color blue)
+  ("s" my/set-font-size :color blue)
+  ("q" nil "exit"))
 
-(map! :leader :desc "Font zoom" :g "z" #'my/font-resize)
+(map! :leader :desc "Font zoom" :g "z" #'hydra-global-zoom/body)
 #+end_src
 
 ** Color theme(s)

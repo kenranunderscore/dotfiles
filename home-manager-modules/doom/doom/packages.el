@@ -21,4 +21,4 @@
 
 ;;; Keybindings
 
-(package! hercules)
+(package! hydra)
