@@ -1114,6 +1114,11 @@ TODO: docs
 #+end_src
 
 * TODO Project management
+
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/projects" "~/ag" "~/tmpdev"))
+#+end_src
+
 * =Magit=
 
 Not much to say here: =magit= is awesome and in my top 3 reasons why I can't
