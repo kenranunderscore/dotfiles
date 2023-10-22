@@ -1123,7 +1123,8 @@ previously did (and more), like:
 (after! magit
   (map! :leader
         :desc "Magit status here" :nvm "g g" #'magit-status-here
-        :desc "Magit status" :nvm "g G" #'magit-status))
+        :desc "Magit status" :nvm "g G" #'magit-status)
+  (setq git-commit-summary-max-length 68))
 #+end_src
 
 ** Interactively browse =git= history
