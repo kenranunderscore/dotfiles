@@ -327,7 +327,7 @@ buffers).  Let's use one of those for now until everything else is up and
 running.  =Gruvbox= is always a good choice, anywhere.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'naga)
 #+end_src
 
 ** Mode line (TODO: port and conditionalize with =featurep!=)
