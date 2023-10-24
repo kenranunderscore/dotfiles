@@ -159,6 +159,9 @@ attributes that need to be applied when switching to the respective font.
         (unifont
          . (:family
             "Unifont"))
+        (andale-mono
+         . (:family
+            "Andale Mono"))
         (twilio-sans-mono
          . (:family
             "Twilio Sans Mono"))))

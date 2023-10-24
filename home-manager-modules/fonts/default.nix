@@ -37,6 +37,7 @@ in {
         borg-sans-mono
         cantarell-fonts
         cascadia-code
+        corefonts
         courier-prime
         fantasque-sans-mono
         fira-code
