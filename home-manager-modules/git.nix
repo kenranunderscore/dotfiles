@@ -26,6 +26,10 @@ in {
         co = "checkout";
         pushf = "push --force-with-lease";
       };
+      includes = [{
+        condition = "gitdir:~/ag/";
+        contents = { user.email = "johannes.maier@active-group.de"; };
+      }];
       ignores = [
         # (n)vim
         "*.swp"

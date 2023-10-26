@@ -88,7 +88,7 @@ in {
     # imwheel seems to be responsible for stuttering scrolling
     imwheel.enable = false;
     nyxt.enable = true;
-    git.email = email;
+    git.email = "johannes.maier@mailbox.org";
   };
 
   programs = {
