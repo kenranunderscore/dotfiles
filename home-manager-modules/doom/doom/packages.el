@@ -22,3 +22,6 @@
 ;;; Keybindings
 
 (package! hydra)
+
+;;;  Disable default snippets
+(package! doom-snippets :ignore t)

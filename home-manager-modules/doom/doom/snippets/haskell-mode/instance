@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: instance
+# uuid: haskell_instance
+# key: inst
+# --
+instance ${1:Class} ${2:Type} where
+ $0

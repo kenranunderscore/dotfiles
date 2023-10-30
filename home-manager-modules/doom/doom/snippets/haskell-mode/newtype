@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: newtype
+# uuid: haskell_newtype
+# key: nt
+# --
+newtype ${1:Name} = ${2:$1} { ${3:value} :: ${4:Type} }
+$0

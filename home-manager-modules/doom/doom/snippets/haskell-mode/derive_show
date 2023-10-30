@@ -1,0 +1,5 @@
+# name: derive Show
+# uuid: haskell_derive_show
+# key: ds
+# --
+deriving stock (Show)

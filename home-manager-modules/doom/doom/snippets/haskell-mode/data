@@ -1,0 +1,6 @@
+# name: data
+# uuid: haskell_data
+# key: da
+# --
+data ${1:Type} = ${2:$1}
+ $0
