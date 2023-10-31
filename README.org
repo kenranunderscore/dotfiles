@@ -32,7 +32,7 @@ some point) I manage this way:
 ** Repository and flake structure
 
 The [[file:hosts/][hosts]] directory contains the machine/host-specific pieces of configuration.
-Every subdirectory will lead to a flake output under =nixosConfiguration=, with
+Every subdirectory will lead to a flake output under =nixosConfigurations=, with
 the attribute name being the name of the directory.
 
 The directories itself follow a fixed convention:
