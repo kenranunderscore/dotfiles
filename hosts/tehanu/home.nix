@@ -110,7 +110,7 @@ in {
     discord
     dmenu
     element-desktop
-    google-chrome-beta
+    google-chrome
     keepass
     keepassxc
     libreoffice
