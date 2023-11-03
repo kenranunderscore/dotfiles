@@ -9,7 +9,7 @@ in {
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
-      withGaps = false;
+      withGaps = true;
       workspaces = [
         {
           name = "1:main";
@@ -75,7 +75,7 @@ in {
       enable = true;
       withBattery = true;
     };
-    picom.enable = false;
+    picom.enable = true;
     email = {
       certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
       primaryAccount = "mailbox";

@@ -2,10 +2,12 @@
 
 let
   colors = {
-    foreground = "#0ac30a";
-    background = "#040404";
-    transparent = "#040404";
-    urgent = "#ff4500";
+    foreground = "#d3c6aa";
+    accent = "#a7c080";
+    background = "#2b3339";
+    highlight-background = "#1b1f22";
+    transparent = "#2b3339";
+    urgent = "#e67e80";
   };
   mkLayoutTextModule = content: {
     inherit content;
@@ -25,18 +27,22 @@ let
     # TODO: maybe Material is a better fit?
     font-2 = "Font Awesome 6 Free:size=17;5";
     font-3 = "Font Awesome 6 Free Solid:style=Solid:size=17;5";
-    height = "30";
+    height = "33";
     locale = "en_US.UTF-8";
     offset-x = "0%";
     padding = "0";
     radius-top = "0";
     width = "100%";
+    separator = "|";
+    line-size = "5";
   };
   mkWlanModule = interface: {
     inherit interface;
     type = "internal/network";
     accumulate-stats = "true";
-    format-connected = " <label-connected>";
+    format-connected-prefix = " ";
+    format-connected-prefix-foreground = "${colors.accent}";
+    format-connected = "<label-connected>";
     format-connected-background = "${colors.background}";
     format-connected-foreground = "${colors.foreground}";
     format-connected-margin = 0;
@@ -61,52 +67,28 @@ in {
     margin-top = 0;
   };
 
-  "bar/main" = mkBar true "date distro-icon cpu memory" "i3"
-    (pkgs.lib.optionalString withBattery "battery "
-      + "wlan1 wlan2 wlan3 wlan4 audio powermenu");
-
-  # "module/xworkspaces" = {
-  #   type = "internal/xworkspaces";
-  #   enable-scroll = false;
-  #   pin-workspaces = true;
-  #   format = "<label-state>";
-  #   label-monitor = "";
-  #   label-active = "%name%";
-  #   label-active-background = "${colors.background}";
-  #   label-active-foreground = "${colors.foreground}";
-  #   label-active-padding = 1;
-  #   label-active-margin = 0;
-  #   label-active-font = 2;
-  #   label-occupied = "%name%";
-  #   label-occupied-background = "${colors.background}";
-  #   label-occupied-foreground = "#707070";
-  #   label-occupied-padding = 1;
-  #   label-occupied-margin = 0;
-  #   label-empty = "";
-  #   label-empty-padding = 0;
-  #   label-empty-margin = 0;
-  #   label-urgent = "%name%";
-  #   label-urgent-background = "${colors.background}";
-  #   label-urgent-foreground = "${colors.urgent}";
-  #   label-urgent-padding = 1;
-  #   label-urgent-margin = 0;
-  # };
+  "bar/main" = mkBar true "i3" "" ("distro-icon cpu memory"
+    + (pkgs.lib.optionalString withBattery " battery "
+      + "wlan1 wlan2 wlan3 wlan4 audio date"));
 
   "module/date" = {
+    format-prefix = " ";
+    format-prefix-foreground = "${colors.accent}";
     format-foreground = "${colors.foreground}";
     format-background = "${colors.background}";
     format-padding = 2;
     format-margin = 0;
     interval = 1;
-    label = " %date%   %time%";
+    label = "%date% %time%";
     time = "%H:%M:%S";
     date = "%d %b %Y";
     type = "internal/date";
   };
 
   "module/cpu" = {
-    # format = "%{T-2} %{T-}<label>";
-    format = "%{T3} %{T-}<label>";
+    format = "<label>";
+    format-prefix = "%{T3} %{T-}";
+    format-prefix-foreground = "${colors.accent}";
     format-background = "${colors.background}";
     format-foreground = "${colors.foreground}";
     format-padding = 2;
@@ -125,7 +107,9 @@ in {
     animation-charging-4 = "";
     animation-charging-framerate = 500;
     battery = "BAT0";
-    format-charging = " <animation-charging> <label-charging>";
+    format-charging-prefix = " ";
+    format-charging-prefix-foreground = "${colors.accent}";
+    format-charging = "<animation-charging> <label-charging>";
     format-charging-background = "${colors.background}";
     format-charging-foreground = "${colors.foreground}";
     format-charging-padding = 1;
@@ -133,13 +117,15 @@ in {
     format-discharging-background = "${colors.background}";
     format-discharging-foreground = "${colors.foreground}";
     format-discharging-padding = 1;
+    format-full-prefix = " ";
+    format-full-prefix-foreground = "${colors.accent}";
     format-full-background = "${colors.background}";
     format-full-foreground = "${colors.foreground}";
     format-full-padding = 1;
-    full-at = 101;
+    full-at = 99;
     label-charging = "%percentage%%";
     label-discharging = "%percentage%%";
-    label-full = " 100%";
+    label-full = "100%";
     poll-interval = 2;
     ramp-capacity-0 = " ";
     ramp-capacity-0-foreground = "#e74c3c";
@@ -159,7 +145,9 @@ in {
     format-muted-margin = 0;
     format-muted-prefix = "%{T4} %{T-}";
     format-muted-prefix-foreground = "${colors.urgent}";
-    format-volume = "%{T4} %{T-}VOL <label-volume>";
+    format-volume = "<label-volume>";
+    format-volume-prefix = "%{T4} %{T-}";
+    format-volume-prefix-foreground = "${colors.accent}";
     format-volume-background = "${colors.background}";
     format-volume-foreground = "${colors.foreground}";
     format-volume-padding = 2;
@@ -174,33 +162,11 @@ in {
     compositing-border = "over";
     compositing-foreground = "over";
     compositing-overline = "over";
-    comppositing-underline = "over";
+    compositing-underline = "over";
     pseudo-transparency = false;
     screenchange-reload = true;
     throttle-output = "5";
     throttle-output-for = "10";
-  };
-
-  "module/powermenu" = {
-    type = "custom/menu";
-    expand-left = true;
-    format = "<label-toggle> <menu>";
-    format-background = "${colors.background}";
-    format-foreground = "${colors.foreground}";
-    format-padding = 1;
-    label-close = " ";
-    label-close-padding-right = 0;
-    label-close-padding-left = 1;
-    label-open = " ";
-    label-open-padding = 1;
-    label-separator = "|";
-    label-separator-padding = 1;
-    menu-0-0 = "  Suspend";
-    menu-0-0-exec = "systemctl suspend";
-    menu-0-1 = "  Reboot";
-    menu-0-1-exec = "v";
-    menu-0-2 = "  Shutdown";
-    menu-0-2-exec = "systemctl poweroff";
   };
 
   "module/wlan1" = mkWlanModule "wlp3s0";
@@ -209,7 +175,9 @@ in {
   "module/wlan4" = mkWlanModule "wlp0s20f3";
 
   "module/memory" = {
-    format = "%{T4} %{T-}<label>";
+    format = "<label>";
+    format-prefix = "%{T4} %{T-}";
+    format-prefix-foreground = "${colors.accent}";
     format-background = "${colors.background}";
     format-foreground = "${colors.foreground}";
     format-padding = 2;
@@ -227,7 +195,7 @@ in {
     enable-click = true;
     enable-scroll = false;
     format = "<label-state><label-mode>";
-    label-separator = "";
+    label-separator = "|";
     label-separator-padding = 0;
     label-separator-margin = 0;
     label-mode = "%mode%";
@@ -236,19 +204,20 @@ in {
     label-mode-padding = 1;
     label-mode-margin = 0;
     label-focused = "%name%";
-    label-focused-background = "${colors.background}";
-    label-focused-foreground = "${colors.foreground}";
+    label-focused-background = "${colors.highlight-background}";
+    label-focused-foreground = "${colors.accent}";
+    label-focused-underline = "${colors.accent}";
     label-focused-padding = 1;
     label-focused-margin = 0;
     label-focused-font = 2;
     label-unfocused = "%name%";
     label-unfocused-background = "${colors.background}";
-    label-unfocused-foreground = "#707070";
+    label-unfocused-foreground = "${colors.foreground}";
     label-unfocused-padding = 1;
     label-unfocused-margin = 0;
     label-visible = "%name%";
-    label-visible-background = "${colors.background}";
-    label-visible-foreground = "#3cb371";
+    label-visible-background = "${colors.highlight-background}";
+    label-visible-foreground = "${colors.accent}";
     label-visible-padding = 1;
     label-visible-margin = 0;
     label-urgent = "%name%";
@@ -260,7 +229,9 @@ in {
 
   "module/distro-icon" = {
     exec = "${pkgs.coreutils}/bin/uname -r | ${pkgs.coreutils}/bin/cut -d- -f1";
-    format = "%{T3} %{T-}<label>";
+    format-prefix = "%{T3} %{T-}";
+    format-prefix-foreground = "${colors.accent}";
+    format = "<label>";
     format-background = "${colors.background}";
     format-foreground = "${colors.foreground}";
     format-padding = 2;

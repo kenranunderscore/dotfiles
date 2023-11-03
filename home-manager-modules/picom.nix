@@ -28,10 +28,13 @@ in {
         ''100:class_i = "Alacritty"''
       ];
       backend = "glx";
-      fade = false;
+      fade = true;
       fadeDelta = 5;
-      vSync = false;
-      settings = { xrender-sync-fence = true; };
+      vSync = true;
+      settings = {
+        xrender-sync-fence = true;
+        corner-radius = 0;
+      };
     };
   };
 }

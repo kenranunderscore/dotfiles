@@ -129,13 +129,13 @@ in {
           };
           urgent = {
             background = "#040404";
-            border = "#ff4500";
+            border = "#a7c080";
             childBorder = "#700000";
             indicator = "#700000";
             text = "#ff4500";
           };
         };
-        gaps = let val = 70;
+        gaps = let val = 50;
         in lib.mkIf cfg.withGaps {
           inner = val;
           outer = 0;
