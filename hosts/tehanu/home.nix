@@ -127,6 +127,7 @@ in {
     thunderbird
     twitch-cli
     vlc
+    wezterm
     wine
     wireshark
   ];
