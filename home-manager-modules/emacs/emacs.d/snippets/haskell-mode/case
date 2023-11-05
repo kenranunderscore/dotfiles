@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: case
+# uuid: haskell_case
+# key: case
+# --
+case ${1:val} of
+ ${2:cond} -> ${3:result}
+ $0

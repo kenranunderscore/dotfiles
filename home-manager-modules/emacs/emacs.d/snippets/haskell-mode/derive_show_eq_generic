@@ -1,0 +1,5 @@
+# name: derive Show, Eq, Generic
+# uuid: haskell_derive_show_eq_generic
+# key: dsg
+# --
+deriving stock (Show, Eq, Generic)

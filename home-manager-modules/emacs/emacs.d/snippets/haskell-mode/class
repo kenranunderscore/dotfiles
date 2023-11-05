@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: class
+# uuid: haskell_class
+# key: cl
+# --
+class ${1:Name} where
+ $0

@@ -1,0 +1,5 @@
+# name: impl
+# uuid: haskell_impl
+# key: impl
+# --
+(error "TODO: ${1:implement this}")

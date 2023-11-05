@@ -8,14 +8,7 @@
 ;; mostly typos I often make.
 
 (define-abbrev-table 'global-abbrev-table
-  '(;; templates
-    ("td" "TODO:")
-    ("tdj" "TODO(Johannes):")
-    ("fm" "FIXME:")
-    ("fmj" "FIXME(Johannes):")
-
-    ;; typos
-    ("aciton" "action")
+  '(("aciton" "action")
     ("cilent" "client")
     ("configuraion" "configuration")
     ("configuraiton" "configuraiton")

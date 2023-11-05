@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: function
+# uuid: haskell_function
+# key: ::
+# expand-env: ((yas-indent-line 'fixed))
+# --
+${1:foo} :: ${2:signature}
+$1 ${3:args} = $0
