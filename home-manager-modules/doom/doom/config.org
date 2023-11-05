@@ -1120,6 +1120,7 @@ TODO: docs
 
 #+begin_src emacs-lisp
 (setq projectile-project-search-path '("~/projects" "~/ag" "~/tmpdev"))
+(setq projectile-enable-caching nil)
 #+end_src
 
 * =Magit=
