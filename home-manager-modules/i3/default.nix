@@ -39,7 +39,7 @@ in {
         menu = "rofi -show run";
         window = {
           titlebar = false;
-          border = 2;
+          border = 5;
         };
         assigns = builtins.foldl' (acc: w:
           if builtins.hasAttr "assigns" w then
@@ -101,9 +101,9 @@ in {
         colors = {
           focused = {
             background = "#041a04";
-            border = "#0ac30a";
-            childBorder = "#00a000";
-            indicator = "#00a000";
+            border = "#a7c080";
+            childBorder = "#a7c080";
+            indicator = "#e67e80";
             text = "#0ac30a";
           };
           focusedInactive = {
