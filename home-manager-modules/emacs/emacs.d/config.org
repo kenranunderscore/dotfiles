@@ -1654,22 +1654,21 @@ with =evil= as well.
   (evil-org-agenda-set-keys))
 #+end_src
 
-** Beautiful bullet points
+** Giving org a more modern look&feel
+
+Minad's [[https://github.com/minad/org-modern][org-modern package]] looks very promising, so let's try it out.
 
 #+begin_src emacs-lisp
-(use-package org-bullets
-  ;; :hook (org-mode . org-bullets-mode)
-  :custom (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-#+end_src
-
-Also render unordered list bullet points as dots instead of =-= or =+=.
-
-#+begin_src emacs-lisp
-(font-lock-add-keywords
- 'org-mode
- '(("^ *\\([-]\\) "
-    (0 (prog1 ()
-         (compose-region (match-beginning 1) (match-end 1) "•"))))))
+(use-package org-modern
+  :hook
+  (org-mode . org-modern-mode)
+  :config
+  (setq org-modern-star '("◉" "○" "✸" "✿" "✤" "✜" "◆" "▶")
+        org-modern-block-name '((t . t)
+                                ("src" "»" "«")
+                                ("example" "»–" "–«")
+                                ("quote" "❝" "❞")
+                                ("export" "⏩" "⏪"))))
 #+end_src
 
 ** Show emphasis markers depending on point
