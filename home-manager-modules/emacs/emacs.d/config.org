@@ -567,7 +567,6 @@ Enable and configure =naga=:
 (setq naga-theme-use-red-cursor t)
 (setq naga-theme-surround-org-blocks t)
 (setq naga-theme-use-lighter-org-block-background t)
-(my/switch-theme 'wheatgrass)
 #+end_src
 
 **** Modus themes
@@ -637,6 +636,12 @@ out via =straight-use-package=.
 #+begin_src emacs-lisp
 (use-package srcery-theme
   :defer)
+#+end_src
+
+**** Set the current theme
+
+#+begin_src emacs-lisp
+(my/switch-theme 'doom-zenburn)
 #+end_src
 
 ** Render color names/codes in their respective color
