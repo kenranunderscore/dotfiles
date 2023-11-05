@@ -102,7 +102,10 @@ Helix etc. are also using it by default.)
     "b n" 'next-buffer
     "b s" 'scratch-buffer
     "c" 'comment-or-uncomment-region
-    "t" '(:ignore t :which-key "toggles")))
+    "t" '(:ignore t :which-key "toggles")
+    "q" '(:ignore t :which-key "quit")
+    "q k" 'save-buffers-kill-emacs
+    "q r" 'restart-emacs))
 #+end_src
 
 * The region
