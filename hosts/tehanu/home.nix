@@ -69,7 +69,7 @@ in {
       ];
     };
     rofi.enable = true;
-    neovim.enable = lib.mkForce false;
+    neovim.enable = true;
     sbcl.enable = true;
     polybar = {
       enable = true;

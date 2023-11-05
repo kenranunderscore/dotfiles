@@ -33,6 +33,8 @@ use("nvim-lua/plenary.nvim")
 
 -- Colorschemes I like to use (TODO(Johannes): add modus maybe?)
 use("tiagovla/tokyodark.nvim")
+use{ "catppuccin/nvim", as = "catppuccin" }
+use("sainnhe/everforest")
 
 -- General utils/quality of life
 use("tpope/vim-repeat")
