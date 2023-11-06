@@ -3088,8 +3088,7 @@ press single keys until it quits -- either after =q= or a timeout.
          (setq default-text-scale--complement 0)
          (face-spec-set 'default `((t (:height ,my/default-font-height))))
          (set-face-attribute 'default nil
-                             :height my/default-font-height))
-   :color blue)
+                             :height my/default-font-height)))
   ("s" (lambda (height)
          (interactive "nFont size: ")
          (set-face-attribute 'default nil
