@@ -743,6 +743,7 @@ line."
 see filtered out."
   (let ((hidden-modes '(gcmh-mode
                         which-key-mode
+                        yas-minor-mode
                         buffer-face-mode
                         eldoc-mode
                         evil-org-mode
