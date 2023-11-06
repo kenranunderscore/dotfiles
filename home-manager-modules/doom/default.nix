@@ -4,14 +4,7 @@ let
   cfg = config.modules.doom;
   types = lib.types;
 in {
-  options.modules.doom = {
-    enable = lib.mkEnableOption "doom";
-
-    emacsVersion = lib.mkOption {
-      type = types.enum [ "stable" "git" ];
-      default = "git";
-    };
-  };
+  options.modules.doom.enable = lib.mkEnableOption "doom";
 
   config = lib.mkIf cfg.enable {
     home = {
@@ -32,10 +25,8 @@ in {
       };
 
       packages = let
-        targetEmacs =
-          if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs29;
         emacsWithPackages =
-          (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
+          (pkgs.emacsPackagesFor pkgs.emacs29).emacsWithPackages;
         # Doom manages packages itself, but vterm is an exception as it
         # sometimes does not build in a naive way. Also have Emacs know all
         # treesit grammars by default, so we don't have to install them

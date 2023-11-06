@@ -81,10 +81,8 @@ in {
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    doom = {
-      enable = true;
-      emacsVersion = "stable";
-    };
+    doom.enable = false;
+    emacs.enable = true;
     # imwheel seems to be responsible for stuttering scrolling
     imwheel.enable = false;
     nyxt.enable = true;

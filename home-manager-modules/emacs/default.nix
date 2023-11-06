@@ -4,14 +4,7 @@ let
   cfg = config.modules.emacs;
   types = lib.types;
 in {
-  options.modules.emacs = {
-    enable = lib.mkEnableOption "emacs";
-
-    emacsVersion = lib.mkOption {
-      type = types.enum [ "stable" "git" ];
-      default = "git";
-    };
-  };
+  options.modules.emacs.enable = lib.mkEnableOption "emacs";
 
   config = lib.mkIf cfg.enable {
     home = {
@@ -24,13 +17,10 @@ in {
       };
 
       packages = let
-        targetEmacs =
-          if cfg.emacsVersion == "git" then pkgs.emacs-git else pkgs.emacs;
         emacsWithPackages =
-          (pkgs.emacsPackagesFor targetEmacs).emacsWithPackages;
-        # Empty package list as I use straight.el now to try it out. vterm is an
-        # exception as it does not currently build in a naive way, which makes
-        # straight.el support difficult.
+          (pkgs.emacsPackagesFor pkgs.emacs-git).emacsWithPackages;
+        # Some packages should come "with Emacs" via nix, as they are either
+        # notoriously difficult to build locally on NixOS, or not in MELPA etc.
         myEmacs = emacsWithPackages (p: [ p.vterm p.mu4e ]);
       in with pkgs; [
         myEmacs
