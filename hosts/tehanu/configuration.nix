@@ -125,7 +125,12 @@ in {
     fish.enable = true;
   };
 
-  virtualisation = { docker.enable = true; };
+  virtualisation = {
+    docker = {
+      enable = true;
+      extraOptions = "--experimental";
+    };
+  };
 
   environment = {
     systemPackages = with pkgs; [ git ];
