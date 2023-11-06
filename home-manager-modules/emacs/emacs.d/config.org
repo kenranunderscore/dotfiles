@@ -953,6 +953,15 @@ Emacs uses the =fill-column= variable to determine when to break.  Its default o
 (setq-default fill-column 80)
 #+end_src
 
+** Don't require two spaces to end sentences
+
+Controversial, I know, but I've gotten used to it in Doom and actually like not
+having to change my typing flow depending on the context anymore.
+
+#+begin_src emacs-lisp
+(setq sentence-end-double-space nil)
+#+end_src
+
 * Vim emulation with =evil=
 
 The =evil= package offers a very complete Vim experience inside of Emacs.  I've
