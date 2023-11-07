@@ -747,6 +747,7 @@ see filtered out."
                         buffer-face-mode
                         eldoc-mode
                         evil-org-mode
+                        evil-commentary-mode
                         org-indent-mode
                         auto-revert-mode
                         auto-fill-function
