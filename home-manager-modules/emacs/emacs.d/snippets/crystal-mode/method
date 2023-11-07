@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: method
+# key: f
+# --
+def ${1:function_name}(${2:args})
+ $0
+end

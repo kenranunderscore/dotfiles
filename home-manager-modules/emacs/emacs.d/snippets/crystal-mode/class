@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: class
+# key: c
+# --
+class ${1:Foo}
+ $0
+end
