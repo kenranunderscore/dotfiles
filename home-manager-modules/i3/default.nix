@@ -33,7 +33,7 @@ in {
         modifier = "Mod4";
         startup = cfg.startupCommands;
         focus = {
-          followMouse = false;
+          followMouse = true;
           mouseWarping = true;
         };
         menu = "rofi -show run";
