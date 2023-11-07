@@ -2764,6 +2764,17 @@ highlighting at least for when I /do/ have to read it.
   :defer)
 #+end_src
 
+** Crystal
+
+Crystal is the language I learn/use to write my Twitch bot with, at least for
+now. So far I'm liking it and it will surely also transfer to my Ruby reading
+skills.
+
+#+begin_src emacs-lisp
+(use-package crystal-mode
+  :defer)
+#+end_src
+
 ** LSP integration
 
 I've used =lsp-mode= in the past and while it's nice, I feel like it's more in
