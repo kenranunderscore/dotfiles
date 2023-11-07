@@ -3068,7 +3068,7 @@ everywhere.
   :defer
   :after hydra
   :config
-  (setq default-text-scale-amount 15))
+  (setq default-text-scale-amount 10))
 #+end_src
 
 Now I like increasing/decreasing the font, for instance when presenting or pair
