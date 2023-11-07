@@ -864,15 +864,13 @@ two functions are used for.
 #+begin_src emacs-lisp
 (defun my/switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
-  (interactive)
-  (when display-line-numbers-mode
+  (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers t)))
 
 (defun my/switch-to-hybrid-line-numbers ()
   "Enable relative line numbers, but with the current line
 showing its absolute line number."
-  (interactive)
-  (when display-line-numbers-mode
+  (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers 'relative)
     (setq display-line-numbers-current-absolute t)))
 
@@ -884,14 +882,13 @@ keybinding."
 
 (use-package display-line-numbers
   :defer
-  :hook ((prog-mode . display-line-numbers-mode)
-         (conf-mode . display-line-numbers-mode)
-         (evil-insert-state-entry . my/switch-to-absolute-line-numbers)
+  :hook ((evil-insert-state-entry . my/switch-to-absolute-line-numbers)
          (evil-insert-state-exit . my/switch-to-hybrid-line-numbers))
   :config
   (setq display-line-numbers-type 'relative)
-  (setq display-line-numbers-current-absolute t)
-  (leader "t l" 'my/toggle-line-numbers))
+  (setq display-line-numbers-current-absolute t))
+
+(leader "t l" 'my/toggle-line-numbers)
 #+end_src
 
 ** Insert a newline at the end of files
