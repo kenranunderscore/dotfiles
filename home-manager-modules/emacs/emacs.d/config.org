@@ -42,7 +42,7 @@ packages on its own, as =straight.el= is responsible for doing so.
 
 * Profiling the startup time
 
-For no real reason whatsoever I like it when my Emacs starts up quickly.  The
+For no real reason whatsoever I like it when my Emacs starts up quickly. The
 =benchmark-init= package nicely profiles where the time during startup went, and
 if a culprit is found, the "fix" is usually to add =:defer= to a =use-package= call.
 
@@ -59,7 +59,7 @@ behavior.
 * Keybinding management
 
 I use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more straightforward and
-declarative way.  This is especially useful for Vim emulation with =evil-mode=,
+declarative way. This is especially useful for Vim emulation with =evil-mode=,
 where keys have to be bound according to the current (Vim) mode.
 
 #+begin_src emacs-lisp
@@ -69,11 +69,11 @@ where keys have to be bound according to the current (Vim) mode.
 The concept of a /prefix key/ (or /leader key/) is quite useful in my opinion:
 decide on a key that should hold all custom or built-in functionality (not
 specific to a major mode, where =C-c <letter>= would be the appropriate place to
-bind things to).  With this mechanism you basically create your own custom
+bind things to). With this mechanism you basically create your own custom
 mode-agnostic keymap, accessible almost everywhere.
 
-I used to use =C-t= as my prefix key when not using =evil=.  With Vim emulation =SPC=
-becomes is more attractive as leader key.  (That's why Spacemacs, Doom Emacs,
+I used to use =C-t= as my prefix key when not using =evil=. With Vim emulation =SPC=
+becomes is more attractive as leader key. (That's why Spacemacs, Doom Emacs,
 Helix etc. are also using it by default.)
 
 #+begin_src emacs-lisp
@@ -114,11 +114,11 @@ The command to narrow the view to the current region is disabled by default, as
 it might actually confuse people new to Emacs who invoke it by accident.
 
 Narrowing is a concept used in many areas of Emacs, but I now mostly use it when
-writing =org= files like this one right here.  Narrowing means restricting what
-can be seen of the current buffer to a smaller area; marking the whole buffer
-with =C-x h= or similar commands then only affect that restricted area.  In
-=org-mode= there are built-in commands to narrow to a subtree/section, or blocks,
-for instance; but narrowing is also used by Emacs itself.  An example would be
+writing =org= files like this one right here. Narrowing means restricting what can
+be seen of the current buffer to a smaller area; marking the whole buffer with
+=C-x h= or similar commands then only affect that restricted area. In =org-mode=
+there are built-in commands to narrow to a subtree/section, or blocks, for
+instance; but narrowing is also used by Emacs itself. An example would be
 capturing todo items (with =org-capture=), where you on see the item(s) you wish
 to add, but are actually editing your whole inbox =.org= file within a narrowed
 view.
@@ -130,7 +130,7 @@ view.
 * Copying the current line
 
 It's awkward to have to do =C-S-<backspace>= or =C-k C-k=, followed by yanking, to
-"just" copy the line point is on to the kill ring.  Note that when using =evil=,
+"just" copy the line point is on to the kill ring. Note that when using =evil=,
 this command is obsolete, as Vim bindings make this quite easy.
 
 #+begin_src emacs-lisp :tangle no
@@ -146,7 +146,7 @@ this command is obsolete, as Vim bindings make this quite easy.
 
 * Loading additional ELisp configuration files
 
-I do not want customizations done via =customize= to end up in this file.  Use a
+I do not want customizations done via =customize= to end up in this file. Use a
 separate file instead and load that one on startup.
 
 #+begin_src emacs-lisp
@@ -179,7 +179,7 @@ TODO
 ** "Error" navigation
 
 Commands like =next-error= provide navigation for more than just errors in the
-strict sense of the word.  For instance, they also work with =occur= and =grep= type
+strict sense of the word. For instance, they also work with =occur= and =grep= type
 buffers (this holds for the variants of those that I use as well: =embark= and
 =ripgrep=, with or without =consult=).
 
@@ -208,9 +208,9 @@ emacsclient -a ''
 #+end_src
 
 Setting some things at this point often results in the changes not being applied
-correctly.  It's due to them happening in a technical, invisible Emacs frame.
-So you'll often see =(daemonp)= being called, checking whether this instance of
-Emacs is using the daemon, then adding some initializer function to
+correctly. It's due to them happening in a technical, invisible Emacs frame. So
+you'll often see =(daemonp)= being called, checking whether this instance of Emacs
+is using the daemon, then adding some initializer function to
 =server-after-make-frame-hook= if it is.
 
 ** Cursor
@@ -224,8 +224,8 @@ Brighten it up a bit.
           (lambda () (set-mouse-color "white")))
 #+end_src
 
-Enable a forever-blinking cursor.  I used to disable this mode but I found
-myself searching for the cursor a couple of times lately.
+Enable a forever-blinking cursor. I used to disable this mode but I found myself
+searching for the cursor a couple of times lately.
 
 #+begin_src emacs-lisp
 (setq blink-cursor-delay 0.5)
@@ -356,10 +356,10 @@ attributes that need to be applied when switching to the respective font.
 #+end_src
 
 =my/current-font= contains a symbol pointing to one of the fonts specified in
-=my/font-alist=.  Since I can now globally "set" and change a font I like for my
-system, Emacs should try to adapt to this (at startup) as well.  The function
+=my/font-alist=. Since I can now globally "set" and change a font I like for my
+system, Emacs should try to adapt to this (at startup) as well. The function
 =my/load-font-from-env= does just that, as the global font -- if it exists -- can
-be read from an environment variable.  If a setting for this font is found in
+be read from an environment variable. If a setting for this font is found in
 Emacs, that is taken, unless there's a =my/default-font= set, which always "wins".
 
 If neither default font nor environment variable are set/found, I fall back to
@@ -385,14 +385,13 @@ set, and translate that to one of the font symbols."
           'dejavu))
 #+end_src
 
-For =org-mode= I (sometimes) like using a non-monospace font.  This is
-it.
+For =org-mode= I (sometimes) like using a non-monospace font. This is it.
 
 #+begin_src emacs-lisp
 (defconst my/variable-pitch-font "Cantarell")
 #+end_src
 
-The function I use to switch between the various fonts I like.  It applies the
+The function I use to switch between the various fonts I like. It applies the
 attributes of its value in =my/font-alist=.
 
 #+begin_src emacs-lisp
@@ -456,7 +455,7 @@ makes sure that these also work when using the Emacs daemon together with
 #+end_src
 
 I find myself switching fonts /all the time/; I just seem to need that kind of
-visual refreshment.  So let's bind it to a "leader" key.
+visual refreshment. So let's bind it to a "leader" key.
 
 #+begin_src emacs-lisp
 (leader "t f" '(my/switch-font :which-key "switch font"))
@@ -465,7 +464,7 @@ visual refreshment.  So let's bind it to a "leader" key.
 ** Color theme
 *** Utilities
 
-A command to switch themes interactively.  Emacs's =load-theme= applies all the
+A command to switch themes interactively. Emacs's =load-theme= applies all the
 loaded themes on top of each other; I like to only have one theme active at all
 times, so I use =disable-theme= on all themes in =custom-enabled-themes= before
 enabling the target theme.
@@ -530,7 +529,7 @@ it on the fly.
 #+end_src
 
 As with fonts, I like changing visuals regularly, as in, multiple times a day
-usually.  So keybindings for this come in useful:
+usually. So keybindings for this come in useful:
 
 #+begin_src emacs-lisp
 (leader
@@ -546,13 +545,13 @@ theme collections, loaded here.
 
 **** Custom theme: =naga=
 
-I usually use [[https://github.com/kenranunderscore/emacs-naga-theme][my own /naga/ theme]].  It can be found on MELPA nowadays, though it's
-still only "finished" for the parts I really use.  Should there be enough
+I usually use [[https://github.com/kenranunderscore/emacs-naga-theme][my own /naga/ theme]]. It can be found on MELPA nowadays, though it's
+still only "finished" for the parts I really use. Should there be enough
 interest, I could style some more parts, but it's not anything I plan on doing
 for now.
 
 I'm using a "mutable" path to the theme repository, assuming I've cloned my
-project repository to a fixed location.  This allows for quick iteration by
+project repository to a fixed location. This allows for quick iteration by
 changing stuff in the theme, followed by =my/reload-theme=.
 
 #+begin_src emacs-lisp
@@ -571,7 +570,7 @@ Enable and configure =naga=:
 
 **** Modus themes
 
-[[https://protesilaos.com/emacs/modus-themes][This package]] by Protesilaos Stavrou is my first choice of "external" themes.  I
+[[https://protesilaos.com/emacs/modus-themes][This package]] by Protesilaos Stavrou is my first choice of "external" themes. I
 find myself going back to =modus-vivendi= in the evening, even though I keep
 saying that I don't like that high of a contrast.
 
@@ -612,16 +611,16 @@ turn on:
 
 **** Doom themes
 
-[[https://github.com/hlissner/doom-emacs][This package]] used to be my go-to source of different themes.  It's a megapack,
+[[https://github.com/hlissner/doom-emacs][This package]] used to be my go-to source of different themes. It's a megapack,
 started by the creator of [[https://github.com/hlissner/doom-emacs][Doom Emacs]], Henrik Lissner, but over time it grew into
 an extensive collection of different themes.
 
 It also comes with a DSL to create custom "doom themes", that is, one specifies
 a relatively small number of faces / colors and the results are propagated to
-most faces of all the common packages.  Without using (something like) this,
-it's quite a bit of work to style lots of packages, as one might imagine.  I'll
-leave this here for posterity and also to from time to time enable it and check
-out newly added doom themes.
+most faces of all the common packages. Without using (something like) this, it's
+quite a bit of work to style lots of packages, as one might imagine. I'll leave
+this here for posterity and also to from time to time enable it and check out
+newly added doom themes.
 
 #+begin_src emacs-lisp
 (use-package doom-themes
@@ -648,7 +647,7 @@ out via =straight-use-package=.
 
 =Rainbow-mode= does what the (org) title says: whenever you see a color in text in
 Emacs, say, the nice orange #ff9000, then it will be rendered with the
-respective background color.  The package will even pick a fitting light or dark
+respective background color. The package will even pick a fitting light or dark
 foreground for you.
 
 Note that I load this deferred, and it won't be automatically started when a
@@ -664,8 +663,7 @@ fit.
 
 I could (and can) live with the default mode line just fine, but I sometimes
 (usually when sharing my screen) stupidly click on the modes and something
-annoying happens.  So let's try to fiddle with it to make it work the way I
-like:
+annoying happens. So let's try to fiddle with it to make it work the way I like:
 
 - No context/mouse menus
 - major mode separate from the list of minor modes I want to see
@@ -787,10 +785,10 @@ see filtered out."
 * Basic options
 ** Startup
 
-FIXME: Move some of the following to =early-init.el= instead.  See Prot's
+FIXME: Move some of the following to =early-init.el= instead. See Prot's
 configuration for inspiration and give credit.
 
-I wish to know how fast my Emacs is starting.  I'm not sure how to make use of
+I wish to know how fast my Emacs is starting. I'm not sure how to make use of
 all that =use-package= has to offer in that regard yet, but I want to at least
 know when I've made things worse.
 
@@ -835,7 +833,7 @@ The following setting enables answering those yes/no questions with just =y= or 
 ** No annoying bell sounds
 
 If =ring-bell-function= is =nil=, Emacs will still make a sound on, for instance,
-=C-g=.  Since this annoys me to no end, I disable this by customizing the function
+=C-g=. Since this annoys me to no end, I disable this by customizing the function
 to essentially "do nothing".
 
 #+begin_src emacs-lisp
@@ -844,9 +842,9 @@ to essentially "do nothing".
 
 ** Mode-sensitive completion for extended commands
 
-Make commands shown with M-x depend on the active major mode.  Note: this
-doesn't work correctly yet, as =(command-modes 'some-command)= seems to return the
-modes in an unexpected format.
+Make commands shown with M-x depend on the active major mode. Note: this doesn't
+work correctly yet, as =(command-modes 'some-command)= seems to return the modes
+in an unexpected format.
 
 #+begin_src emacs-lisp
 (setq read-extended-command-predicate
@@ -856,9 +854,9 @@ modes in an unexpected format.
 ** Line and column numbers
 
 To display line numbers, the aptly named =display-line-numbers= package is used. I
-prefer a hybrid mode for displaying line numbers.  That is, line numbers are
+prefer a hybrid mode for displaying line numbers. That is, line numbers are
 shown in a relative way, but the current line displays its absolute line number.
-In insert mode, line numbers should be disabled altogether.  That's what these
+In insert mode, line numbers should be disabled altogether. That's what these
 two functions are used for.
 
 #+begin_src emacs-lisp
@@ -901,7 +899,7 @@ keybinding."
 ** Suppress warning from native compilation
 
 When using Emacs =HEAD= (with the merged =native-comp= branch) a lot of warnings
-show up during startup and when changing modes.  We could increase the minimum
+show up during startup and when changing modes. We could increase the minimum
 severity for logs to be shown by setting =warning-minimum-level= to =:error=, or
 just disable the warnings for native compilation entirely like this:
 
@@ -933,7 +931,7 @@ Looking at you, [[https://go.dev/][Go]].
 
 The default Emacs behavior when yanking (in the Emacs sense of the word) things
 from the clipboard by clicking the middle mouse button is to insert those at the
-mouse cursor position.  I wish to be able to carelessly click anywhere and have
+mouse cursor position. I wish to be able to carelessly click anywhere and have
 it insert at point, similar to how it's done in most terminal emulators.
 
 Of course there's an existing Emacs options for this:
@@ -945,7 +943,7 @@ Of course there's an existing Emacs options for this:
 ** Breaking long lines
 
 When writing prose I often use =auto-fill-mode= to automatically break long lines.
-Emacs uses the =fill-column= variable to determine when to break.  Its default of
+Emacs uses the =fill-column= variable to determine when to break. Its default of
 70 is a little low for my taste, though.
 
 #+begin_src emacs-lisp
@@ -963,9 +961,9 @@ having to change my typing flow depending on the context anymore.
 
 * Vim emulation with =evil=
 
-The =evil= package offers a very complete Vim experience inside of Emacs.  I've
+The =evil= package offers a very complete Vim experience inside of Emacs. I've
 borrowed some pieces of configuration from [[https://depp.brause.cc/dotemacs][wasamasa]], specifically the part where
-I default to =emacs= mode.  The reason is that (sometimes due to =evil=, other times
+I default to =emacs= mode. The reason is that (sometimes due to =evil=, other times
 =evil-collection=) some buffers, like popups in =special-mode=, don't behave the way
 I'd expect them to.
 
@@ -1012,10 +1010,10 @@ I'd expect them to.
 
 ** Interacting with "surrounding things"
 
-The analogue of Tim Pope's =vim-surround= plugin in Emacs.  Now I can use things
+The analogue of Tim Pope's =vim-surround= plugin in Emacs. Now I can use things
 like =ysiw=) to surround an inner word with non-padded normal parentheses, =ds]= to
 delete surrounding brackets, or =cs[{= to change surrounding brackets to curly
-braces with whitespace padding.  Selected regions can be surround with e.g. =S`=.
+braces with whitespace padding. Selected regions can be surround with e.g. =S`=.
 
 #+begin_src emacs-lisp
 (use-package evil-surround
@@ -1027,12 +1025,12 @@ braces with whitespace padding.  Selected regions can be surround with e.g. =S`=
 ** Commenting code
 
 By default. Emacs distinguishes between commenting a single line and commenting
-a region.  Its built-in commands are =C-x C-;= and =comment-or-uncomment-region=.
-Using these with =evil= is in my opinion a little clunky.  The =evil-commentary=
+a region. Its built-in commands are =C-x C-;= and =comment-or-uncomment-region=.
+Using these with =evil= is in my opinion a little clunky. The =evil-commentary=
 packages aims to make this easier and comes with a couple more useful functions,
-like commenting out a selection while also copying it into a register.  Let's
-try it out and see whether it's more useful than, say, just writing some ELisp
-to call the correct Emacs command depending on the visual selection.
+like commenting out a selection while also copying it into a register. Let's try
+it out and see whether it's more useful than, say, just writing some ELisp to
+call the correct Emacs command depending on the visual selection.
 
 #+begin_src emacs-lisp
 (use-package evil-commentary
@@ -1054,14 +1052,14 @@ to, usually mode-specific ones. I used =,= for this in Vim; same here now.
 
 ** =Evil= integration with other packages: =evil-collection=
 
-This is a package I have a love/hate relationship with.  =evil-collection= in
+This is a package I have a love/hate relationship with. =evil-collection= in
 principle is a great idea, but I've found it to be "slightly buggy" at times,
-and I also don't need or like =evil= to be integrated /everywhere/.  The most
+and I also don't need or like =evil= to be integrated /everywhere/. The most
 prominent example for this might be terminal-like things, but I might be coming
 around to that.
 
 In the past, whenever I had any misbehavior after a package update, it felt like
-a 50:50 chance of =evil-collection= being the reason behind it.  This is not meant
+a 50:50 chance of =evil-collection= being the reason behind it. This is not meant
 to be a stab in their direction, as I think that this just lies in the nature of
 all things =evil=: the community will usually follow up with a solution, but there
 will be a period of time between underlying package changes and that solution
@@ -1070,7 +1068,7 @@ where it just does not really work.
 For these reasons I have (twice now) tried to live without this package, but
 that doesn't seem to satisfy me either; the context switching between
 traditional =C-n= or =C-p= bindings (or =n= and =p=, which are often used in special
-modes) starts to be frustrating after a month or so.  So here goes another try,
+modes) starts to be frustrating after a month or so. So here goes another try,
 this time selectively enabling packages instead of /evilify everything/.
 
 #+begin_src emacs-lisp
@@ -1149,10 +1147,9 @@ Make whitespace symbols visible.
 
 ** =Isearch=
 
-It hasn't been long since I switched from =evil= with its standard vim search via
-=/=.  For many things I use =avy= now, but can't get around the de-facto standard
-=isearch=.  I haven't gotten around to configuring it a lot, but this will
-probably grow in the coming weeks or months.
+For many things I use =avy= now, but can't get around the de-facto standard
+=isearch=. I haven't gotten around to configuring it a lot, but this will probably
+grow in the coming weeks or months.
 
 #+begin_src emacs-lisp
 (use-package isearch
@@ -1207,8 +1204,8 @@ Beautify =dired= a bit.
 #+end_src
 
 =Dired-narrow= is a package containing functionality to enter a filter to narrow
-down the contents of a =dired= buffer interactively.  The filter could be either
-some fixed string, with normal or fuzzy matching, or a regural expression.  Bind
+down the contents of a =dired= buffer interactively. The filter could be either
+some fixed string, with normal or fuzzy matching, or a regural expression. Bind
 those three functions to the local leader key to have easier access, as =dired=
 already has lots of keys bound.
 
@@ -1220,12 +1217,12 @@ already has lots of keys bound.
 
 ** Ediff
 
-=Ediff= is a great way to diff and/or merge files or buffers.  By default it
+=Ediff= is a great way to diff and/or merge files or buffers. By default it
 creates a new frame containing a "control buffer" used to navigate the diff and
-manipulate the output.  Unfortunately for the longest time this behaved weirdly
+manipulate the output. Unfortunately for the longest time this behaved weirdly
 for me: whenever I'd tab to the frame containing the diff, do something, then
 tab back, the next navigational command from the control frame would work but
-drop me back in the diff frame.  It's possible to use =ediff-setup-windows-plain=
+drop me back in the diff frame. It's possible to use =ediff-setup-windows-plain=
 as setup function, which makes =ediff= single-frame, circumventing the problem.
 
 #+begin_src emacs-lisp
@@ -1239,11 +1236,11 @@ as setup function, which makes =ediff= single-frame, circumventing the problem.
 ** Auto-closing parens, braces and other pairs
 
 I used to use =smartparens= to automatically insert closing parentheses and other
-pairs in non-lispy modes.  One thing I was missing from Neovim, though, was the
+pairs in non-lispy modes. One thing I was missing from Neovim, though, was the
 newlines and indentation that it inserted automatically when pressing =RET= with
 point between braces.
 
-The built-in =electric-pair-mode= does just that (by default).  I just realized
+The built-in =electric-pair-mode= does just that (by default). I just realized
 that I don't really need it after all (neither with =evil= nor without it).
 
 #+begin_src emacs-lisp
@@ -1257,7 +1254,7 @@ that I don't really need it after all (neither with =evil= nor without it).
 
 ** Undo changes to window arrangements
 
-Sometimes I accidentally mess up my window layout.  =Winner-mode= comes with the
+Sometimes I accidentally mess up my window layout. =Winner-mode= comes with the
 =winner-undo= command (bound by default to =C-<left>=) that reverts such changes.
 
 #+begin_src emacs-lisp
@@ -1269,9 +1266,8 @@ Sometimes I accidentally mess up my window layout.  =Winner-mode= comes with the
 ** Correct typos while typing with =abbrev=
 
 =Abbrev-mode= is a nice built-in minor mode that silently replaces some things I
-type with other things.  It is mostly used for correcting typos, though I
-haven't really "trained" my self-made list of abbrevs -- I've just started using
-it.
+type with other things. It is mostly used for correcting typos, though I haven't
+really "trained" my self-made list of abbrevs -- I've just started using it.
 
 Since it doesn't come with a global mode itself, I use =setq-default= to enable it
 everywhere.
@@ -1290,11 +1286,11 @@ everywhere.
 * Incremental narrowing with =vertico=
 
 I started with =helm= in [[https://www.spacemacs.org/][spacemacs]], then later switched to [[https://github.com/hlissner/doom-emacs][Doom Emacs]] where after
-a while I tried out =ivy= and loved it.  Configuring Emacs from scratch was when I
+a while I tried out =ivy= and loved it. Configuring Emacs from scratch was when I
 decided to try out some of the newer, more lightweight Emacs packages like
-[[https://github.com/raxod502/selectrum][selectrum]] and [[https://github.com/minad/vertico][vertico]].  Those integrate very well with default Emacs
-functionality, so a lot of things can utilize them "implicitly".  I've stuck
-with =vertico= and I've been happy with it ever since.
+[[https://github.com/raxod502/selectrum][selectrum]] and [[https://github.com/minad/vertico][vertico]]. Those integrate very well with default Emacs
+functionality, so a lot of things can utilize them "implicitly". I've stuck with
+=vertico= and I've been happy with it ever since.
 
 #+begin_src emacs-lisp
 (use-package vertico
@@ -1308,7 +1304,7 @@ with =vertico= and I've been happy with it ever since.
 
 Directory navigation in =C-x d= or =C-x C-f= is something else that I liked in Doom
 Emacs, as Doom had a notion of "directory name", that is, =DEL= would delete one
-level in the directory hierarchy, including the slash symbol.  The following
+level in the directory hierarchy, including the slash symbol. The following
 extension to =vertico= does just that.
 
 #+begin_src emacs-lisp
@@ -1336,9 +1332,9 @@ possible results from =vertico=.
 ** Orderless
 
 [[https://github.com/oantolin/orderless][orderless]] is a /completion style/ that fits in very well with =vertico= (or
-=selectrum=, for that matter).  Parts of a search string may match according to
-several matching styles.  We want to be able to specify which matching style to
-use by appending a suffix so a search string.  Therefore we define style
+=selectrum=, for that matter). Parts of a search string may match according to
+several matching styles. We want to be able to specify which matching style to
+use by appending a suffix so a search string. Therefore we define style
 dispatchers and use them to customize =orderless-style-dispatchers=.
 
 Prepending an equals sign to a search term will search for literal matches of
@@ -1378,7 +1374,7 @@ The tilde sign gives me a way to have "fuzzy" search, if needed.
 ** Consult
 
 The [[https://github.com/minad/consult][consult]] package is the analogue of =counsel=, which I used for quite some
-time, though not in any extent close to full.  This defines some basic bindings
+time, though not in any extent close to full. This defines some basic bindings
 mostly taken from an example in its readme.
 
 #+begin_src emacs-lisp
@@ -1417,9 +1413,9 @@ mostly taken from an example in its readme.
 
 ** Minibuffer actions
 
-I haven't really grokked [[https://github.com/oantolin/embark][Embark]] yet.  It seems to be amazing, though!  What I
+I haven't really grokked [[https://github.com/oantolin/embark][Embark]] yet. It seems to be amazing, though! What I
 mostly use it for at the moment is its =embark-act= command in conjunction with
-=embark-export=.  With this I often pull the results of some =grep= command into a
+=embark-export=. With this I often pull the results of some =grep= command into a
 separate buffer, where I can then utilize =wgrep= to bulk-modify the original
 buffers.
 
@@ -1443,11 +1439,11 @@ Integrate =embark= with =consult=.
 * Jumping and sniping with =avy=
 
 Try out =avy= to quickly jump to specific locations in the currently visible area
-of the buffer.  This is similar to =evil-snipe= in Emacs, or (neo)vim plugins like
+of the buffer. This is similar to =evil-snipe= in Emacs, or (neo)vim plugins like
 =vim-snipe=, =easymotion=, =leap.nvim=, =hop.nvim=, =lightspeed.nvim=, etc.
 
 One cool thing about =avy= is that it is well-integrated with =evil=, meaning that
-it's possible to use =avy= operations in conjunction with Vim commands.  For
+it's possible to use =avy= operations in conjunction with Vim commands. For
 instance, deleting up until the next =avy-goto-char-timer= match can be done with
 =ds= (where I bind =s= to the =avy= operation below) and then sniping the correct
 result.
@@ -1469,7 +1465,7 @@ result.
 #+end_src
 
 The command =avy-goto-char-timer= is the perfect solution for my jumping needs in
-almost every case.  I still find myself trying to navigate to multi-character
+almost every case. I still find myself trying to navigate to multi-character
 sequences in the current line quite often, and would like to have the same
 behavior there; that is:
 
@@ -1502,7 +1498,7 @@ whenever these sorts of changes happen, either through hooks or manual trigger.
 
 Note that some themes, like =modus-{vivendi,operandi}=, might set the =:inherit=
 attribute on a face, in which case a naive ~(set-face-attribute face nil :inherit
-'fixed-pitch)~ overrides the theme settings.  To circumvent this I've written the
+'fixed-pitch)~ overrides the theme settings. To circumvent this I've written the
 following function that appends a single new value to the current =:inherit=
 attribute value of a face.
 
@@ -1592,8 +1588,8 @@ For navigation and other =org=-specific stuff I'm going to try out another =hydr
 #+end_src
 
 When writing text with =org=, =auto-fill-mode= should be enabled to automatically
-break overly long lines into smaller pieces when typing.  One may still use =M-q=
-to re-fill paragraphs when editing text.  After loading =org=, a custom font setup
+break overly long lines into smaller pieces when typing. One may still use =M-q=
+to re-fill paragraphs when editing text. After loading =org=, a custom font setup
 might run to adjust the headers.
 
 #+begin_src emacs-lisp
@@ -1658,7 +1654,7 @@ might run to adjust the headers.
 Some things don't quite work when =evil= is enabled, like the header cycling.
 =Evil-org= fixes these small issue, and also adds some bonus functionality like =o=
 and =O= being slightly "smart", for instance, adding new bullet points when inside
-lists.  Additionally, it configures the =org-agenda= view to be more compatible
+lists. Additionally, it configures the =org-agenda= view to be more compatible
 with =evil= as well.
 
 #+begin_src emacs-lisp
@@ -1690,7 +1686,7 @@ Minad's [[https://github.com/minad/org-modern][org-modern package]] looks very p
 ** Show emphasis markers depending on point
 
 In my =org= configuration I'm setting =org-hide-emphasis-markers= to =t=, thus hiding
-certain markup elements around text.  Unfortunately it seem to be currently
+certain markup elements around text. Unfortunately it seem to be currently
 impossible to switch this interactively, or I just don't know how, which
 prevents me from simply adding a keybinding to toggle it.
 
@@ -1732,8 +1728,8 @@ position of point to automatically show surrounding markup.
 ** Static analysis of shell scripts
 
 [[https://github.com/koalaman/shellcheck][ShellCheck]] is a great little program providing feedback when writing shell
-scripts.  The Emacs package [[https://github.com/federicotdn/flymake-shellcheck][flymake-shellcheck]] integrates ShellCheck with
-Flymake.  We have to trigger =flymake-shellcheck-load= when loading shell scripts,
+scripts. The Emacs package [[https://github.com/federicotdn/flymake-shellcheck][flymake-shellcheck]] integrates ShellCheck with
+Flymake. We have to trigger =flymake-shellcheck-load= when loading shell scripts,
 and also enable Flymake itself, both done via hooks to =sh-mode=.
 
 #+begin_src emacs-lisp
@@ -1746,12 +1742,12 @@ and also enable Flymake itself, both done via hooks to =sh-mode=.
 * Auto-completion popups via =corfu=
 
 This is another one of Daniel Mendler's (aka =minad='s) absolutely great Emacs
-packages!  I've replaced =company= with =corfu= in the past, but back then it did
-not have the automatic mode (=corfu-auto=) yet.  Without automatic completion it
-was a little more tedious to use in modes where =TAB= changes the level of
-indentation, like in =haskell-mode= for instance.
+packages! I've replaced =company= with =corfu= in the past, but back then it did not
+have the automatic mode (=corfu-auto=) yet. Without automatic completion it was a
+little more tedious to use in modes where =TAB= changes the level of indentation,
+like in =haskell-mode= for instance.
 
-Now that this feature exists it's time to give the package another try.  The
+Now that this feature exists it's time to give the package another try. The
 first impression was very positive, as =corfu= is using a child frame for the
 completion popup and thus does not clash with =whitespace-mode= the way =company=
 does.
@@ -1772,7 +1768,7 @@ does.
 
 ** Show documentation in a separate popup
 
-I'll have to figure out whether I like this or not.  At the moment it seems
+I'll have to figure out whether I like this or not. At the moment it seems
 great.
 
 #+begin_src emacs-lisp
@@ -1823,16 +1819,16 @@ called at all."
 
 * E-mail configuration
 
-There are different ways to "do e-mail in Emacs".  Over the last two years I've
-tried out =notmuch=, =gnus=, and =mu4e=.  Some thoughts on each of those:
+There are different ways to "do e-mail in Emacs". Over the last two years I've
+tried out =notmuch=, =gnus=, and =mu4e=. Some thoughts on each of those:
 
 ** Notmuch
 
 The Emacs integration for =notmuch= is great; it has the most intuitive and
-appealing UI from each of the options.  =Notmuch= works by referencing incoming
-e-mail in a separate database only, not ever touching or modifying it.  I really
+appealing UI from each of the options. =Notmuch= works by referencing incoming
+e-mail in a separate database only, not ever touching or modifying it. I really
 like this idea, and in practice it also felt great due to the quick und
-customizable searches.  The usual approach is to use a tag-based system of
+customizable searches. The usual approach is to use a tag-based system of
 categorizing your e-mail, but simply having lots of stored queries is a little
 bit more flexible.
 
@@ -1853,30 +1849,30 @@ The initial tagging can be done with a shell script using the well-documented
 
 For sending mail I use =msmtp=.
 
-I'm using =muchsync= on my personal server to be the "source of truth".  This
-means that only the server downloads e-mail via IMAP, and the machines are
-simply its /clients/; they use =muchsync= to download mail from the server.
+I'm using =muchsync= on my personal server to be the "source of truth". This means
+that only the server downloads e-mail via IMAP, and the machines are simply its
+/clients/; they use =muchsync= to download mail from the server.
 
 This sounds great on paper but is a little finicky with sent mail, which I'd
-also like to sync back via IMAP to my accounts.  The client machine sends this
+also like to sync back via IMAP to my accounts. The client machine sends this
 and puts it into respective =sent= directories; =muchsync= synchronizes these
 directories as well, but I've had problems with mails appearing twice, or
-appearing not at all on the respective "other" machine, at least in the past.
-It looks or feels like my usage of =muchsync --nonew= on the clients was a
-potential problem: I've verified that after sending a mail and it having landed
-in the correct =sent= directory, a simple =muchsync my-server= didn't lead to the
-mail appearing on my servers.  It worked after executing =notmuch new= once,
-though, so I guess =muchsync= only synchronizes those mails that are part of the
-current =notmuch= database state.
+appearing not at all on the respective "other" machine, at least in the past. It
+looks or feels like my usage of =muchsync --nonew= on the clients was a potential
+problem: I've verified that after sending a mail and it having landed in the
+correct =sent= directory, a simple =muchsync my-server= didn't lead to the mail
+appearing on my servers. It worked after executing =notmuch new= once, though, so
+I guess =muchsync= only synchronizes those mails that are part of the current
+=notmuch= database state.
 
 One solution would be to make sure that whenever I'm polling from within Emacs,
-both =muchsync my-server= and =notmuch new= are executed.  Since =notmuch= has
+both =muchsync my-server= and =notmuch new= are executed. Since =notmuch= has
 deprecated the =notmuch-poll-script= variable in their Emacs client, I have to use
-the hooks it provides to make sure =muchsync= is executed.  Putting =muchsync
+the hooks it provides to make sure =muchsync= is executed. Putting =muchsync
 --nonew= into the =preNew= hook while having an unsynchronized sent mail on the
 client sounds correct on paper in order to not execute =notmuch new= twice, but it
 means that in the case of an unsynchronized sent mail, this mail won't have been
-pushed to the server after the first call, if I am correct.  So I'll have to
+pushed to the server after the first call, if I am correct. So I'll have to
 experiment and probably live with =notmuch new= being called twice (which is fine
 as it's blazingly fast).
 
@@ -1909,7 +1905,7 @@ later.
   (notmuch-show-next-thread t))
 #+end_src
 
-Now pull in and configure the actual =notmuch= package.  Note that same options
+Now pull in and configure the actual =notmuch= package. Note that same options
 here rather belong to built-in functionality, but they fit in here very well.
 
 #+begin_src emacs-lisp :tangle no
@@ -1956,7 +1952,7 @@ here rather belong to built-in functionality, but they fit in here very well.
         ("u" . my/notmuch-search-toggle-unread)))
 #+end_src
 
-=Gnus-alias= makes it possible to use different identities when composing mail.  I
+=Gnus-alias= makes it possible to use different identities when composing mail. I
 mostly use it to make sure that replies to a mail are sent from the address I've
 received it at.
 
@@ -1997,20 +1993,20 @@ received it at.
 ** Gnus
 
 As I've written before, I've never given the mighty =gnus= the trial it deserves.
-Getting into this package is really quite scary, for lack of a better word.  The
+Getting into this package is really quite scary, for lack of a better word. The
 reason is that =gnus= defines abstractions over "news", where the word nowadays
-can incorporate everything from feeds, reddit, usenet, email, etc.  The result
-is that one has to learn lots of specialized and often confusing terminology
-before being able to use =gnus= (especially for email).  Due to the length and
+can incorporate everything from feeds, reddit, usenet, email, etc. The result is
+that one has to learn lots of specialized and often confusing terminology before
+being able to use =gnus= (especially for email). Due to the length and
 comprehensiveness of the manual the learning curve is quite steep.
 
 Plus, I feel like you cannot "just start using =gnus=" and get used to it, whereas
-that is an actual path to succees in something like =mu4e=, for instance.  With
+that is an actual path to succees in something like =mu4e=, for instance. With
 =gnus= there's a lot of configuration to be done before even being able to do
 anything.
 
 I'm not sure yet what I will have to sync between machines; the automatically
-created =.newsrc.eld= file is the most likely candidate.  It seems like that the
+created =.newsrc.eld= file is the most likely candidate. It seems like that the
 path to this file can (only?) be configured by setting the path to the /startup
 file/, meaning the newsreader-agnostic =.newsrc= file -- that I'm not actually
 using, as I will only be using =gnus=.
@@ -2056,20 +2052,20 @@ using, as I will only be using =gnus=.
 ** Mu for Emacs (=mu4e=)
 
 [[https://www.djcbsoftware.nl/code/mu/][Mu]] is what I was using for the longest period of time, with =mu4e= being its Emacs
-frontend.  It's not as customizable as =notmuch=, but part of its charm is that I
+frontend. It's not as customizable as =notmuch=, but part of its charm is that I
 don't need to sync anything between my machines, at the cost of =mu= touching my
-e-mail (adding custom headers I believe).  I don't mind this at all, and I can
+e-mail (adding custom headers I believe). I don't mind this at all, and I can
 use =isync= and =msmtp= to receive and send mail on any host.
 
-For writing e-mails =mu4e= uses =message-mode= like the other tools.  This checks
-the =user-full-name= variable to fill in my name.
+For writing e-mails =mu4e= uses =message-mode= like the other tools. This checks the
+=user-full-name= variable to fill in my name.
 
 #+begin_src emacs-lisp
 (setq user-full-name "Johannes Maier")
 #+end_src
 
 The actual =mu4e= configuration is one huge =use-package= block, but most of it is
-due to its concept of /contexts/.  Usually there's one context for each of my
+due to its concept of /contexts/. Usually there's one context for each of my
 e-mail addresses, and switching between them I may set some context-specific
 variables, or even change the =mu4e= UI accordingly.
 
@@ -2176,7 +2172,7 @@ variables, or even change the =mu4e= UI accordingly.
 
 *** Warn/confirm when trying to send with empty subject
 
-=mu4e= uses the built-in =message-mode= for composing mail.  In order to receive a
+=mu4e= uses the built-in =message-mode= for composing mail. In order to receive a
 warning or yes/no question whenever I try sending without having specified a
 subject header, I have to hook into this.
 
@@ -2197,7 +2193,7 @@ and abort in this case (https://emacs.stackexchange.com/a/41176)."
 TODO: reevaluate whether I need this after switching away from =evil=
 
 One thing I'm missing from Doom Emacs is the way it handled all sorts of
-popup-like buffers.  When using vanilla Emacs with packages, there are some
+popup-like buffers. When using vanilla Emacs with packages, there are some
 different behaviors w.r.t. popups:
 
 - Window splits, new buffer is focused
@@ -2209,10 +2205,10 @@ different behaviors w.r.t. popups:
 - ... and probably others
 
 Doom makes it so there is a unified way of dealing with these, and they all open
-and behave the same way.  In theory much of this should boil down to good
-customization of =display-buffer-alist=, but that's pretty arcane.  =Shackle.el=
-seems to make this easier.  There's also =popper.el=, and I'm not quite sure yet
-where the differences are.  My guess is that they probably go well together.
+and behave the same way. In theory much of this should boil down to good
+customization of =display-buffer-alist=, but that's pretty arcane. =Shackle.el=
+seems to make this easier. There's also =popper.el=, and I'm not quite sure yet
+where the differences are. My guess is that they probably go well together.
 
 #+begin_src emacs-lisp
 (use-package shackle
@@ -2251,7 +2247,7 @@ where the differences are.  My guess is that they probably go well together.
 ** Resizing windows in splits
 
 Resizing windows is one of those things that still make me use a mouse, as I
-find the default bindings awkward to use and especially chain.  A =hydra= might
+find the default bindings awkward to use and especially chain. A =hydra= might
 just remedy that:
 
 #+begin_src emacs-lisp
@@ -2278,11 +2274,11 @@ just remedy that:
 
 * IRC with ERC
 
-I've been using [[https://weechat.org][weechat]] for IRC communication in the past.  And while my usage
-of IRC has decreased quite a bit due to a lot of things moving over to Discord,
+I've been using [[https://weechat.org][weechat]] for IRC communication in the past. And while my usage of
+IRC has decreased quite a bit due to a lot of things moving over to Discord,
 there are some channels and communities that have their sole online presence in
-IRC.  As with anything, it's worth trying whether just using Emacs might be
-preferable.  So far my experience with ERC has been quite smooth and I don't
+IRC. As with anything, it's worth trying whether just using Emacs might be
+preferable. So far my experience with ERC has been quite smooth and I don't
 regret it yet, so I've fully switched over.
 
 #+begin_src emacs-lisp
@@ -2341,7 +2337,7 @@ regret it yet, so I've fully switched over.
 * Multiple cursors
 
 I'm still new to this, and have only scratched the surface of when to
-successfully use them.  In particular I'm not sure about what my most-used
+successfully use them. In particular I'm not sure about what my most-used
 commands will be, and if and where to bind those.
 
 #+begin_src emacs-lisp
@@ -2360,8 +2356,8 @@ https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_2
 #+end_src
 
 Due to the nature of =mc/mark-next-like-this= and consorts, a hydra should lend
-itself very well to this package.  It can then be bound to a top-level
-keybinding for the best of both worlds.
+itself very well to this package. It can then be bound to a top-level keybinding
+for the best of both worlds.
 
 Credit: I found [[https://github.com/ejmr/DotEmacs][ejmr's archived Emacs configuration]] on GitHub; it contains lots
 of hydras, so I took heavy inspiration there.
@@ -2408,7 +2404,7 @@ of hydras, so I took heavy inspiration there.
 
 ** Unified interface for creating code formatters
 
-Another generally useful package by Steve Purcell is [[https://github.com/purcell/emacs-reformatter][reformatter.el]].  It enables
+Another generally useful package by Steve Purcell is [[https://github.com/purcell/emacs-reformatter][reformatter.el]]. It enables
 easy definition of commands to format buffers, as well as minor modes that, when
 active, automatically apply these commands on save.
 
@@ -2420,7 +2416,7 @@ active, automatically apply these commands on save.
 ** Terminal emulator in Emacs
 
 =vterm= is a terminal emulator for Emacs, more feature-rich than the built-in
-=term=.  This is very useful for quickly spawning a terminal, for instance in the
+=term=. This is very useful for quickly spawning a terminal, for instance in the
 top-level directory of a project.
 
 #+begin_src emacs-lisp
@@ -2439,8 +2435,8 @@ top-level directory of a project.
 ** Zig
 
 [[https://ziglang.org/][Zig]] is a relatively new systems programming language that I could see me
-learning more in-depth in the near future.  It's a smaller language than, say,
-Rust, and less safe; but I like its explicit nature and great defaults.  The
+learning more in-depth in the near future. It's a smaller language than, say,
+Rust, and less safe; but I like its explicit nature and great defaults. The
 community is very welcoming so far, as well!
 
 #+begin_src emacs-lisp
@@ -2469,8 +2465,8 @@ To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/mer
   :hook ((tuareg-mode . merlin-mode)))
 #+end_src
 
-[[https://github.com/Khady/merlin-eldoc][merlin-eldoc]] integrates =merlin= with =eldoc-mode=, automatically
-documenting things at point.
+[[https://github.com/Khady/merlin-eldoc][merlin-eldoc]] integrates =merlin= with =eldoc-mode=, automatically documenting things
+at point.
 
 #+begin_src emacs-lisp
 (use-package merlin-eldoc
@@ -2485,9 +2481,9 @@ documenting things at point.
 
 ** Fish
 
-I'm often using the [[https://fishshell.com/][fish]] shell.  It comes with its own, POSIX-incompatible
+I'm often using the [[https://fishshell.com/][fish]] shell. It comes with its own, POSIX-incompatible
 language, but I mainly use it for =fish='s configuration (though most of that is
-done via =nix=, anyway).  It's nice to have syntax highlighting, though.
+done via =nix=, anyway). It's nice to have syntax highlighting, though.
 
 #+begin_src emacs-lisp
 (use-package fish-mode
@@ -2500,7 +2496,7 @@ I want to be able to simply clone and work in projects and adapt to their
 respective styles of indentation, newlines at the end of files, and the like.
 [[https://editorconfig.org/][EditorConfig]] comes with a specified file format to describe these things,
 possible even on per-file basis; all one needs to use these is support of one's
-editor.  Many editors have out-of-the-box EditorConfig support nowadays.  For
+editor. Many editors have out-of-the-box EditorConfig support nowadays. For
 Emacs, there's the official [[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]] package.
 
 #+begin_src emacs-lisp
@@ -2513,7 +2509,7 @@ Emacs, there's the official [[https://github.com/editorconfig/editorconfig-emacs
 ** Ini files
 
 I'm not 100 percent happy with this package, as paragraphs seem to be acting
-strange.  Deleting a paragraph via =dap= for instance often deletes the following
+strange. Deleting a paragraph via =dap= for instance often deletes the following
 one, too, plus sometimes the previous section header.
 
 #+begin_src emacs-lisp
@@ -2577,8 +2573,8 @@ one, too, plus sometimes the previous section header.
 
 ** Haskell
 
-Provide an interactive mode for writing Haskell.  I can work with a REPL, get
-feedback and compilation errors shown in the code, and so on.  I've also added a
+Provide an interactive mode for writing Haskell. I can work with a REPL, get
+feedback and compilation errors shown in the code, and so on. I've also added a
 bunch of utility functions and want to load everything lazily, so I've created a
 [[file:my-packages/my-haskell.org][custom local Emacs package]] that contains everything.
 
@@ -2600,8 +2596,8 @@ bunch of utility functions and want to load everything lazily, so I've created a
 
 ** Docker
 
-I still have to semi-regularly write Dockerfiles.  This package comes with
-syntax highlighting for those.
+I still have to semi-regularly write Dockerfiles. This package comes with syntax
+highlighting for those.
 
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
@@ -2695,11 +2691,8 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 ** Java
 
 I don't use Java, but Bob Nystrom's excellent and free book [[https://craftinginterpreters.com/][Crafting
-Interpreters]] uses it for the first part.  It's actually quite OK to write Java
+Interpreters]] uses it for the first part. It's actually quite OK to write Java
 with =meghanada,= but it takes a long time to download all its dependencies.
-
-It's currently commented out as it's the last remaining package pulling in
-=yasnippet=.
 
 #+begin_src emacs-lisp :tangle no
 (use-package meghanada
@@ -2716,7 +2709,7 @@ It's currently commented out as it's the last remaining package pulling in
 
 ** Lua
 
-From time to time I need to write some Lua code, like for DCSS RC files.  I
+From time to time I need to write some Lua code, like for DCSS RC files. I
 haven't used much from =lua-mode= yet, but having syntax highlighting at least is
 nice.
 
@@ -2779,7 +2772,7 @@ skills.
 
 I've used =lsp-mode= in the past and while it's nice, I feel like it's more in
 line with the rest of this configuration to try out something more lightweight
-and closer to vanilla Emacs.  This is where [[https://github.com/joaotavora/eglot][eglot]] comes into play.
+and closer to vanilla Emacs. This is where [[https://github.com/joaotavora/eglot][eglot]] comes into play.
 
 #+begin_src emacs-lisp
 (use-package eglot
@@ -2788,8 +2781,8 @@ and closer to vanilla Emacs.  This is where [[https://github.com/joaotavora/eglo
 
 ** Better Emacs help and documentation
 
-This gives us better and more readable help pages.  We also replace some
-built-in =C-h= keybings with =helpful-*= functions.
+This gives us better and more readable help pages. We also replace some built-in
+=C-h= keybings with =helpful-*= functions.
 
 #+begin_src emacs-lisp
 (use-package helpful
@@ -2803,12 +2796,12 @@ built-in =C-h= keybings with =helpful-*= functions.
 
 ** Project management
 
-I've used [[https://github.com/bbatsov/projectile][projectile]] for a while.  It's great, but I found myself not using most
-of its features.  Now that the built-in =project.el= has been coming along great,
-I'm giving it a try.  I'm very happy with it so far.
+I've used [[https://github.com/bbatsov/projectile][projectile]] for a while. It's great, but I found myself not using most
+of its features. Now that the built-in =project.el= has been coming along great,
+I'm giving it a try. I'm very happy with it so far.
 
 The following are utility functions that mostly rely on being in the top-level
-directory of a known project.  =project.el= is making this possible in a
+directory of a known project. =project.el= is making this possible in a
 straightforward way.
 
 #+begin_src emacs-lisp
@@ -2856,7 +2849,7 @@ why not write something to open =dired= there and then add this function to
 #+end_src
 
 One tricky thing was making it possible to bind the keymap =project-prefix-map= to
-a key.  One needs to make it callable via =fset=.
+a key. One needs to make it callable via =fset=.
 
 #+begin_src emacs-lisp
 (use-package project
@@ -2884,10 +2877,10 @@ a key.  One needs to make it callable via =fset=.
 ** Magit
 
 Not much to say here: =magit= is awesome and in my top 3 reasons why I can't ever
-switch to anything that doesn't have this.  I've tried =vim-fugitive= and =neogit=
-for (neo)vim, and while they're great, I still missed =magit=.  I'm in the process
+switch to anything that doesn't have this. I've tried =vim-fugitive= and =neogit=
+for (neo)vim, and while they're great, I still missed =magit=. I'm in the process
 of getting used to the non-=evil= keybindings (again); once that is finished, I
-might add some custom bindings here.  =magit-status-here= is surely the one I use
+might add some custom bindings here. =magit-status-here= is surely the one I use
 the most, but I have a hunch it's not used nearly often enough to warrant a
 custom key chord; I can just use =M-x=, where I don't have to enter much due to
 =savehist-mode=.
@@ -2911,7 +2904,7 @@ custom key chord; I can just use =M-x=, where I don't have to enter much due to
 #+end_src
 
 I used to have way more =magit= keybindings when I used =evil=, but as mentioned
-above =M-x= seems like the way to go.  I was missing =magit-status-here= a lot,
+above =M-x= seems like the way to go. I was missing =magit-status-here= a lot,
 though, so add it in an accessible spot.
 
 #+begin_src emacs-lisp
@@ -2928,9 +2921,9 @@ though, so add it in an accessible spot.
 *** Modes for other kinds of =git=-related files
 
 It's useful to have a little bit of syntax highlighting in files like =.gitignore=
-or =.gitattributes=.  The =git-modes= package provides just that, and autoloads the
-specific modes for the respective file types.  Like its readme proposes it's
-also possible to reuse the =gitignore-mode= for other things, in this case
+or =.gitattributes=. The =git-modes= package provides just that, and autoloads the
+specific modes for the respective file types. Like its readme proposes it's also
+possible to reuse the =gitignore-mode= for other things, in this case
 =.dockerignore= files.
 
 #+begin_src emacs-lisp
@@ -2944,15 +2937,15 @@ also possible to reuse the =gitignore-mode= for other things, in this case
 ** "Modal" Lisp editing with =lispy=
 
 I've grown very fond of the way the [[https://github.com/abo-abo/lispy][lispy]] package works, especially without
-=evil=.  The basic idea is that there are certain /special/ positions in Lisp code
-where it's *very* uncommon to insert any letter.  When point is in such a /special/
+=evil=. The basic idea is that there are certain /special/ positions in Lisp code
+where it's *very* uncommon to insert any letter. When point is in such a /special/
 position -- most commonly on an opening parenthesis or directly behind a closing
 parenthesis -- letters that you enter execute special Lisp editing commands: =>=
 slurps s-expressions, =j= and =k= move down and up on the same level, =r= raises and
-lots and lots more.  After getting used to it for a bit, it feels /absolutely
-great/ and I continue to discover new bindings gradually.  There's also an
-awesome video by abo-abo, linked in the readme, where they showcase many things
-=lispy= has to offer.
+lots and lots more. After getting used to it for a bit, it feels /absolutely
+great/ and I continue to discover new bindings gradually. There's also an awesome
+video by abo-abo, linked in the readme, where they showcase many things =lispy=
+has to offer.
 
 #+begin_src emacs-lisp
 (use-package lispy
@@ -2975,9 +2968,9 @@ awesome video by abo-abo, linked in the readme, where they showcase many things
 
 *** Integration with =evil=: =lispyville=
 
-When I was not using =evil= for a couple of months, I learned how to use =lispy=.  I
+When I was not using =evil= for a couple of months, I learned how to use =lispy=. I
 really loved that, but going fully "holy" now feels wrong when writing Lisp
-code.  So I'll try reverting to =lispyville=, which changes some =lispy= keybindings
+code. So I'll try reverting to =lispyville=, which changes some =lispy= keybindings
 (which I don't like) but also integrates =lispy= with =evil=, making it so that
 keybindings like =C=, deletions and pastes don't interfere with the balanced
 parentheses.
@@ -3027,9 +3020,9 @@ C-f=, and much more.
 
 ** Make Emacs =direnv=-sensitive
 
-Steve Purcell's [[https://github.com/purcell/envrc][envrc]] package is an alternative to [[https://github.com/wbolster/emacs-direnv][emacs-direnv]].  The latter has
+Steve Purcell's [[https://github.com/purcell/envrc][envrc]] package is an alternative to [[https://github.com/wbolster/emacs-direnv][emacs-direnv]]. The latter has
 a long-standing issue where it sometimes loads too late, that is, /after/ packages
-like =lsp-mode= would need it.  =envrc= has worked flawlessly so far.  Note: this
+like =lsp-mode= would need it. =envrc= has worked flawlessly so far. Note: this
 should probably be one of the last modes to load, as the hook function is then
 placed before the other modes to ensure =direnv= integration is working as
 expected.
@@ -3042,7 +3035,7 @@ expected.
 
 ** Fast grepping via =ripgrep=
 
-I use [[https://github.com/BurntSushi/ripgrep][ripgrep]] on the command line a lot.  This package makes it comfortably
+I use [[https://github.com/BurntSushi/ripgrep][ripgrep]] on the command line a lot. This package makes it comfortably
 usable from within Emacs.
 
 #+begin_src emacs-lisp
@@ -3068,8 +3061,8 @@ usable from within Emacs.
 ** Global font scaling
 
 The =default-text-scale= package (again by Steve Purcell) makes it a breeze to
-"globally" scale text in Emacs.  That is, it won't only increase the font size
-in the current buffer as the =text-scale-increase= command does, but rather do it
+"globally" scale text in Emacs. That is, it won't only increase the font size in
+the current buffer as the =text-scale-increase= command does, but rather do it
 everywhere.
 
 #+begin_src emacs-lisp
@@ -3081,8 +3074,8 @@ everywhere.
 #+end_src
 
 Now I like increasing/decreasing the font, for instance when presenting or pair
-programming, untit it "fits".  Let's create a =hydra= for this, so that I can
-press single keys until it quits -- either after =q= or a timeout.
+programming, untit it "fits". Let's create a =hydra= for this, so that I can press
+single keys until it quits -- either after =q= or a timeout.
 
 #+begin_src emacs-lisp
 (defhydra hydra-global-zoom (:hint nil :timeout 3)
