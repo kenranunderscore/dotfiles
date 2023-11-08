@@ -637,6 +637,15 @@ out via =straight-use-package=.
   :defer)
 #+end_src
 
+**** Ef themes
+
+Another theme package by Protesilaos Stavrou.
+
+#+begin_src emacs-lisp
+(use-package ef-themes
+  :defer)
+#+end_src
+
 **** Set the current theme
 
 #+begin_src emacs-lisp
