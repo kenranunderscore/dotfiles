@@ -34,7 +34,6 @@ in {
       # plugins and variables -- I don't like mixing methods.
       initExtraFirst = ''
         setopt auto_cd
-        unsetopt case_glob
         setopt prompt_subst
       '';
       initExtra = ''
