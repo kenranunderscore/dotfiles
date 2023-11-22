@@ -100,6 +100,7 @@ Helix etc. are also using it by default.)
     "b i" 'ibuffer
     "b p" 'previous-buffer
     "b n" 'next-buffer
+    "b r" 'revert-buffer-quick
     "b s" 'scratch-buffer
     "c" 'comment-or-uncomment-region
     "t" '(:ignore t :which-key "toggles")
