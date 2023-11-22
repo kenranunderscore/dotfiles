@@ -267,15 +267,6 @@ attributes that need to be applied when switching to the respective font.
         (iosevka
          . (:family
             "Iosevka Term"))
-        (iosevka-slab
-         . (:family
-            "Iosevka Slab"))
-        (iosevka-curly
-         . (:family
-            "Iosevka Curly"))
-        (iosevka-curly-slab
-         . (:family
-            "Iosevka Curly Slab"))
         (dejavu
          . (:family
             "DejaVu Sans Mono"))

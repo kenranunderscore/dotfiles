@@ -48,9 +48,6 @@ in {
         ibm-plex
         inconsolata
         iosevka-bin
-        (iosevka-bin.override { variant = "slab"; })
-        (iosevka-bin.override { variant = "curly-slab"; })
-        (iosevka-bin.override { variant = "curly"; })
         jetbrains-mono
         julia-mono
         noto-fonts
