@@ -267,6 +267,9 @@ attributes that need to be applied when switching to the respective font.
         (iosevka
          . (:family
             "Iosevka Term"))
+        (iosevka-comfy
+         . (:family
+            "Iosevka Comfy"))
         (dejavu
          . (:family
             "DejaVu Sans Mono"))
