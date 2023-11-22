@@ -1490,6 +1490,19 @@ The following snippet was handed to me [[https://www.reddit.com/r/emacs/comments
 (evil-define-avy-motion avy-goto-char-in-line-timer inclusive)
 #+end_src
 
+* Visualized keybindings with =which-key=
+
+#+begin_src emacs-lisp
+(use-package which-key
+  :init
+  (which-key-mode)
+  :config
+  (setq which-key-add-column-padding 3)
+  (setq which-key-min-display-lines 2)
+  (setq which-key-side-window-location 'bottom)
+  (setq which-key-idle-delay 0.05))
+#+end_src
+
 * Org mode
 
 I sometimes like using =variable-pitch-mode=, which makes it so only code,
