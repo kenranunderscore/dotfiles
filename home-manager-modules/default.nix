@@ -30,6 +30,7 @@
     ./ssh.nix
     ./tmux.nix
     ./vim.nix
+    ./wezterm
     ./xdg-config-files
     ./x-configuration
     ./zsh
