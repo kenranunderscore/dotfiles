@@ -2543,6 +2543,18 @@ one, too, plus sometimes the previous section header.
 
 ** Nix
 
+I use [[https://nixos.org][Nix]] for tons of things (like the repository you found this Emacs
+configuration in). As of now there are a couple of widely used formatters, of
+which I personally like =nixfmt= the most.
+
+But =flake.nix= files can nowadays also "declare" which formatter should be used
+for any =.nix= files in their respective project; that formatter is then
+integrated with the Flake CLI, by calling =nix fmt <some-file-or-dir>=. The "user
+experience" is still lacking in my opinion, as it doesn't accept input from
+=stdin= (yet?), and is thus harder to integrate with text editors. This is why I
+still =reformatter-define= functions for more convenient to use formatters as well
+as =nix fmt= here.
+
 #+begin_src emacs-lisp
 (reformatter-define my/nix-format
   :program "nix"
@@ -2558,9 +2570,15 @@ one, too, plus sometimes the previous section header.
 (reformatter-define my/alejandra-format
   :program "alejandra"
   :lighter " my/alejandra")
+#+end_src
 
+#+begin_src emacs-lisp
 (use-package nix-mode
-  :mode "\\.nix\\'")
+  :mode "\\.nix\\'"
+  :config
+  (local-leader
+    :keymaps 'nix-mode-map
+    "f" 'my/nixfmt-format-buffer))
 #+end_src
 
 ** Markdown
