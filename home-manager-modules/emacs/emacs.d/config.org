@@ -102,11 +102,10 @@ Helix etc. are also using it by default.)
     "b n" 'next-buffer
     "b r" 'revert-buffer-quick
     "b s" 'scratch-buffer
-    "c" 'comment-or-uncomment-region
     "t" '(:ignore t :which-key "toggles")
     "q" '(:ignore t :which-key "quit")
-    "q k" 'save-buffers-kill-emacs
-    "q r" 'restart-emacs))
+    "q k" '(save-buffers-kill-emacs :which-key "quit")
+    "q r" '(restart-emacs :which-key "restart")))
 #+end_src
 
 * The region
@@ -890,7 +889,7 @@ keybinding."
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t))
 
-(leader "t l" 'my/toggle-line-numbers)
+(leader "t l" '(my/toggle-line-numbers :which-key "line numbers"))
 #+end_src
 
 ** Insert a newline at the end of files
@@ -1660,7 +1659,7 @@ might run to adjust the headers.
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
-  (leader "o" 'hydra-org/body)
+  (local-leader :keymaps 'org-mode-map "o" 'hydra-org/body)
   :bind
   (:map org-mode-map
         ("C-'" . nil)))
