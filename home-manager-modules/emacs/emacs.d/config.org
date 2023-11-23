@@ -1499,7 +1499,7 @@ The following snippet was handed to me [[https://www.reddit.com/r/emacs/comments
   (setq which-key-add-column-padding 3)
   (setq which-key-min-display-lines 2)
   (setq which-key-side-window-location 'bottom)
-  (setq which-key-idle-delay 0.05))
+  (setq which-key-idle-delay 0.25))
 #+end_src
 
 * Org mode
