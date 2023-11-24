@@ -98,7 +98,7 @@ in {
         openssl.dev
         pciutils
         perl
-        pkg-config
+        pkgconf
         ripgrep
         rlwrap
         rsync
