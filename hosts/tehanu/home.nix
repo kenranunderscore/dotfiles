@@ -87,6 +87,7 @@ in {
     imwheel.enable = false;
     nyxt.enable = true;
     git.email = "johannes.maier@mailbox.org";
+    gcli.enable = true;
   };
 
   programs = {
