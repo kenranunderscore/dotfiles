@@ -2313,6 +2313,7 @@ regret it yet, so I've fully switched over.
                   "#commonlisp"
                   "#lisp"
                   "#herrhotzenplotz"
+                  "#gcli"
                   "#stumpwm")))
   (setq erc-track-exclude
         '("#org-mode" "#crawl" "#nim" "#zig"))
