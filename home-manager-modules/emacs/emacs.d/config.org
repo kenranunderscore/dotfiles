@@ -2214,8 +2214,6 @@ and abort in this case (https://emacs.stackexchange.com/a/41176)."
 * Window management
 ** Taming popups
 
-TODO: reevaluate whether I need this after switching away from =evil=
-
 One thing I'm missing from Doom Emacs is the way it handled all sorts of
 popup-like buffers. When using vanilla Emacs with packages, there are some
 different behaviors w.r.t. popups:
@@ -2231,42 +2229,32 @@ different behaviors w.r.t. popups:
 Doom makes it so there is a unified way of dealing with these, and they all open
 and behave the same way. In theory much of this should boil down to good
 customization of =display-buffer-alist=, but that's pretty arcane. =Shackle.el=
-seems to make this easier. There's also =popper.el=, and I'm not quite sure yet
-where the differences are. My guess is that they probably go well together.
+seems to make this easier. There's also =popper.el= (it goes well together with
+=shackle.el=), which can designate windows/buffers meeting certain criteria as
+/popups/, which can then be hidden/shown on a whim. I might want that at a later
+point, but first I have to take the following hurdle:
+
+Some buffers (think =helpful= or =help=) should have a "designated" window, that is,
+create "their" window if it doesn't already exist, and open subsequent buffers
+in that one. This is (of course) possible with =shackle=, yet I'm pretty sure I'd
+need to understand the inner workings of =display-buffer= to customize it that
+way. It seems prudent then to tackle those, and I might end up not needing
+=shackle= that way.
 
 #+begin_src emacs-lisp
-(use-package shackle
-  :init (shackle-mode)
-  :config
-  (setq shackle-inhibit-window-quit-on-same-windows t)
-  (setq shackle-default-alignment 'below)
-  (setq shackle-default-size 0.4)
-  (setq shackle-rules '((helpful-mode :align t :select t)
-                        (help-mode :align t :select t)
-                        (compilation-mode :align t :select t)
-                        (apropos-mode :align t :select t)
-                        ("^\\*eldoc" :regexp t :align below :select t)
-                        ("^\\*Occur" :regexp t :align t :select t)
-                        ("^\\*sly-description" :regexp t :align t :select t)
-                        ("^\\*lispy" :regexp t :align t :noselect t)
-                        ("^\\*mu4e-main" :same t :regexp t)))
-  (setq shackle-default-rule nil))
+(setq display-buffer-alist
+      '(("\\*helpful"
+         (display-buffer-reuse-mode-window display-buffer-at-bottom)
+         (mode . helpful-mode)
+         (window-height . 0.40))))
 #+end_src
 
-#+begin_src emacs-lisp :tangle no
-(use-package popper
-  :disabled
-  :defer
-  :init (popper-mode))
-#+end_src
-
-*** TODO What kinds of popups to try and tame? [0/7]
-- [ ] REPLs
-- [ ] =helpful=
-- [ ] =apropos=
-- [ ] Compilation results
+*** TODO Untamed popups
+- [ ] REPLs? vterm?
+- [ ] =*Backtrace*=
 - [ ] Shell command results
 - [ ] LSP / =eglot=
+- [ ] lispy evaluation results?
 
 ** Resizing windows in splits
 
