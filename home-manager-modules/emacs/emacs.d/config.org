@@ -2821,10 +2821,21 @@ This gives us better and more readable help pages. We also replace some built-in
 (use-package helpful
   :defer
   :config
-  (setq helpful-max-buffers 1)
+  (setq helpful-max-buffers 2)
+  (setq helpful-switch-buffer-function #'my/helpful-switch-to-buffer)
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)))
+#+end_src
+
+By default, =helpful= annoys me with its way of continuously spawning new windows
+in new locations.
+
+#+begin_src emacs-lisp
+(defun my/helpful-switch-to-buffer (buffer-or-name)
+  (if (eq major-mode 'helpful-mode)
+      (switch-to-buffer buffer-or-name)
+    (pop-to-buffer buffer-or-name)))
 #+end_src
 
 ** Project management
