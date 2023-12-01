@@ -3023,6 +3023,10 @@ possible completions and associated functions.
   :defer
   :custom
   (which-key-idle-delay 0.3)
+  :config
+  (setq which-key-add-column-padding 3)
+  (setq which-key-min-display-lines 2)
+  (setq which-key-side-window-location 'bottom)
   :init
   ;; See https://github.com/justbur/emacs-which-key/issues/306
   (if (daemonp)
