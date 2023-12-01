@@ -1137,13 +1137,35 @@ Make whitespace symbols visible.
 
 ** Render manpages in Emacs
 
+When the manpage to be opened has finished loading, I'd like it to be shown in a
+separate, selected window. One way to accomplish this is by configuring the
+notification method via =Man-notify-method=.
+
 #+begin_src emacs-lisp
 (use-package man
   :defer
   :config
-  ;; As soon as it is ready open the manpage in a separate, focused
-  ;; window.
   (setq Man-notify-method 'aggressive))
+#+end_src
+
+** Automatically selecting some built-in "popups"
+
+As with a lot of built-in popup-like functionality in Emacs, there's a lot of
+different ways to configure them. I want the =*Apropos*= and =*Help*= buffers to be
+selected (i.e., focused) automatically, like the rest of the popups out there.
+
+#+begin_src emacs-lisp
+(defun my/pop-to-current-buffer ()
+  "Pop to the current buffer. This is supposed to be used in hooks
+for modes/commands that spawn unfocused windows, like `apropos'."
+  (pop-to-buffer (current-buffer)))
+
+(use-package emacs
+  :straight (:type built-in)
+  :config
+  (setq help-window-select t)
+  (add-hook 'apropos-mode-hook #'my/pop-to-current-buffer)
+  (add-hook 'compilation-mode-hook #'my/pop-to-current-buffer))
 #+end_src
 
 ** =Isearch=
@@ -1177,7 +1199,6 @@ grow in the coming weeks or months.
   (advice-add 'eldoc-doc-buffer
               :after
               (defun my/focus-eldoc-buffer ()
-                (message (buffer-name (current-buffer)))
                 (pop-to-buffer eldoc--doc-buffer))))
 #+end_src
 
