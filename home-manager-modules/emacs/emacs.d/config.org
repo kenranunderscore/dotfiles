@@ -2243,9 +2243,9 @@ way. It seems prudent then to tackle those, and I might end up not needing
 
 #+begin_src emacs-lisp
 (setq display-buffer-alist
-      '(("\\*helpful"
+      '(("\\*\\(helpful\\|Help\\|Apropos\\)"
          (display-buffer-reuse-mode-window display-buffer-at-bottom)
-         (mode . helpful-mode)
+         (mode . (helpful-mode help-mode apropos-mode))
          (window-height . 0.40))))
 #+end_src
 
