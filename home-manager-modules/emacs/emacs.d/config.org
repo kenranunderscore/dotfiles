@@ -270,6 +270,11 @@ attributes that need to be applied when switching to the respective font.
             "Iosevka Comfy"
             :default-height
             180))
+        (iosevka-comfy-wide
+         . (:family
+            "Iosevka Comfy Wide"
+            :default-height
+            180))
         (dejavu
          . (:family
             "DejaVu Sans Mono"))
