@@ -19,7 +19,6 @@
     ./git.nix
     ./herbstluftwm
     ./i3
-    ./imwheel
     ./kitty.nix
     ./neovim
     ./nyxt
