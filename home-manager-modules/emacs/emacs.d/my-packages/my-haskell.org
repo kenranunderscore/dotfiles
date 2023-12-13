@@ -203,6 +203,31 @@ basis to enable the fitting mode there.
   "f" 'my/cabal-fmt-format-buffer)
 #+end_src
 
+* Better (no) indentation for =o= and =O= vim motions
+
+Indentation using the "open line" motions in =evil= behaves weirdly in that it
+adds indentation where none should be. These functions mostly fix this; they're
+snatched from the Doom Emacs Haskell module.
+
+I'm not sure whether I really need the "above" one, but I'll try it out.
+
+#+begin_src emacs-lisp
+(defun my/haskell-evil-open-above ()
+  "Open a line above the current mode."
+  (interactive)
+  (evil-beginning-of-line)
+  (haskell-indentation-newline-and-indent)
+  (evil-previous-line)
+  (haskell-indentation-indent-line)
+  (evil-append-line nil))
+
+(defun my/haskell-evil-open-below ()
+  "Open a line below the current mode."
+  (interactive)
+  (evil-append-line nil)
+  (haskell-indentation-newline-and-indent))
+#+end_src
+
 * =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used functions as
@@ -218,6 +243,12 @@ well as some of the above utilities into a local keymap for easy access.
   (haskell-process-args-cabal-repl '("--repl-options=-ferror-spans"))
   :hook
   (haskell-mode . interactive-haskell-mode)
+  :config
+  (general-define-key
+   :keymaps 'haskell-mode-map
+   :states 'normal
+   "o" #'my/haskell-evil-open-below
+   "O" #'my/haskell-evil-open-above)
   :bind
   (:map haskell-mode-map
         ("C-c e" . hydra-haskell-error-navigation/body)
