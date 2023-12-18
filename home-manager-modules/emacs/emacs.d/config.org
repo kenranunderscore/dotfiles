@@ -986,17 +986,6 @@ I'd expect them to.
   (general-define-key
    :states 'normal
    "U" 'evil-redo)
-  ;; Don't make certain commands repeatable with '.'
-  (mapc #'evil-declare-ignore-repeat
-        '(haskell-process-load-file
-          haskell-process-reload
-          haskell-goto-first-error
-          haskell-goto-next-error
-          haskell-goto-prev-error
-          hydra-haskell-error-navigation/body
-          my/haskell-add-import
-          my/haskell-add-ghc-option
-          my/haskell-add-language-extension))
   (add-to-list 'evil-emacs-state-modes 'sieve-manage-mode)
   :custom
   ((evil-want-C-u-scroll t)

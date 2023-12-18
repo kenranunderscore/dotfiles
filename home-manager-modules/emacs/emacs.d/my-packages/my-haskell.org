@@ -249,6 +249,17 @@ well as some of the above utilities into a local keymap for easy access.
    :states 'normal
    "o" #'my/haskell-evil-open-below
    "O" #'my/haskell-evil-open-above)
+  ;; Don't make certain commands repeatable with '.'
+  (mapc #'evil-declare-ignore-repeat
+        '(haskell-process-load-file
+          haskell-process-reload
+          haskell-goto-first-error
+          haskell-goto-next-error
+          haskell-goto-prev-error
+          hydra-haskell-error-navigation/body
+          my/haskell-add-import
+          my/haskell-add-ghc-option
+          my/haskell-add-language-extension))
   :bind
   (:map haskell-mode-map
         ("C-c e" . hydra-haskell-error-navigation/body)
