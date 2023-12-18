@@ -2593,6 +2593,10 @@ as =nix fmt= here.
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "pandoc")
+  :config
+  (mapc #'evil-declare-ignore-repeat
+        '(markdown-forward-paragraph
+          markdown-backward-paragraph))
   :hook ((markdown-mode gfm-mode) . auto-fill-mode))
 #+end_src
 
