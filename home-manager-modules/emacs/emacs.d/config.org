@@ -1580,14 +1580,7 @@ For navigation and other =org=-specific stuff I'm going to try out another =hydr
   visible header:  [_n_] / [_p_]
   sibling header:  [_N_] / [_P_]
   parent header:   [_k_]
-  block:           [_b_] / [_B_]
-
-  misc commands
-  ^^----------------------^^----------------------------
-  [_<tab>_]:                       ^^toggle header
-  [_t_]:   capture todo     [_c_]:   capture
-  [_a_]:   agenda           [_f_]:   cycle agenda files
-  [_l_]:   store link\n
+  block:           [_b_] / [_B_]\n
   "
   ("n" org-next-visible-heading)
   ("p" org-previous-visible-heading)
@@ -1596,12 +1589,6 @@ For navigation and other =org=-specific stuff I'm going to try out another =hydr
   ("N" org-forward-heading-same-level)
   ("P" org-backward-heading-same-level)
   ("k" org-up-element)
-  ("<tab>" org-cycle)
-  ("t" my/capture-todo :exit t)
-  ("c" org-capture :exit t)
-  ("a" org-agenda :exit t)
-  ("f" org-cycle-agenda-files :exit t)
-  ("l" org-store-link :exit t)
   ("q" nil "exit"))
 #+end_src
 
@@ -1661,7 +1648,15 @@ might run to adjust the headers.
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
-  (local-leader :keymaps 'org-mode-map "o" 'hydra-org/body)
+  (local-leader
+    :keymaps 'org-mode-map
+    "," 'hydra-org/body)
+  (leader
+    "o a" 'org-agenda
+    "o t" 'my/capture-todo
+    "o c" 'org-capture
+    "o l" 'org-store-link
+    "o f" 'org-cycle-agenda-files)
   :bind
   (:map org-mode-map
         ("C-'" . nil)))
