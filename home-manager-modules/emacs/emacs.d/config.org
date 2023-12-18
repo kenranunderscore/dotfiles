@@ -93,8 +93,7 @@ Helix etc. are also using it by default.)
   ("C-x C-o" . other-window)
   :config
   (leader
-    "SPC" '(execute-extended-command :which-key "M-x")
-    "b" '(:ignore t :which-key "buffer")
+    "SPC" 'execute-extended-command
     "b b" 'consult-buffer
     "b k" 'kill-current-buffer
     "b i" 'ibuffer
@@ -102,10 +101,8 @@ Helix etc. are also using it by default.)
     "b n" 'next-buffer
     "b r" 'revert-buffer-quick
     "b s" 'scratch-buffer
-    "t" '(:ignore t :which-key "toggles")
-    "q" '(:ignore t :which-key "quit")
-    "q k" '(save-buffers-kill-emacs :which-key "quit")
-    "q r" '(restart-emacs :which-key "restart")))
+    "q k" 'save-buffers-kill-emacs
+    "q r" 'restart-emacs))
 #+end_src
 
 * The region
@@ -164,7 +161,7 @@ A quick way to jump to this file, and an accompanying keybinding, as I do this
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
 
-(leader "e" '(my/open-init-file :which-key "edit emacs config"))
+(leader "e" 'my/open-init-file)
 #+end_src
 
 * "Menus" with =hydra=
@@ -193,7 +190,7 @@ buffers (this holds for the variants of those that I use as well: =embark= and
   ("f" first-error)
   ("q" nil "exit"))
 
-(leader "n e" '(hydra-navigate-errors/body :which-key "navigate errors"))
+(leader "n e" 'hydra-navigate-errors/body)
 #+end_src
 
 * Custom Emacs look
@@ -457,7 +454,7 @@ I find myself switching fonts /all the time/; I just seem to need that kind of
 visual refreshment. So let's bind it to a "leader" key.
 
 #+begin_src emacs-lisp
-(leader "t f" '(my/switch-font :which-key "switch font"))
+(leader "t f" 'my/switch-font)
 #+end_src
 
 ** Color theme
@@ -532,9 +529,9 @@ usually. So keybindings for this come in useful:
 
 #+begin_src emacs-lisp
 (leader
-  "t t" '(my/switch-theme :which-key "choose theme")
-  "t r" '(my/reload-theme :which-key "reload theme")
-  "t R" '(hydra-random-theme/body :which-key "random theme"))
+  "t t" 'my/switch-theme
+  "t r" 'my/reload-theme
+  "t R" 'hydra-random-theme/body)
 #+end_src
 
 *** My favorite Emacs themes
@@ -748,7 +745,6 @@ line."
   "Return `minor-mode-alist', but with certain modes I don't want to
 see filtered out."
   (let ((hidden-modes '(gcmh-mode
-                        which-key-mode
                         yas-minor-mode
                         buffer-face-mode
                         eldoc-mode
@@ -894,7 +890,7 @@ keybinding."
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t))
 
-(leader "t l" '(my/toggle-line-numbers :which-key "line numbers"))
+(leader "t l" 'my/toggle-line-numbers)
 #+end_src
 
 ** Insert a newline at the end of files
@@ -2270,7 +2266,7 @@ just remedy that:
          (shrink-window-horizontally 2)))
   ("q" nil "exit"))
 
-(leader "w" '(hydra-window-size/body :which-key "adjust window size"))
+(leader "w" 'hydra-window-size/body)
 #+end_src
 
 * IRC with ERC
@@ -3015,27 +3011,6 @@ parentheses.
   :hook ((lispy-mode . lispyville-mode)))
 #+end_src
 
-** Display commands bound to keys in the minibuffer
-
-When pressing the first key in a hotkey chain, show a popup that displays the
-possible completions and associated functions.
-
-#+begin_src emacs-lisp :tangle no
-(use-package which-key
-  :defer
-  :custom
-  (which-key-idle-delay 0.3)
-  :config
-  (setq which-key-add-column-padding 3)
-  (setq which-key-min-display-lines 2)
-  (setq which-key-side-window-location 'bottom)
-  :init
-  ;; See https://github.com/justbur/emacs-which-key/issues/306
-  (if (daemonp)
-      (add-hook 'server-after-make-frame-hook 'which-key-mode)
-    (add-hook 'after-init-hook 'which-key-mode)))
-#+end_src
-
 ** Annotate minibuffer completions
 
 Annotate minibuffer completions, like showing the bound keys and docstrings for
@@ -3137,7 +3112,7 @@ single keys until it quits -- either after =q= or a timeout.
    :color blue)
   ("q" nil "exit"))
 
-(leader "z" '(hydra-global-zoom/body :which-key "zoom"))
+(leader "z" 'hydra-global-zoom/body)
 #+end_src
 
 ** Edit =grep= results over multiple buffers
