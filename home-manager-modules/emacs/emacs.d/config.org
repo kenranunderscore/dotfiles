@@ -720,13 +720,14 @@ the `mode-line-inactive' face otherwise."
 line."
   :risky t)
 
-(defcustom my/mode-line-buffer-format
+(defcustom my/mode-line-compilation-format
   '(compilation-in-progress
     (:eval (propertize
 	        "   [Compiling...]"
 	        'face
 	        (my/with-active-face compilation-mode-line-run))))
-  "How to display the name of the current buffer in the mode line."
+  "How to display the indicator for a running compilation process in
+the mode line."
   :risky t)
 
 (defcustom my/mode-line-flymake-format
@@ -777,10 +778,10 @@ see filtered out."
  '(""
    my/evil-state-mode-line-format
    my/mode-line-flymake-format
-   my/mode-line-buffer-format
+   my/mode-line-compilation-format
    (:propertize "   %b" face mode-line-buffer-id)
-   ;; Always show current line and column, without checking
-   ;; `column-number-mode' and `line-number-mode'
+   ;; Always show current line and column, without checking `column-number-mode'
+   ;; and `line-number-mode'
    ("   L%l C%c")
    ("   " my/major-mode-mode-line-format)
    ("   " my/minor-modes-mode-line-format)))
