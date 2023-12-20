@@ -793,6 +793,14 @@ Disable the help display in the minibuffer when hovering over the mode line.
 (setq-default mode-line-default-help-echo nil)
 #+end_src
 
+By default, Emacs has a couple of keybindings defined for interaction with the
+mode line (usually mouse bindings). These are tagged with the special
+=<mode-line>= "key". Let's remove all of them.
+
+#+begin_src emacs-lisp
+(keymap-global-unset "<mode-line>" t)
+#+end_src
+
 * Basic options
 ** Startup
 
