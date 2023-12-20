@@ -787,6 +787,12 @@ see filtered out."
    ("   " my/minor-modes-mode-line-format)))
 #+end_src
 
+Disable the help display in the minibuffer when hovering over the mode line.
+
+#+begin_src emacs-lisp
+(setq-default mode-line-default-help-echo nil)
+#+end_src
+
 * Basic options
 ** Startup
 
