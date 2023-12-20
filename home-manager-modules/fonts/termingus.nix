@@ -4,7 +4,7 @@ let
   font = fetchFromGitHub {
     owner = "neutaaaaan";
     repo = "termingus";
-    sha256 = "sha256-yHXKZF5+eRgzzuhSCx5X0d7Pci6RGguTLFg04o/1OkI=";
+    hash = "sha256-yHXKZF5+eRgzzuhSCx5X0d7Pci6RGguTLFg04o/1OkI=";
     rev = "f73425d339b5c85205d01422260687e0d991c1bb";
   };
 in runCommand "install_termingus" { } ''

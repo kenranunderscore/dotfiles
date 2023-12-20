@@ -7,7 +7,7 @@ let
   font = fetchurl {
     url =
       "https://int10h.org/oldschool-pc-fonts/download/oldschool_pc_font_pack_v2.2_linux.zip";
-    sha256 = "sha256-sw3D7MmTGtLdi+dRfdAYE8iDShkRtYKrdkMZG0Gj11k=";
+    hash = "sha256-sw3D7MmTGtLdi+dRfdAYE8iDShkRtYKrdkMZG0Gj11k=";
   };
 in runCommand "install_oldschool_fonts" { } ''
   dest=$out/share/fonts/oldschool

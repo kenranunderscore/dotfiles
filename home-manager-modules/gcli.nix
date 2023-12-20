@@ -11,7 +11,7 @@ let
         owner = "herrhotzenplotz";
         repo = "gcli";
         rev = version;
-        sha256 = "sha256-ry+T39gFVPfHazAbv97UFpMIH1Dbbw6tZwsn9V4uRec=";
+        hash = "sha256-ry+T39gFVPfHazAbv97UFpMIH1Dbbw6tZwsn9V4uRec=";
       };
       nativeBuildInputs = [ autoreconfHook pkg-config yacc flex ];
       buildInputs = [ curl ];
