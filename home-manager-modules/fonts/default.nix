@@ -25,7 +25,7 @@ in {
           inherit (pkgs) runCommand;
           inherit (inputs) sf-mono;
         })
-        (import ./lucida-console.nix { inherit (pkgs) runCommand fetchurl; })
+        (pkgs.callPackage ./lucida-console.nix { })
         pragmataPro
         (import ./termingus.nix { inherit (pkgs) runCommand fetchFromGitHub; })
         (pkgs.callPackage (import ./oldschool.nix) { })

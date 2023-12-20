@@ -1,11 +1,12 @@
-{ runCommand, fetchurl }:
+{ runCommand, fetchzip, pkgs }:
 
 let
-  font = fetchurl {
-    url = "https://www.dafontfree.net/data/11/l/60383/Lucida%20Console.ttf";
-    sha256 = "sha256-bd9k7oltJM+ZCPEVriIKfPoY3ANLxKaOTbaNzVfHFRI=";
+  font = fetchzip {
+    url =
+      "https://www.dafontfree.io/download/lucida-console/?wpdmdl=71987&refresh=65825283b05f61703039619&ind=1612720414927&filename=Lucida%20Console%20Regular.zip";
+    sha256 = "sha256-viy63jSEOhM6WmPSKz8lueZCNmv+V7anCwusliT6afc=";
   };
 in runCommand "lucida-console" { } ''
   mkdir -p $out/share/fonts
-  cp ${font} $out/share/fonts/Lucida\ Console.ttf
+  cp "${font}/Lucida Console Regular.ttf" $out/share/fonts/
 ''
