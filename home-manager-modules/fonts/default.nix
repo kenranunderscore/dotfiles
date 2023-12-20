@@ -1,9 +1,8 @@
 { inputs, custom, config, lib, pkgs, ... }:
 
 let
+  inherit (pkgs) callPackage;
   cfg = config.modules.fonts;
-  pragmataPro =
-    pkgs.callPackage (import ./pp.nix "${inputs.privateConfig}") { };
 in {
   options.modules.fonts = {
     enable = lib.mkEnableOption "fonts";
@@ -21,16 +20,12 @@ in {
       sessionVariables.KENRAN_DEFAULT_FONT = custom.font.name;
 
       packages = lib.optionals cfg.withCustomBuilds [
-        (import ./sf-mono.nix {
-          inherit (pkgs) runCommand;
-          inherit (inputs) sf-mono;
-        })
-        (pkgs.callPackage ./lucida-console.nix { })
-        pragmataPro
-        (import ./termingus.nix { inherit (pkgs) runCommand fetchFromGitHub; })
-        (pkgs.callPackage (import ./oldschool.nix) { })
-        (pkgs.callPackage (import ./twilio-sans-mono.nix) {
-          inherit (pkgs) runCommand unzip;
+        (callPackage ./sf-mono.nix { inherit (inputs) sf-mono; })
+        (callPackage ./lucida-console.nix { })
+        (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
+        (callPackage ./termingus.nix { })
+        (callPackage ./oldschool.nix { })
+        (callPackage ./twilio-sans-mono.nix {
           inherit (inputs) twilio-sans-mono;
         })
       ] ++ (with pkgs; [
