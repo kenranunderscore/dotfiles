@@ -8,9 +8,9 @@ in {
     programs.ssh = {
       enable = true;
       compression = true;
+      addKeysToAgent = "yes";
       extraConfig = ''
         IdentityFile ~/.ssh/id_ed25519
-        AddKeysToAgent yes
       '';
 
       matchBlocks = {
