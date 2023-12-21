@@ -44,20 +44,14 @@ file."
 
 * Insert imports
 
-This function is the one is use by far the most It makes it somewhat easy to add
-=import= statements to Haskell files.  It's surely not perfect, but fits my
+This function is the one is use by far the most. It makes it somewhat easy to
+add =import= statements to Haskell files. It's surely not perfect, but fits my
 preferences well; that is, I almost never use the combinations that are harder
-to add with this template.  For instance, adding a qualified import with import
+to add with this template. For instance, adding a qualified import with import
 list, or an unqualified one with an alias, would require "tricks".
 
 #+begin_src emacs-lisp
-(defun +read-non-empty-string (prompt &optional initial-input)
-  "Read a string from the minibuffer.  When the result is the empty
-string, return nil instead."
-  (let ((str (read-string prompt initial-input)))
-    (unless (string-empty-p str)
-      str)))
-
+(require '+elisp-utils)
 (defun +haskell-add-import (arg module &optional qualified? alias)
   "Add an import to the import list.  When no prefix ARG is set, the
 user will be prompted whether the import should be qualified, and

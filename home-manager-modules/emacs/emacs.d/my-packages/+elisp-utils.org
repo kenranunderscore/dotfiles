@@ -1,0 +1,22 @@
+#+TITLE: Emacs Lisp utility functions
+#+AUTHOR: Johannes Maier
+#+EMAIL: johannes.maier@mailbox.org
+#+STARTUP: showall
+#+OPTIONS: toc:nil
+
+* Helpers for writing commands
+
+#+begin_src emacs-lisp
+(defun +read-non-empty-string (prompt &optional initial-input)
+  "Read a string from the minibuffer. When the result is the empty
+string, return nil instead."
+  (let ((str (read-string prompt initial-input)))
+    (unless (string-empty-p str)
+      str)))
+#+end_src
+
+* Provide the package
+
+#+begin_src emacs-lisp
+(provide '+elisp-utils)
+#+end_src
