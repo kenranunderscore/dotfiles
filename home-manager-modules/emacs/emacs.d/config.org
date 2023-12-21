@@ -996,6 +996,10 @@ I'd expect them to.
   (general-define-key
    :states 'normal
    "U" 'evil-redo)
+  (general-define-key
+   :keymaps 'special-mode-map
+   :states '(normal motion)
+   "q" #'quit-window)
   (add-to-list 'evil-emacs-state-modes 'sieve-manage-mode)
   :custom
   ((evil-want-C-u-scroll t)
