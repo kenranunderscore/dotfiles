@@ -131,7 +131,7 @@ It's awkward to have to do =C-S-<backspace>= or =C-k C-k=, followed by yanking, 
 this command is obsolete, as Vim bindings make this quite easy.
 
 #+begin_src emacs-lisp :tangle no
-(defun my/copy-line-at-point ()
+(defun +copy-line-at-point ()
   "Copy the current line without killing it first."
   (interactive)
   (save-excursion
@@ -156,12 +156,12 @@ A quick way to jump to this file, and an accompanying keybinding, as I do this
 /very often/.
 
 #+begin_src emacs-lisp
-(defun my/open-init-file ()
+(defun +open-init-file ()
   "Open my config.org file."
   (interactive)
   (find-file (file-truename (locate-user-emacs-file "config.org"))))
 
-(leader "e" 'my/open-init-file)
+(leader "e" #'+open-init-file)
 #+end_src
 
 * "Menus" with =hydra=
@@ -240,7 +240,7 @@ An alist of my preferred font families, together with a plist of certain
 attributes that need to be applied when switching to the respective font.
 
 #+begin_src emacs-lisp
-(setq my/font-alist
+(setq +font-alist
       '((pragmata-pro
          . (:family
             "Pragmata Pro Mono"))
@@ -351,20 +351,20 @@ attributes that need to be applied when switching to the respective font.
             "Twilio Sans Mono"))))
 #+end_src
 
-=my/current-font= contains a symbol pointing to one of the fonts specified in
-=my/font-alist=. Since I can now globally "set" and change a font I like for my
+=+current-font= contains a symbol pointing to one of the fonts specified in
+=+font-alist=. Since I can now globally "set" and change a font I like for my
 system, Emacs should try to adapt to this (at startup) as well. The function
-=my/load-font-from-env= does just that, as the global font -- if it exists -- can
-be read from an environment variable. If a setting for this font is found in
-Emacs, that is taken, unless there's a =my/default-font= set, which always "wins".
+=+load-font-from-env= does just that, as the global font -- if it exists -- can be
+read from an environment variable. If a setting for this font is found in Emacs,
+that is taken, unless there's a =+default-font= set, which always "wins".
 
 If neither default font nor environment variable are set/found, I fall back to
 DejaVu Sans Mono.
 
 #+begin_src emacs-lisp
-(setq my/default-font nil)
+(setq +default-font nil)
 
-(defun my/load-font-from-env ()
+(defun +load-font-from-env ()
   "See whether an environment variable specifying a 'system font' is
 set, and translate that to one of the font symbols."
   (when-let ((f (getenv "KENRAN_DEFAULT_FONT"))
@@ -372,27 +372,27 @@ set, and translate that to one of the font symbols."
                     (lambda (x)
                       (equal (plist-get (cdr x) :family)
                              f))
-                    my/font-alist)))
+                    +font-alist)))
     (car font)))
 
-(setq my/current-font
-      (or my/default-font
-          (my/load-font-from-env)
+(setq +current-font
+      (or +default-font
+          (+load-font-from-env)
           'dejavu))
 #+end_src
 
 For =org-mode= I (sometimes) like using a non-monospace font. This is it.
 
 #+begin_src emacs-lisp
-(defconst my/variable-pitch-font "Cantarell")
+(defconst +variable-pitch-font "Cantarell")
 #+end_src
 
 The function I use to switch between the various fonts I like. It applies the
-attributes of its value in =my/font-alist=.
+attributes of its value in =+font-alist=.
 
 #+begin_src emacs-lisp
-(defun my/switch-font (arg font)
-  "Apply the attributes stored for FONT in `my/font-alist'.  When
+(defun +switch-font (arg font)
+  "Apply the attributes stored for FONT in `+font-alist'.  When
 called with non-nil prefix argument ARG the current height is
 reset to the default height for the selected font."
   (interactive
@@ -401,9 +401,9 @@ reset to the default height for the selected font."
           (completing-read
            "Font: "
            (mapcar #'car
-                   (assoc-delete-all my/current-font
-                                     (copy-alist my/font-alist)))))))
-  (let* ((attrs (alist-get font my/font-alist))
+                   (assoc-delete-all +current-font
+                                     (copy-alist +font-alist)))))))
+  (let* ((attrs (alist-get font +font-alist))
          (family (plist-get attrs :family))
          (default-height (or (plist-get attrs :default-height) 160))
          (height (or (and arg default-height)
@@ -414,8 +414,8 @@ reset to the default height for the selected font."
                          (or (plist-get attrs :org-height) 0.9)
                        1.0))
          (weight (or (plist-get attrs :weight) 'regular)))
-    (setq my/current-font font)
-    (setq my/default-font-height default-height)
+    (setq +current-font font)
+    (setq +default-font-height default-height)
     (set-face-attribute
      'default nil
      :font family
@@ -427,7 +427,7 @@ reset to the default height for the selected font."
      :height org-height)
     (set-face-attribute
      'variable-pitch nil
-     :font my/variable-pitch-font
+     :font +variable-pitch-font
      :height 1.0)
     (set-face-attribute
      'fixed-pitch-serif nil
@@ -443,18 +443,18 @@ makes sure that these also work when using the Emacs daemon together with
 #+begin_src emacs-lisp
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook
-              (defun my/switch-to-current-font ()
-                (my/switch-font t my/current-font)
+              (defun +switch-to-current-font ()
+                (+switch-font t +current-font)
                 (remove-hook 'server-after-make-frame-hook
-                             #'my/switch-to-current-font)))
-  (my/switch-font t my/current-font))
+                             #'+switch-to-current-font)))
+  (+switch-font t +current-font))
 #+end_src
 
 I find myself switching fonts /all the time/; I just seem to need that kind of
 visual refreshment. So let's bind it to a "leader" key.
 
 #+begin_src emacs-lisp
-(leader "t f" 'my/switch-font)
+(leader "t f" #'+switch-font)
 #+end_src
 
 ** Color theme
@@ -466,42 +466,41 @@ times, so I use =disable-theme= on all themes in =custom-enabled-themes= before
 enabling the target theme.
 
 #+begin_src emacs-lisp
-(defvar my/switch-theme-hook nil
-  "Functions to be called after switching the current (default)
-font.")
+(defvar +switch-theme-hook nil
+  "Functions to be called after switching the theme.")
 
-(defun my/switch-theme-hook ()
-  "Run `my/switch-theme-hook'."
-  (run-hook-with-args 'my/switch-theme-hook))
+(defun +switch-theme-hook ()
+  "Run `+switch-theme-hook'."
+  (run-hook-with-args #'+switch-theme-hook))
 
-(defun my/available-themes ()
+(defun +available-themes ()
   "Get a list of the names of all available themes, excluding the
 currently enabled one(s)."
   (mapcar #'symbol-name
           (seq-difference (custom-available-themes)
                           custom-enabled-themes)))
 
-(defun my/switch-theme (name)
-  "Switch themes interactively.  Similar to `load-theme' but also
+(defun +switch-theme (name)
+  "Switch themes interactively. Similar to `load-theme' but also
 disables all other enabled themes."
   (interactive
    (list (intern
           (completing-read
            "Theme: "
-           (my/available-themes)))))
+           (+available-themes)))))
   (progn
     (mapc #'disable-theme
           custom-enabled-themes)
     (princ name)
     (load-theme name t)
-    (my/switch-theme-hook)))
+    (+switch-theme-hook)))
 
-(defun my/enable-random-theme ()
+(defun +enable-random-theme ()
   "Randomly choose and enable a theme."
   (interactive)
-  (my/switch-theme
+  (+switch-theme
    (intern
-    (seq-random-elt (my/available-themes)))))
+    (seq-random-elt (+available-themes)))))
 
 (defhydra hydra-random-theme (:hint nil)
   "\n
@@ -509,7 +508,7 @@ disables all other enabled themes."
 
   [_n_]: next    [_q_]: exit\n
   "
-  ("n" my/enable-random-theme)
+  ("n" +enable-random-theme)
   ("q" nil))
 #+end_src
 
@@ -517,11 +516,11 @@ When developing a theme, like I did with =naga=, it's handy to be able to reload
 it on the fly.
 
 #+begin_src emacs-lisp
-(defun my/reload-theme ()
+(defun +reload-theme ()
   "Reload the currently active theme."
   (interactive)
   (let ((active-theme (car custom-enabled-themes)))
-    (my/switch-theme active-theme)))
+    (+switch-theme active-theme)))
 #+end_src
 
 As with fonts, I like changing visuals regularly, as in, multiple times a day
@@ -529,8 +528,8 @@ usually. So keybindings for this come in useful:
 
 #+begin_src emacs-lisp
 (leader
-  "t t" 'my/switch-theme
-  "t r" 'my/reload-theme
+  "t t" #'+switch-theme
+  "t r" #'+reload-theme
   "t R" 'hydra-random-theme/body)
 #+end_src
 
@@ -548,7 +547,7 @@ for now.
 
 I'm using a "mutable" path to the theme repository, assuming I've cloned my
 project repository to a fixed location. This allows for quick iteration by
-changing stuff in the theme, followed by =my/reload-theme=.
+changing stuff in the theme, followed by =+reload-theme=.
 
 #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/projects/emacs-naga-theme")
@@ -645,7 +644,7 @@ Another theme package by Protesilaos Stavrou.
 **** Set the current theme
 
 #+begin_src emacs-lisp
-(my/switch-theme 'doom-zenburn)
+(+switch-theme 'doom-gruvbox)
 #+end_src
 
 ** Render color names/codes in their respective color
@@ -677,14 +676,14 @@ annoying happens. So let's try to fiddle with it to make it work the way I like:
 - Strip stuff away that I don't look at anyway
 
 #+begin_src emacs-lisp
-(defmacro my/with-active-face (face)
+(defmacro +with-active-face (face)
   "Return FACE if we're in the mode line of the active window, and
 the `mode-line-inactive' face otherwise."
   `(if (mode-line-window-selected-p)
    ,face
      'mode-line-inactive)) 
 
-(defcustom my/evil-state-mode-line-format
+(defcustom +evil-state-mode-line-format
   '(:eval
     (let ((fg (face-attribute 'default :foreground))
           (bg (face-attribute 'default :background))
@@ -694,55 +693,55 @@ the `mode-line-inactive' face otherwise."
         (propertize
          " INSERT "
          'face
-         (my/with-active-face `(:foreground ,bg :background ,error-fg))))
+         (+with-active-face `(:foreground ,bg :background ,error-fg))))
        ((eq evil-state 'normal)
         (propertize
          " NORMAL "
          'face
-         (my/with-active-face `(:foreground ,bg :background ,fg))))
+         (+with-active-face `(:foreground ,bg :background ,fg))))
        ((eq evil-state 'motion)
         (propertize
          " MOTION "
          'face
-         (my/with-active-face `(:foreground ,bg :background ,fg))))
+         (+with-active-face `(:foreground ,bg :background ,fg))))
        ((eq evil-state 'visual)
         (propertize
          " VISUAL "
          'face
-         (my/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground)))))
+         (+with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground)))))
        ((eq evil-state 'emacs)
         (propertize
          " EMACS "
          'face
-         (my/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground)))))
+         (+with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground)))))
        (t "        "))))
   "Specifies how to display the current `evil-state' in the mode
 line."
   :risky t)
 
-(defcustom my/mode-line-compilation-format
+(defcustom +mode-line-compilation-format
   '(compilation-in-progress
     (:eval (propertize
 	        "   [Compiling...]"
 	        'face
-	        (my/with-active-face compilation-mode-line-run))))
+	        (+with-active-face compilation-mode-line-run))))
   "How to display the indicator for a running compilation process in
 the mode line."
   :risky t)
 
-(defcustom my/mode-line-flymake-format
+(defcustom +mode-line-flymake-format
   '(flymake-mode
     (:eval (when-let ((counters (format-mode-line 'flymake-mode-line-counters)))
 	     `("   " ,counters))))
   "How to display the name of the current buffer in the mode line."
   :risky t)
 
-(defcustom my/major-mode-mode-line-format
+(defcustom +major-mode-mode-line-format
   '("" (:eval (string-replace "-mode" "" (symbol-name major-mode))))
   "How to display the active major mode in the mode line."
   :risky t)
 
-(defun my/visible-minor-modes ()
+(defun +visible-minor-modes ()
   "Return `minor-mode-alist', but with certain modes I don't want to
 see filtered out."
   (let ((hidden-modes '(gcmh-mode
@@ -764,10 +763,10 @@ see filtered out."
                       (eq (car cell)
                           hidden)))))
 
-(defcustom my/minor-modes-mode-line-format
+(defcustom +minor-modes-mode-line-format
   '("("
     (:eval
-     (let ((s (format-mode-line (my/visible-minor-modes))))
+     (let ((s (format-mode-line (+visible-minor-modes))))
        (substring s 1)))
     ")")
   "How to display the active minor modes in the mode line."
@@ -776,15 +775,15 @@ see filtered out."
 (setq-default
  mode-line-format
  '(""
-   my/evil-state-mode-line-format
-   my/mode-line-flymake-format
-   my/mode-line-compilation-format
+   +evil-state-mode-line-format
+   +mode-line-flymake-format
+   +mode-line-compilation-format
    (:propertize "   %b" face mode-line-buffer-id)
    ;; Always show current line and column, without checking `column-number-mode'
    ;; and `line-number-mode'
    ("   L%l C%c")
-   ("   " my/major-mode-mode-line-format)
-   ("   " my/minor-modes-mode-line-format)))
+   ("   " +major-mode-mode-line-format)
+   ("   " +minor-modes-mode-line-format)))
 #+end_src
 
 Disable the help display in the minibuffer when hovering over the mode line.
@@ -879,19 +878,19 @@ In insert mode, line numbers should be disabled altogether. That's what these
 two functions are used for.
 
 #+begin_src emacs-lisp
-(defun my/switch-to-absolute-line-numbers ()
+(defun +switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
   (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers t)))
 
-(defun my/switch-to-hybrid-line-numbers ()
+(defun +switch-to-hybrid-line-numbers ()
   "Enable relative line numbers, but with the current line
 showing its absolute line number."
   (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers 'relative)
     (setq display-line-numbers-current-absolute t)))
 
-(defun my/toggle-line-numbers ()
+(defun +toggle-line-numbers ()
   "Toggle `display-line-numbers-mode'.  Meant to be used in a
 keybinding."
   (interactive)
@@ -899,13 +898,13 @@ keybinding."
 
 (use-package display-line-numbers
   :defer
-  :hook ((evil-insert-state-entry . my/switch-to-absolute-line-numbers)
-         (evil-insert-state-exit . my/switch-to-hybrid-line-numbers))
+  :hook ((evil-insert-state-entry . +switch-to-absolute-line-numbers)
+         (evil-insert-state-exit . +switch-to-hybrid-line-numbers))
   :config
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t))
 
-(leader "t l" 'my/toggle-line-numbers)
+(leader "t l" #'+toggle-line-numbers)
 #+end_src
 
 ** Insert a newline at the end of files
@@ -1162,7 +1161,7 @@ different ways to configure them. I want the =*Apropos*= and =*Help*= buffers to
 selected (i.e., focused) automatically, like the rest of the popups out there.
 
 #+begin_src emacs-lisp
-(defun my/pop-to-current-buffer ()
+(defun +pop-to-current-buffer ()
   "Pop to the current buffer. This is supposed to be used in hooks
 for modes/commands that spawn unfocused windows, like `apropos'."
   (pop-to-buffer (current-buffer)))
@@ -1171,8 +1170,8 @@ for modes/commands that spawn unfocused windows, like `apropos'."
   :straight (:type built-in)
   :config
   (setq help-window-select t)
-  (add-hook 'apropos-mode-hook #'my/pop-to-current-buffer)
-  (add-hook 'compilation-mode-hook #'my/pop-to-current-buffer))
+  (add-hook 'apropos-mode-hook #'+pop-to-current-buffer)
+  (add-hook 'compilation-mode-hook #'+pop-to-current-buffer))
 #+end_src
 
 ** =Isearch=
@@ -1205,7 +1204,7 @@ grow in the coming weeks or months.
   :config
   (advice-add 'eldoc-doc-buffer
               :after
-              (defun my/focus-eldoc-buffer ()
+              (defun +focus-eldoc-buffer ()
                 (pop-to-buffer eldoc--doc-buffer))))
 #+end_src
 
@@ -1370,7 +1369,7 @@ Prepending an equals sign to a search term will search for literal matches of
 the preceding string.
 
 #+begin_src emacs-lisp
-(defun my/literal-if-= (pattern _index _total)
+(defun +literal-if-= (pattern _index _total)
   (when (string-prefix-p "=" pattern)
     `(orderless-literal . ,(substring pattern 1))))
 #+end_src
@@ -1378,7 +1377,7 @@ the preceding string.
 A prepended bang discards everything that matches the preceding literal string.
 
 #+begin_src emacs-lisp
-(defun my/without-if-! (pattern _index _total)
+(defun +without-if-! (pattern _index _total)
   (when (string-prefix-p "!" pattern)
     `(orderless-without-literal . ,(substring pattern 1))))
 #+end_src
@@ -1386,7 +1385,7 @@ A prepended bang discards everything that matches the preceding literal string.
 The tilde sign gives me a way to have "fuzzy" search, if needed.
 
 #+begin_src emacs-lisp
-(defun my/flex-if-~ (pattern _index _total)
+(defun +flex-if-~ (pattern _index _total)
   (when (string-prefix-p "~" pattern)
     `(orderless-flex . ,(substring pattern 1))))
 #+end_src
@@ -1395,9 +1394,9 @@ The tilde sign gives me a way to have "fuzzy" search, if needed.
 (use-package orderless
   :custom (completion-styles '(orderless))
   (orderless-style-dispatchers
-   '(my/literal-if-=
-     my/without-if-!
-     my/flex-if-~)))
+   '(+literal-if-=
+     +without-if-!
+     +flex-if-~)))
 #+end_src
 
 ** Consult
@@ -1532,7 +1531,7 @@ following function that appends a single new value to the current =:inherit=
 attribute value of a face.
 
 #+begin_src emacs-lisp
-(defun my/inherit-fixed-pitch (face)
+(defun +inherit-fixed-pitch (face)
   "Append `fixed-pitch' to the `:inherit' attribute of FACE."
   (let* ((current (face-attribute face :inherit))
          (new (cond
@@ -1546,36 +1545,36 @@ attribute value of a face.
                 (list 'fixed-pitch current)))))
     (set-face-attribute face nil :inherit new)))
 
-(defun my/org-font-setup ()
+(defun +org-font-setup ()
   "Set the face attributes for code, verbatim, and other markup
 elements.  Also increase org header size."
   (interactive)
-  (my/inherit-fixed-pitch 'org-block)
-  (my/inherit-fixed-pitch 'org-block-begin-line)
-  (my/inherit-fixed-pitch 'org-block-end-line)
-  (my/inherit-fixed-pitch 'org-document-info-keyword)
-  (my/inherit-fixed-pitch 'org-document-info)
-  (my/inherit-fixed-pitch 'org-code)
-  (my/inherit-fixed-pitch 'org-table)
-  (my/inherit-fixed-pitch 'org-verbatim)
-  (my/inherit-fixed-pitch 'org-checkbox)
-  (my/inherit-fixed-pitch 'org-meta-line)
-  (my/inherit-fixed-pitch 'org-special-keyword)
-  (my/inherit-fixed-pitch 'org-link)
-  (my/inherit-fixed-pitch 'org-todo)
-  (my/inherit-fixed-pitch 'org-done)
-  (my/inherit-fixed-pitch 'org-drawer)
-  (my/inherit-fixed-pitch 'org-property-value)
-  (my/inherit-fixed-pitch 'org-document-title))
+  (+inherit-fixed-pitch 'org-block)
+  (+inherit-fixed-pitch 'org-block-begin-line)
+  (+inherit-fixed-pitch 'org-block-end-line)
+  (+inherit-fixed-pitch 'org-document-info-keyword)
+  (+inherit-fixed-pitch 'org-document-info)
+  (+inherit-fixed-pitch 'org-code)
+  (+inherit-fixed-pitch 'org-table)
+  (+inherit-fixed-pitch 'org-verbatim)
+  (+inherit-fixed-pitch 'org-checkbox)
+  (+inherit-fixed-pitch 'org-meta-line)
+  (+inherit-fixed-pitch 'org-special-keyword)
+  (+inherit-fixed-pitch 'org-link)
+  (+inherit-fixed-pitch 'org-todo)
+  (+inherit-fixed-pitch 'org-done)
+  (+inherit-fixed-pitch 'org-drawer)
+  (+inherit-fixed-pitch 'org-property-value)
+  (+inherit-fixed-pitch 'org-document-title))
 
-(add-hook 'my/switch-theme-hook #'my/org-font-setup)
+(add-hook '+switch-theme-hook #'+org-font-setup)
 #+end_src
 
 I capture mostly =TODO= items, so it's convenient to have a special shortcut for
 that.
 
 #+begin_src emacs-lisp
-(defun my/capture-todo ()
+(defun +capture-todo ()
   "Capture a TODO item with `org-capture'."
   (interactive)
   (org-capture nil "t"))
@@ -1616,14 +1615,14 @@ might run to adjust the headers.
   :straight (:type built-in)
   :hook
   ((org-mode . auto-fill-mode)
-   (org-mode . my/org-font-setup)
+   (org-mode . +org-font-setup)
    ;; (org-mode . variable-pitch-mode)
    (org-trigger . save-buffer)
-   ;; Inheriting fixed-pitch in my/org-font-setup doesn't work; the
+   ;; Inheriting fixed-pitch in +org-font-setup doesn't work; the
    ;; face is not yet known there, so use a hook.
    (org-indent-mode . (lambda ()
-                        (my/inherit-fixed-pitch 'org-indent)
-                        (my/inherit-fixed-pitch 'org-hide)))
+                        (+inherit-fixed-pitch 'org-indent)
+                        (+inherit-fixed-pitch 'org-hide)))
    (org-capture-mode . evil-insert-state))
   :custom
   ((org-startup-indented t)
@@ -1663,11 +1662,11 @@ might run to adjust the headers.
     :keymaps 'org-mode-map
     "," 'hydra-org/body)
   (leader
-    "o a" 'org-agenda
-    "o t" 'my/capture-todo
-    "o c" 'org-capture
-    "o l" 'org-store-link
-    "o f" 'org-cycle-agenda-files)
+    "o a" #'org-agenda
+    "o t" #'+capture-todo
+    "o c" #'org-capture
+    "o l" #'org-store-link
+    "o f" #'org-cycle-agenda-files)
   :bind
   (:map org-mode-map
         ("C-'" . nil)))
@@ -1807,25 +1806,25 @@ great.
 ** More completion-at-point backends via =cape=
 
 #+begin_src emacs-lisp
-(defun my/ignore-elisp-keywords (cand)
+(defun +ignore-elisp-keywords (cand)
   "Do not show Emacs Lisp keywords in completions in
 'emacs-lisp-mode'."
   (or (not (keywordp cand))
       (eq (char-after (car completion-in-region--data)) ?:)))
 
-(defun my/setup-elisp-capfs ()
+(defun +setup-elisp-capfs ()
   "Uses 'cape-capf-super' to work around the problem that dabbrev
 completions don't show up in 'emacs-lisp-mode' by default."
   (setq-local completion-at-point-functions
               `(,(cape-capf-super
                   (cape-capf-predicate
                    #'elisp-completion-at-point
-                   #'my/ignore-elisp-keywords)
+                   #'+ignore-elisp-keywords)
                   #'cape-dabbrev)
                 cape-file))
   (setq-local cape-dabbrev-min-length 4))
 
-(defun my/register-default-capfs ()
+(defun +register-default-capfs ()
   "I use 'cape-dabbrev' and 'cape-file' everywhere as they are
 generally useful. This function needs to be called in certain
 mode hooks, as some modes fill the buffer-local capfs with
@@ -1835,10 +1834,10 @@ called at all."
   (add-to-list 'completion-at-point-functions #'cape-file))
 
 (use-package cape
-  :hook ((emacs-lisp-mode . my/setup-elisp-capfs)
-         (haskell-mode . my/register-default-capfs))
+  :hook ((emacs-lisp-mode . +setup-elisp-capfs)
+         (haskell-mode . +register-default-capfs))
   :init
-  (my/register-default-capfs))
+  (+register-default-capfs))
 #+end_src
 
 * E-mail configuration
@@ -1904,7 +1903,7 @@ Let's first define some utility functions that I'll then bind to special keys
 later.
 
 #+begin_src emacs-lisp :tangle no
-(defun my/notmuch-search-toggle-unread ()
+(defun +notmuch-search-toggle-unread ()
   "Toggle unread tag at point in `notmuch-search-mode'."
   (interactive)
   (if (member "unread" (notmuch-search-get-tags))
@@ -1912,7 +1911,7 @@ later.
     (notmuch-search-tag '("+unread")))
   (notmuch-search-next-thread))
 
-(defun my/notmuch-search-toggle-deleted ()
+(defun +notmuch-search-toggle-deleted ()
   "Toggle deleted tag at point in `notmuch-search-mode'."
   (interactive)
   (if (member "deleted" (notmuch-search-get-tags))
@@ -1920,7 +1919,7 @@ later.
     (notmuch-search-tag '("+deleted")))
   (notmuch-search-next-thread))
 
-(defun my/notmuch-show-toggle-deleted ()
+(defun +notmuch-show-toggle-deleted ()
   "Toggle deleted tag at point in `notmuch-show-mode'."
   (interactive)
   (if (member "deleted" (notmuch-show-get-tags))
@@ -1970,10 +1969,10 @@ here rather belong to built-in functionality, but they fit in here very well.
      (:name "all mail" :query "*" :key "a")))
   :bind
   (:map notmuch-show-mode-map
-        ("d" . my/notmuch-show-toggle-deleted)
+        ("d" . +notmuch-show-toggle-deleted)
         :map notmuch-search-mode-map
-        ("d" . my/notmuch-search-toggle-deleted)
-        ("u" . my/notmuch-search-toggle-unread)))
+        ("d" . +notmuch-search-toggle-deleted)
+        ("u" . +notmuch-search-toggle-unread)))
 #+end_src
 
 =Gnus-alias= makes it possible to use different identities when composing mail. I
@@ -2201,14 +2200,14 @@ warning or yes/no question whenever I try sending without having specified a
 subject header, I have to hook into this.
 
 #+begin_src emacs-lisp
-(defun my/confirm-empty-mail-subject ()
+(defun +confirm-empty-mail-subject ()
   "Check whether the subject header of the current message is empty,
 and abort in this case (https://emacs.stackexchange.com/a/41176)."
   (or (message-field-value "Subject")
       (y-or-n-p "Really send without subject? ")
       (keyboard-quit)))
 
-(add-hook 'message-send-mail-hook #'my/confirm-empty-mail-subject)
+(add-hook 'message-send-mail-hook #'+confirm-empty-mail-subject)
 #+end_src
 
 * Window management
@@ -2360,12 +2359,12 @@ commands will be, and if and where to bind those.
   (keymap-unset mc/keymap "<return>")
   :init
   (add-hook 'multiple-cursors-mode-hook
-            (defun my/work-around-multiple-cursors-issue ()
+            (defun +work-around-multiple-cursors-issue ()
               "Loads the file multiple-cursors-core.el (probably for the second
 time), which makes the cursors work again.  See
 https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_29060/."
               (load "multiple-cursors-core.el")
-              (remove-hook 'multiple-cursors-mode-hook #'my/work-around-multiple-cursors-issue))))
+              (remove-hook 'multiple-cursors-mode-hook #'+work-around-multiple-cursors-issue))))
 #+end_src
 
 Due to the nature of =mc/mark-next-like-this= and consorts, a hydra should lend
@@ -2566,20 +2565,20 @@ still =reformatter-define= functions for more convenient to use formatters as we
 as =nix fmt= here.
 
 #+begin_src emacs-lisp
-(reformatter-define my/nix-format
+(reformatter-define +nix-format
   :program "nix"
   :args (list "fmt" input-file)
   :stdin nil
   :stdout nil
-  :lighter " my/nix-fmt")
+  :lighter " +nix-fmt")
 
-(reformatter-define my/nixfmt-format
+(reformatter-define +nixfmt-format
   :program "nixfmt"
-  :lighter " my/nixfmt")
+  :lighter " +nixfmt")
 
-(reformatter-define my/alejandra-format
+(reformatter-define +alejandra-format
   :program "alejandra"
-  :lighter " my/alejandra")
+  :lighter " +alejandra")
 #+end_src
 
 #+begin_src emacs-lisp
@@ -2588,7 +2587,7 @@ as =nix fmt= here.
   :config
   (local-leader
     :keymaps 'nix-mode-map
-    "f" 'my/nixfmt-format-buffer))
+    "f" #'+nixfmt-format-buffer))
 #+end_src
 
 ** Markdown
@@ -2614,10 +2613,10 @@ bunch of utility functions and want to load everything lazily, so I've created a
 [[file:my-packages/my-haskell.org][custom local Emacs package]] that contains everything.
 
 #+begin_src emacs-lisp
-(use-package my-haskell
+(use-package +haskell
   :straight nil
   :demand
-  :load-path my/custom-package-dir)
+  :load-path +custom-package-dir)
 #+end_src
 
 ** Dhall
@@ -2824,7 +2823,7 @@ This gives us better and more readable help pages. We also replace some built-in
   :defer
   :config
   (setq helpful-max-buffers 2)
-  (setq helpful-switch-buffer-function #'my/helpful-switch-to-buffer)
+  (setq helpful-switch-buffer-function #'+helpful-switch-to-buffer)
   :bind (("C-h f" . helpful-callable)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)))
@@ -2834,7 +2833,7 @@ By default, =helpful= annoys me with its way of continuously spawning new window
 in new locations.
 
 #+begin_src emacs-lisp
-(defun my/helpful-switch-to-buffer (buffer-or-name)
+(defun +helpful-switch-to-buffer (buffer-or-name)
   (if (eq major-mode 'helpful-mode)
       (switch-to-buffer buffer-or-name)
     (pop-to-buffer buffer-or-name)))
@@ -2851,7 +2850,7 @@ directory of a known project. =project.el= is making this possible in a
 straightforward way.
 
 #+begin_src emacs-lisp
-(defun my/add-nix-flakes-envrc-file ()
+(defun +add-nix-flakes-envrc-file ()
   "If it doesn't already exist create a .envrc file containing 'use
 flake in the current directory."
   (interactive)
@@ -2860,14 +2859,14 @@ flake in the current directory."
         (message "Envrc file already exists")
       (write-region "use flake" nil envrc))))
 
-(defun my/project-vterm ()
+(defun +project-vterm ()
   "Open a `vterm' session in the project root of the current
 project.  Prompt if no project can be found."
   (interactive)
   (let ((default-directory (project-root (project-current t))))
     (vterm)))
 
-(defun my/project-edit-dir-local-variable (mode variable value)
+(defun +project-edit-dir-local-variable (mode variable value)
   "Edit directory-local variables in the root directory of the
 current project."
   (interactive
@@ -2888,7 +2887,7 @@ why not write something to open =dired= there and then add this function to
 =project-prefix-map=?
 
 #+begin_src emacs-lisp
-(defun my/navigate-to-projects ()
+(defun +navigate-to-projects ()
   "Open a `dired' buffer in my personal project directory."
   (interactive)
   (dired "~/projects"))
@@ -2906,18 +2905,18 @@ a key. One needs to make it callable via =fset=.
           (consult-ripgrep "search/grep" ?s)
           (magit-project-status "git status" ?g)
           (project-dired "dired")
-          (my/project-vterm "vterm" ?t)
+          (+project-vterm "vterm" ?t)
           (project-switch-to-buffer "find buffer" ?b)
           (project-vc-dir "vc")))
   (leader "p" project-prefix-map)
   :bind
   (:map project-prefix-map
-        ("t" . my/project-vterm)
+        ("t" . +project-vterm)
         ("g" . magit-project-status)
         ("d" . project-dired)
         ("s" . consult-ripgrep)
-        ("D" . my/project-edit-dir-local-variable)
-        ("n" . my/navigate-to-projects)))
+        ("D" . +project-edit-dir-local-variable)
+        ("n" . +navigate-to-projects)))
 #+end_src
 
 ** Magit
@@ -3117,9 +3116,9 @@ single keys until it quits -- either after =q= or a timeout.
   ("r" (lambda ()
          (interactive)
          (setq default-text-scale--complement 0)
-         (face-spec-set 'default `((t (:height ,my/default-font-height))))
+         (face-spec-set 'default `((t (:height ,+default-font-height))))
          (set-face-attribute 'default nil
-                             :height my/default-font-height)))
+                             :height +default-font-height)))
   ("s" (lambda (height)
          (interactive "nFont size: ")
          (set-face-attribute 'default nil

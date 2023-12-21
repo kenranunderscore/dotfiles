@@ -11,11 +11,11 @@ quick changes to Haskell files (adding pragmas, language extensions, GHC
 options).
 
 #+begin_src emacs-lisp
-(defun my/make-pragma (pragma content)
+(defun +haskell-make-pragma (pragma content)
   "Create a pragma line of type `pragma' containing `content'."
   (concat "{-# " pragma " " content " #-}\n"))
 
-(defun my/haskell-add-language-extension (ext-name)
+(defun +haskell-add-language-extension (ext-name)
   "Add an extension from the list of available language extensions
 to the top of the file."
   (interactive
@@ -23,12 +23,12 @@ to the top of the file."
     (completing-read
      "Extension: "
      haskell-ghc-supported-extensions)))
-  (let ((pragma (my/make-pragma "LANGUAGE" ext-name)))
+  (let ((pragma (+haskell-make-pragma "LANGUAGE" ext-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
 
-(defun my/haskell-add-ghc-option (opt-name)
+(defun +haskell-add-ghc-option (opt-name)
   "Add a GHC option from the list of options to the top of the
 file."
   (interactive
@@ -36,7 +36,7 @@ file."
     (completing-read
      "GHC option: "
      haskell-ghc-supported-options)))
-  (let ((pragma (my/make-pragma "OPTIONS_GHC" opt-name)))
+  (let ((pragma (+haskell-make-pragma "OPTIONS_GHC" opt-name)))
     (save-excursion
       (goto-char (point-min))
       (insert pragma))))
@@ -51,14 +51,14 @@ to add with this template.  For instance, adding a qualified import with import
 list, or an unqualified one with an alias, would require "tricks".
 
 #+begin_src emacs-lisp
-(defun my/read-non-empty-string (prompt &optional initial-input)
+(defun +read-non-empty-string (prompt &optional initial-input)
   "Read a string from the minibuffer.  When the result is the empty
 string, return nil instead."
   (let ((str (read-string prompt initial-input)))
     (unless (string-empty-p str)
       str)))
 
-(defun my/haskell-add-import (arg module &optional qualified? alias)
+(defun +haskell-add-import (arg module &optional qualified? alias)
   "Add an import to the import list.  When no prefix ARG is set, the
 user will be prompted whether the import should be qualified, and
 what the identifier should be in that case."
@@ -71,7 +71,7 @@ what the identifier should be in that case."
           (default-alias
            (last (split-string module "[\.]" t)))
           (alias (when qualified?
-                   (my/read-non-empty-string "Alias: " default-alias))))
+                   (+read-non-empty-string "Alias: " default-alias))))
      (list arg module qualified? alias)))
   (let ((import-line
          (concat "import "
@@ -110,23 +110,23 @@ newtype Foo a = SomeCtor { unFoo :: ReaderT Config IO a }
 The following rather complicated command /should/ handle all the cases above.
 
 #+begin_src emacs-lisp
-(defun my/haskell-newtype-template (arg name ctor accessor type)
+(defun +haskell-newtype-template (arg name ctor accessor type)
   "Create a Haskell newtype declaration.  This will ask you for the
 type NAME, the inner TYPE, and optionally for constructor and
 accessor name.  If called with a non-nil prefix ARG then it won't
 create and accessor and omit the curly braces."
   (interactive
    (let* ((arg current-prefix-arg)
-          (name (my/read-non-empty-string "Name: "))
-          (ctor (or (my/read-non-empty-string
+          (name (+read-non-empty-string "Name: "))
+          (ctor (or (+read-non-empty-string
                      (concat "Constructor [default " name "]: "))
                     name))
           (accessor-def (concat "un" name))
           (accessor (unless arg
-                      (or (my/read-non-empty-string
+                      (or (+read-non-empty-string
                            (concat "Accessor [default " accessor-def "]: "))
                           accessor-def)))
-          (type (my/read-non-empty-string "Inner type: ")))
+          (type (+read-non-empty-string "Inner type: ")))
      (list arg name ctor accessor type)))
   (let* ((type-parts
           (mapcar (lambda (s)
@@ -178,29 +178,29 @@ basis to enable the fitting mode there.
 ** Fourmolu
 
 #+begin_src emacs-lisp
-(reformatter-define my/fourmolu-format
+(reformatter-define +fourmolu-format
   :program "fourmolu"
   :args (list "--stdin-input-file" (or (buffer-file-name) input-file))
-  :lighter " my/fourmolu")
+  :lighter " +fourmolu")
 
 (local-leader
   :keymaps 'haskell-mode-map
-  "f" 'my/fourmolu-format-buffer)
+  "f" #'+fourmolu-format-buffer)
 #+end_src
 
 ** Cabal files
 
 #+begin_src emacs-lisp
-(reformatter-define my/cabal-fmt-format
+(reformatter-define +cabal-fmt-format
   :program "cabal-fmt"
   :args (list "-i" input-file)
   :stdin nil
   :stdout nil
-  :lighter " my/cabal-fmt")
+  :lighter " +cabal-fmt")
 
 (local-leader
   :keymaps 'haskell-cabal-mode-map
-  "f" 'my/cabal-fmt-format-buffer)
+  "f" #'+cabal-fmt-format-buffer)
 #+end_src
 
 * Better (no) indentation for =o= and =O= vim motions
@@ -212,7 +212,7 @@ snatched from the Doom Emacs Haskell module.
 I'm not sure whether I really need the "above" one, but I'll try it out.
 
 #+begin_src emacs-lisp
-(defun my/haskell-evil-open-above ()
+(defun +haskell-evil-open-above ()
   "Open a line above the current mode."
   (interactive)
   (evil-beginning-of-line)
@@ -221,7 +221,7 @@ I'm not sure whether I really need the "above" one, but I'll try it out.
   (haskell-indentation-indent-line)
   (evil-append-line nil))
 
-(defun my/haskell-evil-open-below ()
+(defun +haskell-evil-open-below ()
   "Open a line below the current mode."
   (interactive)
   (evil-append-line nil)
@@ -247,8 +247,8 @@ well as some of the above utilities into a local keymap for easy access.
   (general-define-key
    :keymaps 'haskell-mode-map
    :states 'normal
-   "o" #'my/haskell-evil-open-below
-   "O" #'my/haskell-evil-open-above)
+   "o" #'+haskell-evil-open-below
+   "O" #'+haskell-evil-open-above)
   ;; Don't make certain commands repeatable with '.'
   (mapc #'evil-declare-ignore-repeat
         '(haskell-process-load-file
@@ -257,18 +257,18 @@ well as some of the above utilities into a local keymap for easy access.
           haskell-goto-next-error
           haskell-goto-prev-error
           hydra-haskell-error-navigation/body
-          my/haskell-add-import
-          my/haskell-add-ghc-option
-          my/haskell-add-language-extension))
+          +haskell-add-import
+          +haskell-add-ghc-option
+          +haskell-add-language-extension))
   :bind
   (:map haskell-mode-map
         ("C-c e" . hydra-haskell-error-navigation/body)
-        ("C-c i" . my/haskell-add-import)
-        ("C-c p l" . my/haskell-add-language-extension)
-        ("C-c p o" . my/haskell-add-ghc-option)
+        ("C-c i" . +haskell-add-import)
+        ("C-c p l" . +haskell-add-language-extension)
+        ("C-c p o" . +haskell-add-ghc-option)
         ("C-c h k" . haskell-session-kill)
         ("C-c h r" . haskell-process-restart)
-        ("C-c n" . my/haskell-newtype-template)))
+        ("C-c n" . +haskell-newtype-template)))
 
-(provide 'my-haskell)
+(provide '+haskell)
 #+end_src

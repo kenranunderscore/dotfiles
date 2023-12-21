@@ -1,6 +1,6 @@
 (require 'org)
 
-(defun my/tangle-org-file (path)
+(defun +tangle-org-file (path)
   "Tangle an org file at PATH (absolute) to an ELisp file.  Will
 only tangle if no target file exists yet, or if the source file
 has been touched more recently than the target."
@@ -13,11 +13,11 @@ has been touched more recently than the target."
       (set-file-times target))))
 
 ;; Tangle all my custom packages.
-(setq my/custom-package-dir
+(setq +custom-package-dir
       (concat user-emacs-directory "my-packages"))
-(dolist (f (directory-files my/custom-package-dir
+(dolist (f (directory-files +custom-package-dir
                             :match "\.org$"))
-  (my/tangle-org-file f))
+  (+tangle-org-file f))
 
-(my/tangle-org-file (concat user-emacs-directory "config.org"))
+(+tangle-org-file (concat user-emacs-directory "config.org"))
 (load-file (concat user-emacs-directory "config.el"))
