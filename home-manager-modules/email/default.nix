@@ -61,9 +61,9 @@ in {
             tls.enable = true;
           };
         };
-        ag = {
+        ag = rec {
           address = "johannes.maier@active-group.de";
-          userName = "maier";
+          userName = address;
           primary = cfg.primaryAccount == "ag";
           mbsync = {
             enable = true;
@@ -81,7 +81,7 @@ in {
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
-            host = "imap.active-group.de";
+            host = "mail.active-group.de";
             port = null;
             tls = {
               enable = true;
@@ -89,7 +89,7 @@ in {
             };
           };
           smtp = {
-            host = "smtp.active-group.de";
+            host = "mail.active-group.de";
             port = null;
           };
         };
