@@ -1814,10 +1814,10 @@ great.
       (eq (char-after (car completion-in-region--data)) ?:)))
 
 (defun my/setup-elisp-capfs ()
-  "Uses 'cape-super-capf' to work around the problem that dabbrev
+  "Uses 'cape-capf-super' to work around the problem that dabbrev
 completions don't show up in 'emacs-lisp-mode' by default."
   (setq-local completion-at-point-functions
-              `(,(cape-super-capf
+              `(,(cape-capf-super
                   (cape-capf-predicate
                    #'elisp-completion-at-point
                    #'my/ignore-elisp-keywords)
@@ -1827,7 +1827,7 @@ completions don't show up in 'emacs-lisp-mode' by default."
 
 (defun my/register-default-capfs ()
   "I use 'cape-dabbrev' and 'cape-file' everywhere as they are
-generally useful.  This function needs to be called in certain
+generally useful. This function needs to be called in certain
 mode hooks, as some modes fill the buffer-local capfs with
 exclusive completion functions, so that the global ones don't get
 called at all."
