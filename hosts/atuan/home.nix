@@ -15,9 +15,9 @@
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    dwarfFortress.enable = true;
-    nyxt.enable = true;
-    sbcl.enable = true;
+    dwarfFortress.enable = false;
+    nyxt.enable = false;
+    sbcl.enable = false;
     git.email = "johannes.maier@mailbox.org";
   };
 
@@ -33,13 +33,7 @@
 
   home = {
     packages = with pkgs; [
-      (angband.override { enableSdl2 = true; })
-      cmus
-      cmusfm
-      element-desktop
-      obs-studio
       pavucontrol
-      rustup
     ];
     stateVersion = "21.03";
   };

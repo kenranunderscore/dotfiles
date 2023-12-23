@@ -23,7 +23,7 @@ in {
     };
 
     modules = {
-      alacritty.enable = true;
+      alacritty.enable = false;
       firefox.enable = true;
       kitty.enable = true;
       bash.enable = true;
@@ -83,12 +83,10 @@ in {
         curl
         fd
         feh
-        fennel
         file
         fontconfig.dev
         gh
         gnumake
-        graphviz
         htop
         jq
         man-pages
@@ -102,7 +100,6 @@ in {
         ripgrep
         rlwrap
         rsync
-        rxvt-unicode
         scrot
         shellcheck
         shfmt
