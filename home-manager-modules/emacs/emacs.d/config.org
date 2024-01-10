@@ -575,6 +575,7 @@ available).
 
 #+begin_src emacs-lisp
 (use-package modus-themes
+  :straight (:type built-in)
   :defer
   :config
   (setq modus-themes-subtle-line-numbers t)
