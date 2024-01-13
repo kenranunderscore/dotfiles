@@ -141,6 +141,7 @@ in {
     nushell
     obs-studio
     pavucontrol
+    pinta
     prismlauncher
     racket
     sieve-connect
