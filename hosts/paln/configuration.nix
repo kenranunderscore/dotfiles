@@ -4,8 +4,11 @@ let username = custom.username;
 in {
   imports = [ ./hardware-configuration.nix ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot = {
+    loader.grub.enable = true;
+    loader.grub.device = "/dev/sda";
+    tmp.cleanOnBoot = true;
+  };
 
   networking.hostName = "paln";
 

@@ -26,6 +26,7 @@ in {
       };
       efi.canTouchEfiVariables = true;
     };
+    tmp.cleanOnBoot = true;
   };
 
   time.timeZone = "Europe/Berlin";

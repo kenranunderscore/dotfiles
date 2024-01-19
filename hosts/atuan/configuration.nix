@@ -26,6 +26,7 @@ in {
       };
     };
     supportedFilesystems = [ "ntfs" ];
+    tmp.cleanOnBoot = true;
   };
 
   # FIXME(Johannes): load this "lazily"?  It's not necessary for the boot
