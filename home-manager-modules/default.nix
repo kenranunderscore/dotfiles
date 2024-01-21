@@ -31,8 +31,8 @@
     ./tmux.nix
     ./vim.nix
     ./wezterm
-    ./xdg-config-files
     ./x-configuration
+    ./xdg
     ./zsh
   ];
 }
