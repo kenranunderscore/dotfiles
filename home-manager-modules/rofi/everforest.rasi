@@ -23,7 +23,7 @@
 
 window {
     location:   center;
-    width:      25%;
+    width:      35%;
 
     border:     5;
     background-color:   @bg0;
