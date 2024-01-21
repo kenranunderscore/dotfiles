@@ -11,5 +11,7 @@
   home.sessionVariables = {
     STACK_XDG = "1";
     GHCUP_USE_XDG_DIRS = "1";
+    CARGO_HOME = "$XDG_DATA_HOME/cargo";
+    RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
   };
 }
