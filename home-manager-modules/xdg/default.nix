@@ -1,6 +1,7 @@
-{ ... }:
+{ config, ... }:
 
-{
+let inherit (config.xdg) dataHome configHome cacheHome;
+in {
   # Any static configuration files that should be put into $XDG_CONFIG_HOME
   xdg.configFile = {
     "fourmolu/fourmolu.yaml".source = ./fourmolu.yaml;
@@ -18,25 +19,25 @@
       GHCUP_USE_XDG_DIRS = "1";
 
       # Rust
-      CARGO_HOME = "$XDG_DATA_HOME/cargo";
-      RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
+      CARGO_HOME = "${dataHome}/cargo";
+      RUSTUP_HOME = "${dataHome}/rustup";
 
       # Python (thanks hlissner)
-      IPYTHONDIR = "$XDG_CONFIG_HOME/ipython";
-      PIP_CONFIG_FILE = "$XDG_CONFIG_HOME/pip/pip.conf";
-      PIP_LOG_FILE = "$XDG_DATA_HOME/pip/log";
-      PYTHONSTARTUP = "$XDG_CONFIG_HOME/python/pythonrc";
-      JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+      IPYTHONDIR = "${configHome}/ipython";
+      PIP_CONFIG_FILE = "${configHome}/pip/pip.conf";
+      PIP_LOG_FILE = "${dataHome}/pip/log";
+      PYTHONSTARTUP = "${configHome}/python/pythonrc";
+      JUPYTER_CONFIG_DIR = "${configHome}/jupyter";
 
       # JavaScript / NodeJS
-      NPM_CONFIG_USERCONFIG = "$XDG_CONFIG_HOME/npm/config";
-      NPM_CONFIG_CACHE = "$XDG_CACHE_HOME/npm";
-      NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
-      NPM_CONFIG_PREFIX = "$XDG_CACHE_HOME/npm";
-      NODE_REPL_HISTORY = "$XDG_CACHE_HOME/node/repl_history";
+      NPM_CONFIG_USERCONFIG = "${configHome}/npm/config";
+      NPM_CONFIG_CACHE = "${cacheHome}/npm";
+      NPM_CONFIG_TMP = "\${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/npm";
+      NPM_CONFIG_PREFIX = "${cacheHome}/npm";
+      NODE_REPL_HISTORY = "${cacheHome}/node/repl_history";
 
       # Nim
-      NIMBLE_DIR = "$XDG_DATA_HOME/nimble";
+      NIMBLE_DIR = "${dataHome}/nimble";
     };
   };
 }
