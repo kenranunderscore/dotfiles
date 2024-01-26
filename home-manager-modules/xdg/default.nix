@@ -38,6 +38,9 @@ in {
 
       # Nim
       NIMBLE_DIR = "${dataHome}/nimble";
+
+      # OCaml
+      OPAMROOT = "${configHome}/opam";
     };
   };
 }
