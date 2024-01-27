@@ -7,7 +7,7 @@ function navigate_to_project \
     set fzf fzf --prompt "Navigate to project: "
     
     for i in (seq (count $project_dirs))
-        set -a projects $($fd $project_dirs[$i] 2>/dev/null || true)
+        set -a projects $($fd $project_dirs[$i] 2>/dev/null | sed 's/\/home\/\w\+\///')
     end
     set -a projects ~/dotfiles
     
