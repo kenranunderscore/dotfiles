@@ -40,7 +40,8 @@ in {
       NIMBLE_DIR = "${dataHome}/nimble";
 
       # OCaml
-      OPAMROOT = "${configHome}/opam";
+      OPAMROOT = "${dataHome}/opam";
+      DUNE_CACHE_ROOT = "${cacheHome}/dune}";
     };
   };
 }
