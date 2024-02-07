@@ -9,11 +9,11 @@ function navigate_to_project \
     for i in (seq (count $project_dirs))
         set -a projects $($fd $project_dirs[$i] 2>/dev/null | sed 's/\/home\/\w\+\///')
     end
-    set -a projects ~/dotfiles
+    set -a projects dotfiles
     
     set target $(echo -e (string join "\n" $projects) | $fzf)
     if test -n "$target"
-        cd $target
+        cd ~/$target
     end
     commandline -f repaint
 end
