@@ -9,7 +9,7 @@ in {
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
-      withGaps = true;
+      withGaps = false;
       workspaces = [
         {
           name = "1:main";
