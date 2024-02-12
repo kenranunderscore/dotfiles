@@ -68,8 +68,10 @@ in {
         enable = true;
         mouse.naturalScrolling = true;
       };
-      layout = "us";
-      xkbVariant = "altgr-intl";
+      xkb = {
+        layout = "us";
+        variant = "altgr-intl";
+      };
       displayManager = {
         session = [{
           manage = "window";
