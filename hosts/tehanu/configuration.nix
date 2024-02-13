@@ -131,6 +131,7 @@ in {
   virtualisation = {
     docker = {
       enable = true;
+      enableNvidia = true;
       extraOptions = "--experimental";
     };
   };
