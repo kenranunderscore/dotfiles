@@ -2496,6 +2496,16 @@ at point.
   (setq merlin-eldoc-doc t))
 #+end_src
 
+I use =ocamlformat= to automatically format files on save (using =.dir-locals.el= to
+=eval= the reformatter-created mode.
+
+#+begin_src emacs-lisp
+(reformatter-define +ocamlformat-format
+  :program "ocamlformat"
+  :args (list "--name" (buffer-file-name) "-")
+  :lighter " +ocamlformat")
+#+end_src
+
 ** Fish
 
 I'm often using the [[https://fishshell.com/][fish]] shell. It comes with its own, POSIX-incompatible
