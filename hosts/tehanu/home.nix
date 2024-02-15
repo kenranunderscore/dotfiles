@@ -85,6 +85,7 @@ in {
     nyxt.enable = true;
     git.email = "johannes.maier@mailbox.org";
     gcli.enable = true;
+    wezterm.enable = true;
   };
 
   programs = {
