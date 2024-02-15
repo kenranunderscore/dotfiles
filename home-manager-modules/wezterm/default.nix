@@ -1,7 +1,7 @@
 { custom, config, lib, pkgs, ... }:
 
 let
-  cfg = config.modules.kitty;
+  cfg = config.modules.wezterm;
   types = lib.types;
 in {
   options.modules.wezterm.enable = lib.mkEnableOption "wezterm";
