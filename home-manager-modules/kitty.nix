@@ -15,6 +15,7 @@ in {
         "ctrl+shift+plus" = "change_font_size all +1.0";
         "ctrl+shift+minus" = "change_font_size all -1.0";
       };
+      shellIntegration.mode = "disabled";
       settings = {
         term = "xterm-256color";
         macos_option_as_alt = true;
@@ -35,7 +36,6 @@ in {
         cursor_shape = "block";
         cursor_blink_interval = "-1";
         cursor_stop_blinking_after = "0";
-        shell_integration = "no-cursor";
         selection_background = "#a4c5ef";
         color0 = "#707370";
         color8 = "#545454";
