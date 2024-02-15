@@ -993,7 +993,7 @@ I'd expect them to.
   (setq evil-want-keybinding nil)
   (evil-mode 1)
   :config
-  (setq evil-insert-state-cursor '(hbar . 5))
+  (setq evil-insert-state-cursor '(box . 5))
   (general-define-key
    :states 'normal
    "U" 'evil-redo)
