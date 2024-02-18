@@ -139,12 +139,11 @@ in {
     libreoffice
     linphone
     mattermost-desktop
-    nushell
     obs-studio
     pavucontrol
     pinta
     prismlauncher
-    racket
+    qutebrowser
     sieve-connect
     steam
     subversion
@@ -153,6 +152,11 @@ in {
     vlc
     wine
     wireshark
+    xst
+
+    # Languages that should rather live globally, or are sometimes useful to
+    # have available always
+    opam
   ];
 
   home.stateVersion = "22.05";
