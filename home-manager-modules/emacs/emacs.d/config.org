@@ -1765,7 +1765,25 @@ position of point to automatically show surrounding markup.
   (setq flymake-suppress-zero-counters nil)
   (setq flymake-fringe-indicator-position 'left-fringe)
   (setq flymake-no-changes-timeout 1.0)
-  (setq flymake-mode-line-lighter ""))
+  (setq flymake-mode-line-lighter "")
+  (local-leader
+    :keymaps 'flymake-mode-map
+    "e n" #'+flymake-next-error
+    "e p" #'+flymake-prev-error))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun +flymake-next-error ()
+  "Jump to the next flymake diagnostic that's at least of severity
+`:error'."
+  (interactive)
+  (flymake-goto-next-error 1 '(:error) t))
+
+(defun +flymake-prev-error ()
+  "Jump to the previous flymake diagnostic that's at least of severity
+`:error'."
+  (interactive)
+  (flymake-goto-prev-error 1 '(:error) t))
 #+end_src
 
 ** Static analysis of shell scripts
@@ -2587,11 +2605,13 @@ one, too, plus sometimes the previous section header.
 
 #+begin_src emacs-lisp
 (use-package psc-ide
+  :disabled
   :hook (purescript-mode . psc-ide-mode)
   :config
   (setq psc-ide-rebuild-on-save t))
 
 (use-package purescript-mode
+  :disabled
   :hook (purescript-mode . turn-on-purescript-indentation))
 #+end_src
 
@@ -2812,6 +2832,7 @@ nice.
 
 #+begin_src emacs-lisp
 (use-package nim-mode
+  :disabled
   :defer)
 #+end_src
 
