@@ -56,6 +56,20 @@ behavior.
   :hook (after-init . benchmark-init/deactivate))
 #+end_src
 
+* Working around issues using =fish= as default shell
+
+Sometimes having non-POSIX shells (like =fish= that I'm using most of the time) as
+=$SHELL= leads to hard-to-debug problems and subtle failures. To circumvent this
+we can point Emacs to any POSIX shell:
+
+#+begin_src emacs-lisp
+(setq shell-file-name (executable-find "bash"))
+#+end_src
+
+This isn't so nice overall as now =bash= is used in =term= and =vterm= by default, but
+for the latter we can just set a different shell again, as =vterm= is only used
+interactively.
+
 * Keybinding management
 
 I use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more straightforward and
@@ -2440,7 +2454,9 @@ top-level directory of a project.
 #+begin_src emacs-lisp
 (use-package vterm
   :commands (vterm)
-  :defer)
+  :defer
+  :config
+  (setq vterm-shell "fish"))
 #+end_src
 
 ** C/C++
