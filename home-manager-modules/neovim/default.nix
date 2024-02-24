@@ -6,13 +6,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      packages = with pkgs; [
-        neovim
-        lua
-        sumneko-lua-language-server
-        stylua
-        xclip
-      ];
+      packages = with pkgs; [ neovim sumneko-lua-language-server stylua xclip ];
 
       activation = {
         symlinkNeovimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
