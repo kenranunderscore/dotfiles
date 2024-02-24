@@ -2473,7 +2473,10 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
   :hook (tuareg-mode . (lambda () (setq mode-name "🐫")))
   :config
   (setq tuareg-indent-align-with-first-arg nil)
-  (setq tuareg-match-patterns-aligned t))
+  (setq tuareg-match-patterns-aligned t)
+  (local-leader
+    :keymaps 'tuareg-mode-map
+    "f" #'+ocamlformat-format-buffer))
 #+end_src
 
 To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/merlin][merlin]].
