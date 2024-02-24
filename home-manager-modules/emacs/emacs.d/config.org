@@ -1797,6 +1797,7 @@ does.
 
 #+begin_src emacs-lisp
 (use-package corfu
+  :disabled
   :straight (corfu :files (:defaults "extensions/*.el"))
   :init (global-corfu-mode)
   :hook (evil-insert-state-exit . corfu-quit)
@@ -1816,6 +1817,7 @@ great.
 
 #+begin_src emacs-lisp
 (use-package corfu-popupinfo
+  :disabled
   :straight nil
   :after corfu
   :config
@@ -1858,6 +1860,14 @@ called at all."
          (haskell-mode . +register-default-capfs))
   :init
   (+register-default-capfs))
+#+end_src
+
+* TODO: company?
+
+#+begin_src emacs-lisp
+(use-package company
+  :init
+  (global-company-mode))
 #+end_src
 
 * E-mail configuration
@@ -2839,13 +2849,36 @@ skills.
 
 ** LSP integration
 
-I've used =lsp-mode= in the past and while it's nice, I feel like it's more in
-line with the rest of this configuration to try out something more lightweight
-and closer to vanilla Emacs. This is where [[https://github.com/joaotavora/eglot][eglot]] comes into play.
+TODO: document
+
+*** =eglot=
 
 #+begin_src emacs-lisp
 (use-package eglot
   :defer)
+#+end_src
+
+*** =lsp-mode= and supporting modes
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-;")
+  :config
+  (setq lsp-diagnostics-provider :flymake)
+  :defer
+  :commands lsp)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package consult-lsp
+  :defer
+  :after lsp-mode)
 #+end_src
 
 ** Better Emacs help and documentation
