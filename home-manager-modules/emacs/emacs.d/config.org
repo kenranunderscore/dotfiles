@@ -2834,7 +2834,12 @@ Sometimes I wish to format Lua files. [[https://github.com/JohnnyMorganz/StyLua]
 #+begin_src emacs-lisp
 (reformatter-define +stylua-format
   :program "stylua"
-  :args (list "--stdin-filepath" (buffer-file-name) "-")
+  :args
+  (list
+   "--search-parent-directories"
+   "--stdin-filepath"
+   (buffer-file-name)
+   "-")
   :lighter " +stylua")
 
 (local-leader
