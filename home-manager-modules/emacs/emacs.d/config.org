@@ -765,6 +765,9 @@ see filtered out."
                         eldoc-mode
                         evil-org-mode
                         evil-commentary-mode
+                        company-mode
+                        global-company-mode
+                        lsp-lens-mode
                         org-indent-mode
                         auto-revert-mode
                         auto-fill-function
