@@ -2829,6 +2829,19 @@ nice.
   :defer t)
 #+end_src
 
+Sometimes I wish to format Lua files. [[https://github.com/JohnnyMorganz/StyLua][Stylua]] seems nice.
+
+#+begin_src emacs-lisp
+(reformatter-define +stylua-format
+  :program "stylua"
+  :args (list "--stdin-filepath" (buffer-file-name) "-")
+  :lighter " +stylua")
+
+(local-leader
+  :keymaps 'lua-mode-map
+  "f" #'+stylua-format-buffer)
+#+end_src
+
 ** Python
 
 #+begin_src emacs-lisp
