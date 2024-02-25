@@ -2558,6 +2558,14 @@ I use =ocamlformat= to automatically format files on save (using =.dir-locals.el
   :lighter " +ocamlformat")
 #+end_src
 
+The OCaml build tool =dune= has configuration files written with s-expression
+syntax. So in the special =dune-mode= let's add =lispy=/=lispyville= as well.
+
+#+begin_src emacs-lisp
+(use-package dune
+  :hook (dune-mode . lispy-mode))
+#+end_src
+
 ** Fish
 
 I'm often using the [[https://fishshell.com/][fish]] shell. It comes with its own, POSIX-incompatible
