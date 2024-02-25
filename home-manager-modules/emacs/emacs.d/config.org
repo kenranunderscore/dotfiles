@@ -659,7 +659,7 @@ Another theme package by Protesilaos Stavrou.
 **** Set the current theme
 
 #+begin_src emacs-lisp
-(+switch-theme 'doom-gruvbox)
+(+switch-theme 'naga)
 #+end_src
 
 ** Render color names/codes in their respective color
