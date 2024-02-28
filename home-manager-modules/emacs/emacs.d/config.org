@@ -783,12 +783,10 @@ see filtered out."
                           hidden)))))
 
 (defcustom +minor-modes-mode-line-format
-  '("("
-    (:eval
-     (let ((s (format-mode-line (+visible-minor-modes))))
-       (if (string-empty-p s) ""
-         (substring s 1))))
-    ")")
+  '(:eval
+    (let ((s (format-mode-line (+visible-minor-modes))))
+      (if (string-empty-p s) ""
+        (concat "(" (substring s 1) ")"))))
   "How to display the active minor modes in the mode line."
   :risky t)
 
