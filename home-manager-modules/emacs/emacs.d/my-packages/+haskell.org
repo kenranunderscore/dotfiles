@@ -222,6 +222,13 @@ I'm not sure whether I really need the "above" one, but I'll try it out.
   (haskell-indentation-newline-and-indent))
 #+end_src
 
+* LSP integration
+
+#+begin_src emacs-lisp
+(use-package lsp-haskell
+  :defer)
+#+end_src
+
 * =Haskell-mode= configuration
 
 Now load the actual =haskell-mode= package, and put some often-used functions as
@@ -237,7 +244,6 @@ well as some of the above utilities into a local keymap for easy access.
   :hook
   (haskell-mode . interactive-haskell-mode)
   :config
-  (use-package lsp-haskell)
   (general-define-key
    :keymaps 'haskell-mode-map
    :states 'normal
