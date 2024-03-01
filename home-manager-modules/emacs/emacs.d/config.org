@@ -2910,7 +2910,7 @@ TODO: document
   :init
   (setq lsp-keymap-prefix "C-;")
   :config
-  (setq lsp-diagnostics-provider :flymake)
+  (setq lsp-diagnostics-provider :flycheck)
   :defer
   :commands lsp)
 #+end_src
@@ -2924,6 +2924,12 @@ TODO: document
 (use-package consult-lsp
   :defer
   :after lsp-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :after lsp-mode
+  :defer)
 #+end_src
 
 ** Better Emacs help and documentation
