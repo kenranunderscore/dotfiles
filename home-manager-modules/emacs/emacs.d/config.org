@@ -1767,11 +1767,7 @@ position of point to automatically show surrounding markup.
   (setq flymake-suppress-zero-counters nil)
   (setq flymake-fringe-indicator-position 'left-fringe)
   (setq flymake-no-changes-timeout 1.0)
-  (setq flymake-mode-line-lighter "")
-  (local-leader
-    :keymaps 'flymake-mode-map
-    "e n" #'+flymake-next-error
-    "e p" #'+flymake-prev-error))
+  (setq flymake-mode-line-lighter ""))
 #+end_src
 
 #+begin_src emacs-lisp
