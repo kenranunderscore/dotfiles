@@ -1883,7 +1883,9 @@ called at all."
 #+begin_src emacs-lisp
 (use-package company
   :init
-  (global-company-mode))
+  (global-company-mode)
+  :hook
+  (evil-insert-state-exit . company-abort))
 #+end_src
 
 * E-mail configuration
