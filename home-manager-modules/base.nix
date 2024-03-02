@@ -103,6 +103,7 @@ in {
         scrot
         shellcheck
         shfmt
+        timer
         tree
         unzip
         usbutils
