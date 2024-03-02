@@ -82,7 +82,7 @@ in {
     fonts.enable = true;
     doom.enable = false;
     emacs.enable = true;
-    nyxt.enable = true;
+    nyxt.enable = false;
     git.email = "johannes.maier@mailbox.org";
     gcli.enable = true;
     wezterm.enable = true;
