@@ -1070,8 +1070,8 @@ call the correct Emacs command depending on the visual selection.
 
 ** Local leader key
 
-A local leader key is something that can be used to bind situational commands
-to, usually mode-specific ones. I used =,= for this in Vim; same here now.
+A local leader key is something that can be used to bind situational commands to
+usually mode-specific ones. I used =,= for this in Vim; same here now.
 
 #+begin_src emacs-lisp
 (general-create-definer local-leader
