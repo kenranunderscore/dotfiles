@@ -34,6 +34,7 @@ in {
         cascadia-code
         corefonts
         courier-prime
+        geist-font
         fantasque-sans-mono
         fira-code
         font-awesome_6
