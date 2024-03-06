@@ -2915,6 +2915,7 @@ TODO: document
   :init
   (setq lsp-keymap-prefix "C-;")
   :config
+  (setq lsp-ui-doc-enable nil)
   (setq lsp-diagnostics-provider :flycheck)
   :defer
   :commands lsp)
