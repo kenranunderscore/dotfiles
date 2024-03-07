@@ -276,16 +276,6 @@ attributes that need to be applied when switching to the respective font.
         (iosevka
          . (:family
             "Iosevka Term"))
-        (iosevka-comfy
-         . (:family
-            "Iosevka Comfy"
-            :default-height
-            180))
-        (iosevka-comfy-wide
-         . (:family
-            "Iosevka Comfy Wide"
-            :default-height
-            180))
         (dejavu
          . (:family
             "DejaVu Sans Mono"))
@@ -422,7 +412,7 @@ reset to the default height for the selected font."
                                      (copy-alist +font-alist)))))))
   (let* ((attrs (alist-get font +font-alist))
          (family (plist-get attrs :family))
-         (default-height (or (plist-get attrs :default-height) 160))
+         (default-height (or (plist-get attrs :default-height) 170))
          (height (or (and arg default-height)
                      (face-attribute 'default :height)))
          ;; `buffer-face-mode' is enabled when calling
