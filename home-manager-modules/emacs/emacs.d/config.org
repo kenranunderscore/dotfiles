@@ -1881,6 +1881,11 @@ called at all."
   (evil-insert-state-exit . company-abort))
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+#+end_src
+
 * E-mail configuration
 
 There are different ways to "do e-mail in Emacs". Over the last two years I've
