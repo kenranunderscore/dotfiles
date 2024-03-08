@@ -7,7 +7,7 @@ in {
 
     terminal = lib.mkOption {
       type = lib.types.str;
-      default = "${lib.getExe pkgs.wezterm}";
+      default = "${lib.getExe pkgs.kitty}";
     };
 
     # TODO: type this with hm.lib.options?
@@ -39,7 +39,7 @@ in {
         menu = "rofi -show run";
         window = {
           titlebar = false;
-          border = 5;
+          border = 2;
         };
         assigns = builtins.foldl' (acc: w:
           if builtins.hasAttr "assigns" w then
@@ -101,10 +101,10 @@ in {
         colors = {
           focused = {
             background = "#041a04";
-            border = "#a7c080";
-            childBorder = "#a7c080";
-            indicator = "#e67e80";
-            text = "#0ac30a";
+            border = "#088e08";
+            childBorder = "#088e08";
+            indicator = "#088e08";
+            text = "#088e08";
           };
           focusedInactive = {
             background = "#5f676a";
@@ -114,10 +114,10 @@ in {
             text = "#eeeeee";
           };
           placeholder = {
-            background = "#040404";
-            border = "#040404";
+            background = "#040504";
+            border = "#040504";
             childBorder = "#0c0c0c";
-            indicator = "#040404";
+            indicator = "#040504";
             text = "#eeeeee";
           };
           unfocused = {
@@ -128,11 +128,11 @@ in {
             text = "#909590";
           };
           urgent = {
-            background = "#040404";
-            border = "#a7c080";
+            background = "#040504";
+            border = "#088e08";
             childBorder = "#700000";
             indicator = "#700000";
-            text = "#ff4500";
+            text = "#f03500";
           };
         };
         gaps = let val = 50;

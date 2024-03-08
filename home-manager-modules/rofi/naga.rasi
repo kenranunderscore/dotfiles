@@ -1,10 +1,10 @@
 * {
-    green:                       #0ac30a;
-    red:                         #ff4500;
-    yellow:                      #eec900;
-    cyan:                        #00cdcd;
-    bg:                          #040404;
-    highlight-bg:                #01018a;
+    green:                       #0eb40e;
+    red:                         #ef1500;
+    yellow:                      #b89c00;
+    cyan:                        #00afa0;
+    bg:                          #040504;
+    highlight-bg:                #01073a;
     separatorcolor:              var(green);
     background-color:            var(bg);
     border-color:                var(green);
@@ -79,7 +79,7 @@ element-icon {
 window {
     padding:          5;
     background-color: var(bg);
-    border:           1;
+    border:           2;
     width:            30%;
 }
 

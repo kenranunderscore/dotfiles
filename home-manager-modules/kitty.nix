@@ -31,14 +31,14 @@ in {
 
         # Set custom color scheme that is used nearly everywhere:
         # Dimmed Naga colors
-        background = "#040404";
+        background = "#040504";
         foreground = "#0eb40e";
         cursor = "#f01500";
         cursor_text_color = "background";
         cursor_shape = "block";
         cursor_blink_interval = "-1";
         cursor_stop_blinking_after = "0";
-        selection_background = "#01018a";
+        selection_background = "#01073a";
         selection_foreground = "#0eb40e";
         # black
         color0 = "#707370";
