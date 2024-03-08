@@ -355,7 +355,10 @@ attributes that need to be applied when switching to the respective font.
             "Twilio Sans Mono"))
         (geist
          . (:family
-            "Geist Mono"))))
+            "Geist Mono"))
+        (berkeley-mono
+         . (:family
+            "Berkeley Mono"))))
 #+end_src
 
 =+current-font= contains a symbol pointing to one of the fonts specified in
@@ -369,7 +372,7 @@ If neither default font nor environment variable are set/found, I fall back to
 DejaVu Sans Mono.
 
 #+begin_src emacs-lisp
-(setq +default-font nil)
+(setq +default-font 'berkeley-mono)
 
 (defun +load-font-from-env ()
   "See whether an environment variable specifying a 'system font' is
