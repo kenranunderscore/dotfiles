@@ -28,32 +28,42 @@ in {
         initial_window_height = 520;
         enable_audio_bell = false;
         window_padding_width = "0";
-        # Set custom color scheme that is used nearly everywhere.
+
+        # Set custom color scheme that is used nearly everywhere:
+        # Dimmed Naga colors
         background = "#040404";
-        foreground = "#0ac30a";
-        cursor = "#f00000";
+        foreground = "#0eb40e";
+        cursor = "#f01500";
         cursor_text_color = "background";
         cursor_shape = "block";
         cursor_blink_interval = "-1";
         cursor_stop_blinking_after = "0";
-        selection_background = "#a4c5ef";
+        selection_background = "#01018a";
+        selection_foreground = "#0eb40e";
+        # black
         color0 = "#707370";
         color8 = "#545454";
-        color1 = "#ff4500";
-        color9 = "#ff4500";
-        color2 = "#eec900";
-        color10 = "#eec900";
-        color3 = "#b3ee3a";
-        color11 = "#b3ee3a";
-        color4 = "#00cdcd";
-        color12 = "#00cdcd";
-        color5 = "#cc59d2";
-        color13 = "#cc59d2";
-        color6 = "#00cdcd";
-        color14 = "#00cdcd";
-        color7 = "#f4f4f4";
-        color15 = "#e5e5e5";
-        selection_foreground = "#000000";
+        # red
+        color1 = "#d99000";
+        color9 = "#d99000";
+        # green
+        color2 = "#83bc10";
+        color10 = "#83bc10";
+        # yellow
+        color3 = "#b89c00";
+        color11 = "#b89c00";
+        # blue
+        color4 = "#00afa0";
+        color12 = "#00afa0";
+        # magenta
+        color5 = "#825c84";
+        color13 = "#825c84";
+        # cyan
+        color6 = "#00afa0";
+        color14 = "#00afa0";
+        # white
+        color7 = "#e5e5e5";
+        color15 = "#d5d5d5";
       };
     };
   };
