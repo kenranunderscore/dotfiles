@@ -71,7 +71,7 @@ in {
     neovim.enable = true;
     sbcl.enable = true;
     polybar = {
-      enable = true;
+      enable = false;
       withBattery = true;
     };
     picom.enable = false;

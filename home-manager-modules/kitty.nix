@@ -31,7 +31,7 @@ in {
 
         # Set custom color scheme that is used nearly everywhere:
         # Dimmed Naga colors
-        background = "#040504";
+        background = "#060606";
         foreground = "#088e08";
         cursor = "#f01500";
         cursor_text_color = "background";

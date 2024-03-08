@@ -97,7 +97,41 @@ in {
           inherit (w) output;
           workspace = w.name;
         }) (builtins.filter (builtins.hasAttr "output") cfg.workspaces);
-        bars = [ ];
+        bars = [{
+          mode = "dock";
+          position = "bottom";
+          statusCommand = "${lib.getExe pkgs.i3status}";
+          workspaceButtons = true;
+          fonts = {
+            names = [ "Berkeley Mono" "JetBrains Mono" ];
+            size = 15.0;
+          };
+          colors = rec {
+            background = "#060606";
+            focusedBackground = background;
+            statusline = "#088e08";
+            focusedStatusline = statusline;
+            bindingMode = rec {
+              inherit background;
+              border = "#00afa0";
+              text = border;
+            };
+            focusedWorkspace = {
+              background = "#041a04";
+              border = "#088e08";
+              text = "#088e08";
+            };
+            activeWorkspace = {
+              inherit background;
+              inherit (focusedWorkspace) text border;
+            };
+            inactiveWorkspace = rec {
+              inherit background;
+              border = "#707370";
+              text = border;
+            };
+          };
+        }];
         colors = {
           focused = {
             background = "#041a04";
@@ -148,5 +182,8 @@ in {
         };
       };
     };
+
+    home.packages = [ pkgs.i3status ];
+    xdg.configFile."i3status/config".source = ./i3status.config;
   };
 }
