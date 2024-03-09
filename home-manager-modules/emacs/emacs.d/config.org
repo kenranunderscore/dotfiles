@@ -70,6 +70,23 @@ This isn't so nice overall as now =bash= is used in =term= and =vterm= by defaul
 for the latter we can just set a different shell again, as =vterm= is only used
 interactively.
 
+* Emacs special file management (backup, auto save, file lock)
+
+By default, Emacs creates lots of backup files while editing (which is nice and
+saved me a couple of times). Yet I can't stand pressing =C-x C-j= and seeing all
+those greyed-out names seemingly cluttering my directory, getting copied when
+using =scp= or similar, etc. Yes, they're globally ignored in my =git=
+configuration, but wouldn't it be cool if they were to just live somewhere else?
+
+#+begin_src emacs-lisp
+(setq +backup-directory (file-name-concat user-emacs-directory ".autosave/"))
+
+(setq backup-by-copying t)
+(setq backup-directory-alist `(("." . ,+backup-directory)))
+(setq auto-save-file-name-transforms `((".*" ,+backup-directory t)))
+(setq lock-file-name-transforms auto-save-file-name-transforms)
+#+end_src
+
 * Keybinding management
 
 I use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more straightforward and
