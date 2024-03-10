@@ -139,7 +139,6 @@ in {
     libreoffice
     linphone
     mattermost-desktop
-    nixd
     obs-studio
     pavucontrol
     pinta
