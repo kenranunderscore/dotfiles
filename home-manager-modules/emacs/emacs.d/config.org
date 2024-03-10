@@ -577,10 +577,12 @@ project repository to a fixed location. This allows for quick iteration by
 changing stuff in the theme, followed by =+reload-theme=.
 
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "~/projects/emacs-naga-theme")
+(add-to-list
+ 'custom-theme-load-path
+ (file-name-as-directory (expand-file-name "~/projects/emacs-naga-theme")))
 #+end_src
 
-Enable and configure =naga=:
+Configure =naga= and =naga-dimmed=:
 
 #+begin_src emacs-lisp
 (setq naga-theme-use-lighter-org-block-background nil)
@@ -672,7 +674,7 @@ Another theme package by Protesilaos Stavrou.
 **** Set the current theme
 
 #+begin_src emacs-lisp
-(+switch-theme 'naga)
+(+switch-theme 'naga-dimmed)
 #+end_src
 
 ** Render color names/codes in their respective color
