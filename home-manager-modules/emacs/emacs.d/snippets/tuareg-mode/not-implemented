@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: not-implemented
+# key: i
+# --
+failwith "FIXME: implement"
