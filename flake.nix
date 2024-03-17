@@ -51,14 +51,7 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      overlays = [
-        (final: prev: {
-          # Shorter than prev.lib.extend (f: p: ...), but I don't know
-          # if there's another difference.
-          lib = prev.lib // { my = import ./lib { inherit (final) lib; }; };
-        })
-        inputs.emacs-overlay.overlay
-      ];
+      overlays = [ inputs.emacs-overlay.overlay ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;
@@ -66,11 +59,12 @@
       inherit (pkgs) lib;
     in {
       formatter.${system} = pkgs.nixfmt;
-      nixosConfigurations = let machines = lib.my.readDirNames ./hosts;
+      lib = import ./lib { inherit (pkgs) lib; };
+      nixosConfigurations = let machines = self.lib.readDirNames ./hosts;
       in builtins.foldl' (acc: hostname:
         acc // {
           ${hostname} =
-            lib.my.mkNixosSystem { inherit hostname system inputs pkgs; };
+            self.lib.mkNixosSystem { inherit hostname system inputs pkgs; };
         }) { } machines;
     };
 }
