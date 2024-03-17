@@ -26,16 +26,13 @@
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      pinentryFlavor = "curses";
     };
   };
 
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [
-      pavucontrol
-    ];
+    packages = with pkgs; [ pavucontrol ];
     stateVersion = "21.03";
   };
 }
