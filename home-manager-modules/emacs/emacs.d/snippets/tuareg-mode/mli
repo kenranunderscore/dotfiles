@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mli
+# key: s
+# --
+module ${1:Module_name} : sig
+ $0
+end
