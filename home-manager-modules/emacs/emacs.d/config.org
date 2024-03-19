@@ -2946,6 +2946,18 @@ skills.
   :defer)
 #+end_src
 
+** WASM
+
+Sometimes one needs to edit/write WASM text files (=.wat=) manually. Sadly this
+package is not on MELPA yet, but that's no problem with =straight=.
+
+#+begin_src emacs-lisp
+(use-package wat-mode
+  :straight (:type git :host github :repo "devonsparks/wat-mode")
+  :mode "\\.wat\\'"
+  :defer)
+#+end_src
+
 ** LSP integration
 
 TODO: document
