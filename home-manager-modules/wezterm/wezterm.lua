@@ -8,5 +8,6 @@ config.font = wezterm.font 'Berkeley Mono'
 config.font_size = 16.0
 config.audible_bell = "Disabled"
 config.default_cursor_style = "SteadyBlock"
+config.default_prog = { 'fish', '-l' }
 
 return config
