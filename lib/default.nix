@@ -26,14 +26,18 @@
       ];
     };
 
-  mkHomeConfiguration = { username, hostname, system, inputs, pkgs }:
+  mkHomeConfiguration = { userAtHost, system, inputs, pkgs }:
     let
-      inherit (inputs) home-manager;
-      dir = ../home-configurations + "/${username}";
-      custom = import (dir + /custom.nix);
-    in home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      extraSpecialArgs = { inherit inputs custom; };
-      modules = [ (dir + /home.nix) ];
+      dir = ../users + "/${userAtHost}";
+      parts = lib.splitString "@" userAtHost;
+      username = builtins.head parts;
+      hostname = builtins.elemAt parts 1;
+      custom = import (dir + /custom.nix) // { inherit username hostname; };
+    in {
+      "${username}" = inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs custom; };
+        modules = [ (dir + /home.nix) ];
+      };
     };
 }

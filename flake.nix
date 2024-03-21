@@ -74,10 +74,10 @@
             self.lib.mkNixosSystem { inherit hostname system inputs pkgs; };
         }) { } machines;
 
-      homeConfigurations.void = self.lib.mkHomeConfiguration {
-        username = "void";
-        hostname = "tuon";
-        inherit system pkgs inputs;
-      };
+      homeConfigurations = let users = self.lib.readDirNames ./users;
+      in builtins.foldl' (acc: userAtHost:
+        acc // self.lib.mkHomeConfiguration {
+          inherit userAtHost system inputs pkgs;
+        }) { } users;
     };
 }
