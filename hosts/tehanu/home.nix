@@ -5,6 +5,7 @@ in {
   imports = [ ../../home-manager-modules/base.nix ../../home-manager-modules ];
 
   modules = {
+    bash.enable = true;
     base.gpgKey = "9AC78C1A48681583";
     herbstluftwm.enable = false;
     i3 = {

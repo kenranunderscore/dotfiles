@@ -26,7 +26,6 @@ in {
       alacritty.enable = false;
       firefox.enable = true;
       kitty.enable = true;
-      bash.enable = true;
       bat.enable = true;
       direnv.enable = true;
       email.enable = true;
