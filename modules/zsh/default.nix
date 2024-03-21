@@ -20,7 +20,7 @@ in {
       # enable* options are sugar for enabling certain plugins, so
       # don't set them.
       syntaxHighlighting.enable = false;
-      enableAutosuggestions = false;
+      autosuggestion.enable = false;
       history = {
         path = "${config.xdg.dataHome}/zsh/zsh_history";
         size = 10000;
