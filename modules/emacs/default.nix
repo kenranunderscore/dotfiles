@@ -12,7 +12,7 @@ in {
         symlinkDotEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           dot_emacs="$XDG_CONFIG_HOME/emacs"
           if [ ! -e $dot_emacs ]; then
-            $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/emacs/emacs.d $dot_emacs
+            $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/emacs/emacs.d $dot_emacs
           fi
         '';
       };

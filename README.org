@@ -45,13 +45,13 @@ The directories itself follow a fixed convention:
   manager modules as arguments; usually this (only) means things that should be
   known everywhere, like my username
 
-The [[file:home-manager-modules/][home-manager-modules]] directory contains the home manager NixOS modules that
+The [[file:modules/][modules]] directory contains the home manager NixOS modules that
 all my configurations share (but might choose to disable or enable on a
 per-machine basis).
 
 ** Building/switching to a new generation
 
-I usually use an [[file:home-manager-modules/shell-aliases.nix][alias]] in my shell to switch to the next generation after
+I usually use an [[file:modules/shell-aliases.nix][alias]] in my shell to switch to the next generation after
 changing things in my configuration. The actual command is the following:
 
 #+begin_src shell
@@ -82,9 +82,9 @@ not be "activated" upon next boot.
 A special case of a program with a relatively huge accompanying configuration is
 GNU Emacs. My literate Emacs configuration (very much a work-in-progress, as
 I've only recently started going back to using [[https://orgmode.org/][Org Mode]] to configure Emacs
-itself) can be found [[file:home-manager-modules/emacs/emacs.d/config.org][here]].
+itself) can be found [[file:modules/emacs/emacs.d/config.org][here]].
 
-Note that there is a corresponding [[file:home-manager-modules/emacs/default.nix][default.nix]] which specifies the version of
+Note that there is a corresponding [[file:modules/emacs/default.nix][default.nix]] which specifies the version of
 Emacs I use (usually a quite recent one, made possible by [[https://github.com/nix-community/emacs-overlay][emacs-overlay]]), as
 well as some pre-built packages, all "obeying" my current pin of =nixpkgs= (see
 [[file:flake.lock][flake.lock]]). I used to use Nix to manage all of my Emacs packages, but have

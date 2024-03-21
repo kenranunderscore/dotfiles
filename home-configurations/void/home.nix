@@ -2,7 +2,7 @@
 
 let email = "johannes.maier@active-group.de";
 in {
-  imports = [ ../../home-manager-modules/base.nix ../../home-manager-modules ];
+  imports = [ ../../modules/base.nix ../../modules ];
 
   modules = {
     base.gpgKey = "9AC78C1A48681583";

@@ -1,7 +1,7 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  imports = [ ../../home-manager-modules/base.nix ../../home-manager-modules ];
+  imports = [ ../../modules/base.nix ../../modules ];
 
   modules = {
     bash.enable = true;

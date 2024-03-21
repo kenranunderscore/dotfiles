@@ -18,7 +18,7 @@ in {
                          "$XDG_CONFIG_HOME/emacs"
           fi
           if [ ! -e "$XDG_CONFIG_HOME/doom" ]; then
-            $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/doom/doom \
+            $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/doom/doom \
                          "$XDG_CONFIG_HOME/doom"
           fi
         '';

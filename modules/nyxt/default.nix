@@ -13,7 +13,7 @@ in {
 
           if [ ! -d "$config_dir" ]; then
             mkdir -p "$(dirname "$config_dir")"
-            $DRY_RUN_CMD ln -snf $HOME/dotfiles/home-manager-modules/nyxt/nyxt \
+            $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/nyxt/nyxt \
                          "$config_dir"
           fi
         '';
