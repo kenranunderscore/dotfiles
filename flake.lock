@@ -42,6 +42,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -59,6 +74,27 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixgl": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1710942276,
+        "narHash": "sha256-+K0UtpWhsA5X0kZpN2eaBI6TP2OvrQAWFvtoeICWmhM=",
+        "owner": "kenranunderscore",
+        "repo": "nixgl",
+        "rev": "c58137326ef0bac8a504111591692ad849f49029",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kenranunderscore",
+        "repo": "nixgl",
         "type": "github"
       }
     },
@@ -98,6 +134,7 @@
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
+        "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
         "privateConfig": "privateConfig",
         "sf-mono": "sf-mono",

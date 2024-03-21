@@ -11,6 +11,10 @@
       url = "git+ssh://git@github.com/kenranunderscore/private-config";
       flake = false;
     };
+    nixgl = {
+      url = "github:kenranunderscore/nixgl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Editors
     emacs-overlay = {
@@ -51,7 +55,8 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      overlays = [ inputs.emacs-overlay.overlay ];
+      overlays =
+        [ inputs.emacs-overlay.overlays.default inputs.nixgl.overlays.default ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;
