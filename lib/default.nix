@@ -1,9 +1,7 @@
 { lib, ... }:
 
 {
-  readDirNames = path:
-    builtins.attrNames
-    (lib.filterAttrs (_: type: type == "directory") (builtins.readDir path));
+  readDirNames = path: builtins.attrNames (builtins.readDir path);
 
   mkNixosSystem = { hostname, system, inputs, pkgs }:
     let
