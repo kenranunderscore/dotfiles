@@ -64,12 +64,20 @@
       inherit (pkgs) lib;
     in {
       formatter.${system} = pkgs.nixfmt;
+
       lib = import ./lib { inherit (pkgs) lib; };
+
       nixosConfigurations = let machines = self.lib.readDirNames ./hosts;
       in builtins.foldl' (acc: hostname:
         acc // {
           ${hostname} =
             self.lib.mkNixosSystem { inherit hostname system inputs pkgs; };
         }) { } machines;
+
+      homeConfigurations.void = self.lib.mkHomeConfiguration {
+        username = "void";
+        hostname = "tuon";
+        inherit system pkgs inputs;
+      };
     };
 }
