@@ -10,11 +10,11 @@ for development, learning and, to some degree, entertainment. Currently there
 are only NixOS machines (plus one WSL2 environment that I need to include at
 some point) I manage this way:
 
-- [[file:hosts/atuan/][atuan]]: my home PC
-- [[file:hosts/tehanu/][tehanu]]: my new work laptop
-- [[file:hosts/angband/][angband]]: a tiny notebook (64 GB of disk space only) I use when
+- [[file:nixos/atuan/][atuan]]: my home PC
+- [[file:nixos/tehanu/][tehanu]]: my new work laptop
+- [[file:nixos/angband/][angband]]: a tiny notebook (64 GB of disk space only) I use when
   traveling
-- [[file:hosts/paln/][paln]]: a tiny [[https://www.hetzner.com/cloud][Hetzner Cloud]] VM I use for synchronization and small
+- [[file:nixos/paln/][paln]]: a tiny [[https://www.hetzner.com/cloud][Hetzner Cloud]] VM I use for synchronization and small
   backups
 
   The actual (development) environments are managed with [[https://github.com/nix-community/home-manager][home-manager]].
@@ -31,7 +31,7 @@ some point) I manage this way:
 
 ** Repository and flake structure
 
-The [[file:hosts/][hosts]] directory contains the machine/host-specific pieces of configuration.
+The [[file:nixos/][nixos]] directory contains the machine/host-specific pieces of configuration.
 Every subdirectory will lead to a flake output under =nixosConfigurations=, with
 the attribute name being the name of the directory.
 

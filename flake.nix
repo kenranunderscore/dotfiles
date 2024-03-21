@@ -67,7 +67,7 @@
 
       lib = import ./lib { inherit (pkgs) lib; };
 
-      nixosConfigurations = let machines = self.lib.readDirNames ./hosts;
+      nixosConfigurations = let machines = self.lib.readDirNames ./nixos;
       in builtins.foldl' (acc: hostname:
         acc // {
           ${hostname} =

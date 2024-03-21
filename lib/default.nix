@@ -8,7 +8,7 @@
   mkNixosSystem = { hostname, system, inputs, pkgs }:
     let
       inherit (inputs) home-manager nixpkgs;
-      dir = ../hosts + "/${hostname}";
+      dir = ../nixos + "/${hostname}";
       custom = (import (dir + /custom.nix)) // { inherit hostname; };
       username = custom.username;
       specialArgs = { inherit inputs custom; };
