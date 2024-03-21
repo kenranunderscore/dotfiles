@@ -25,9 +25,6 @@ in {
         (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
         (callPackage ./termingus.nix { })
         (callPackage ./oldschool.nix { })
-        (callPackage ./twilio-sans-mono.nix {
-          inherit (inputs) twilio-sans-mono;
-        })
       ] ++ (with pkgs; [
         borg-sans-mono
         cantarell-fonts

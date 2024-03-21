@@ -161,10 +161,7 @@ attributes that need to be applied when switching to the respective font.
             "Unifont"))
         (andale-mono
          . (:family
-            "Andale Mono"))
-        (twilio-sans-mono
-         . (:family
-            "Twilio Sans Mono"))))
+            "Andale Mono"))))
 #+end_src
 
 #+begin_src emacs-lisp

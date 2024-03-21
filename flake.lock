@@ -138,7 +138,6 @@
         "nixpkgs": "nixpkgs",
         "privateConfig": "privateConfig",
         "sf-mono": "sf-mono",
-        "twilio-sans-mono": "twilio-sans-mono",
         "zsh-autopair": "zsh-autopair",
         "zsh-autosuggestions": "zsh-autosuggestions",
         "zsh-history-substring-search": "zsh-history-substring-search",
@@ -173,22 +172,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "twilio-sans-mono": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1668721927,
-        "narHash": "sha256-qAo/CNxe8dTuA4fH0ifJP/2SkzX6IOjF/Z4PWzS7H3M=",
-        "owner": "twilio",
-        "repo": "twilio-sans-mono",
-        "rev": "6bb29c96842f19a533401e6266fdfdd813dcf3e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "twilio",
-        "repo": "twilio-sans-mono",
         "type": "github"
       }
     },

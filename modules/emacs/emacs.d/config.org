@@ -367,9 +367,6 @@ attributes that need to be applied when switching to the respective font.
             "Unifont"
             :default-height
             200))
-        (twilio-sans-mono
-         . (:family
-            "Twilio Sans Mono"))
         (geist
          . (:family
             "Geist Mono"))

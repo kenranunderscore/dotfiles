@@ -46,10 +46,6 @@
       url = "github:supercomputra/sf-mono-font";
       flake = false;
     };
-    twilio-sans-mono = {
-      url = "github:twilio/twilio-sans-mono";
-      flake = false;
-    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
