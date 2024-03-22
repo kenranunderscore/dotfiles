@@ -55,7 +55,7 @@
     in {
       formatter.${system} = pkgs.nixfmt;
 
-      lib = import ./lib { inherit (pkgs) lib; };
+      lib = import ./lib;
 
       nixosConfigurations = let machines = self.lib.readDirNames ./nixos;
       in builtins.foldl' (acc: dir:

@@ -1,10 +1,11 @@
-{ lib, ... }:
-
 {
+  # Get a list of absolute paths of all files/directories in a given directory.
   readDirNames = dir:
     builtins.map (path: dir + "/${path}")
     (builtins.attrNames (builtins.readDir dir));
 
+  # Create a NixOS configuration attrset of the form { myHostname = conf },
+  # which can be used as a flake output in `nixosConfigurations`.
   mkNixosSystem = { dir, system, inputs, pkgs }:
     let
       hostname = builtins.baseNameOf dir;
@@ -29,10 +30,12 @@
       };
     };
 
+  # Create a home-manager configuration attrset of the form { username = conf },
+  # which can be used as a flake output in `homeConfigurations`.
   mkHomeConfiguration = { dir, system, inputs, pkgs }:
     let
       userAtHost = builtins.baseNameOf dir;
-      parts = lib.splitString "@" userAtHost;
+      parts = pkgs.lib.splitString "@" userAtHost;
       username = builtins.head parts;
       hostname = builtins.elemAt parts 1;
       custom = import (dir + /custom.nix) // { inherit username hostname; };
