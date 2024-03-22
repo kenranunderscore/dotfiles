@@ -19,7 +19,7 @@
     ./git.nix
     ./herbstluftwm
     ./i3
-    ./kitty.nix
+    ./kitty
     ./neovim
     ./nyxt
     ./pass.nix
