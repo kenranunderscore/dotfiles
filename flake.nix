@@ -64,16 +64,13 @@
       lib = import ./lib { inherit (pkgs) lib; };
 
       nixosConfigurations = let machines = self.lib.readDirNames ./nixos;
-      in builtins.foldl' (acc: hostname:
-        acc // {
-          ${hostname} =
-            self.lib.mkNixosSystem { inherit hostname system inputs pkgs; };
-        }) { } machines;
+      in builtins.foldl' (acc: dir:
+        acc // self.lib.mkNixosSystem { inherit dir system inputs pkgs; }) { }
+      machines;
 
       homeConfigurations = let users = self.lib.readDirNames ./users;
-      in builtins.foldl' (acc: userAtHost:
-        acc // self.lib.mkHomeConfiguration {
-          inherit userAtHost system inputs pkgs;
-        }) { } users;
+      in builtins.foldl' (acc: dir:
+        acc // self.lib.mkHomeConfiguration { inherit dir system inputs pkgs; })
+      { } users;
     };
 }

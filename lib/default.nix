@@ -1,34 +1,37 @@
 { lib, ... }:
 
 {
-  readDirNames = path: builtins.attrNames (builtins.readDir path);
+  readDirNames = dir:
+    builtins.map (path: dir + "/${path}")
+    (builtins.attrNames (builtins.readDir dir));
 
-  mkNixosSystem = { hostname, system, inputs, pkgs }:
+  mkNixosSystem = { dir, system, inputs, pkgs }:
     let
-      inherit (inputs) home-manager nixpkgs;
-      dir = ../nixos + "/${hostname}";
+      hostname = builtins.baseNameOf dir;
       custom = (import (dir + /custom.nix)) // { inherit hostname; };
       username = custom.username;
       specialArgs = { inherit inputs custom; };
-    in nixpkgs.lib.nixosSystem {
-      inherit system pkgs specialArgs;
-      modules = [
-        (dir + /configuration.nix)
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            users.${username} = import (dir + /home.nix);
-            useGlobalPkgs = true;
-            useUserPackages = false;
-            extraSpecialArgs = specialArgs;
-          };
-        }
-      ];
+    in {
+      "${hostname}" = inputs.nixpkgs.lib.nixosSystem {
+        inherit system pkgs specialArgs;
+        modules = [
+          (dir + /configuration.nix)
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              users.${username} = import (dir + /home.nix);
+              useGlobalPkgs = true;
+              useUserPackages = false;
+              extraSpecialArgs = specialArgs;
+            };
+          }
+        ];
+      };
     };
 
-  mkHomeConfiguration = { userAtHost, system, inputs, pkgs }:
+  mkHomeConfiguration = { dir, system, inputs, pkgs }:
     let
-      dir = ../users + "/${userAtHost}";
+      userAtHost = builtins.baseNameOf dir;
       parts = lib.splitString "@" userAtHost;
       username = builtins.head parts;
       hostname = builtins.elemAt parts 1;
