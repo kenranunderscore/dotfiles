@@ -46,4 +46,14 @@
         modules = [ (dir + /home.nix) ];
       };
     };
+
+  # Create a shell script derivation based on an existing package, calling the
+  # respective package with nixGL, thus making it work on non-NixOS.
+  createNixGLWrapper = pkgs: drv:
+    let
+      inherit (pkgs.lib) getExe;
+      name = drv.meta.mainProgram or drv.pname;
+    in pkgs.writeShellScriptBin name ''
+      exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${getExe drv} $@
+    '';
 }
