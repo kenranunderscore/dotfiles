@@ -6,6 +6,10 @@ in {
 
   modules = {
     base.gpgKey = "9AC78C1A48681583";
+    brave = {
+      enable = true;
+      wrapWithNixGL = true;
+    };
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
@@ -68,6 +72,7 @@ in {
         }
       ];
     };
+    kitty.wrapWithNixGL = true;
     rofi.enable = true;
     neovim.enable = true;
     sbcl.enable = true;
@@ -93,7 +98,6 @@ in {
   };
 
   home.packages = with pkgs; [
-    brave
     cloc
     dmenu
     keepass

@@ -5,6 +5,7 @@
     ./alacritty
     ./bash.nix
     ./bat.nix
+    ./brave
     ./dcss
     ./direnv.nix
     ./doom
