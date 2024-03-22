@@ -20,7 +20,6 @@ in {
       sessionVariables.KENRAN_DEFAULT_FONT = custom.font.name;
 
       packages = lib.optionals cfg.withCustomBuilds [
-        (callPackage ./sf-mono.nix { inherit (inputs) sf-mono; })
         (callPackage ./lucida-console.nix { })
         (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
         (callPackage ./termingus.nix { })

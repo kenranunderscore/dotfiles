@@ -330,11 +330,6 @@ attributes that need to be applied when switching to the respective font.
             "Courier Prime"
             :org-height
             0.95))
-        (sf-mono
-         . (:family
-            "SFMono"
-            :org-height
-            0.85))
         (fantasque-sans-mono
          . (:family
             "Fantasque Sans Mono"))

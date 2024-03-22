@@ -138,9 +138,6 @@ attributes that need to be applied when switching to the respective font.
         (courier-prime
          . (:family
             "Courier Prime"))
-        (sf-mono
-         . (:family
-            "SFMono"))
         (fantasque-sans-mono
          . (:family
             "Fantasque Sans Mono"))

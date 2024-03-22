@@ -137,27 +137,10 @@
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
         "privateConfig": "privateConfig",
-        "sf-mono": "sf-mono",
         "zsh-autopair": "zsh-autopair",
         "zsh-autosuggestions": "zsh-autosuggestions",
         "zsh-history-substring-search": "zsh-history-substring-search",
         "zsh-syntax-highlighting": "zsh-syntax-highlighting"
-      }
-    },
-    "sf-mono": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1528395704,
-        "narHash": "sha256-3wG3M4Qep7MYjktzX9u8d0iDWa17FSXYnObSoTG2I/o=",
-        "owner": "supercomputra",
-        "repo": "sf-mono-font",
-        "rev": "1409ae79074d204c284507fef9e479248d5367c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "supercomputra",
-        "repo": "sf-mono-font",
-        "type": "github"
       }
     },
     "systems": {
