@@ -30,6 +30,7 @@ some point) I manage this way:
   output in your =flake.nix=, replacing the =nixosConfigurations.<hostname>= one.)
 
 ** Repository and flake structure
+*** NixOS systems
 
 The [[file:nixos/][nixos]] directory contains the machine/host-specific pieces of configuration.
 Every subdirectory will lead to a flake output under =nixosConfigurations=, with
@@ -48,6 +49,22 @@ The directories itself follow a fixed convention:
 The [[file:modules/][modules]] directory contains the home manager NixOS modules that
 all my configurations share (but might choose to disable or enable on a
 per-machine basis).
+
+*** Home-manager on non-NixOS
+
+The [[file:users][users]] directory contains =home-manager=-only configurations for my non-NixOS
+machines. At the moment my work laptop runs both NixOS and Void Linux, and on
+the latter I use =home-manager= first-class.
+
+Install a new generation with
+
+#+begin_src shell
+home-manager switch --flake ~/dotfiles --impure
+#+end_src
+
+(The =--impure= argument is due to the fact that on non-NixOS systems,
+applications using OpenGL (or similar) often fail on startup; [[https://github.com/nix-community/nixGL][nixGL]] helps with
+this problem, but installing it requires this parameter).
 
 ** Building/switching to a new generation
 
