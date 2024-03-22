@@ -92,41 +92,6 @@ in {
     };
   };
 
-  programs = {
-    mercurial = {
-      enable = true;
-      userEmail = email;
-      userName = "Johannes Maier";
-      # FIXME: always enable git, and use its config here, or extract
-      ignores = [
-        # Vim
-        "*.swp"
-        # Direnv
-        ".direnv/"
-        ".envrc"
-        # macOS
-        ".DS_Store"
-        # Emacs: backup, auto-save, lock files, directory-local
-        # variables
-        "*~"
-        "\\#*\\#"
-        ".\\#*"
-        ".dir-locals.el"
-      ];
-      aliases = { p = "pull -u"; };
-    };
-  };
-
-  xsession.enable = true;
-
-  services = {
-    gpg-agent = {
-      enable = true;
-      enableSshSupport = true;
-    };
-    syncthing.enable = true;
-  };
-
   home.packages = with pkgs; [
     brave
     cloc
