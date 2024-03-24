@@ -1385,7 +1385,7 @@ functionality, so a lot of things can utilize them "implicitly". I've stuck with
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*.el"))
   :init
-  (vertico-mode +1)
+  (vertico-mode)
   :custom
   (vertico-cycle t)
   (vertico-resize t))
@@ -1404,6 +1404,22 @@ extension to =vertico= does just that.
               ("DEL" . vertico-directory-delete-char)
               ("C-w" . vertico-directory-delete-word)
               ("RET" . vertico-directory-enter)))
+#+end_src
+
+** Showing =vertico= in a centered frame
+
+Let's give =vertico-posframe= another try. This makes Emacs look a little similar
+to Neovim with something like Telescope, though I like my centered frame to be a
+little smaller.
+
+#+begin_src emacs-lisp
+(use-package vertico-posframe
+  :after vertico
+  :config
+  (setq vertico-posframe-height 13)
+  (setq vertico-posframe-border-width 3)
+  (setq vertico-posframe-poshandler #'posframe-poshandler-frame-center)
+  (vertico-posframe-mode))
 #+end_src
 
 ** Remembering command history
