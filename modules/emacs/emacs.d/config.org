@@ -782,6 +782,7 @@ see filtered out."
                         evil-org-mode
                         evil-commentary-mode
                         company-mode
+                        company-box-mode
                         global-company-mode
                         lsp-lens-mode
                         org-indent-mode
