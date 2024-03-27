@@ -663,6 +663,15 @@ Another theme package by Protesilaos Stavrou.
   :defer)
 #+end_src
 
+**** Spacemacs themes
+
+For nostalgic reasons I like to pretend I'm using Spacemacs from time to time.
+
+#+begin_src emacs-lisp
+(use-package spacemacs-theme
+  :defer)
+#+end_src
+
 **** Set the current theme
 
 #+begin_src emacs-lisp
