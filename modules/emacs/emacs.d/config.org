@@ -347,11 +347,6 @@ attributes that need to be applied when switching to the respective font.
             170
             :org-height
             0.9))
-        (borg
-         . (:family
-            "Borg Sans Mono"
-            :org-height
-            0.85))
         (termingus
          . (:family
             "Termingus"

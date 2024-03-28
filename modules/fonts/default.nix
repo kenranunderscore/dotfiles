@@ -25,7 +25,6 @@ in {
         (callPackage ./termingus.nix { })
         (callPackage ./oldschool.nix { })
       ] ++ (with pkgs; [
-        borg-sans-mono
         cantarell-fonts
         cascadia-code
         corefonts

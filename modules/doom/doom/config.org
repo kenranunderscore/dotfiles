@@ -147,9 +147,6 @@ attributes that need to be applied when switching to the respective font.
         (inconsolata
          . (:family
             "Inconsolata"))
-        (borg
-         . (:family
-            "Borg Sans Mono"))
         (termingus
          . (:family
             "Termingus"))
