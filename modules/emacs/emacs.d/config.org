@@ -3009,6 +3009,11 @@ TODO: document
 #+begin_src emacs-lisp
 (use-package flycheck
   :after lsp-mode
+  :config
+  (mapc #'evil-declare-ignore-repeat
+        '(flycheck-next-error
+          flycheck-previous-error
+          flycheck-first-error))
   :defer)
 #+end_src
 
