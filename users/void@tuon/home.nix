@@ -14,7 +14,7 @@ in {
     i3 = {
       enable = true;
       withGaps = false;
-      terminal = "wezterm";
+      terminal = "kitty";
       workspaces = [
         {
           name = "1:main";
