@@ -1039,6 +1039,17 @@ having to change my typing flow depending on the context anymore.
 (setq sentence-end-double-space nil)
 #+end_src
 
+** Automatically scroll compilation output
+
+Emacs' =M-x compile= command (and =M-x project-compile=, which I use much more
+often) create a new buffer that contains the compilation output. This buffer
+does not automatically follow the output if it reaches the bottom of the first
+page, so let's change that.
+
+#+begin_src emacs-lisp
+(setq compilation-scroll-output t)
+#+end_src
+
 * Vim emulation with =evil=
 
 The =evil= package offers a very complete Vim experience inside of Emacs. I've
