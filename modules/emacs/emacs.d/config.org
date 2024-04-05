@@ -2103,7 +2103,7 @@ here rather belong to built-in functionality, but they fit in here very well.
 mostly use it to make sure that replies to a mail are sent from the address I've
 received it at.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package gnus-alias
   :defer t
   :config
