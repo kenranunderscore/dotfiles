@@ -1092,6 +1092,14 @@ I'd expect them to.
         ("C-d" . evil-window-delete)))
 #+end_src
 
+In order for scrolling with =C-u=, =C-d=, =C-f=, =C-b=, and especially with =z t= and =z b=,
+to not leave point on the first or last line of the visible page, we can use the
+built-in =scroll-margin= variable.
+
+#+begin_src emacs-lisp
+(setq scroll-margin 2)
+#+end_src
+
 ** Interacting with "surrounding things"
 
 The analogue of Tim Pope's =vim-surround= plugin in Emacs. Now I can use things
