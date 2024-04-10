@@ -667,6 +667,13 @@ For nostalgic reasons I like to pretend I'm using Spacemacs from time to time.
   :defer)
 #+end_src
 
+**** =base16= themes
+
+#+begin_src emacs-lisp
+(use-package base16-theme
+  :defer)
+#+end_src
+
 **** Set the current theme
 
 #+begin_src emacs-lisp
