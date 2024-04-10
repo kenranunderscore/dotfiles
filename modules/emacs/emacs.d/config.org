@@ -1419,7 +1419,10 @@ functionality, so a lot of things can utilize them "implicitly". I've stuck with
   (vertico-mode)
   :custom
   (vertico-cycle t)
-  (vertico-resize t))
+  (vertico-resize t)
+  :bind
+  (:map vertico-map
+        ("C-;" . +vertico-select-randomly)))
 #+end_src
 
 Directory navigation in =C-x d= or =C-x C-f= is something else that I liked in Doom
@@ -1548,6 +1551,7 @@ mostly taken from an example in its readme.
 #+end_src
 
 ** Minibuffer actions
+*** Embark
 
 I haven't really grokked [[https://github.com/oantolin/embark][Embark]] yet. It seems to be amazing, though! What I
 mostly use it for at the moment is its =embark-act= command in conjunction with
@@ -1570,6 +1574,31 @@ Integrate =embark= with =consult=.
   :after (embark consult)
   :demand
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
+#+end_src
+
+*** Selecting a random candidate
+
+I switch themes frequently, usually often in one single day, depending on
+lighting and mood. But I can never quite decide, and sometimes
+=+enable-random-theme= hits too many "negatives". One thing I now like to do is
+the following:
+
+- Call =+switch-theme=
+- Narrow it down with =vertico= / =orderless= according to current taste, like
+  =base16 !light !metal=
+- From the remaining entries, choose a random candidate
+
+This is the function used to do so; it can be used in many contexts.
+
+#+begin_src emacs-lisp
+(defun +vertico-select-randomly ()
+  "Select a random thing from the current (possibly narrowed) list of
+candidates."
+  (interactive)
+  (unless (= vertico--total 0)
+    (let ((index (random vertico--total)))
+      (vertico--goto index)
+      (vertico-exit))))
 #+end_src
 
 * Jumping and sniping with =avy=
