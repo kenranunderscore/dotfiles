@@ -447,7 +447,8 @@ reset to the default height for the selected font."
      'fixed-pitch-serif nil
      :font family
      :inherit 'fixed-pitch
-     :height 1.0)))
+     :height 1.0)
+    (message "Switched to font: %s" family)))
 #+end_src
 
 Finally, set all the face attributes synchronously, or register a hook that
