@@ -1793,6 +1793,7 @@ might run to adjust the headers.
                          "CANCELLED(c)")))
    (org-html-htmlize-output-type 'css))
   :config
+  (setq org-use-fast-todo-selection 'expert)
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
               :after (lambda (&rest _) (org-save-all-org-buffers)))
