@@ -1893,7 +1893,12 @@ files/headers with a huge font size, looking a bit like slides.
         (org-present-small)
         (org-remove-inline-images)
         (org-present-read-write))))
-  :defer)
+  :config
+  (local-leader
+    :keymaps 'org-present-mode-keymap
+    "n" #'org-present-next
+    "p" #'org-present-prev
+    "q" #'org-present-quit))
 #+end_src
 
 * On-the-fly syntax checking (and other things): =Flymake=
