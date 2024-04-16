@@ -1874,6 +1874,28 @@ position of point to automatically show surrounding markup.
   :after ox)
 #+end_src
 
+** Tiny presentations with =org-present=
+
+Sometimes I need to showcase some stuff, often code, in a quick and textual
+manner. This is where =org-present= comes in handy, as it can present Org mode
+files/headers with a huge font size, looking a bit like slides.
+
+#+begin_src emacs-lisp
+(use-package org-present
+  :hook
+  ((org-present-mode
+    . (lambda ()
+        (org-present-big)
+        (org-display-inline-images)
+        (org-present-read-only)))
+   (org-present-mode-quit
+    . (lambda ()
+        (org-present-small)
+        (org-remove-inline-images)
+        (org-present-read-write))))
+  :defer)
+#+end_src
+
 * On-the-fly syntax checking (and other things): =Flymake=
 
 #+begin_src emacs-lisp
