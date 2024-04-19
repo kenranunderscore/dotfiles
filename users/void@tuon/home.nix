@@ -99,6 +99,7 @@ in {
 
   home.packages = with pkgs; [
     cloc
+    eclipses.eclipse-dsl
     dmenu
     keepass
     keepassxc
