@@ -42,6 +42,7 @@ in {
         jetbrains-mono
         julia-mono
         noto-fonts
+        paratype-pt-mono
         roboto-mono
         source-code-pro
         unifont

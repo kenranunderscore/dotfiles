@@ -362,7 +362,10 @@ attributes that need to be applied when switching to the respective font.
             "Geist Mono"))
         (berkeley-mono
          . (:family
-            "Berkeley Mono"))))
+            "Berkeley Mono"))
+        (pt-mono
+         . (:family
+            "PT Mono"))))
 #+end_src
 
 =+current-font= contains a symbol pointing to one of the fonts specified in
