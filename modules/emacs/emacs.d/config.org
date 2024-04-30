@@ -2445,7 +2445,9 @@ way. It seems prudent then to tackle those, and I might end up not needing
       '(("\\*\\(helpful\\|Help\\|Apropos\\)"
          (display-buffer-reuse-mode-window display-buffer-at-bottom)
          (mode . (helpful-mode help-mode apropos-mode))
-         (window-height . 0.40))))
+         (window-height . 0.4))
+        ("\\*mu4e-main\\*"
+         (display-buffer-same-window))))
 #+end_src
 
 *** TODO Untamed popups
