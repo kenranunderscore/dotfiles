@@ -53,7 +53,7 @@
       };
       inherit (pkgs) lib;
     in {
-      formatter.${system} = pkgs.nixfmt;
+      formatter.${system} = pkgs.nixfmt-rfc-style;
 
       lib = import ./lib;
 
