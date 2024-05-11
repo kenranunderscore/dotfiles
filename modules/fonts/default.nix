@@ -48,6 +48,10 @@ in {
         unifont
         victor-mono
         vistafonts
+
+        # Anne/Japanese
+        ipafont
+        source-han-sans
       ]);
     };
   };
