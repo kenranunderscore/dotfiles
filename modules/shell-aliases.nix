@@ -81,6 +81,7 @@
 
   # docker
   drun = "docker run -it --rm";
+  drunl = "docker run -it --rm --mount type=bind,source=$(pwd),target=/foo";
   dsp = "docker system prune";
 
   # misc
