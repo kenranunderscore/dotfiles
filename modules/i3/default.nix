@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.i3;
-in {
+let
+  cfg = config.modules.i3;
+in
+{
   options.modules.i3 = {
     enable = lib.mkEnableOption "i3";
 
@@ -41,97 +48,108 @@ in {
           titlebar = false;
           border = 2;
         };
-        assigns = builtins.foldl' (acc: w:
-          if builtins.hasAttr "assigns" w then
-            acc // { "${w.name}" = w.assigns; }
-          else
-            acc) { } cfg.workspaces;
-        keybindings = let
-          workspaceKeybindings = builtins.foldl' (acc: w:
-            let n = builtins.head (builtins.split ":" w.name);
-            in acc // {
-              "${modifier}+${n}" = "workspace number ${w.name}";
-              "${modifier}+Shift+${n}" =
-                "move container to workspace number ${w.name}";
-            }) { } cfg.workspaces;
-        in lib.mkOptionDefault ({
-          # Disable the default workspaces
-          "${modifier}+0" = null;
-          "${modifier}+1" = null;
-          "${modifier}+2" = null;
-          "${modifier}+3" = null;
-          "${modifier}+4" = null;
-          "${modifier}+5" = null;
-          "${modifier}+6" = null;
-          "${modifier}+7" = null;
-          "${modifier}+8" = null;
-          "${modifier}+9" = null;
-          "${modifier}+Shift+0" = null;
-          "${modifier}+Shift+1" = null;
-          "${modifier}+Shift+2" = null;
-          "${modifier}+Shift+3" = null;
-          "${modifier}+Shift+4" = null;
-          "${modifier}+Shift+5" = null;
-          "${modifier}+Shift+6" = null;
-          "${modifier}+Shift+7" = null;
-          "${modifier}+Shift+8" = null;
-          "${modifier}+Shift+9" = null;
-          # Use normal vim keys for moving between windows.
-          "${modifier}+h" = "focus left";
-          "${modifier}+l" = "focus right";
-          "${modifier}+j" = "focus down";
-          "${modifier}+k" = "focus up";
-          "${modifier}+Shift+h" = "move left";
-          "${modifier}+Shift+l" = "move right";
-          "${modifier}+Shift+j" = "move down";
-          "${modifier}+Shift+k" = "move up";
-          "${modifier}+v" = "split v";
-          "${modifier}+g" = "split h";
-          "${modifier}+t" = "exec ${terminal}";
-          "${modifier}+space" = lib.mkForce "exec ${menu}";
-          "${modifier}+d" =
-            lib.mkForce "exec rofi -disable-history -show-icons -show drun";
-          "${modifier}+e" = "exec emacsclient -a '' --create-frame --no-wait";
-        } // workspaceKeybindings);
+        assigns = builtins.foldl' (
+          acc: w: if builtins.hasAttr "assigns" w then acc // { "${w.name}" = w.assigns; } else acc
+        ) { } cfg.workspaces;
+        keybindings =
+          let
+            workspaceKeybindings = builtins.foldl' (
+              acc: w:
+              let
+                n = builtins.head (builtins.split ":" w.name);
+              in
+              acc
+              // {
+                "${modifier}+${n}" = "workspace number ${w.name}";
+                "${modifier}+Shift+${n}" = "move container to workspace number ${w.name}";
+              }
+            ) { } cfg.workspaces;
+          in
+          lib.mkOptionDefault (
+            {
+              # Disable the default workspaces
+              "${modifier}+0" = null;
+              "${modifier}+1" = null;
+              "${modifier}+2" = null;
+              "${modifier}+3" = null;
+              "${modifier}+4" = null;
+              "${modifier}+5" = null;
+              "${modifier}+6" = null;
+              "${modifier}+7" = null;
+              "${modifier}+8" = null;
+              "${modifier}+9" = null;
+              "${modifier}+Shift+0" = null;
+              "${modifier}+Shift+1" = null;
+              "${modifier}+Shift+2" = null;
+              "${modifier}+Shift+3" = null;
+              "${modifier}+Shift+4" = null;
+              "${modifier}+Shift+5" = null;
+              "${modifier}+Shift+6" = null;
+              "${modifier}+Shift+7" = null;
+              "${modifier}+Shift+8" = null;
+              "${modifier}+Shift+9" = null;
+              # Use normal vim keys for moving between windows.
+              "${modifier}+h" = "focus left";
+              "${modifier}+l" = "focus right";
+              "${modifier}+j" = "focus down";
+              "${modifier}+k" = "focus up";
+              "${modifier}+Shift+h" = "move left";
+              "${modifier}+Shift+l" = "move right";
+              "${modifier}+Shift+j" = "move down";
+              "${modifier}+Shift+k" = "move up";
+              "${modifier}+v" = "split v";
+              "${modifier}+g" = "split h";
+              "${modifier}+t" = "exec ${terminal}";
+              "${modifier}+space" = lib.mkForce "exec ${menu}";
+              "${modifier}+d" = lib.mkForce "exec rofi -disable-history -show-icons -show drun";
+              "${modifier}+e" = "exec emacsclient -a '' --create-frame --no-wait";
+            }
+            // workspaceKeybindings
+          );
         workspaceOutputAssign = builtins.map (w: {
           inherit (w) output;
           workspace = w.name;
         }) (builtins.filter (builtins.hasAttr "output") cfg.workspaces);
-        bars = [{
-          mode = "dock";
-          position = "bottom";
-          statusCommand = "${lib.getExe pkgs.i3status}";
-          workspaceButtons = true;
-          fonts = {
-            names = [ "Berkeley Mono" "JetBrains Mono" ];
-            size = 15.0;
-          };
-          colors = rec {
-            background = "#060606";
-            focusedBackground = background;
-            statusline = "#088e08";
-            focusedStatusline = statusline;
-            bindingMode = rec {
-              inherit background;
-              border = "#00afa0";
-              text = border;
+        bars = [
+          {
+            mode = "dock";
+            position = "bottom";
+            statusCommand = "${lib.getExe pkgs.i3status}";
+            workspaceButtons = true;
+            fonts = {
+              names = [
+                "Berkeley Mono"
+                "JetBrains Mono"
+              ];
+              size = 15.0;
             };
-            focusedWorkspace = {
-              background = "#041a04";
-              border = "#088e08";
-              text = "#088e08";
+            colors = rec {
+              background = "#060606";
+              focusedBackground = background;
+              statusline = "#088e08";
+              focusedStatusline = statusline;
+              bindingMode = rec {
+                inherit background;
+                border = "#00afa0";
+                text = border;
+              };
+              focusedWorkspace = {
+                background = "#041a04";
+                border = "#088e08";
+                text = "#088e08";
+              };
+              activeWorkspace = {
+                inherit background;
+                inherit (focusedWorkspace) text border;
+              };
+              inactiveWorkspace = rec {
+                inherit background;
+                border = "#707370";
+                text = border;
+              };
             };
-            activeWorkspace = {
-              inherit background;
-              inherit (focusedWorkspace) text border;
-            };
-            inactiveWorkspace = rec {
-              inherit background;
-              border = "#707370";
-              text = border;
-            };
-          };
-        }];
+          }
+        ];
         colors = {
           focused = {
             background = "#041a04";
@@ -169,17 +187,20 @@ in {
             text = "#f03500";
           };
         };
-        gaps = let val = 50;
-        in lib.mkIf cfg.withGaps {
-          inner = val;
-          outer = 0;
-          left = 0;
-          right = 0;
-          bottom = 0;
-          top = 0;
-          horizontal = 0;
-          vertical = 0;
-        };
+        gaps =
+          let
+            val = 50;
+          in
+          lib.mkIf cfg.withGaps {
+            inner = val;
+            outer = 0;
+            left = 0;
+            right = 0;
+            bottom = 0;
+            top = 0;
+            horizontal = 0;
+            vertical = 0;
+          };
       };
     };
 

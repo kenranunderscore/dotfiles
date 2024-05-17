@@ -1,8 +1,15 @@
 path:
-{ stdenv, lib, fetchurl, unzip }:
+{
+  stdenv,
+  lib,
+  fetchurl,
+  unzip,
+}:
 
-let version = "0.829";
-in stdenv.mkDerivation {
+let
+  version = "0.829";
+in
+stdenv.mkDerivation {
   name = "pragmata-pro-${version}";
   src = fetchurl {
     url = "file://${path}/pragmatapro_${version}.zip";

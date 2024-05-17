@@ -1,7 +1,16 @@
-{ inputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ ../../modules/base.nix ../../modules ];
+  imports = [
+    ../../modules/base.nix
+    ../../modules
+  ];
 
   modules = {
     bash.enable = true;
@@ -13,7 +22,7 @@
         { name = "1:main"; }
         {
           name = "2:web";
-          assigns = [{ class = "firefox"; }];
+          assigns = [ { class = "firefox"; } ];
         }
         { name = "3"; }
         { name = "4"; }
@@ -76,7 +85,10 @@
   xsession.enable = true;
 
   home = {
-    packages = with pkgs; [ xorg.xkbcomp xcape ];
+    packages = with pkgs; [
+      xorg.xkbcomp
+      xcape
+    ];
     stateVersion = "21.03";
   };
 }

@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.spectrwm;
-in {
+let
+  cfg = config.modules.spectrwm;
+in
+{
   options.modules.spectrwm = {
     enable = lib.mkEnableOption "spectrwm";
 
@@ -11,6 +18,10 @@ in {
     };
   };
 
-  config =
-    lib.mkIf cfg.enable { home.packages = [ pkgs.spectrwm pkgs.xlockmore ]; };
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      pkgs.spectrwm
+      pkgs.xlockmore
+    ];
+  };
 }

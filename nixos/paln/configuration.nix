@@ -1,7 +1,14 @@
-{ config, pkgs, custom, ... }:
+{
+  config,
+  pkgs,
+  custom,
+  ...
+}:
 
-let username = custom.username;
-in {
+let
+  username = custom.username;
+in
+{
   imports = [ ./hardware-configuration.nix ];
 
   boot = {
@@ -28,7 +35,10 @@ in {
     home = "/home/${username}";
     extraGroups = [ "wheel" ];
   };
-  nix.settings.trusted-users = [ "root" username ];
+  nix.settings.trusted-users = [
+    "root"
+    username
+  ];
 
   environment = {
     systemPackages = with pkgs; [ vim ];
@@ -71,8 +81,15 @@ in {
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22000 80 443 ];
-    allowedUDPPorts = [ 21027 22000 ];
+    allowedTCPPorts = [
+      22000
+      80
+      443
+    ];
+    allowedUDPPorts = [
+      21027
+      22000
+    ];
   };
 
   # This value determines the NixOS release from which the default

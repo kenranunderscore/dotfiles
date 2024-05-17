@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.emacs;
   types = lib.types;
-in {
+in
+{
   options.modules.emacs.enable = lib.mkEnableOption "emacs";
 
   config = lib.mkIf cfg.enable {
@@ -17,23 +23,28 @@ in {
         '';
       };
 
-      packages = let
-        emacsWithPackages =
-          (pkgs.emacsPackagesFor pkgs.emacs-git).emacsWithPackages;
-        # Some packages should come "with Emacs" via nix, as they are either
-        # notoriously difficult to build locally on NixOS, or not in MELPA etc.
-        myEmacs = emacsWithPackages (p: [ p.vterm p.mu4e ]);
-      in with pkgs; [
-        myEmacs
+      packages =
+        let
+          emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs-git).emacsWithPackages;
+          # Some packages should come "with Emacs" via nix, as they are either
+          # notoriously difficult to build locally on NixOS, or not in MELPA etc.
+          myEmacs = emacsWithPackages (p: [
+            p.vterm
+            p.mu4e
+          ]);
+        in
+        with pkgs;
+        [
+          myEmacs
 
-        # Programs needed at runtime or for straight to build packages
-        cmake
-        gcc
-        libtool
-        meson
-        ninja
-        shellcheck
-      ];
+          # Programs needed at runtime or for straight to build packages
+          cmake
+          gcc
+          libtool
+          meson
+          ninja
+          shellcheck
+        ];
     };
   };
 }

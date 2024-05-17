@@ -1,7 +1,16 @@
-{ inputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports = [ ../../modules/base.nix ../../modules ];
+  imports = [
+    ../../modules/base.nix
+    ../../modules
+  ];
 
   modules = {
     bash.enable = true;

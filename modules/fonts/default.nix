@@ -1,9 +1,17 @@
-{ inputs, custom, config, lib, pkgs, ... }:
+{
+  inputs,
+  custom,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (pkgs) callPackage;
   cfg = config.modules.fonts;
-in {
+in
+{
   options.modules.fonts = {
     enable = lib.mkEnableOption "fonts";
 
@@ -19,40 +27,42 @@ in {
     home = {
       sessionVariables.KENRAN_DEFAULT_FONT = custom.font.name;
 
-      packages = lib.optionals cfg.withCustomBuilds [
-        (callPackage ./lucida-console.nix { })
-        (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
-        (callPackage ./termingus.nix { })
-        (callPackage ./oldschool.nix { })
-      ] ++ (with pkgs; [
-        cantarell-fonts
-        cascadia-code
-        corefonts
-        courier-prime
-        geist-font
-        fantasque-sans-mono
-        fira-code
-        font-awesome_6
-        go-font
-        hack-font
-        hasklig
-        ibm-plex
-        inconsolata
-        iosevka-bin
-        jetbrains-mono
-        julia-mono
-        noto-fonts
-        paratype-pt-mono
-        roboto-mono
-        source-code-pro
-        unifont
-        victor-mono
-        vistafonts
+      packages =
+        lib.optionals cfg.withCustomBuilds [
+          (callPackage ./lucida-console.nix { })
+          (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
+          (callPackage ./termingus.nix { })
+          (callPackage ./oldschool.nix { })
+        ]
+        ++ (with pkgs; [
+          cantarell-fonts
+          cascadia-code
+          corefonts
+          courier-prime
+          geist-font
+          fantasque-sans-mono
+          fira-code
+          font-awesome_6
+          go-font
+          hack-font
+          hasklig
+          ibm-plex
+          inconsolata
+          iosevka-bin
+          jetbrains-mono
+          julia-mono
+          noto-fonts
+          paratype-pt-mono
+          roboto-mono
+          source-code-pro
+          unifont
+          victor-mono
+          vistafonts
 
-        # Anne/Japanese
-        ipafont
-        source-han-sans
-      ]);
+          # Anne/Japanese
+          ipafont
+          source-han-sans
+        ]);
     };
   };
 }

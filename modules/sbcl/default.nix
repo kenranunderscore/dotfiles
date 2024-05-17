@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.sbcl;
-in {
+let
+  cfg = config.modules.sbcl;
+in
+{
   options.modules.sbcl.enable = lib.mkEnableOption "sbcl";
 
   config = lib.mkIf cfg.enable {

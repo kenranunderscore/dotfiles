@@ -1,8 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.picom;
-in {
-  options.modules.picom = { enable = lib.mkEnableOption "picom"; };
+let
+  cfg = config.modules.picom;
+in
+{
+  options.modules.picom = {
+    enable = lib.mkEnableOption "picom";
+  };
 
   config = lib.mkIf cfg.enable {
     services.picom = {

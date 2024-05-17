@@ -2680,8 +2680,8 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
 To get some IDE features for OCaml in Emacs I use [[https://github.com/ocaml/merlin][merlin]].
 
 #+begin_src emacs-lisp
-(use-package merlin
-  :hook ((tuareg-mode . merlin-mode)))
+;; (use-package merlin
+;;   :hook ((tuareg-mode . merlin-mode)))
 #+end_src
 
 [[https://github.com/Khady/merlin-eldoc][merlin-eldoc]] integrates =merlin= with =eldoc-mode=, automatically documenting things

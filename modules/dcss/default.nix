@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.fish;
-in {
+let
+  cfg = config.modules.fish;
+in
+{
   options.modules.dcss.enable = lib.mkEnableOption "dcss";
 
   config = lib.mkIf cfg.enable {

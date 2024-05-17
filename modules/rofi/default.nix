@@ -1,7 +1,15 @@
-{ custom, config, lib, pkgs, ... }:
+{
+  custom,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.rofi;
-in {
+let
+  cfg = config.modules.rofi;
+in
+{
   options.modules.rofi.enable = lib.mkEnableOption "rofi";
 
   config = lib.mkIf cfg.enable {
@@ -13,7 +21,9 @@ in {
         location = "center";
         terminal = "${lib.getExe pkgs.kitty}";
         theme = ./naga.rasi;
-        extraConfig = { modi = "run,drun,ssh,window"; };
+        extraConfig = {
+          modi = "run,drun,ssh,window";
+        };
       };
     };
   };

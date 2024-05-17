@@ -1,7 +1,9 @@
 { config, ... }:
 
-let inherit (config.xdg) dataHome configHome cacheHome;
-in {
+let
+  inherit (config.xdg) dataHome configHome cacheHome;
+in
+{
   # Any static configuration files that should be put into $XDG_CONFIG_HOME
   xdg.configFile = {
     "fourmolu/fourmolu.yaml".source = ./fourmolu.yaml;

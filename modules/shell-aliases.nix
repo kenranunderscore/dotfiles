@@ -4,8 +4,7 @@
   # nixos
   nrs = "nixos-rebuild switch --use-remote-sudo --flake ~/dotfiles/";
   nrb = "nixos-rebuild boot --use-remote-sudo --flake ~/dotfiles/";
-  hs = ''
-    nix shell "$HOME/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users.$USER.home.activationPackage" --command home-manager-generation'';
+  hs = ''nix shell "$HOME/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users.$USER.home.activationPackage" --command home-manager-generation'';
 
   # direnv
   dea = "direnv allow";
@@ -19,11 +18,9 @@
   # Open a new emacsclient in the current terminal window
   et = "emacsclient --alternate-editor '' --tty";
   # Kill the emacs daemon
-  ekill =
-    "env -u ALTERNATE_EDITOR emacsclient --eval '(kill-emacs)' 2>/dev/null";
+  ekill = "env -u ALTERNATE_EDITOR emacsclient --eval '(kill-emacs)' 2>/dev/null";
   # Try using emacs/magit as replacement for CLI git
-  eg =
-    "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'";
+  eg = "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'";
   v = "nvim";
 
   # git
@@ -90,7 +87,6 @@
   rr = "rm -rf";
   d = "cd ~/dotfiles";
   serve-this = "${pkgs.lib.getExe pkgs.python3} -m http.server";
-  dual-monitor-setup =
-    "xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0";
+  dual-monitor-setup = "xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0";
   hc = "herbstclient";
 }

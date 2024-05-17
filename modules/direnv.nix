@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.direnv;
-in {
+let
+  cfg = config.modules.direnv;
+in
+{
   options.modules.direnv.enable = lib.mkEnableOption "direnv";
 
   config = lib.mkIf cfg.enable {

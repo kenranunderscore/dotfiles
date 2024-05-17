@@ -1,13 +1,23 @@
-{ config, pkgs, custom, ... }:
+{
+  config,
+  pkgs,
+  custom,
+  ...
+}:
 
-let username = custom.username;
-in {
+let
+  username = custom.username;
+in
+{
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings.trusted-users = [ "root" username ];
+    settings.trusted-users = [
+      "root"
+      username
+    ];
   };
 
   imports = [ ./hardware-configuration.nix ];
@@ -45,11 +55,13 @@ in {
         variant = "altgr-intl";
       };
       displayManager = {
-        session = [{
-          manage = "window";
-          name = "fake";
-          start = "";
-        }];
+        session = [
+          {
+            manage = "window";
+            name = "fake";
+            start = "";
+          }
+        ];
         defaultSession = "none+fake";
         autoLogin = {
           enable = true;
@@ -80,13 +92,18 @@ in {
     dev.enable = true;
   };
 
-  hardware = { opengl.enable = true; };
+  hardware = {
+    opengl.enable = true;
+  };
 
   users.users.${username} = {
     uid = 1000;
     isNormalUser = true;
     home = "/home/${username}";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
     shell = pkgs.fish;
   };
 

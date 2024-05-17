@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.pass;
   types = lib.types;
-in {
+in
+{
   options.modules.pass = {
     enable = lib.mkEnableOption "pass module";
 

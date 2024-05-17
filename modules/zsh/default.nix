@@ -1,7 +1,15 @@
-{ inputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.zsh;
-in {
+let
+  cfg = config.modules.zsh;
+in
+{
   options.modules.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
@@ -28,7 +36,11 @@ in {
         share = true;
         expireDuplicatesFirst = true;
         ignoreDups = true;
-        ignorePatterns = [ "rm *" "kill *" "pkill *" ];
+        ignorePatterns = [
+          "rm *"
+          "kill *"
+          "pkill *"
+        ];
       };
       # I know autocd is an option in programs.zsh but -- as with
       # plugins and variables -- I don't like mixing methods.

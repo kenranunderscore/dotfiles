@@ -1,8 +1,19 @@
-{ inputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let email = "johannes.maier@active-group.de";
-in {
-  imports = [ ../../modules/base.nix ../../modules ];
+let
+  email = "johannes.maier@active-group.de";
+in
+{
+  imports = [
+    ../../modules/base.nix
+    ../../modules
+  ];
 
   modules = {
     base.gpgKey = "9AC78C1A48681583";
@@ -51,7 +62,7 @@ in {
         {
           name = "9:mattermost";
           output = "eDP-1-1";
-          assigns = [{ class = "Mattermost"; }];
+          assigns = [ { class = "Mattermost"; } ];
         }
       ];
       startupCommands = [

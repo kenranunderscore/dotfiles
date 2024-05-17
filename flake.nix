@@ -42,29 +42,62 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
-      overlays =
-        [ inputs.emacs-overlay.overlays.default inputs.nixgl.overlays.default ];
+      overlays = [
+        inputs.emacs-overlay.overlays.default
+        inputs.nixgl.overlays.default
+      ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;
       };
       inherit (pkgs) lib;
-    in {
+    in
+    {
       formatter.${system} = pkgs.nixfmt-rfc-style;
 
       lib = import ./lib;
 
-      nixosConfigurations = let machines = self.lib.readDirNames ./nixos;
-      in builtins.foldl' (acc: dir:
-        acc // self.lib.mkNixosSystem { inherit dir system inputs pkgs; }) { }
-      machines;
+      nixosConfigurations =
+        let
+          machines = self.lib.readDirNames ./nixos;
+        in
+        builtins.foldl' (
+          acc: dir:
+          acc
+          // self.lib.mkNixosSystem {
+            inherit
+              dir
+              system
+              inputs
+              pkgs
+              ;
+          }
+        ) { } machines;
 
-      homeConfigurations = let users = self.lib.readDirNames ./users;
-      in builtins.foldl' (acc: dir:
-        acc // self.lib.mkHomeConfiguration { inherit dir system inputs pkgs; })
-      { } users;
+      homeConfigurations =
+        let
+          users = self.lib.readDirNames ./users;
+        in
+        builtins.foldl' (
+          acc: dir:
+          acc
+          // self.lib.mkHomeConfiguration {
+            inherit
+              dir
+              system
+              inputs
+              pkgs
+              ;
+          }
+        ) { } users;
     };
 }

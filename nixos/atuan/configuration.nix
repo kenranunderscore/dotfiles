@@ -1,13 +1,23 @@
-{ config, pkgs, custom, ... }:
+{
+  config,
+  pkgs,
+  custom,
+  ...
+}:
 
-let username = custom.username;
-in {
+let
+  username = custom.username;
+in
+{
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings.trusted-users = [ "root" username ];
+    settings.trusted-users = [
+      "root"
+      username
+    ];
   };
 
   imports = [ ./hardware-configuration.nix ];
@@ -73,11 +83,13 @@ in {
         variant = "altgr-intl";
       };
       displayManager = {
-        session = [{
-          manage = "window";
-          name = "fake";
-          start = "";
-        }];
+        session = [
+          {
+            manage = "window";
+            name = "fake";
+            start = "";
+          }
+        ];
         defaultSession = "none+fake";
         autoLogin = {
           enable = true;
@@ -119,7 +131,11 @@ in {
     uid = 1000;
     isNormalUser = true;
     home = "/home/${username}";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
     shell = pkgs.fish;
   };
 

@@ -1,4 +1,8 @@
-{ withBattery, font, pkgs }:
+{
+  withBattery,
+  font,
+  pkgs,
+}:
 
 let
   colors = {
@@ -17,7 +21,12 @@ let
     content-font = 2;
   };
   mkBar = bottom: modules-left: modules-center: modules-right: {
-    inherit bottom modules-left modules-center modules-right;
+    inherit
+      bottom
+      modules-left
+      modules-center
+      modules-right
+      ;
     monitor = "\${env:MONITOR:}";
     background = "${colors.transparent}";
     foreground = "${colors.foreground}";
@@ -61,15 +70,17 @@ let
     label-disconnected = "DISCONNECTED";
     unknown-as-up = true;
   };
-in {
+in
+{
   "global/wm" = {
     margin-bottom = 0;
     margin-top = 0;
   };
 
-  "bar/main" = mkBar true "i3" "" ("distro-icon cpu memory"
-    + (pkgs.lib.optionalString withBattery " battery "
-      + "wlan1 wlan2 wlan3 wlan4 audio date"));
+  "bar/main" = mkBar true "i3" "" (
+    "distro-icon cpu memory"
+    + (pkgs.lib.optionalString withBattery " battery " + "wlan1 wlan2 wlan3 wlan4 audio date")
+  );
 
   "module/date" = {
     format-prefix = " ";

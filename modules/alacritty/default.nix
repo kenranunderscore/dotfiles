@@ -1,7 +1,15 @@
-{ custom, config, lib, pkgs, ... }:
+{
+  custom,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.alacritty;
-in {
+let
+  cfg = config.modules.alacritty;
+in
+{
   options.modules.alacritty = {
     enable = lib.mkEnableOption "alacritty";
   };
@@ -11,4 +19,3 @@ in {
     xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
   };
 }
-

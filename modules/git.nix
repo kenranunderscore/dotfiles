@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.git;
   types = lib.types;
-in {
+in
+{
   options.modules.git = {
     email = lib.mkOption {
       type = types.str;
@@ -26,10 +32,14 @@ in {
         co = "checkout";
         pushf = "push --force-with-lease";
       };
-      includes = [{
-        condition = "gitdir:~/ag/";
-        contents = { user.email = "johannes.maier@active-group.de"; };
-      }];
+      includes = [
+        {
+          condition = "gitdir:~/ag/";
+          contents = {
+            user.email = "johannes.maier@active-group.de";
+          };
+        }
+      ];
       ignores = [
         # (n)vim
         "*.swp"
@@ -60,11 +70,21 @@ in {
         push.autoSetupRemote = "true";
         submodule.recurse = "true";
         url = {
-          "https://github.com/" = { insteadOf = "gh:"; };
-          "git@github.com:kenranunderscore/" = { insteadOf = "gh:/"; };
-          "https://gitlab.com/" = { insteadOf = "gl:"; };
-          "ssh://git@gitlab.active-group.de:1022/ag/" = { insteadOf = "ag:"; };
-          "git@github.com:active-group/" = { insteadOf = "aggh:"; };
+          "https://github.com/" = {
+            insteadOf = "gh:";
+          };
+          "git@github.com:kenranunderscore/" = {
+            insteadOf = "gh:/";
+          };
+          "https://gitlab.com/" = {
+            insteadOf = "gl:";
+          };
+          "ssh://git@gitlab.active-group.de:1022/ag/" = {
+            insteadOf = "ag:";
+          };
+          "git@github.com:active-group/" = {
+            insteadOf = "aggh:";
+          };
         };
       };
     };

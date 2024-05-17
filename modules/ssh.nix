@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.ssh;
-in {
+let
+  cfg = config.modules.ssh;
+in
+{
   options.modules.ssh.enable = lib.mkEnableOption "ssh";
 
   config = {

@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.doom;
   types = lib.types;
-in {
+in
+{
   options.modules.doom.enable = lib.mkEnableOption "doom";
 
   config = lib.mkIf cfg.enable {
@@ -24,28 +30,33 @@ in {
         '';
       };
 
-      packages = let
-        emacsWithPackages =
-          (pkgs.emacsPackagesFor pkgs.emacs29).emacsWithPackages;
-        # Doom manages packages itself, but vterm is an exception as it
-        # sometimes does not build in a naive way. Also have Emacs know all
-        # treesit grammars by default, so we don't have to install them
-        # externally later on.
-        myEmacs = emacsWithPackages
-          (p: [ p.vterm p.treesit-grammars.with-all-grammars p.mu4e ]);
-      in with pkgs; [
-        myEmacs
+      packages =
+        let
+          emacsWithPackages = (pkgs.emacsPackagesFor pkgs.emacs29).emacsWithPackages;
+          # Doom manages packages itself, but vterm is an exception as it
+          # sometimes does not build in a naive way. Also have Emacs know all
+          # treesit grammars by default, so we don't have to install them
+          # externally later on.
+          myEmacs = emacsWithPackages (p: [
+            p.vterm
+            p.treesit-grammars.with-all-grammars
+            p.mu4e
+          ]);
+        in
+        with pkgs;
+        [
+          myEmacs
 
-        # Programs needed at runtime
-        cmake
-        fd
-        gcc
-        libtool
-        meson
-        ninja
-        ripgrep
-        shellcheck
-      ];
+          # Programs needed at runtime
+          cmake
+          fd
+          gcc
+          libtool
+          meson
+          ninja
+          ripgrep
+          shellcheck
+        ];
     };
   };
 }

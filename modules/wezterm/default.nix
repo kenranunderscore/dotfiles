@@ -1,9 +1,16 @@
-{ custom, config, lib, pkgs, ... }:
+{
+  custom,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.wezterm;
   types = lib.types;
-in {
+in
+{
   options.modules.wezterm = {
     enable = lib.mkEnableOption "wezterm";
     withPackage = lib.mkOption {

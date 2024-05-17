@@ -1,11 +1,18 @@
-{ config, lib, pkgs, custom, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  custom,
+  ...
+}:
 
 let
   types = lib.types;
   realName = "Johannes Maier";
   cfg = config.modules.email;
   isSyncRoot = custom.hostname == "paln";
-in {
+in
+{
   options.modules.email = {
     enable = lib.mkEnableOption "email module";
 
@@ -20,7 +27,10 @@ in {
     };
 
     primaryAccount = lib.mkOption {
-      type = types.enum [ "ag" "mailbox" ];
+      type = types.enum [
+        "ag"
+        "mailbox"
+      ];
       default = "mailbox";
     };
   };
@@ -40,11 +50,16 @@ in {
             create = "both";
             remove = "both";
             expunge = "both";
-            patterns = [ "*" "!Drafts" ];
+            patterns = [
+              "*"
+              "!Drafts"
+            ];
           };
           msmtp = {
             enable = true;
-            extraConfig = { "syslog" = "LOG_USER"; };
+            extraConfig = {
+              "syslog" = "LOG_USER";
+            };
           };
           notmuch.enable = false;
           mu.enable = true;
@@ -70,11 +85,17 @@ in {
             create = "both";
             remove = "both";
             expunge = "both";
-            patterns = [ "*" "!Drafts" "!Deleted Messages" ];
+            patterns = [
+              "*"
+              "!Drafts"
+              "!Deleted Messages"
+            ];
           };
           msmtp = {
             enable = true;
-            extraConfig = { "syslog" = "LOG_USER"; };
+            extraConfig = {
+              "syslog" = "LOG_USER";
+            };
           };
           notmuch.enable = false;
           mu.enable = true;

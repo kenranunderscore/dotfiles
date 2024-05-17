@@ -1,12 +1,24 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
-let cfg = config.modules.neovim;
-in {
+let
+  cfg = config.modules.neovim;
+in
+{
   options.modules.neovim.enable = lib.mkEnableOption "neovim";
 
   config = lib.mkIf cfg.enable {
     home = {
-      packages = with pkgs; [ neovim sumneko-lua-language-server stylua xclip ];
+      packages = with pkgs; [
+        neovim
+        sumneko-lua-language-server
+        stylua
+        xclip
+      ];
 
       activation = {
         symlinkNeovimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

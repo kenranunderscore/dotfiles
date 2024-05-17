@@ -1,7 +1,14 @@
-{ config, pkgs, custom, ... }:
+{
+  config,
+  pkgs,
+  custom,
+  ...
+}:
 
-let username = custom.username;
-in {
+let
+  username = custom.username;
+in
+{
   imports = [ ./hardware-configuration.nix ];
 
   nix = {
@@ -9,7 +16,10 @@ in {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings.trusted-users = [ "root" username ];
+    settings.trusted-users = [
+      "root"
+      username
+    ];
   };
 
   boot = {
@@ -71,11 +81,13 @@ in {
         variant = "altgr-intl";
       };
       displayManager = {
-        session = [{
-          manage = "window";
-          name = "fake";
-          start = "";
-        }];
+        session = [
+          {
+            manage = "window";
+            name = "fake";
+            start = "";
+          }
+        ];
         defaultSession = "none+fake";
         lightdm = {
           enable = true;
@@ -118,7 +130,11 @@ in {
   users.users.${username} = {
     uid = 1000;
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
     shell = pkgs.fish;
   };
   users.extraGroups.vboxusers.members = [ username ];

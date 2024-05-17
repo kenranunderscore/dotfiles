@@ -1,9 +1,17 @@
-{ inputs, custom, config, lib, pkgs, ... }:
+{
+  inputs,
+  custom,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.modules.base;
   privateDir = "${inputs.privateConfig}";
-in {
+in
+{
   options.modules.base = {
     gpgKey = lib.mkOption {
       type = lib.types.str;
@@ -60,65 +68,66 @@ in {
       mime.enable = true;
     };
 
-    home = let inherit (custom) username;
-    in {
-      inherit username;
-      homeDirectory = "/home/${username}";
+    home =
+      let
+        inherit (custom) username;
+      in
+      {
+        inherit username;
+        homeDirectory = "/home/${username}";
 
-      sessionVariables = rec {
-        EDITOR = "emacsclient -c";
-        VISUAL = EDITOR;
-        ALTERNATE_EDITOR = "";
-        KENRAN_IRC_CERTS = "${privateDir}/irc";
-        OPENSSL_DIR = "${pkgs.openssl.dev}";
+        sessionVariables = rec {
+          EDITOR = "emacsclient -c";
+          VISUAL = EDITOR;
+          ALTERNATE_EDITOR = "";
+          KENRAN_IRC_CERTS = "${privateDir}/irc";
+          OPENSSL_DIR = "${pkgs.openssl.dev}";
+        };
+
+        packages = with pkgs; [
+          autoconf
+          automake
+          binutils
+          cacert
+          cmake
+          curl
+          fd
+          feh
+          file
+          fontconfig.dev
+          gh
+          gnumake
+          htop
+          jq
+          man-pages
+          neofetch
+          nixfmt-rfc-style
+          nixpkgs-review
+          openssl.dev
+          pciutils
+          perl
+          pkgconf
+          ripgrep
+          rlwrap
+          rsync
+          scrot
+          shellcheck
+          shfmt
+          timer
+          tree
+          unzip
+          usbutils
+          watchexec
+          wget
+          xcolor
+          xorg.xkill
+        ];
+
+        activation = {
+          importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            $DRY_RUN_CMD ${lib.getExe pkgs.gnupg} --import ${privateDir + "/gpg.key"}
+          '';
+        };
       };
-
-      packages = with pkgs; [
-        autoconf
-        automake
-        binutils
-        cacert
-        cmake
-        curl
-        fd
-        feh
-        file
-        fontconfig.dev
-        gh
-        gnumake
-        htop
-        jq
-        man-pages
-        neofetch
-        nixfmt
-        nixpkgs-review
-        openssl.dev
-        pciutils
-        perl
-        pkgconf
-        ripgrep
-        rlwrap
-        rsync
-        scrot
-        shellcheck
-        shfmt
-        timer
-        tree
-        unzip
-        usbutils
-        watchexec
-        wget
-        xcolor
-        xorg.xkill
-      ];
-
-      activation = {
-        importGpgKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ${lib.getExe pkgs.gnupg} --import ${
-            privateDir + "/gpg.key"
-          }
-        '';
-      };
-    };
   };
 }
