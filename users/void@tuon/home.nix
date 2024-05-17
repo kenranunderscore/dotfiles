@@ -8,7 +8,7 @@ in {
     base.gpgKey = "9AC78C1A48681583";
     brave = {
       enable = true;
-      wrapWithNixGL = true;
+      wrapWithNixGL = false;
     };
     herbstluftwm.enable = false;
     i3 = {
@@ -99,8 +99,12 @@ in {
 
   home.packages = with pkgs; [
     cloc
-    eclipses.eclipse-dsl
+    dbeaver
     dmenu
+    eclipses.eclipse-dsl
+    element-desktop
+    inkscape
+    jetbrains.idea-community
     keepass
     keepassxc
     nixgl.auto.nixGLDefault
@@ -108,6 +112,7 @@ in {
     pavucontrol
     sieve-connect
     subversion
+    steam
     thunderbird
     twitch-cli
     xst
