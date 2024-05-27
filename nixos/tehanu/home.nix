@@ -114,7 +114,7 @@ in
     # citrix_workspace
     brave
     cloc
-    dbeaver
+    dbeaver-bin
     dhall
     discord
     dmenu

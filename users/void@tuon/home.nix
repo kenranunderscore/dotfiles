@@ -110,7 +110,7 @@ in
 
   home.packages = with pkgs; [
     cloc
-    dbeaver
+    dbeaver-bin
     dmenu
     eclipses.eclipse-dsl
     element-desktop
