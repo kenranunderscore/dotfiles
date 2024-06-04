@@ -653,15 +653,6 @@ out via =straight-use-package=.
   :defer)
 #+end_src
 
-**** Ef themes
-
-Another theme package by Protesilaos Stavrou.
-
-#+begin_src emacs-lisp
-(use-package ef-themes
-  :defer)
-#+end_src
-
 **** Spacemacs themes
 
 For nostalgic reasons I like to pretend I'm using Spacemacs from time to time.
