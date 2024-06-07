@@ -109,6 +109,7 @@ in
   };
 
   home.packages = with pkgs; [
+    (agda.withPackages (p: [ p.standard-library ]))
     cloc
     dbeaver-bin
     dmenu
