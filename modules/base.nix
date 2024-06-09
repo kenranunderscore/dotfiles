@@ -28,6 +28,11 @@ in
         id = "nixpkgs";
         type = "indirect";
       };
+      d.to = {
+        owner = "kenranunderscore";
+        repo = "dotfiles";
+        type = "github";
+      };
     };
 
     modules = {
