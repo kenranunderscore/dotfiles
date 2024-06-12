@@ -6,10 +6,10 @@
 * Package management
 
 I'm specifying the Emacs I'm using via [[https://github.com/nixos/nixpkgs][nixpkgs]] / my [[https://github.com/nix-community/home-manager][home-manager]] setup, but for
-package management I'm currently using the now-built-in =use-package= macro.
-Having the packages come from =nixpkgs= (marked as =external= in =list-packages=) is
-nice, but requires a =nixos-rebuild= and restarting Emacs after making some
-changes.
+package management I'm currently using the now-built-in =use-package= with
+integration for =straight=. Having the packages come from =nixpkgs= (marked as
+=external= in =list-packages=) is nice, but requires a =nixos-rebuild= and restarting
+Emacs after making some changes.
 
 ** =Straight.el=
 
