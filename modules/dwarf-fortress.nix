@@ -16,13 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages =
       let
-        df = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override {
-          dfVersion = "0.47.05";
-          enableIntro = false;
-          enableFPS = true;
-          enableSound = false;
-          theme = null;
-        };
+        df = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override { theme = null; };
       in
       with pkgs.dwarf-fortress-packages;
       [
