@@ -13,24 +13,12 @@ Emacs after making some changes.
 
 ** =Straight.el=
 
-Install [[https://github.com/radian-software/straight.el#features][straight.el]] if it isn't installed already.
+[[https://github.com/radian-software/straight.el#features][Straight.el]] is bootstrapped in [[file:init.el][init.el]] as first step of the setup. This needs to
+be done at the earliest possible time during startup, as I don't want to use the
+built-in version of =org=, and /org/ is needed to read /this file/ and thus start the
+whole process.
 
-#+begin_src emacs-lisp
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-#+end_src
-
-Then set up =use-package= (which is nowadays built-in) in a way such that the
+Now set up =use-package= (which is nowadays built-in) in a way such that the
 =:ensure= keyword is unset by default, that is, =use-package= does not install
 packages on its own, as =straight.el= is responsible for doing so.
 
