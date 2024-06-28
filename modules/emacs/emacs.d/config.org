@@ -2987,6 +2987,17 @@ Sometimes I wish to format Lua files. [[https://github.com/JohnnyMorganz/StyLua]
   :defer)
 #+end_src
 
+Formatting with =black=:
+
+#+begin_src emacs-lisp
+(reformatter-define +black-format
+  :program "black"
+  :args (list input-file)
+  :stdin nil
+  :stdout nil
+  :lighter " +black")
+#+end_src
+
 ** Nim
 
 #+begin_src emacs-lisp
