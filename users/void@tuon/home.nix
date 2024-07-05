@@ -123,6 +123,7 @@ in
     nixgl.auto.nixGLDefault
     opam
     pavucontrol
+    remmina
     sieve-connect
     subversion
     steam
