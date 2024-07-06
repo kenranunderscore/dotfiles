@@ -9,6 +9,7 @@ function gclone --description 'Clone a git repository and cd into it'
     if [ (count $argv) -gt 1 ] && ! [ (string match -- '--*' $argv[-1]) ]
         cd $argv[-1]
     else
-        cd (basename $argv[1] '.git')
+        set repo (string split : $argv[1])[2..-1]
+        cd (basename $repo '.git')
     end
 end
