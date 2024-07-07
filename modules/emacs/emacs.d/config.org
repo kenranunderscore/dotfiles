@@ -3145,9 +3145,12 @@ flake in the current directory."
 
 (defun +project-vterm ()
   "Open a `vterm' session in the project root of the current
-project.  Prompt if no project can be found."
+project."
   (interactive)
-  (let ((default-directory (project-root (project-current t))))
+  (let ((default-directory
+         (if-let (project (project-current))
+             (project-root project)
+           default-directory)))
     (vterm)))
 
 (defun +project-edit-dir-local-variable (mode variable value)
