@@ -2900,7 +2900,9 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
 (use-package sly
   :defer
   :config
-  (setq inferior-lisp-program "sbcl"))
+  (setq inferior-lisp-program "sbcl")
+  (add-to-list 'evil-emacs-state-modes 'sly-mrepl-mode)
+  (add-to-list 'evil-emacs-state-modes 'sly-db-mode))
 #+end_src
 
 =sly-asdf= gives integration with Common Lisp's package manager, [[https://asdf.common-lisp.dev/][ASDF]].
