@@ -2,6 +2,7 @@
 #+AUTHOR: Johannes Maier
 #+EMAIL: johannes.maier@mailbox.org
 #+STARTUP: showall
+#+PROPERTY: header-args :results silent
 
 * Package management
 
