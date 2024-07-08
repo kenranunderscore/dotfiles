@@ -2427,7 +2427,13 @@ way. It seems prudent then to tackle those, and I might end up not needing
          (mode . (helpful-mode help-mode apropos-mode))
          (window-height . 0.4))
         ("\\*mu4e-main\\*"
-         (display-buffer-same-window))))
+         (display-buffer-same-window))
+        ("\\*Native-compile-Log\\*"
+         (display-buffer-no-window)
+         (allow-no-window . t))
+        ("\\*Async-native-compile-log\\*"
+         (display-buffer-no-window)
+         (allow-no-window . t))))
 #+end_src
 
 *** TODO Untamed popups
