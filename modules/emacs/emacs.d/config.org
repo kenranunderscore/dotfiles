@@ -975,7 +975,7 @@ severity for logs to be shown by setting =warning-minimum-level= to =:error=, or
 just disable the warnings for native compilation entirely like this:
 
 #+begin_src emacs-lisp
-(setq native-comp-async-report-warnings-errors nil)
+(setq native-comp-async-report-warnings-errors 'silent)
 #+end_src
 
 ** Spaces over tabs
