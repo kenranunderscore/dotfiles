@@ -105,7 +105,6 @@ in
           htop
           jq
           man-pages
-          neofetch
           nixfmt-rfc-style
           nixpkgs-review
           openssl.dev
