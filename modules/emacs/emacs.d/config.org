@@ -2433,6 +2433,9 @@ way. It seems prudent then to tackle those, and I might end up not needing
          (allow-no-window . t))
         ("\\*Async-native-compile-log\\*"
          (display-buffer-no-window)
+         (allow-no-window . t))
+        ("\\*sly-compilation\\*"
+         (display-buffer-no-window)
          (allow-no-window . t))))
 #+end_src
 
