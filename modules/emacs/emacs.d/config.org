@@ -3240,6 +3240,9 @@ custom key chord; I can just use =M-x=, where I don't have to enter much due to
   (setq magit-diff-refine-hunk t)
   (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (setq magit-bury-buffer-function #'magit-restore-window-configuration)
+  (setq magit-section-initial-visibility-alist
+        '((stashes . hide)
+          (untracked . show)))
   ;; I frequently pull with the autostash option, so add that to the
   ;; transient command list.
   (transient-append-suffix 'magit-pull "-r"
