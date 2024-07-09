@@ -101,6 +101,10 @@
         ) { } users;
 
       templates = {
+        devShell = {
+          path = ./templates/devShell;
+          description = "A simple default devShell";
+        };
         haskell = {
           path = ./templates/haskell;
           description = "A template for a simple, single-package Haskell project using cabal-install";
