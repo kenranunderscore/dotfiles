@@ -2851,7 +2851,13 @@ highlighting for those.
 
 #+begin_src emacs-lisp
 (use-package dockerfile-mode
-  :defer)
+  :defer
+  :config
+  (add-to-list 'evil-emacs-state-modes 'docker-image-mode)
+  (add-to-list 'evil-emacs-state-modes 'docker-container-mode)
+  (add-to-list 'evil-emacs-state-modes 'docker-volume-mode)
+  (add-to-list 'evil-emacs-state-modes 'docker-network-mode)
+  (add-to-list 'evil-emacs-state-modes 'docker-context-mode))
 #+end_src
 
 I'm trying out this package, as it provides a =magit=-like UI to control images,
