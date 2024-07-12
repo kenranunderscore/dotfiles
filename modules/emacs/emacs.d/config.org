@@ -2502,7 +2502,8 @@ regret it yet, so I've fully switched over.
                   "#lisp"
                   "#herrhotzenplotz"
                   "#gcli"
-                  "#stumpwm")))
+                  "#stumpwm"
+                  "#voidlinux")))
   (setq erc-track-exclude
         '("#org-mode" "#crawl" "#nim" "#zig"))
   (setq erc-track-exclude-types '("333" "353"))
