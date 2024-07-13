@@ -87,7 +87,10 @@ in
     kitty.wrapWithNixGL = true;
     rofi.enable = true;
     neovim.enable = true;
-    sbcl.enable = true;
+    sbcl = {
+      enable = true;
+      withPackage = false;
+    };
     polybar = {
       enable = false;
       withBattery = true;
