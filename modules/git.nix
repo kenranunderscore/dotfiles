@@ -15,11 +15,6 @@ in
       type = types.str;
       default = "";
     };
-
-    gpgKey = lib.mkOption {
-      type = types.nullOr types.str;
-      default = null;
-    };
   };
 
   config = {
@@ -60,10 +55,13 @@ in
         ".\\#*"
         ".dir-locals.el"
       ];
-      signing.signByDefault = cfg.gpgKey != null;
-      signing.key = if cfg.gpgKey != null then cfg.gpgKey else "";
+      signing = {
+        signByDefault = true;
+        key = "~/.ssh/id_ed25519.pub";
+      };
       extraConfig = {
         core.askPass = "";
+        gpg.format = "ssh";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         pull.rebase = "true";
