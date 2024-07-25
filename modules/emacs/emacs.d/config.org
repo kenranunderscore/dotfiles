@@ -2370,7 +2370,11 @@ variables, or even change the =mu4e= UI accordingly.
   (setq mu4e-headers-thread-connection-prefix '("│ " . "│ "))
   (setq mu4e-headers-thread-duplicate-prefix '("= " . "≡ "))
   (setq mu4e-headers-thread-first-child-prefix '("├> " . "├▶"))
-  (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶")))
+  (setq mu4e-headers-thread-last-child-prefix '("└> " . "╰▶"))
+  (general-define-key
+   :keymaps '(mu4e-view-mode-map mu4e-headers-mode-map)
+   :states '(normal motion)
+   "R" #'mu4e-compose-wide-reply))
 #+end_src
 
 *** Warn/confirm when trying to send with empty subject
