@@ -85,15 +85,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1710942276,
-        "narHash": "sha256-+K0UtpWhsA5X0kZpN2eaBI6TP2OvrQAWFvtoeICWmhM=",
-        "owner": "kenranunderscore",
+        "lastModified": 1713543440,
+        "narHash": "sha256-lnzZQYG0+EXl/6NkGpyIz+FEOc/DSEG57AP1VsdeNrM=",
+        "owner": "nix-community",
         "repo": "nixgl",
-        "rev": "c58137326ef0bac8a504111591692ad849f49029",
+        "rev": "310f8e49a149e4c9ea52f1adf70cdc768ec53f8a",
         "type": "github"
       },
       "original": {
-        "owner": "kenranunderscore",
+        "owner": "nix-community",
         "repo": "nixgl",
         "type": "github"
       }

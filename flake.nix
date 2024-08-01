@@ -12,7 +12,7 @@
       flake = false;
     };
     nixgl = {
-      url = "github:kenranunderscore/nixgl";
+      url = "github:nix-community/nixgl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
