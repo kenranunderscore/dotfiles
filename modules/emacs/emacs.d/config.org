@@ -3338,7 +3338,18 @@ parentheses.
 
 #+begin_src emacs-lisp
 (use-package lispyville
-  :hook ((lispy-mode . lispyville-mode)))
+  :hook
+  ((lispy-mode . lispyville-mode))
+  :init
+  (setq lispyville-key-theme
+        '(operators
+          c-w
+          (prettify insert)
+          additional-movement
+          (atom-movement t)
+          slurp/barf-lispy
+          additional
+          additional-insert)))
 #+end_src
 
 ** Annotate minibuffer completions
