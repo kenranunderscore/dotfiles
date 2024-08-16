@@ -2943,6 +2943,22 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
   :defer)
 #+end_src
 
+I don't like that ~sly~ immediately jumps inside its REPL buffer (and window) it
+creates. The following works well, at least in the situation where you don't
+want to connect to an existing ~sly~ session/REPL.
+
+#+begin_src emacs-lisp
+(defun +sly (&optional command coding-system interactive callback)
+  (interactive (list nil nil t nil))
+  (let ((buf (buffer-name (current-buffer))))
+    (add-hook 'sly-mrepl-hook
+              (defun +sly-jump-back ()
+                (pop-to-buffer buf)
+                (remove-hook 'sly-mrepl-hook #'+sly-jump-back)
+                (when callback (funcall callback))))
+    (sly command coding-system interactive)))
+#+end_src
+
 When developing one of my Common Lisp projects, the normal "startup" workflow
 would be as follows:
 
@@ -2953,11 +2969,9 @@ would be as follows:
 - Load the system with ~sly-asdf-load-system~
 - Inside the REPL, set the current package via ~sly-mrepl-set-package~
 
-The following utility function ~+sly-load-project~ slightly simplify the above
-process by only needing to be inside the ASDF file with a connection to ~sly~. The
-rest is done automatically.
-
-FIXME: find out how to start ~sly~ as part of the process
+The following utility function ~+sly-load-project~ simplifies the above process by
+only needing to be inside the ASDF file when invoking it. The rest is done
+automatically.
 
 #+begin_src emacs-lisp
 (defun +sly-set-repl-package (successp notes buffer loadp)
@@ -2973,25 +2987,12 @@ FIXME: find out how to start ~sly~ as part of the process
   "From within an ASDF file, load it as well as the contained package(s),
 then switch the current REPL package."
   (interactive)
-  (sly-load-file (buffer-file-name))
-  (let ((system (sly-asdf-find-current-system)))
-    (sly-asdf-load-system system)
-    (add-hook 'sly-compilation-finished-hook #'+sly-set-repl-package)))
-#+end_src
-
-I don't like that ~sly~ immediately jumps inside its REPL buffer (and window) it
-creates. The following works well, at least in the situation where you don't
-want to connect to an existing ~sly~ session/REPL.
-
-#+begin_src emacs-lisp
-(defun +sly (&optional command coding-system interactive)
-  (interactive (list nil nil t))
-  (let ((buf (buffer-name (current-buffer))))
-    (add-hook 'sly-mrepl-hook
-              (defun +sly-jump-back ()
-                (pop-to-buffer buf)
-                (remove-hook 'sly-mrepl-hook #'+sly-jump-back)))
-    (sly command coding-system interactive)))
+  (+sly nil nil nil
+        (lambda ()
+          (sly-load-file (buffer-file-name))
+          (let ((system (sly-asdf-find-current-system)))
+            (add-hook 'sly-compilation-finished-hook #'+sly-set-repl-package)
+            (sly-asdf-load-system system)))))
 #+end_src
 
 ** Racket
