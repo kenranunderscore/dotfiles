@@ -3,6 +3,13 @@
 #+EMAIL: johannes.maier@mailbox.org
 #+STARTUP: showall
 #+PROPERTY: header-args :results silent
+#+PROPERTY: header-args:emacs-lisp :lexical t
+
+* Enable lexical binding for Emacs Lisp
+
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
 
 * Package management
 
@@ -2970,6 +2977,21 @@ then switch the current REPL package."
   (let ((system (sly-asdf-find-current-system)))
     (sly-asdf-load-system system)
     (add-hook 'sly-compilation-finished-hook #'+sly-set-repl-package)))
+#+end_src
+
+I don't like that ~sly~ immediately jumps inside its REPL buffer (and window) it
+creates. The following works well, at least in the situation where you don't
+want to connect to an existing ~sly~ session/REPL.
+
+#+begin_src emacs-lisp
+(defun +sly (&optional command coding-system interactive)
+  (interactive (list nil nil t))
+  (let ((buf (buffer-name (current-buffer))))
+    (add-hook 'sly-mrepl-hook
+              (defun +sly-jump-back ()
+                (pop-to-buffer buf)
+                (remove-hook 'sly-mrepl-hook #'+sly-jump-back)))
+    (sly command coding-system interactive)))
 #+end_src
 
 ** Racket
