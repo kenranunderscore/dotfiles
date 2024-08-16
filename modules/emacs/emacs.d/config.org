@@ -2936,6 +2936,42 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
   :defer)
 #+end_src
 
+When developing one of my Common Lisp projects, the normal "startup" workflow
+would be as follows:
+
+- Open the ASDF file
+- ~M-x sly~
+- Use ~sly-compile-and-load-file~ to load the file, making the system definitions
+  known to, for instance, quicklisp
+- Load the system with ~sly-asdf-load-system~
+- Inside the REPL, set the current package via ~sly-mrepl-set-package~
+
+The following utility function ~+sly-load-project~ slightly simplify the above
+process by only needing to be inside the ASDF file with a connection to ~sly~. The
+rest is done automatically.
+
+FIXME: find out how to start ~sly~ as part of the process
+
+#+begin_src emacs-lisp
+(defun +sly-set-repl-package (successp notes buffer loadp)
+  "Pop to the current MREPL buffer and call `sly-mrepl-set-package'."
+  (if successp
+      (progn
+        (pop-to-buffer (sly-mrepl--find-buffer))
+        (sly-mrepl-set-package)
+        (remove-hook 'sly-compilation-finished-hook #'+sly-set-repl-package))
+    (warn "Compilation has failed. Can't set REPL package.")))
+
+(defun +sly-load-project ()
+  "From within an ASDF file, load it as well as the contained package(s),
+then switch the current REPL package."
+  (interactive)
+  (sly-load-file (buffer-file-name))
+  (let ((system (sly-asdf-find-current-system)))
+    (sly-asdf-load-system system)
+    (add-hook 'sly-compilation-finished-hook #'+sly-set-repl-package)))
+#+end_src
+
 ** Racket
 
 #+begin_src emacs-lisp
