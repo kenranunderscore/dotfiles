@@ -3166,7 +3166,7 @@ flake in the current directory."
   (interactive)
   (let ((envrc (expand-file-name ".envrc")))
     (if (file-exists-p envrc)
-        (message "Envrc file already exists")
+        (message "%s" "Envrc file already exists")
       (write-region "use flake" nil envrc))))
 
 (defun +project-vterm ()
