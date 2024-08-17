@@ -2999,6 +2999,36 @@ then switch the current REPL package."
             (sly-asdf-load-system system)))))
 #+end_src
 
+To have easier access to these functions when inside ASDF buffers, let's create
+a specific minor mode (and, implicitly, keymap, to hold bindings for our
+functions).
+
+#+begin_src emacs-lisp
+(define-minor-mode +asdf-mode
+  "A minor mode to signify ASDF's files."
+  nil
+  :global nil
+  :lighter " +asdf"
+  :keymap (make-sparse-keymap))
+#+end_src
+
+To enable ~+asdf-mode~ in =.asd= files that run ~lisp-mode~, we need to hook into
+~find-file-hook~; it's easier for major modes, which can make use of
+~auto-mode-alist~.
+
+#+begin_src emacs-lisp
+(add-hook
+ 'find-file-hook
+ (defun +possibly-enable-+asdf-mode ()
+   "Enable `+asdf-mode' if the current file has the 'asd' extension, and the
+buffer's major mode is `lisp-mode'."
+   (when (and (string= (file-name-extension buffer-file-name)
+                       "asd")
+              (string= (symbol-name major-mode)
+                       "lisp-mode"))
+     (+asdf-mode 1))))
+#+end_src
+
 ** Racket
 
 #+begin_src emacs-lisp
