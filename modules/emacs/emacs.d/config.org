@@ -621,6 +621,7 @@ turn on:
 
 #+begin_src emacs-lisp
 (use-package gruber-darker-theme
+  :disabled
   :defer)
 #+end_src
 
@@ -639,6 +640,7 @@ newly added doom themes.
 
 #+begin_src emacs-lisp
 (use-package doom-themes
+  :disabled
   :defer)
 #+end_src
 
@@ -649,6 +651,7 @@ out via =straight-use-package=.
 
 #+begin_src emacs-lisp
 (use-package srcery-theme
+  :disabled
   :defer)
 #+end_src
 
