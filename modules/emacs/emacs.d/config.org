@@ -2934,6 +2934,7 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
   :defer
   :config
   (setq inferior-lisp-program "sbcl")
+  (add-hook 'sly-macroexpansion-minor-mode-hook #'turn-off-evil-mode)
   (add-to-list 'evil-emacs-state-modes 'sly-mrepl-mode)
   (add-to-list 'evil-emacs-state-modes 'sly-db-mode)
   (add-to-list 'evil-emacs-state-modes 'sly-inspector-mode))
