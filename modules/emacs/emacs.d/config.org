@@ -1443,7 +1443,7 @@ Let's give =vertico-posframe= another try. This makes Emacs look a little simila
 to Neovim with something like Telescope, though I like my centered frame to be a
 little smaller.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package vertico-posframe
   :after vertico
   :config
