@@ -3006,10 +3006,9 @@ functions).
 #+begin_src emacs-lisp
 (define-minor-mode +asdf-mode
   "A minor mode to signify ASDF's files."
-  nil
+  :init-value nil
   :global nil
-  :lighter " +asdf"
-  :keymap (make-sparse-keymap))
+  :lighter " +asdf")
 #+end_src
 
 To enable ~+asdf-mode~ in =.asd= files that run ~lisp-mode~, we need to hook into
@@ -3027,6 +3026,19 @@ buffer's major mode is `lisp-mode'."
               (string= (symbol-name major-mode)
                        "lisp-mode"))
      (+asdf-mode 1))))
+#+end_src
+
+To finally set the keybinding in ~+asdf-mode~, we need to circumvent [[https://github.com/noctuid/general.el#why-dont-some-evil-keybindings-work-immediately][a known ~evil~
+problem]]. Note that the keymap below isn't really a keymap (actually, we don't
+even create one for ~+asdf-mode~), but rather the mode's symbol itself. In
+conjunction with ~:definer 'minor-mode~ this creates a binding that immediately
+works.
+
+#+begin_src emacs-lisp
+(local-leader
+  :definer 'minor-mode
+  :keymaps '+asdf-mode
+  "l" #'+sly-load-project)
 #+end_src
 
 ** Racket
