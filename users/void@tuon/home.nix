@@ -115,12 +115,7 @@ in
   home.packages = with pkgs; [
     (agda.withPackages (p: [ p.standard-library ]))
     cloc
-    dbeaver-bin
     dmenu
-    eclipses.eclipse-dsl
-    element-desktop
-    inkscape
-    jetbrains.idea-community
     keepass
     keepassxc
     nixgl.auto.nixGLDefault
