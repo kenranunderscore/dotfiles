@@ -3012,21 +3012,18 @@ functions).
   :lighter " +asdf")
 #+end_src
 
-To enable ~+asdf-mode~ in =.asd= files that run ~lisp-mode~, we need to hook into
-~find-file-hook~; it's easier for major modes, which can make use of
-~auto-mode-alist~.
+To enable ~+asdf-mode~ in =.asd= files, we hook into ~lisp-mode~; note that this is
+easier for major modes, which can make use of ~auto-mode-alist~.
 
 #+begin_src emacs-lisp
-(add-hook
- 'find-file-hook
- (defun +possibly-enable-+asdf-mode ()
-   "Enable `+asdf-mode' if the current file has the 'asd' extension, and the
+(defun +possibly-enable-+asdf-mode ()
+  "Enable `+asdf-mode' if the current file has the 'asd' extension, and the
 buffer's major mode is `lisp-mode'."
-   (when (and (string= (file-name-extension buffer-file-name)
-                       "asd")
-              (string= (symbol-name major-mode)
-                       "lisp-mode"))
-     (+asdf-mode 1))))
+  (when (string= "asd"
+                 (file-name-extension buffer-file-name))
+    (+asdf-mode 1)))
+
+(add-hook 'lisp-mode-hook #'+possibly-enable-+asdf-mode)
 #+end_src
 
 To finally set the keybinding in ~+asdf-mode~, we need to circumvent [[https://github.com/noctuid/general.el#why-dont-some-evil-keybindings-work-immediately][a known ~evil~
