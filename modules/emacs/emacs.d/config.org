@@ -930,11 +930,10 @@ know when I've made things worse.
  'emacs-startup-hook
  (lambda ()
    (message
-    "Emacs startup took %s with %d garbage collections"
-    (format
-     "%.2f seconds"
-     (float-time (time-subtract after-init-time before-init-time)))
-    gcs-done)))
+    "Emacs startup took %.2f seconds with %d garbage collection%s"
+    (float-time (time-subtract after-init-time before-init-time))
+    gcs-done
+    (if (> gcs-done 1) "s" ""))))
 #+end_src
 
 Disable the graphical UI things like the tool and menu bars, the splash screen,
