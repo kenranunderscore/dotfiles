@@ -22,6 +22,14 @@
   "Determine the name of the to-be-created result of tangling FILE."
   (replace-regexp-in-string "\.org$" ".el" file))
 
+(defun +silent+timed-org-babel-tangle (file target)
+  (let ((inhibit-message t)
+        (message-log-max nil)
+        (start-time (current-time)))
+    (org-babel-tangle-file file target)
+    (set-file-times target)
+    (time-subtract (current-time) start-time)))
+
 (defun +tangle-literate-config-file (file &optional only-if-newer)
   "Tangle an org file, assuming it's part of my literate configuration.
 When used interactively, FILE defaults to the currently visited one."
@@ -33,11 +41,11 @@ When used interactively, FILE defaults to the currently visited one."
         (message "[+litconf] skipping %s: up-to-date" file)
       (progn
         (message "[+litconf] tangling %s ..." file)
-        (let ((inhibit-message t)
-              (message-log-max nil))
-          (org-babel-tangle-file file (+determine-tangle-target file)))
-        (set-file-times target)
-        (message "[+litconf] done")))))
+        (let ((duration (+silent+timed-org-babel-tangle file target)))
+          (message
+           "[+litconf] created %s in %.3f seconds"
+           target
+           (float-time duration)))))))
 
 (defun +tangle-all-literate-config-files (only-if-newer)
   "Tangle all literate configuration files, which includes my custom
