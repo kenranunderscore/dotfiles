@@ -20,7 +20,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = lib.optional cfg.withPackage pkgs.wezterm;
-    xdg.configFile."wezterm/wezterm.lua".source = ./wezterm.lua;
+    home = {
+      packages = lib.optional cfg.withPackage pkgs.wezterm;
+      activation.symlinkWeztermConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        config_dir="$XDG_CONFIG_HOME/wezterm"
+        if [ ! -d $config_dir ]; then
+          mkdir -p "$config_dir"
+          $DRY_RUN_CMD ln -s $HOME/dotfiles/modules/wezterm/wezterm.lua $config_dir/
+        fi
+      '';
+    };
   };
 }
