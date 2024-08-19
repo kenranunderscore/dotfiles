@@ -36,6 +36,41 @@ packages on its own, as =straight.el= is responsible for doing so.
 (setq use-package-always-ensure nil)
 #+end_src
 
+* Tangling this literate Emacs configuration
+
+I like the [[https://systemcrafters.net][systemcrafters]] idea of having a custom minor mode for my
+=org= mode configuration files which takes care of tangling (that is, transforming
+=org= to Emacs Lisp). I previously only tangled on startup, from my =init.el= file,
+which left me unable to better document this process in exchange for not having
+to deal with a one-off bootstrapping "problem".
+
+After defining this particular minor mode, we want to enable it in all the =org=
+files that reside in =user-emacs-directory=.
+
+#+begin_src emacs-lisp
+(define-minor-mode +literate-config-mode
+  "A minor mode for interacting with org files belonging to my literate
+Emacs configuration."
+  :init-value nil
+  :global nil
+  :lighter " +litconf")
+
+(defun +is-literate-config-file ()
+  "Determine whether the current file is part of my literate Emacs
+configuration."
+  (when-let (file (buffer-file-name))
+    (and (file-in-directory-p file user-emacs-directory)
+         (string= "org" (file-name-extension file)))))
+
+(add-hook
+ 'org-mode-hook
+ (defun +possibly-enable-+literate-config-mode ()
+   "Enable `+literate-config-mode' if this org file belongs to my literate
+Emacs configuration."
+   (when (+is-literate-config-file)
+     (+literate-config-mode 1))))
+#+end_src
+
 * Profiling the startup time
 
 For no real reason whatsoever I like it when my Emacs starts up quickly. The
