@@ -71,6 +71,20 @@ Emacs configuration."
      (+literate-config-mode 1))))
 #+end_src
 
+This might not be the best way to tangle when saving (systemcrafters does it by
+installing some =after-save-hook= only when their respective minor mode is
+enabled), but here goes:
+
+#+begin_src emacs-lisp
+(add-hook
+ 'after-save-hook
+ (defun +literate-config-after-save-hook ()
+   "If `+literate-config-mode' is enabled, tangle the currently visited org
+file."
+   (when +literate-config-mode
+     (+tangle-literate-config-file (buffer-file-name)))))
+#+end_src
+
 * Profiling the startup time
 
 For no real reason whatsoever I like it when my Emacs starts up quickly. The

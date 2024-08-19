@@ -14,24 +14,44 @@
 (straight-use-package 'org)
 (require 'org)
 
-(defun +tangle-org-file (path)
-  "Tangle an org file at PATH (absolute) to an ELisp file.  Will
-only tangle if no target file exists yet, or if the source file
-has been touched more recently than the target."
-  (let* ((target (replace-regexp-in-string "\.org$" ".el" path)))
-    (when (or (not (file-exists-p target))
-              (file-newer-than-file-p path target))
-      (message (concat "Tangling config file: "
-                       (file-name-nondirectory path)))
-      (org-babel-tangle-file path target)
-      (set-file-times target))))
+(defvar +custom-package-dir
+  (concat user-emacs-directory "my-packages")
+  "The directory my custom (literate) Emacs packages reside in.")
 
-;; Tangle all my custom packages.
-(setq +custom-package-dir
-      (concat user-emacs-directory "my-packages"))
-(dolist (f (directory-files +custom-package-dir
-                            :match "\.org$"))
-  (+tangle-org-file f))
+(defun +determine-tangle-target (file)
+  "Determine the name of the to-be-created result of tangling FILE."
+  (replace-regexp-in-string "\.org$" ".el" file))
 
-(+tangle-org-file (concat user-emacs-directory "config.org"))
+(defun +tangle-literate-config-file (file &optional only-if-newer)
+  "Tangle an org file, assuming it's part of my literate configuration.
+When used interactively, FILE defaults to the currently visited one."
+  (interactive (list (buffer-file-name) nil))
+  (let ((target (+determine-tangle-target file)))
+    (if (and only-if-newer
+             (not (or (not (file-exists-p target))
+                      (file-newer-than-file-p file target))))
+        (message "[+litconf] skipping %s: up-to-date" file)
+      (progn
+        (message "[+litconf] tangling %s ..." file)
+        (let ((inhibit-message t)
+              (message-log-max nil))
+          (org-babel-tangle-file file (+determine-tangle-target file)))
+        (set-file-times target)
+        (message "[+litconf] done")))))
+
+(defun +tangle-all-literate-config-files (only-if-newer)
+  "Tangle all literate configuration files, which includes my custom
+packages in `+custom-package-dir', at once. If ONLY-IF-NEWER is non-nil,
+only tangle files whose timestamp is more recent than their target's."
+  (interactive (list nil))
+  (+tangle-literate-config-file
+   (concat user-emacs-directory "config.org")
+   only-if-newer)
+  (dolist (pkg (directory-files +custom-package-dir :match "\.org$"))
+    (+tangle-literate-config-file pkg only-if-newer)))
+
+;; Tangle everything if necessary
+(+tangle-all-literate-config-files t)
+
+;; Actually load the generated configuration
 (load-file (concat user-emacs-directory "config.el"))
