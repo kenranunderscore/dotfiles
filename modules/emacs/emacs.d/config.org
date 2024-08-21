@@ -3067,8 +3067,9 @@ easier for major modes, which can make use of ~auto-mode-alist~.
 (defun +possibly-enable-+asdf-mode ()
   "Enable `+asdf-mode' if the current file has the 'asd' extension, and the
 buffer's major mode is `lisp-mode'."
-  (when (string= "asd"
-                 (file-name-extension buffer-file-name))
+  (when (and buffer-file-name
+             (string= "asd"
+                      (file-name-extension buffer-file-name)))
     (+asdf-mode 1)))
 
 (add-hook 'lisp-mode-hook #'+possibly-enable-+asdf-mode)
