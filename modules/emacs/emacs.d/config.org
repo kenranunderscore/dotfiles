@@ -2997,6 +2997,7 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
   (add-to-list 'evil-emacs-state-modes 'sly-mrepl-mode)
   (add-to-list 'evil-emacs-state-modes 'sly-db-mode)
   (add-to-list 'evil-emacs-state-modes 'sly-inspector-mode)
+  (add-to-list 'evil-emacs-state-modes 'sly-xref-mode)
   (local-leader
     :keymaps 'lisp-mode-map
     "q" #'sly-quit-lisp))
