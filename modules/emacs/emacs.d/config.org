@@ -542,13 +542,6 @@ times, so I use =disable-theme= on all themes in =custom-enabled-themes= before
 enabling the target theme.
 
 #+begin_src emacs-lisp
-(defvar +switch-theme-hook nil
-  "Functions to be called after switching the theme.")
-
-(defun +switch-theme-hook ()
-  "Run `+switch-theme-hook'."
-  (run-hook-with-args #'+switch-theme-hook))
-
 (defun +available-themes ()
   "Get a list of the names of all available themes, excluding the
 currently enabled one(s)."
@@ -568,8 +561,7 @@ disables all other enabled themes."
     (mapc #'disable-theme
           custom-enabled-themes)
     (princ name)
-    (load-theme name t)
-    (+switch-theme-hook)))
+    (load-theme name t)))
 
 (defun +enable-random-theme ()
   "Randomly choose and enable a theme."
@@ -923,6 +915,46 @@ mode line (usually mouse bindings). These are tagged with the special
   (dolist (char-regexp alist)
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
+#+end_src
+
+** Retro look and feel
+
+Sometimes I like using a (fake) bitmap font and making Emacs look like we're in
+the 80s. The =+retro-mode= minor mode does just that. Note that the setup code
+contains a tricky workaround: ~enable-theme~ (which is called by ~load-theme~) is
+always additionally enabling the so-called ='user= theme, which contains variables
+that have to be "persisted" over changing of themes. The variables for custom
+minor modes, like =+retro-mode= in this case, are part of this, and after the
+theme change Emacs sets this variable, which in turn re-enables the mode,
+changing the theme back, etc., creating an infinite loop. That's why I'm
+removing this variable from the ='user= ='theme-settings= manually; it's fine, as it
+only plays a role when disabling the theme anyway.
+
+#+begin_src emacs-lisp
+(defun +retro--set-up (arg)
+  (if arg
+      (progn
+        (setq +retro--prev-font +current-font)
+        (setq +retro--prev-theme (car custom-enabled-themes))
+        (+switch-font nil 'dos-16)
+        (+switch-theme 'base16-greenscreen))
+    (progn
+      (put 'user
+           'theme-settings
+           (-remove
+            (lambda (x)
+              (equal (cadr x) '+retro-mode))
+            (get 'user 'theme-settings)))
+      (+switch-theme +retro--prev-theme)
+      (+switch-font nil +retro--prev-font))))
+
+(define-minor-mode +retro-mode
+  "Change font, theme, and possibly other things to look more
+old-fashioned."
+  :init-value nil
+  :global t
+  :lighter " +retro"
+  (+retro--set-up +retro-mode))
 #+end_src
 
 * Basic options
