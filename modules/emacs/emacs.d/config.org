@@ -132,6 +132,16 @@ configuration, but wouldn't it be cool if they were to just live somewhere else?
 (setq lock-file-name-transforms auto-save-file-name-transforms)
 #+end_src
 
+* Customized =*scratch*= buffer
+
+I don't know what ~lisp-interaction-mode~ is, but usually I just want to execute
+or try out some Emacs Lisp in a =*scratch*= buffer anyway.
+
+#+begin_src emacs-lisp
+(setq initial-scratch-message "")
+(setq initial-major-mode #'emacs-lisp-mode)
+#+end_src
+
 * Keybinding management
 
 I use the [[https://github.com/noctuid/general][general]] package to define keybindings in a more straightforward and
