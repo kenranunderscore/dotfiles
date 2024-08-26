@@ -1740,7 +1740,7 @@ attribute value of a face.
 
 (defun +org-font-setup ()
   "Set the face attributes for code, verbatim, and other markup
-elements.  Also increase org header size."
+elements."
   (interactive)
   (+inherit-fixed-pitch 'org-block)
   (+inherit-fixed-pitch 'org-block-begin-line)
