@@ -61,7 +61,7 @@ in
               "syslog" = "LOG_USER";
             };
           };
-          notmuch.enable = false;
+          notmuch.enable = true;
           mu.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
@@ -97,7 +97,7 @@ in
               "syslog" = "LOG_USER";
             };
           };
-          notmuch.enable = false;
+          notmuch.enable = true;
           mu.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
@@ -121,6 +121,12 @@ in
       mbsync.enable = true;
       msmtp.enable = true;
       mu.enable = true;
+      notmuch = {
+        enable = true;
+        hooks.preNew = "mbsync -a";
+        maildir.synchronizeFlags = true;
+        new.tags = [ ];
+      };
     };
   };
 }
