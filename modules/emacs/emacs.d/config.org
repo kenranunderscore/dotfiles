@@ -2292,8 +2292,7 @@ notmuch does in its preNew hook, yielding quicker refreshes."
                 (defun +notmuch-restore-point (proc)
                   (goto-line line)
                   (remove-hook 'notmuch-tree-process-exit-functions #'+notmuch-restore-point)))
-      (notmuch-refresh-this-buffer)
-      (message "max line: %s" (line-number-at-pos (point-max))))))
+      (notmuch-refresh-this-buffer))))
 
 (defun +is-work-email (email)
   "Determine whether a given EMAIL belongs to my work account."
