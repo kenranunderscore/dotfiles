@@ -2237,6 +2237,8 @@ options customize built-in functionality, but thematically they do belong here.
      (:name "private archive"
             :query "path:mailbox/Archive/**"
             :search-type tree)))
+  :config
+  (leader "m" 'notmuch)
   :bind
   (:map notmuch-show-mode-map
         ("a" . +notmuch-archive)
