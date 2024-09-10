@@ -3293,7 +3293,20 @@ Formatting with =black=:
   :args (list input-file)
   :stdin nil
   :stdout nil
+  :input-file (reformatter-temp-file-in-current-directory)
   :lighter " +black")
+#+end_src
+
+Sorting imports with ~isort~:
+
+#+begin_src emacs-lisp
+(reformatter-define +isort
+  :program "isort"
+  :args (list input-file)
+  :stdin nil
+  :stdout nil
+  :input-file (reformatter-temp-file-in-current-directory)
+  :lighter " +isort")
 #+end_src
 
 ** Nim
