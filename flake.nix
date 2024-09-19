@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     privateConfig = {
-      url = "git+ssh://git@github.com/kenranunderscore/private-config";
+      url = "git+ssh://git@github.com/kenranunderscore/private-config?ref=master";
       flake = false;
     };
     nixgl = {
