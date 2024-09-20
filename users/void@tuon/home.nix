@@ -119,6 +119,7 @@ in
     keepass
     keepassxc
     nixgl.auto.nixGLDefault
+    nixVersions.latest
     opam
     pavucontrol
     remmina
