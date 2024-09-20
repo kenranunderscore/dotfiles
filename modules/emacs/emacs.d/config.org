@@ -3029,6 +3029,20 @@ The key to using Clojure effectively with Emacs seems to be [[https://github.com
   :defer)
 #+end_src
 
+Some of our work projects use ~cljfmt~ to enforce a certain code style. It's a
+little hard to "get right", though, as the source files to be formatted need to
+be inside the project directory.
+
+#+begin_src emacs-lisp
+(reformatter-define +cljfmt
+  :program "cljfmt"
+  :args (list "fix" input-file)
+  :stdin nil
+  :stdout nil
+  :input-file (reformatter-temp-file-in-current-directory)
+  :lighter " +cljfmt")
+#+end_src
+
 ** CSV
 
 #+begin_src emacs-lisp
