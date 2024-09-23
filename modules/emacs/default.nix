@@ -29,8 +29,12 @@ in
           # Some packages should come "with Emacs" via nix, as they are either
           # notoriously difficult to build locally on NixOS, or not in MELPA etc.
           myEmacs = emacsWithPackages (p: [
+            # (p.treesit-grammars.with-grammars (g: [
+            #   g.tree-sitter-python
+            #   g.tree-sitter-lua
+            # ]))
+            p.treesit-grammars.with-all-grammars
             p.vterm
-            p.mu4e
           ]);
         in
         with pkgs;
