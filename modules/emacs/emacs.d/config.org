@@ -2680,61 +2680,35 @@ regret it yet, so I've fully switched over.
 
 * Multiple cursors
 
-I'm still new to this, and have only scratched the surface of when to
-successfully use them. In particular I'm not sure about what my most-used
-commands will be, and if and where to bind those.
-
 #+begin_src emacs-lisp
-(use-package multiple-cursors
-  :defer
-  :config
-  (keymap-unset mc/keymap "<return>")
+(use-package evil-mc
   :init
-  (add-hook 'multiple-cursors-mode-hook
-            (defun +work-around-multiple-cursors-issue ()
-              "Loads the file multiple-cursors-core.el (probably for the second
-time), which makes the cursors work again.  See
-https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_29060/."
-              (load "multiple-cursors-core.el")
-              (remove-hook 'multiple-cursors-mode-hook #'+work-around-multiple-cursors-issue))))
-#+end_src
-
-Due to the nature of =mc/mark-next-like-this= and consorts, a hydra should lend
-itself very well to this package. It can then be bound to a top-level keybinding
-for the best of both worlds.
-
-Credit: I found [[https://github.com/ejmr/DotEmacs][ejmr's archived Emacs configuration]] on GitHub; it contains lots
-of hydras, so I took heavy inspiration there.
-
-#+begin_src emacs-lisp
-(defhydra hydra-multiple-cursors (:hint nil)
-  "\n
-  ^^forward       ^^backward        region-based
-  ^^--------------^^-------------   ^^-------------------^^---------------------
-  [_n_]   next    [_p_]   next      [_l_]   lines        [_C-a_] beg. of lines
-  [_N_]   skip    [_P_]   skip      [_a_]   all          [_C-e_] end. of lines
-  [_M-n_] unmark  [_M-p_] unmark    [_M-w_] all words    [_M-w_] words in defun
-  [_w_]   word    [_W_]   word      [_r_]   regexp
-
-  "
-  ("n" mc/mark-next-like-this)
-  ("N" mc/skip-to-next-like-this)
-  ("M-n" mc/unmark-next-like-this)
-  ("p" mc/mark-previous-like-this)
-  ("P" mc/skip-to-previous-like-this)
-  ("M-p" mc/unmark-previous-like-this)
-  ("w" mc/mark-next-like-this-word)
-  ("W" mc/mark-previous-like-this-word)
-  ("r" mc/mark-all-in-region-regexp :exit t)
-  ("l" mc/edit-lines :exit t)
-  ("a" mc/mark-all-like-this :exit t)
-  ("M-w" mc/mark-all-words-like-this :exit t)
-  ("C-w" mc/mark-all-words-like-this-in-defun :exit t)
-  ("C-a" mc/edit-beginnings-of-lines :exit t)
-  ("C-e" mc/edit-ends-of-lines :exit t)
-  ("q" nil "exit"))
-
-(keymap-global-set "C-z" #'hydra-multiple-cursors/body)
+  (global-evil-mc-mode 1)
+  :commands
+  (evil-mc-make-cursor-here
+   evil-mc-make-all-cursors
+   evil-mc-undo-all-cursors
+   evil-mc-pause-cursors
+   evil-mc-resume-cursors
+   evil-mc-make-and-goto-first-cursor
+   evil-mc-make-and-goto-last-cursor
+   evil-mc-make-cursor-in-visual-selection-beg
+   evil-mc-make-cursor-in-visual-selection-end
+   evil-mc-make-cursor-move-next-line
+   evil-mc-make-cursor-move-prev-line
+   evil-mc-make-cursor-at-pos
+   evil-mc-has-cursors-p
+   evil-mc-make-and-goto-next-cursor
+   evil-mc-skip-and-goto-next-cursor
+   evil-mc-make-and-goto-prev-cursor
+   evil-mc-skip-and-goto-prev-cursor
+   evil-mc-make-and-goto-next-match
+   evil-mc-skip-and-goto-next-match
+   evil-mc-skip-and-goto-next-match
+   evil-mc-make-and-goto-prev-match
+   evil-mc-skip-and-goto-prev-match)
+  :config
+  (add-to-list 'evil-mc-incompatible-minor-modes 'lispy-mode))
 #+end_src
 
 * Package-specific configuration
