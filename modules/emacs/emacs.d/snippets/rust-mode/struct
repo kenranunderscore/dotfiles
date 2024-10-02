@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: struct
+# key: s
+# --
+struct ${1:Name} {
+ ${2:some_field}: ${3:Type},$0
+}
