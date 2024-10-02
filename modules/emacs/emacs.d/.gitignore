@@ -7,6 +7,7 @@
 bookmarks
 config.el
 history
+ielm-history.eld
 auto-save-list/
 elpa/
 eshell/
