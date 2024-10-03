@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: unit test
+# key: t
+# --
+#[test]
+fn ${1:some_test}() {
+ $0
+}

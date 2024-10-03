@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: test module
+# key: tm
+# --
+#[cfg(test)]
+mod tests {
+ use super::*;
+
+ $0
+}
