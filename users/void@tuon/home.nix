@@ -123,6 +123,7 @@ in
     opam
     pavucontrol
     remmina
+    rustup
     sieve-connect
     subversion
     thunderbird
