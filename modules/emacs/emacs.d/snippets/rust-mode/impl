@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: impl
+# key: i
+# --
+impl ${1:TypeName} {
+ $0
+}
