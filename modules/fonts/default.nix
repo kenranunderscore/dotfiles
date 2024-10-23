@@ -55,6 +55,7 @@ in
           paratype-pt-mono
           roboto-mono
           source-code-pro
+          ubuntu-sans-mono
           unifont
           victor-mono
           vistafonts

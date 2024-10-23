@@ -421,6 +421,9 @@ attributes that need to be applied when switching to the respective font.
         (berkeley-mono
          . (:family
             "Berkeley Mono"))
+        (ubuntu-mono
+         . (:family
+            "Ubuntu Sans Mono"))
         (pt-mono
          . (:family
             "PT Mono"))))
@@ -1120,7 +1123,7 @@ I'd expect them to.
   (setq evil-want-keybinding nil)
   (evil-mode 1)
   :config
-  (setq evil-insert-state-cursor '(hbar . 6))
+  (setq evil-insert-state-cursor '(hbox . 3))
   (general-define-key
    :states 'normal
    "U" 'evil-redo)
@@ -3170,7 +3173,8 @@ works.
 (use-package rust-mode
   :defer
   :config
-  (setq rust-format-on-save t))
+  (setq rust-format-on-save t)
+  (setq rust-format-show-buffer nil))
 #+end_src
 
 ** Java
