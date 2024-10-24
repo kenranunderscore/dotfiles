@@ -3196,6 +3196,21 @@ with =meghanada,= but it takes a long time to download all its dependencies.
               (add-hook 'before-save-hook 'meghanada-code-beautify-before-save))))
 #+end_src
 
+** Scala
+
+#+begin_src emacs-lisp
+(use-package scala-mode
+  :defer)
+
+(use-package lsp-metals
+  :defer
+  :custom
+  (lsp-metals-server-args
+   '("-J-Dmetals.allow-multiline-string-formatting=off"
+     "-J-Dmetals.icons=unicode"))
+  (lsp-metals-enable-semantic-highlighting t))
+#+end_src
+
 ** Lua
 
 From time to time I need to write some Lua code, like for DCSS RC files. I
