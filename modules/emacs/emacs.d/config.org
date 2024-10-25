@@ -2289,7 +2289,7 @@ notmuch does in its preNew hook, yielding quicker refreshes."
     (+notmuch-move-into-maildir
      email
      (if (+is-work-email email)
-         "~/.mail/ag/Junk"
+         "~/.mail/ag/Trash"
        "~/.mail/mailbox/Trash"))))
 #+end_src
 
