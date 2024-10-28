@@ -326,107 +326,43 @@ An alist of my preferred font families, together with a plist of certain
 attributes that need to be applied when switching to the respective font.
 
 #+begin_src emacs-lisp
-(setq +font-alist
-      '((pragmata-pro
-         . (:family
-            "Pragmata Pro Mono"))
-        (ibm-vga-8x14
-         . (:family
-            "MxPlus IBM VGA 8x14"
-            :default-height
-            200))
-        (ibm-vga-9x16
-         . (:family
-            "MxPlus IBM VGA 9x16"
-            :default-height
-            200))
-        (dos-16
-         . (:family
-            "Mx437 DOS/V TWN16"
-            :default-height
-            200))
-        (iosevka
-         . (:family
-            "Iosevka Term"))
-        (iosevka-comfy
-         . (:family
-            "Iosevka Comfy"))
-        (dejavu
-         . (:family
-            "DejaVu Sans Mono"))
-        (ibm-plex
-         . (:family
-            "IBM Plex Mono"))
-        (cascadia
-         . (:family
-            "Cascadia Code"))
-        (source-code-pro
-         . (:family
-            "Source Code Pro"))
-        (consolas
-         . (:family
-            "Consolas"
-            :default-height
-            180))
-        (fira-code
-         . (:family
-            "Fira Code"
-            :org-height
-            0.8))
-        (jetbrains-mono
-         . (:family
-            "JetBrains Mono"
-            :org-height
-            0.8))
-        (julia-mono
-         . (:family
-            "JuliaMono"
-            :org-height
-            0.9))
-        (courier-prime
-         . (:family
-            "Courier Prime"
-            :org-height
-            0.95))
-        (fantasque-sans-mono
-         . (:family
-            "Fantasque Sans Mono"))
-        (lucida-console
-         . (:family
-            "Lucida Console"
-            :default-height
-            166
-            :org-height
-            0.8))
-        (inconsolata
-         . (:family
-            "Inconsolata"
-            :default-height
-            170
-            :org-height
-            0.9))
-        (termingus
-         . (:family
-            "Termingus"
-            :default-height
-            200))
-        (unifont
-         . (:family
-            "Unifont"
-            :default-height
-            200))
-        (geist
-         . (:family
-            "Geist Mono"))
-        (berkeley-mono
-         . (:family
-            "Berkeley Mono"))
-        (ubuntu-mono
-         . (:family
-            "Ubuntu Sans Mono"))
-        (pt-mono
-         . (:family
-            "PT Mono"))))
+(defcustom +fonts nil
+  "A list of custom font definitions. Each font definition is a plist,
+usually created by a call to `+define-font'.")
+
+(cl-defun +define-font (family &key default-height org-height weight)
+  "Add a font definition for FAMILY."
+  (add-to-list
+   '+fonts
+   (list
+    :family family
+    :default-height (or default-height 180)
+    :org-height (or org-height 0.9)
+    :weight (or weight 'regular))))
+
+(+define-font "Pragmata Pro Mono")
+(+define-font "MxPlus IBM VGA 8x14" :default-height 200)
+(+define-font "MxPlus IBM VGA 9x16" :default-height 200)
+(+define-font "Mx437 DOS/V TWN16" :default-height 200)
+(+define-font "Iosevka Term")
+(+define-font "Iosevka Comfy")
+(+define-font "DejaVu Sans Mono")
+(+define-font "IBM Plex Mono")
+(+define-font "Cascadia Code")
+(+define-font "Source Code Pro")
+(+define-font "Consolas")
+(+define-font "Fira Code" :org-height 0.8)
+(+define-font "JetBrains Mono" :org-height 0.8)
+(+define-font "Julia Mono")
+(+define-font "Courier Prime" :org-height 0.95)
+(+define-font "Fantasque Sans Mono")
+(+define-font "Lucida Console")
+(+define-font "Inconsolata")
+(+define-font "Unifont" :default-height 200)
+(+define-font "Geist Mono")
+(+define-font "Berkeley Mono")
+(+define-font "Ubuntu Sans Mono" :weight 'medium)
+(+define-font "PT Mono")
 #+end_src
 
 =+current-font= contains a symbol pointing to one of the fonts specified in
@@ -440,7 +376,7 @@ If neither default font nor environment variable are set/found, I fall back to
 DejaVu Sans Mono.
 
 #+begin_src emacs-lisp
-(setq +default-font 'berkeley-mono)
+(setq +default-font "Geist Mono")
 
 (defun +load-font-from-env ()
   "See whether an environment variable specifying a 'system font' is
@@ -475,33 +411,36 @@ called with non-nil prefix argument ARG the current height is
 reset to the default height for the selected font."
   (interactive
    (list current-prefix-arg
-         (intern
-          (completing-read
-           "Font: "
-           (mapcar #'car
-                   (assoc-delete-all +current-font
-                                     (copy-alist +font-alist)))))))
-  (let* ((attrs (alist-get font +font-alist))
-         (family (plist-get attrs :family))
-         (default-height (or (plist-get attrs :default-height) 170))
+         (completing-read
+          "Font: "
+          (mapcar (lambda (f) (plist-get f :family))
+                  (seq-remove (lambda (f)
+                             (string= (plist-get f :family)
+                                      +current-font))
+                           +fonts)))))
+  (let* ((attrs (seq-find (lambda (f)
+                          (string= (plist-get f :family)
+                                   font))
+                        +fonts))
+         (default-height (plist-get attrs :default-height))
          (height (or (and arg default-height)
                      (face-attribute 'default :height)))
          ;; `buffer-face-mode' is enabled when calling
          ;; `variable-pitch-mode'
          (org-height (if (bound-and-true-p buffer-face-mode)
-                         (or (plist-get attrs :org-height) 0.9)
+                         (plist-get attrs :org-height)
                        1.0))
          (weight (or (plist-get attrs :weight) 'regular)))
     (setq +current-font font)
     (setq +default-font-height default-height)
     (set-face-attribute
      'default nil
-     :font family
+     :font font
      :weight weight
      :height height)
     (set-face-attribute
      'fixed-pitch nil
-     :font family
+     :font font
      :height org-height)
     (set-face-attribute
      'variable-pitch nil
@@ -509,10 +448,10 @@ reset to the default height for the selected font."
      :height 1.0)
     (set-face-attribute
      'fixed-pitch-serif nil
-     :font family
+     :font font
      :inherit 'fixed-pitch
      :height 1.0)
-    (message "Switched to font: %s" family)))
+    (message "Switched to font: %s" font)))
 #+end_src
 
 Finally, set all the face attributes synchronously, or register a hook that
