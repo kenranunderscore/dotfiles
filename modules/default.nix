@@ -16,7 +16,6 @@
     ./fish
     ./fonts
     ./fzf.nix
-    ./gcli.nix
     ./git.nix
     ./herbstluftwm
     ./i3

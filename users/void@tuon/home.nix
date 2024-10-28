@@ -105,7 +105,6 @@ in
     emacs.enable = true;
     nyxt.enable = false;
     git.email = "johannes.maier@mailbox.org";
-    gcli.enable = true;
     wezterm = {
       enable = true;
       withPackage = false;
@@ -116,6 +115,7 @@ in
     (agda.withPackages (p: [ p.standard-library ]))
     cloc
     dmenu
+    gcli
     keepass
     keepassxc
     nixgl.auto.nixGLDefault
