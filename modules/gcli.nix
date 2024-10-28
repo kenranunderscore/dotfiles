@@ -14,7 +14,7 @@ let
       curl,
       autoreconfHook,
       pkg-config,
-      yacc,
+      bison,
       flex,
     }:
 
@@ -30,7 +30,7 @@ let
       nativeBuildInputs = [
         autoreconfHook
         pkg-config
-        yacc
+        bison
         flex
       ];
       buildInputs = [ curl ];
