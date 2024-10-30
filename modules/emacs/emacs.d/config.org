@@ -3364,7 +3364,7 @@ flake in the current directory."
 project."
   (interactive)
   (let ((default-directory
-         (if-let (project (project-current))
+         (if-let* ((project (project-current)))
              (project-root project)
            default-directory)))
     (vterm)))
