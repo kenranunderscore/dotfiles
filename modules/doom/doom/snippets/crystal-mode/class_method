@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: class method
+# key: m
+# --
+def self.${1:function_name}(${2:args})
+ $0
+end
