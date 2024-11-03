@@ -1,6 +1,6 @@
 {
   font = {
-    name = "Berkeley Mono";
-    size = 17;
+    name = "JetBrains Mono";
+    size = 16;
   };
 }
