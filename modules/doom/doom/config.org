@@ -3,6 +3,12 @@
 #+EMAIL: johannes.maier@mailbox.org
 #+STARTUP: showall
 
+* Enable lexical binding for Emacs Lisp
+
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
 * Quickly jumping to this Doom Emacs configuration
 
 I /very often/ jump into /this/ file to quickly tweak things. So let's make this
@@ -369,14 +375,14 @@ two functions are used for.
 (defun my/switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
   (interactive)
-  (when (and (boundp 'display-line-numbers-mode) display-line-numbers-mode)
+  (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers t)))
 
 (defun my/switch-to-hybrid-line-numbers ()
   "Enable relative line numbers, but with the current line
 showing its absolute line number."
   (interactive)
-  (when (and (boundp 'display-line-numbers-mode) display-line-numbers-mode)
+  (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers 'relative)
     (setq display-line-numbers-current-absolute t)))
 
@@ -388,6 +394,10 @@ keybinding."
 
 (use-package! display-line-numbers
   :defer
+  :init
+  (remove-hook!
+    '(prog-mode-hook text-mode-hook conf-mode-hook)
+    #'display-line-numbers-mode)
   :hook ((evil-insert-state-entry . my/switch-to-absolute-line-numbers)
          (evil-insert-state-exit . my/switch-to-hybrid-line-numbers))
   :config
@@ -463,7 +473,7 @@ things to my liking.
 #+begin_src emacs-lisp
 (after! evil
   ;; Use a special cursor for insert mode
-  (setq evil-insert-state-cursor '(hbar . 5))
+  (setq evil-insert-state-cursor 'box)
   ;; Don't make certain commands repeatable with '.'
   (mapc #'evil-declare-ignore-repeat
         '(haskell-process-load-file
@@ -733,6 +743,240 @@ and also enable Flymake itself, both done via hooks to =sh-mode=.
 There are several different ways to "do e-mail in Emacs". Over the last two
 years I've tried out =notmuch=, =gnus=, and =mu4e=. Some thoughts on each of those:
 
+** Notmuch
+
+The Emacs integration for =notmuch= is great; it has the most intuitive and
+appealing UI from each of the options. =Notmuch= works by referencing incoming
+e-mail in a separate database only, not ever touching or modifying it. I really
+like this idea, and in practice it also felt great due to the quick und
+customizable searches. The usual approach is to use a tag-based system of
+categorizing your e-mail, but simply having lots of stored queries is a little
+bit more flexible.
+
+But =notmuch= only handles this single aspect; this means that one needs to find
+solutions to the following:
+
+- Getting mail
+- Initial tagging
+- Sending mail
+- Synchronization between machines
+
+Due to the declarative e-mail account configuration from =home-manager= the first
+part is very simple, and I could also easily switch between different tools like
+=isync= or =offlineimap=. For sending mail I use =msmtp=.
+
+*** =muchsync=
+
+Using =muchsync= looks great on paper but is very finicky with sent mail, which
+I'd also like to sync back via IMAP to my accounts. The client machine sends
+this and puts it into respective =sent= directories; =muchsync= synchronizes these
+directories as well, but I've had problems with mails appearing twice, or not
+appearing at all on the respective "other" machine, at least in the past. It
+looks or feels like my usage of =muchsync --nonew= on the clients was a potential
+problem: I've verified that after sending a mail and it having landed in the
+correct =sent= directory, a simple =muchsync my-server= didn't lead to the mail
+appearing on my servers. It worked after executing =notmuch new= once, though, so
+I guess =muchsync= only synchronizes those mails that are part of the current
+=notmuch= database state.
+
+One solution would be to make sure that whenever I'm polling from within Emacs,
+both =muchsync my-server= and =notmuch new= are executed. Since =notmuch= has
+deprecated the =notmuch-poll-script= variable in their Emacs client, I have to use
+the hooks it provides to make sure =muchsync= is executed. Putting =muchsync
+--nonew= into the =preNew= hook while having an unsynchronized sent mail on the
+client sounds correct on paper in order to not execute =notmuch new= twice, but it
+means that in the case of an unsynchronized sent mail, this mail won't have been
+pushed to the server after the first call, if I am correct. So I'll have to
+experiment and probably live with =notmuch new= being called twice (which is fine
+as it's blazingly fast).
+
+I've never managed to get it quite right, and debugging misbehavior has been a
+nightmare as I cannot reliably reproduce it. So when trying out =notmuch= once
+more, I'll do so without any tagging at all, utilizing saved queries only.
+
+Let's first define some utility functions that I'll then bind to special keys
+later.
+
+*** Configuration
+
+Now pull in and configure the actual =notmuch= package. Note that some options
+rather belong to built-in functionality, but they fit here very well.
+
+#+begin_src emacs-lisp
+(setq user-mail-address "johannes.maier@mailbox.org")
+
+(after! notmuch
+  ;; msmtp is registered as sendmail
+  (setq message-send-mail-function 'message-send-mail-with-sendmail)
+  (setq message-kill-buffer-on-exit t)
+  ;; When replying to mail, choose the account to use based on the recipient
+  ;; address
+  (setq message-sendmail-envelope-from 'header)
+  (setq mail-envelope-from 'header)
+  (setq mail-user-agent 'message-user-agent)
+  ;; Settings for notmuch itself
+  (setq notmuch-show-all-multipart/alternative-parts nil)
+  (setq notmuch-hello-sections
+        '(notmuch-hello-insert-header
+          notmuch-hello-insert-saved-searches
+          notmuch-hello-insert-footer))
+  (setq notmuch-show-empty-saved-searches t)
+  (setq notmuch-always-prompt-for-sender t)
+  (setq notmuch-search-oldest-first nil)
+  (setq notmuch-maildir-use-notmuch-insert t)
+  (setq notmuch-archive-tags nil)
+  (setq notmuch-fcc-dirs
+        '(("johannes.maier@mailbox.org" . "mailbox/Sent")
+          ("johannes.maier@active-group.de" . "ag/Sent")
+          (".*" . "sent")))
+  (setq notmuch-saved-searches
+        '((:name "work inbox"
+           :query "folder:ag/Inbox"
+           :key "w"
+           :search-type tree)
+          (:name "sent"
+           :query "folder:ag/Sent or folder:mailbox/Sent"
+           :key "s"
+           :search-type tree)
+          (:name "private inbox"
+           :query "folder:mailbox/Inbox"
+           :key "p"
+           :search-type tree)
+          (:name "work archive"
+           :query "path:ag/Archives/**"
+           :search-type tree)
+          (:name "private archive"
+           :query "path:mailbox/Archive/**"
+           :search-type tree)))
+  (map!
+   :map notmuch-show-mode-map
+   :desc "Archive" :n "a" #'my/notmuch-archive
+   :desc "Delete" :n "d" #'my/notmuch-delete
+   :map notmuch-tree-mode-map
+   :desc "Archive" :n "a" #'my/notmuch-archive
+   :desc "Delete" :n "d" #'my/notmuch-delete
+   :map notmuch-hello-mode-map
+   :desc "Search (tree)" :n "s" #'notmuch-tree))
+#+end_src
+
+In order to be able to use =notmuch= again, I need to rely on saved searches only
+in a way that I get the same state from a clean maildir sync on each machine. So
+let's circumvent the whole idea of =notmuch= and /actually touch/ our mail to
+archive, delete, etc. We don't actually delete things, just move them from
+maildir to maildir, which requires some small hacks to refresh the notmuch
+buffers.
+
+#+begin_src emacs-lisp
+(defun my/notmuch-get-source-file ()
+  "Get the source file for the currently hovered email."
+  (car
+   (cond
+    ((equal major-mode #'notmuch-tree-mode)
+     (notmuch-tree-get-prop :filename))
+    ((equal major-mode #'notmuch-show-mode)
+     (notmuch-show-get-prop :filename))
+    ((equal major-mode #'notmuch-search-mode)
+     (warn "FIXME: Not implemented for `notmuch-search-mode'!"))
+    (warn "cannot find source file for mail"))))
+
+(defun my/notmuch-new-without-hooks ()
+  "Execute 'notmuch new --no-hooks', circumventing the automatic polling
+notmuch does in its preNew hook, yielding quicker refreshes."
+  (interactive)
+  (if (equal major-mode #'notmuch-tree-mode)
+      (notmuch-call-notmuch-process "new" "--no-hooks")))
+
+(defun my/notmuch-move-into-maildir (email maildir)
+  "Move EMAIL (that is, the corresponding file) into MAILDIR."
+  (let* ((parts (split-string (file-truename email) ":"))
+         (target-file (concat
+                       maildir
+                       "/cur/"
+                       (org-id-uuid)
+                       (when-let (rest (cadr parts))
+                         (format ":%s" rest)))))
+    (message "[+email] moving %s to %s" email target-file)
+    (rename-file email target-file)
+    (let ((line (line-number-at-pos)))
+      (my/notmuch-new-without-hooks)
+      (add-hook 'notmuch-tree-process-exit-functions
+                (defun my/notmuch-restore-point (proc)
+                  (goto-line line)
+                  (remove-hook 'notmuch-tree-process-exit-functions #'my/notmuch-restore-point)))
+      (notmuch-refresh-this-buffer))))
+
+(defun my/is-work-email (email)
+  "Determine whether a given EMAIL belongs to my work account."
+  (string-match "/ag/" (file-name-directory email)))
+
+(defun my/notmuch-archive ()
+  "Archive the current email."
+  (interactive)
+  (let* ((email (my/notmuch-get-source-file))
+         (archive-year (caddr (calendar-current-date)))
+         ;; TODO: get maildir location from system configuration
+         (archive-dir (if (my/is-work-email email)
+                          (format "~/.mail/ag/Archives/%s" archive-year)
+                        (format "~/.mail/mailbox/Archive/%s" archive-year))))
+    (my/notmuch-move-into-maildir email archive-dir)))
+
+(defun my/notmuch-unarchive ()
+  "Unarchive the current email."
+  (interactive)
+  (let* ((email (my/notmuch-get-source-file))
+         (maildir (if (my/is-work-email email)
+                      "~/.mail/ag/Inbox"
+                    "~/.mail/mailbox/Inbox")))
+    (my/notmuch-move-into-maildir email maildir)))
+
+(defun my/notmuch-delete ()
+  "Delete the current email (by moving it into the trash)."
+  (interactive)
+  (let ((email (my/notmuch-get-source-file)))
+    (my/notmuch-move-into-maildir
+     email
+     (if (my/is-work-email email)
+         "~/.mail/ag/Trash"
+       "~/.mail/mailbox/Trash"))))
+#+end_src
+=Gnus-alias= makes it possible to use different identities when composing mail. I
+mostly use it to make sure that replies to a mail are sent from the address I've
+received it at.
+
+#+begin_src emacs-lisp
+(use-package gnus-alias
+  :defer t
+  :config
+  (setq gnus-alias-identity-alist
+        `(("mailbox"
+           nil
+           "Johannes Maier <johannes.maier@mailbox.org>"
+           nil
+           nil
+           nil
+           nil)
+          ("ag"
+           nil
+           "Johannes Maier <johannes.maier@active-group.de>"
+           "Active Group GmbH"
+           nil
+           nil
+           ,(concat
+             "Johannes Maier\n"
+             "johannes.maier@active-group.de\n\n"
+             "+49 (7071) 70896-67\n\n"
+             "Active Group GmbH\n"
+             "Hechinger Str. 12/1\n"
+             "72072 Tübingen\n"
+             "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
+             "Geschäftsführer: Dr. Michael Sperber"))))
+  (setq gnus-alias-default-identity "mailbox")
+  (setq gnus-alias-identity-rules
+        '(("ag" ("any" "@active-group.de" both) "ag")))
+  :hook
+  (message-setup . gnus-alias-determine-identity))
+#+end_src
+
 ** Mu for Emacs (=mu4e=)
 
 [[https://www.djcbsoftware.nl/code/mu/][Mu]] is what I was using for the longest period of time, with =mu4e= being its Emacs
@@ -741,10 +985,10 @@ don't need to sync anything between my machines, at the cost of =mu= touching my
 e-mail (adding custom headers I believe). I don't mind this at all, and I can
 use =isync= and =msmtp= to receive and send mail on any host.
 
-For writing e-mails =mu4e= uses =message-mode= like the other tools. This checks the
+For writing e-mails =mu4e= uses =message-mode= like the other tools. This sets the
 =user-full-name= variable to fill in my name.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq user-full-name "Johannes Maier")
 #+end_src
 
@@ -754,7 +998,7 @@ change the =mu4e= UI accordingly. The Doom Emacs =mu4e= module hides this variab
 behind a nicer interface. I don't yet know whether everything still works as
 intended, but let's give it a try.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (after! mu4e
   (setq message-send-mail-function #'message-send-mail-with-sendmail
         message-kill-buffer-on-exit t
@@ -820,16 +1064,16 @@ intended, but let's give it a try.
 
 I also want to use a slightly wider =fill-column= in e-mails.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq-hook! mml-mode fill-column 80)
 #+end_src
 
 =Mu4e= buffers are recognized as popups by Doom, so the initial buffer opens up
 very small at the bottom of the frame; subsequent buffers do the same. Now that
-it's easier to handle popup, I'm not entirely certain what kind of behavior I'd
+it's easier to handle popups, I'm not entirely certain what kind of behavior I'd
 like to have, but let's try some things out:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (set-popup-rule! "^\\*mu4e"
   :ignore t)
 #+end_src
@@ -849,174 +1093,6 @@ and abort in this case (https://emacs.stackexchange.com/a/41176)."
       (keyboard-quit)))
 
 (add-hook 'message-send-mail-hook #'my/confirm-empty-mail-subject)
-#+end_src
-
-** Notmuch
-
-The Emacs integration for =notmuch= is great; it has the most intuitive and
-appealing UI from each of the options. =Notmuch= works by referencing incoming
-e-mail in a separate database only, not ever touching or modifying it. I really
-like this idea, and in practice it also felt great due to the quick und
-customizable searches. The usual approach is to use a tag-based system of
-categorizing your e-mail, but simply having lots of stored queries is a little
-bit more flexible.
-
-But =notmuch= only handles this single aspect; this means that one needs to find
-solutions to the following:
-
-- Getting mail
-- Initial tagging
-- Sending mail
-- Synchronization between machines
-
-Due to the declarative e-mail account configuration from =home-manager= the first
-part is very simple, and I could also easily switch between different tools like
-=isync= or =offlineimap=.
-
-The initial tagging can be done with a shell script using the well-documented
-=notmuch= CLI, or via =afew=.
-
-For sending mail I use =msmtp=.
-
-I'm using =muchsync= on my personal server to be the "source of truth". This means
-that only the server downloads e-mail via IMAP, and the machines are simply its
-/clients/; they use =muchsync= to download mail from the server.
-
-This sounds great on paper but is a little finicky with sent mail, which I'd
-also like to sync back via IMAP to my accounts. The client machine sends this
-and puts it into respective =sent= directories; =muchsync= synchronizes these
-directories as well, but I've had problems with mails appearing twice, or
-appearing not at all on the respective "other" machine, at least in the past. It
-looks or feels like my usage of =muchsync --nonew= on the clients was a potential
-problem: I've verified that after sending a mail and it having landed in the
-correct =sent= directory, a simple =muchsync my-server= didn't lead to the mail
-appearing on my servers. It worked after executing =notmuch new= once, though, so
-I guess =muchsync= only synchronizes those mails that are part of the current
-=notmuch= database state.
-
-One solution would be to make sure that whenever I'm polling from within Emacs,
-both =muchsync my-server= and =notmuch new= are executed. Since =notmuch= has
-deprecated the =notmuch-poll-script= variable in their Emacs client, I have to use
-the hooks it provides to make sure =muchsync= is executed. Putting =muchsync
---nonew= into the =preNew= hook while having an unsynchronized sent mail on the
-client sounds correct on paper in order to not execute =notmuch new= twice, but it
-means that in the case of an unsynchronized sent mail, this mail won't have been
-pushed to the server after the first call, if I am correct. So I'll have to
-experiment and probably live with =notmuch new= being called twice (which is fine
-as it's blazingly fast).
-
-Let's first define some utility functions that I'll then bind to special keys
-later.
-
-#+begin_src emacs-lisp :tangle no
-(defun my/notmuch-search-toggle-unread ()
-  "Toggle unread tag at point in `notmuch-search-mode'."
-  (interactive)
-  (if (member "unread" (notmuch-search-get-tags))
-      (notmuch-search-tag '("-unread"))
-    (notmuch-search-tag '("+unread")))
-  (notmuch-search-next-thread))
-
-(defun my/notmuch-search-toggle-deleted ()
-  "Toggle deleted tag at point in `notmuch-search-mode'."
-  (interactive)
-  (if (member "deleted" (notmuch-search-get-tags))
-      (notmuch-search-tag '("-deleted"))
-    (notmuch-search-tag '("+deleted")))
-  (notmuch-search-next-thread))
-
-(defun my/notmuch-show-toggle-deleted ()
-  "Toggle deleted tag at point in `notmuch-show-mode'."
-  (interactive)
-  (if (member "deleted" (notmuch-show-get-tags))
-      (notmuch-show-tag '("-deleted"))
-    (notmuch-show-tag '("+deleted")))
-  (notmuch-show-next-thread t))
-#+end_src
-
-Now pull in and configure the actual =notmuch= package. Note that some options
-rather belong to built-in functionality, but they fit here very well.
-
-#+begin_src emacs-lisp :tangle no
-(use-package! notmuch
-  :defer
-  :disabled
-  :init
-  (setq user-mail-address "johannes.maier@mailbox.org")
-  :custom
-  ;; msmtp is registered as sendmail
-  (message-send-mail-function 'message-send-mail-with-sendmail)
-  (message-kill-buffer-on-exit t)
-  ;; When replying to mail, choose the account to use
-  ;; based on the recipient address
-  (message-sendmail-envelope-from 'header)
-  (mail-envelope-from 'header)
-  (mail-user-agent 'message-user-agent)
-  ;; Settings for notmuch itself
-  (notmuch-show-all-multipart/alternative-parts nil)
-  (notmuch-hello-sections
-   '(notmuch-hello-insert-header
-     notmuch-hello-insert-saved-searches
-     notmuch-hello-insert-footer))
-  (notmuch-always-prompt-for-sender t)
-  (notmuch-search-oldest-first nil)
-  (notmuch-maildir-use-notmuch-insert t)
-  (notmuch-archive-tags '("-inbox" "-unread"))
-  (notmuch-message-replied-tags '("+replied" "+sent"))
-  (notmuch-fcc-dirs
-   '(("johannes.maier@mailbox.org" . "mailbox/Sent -inbox -unread +sent +private")
-     ("johannes.maier@active-group.de" . "ag/Sent -inbox -unread +sent +work")
-     (".*" . "sent")))
-  (notmuch-saved-searches
-   '((:name "inbox" :query "tag:inbox" :key "i")
-     (:name "sent" :query "tag:sent" :key "s")
-     (:name "work" :query "tag:inbox and tag:work" :key "w")
-     (:name "private" :query "tag:inbox and tag:private" :key "p")
-     (:name "all mail" :query "*" :key "a")))
-  :bind
-  (:map notmuch-show-mode-map
-        ("d" . my/notmuch-show-toggle-deleted)
-        :map notmuch-search-mode-map
-        ("d" . my/notmuch-search-toggle-deleted)
-        ("u" . my/notmuch-search-toggle-unread)))
-#+end_src
-
-=Gnus-alias= makes it possible to use different identities when composing mail. I
-mostly use it to make sure that replies to a mail are sent from the address I've
-received it at.
-
-#+begin_src emacs-lisp
-(use-package gnus-alias
-  :defer t
-  :config
-  (setq gnus-alias-identity-alist
-        `(("mailbox"
-           nil
-           "Johannes Maier <johannes.maier@mailbox.org>"
-           nil
-           nil
-           nil
-           nil)
-          ("ag"
-           nil
-           "Johannes Maier <johannes.maier@active-group.de>"
-           "Active Group GmbH"
-           nil
-           nil
-           ,(concat
-             "Johannes Maier\n"
-             "johannes.maier@active-group.de\n\n"
-             "+49 (7071) 70896-67\n\n"
-             "Active Group GmbH\n"
-             "Hechinger Str. 12/1\n"
-             "72072 Tübingen\n"
-             "Registergericht: Amtsgericht Stuttgart, HRB 224404\n"
-             "Geschäftsführer: Dr. Michael Sperber"))))
-  (setq gnus-alias-default-identity "mailbox")
-  (setq gnus-alias-identity-rules
-        '(("ag" ("any" "@active-group.de" both) "ag")))
-  :hook
-  (message-setup . gnus-alias-determine-identity))
 #+end_src
 
 ** Gnus
@@ -1040,7 +1116,7 @@ path to this file can (only?) be configured by setting the path to the /startup
 file/, meaning the newsreader-agnostic =.newsrc= file -- that I'm not actually
 using, as I will only be using =gnus=.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package! gnus
   :disabled
   :init
