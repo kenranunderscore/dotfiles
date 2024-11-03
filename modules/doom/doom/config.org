@@ -1327,6 +1327,88 @@ what the identifier should be in that case."
       (insert import-line))))
 #+end_src
 
+*** Templates
+
+While I'm using =yasnippet= for templates in Emacs, some things are just a tad bit
+too complex to handle in a template language, and much easier to do in ELisp.
+These go here.
+
+**** Newtypes
+
+In Haskell, =newtype= is a mechanism I use all the time. These are different (but
+not all) scenarios that need to be possible to output with a utility command:
+
+#+begin_src haskell :tangle no
+newtype Foo = Foo Int
+newtype Foo a = Foo (IO a)
+newtype Foo = Foo { unFoo :: Int } -- the default
+newtype Foo = SomeCtor { unFoo :: Int }
+newtype Foo = SomeCtor { custom :: Int }
+newtype Foo a = SomeCtor { unFoo :: ReaderT Config IO a }
+-- etc.
+#+end_src
+
+The following rather complicated command /should/ handle all the cases above. I
+rarely use it, as quickly typing out a short ~newtype~ is usually sufficient. It
+/is/ helpful for longer type names, though.
+
+#+begin_src emacs-lisp
+(defun my/haskell-newtype-template (arg name ctor accessor type)
+  "Create a Haskell newtype declaration.  This will ask you for the
+type NAME, the inner TYPE, and optionally for constructor and
+accessor name.  If called with a non-nil prefix ARG then it won't
+create and accessor and omit the curly braces."
+  (interactive
+   (let* ((arg current-prefix-arg)
+          (name (my/read-non-empty-string "Name: "))
+          (ctor (or (my/read-non-empty-string
+                     (concat "Constructor [default " name "]: "))
+                    name))
+          (accessor-def (concat "un" name))
+          (accessor (unless arg
+                      (or (my/read-non-empty-string
+                           (concat "Accessor [default " accessor-def "]: "))
+                          accessor-def)))
+          (type (my/read-non-empty-string "Inner type: ")))
+     (list arg name ctor accessor type)))
+  (let* ((type-parts
+          (mapcar (lambda (s)
+                    (replace-regexp-in-string "[\\(\\)]" "" s))
+                  (split-string type split-string-default-separators t)))
+         (type-param (seq-find (lambda (s)
+                                 (let ((c (string-to-char s)))
+                                   (equal c (downcase c))))
+                               type-parts))
+         (lhs (if type-param
+                  (concat name " " type-param)
+                name))
+         (final-type (if (and arg
+                              type-param
+                              (> (seq-length type-parts) 1)) ; need parens around type
+                         (concat "(" type ")")
+                       type))
+         (content (if accessor
+                      (concat "{ " accessor " :: " final-type " }")
+                    final-type)))
+    (insert
+     (concat "newtype " lhs " = " ctor " " content "\n"))))
+#+end_src
+
+*** Navigating errors
+
+As always, =hydra= is highly capable of simplifying all sorts of navigational sets
+of commands.
+
+#+begin_src emacs-lisp
+(defhydra hydra-haskell-error-navigation (:hint nil)
+  "\n
+  Navigate Haskell compilation errors\n
+  [_f_]: first   [_n_]: next   [_p_]: previous"
+  ("f" haskell-goto-first-error)
+  ("n" haskell-goto-next-error)
+  ("p" haskell-goto-prev-error))
+#+end_src
+
 *** Formatting
 
 Several formatters are in use in different Haskell projects, like =fourmolu=,
