@@ -9,6 +9,9 @@
 (package! modus-themes)
 (package! gruber-darker-theme)
 (package! srcery-theme)
+(package! base16-theme)
+(package! spacemacs-theme)
+(package! srcery-theme)
 
 ;;; Org mode
 
