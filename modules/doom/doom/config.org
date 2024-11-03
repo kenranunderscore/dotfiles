@@ -85,84 +85,65 @@ Don't show a cursor in inactive windows.
 An alist of my preferred font families, together with a plist of certain
 attributes that need to be applied when switching to the respective font.
 
+FIXME: Respect custom properties defined here
+
 #+begin_src emacs-lisp
-(setq my/font-alist
-      '((pragmata-pro
-         . (:family
-            "Pragmata Pro Mono"))
-        (ibm-vga-8x14
-         . (:family
-            "MxPlus IBM VGA 8x14"))
-        (ibm-vga-9x16
-         . (:family
-            "MxPlus IBM VGA 9x16"))
-        (dos-16
-         . (:family
-            "Mx437 DOS/V TWN16"))
-        (iosevka
-         . (:family
-            "Iosevka Term"))
-        (iosevka-slab
-         . (:family
-            "Iosevka Slab"))
-        (iosevka-curly
-         . (:family
-            "Iosevka Curly"))
-        (iosevka-curly-slab
-         . (:family
-            "Iosevka Curly Slab"))
-        (dejavu
-         . (:family
-            "DejaVu Sans Mono"))
-        (ibm-plex
-         . (:family
-            "IBM Plex Mono"))
-        (cascadia
-         . (:family
-            "Cascadia Code"))
-        (source-code-pro
-         . (:family
-            "Source Code Pro"))
-        (consolas
-         . (:family
-            "Consolas"))
-        (fira-code
-         . (:family
-            "Fira Code"))
-        (jetbrains-mono
-         . (:family
-            "JetBrains Mono"))
-        (julia-mono
-         . (:family
-            "JuliaMono"))
-        (courier-prime
-         . (:family
-            "Courier Prime"))
-        (fantasque-sans-mono
-         . (:family
-            "Fantasque Sans Mono"))
-        (lucida-console
-         . (:family
-            "Lucida Console"))
-        (inconsolata
-         . (:family
-            "Inconsolata"))
-        (termingus
-         . (:family
-            "Termingus"))
-        (unifont
-         . (:family
-            "Unifont"))
-        (andale-mono
-         . (:family
-            "Andale Mono"))))
+(defcustom my/fonts nil
+  "A list of custom font definitions. Each font definition is a plist,
+usually created by a call to `my/define-font'.")
+
+(cl-defun my/define-font (family &key default-height org-height weight)
+  "Add a font definition for FAMILY."
+  (add-to-list
+   'my/fonts
+   (list
+    :family family
+    :default-height (or default-height 180)
+    :org-height (or org-height 0.9)
+    :weight (or weight 'regular))))
+
+(defun my/get-font (family)
+  "Get the font definition for FAMILY."
+  (seq-find
+   (lambda (f)
+     (string=
+      (plist-get f :family)
+      family))
+   my/fonts))
+
+(my/define-font "Pragmata Pro Mono")
+(my/define-font "MxPlus IBM VGA 8x14" :default-height 200)
+(my/define-font "MxPlus IBM VGA 9x16" :default-height 200)
+(my/define-font "Mx437 DOS/V TWN16" :default-height 200)
+(my/define-font "Iosevka Term")
+(my/define-font "Iosevka Comfy")
+(my/define-font "DejaVu Sans Mono")
+(my/define-font "IBM Plex Mono")
+(my/define-font "Cascadia Code")
+(my/define-font "Source Code Pro")
+(my/define-font "Consolas")
+(my/define-font "Fira Code" :org-height 0.8)
+(my/define-font "JetBrains Mono" :org-height 0.8)
+(my/define-font "Julia Mono")
+(my/define-font "Courier Prime" :org-height 0.95)
+(my/define-font "Fantasque Sans Mono")
+(my/define-font "Lucida Console")
+(my/define-font "Inconsolata")
+(my/define-font "Unifont" :default-height 200)
+(my/define-font "Geist Mono")
+(my/define-font "Berkeley Mono")
+(my/define-font "Ubuntu Sans Mono")
+(my/define-font "Fixedsys Excelsior 3.01")
+(my/define-font "PT Mono")
 #+end_src
 
 #+begin_src emacs-lisp
-(setq my/current-font 'jetbrains-mono)
-(setq doom-font (apply #'font-spec
-                       (plist-put (alist-get my/current-font my/font-alist)
-                                  :size 23)))
+(setq my/current-font-family "JetBrains Mono")
+(setq doom-font
+      (apply #'font-spec
+             (plist-put
+              (my/get-font my/current-font-family)
+              :size 23)))
 #+end_src
 
 The default text scaling increment produces jumps in font size that are way too
@@ -182,22 +163,22 @@ increased.
 #+end_src
 
 The function I use to switch between the various fonts I like. It applies the
-attributes of its value in =my/font-alist=.
+attributes of its value in =my/fonts=.
 
 #+begin_src emacs-lisp
-(defun my/switch-font (font)
-  "Apply the attributes stored for FONT in `my/font-alist'."
+(defun my/switch-font (family)
+  "Apply the attributes stored for FAMILY in `my/fonts."
   (interactive
    (list
-    (intern
-     (completing-read
-      "Font: "
-      (mapcar #'car
-              (assoc-delete-all my/current-font
-                                (copy-alist my/font-alist)))))))
+    (completing-read
+     "Font: "
+     (seq-remove
+      (lambda (f) (string= f my/current-font-family))
+      (mapcar (lambda (f) (plist-get f :family))
+              my/fonts)))))
   (let* ((size (font-get doom-font :size))
-         (attrs (plist-put (alist-get font my/font-alist) :size size)))
-    (setq my/current-font font)
+         (attrs (plist-put (my/get-font family) :size size)))
+    (setq my/current-font-family family)
     (setq doom-font (apply #'font-spec attrs))
     (doom/reload-font)))
 #+end_src
@@ -223,7 +204,7 @@ attributes of its value in =my/font-alist=.
   "
   ("g" doom/increase-font-size)
   ("l" doom/decrease-font-size)
-  ("r" doom/reset-font-size :color blue)
+  ("r" doom/reset-font-size)
   ("s" my/set-font-size :color blue)
   ("q" nil "exit"))
 
