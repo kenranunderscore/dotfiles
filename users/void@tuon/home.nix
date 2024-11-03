@@ -101,8 +101,8 @@ in
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    doom.enable = false;
-    emacs.enable = true;
+    doom.enable = true;
+    emacs.enable = false;
     nyxt.enable = false;
     git.email = "johannes.maier@mailbox.org";
     wezterm = {
