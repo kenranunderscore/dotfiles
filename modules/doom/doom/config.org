@@ -1604,3 +1604,14 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
    :desc "Format file"
    :nmv "f" #'my/ocamlformat-format-buffer))
 #+end_src
+
+** Rust
+
+#+begin_src emacs-lisp
+(after! rustic
+  (map!
+   :map rustic-mode-map
+   :localleader
+   :desc "Format buffer"
+   :nmv "f" #'rustic-format-buffer))
+#+end_src
