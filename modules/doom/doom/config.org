@@ -198,6 +198,8 @@ replace ~SPC f~.
 
 *** Changing the font size
 
+FIXME: fix resetting of the font after ~SPC z r~
+
 #+begin_src emacs-lisp
 (defun my/set-font-size (size)
   "Set the font size of the current font to a fixed value SIZE."
@@ -334,9 +336,126 @@ running. =Gruvbox= is always a good choice, anywhere.
 
 ** Mode line (TODO: port and conditionalize with =featurep!=)
 
+FIXME: flycheck
+
 #+begin_src emacs-lisp
-(after! doom-modeline
-  (setq doom-modeline-buffer-file-name-style 'buffer-name))
+(defmacro my/with-active-face (face)
+  "Return FACE if we're in the mode line of the active window, and
+the `mode-line-inactive' face otherwise."
+  `(if (mode-line-window-selected-p)
+       ,face
+     'mode-line-inactive))
+
+(defcustom my/evil-state-mode-line-format
+  '(:eval
+    (let ((fg (face-attribute 'default :foreground))
+          (bg (face-attribute 'default :background))
+          (error-fg (face-attribute 'error :foreground)))
+      (cond
+       ((eq evil-state 'insert)
+        (propertize
+         " INSERT "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,error-fg))))
+       ((eq evil-state 'normal)
+        (propertize
+         " NORMAL "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,fg))))
+       ((eq evil-state 'motion)
+        (propertize
+         " MOTION "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,fg))))
+       ((eq evil-state 'visual)
+        (propertize
+         " VISUAL "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-function-name-face :foreground)))))
+       ((eq evil-state 'emacs)
+        (propertize
+         " EMACS "
+         'face
+         (my/with-active-face `(:foreground ,bg :background ,(face-attribute 'font-lock-keyword-face :foreground)))))
+       (t "        "))))
+  "Specifies how to display the current `evil-state' in the mode
+line."
+  :risky t)
+
+(defun my/visible-minor-modes ()
+  "Return `minor-mode-alist', but with certain modes I don't want to
+see filtered out."
+  (let ((hidden-modes
+         '(
+           abbrev-mode
+           auto-fill-function
+           auto-revert-mode
+           better-jumper-mode
+           better-jumper-local-mode
+           buffer-face-mode
+           company-box-mode
+           company-mode
+           dot-mode
+           editorconfig-mode
+           eldoc-mode
+           evil-collection-unimpaired-mode
+           evil-commentary-mode
+           evil-escape-mode
+           evil-org-mode
+           evil-snipe-mode
+           evil-snipe-local-mode
+           flymake-mode
+           gcmh-mode
+           global-company-mode
+           lsp-lens-mode
+           org-indent-mode
+           projectile-mode
+           visual-line-mode
+           which-key-mode
+           ws-butler-global-mode
+           ws-butler-mode
+           yas-minor-mode)))
+    (seq-difference minor-mode-alist
+                    hidden-modes
+                    (lambda (hidden cell)
+                      (eq (car cell)
+                          hidden)))))
+
+(defcustom my/minor-modes-mode-line-format
+  '(:eval
+    (let ((s (format-mode-line (my/visible-minor-modes))))
+      (if (string-empty-p s) ""
+        (concat "(" (substring s 1) ")"))))
+  "How to display the active minor modes in the mode line."
+  :risky t)
+
+(defcustom my/mode-line-compilation-format
+  '(compilation-in-progress
+    (:eval (propertize
+            "   [Compiling...]"
+            'face
+            (my/with-active-face compilation-mode-line-run))))
+  "How to display the indicator for a running compilation process in
+the mode line."
+  :risky t)
+
+(defcustom my/major-mode-mode-line-format
+  '("" (:eval (string-replace "-mode" "" (symbol-name major-mode))))
+  "How to display the active major mode in the mode line."
+  :risky t)
+
+(setq-default
+ mode-line-format
+ '(""
+   my/evil-state-mode-line-format
+   ;; my/mode-line-flymake-format
+   my/mode-line-compilation-format
+   (:propertize "   %b" face mode-line-buffer-id)
+   ;; Always show current line and column, without checking `column-number-mode'
+   ;; and `line-number-mode'
+   ("   L%l C%c")
+   ("   " my/major-mode-mode-line-format)
+   ("   " my/minor-modes-mode-line-format)))
 #+end_src
 
 * Basic options
@@ -478,6 +597,7 @@ the configuration is done by Doom already, so I only need to slightly tweak some
 things to my liking.
 
 #+begin_src emacs-lisp
+(setq doom-localleader-key ",")
 (after! evil
   ;; Use a special cursor for insert mode
   (setq evil-insert-state-cursor 'box)
@@ -1421,25 +1541,26 @@ basis to enable the fitting mode there.
 **** Fourmolu
 
 #+begin_src emacs-lisp
-(reformatter-define my/fourmolu-format
-  :program "fourmolu"
-  :args (list "--stdin-input-file" (or (buffer-file-name) input-file))
-  :lighter " my/fourmolu")
+(after! haskell-mode
+  (reformatter-define my/fourmolu-format
+    :program "fourmolu"
+    :args (list "--stdin-input-file" (or (buffer-file-name) input-file))
+    :lighter " my/fourmolu"))
 #+end_src
 
 **** Cabal files
 
 #+begin_src emacs-lisp
-(reformatter-define my/cabal-fmt-format
-  :program "cabal-fmt"
-  :args (list "-i" input-file)
-  :stdin nil
-  :stdout nil
-  :lighter " my/cabal-fmt")
-
-(map! :map haskell-cabal-mode-map
-      :localleader
-      :desc "Format" :n "f" #'my/cabal-fmt-format-buffer)
+(after! haskell-mode
+  (reformatter-define my/cabal-fmt-format
+    :program "cabal-fmt"
+    :args (list "-i" input-file)
+    :stdin nil
+    :stdout nil
+    :lighter " my/cabal-fmt")
+  (map! :map haskell-cabal-mode-map
+        :localleader
+        :desc "Format" :n "f" #'my/cabal-fmt-format-buffer))
 #+end_src
 
 *** Configuration of =haskell-mode=
@@ -1453,15 +1574,33 @@ well as some of the above utilities into a local keymap for easy access.
 (after! haskell-mode
   (setq haskell-process-type 'cabal-repl
         haskell-interactive-popup-errors nil
-        haskell-process-args-cabal-repl '("--repl-options=-ferror-spans")))
+        haskell-process-args-cabal-repl '("--repl-options=-ferror-spans"))
+  (map! :map haskell-mode-map
+        :prefix ("C-c p" . "pragmas")
+        :desc "Enable language extension" :n "l" #'my/haskell-add-language-extension
+        :desc "Set GHC option" :n "o" #'my/haskell-add-ghc-option
+        :prefix "C-c"
+        :desc "Add import" :n "i" #'my/haskell-add-import
+        :localleader
+        :desc "Kill session" :n "k" #'haskell-session-kill
+        :desc "Format with fourmolu" :n "f" #'my/fourmolu-format-buffer))
+#+end_src
+** OCaml
 
-(map! :map haskell-mode-map
-      :prefix ("C-c p" . "pragmas")
-      :desc "Enable language extension" :n "l" #'my/haskell-add-language-extension
-      :desc "Set GHC option" :n "o" #'my/haskell-add-ghc-option
-      :prefix "C-c"
-      :desc "Add import" :n "i" #'my/haskell-add-import
-      :localleader
-      :desc "Kill session" :n "k" #'haskell-session-kill
-      :desc "Format with fourmolu" :n "f" #'my/fourmolu-format-buffer)
+[[https://github.com/ocaml/tuareg][tuareg]] is the standard mode for OCaml editing, providing syntax highlighting,
+REPL support, etc., similar to what =haskell-mode= does for Haskell.
+
+#+begin_src emacs-lisp
+(after! tuareg
+  (setq tuareg-indent-align-with-first-arg nil
+        tuareg-match-patterns-aligned t)
+  (reformatter-define my/ocamlformat-format
+    :program "ocamlformat"
+    :args (list "--name" (buffer-file-name) "-")
+    :lighter " +ocamlformat")
+  (map!
+   :map tuareg-mode-map
+   :localleader
+   :desc "Format file"
+   :nmv "f" #'my/ocamlformat-format-buffer))
 #+end_src
