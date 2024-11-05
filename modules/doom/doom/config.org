@@ -983,7 +983,9 @@ rather belong to built-in functionality, but they fit here very well.
    :desc "Archive" :n "a" #'my/notmuch-archive
    :desc "Delete" :n "d" #'my/notmuch-delete
    :map notmuch-hello-mode-map
-   :desc "Search (tree)" :n "s" #'notmuch-tree))
+   :desc "Search (tree)" :n "s" #'notmuch-tree)
+  (set-popup-rule! "^\\*notmuch*"
+    :ignore t))
 #+end_src
 
 In order to be able to use =notmuch= again, I need to rely on saved searches only
