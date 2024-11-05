@@ -1617,3 +1617,25 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
    :desc "Format buffer"
    :nmv "f" #'rustic-format-buffer))
 #+end_src
+
+** Python
+
+Sorting imports with ~isort~:
+
+#+begin_src emacs-lisp
+(after! python-mode
+  (reformatter-define my/black-format
+    :program "black"
+    :args (list input-file)
+    :stdin nil
+    :stdout nil
+    :input-file (reformatter-temp-file-in-current-directory)
+    :lighter " +black")
+  (reformatter-define my/isort
+    :program "isort"
+    :args (list input-file)
+    :stdin nil
+    :stdout nil
+    :input-file (reformatter-temp-file-in-current-directory)
+    :lighter " +isort"))
+#+end_src
