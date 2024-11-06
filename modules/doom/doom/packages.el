@@ -17,6 +17,7 @@
 
 (package! org-appear)
 (package! org-modern)
+(package! org-present)
 
 ;;; E-mail
 
