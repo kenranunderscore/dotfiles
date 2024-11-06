@@ -20,7 +20,7 @@
 
 ;;; E-mail
 
-(package! mu4e-alert :disable t)
+(package! gnus-alias)
 
 ;;; Keybindings
 

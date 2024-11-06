@@ -1073,12 +1073,13 @@ notmuch does in its preNew hook, yielding quicker refreshes."
          "~/.mail/ag/Trash"
        "~/.mail/mailbox/Trash"))))
 #+end_src
+
 =Gnus-alias= makes it possible to use different identities when composing mail. I
 mostly use it to make sure that replies to a mail are sent from the address I've
 received it at.
 
 #+begin_src emacs-lisp
-(use-package gnus-alias
+(use-package! gnus-alias
   :defer t
   :config
   (setq gnus-alias-identity-alist
