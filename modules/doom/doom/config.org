@@ -189,13 +189,6 @@ attributes of its value in =my/fonts=.
     (doom/reload-font)))
 #+end_src
 
-Since I prefer to use the built-in ~C-h~ bindings for /help/ commands I'll happily
-replace ~SPC f~.
-
-#+begin_src emacs-lisp
-(map! :leader :g "h f" #'my/switch-font)
-#+end_src
-
 *** Changing the font size
 
 FIXME: fix resetting of the font after ~SPC z r~
