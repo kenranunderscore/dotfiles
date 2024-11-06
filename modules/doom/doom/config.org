@@ -773,16 +773,21 @@ to re-fill paragraphs when editing text. After loading =org=, a custom font setu
 might run to adjust the headers.
 
 #+begin_src emacs-lisp
-(use-package! org
-  :hook
-  ((org-mode . auto-fill-mode))
-  :custom
-  ((org-directory "~/org")
-   (org-startup-indented t)
-   (org-log-done t)
-   (org-edit-src-content-indentation 0)
-   (org-agenda-files '("~/org/inbox.org"))
-   (org-html-htmlize-output-type 'css))
+(after! org
+  (add-hook 'org-mode-hook #'auto-fill-mode)
+  (setq org-directory "~/org"
+        org-startup-indented t
+        org-log-done t
+        org-edit-src-content-indentation 0
+        org-agenda-files '("~/org/inbox.org" "~/org/gtd.org")
+        org-refile-targets '(("~/org/gtd.org" :maxlevel . 3))
+        org-html-htmlize-output-type 'css
+        org-capture-templates '(("t" "Todo" entry
+                                 (file+headline "~/org/inbox.org" "Tasks")
+                                 "* TODO %i%?")
+                                ("n" "Note" entry
+                                 (file+headline "~/org/notes.org" "Notes")
+                                 "* %?\n%a\nNote taken on %U")))
   :config
   (setq-default org-hide-emphasis-markers t)
   (advice-add 'org-refile
