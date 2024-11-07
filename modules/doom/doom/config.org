@@ -169,7 +169,9 @@ increased.
 #+end_src
 
 The function I use to switch between the various fonts I like. It applies the
-attributes of its value in =my/fonts=.
+attributes of its value in =my/fonts=. Note that it needs a couple of workarounds
+to keep Doom from resetting back to the first chosen font that was ever resized,
+as it keeps that information in the ~'initial-value~ property of ~doom-font~.
 
 #+begin_src emacs-lisp
 (defun my/switch-font (family)
@@ -183,15 +185,19 @@ attributes of its value in =my/fonts=.
       (mapcar (lambda (f) (plist-get f :family))
               my/fonts)))))
   (let* ((size (font-get doom-font :size))
-         (attrs (plist-put (my/get-font family) :size size)))
+         (attrs (plist-put (my/get-font family) :size size))
+         (value (apply #'font-spec attrs))
+         (new-initial-value
+          (when-let ((initial-font (get 'doom-font 'initial-value)))
+            (apply #'font-spec
+                   (plist-put attrs :size (font-get initial-font :size))))))
     (setq my/current-font-family family)
-    (setq doom-font (apply #'font-spec attrs))
+    (setq doom-font value)
+    (put 'doom-font 'initial-value new-initial-value)
     (doom/reload-font)))
 #+end_src
 
 *** Changing the font size
-
-FIXME: fix resetting of the font after ~SPC z r~
 
 #+begin_src emacs-lisp
 (defun my/set-font-size (size)
