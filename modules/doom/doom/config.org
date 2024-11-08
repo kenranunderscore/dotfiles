@@ -479,9 +479,9 @@ seems like a good idea.
 
 ** Mode-sensitive completion for extended commands
 
-Make commands shown with M-x depend on the active major mode. Note: this doesn't
-work correctly yet, as =(command-modes 'some-command)= seems to return the modes
-in an unexpected format.
+Nowadays ~interactive~ may take a list of modes that this command is considered
+applicable for. I like to use this, as (at least for my own commands for now) I
+think it leads to a more precise and uncluttered narrowing experience.
 
 #+begin_src emacs-lisp
 (setq read-extended-command-predicate
@@ -499,14 +499,14 @@ two functions are used for.
 #+begin_src emacs-lisp
 (defun ~switch-to-absolute-line-numbers ()
   "Enable absolute line numbers."
-  (interactive)
+  (interactive nil display-line-numbers-mode)
   (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers t)))
 
 (defun ~switch-to-hybrid-line-numbers ()
   "Enable relative line numbers, but with the current line
 showing its absolute line number."
-  (interactive)
+  (interactive nil display-line-numbers-mode)
   (when (bound-and-true-p display-line-numbers-mode)
     (setq display-line-numbers 'relative)
     (setq display-line-numbers-current-absolute t)))
@@ -1031,7 +1031,7 @@ buffers.
 (defun ~notmuch-new-without-hooks ()
   "Execute 'notmuch new --no-hooks', circumventing the automatic polling
 notmuch does in its preNew hook, yielding quicker refreshes."
-  (interactive)
+  (interactive nil notmuch-show-mode notmuch-tree-mode notmuch-search-mode)
   (if (equal major-mode #'notmuch-tree-mode)
       (notmuch-call-notmuch-process "new" "--no-hooks")))
 
@@ -1060,7 +1060,7 @@ notmuch does in its preNew hook, yielding quicker refreshes."
 
 (defun ~notmuch-archive ()
   "Archive the current email."
-  (interactive)
+  (interactive nil notmuch-show-mode notmuch-tree-mode notmuch-search-mode)
   (let* ((email (~notmuch-get-source-file))
          (archive-year (caddr (calendar-current-date)))
          ;; TODO: get maildir location from system configuration
@@ -1071,7 +1071,7 @@ notmuch does in its preNew hook, yielding quicker refreshes."
 
 (defun ~notmuch-unarchive ()
   "Unarchive the current email."
-  (interactive)
+  (interactive nil notmuch-show-mode notmuch-tree-mode notmuch-search-mode)
   (let* ((email (~notmuch-get-source-file))
          (maildir (if (~is-work-email email)
                       "~/.mail/ag/Inbox"
@@ -1080,7 +1080,7 @@ notmuch does in its preNew hook, yielding quicker refreshes."
 
 (defun ~notmuch-delete ()
   "Delete the current email (by moving it into the trash)."
-  (interactive)
+  (interactive nil notmuch-show-mode notmuch-tree-mode notmuch-search-mode)
   (let ((email (~notmuch-get-source-file)))
     (~notmuch-move-into-maildir
      email
@@ -1406,7 +1406,8 @@ to the top of the file."
    (list
     (completing-read
      "Extension: "
-     haskell-ghc-supported-extensions)))
+     haskell-ghc-supported-extensions))
+   haskell-mode)
   (let ((pragma (~make-pragma "LANGUAGE" ext-name)))
     (save-excursion
       (goto-char (point-min))
@@ -1419,7 +1420,8 @@ file."
    (list
     (completing-read
      "GHC option: "
-     haskell-ghc-supported-options)))
+     haskell-ghc-supported-options))
+   haskell-mode)
   (let ((pragma (~make-pragma "OPTIONS_GHC" opt-name)))
     (save-excursion
       (goto-char (point-min))
@@ -1456,7 +1458,8 @@ what the identifier should be in that case."
            (last (split-string module "[\.]" t)))
           (alias (when qualified?
                    (~read-non-empty-string "Alias: " default-alias))))
-     (list arg module qualified? alias)))
+     (list arg module qualified? alias))
+   haskell-mode)
   (let ((import-line
          (concat "import "
                  module
@@ -1513,7 +1516,8 @@ create and accessor and omit the curly braces."
                            (concat "Accessor [default " accessor-def "]: "))
                           accessor-def)))
           (type (~read-non-empty-string "Inner type: ")))
-     (list arg name ctor accessor type)))
+     (list arg name ctor accessor type))
+   haskell-mode)
   (let* ((type-parts
           (mapcar (lambda (s)
                     (replace-regexp-in-string "[\\(\\)]" "" s))
