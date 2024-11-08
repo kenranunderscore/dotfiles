@@ -762,6 +762,22 @@ mostly use it for at the moment is its =embark-act= command in conjunction with
 a separate buffer, where I can then utilize =wgrep= to bulk-modify the original
 buffers.
 
+*** =Orderless=
+
+[[https://github.com/oantolin/orderless][Orderless]] is used to provide /completion styles/ on top of incremental narrowing.
+In Doom (and in my custom Emacs config) this means having certain
+prefixes/patterns (defined in ~orderless-affix-dispatch-alist~) that change the
+way something I enter into the minibuffer is searched for.
+
+I don't use "full fuzzing", which is normally done by prefixing a search term
+with a tilde character, so I remove it here to free that up as a character
+potentially usable for ELisp variables and functions.
+
+#+begin_src emacs-lisp
+(after! orderless
+  (assq-delete-all ?\~ orderless-affix-dispatch-alist))
+#+end_src
+
 * TODO Jumping around with =avy=
 * TODO Org mode
 ** Tweaks to the default configuration
