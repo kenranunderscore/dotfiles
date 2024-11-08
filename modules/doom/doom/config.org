@@ -12,7 +12,7 @@
 * Quickly jumping to this Doom Emacs configuration
 
 I /very often/ jump into /this/ file to quickly tweak things. So let's make this
-even more convenient than the default binding =SPC f P=.
+even more convenient than the default binding [[kbd:][SPC f P]].
 
 #+begin_src emacs-lisp
 (defun ~open-init-file ()
@@ -466,10 +466,10 @@ the mode line."
 
 ** Use =SPC SPC= as an alias for =M-x=
 
-Doom by default sets =SPC SPC= to =projective-find-file=, which I am used to
-invoking via =SPC p f= (that's also bound by default).
+Doom by default sets [[kbd:][SPC SPC]] to =projective-find-file=, which I am used to
+invoking via [[kbd:][SPC p f]] (that's also bound by default).
 
-I'd like to get used to just pressing =M-x= for extended commands, but =SPC SPC= is
+I'd like to get used to just pressing [[kbd:][M-x]] for extended commands, but [[kbd:][SPC SPC]] is
 ingrained in my muscle memory. Remapping it for when I "accidentally" press it
 seems like a good idea.
 
@@ -623,7 +623,7 @@ things to my liking.
 
 The =ace-window= package comes with Doom's =window-select= module. I need a couple
 of customizations due to using the alternative keyboard layout MTGAP; I'm also
-used to my =C-l= rebind to more comfortably switch than =C-w C-w=.
+used to my [[kbd:][C-l]] rebind to more comfortably switch than [[kbd:][C-w C-w]].
 
 #+begin_src emacs-lisp
 (use-package! ace-window
@@ -637,9 +637,9 @@ used to my =C-l= rebind to more comfortably switch than =C-w C-w=.
 
 * Built-in packages with extensions
 ** Emacs Lisp
-*** Evaluating with =C-c C-c=
+*** Evaluating with [[kbd:][C-c C-c]]
 
-I like evaluating the top-level form I'm currently on by pressing =C-c C-c=,
+I like evaluating the top-level form I'm currently on by pressing [[kbd:][C-c C-c]],
 similar to how one compiles in SLY/SLIME.
 
 FIXME: this destroys the nice bindings in =org-src= buffers.  fix possible?
@@ -783,7 +783,7 @@ potentially usable for ELisp variables and functions.
 ** Tweaks to the default configuration
 
 When writing text with =org=, =auto-fill-mode= should be enabled to automatically
-break overly long lines into smaller pieces when typing. One may still use =M-q=
+break overly long lines into smaller pieces when typing. One may still use [[kbd:][M-q]]
 to re-fill paragraphs when editing text. After loading =org=, a custom font setup
 might run to adjust the headers.
 
