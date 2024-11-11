@@ -586,7 +586,8 @@ does not automatically follow the output if it reaches the bottom of the first
 page, so let's change that.
 
 #+begin_src emacs-lisp
-(setq compilation-scroll-output t)
+(after! compile
+  (setq compilation-scroll-output t))
 #+end_src
 
 * Vim emulation with =evil=
@@ -1612,6 +1613,7 @@ well as some of the above utilities into a local keymap for easy access.
         :desc "Kill session" :n "k" #'haskell-session-kill
         :desc "Format with fourmolu" :n "f" #'~fourmolu-format-buffer))
 #+end_src
+
 ** OCaml
 
 [[https://github.com/ocaml/tuareg][tuareg]] is the standard mode for OCaml editing, providing syntax highlighting,
