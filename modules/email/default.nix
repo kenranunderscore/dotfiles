@@ -62,7 +62,7 @@ in
             };
           };
           notmuch.enable = true;
-          mu.enable = true;
+          mu.enable = false;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -98,7 +98,7 @@ in
             };
           };
           notmuch.enable = true;
-          mu.enable = true;
+          mu.enable = false;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
@@ -120,7 +120,7 @@ in
     programs = {
       mbsync.enable = true;
       msmtp.enable = true;
-      mu.enable = true;
+      mu.enable = false;
       notmuch = {
         enable = true;
         hooks.preNew = "mbsync -a";
