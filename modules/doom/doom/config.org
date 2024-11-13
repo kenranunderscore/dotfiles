@@ -1573,7 +1573,8 @@ basis to enable the fitting mode there.
   (reformatter-define ~fourmolu-format
     :program "fourmolu"
     :args (list "--stdin-input-file" (or (buffer-file-name) input-file))
-    :lighter " ~fourmolu"))
+    :lighter " ~fourmolu"
+    :interactive-modes (haskell-mode)))
 #+end_src
 
 **** Cabal files
@@ -1585,7 +1586,8 @@ basis to enable the fitting mode there.
     :args (list "-i" input-file)
     :stdin nil
     :stdout nil
-    :lighter " ~cabal-fmt")
+    :lighter " ~cabal-fmt"
+    :interactive-modes (haskell-cabal-mode))
   (map! :map haskell-cabal-mode-map
         :localleader
         :desc "Format" :n "f" #'~cabal-fmt-format-buffer))
@@ -1626,7 +1628,8 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
   (reformatter-define ~ocamlformat-format
     :program "ocamlformat"
     :args (list "--name" (buffer-file-name) "-")
-    :lighter " ~ocamlformat")
+    :lighter " ~ocamlformat"
+    :interactive-modes (tuareg-mode))
   (map!
    :map tuareg-mode-map
    :localleader
@@ -1650,19 +1653,21 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
 Sorting imports with ~isort~:
 
 #+begin_src emacs-lisp
-(after! python-mode
+(after! python
   (reformatter-define ~black-format
     :program "black"
     :args (list input-file)
     :stdin nil
     :stdout nil
     :input-file (reformatter-temp-file-in-current-directory)
-    :lighter " ~black")
+    :lighter " ~black"
+    :interactive-modes (python-mode))
   (reformatter-define ~isort
     :program "isort"
     :args (list input-file)
     :stdin nil
     :stdout nil
     :input-file (reformatter-temp-file-in-current-directory)
-    :lighter " ~isort"))
+    :lighter " ~isort"
+    :interactive-modes (python-mode)))
 #+end_src
