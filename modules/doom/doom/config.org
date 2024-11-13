@@ -517,18 +517,15 @@ keybinding."
   (interactive)
   (display-line-numbers-mode 'toggle))
 
-(use-package! display-line-numbers
-  :defer
-  :init
-  (remove-hook!
-    '(prog-mode-hook text-mode-hook conf-mode-hook)
-    #'display-line-numbers-mode)
-  :hook ((evil-insert-state-entry . ~switch-to-absolute-line-numbers)
-         (evil-insert-state-exit . ~switch-to-hybrid-line-numbers))
-  :config
-  (setq display-line-numbers-type 'relative)
-  (setq display-line-numbers-current-absolute t)
-  (map! :leader :desc "Line numbers" :nmv "t l" #'~toggle-line-numbers))
+;; Disable line numbers by default
+(remove-hook!
+  '(prog-mode-hook text-mode-hook conf-mode-hook)
+  #'display-line-numbers-mode)
+(add-hook 'evil-insert-state-entry-hook #'~switch-to-absolute-line-numbers)
+(add-hook 'evil-insert-state-exit-hook #'~switch-to-hybrid-line-numbers)
+(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-current-absolute t)
+(map! :leader :desc "Line numbers" :nmv "t l" #'~toggle-line-numbers)
 #+end_src
 
 ** If I have to use tabs, at least make them smaller
