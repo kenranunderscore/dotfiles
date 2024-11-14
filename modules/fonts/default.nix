@@ -35,6 +35,7 @@ in
           (callPackage ./oldschool.nix { })
         ]
         ++ (with pkgs; [
+          anonymousPro
           cantarell-fonts
           cascadia-code
           corefonts

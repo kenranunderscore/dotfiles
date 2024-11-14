@@ -141,6 +141,7 @@ usually created by a call to `~define-font'.")
 (~define-font "Ubuntu Sans Mono")
 (~define-font "Fixedsys Excelsior 3.01")
 (~define-font "PT Mono")
+(~define-font "Anonymous Pro")
 #+end_src
 
 #+begin_src emacs-lisp
