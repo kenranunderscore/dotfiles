@@ -1331,11 +1331,22 @@ TODO: docs
                  "#herrhotzenplotz"))))
 #+end_src
 
-* TODO Project management
+* Project management with ~projectile~
+
+I used to prefer ~project~ over ~projectile~ in my vanilla Emacs configuration. Doom
+integrates well with ~projectile~, though, but I have to do some work to make
+project switching a little more convenient; the default action after switching
+is to select a file, but I very often need to do different things, like open
+~magit~ or opening ~dired~ in the project root instead.
 
 #+begin_src emacs-lisp
-(setq projectile-project-search-path '("~/projects" "~/ag" "~/tmpdev"))
-(setq projectile-enable-caching nil)
+(after! projectile
+  (setq projectile-switch-project-action #'projectile-commander
+        projectile-project-search-path '("~/projects" "~/ag" "~/tmpdev")
+        projectile-enable-caching nil)
+  (def-projectile-commander-method ?g "Open a magit status buffer" (magit-status))
+  (def-projectile-commander-method ?d "Dired" (projectile-dired))
+  (def-projectile-commander-method ?s "Ripgrep" (+default/search-project)))
 #+end_src
 
 * =Magit=
