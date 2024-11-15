@@ -1649,12 +1649,12 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
 ** Rust
 
 #+begin_src emacs-lisp
-(after! rustic
+(after! rust-mode
   (map!
-   :map rustic-mode-map
+   :map rust-mode-map
    :localleader
    :desc "Format buffer"
-   :nmv "f" #'rustic-format-buffer))
+   :nmv "f" #'rust-format-buffer))
 #+end_src
 
 ** Python
