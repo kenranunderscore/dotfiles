@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: newtype
+# key: n
+# --
+struct ${1:Name}(${0:Type});

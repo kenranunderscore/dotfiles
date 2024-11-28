@@ -122,6 +122,7 @@ usually created by a call to `~define-font'.")
 (~define-font "MxPlus IBM VGA 9x16" :default-height 200)
 (~define-font "Mx437 DOS/V TWN16" :default-height 200)
 (~define-font "Iosevka Term")
+(~define-font "Iosevka")
 (~define-font "Iosevka Comfy")
 (~define-font "DejaVu Sans Mono")
 (~define-font "IBM Plex Mono")
@@ -142,6 +143,7 @@ usually created by a call to `~define-font'.")
 (~define-font "Fixedsys Excelsior 3.01")
 (~define-font "PT Mono")
 (~define-font "Anonymous Pro")
+(~define-font "Roboto Mono")
 #+end_src
 
 #+begin_src emacs-lisp
