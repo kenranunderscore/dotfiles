@@ -849,7 +849,7 @@ position of point to automatically show surrounding markup.
         org-appear-trigger 'always))
 #+end_src
 
-* On-the-fly syntax checking (and other things): =Flymake=
+* On-the-fly syntax checking (and other things): =Flymake= / =Flycheck=
 
 #+begin_src emacs-lisp
 (after! flymake
@@ -858,6 +858,14 @@ position of point to automatically show surrounding markup.
   (setq flymake-allowed-file-name-masks nil))
 
 (add-hook! sh-mode #'flymake-mode)
+
+(after! flycheck
+  :config
+  (mapc #'evil-declare-ignore-repeat
+        '(flycheck-next-error
+          flycheck-previous-error
+          flycheck-first-error))
+  :defer)
 #+end_src
 
 * Full terminal inside Emacs: =vterm=
