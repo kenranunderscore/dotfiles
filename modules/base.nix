@@ -101,6 +101,7 @@ in
           file
           fontconfig.dev
           gh
+          ghostty
           gnumake
           htop
           jq

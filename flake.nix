@@ -15,15 +15,16 @@
       url = "github:nix-community/nixgl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Editors
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-
-    # zsh plugins
+    ghostty = {
+      url = "git+ssh://git@github.com/ghostty-org/ghostty";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
     zsh-autopair = {
       url = "github:hlissner/zsh-autopair";
       flake = false;
@@ -54,6 +55,7 @@
       overlays = [
         inputs.emacs-overlay.overlays.default
         inputs.nixgl.overlays.default
+        (final: prev: { inherit (inputs.ghostty.packages.${system}) ghostty; })
       ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
