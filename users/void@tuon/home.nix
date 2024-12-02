@@ -22,6 +22,7 @@ in
       wrapWithNixGL = false;
     };
     dwarfFortress.enable = false;
+    ghostty.enable = true;
     herbstluftwm.enable = false;
     i3 = {
       enable = true;

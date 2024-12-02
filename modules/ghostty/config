@@ -1,0 +1,48 @@
+font-family = JetBrains Mono
+font-size = 18
+
+palette = 0=#707370
+palette = 1=#ff9000
+palette = 2=#b3ee3a
+palette = 3=#eec900
+palette = 4=#00bfb0
+palette = 5=#cc59d2
+palette = 6=#00bfb0
+palette = 7=#d5d5d5
+palette = 10=#83bc10
+palette = 11=#b89c00
+palette = 12=#00afa0
+palette = 13=#825c84
+palette = 14=#00afa0
+palette = 15=#e5e5e5
+palette = 8=#545454
+palette = 9=#d99000
+background = #060606
+foreground = #0ac30a
+selection-background = #01018a
+selection-foreground = #0eb40e
+
+background-opacity = 0.8
+
+cursor-color = #e01500
+cursor-style = block
+cursor-style-blink = true
+cursor-click-to-move = false
+
+mouse-hide-while-typing = true
+
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+window-padding-color = background
+window-decoration = true
+
+clipboard-read = ask
+clipboard-write = allow
+copy-on-select = true
+
+shell-integration = none
+
+gtk-titlebar = false
+
+term = xterm-256color
