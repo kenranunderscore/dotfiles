@@ -794,6 +794,20 @@ it everywhere.
 Doom does it well out of the box. I should probably look into configuring =embark=
 here later on, maybe to even obsolete =which-key=.
 
+#+begin_src emacs-lisp
+(after! vertico
+  (defun ~vertico-select-randomly ()
+    "Select a random thing from the current (possibly narrowed) list of
+candidates."
+    (interactive)
+    (unless (= vertico--total 0)
+      (let ((index (random vertico--total)))
+        (vertico--goto index)
+        (vertico-exit))))
+  (map! :map vertico-map
+        :desc "Select randomly" "C-," #'~vertico-select-randomly))
+#+end_src
+
 *** =Consult=
 
 The [[https://github.com/minad/consult][consult]] package is the analogue of =counsel=, which I used for quite some
