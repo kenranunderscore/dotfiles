@@ -1387,7 +1387,9 @@ TODO: docs
                  "#guix"
                  "#commonlisp"
                  "#lisp"
-                 "#herrhotzenplotz"))))
+                 "#herrhotzenplotz"
+                 "#gcli"
+                 "#voidlinux"))))
 #+end_src
 
 * Project management with ~projectile~
