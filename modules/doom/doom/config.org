@@ -336,6 +336,55 @@ running. =Gruvbox= is always a good choice, anywhere.
 (setq doom-theme 'base16-gruvbox-dark-hard)
 #+end_src
 
+*** Switching themes
+
+In Doom, I tend to prefer using ~consult-theme~ ([[kbd:][SPC h t]]), as previewing a theme
+is just a great feature. Its logic cannot easily be reused, though, so I need
+something that correctly disables previous themes when I want to switch to a
+random theme with a ~hydra~.
+
+This is basically a port of my hand-rolled switching function from my custom
+Emacs config.
+
+#+begin_src emacs-lisp
+(defun ~available-themes ()
+  "Get a list of the names of all available themes, excluding the
+currently enabled one(s)."
+  (mapcar #'symbol-name
+          (seq-difference (custom-available-themes)
+                          custom-enabled-themes)))
+
+(defun ~switch-theme (name)
+  "Switch themes interactively. Similar to `load-theme' but also
+disables all other enabled themes."
+  (interactive
+   (list (intern
+          (completing-read
+           "Theme: "
+           (~available-themes)))))
+  (progn
+    (mapc #'disable-theme
+          custom-enabled-themes)
+    (princ name)
+    (load-theme name t)))
+
+(defun ~enable-random-theme ()
+  "Randomly choose and enable a theme."
+  (interactive)
+  (~switch-theme
+   (intern
+    (seq-random-elt (~available-themes)))))
+
+(defhydra hydra-random-theme (:hint nil)
+  "\n
+  Choose a random theme
+
+  [_n_]: next    [_q_]: exit\n
+  "
+  ("n" ~enable-random-theme)
+  ("q" nil))
+#+end_src
+
 ** Mode line (TODO: port and conditionalize with =featurep!=)
 
 FIXME: flycheck
