@@ -1407,7 +1407,9 @@ is to select a file, but I very often need to do different things, like open
         projectile-enable-caching nil)
   (def-projectile-commander-method ?g "Open a magit status buffer" (magit-status))
   (def-projectile-commander-method ?d "Dired" (projectile-dired))
-  (def-projectile-commander-method ?s "Ripgrep" (+default/search-project)))
+  (def-projectile-commander-method ?s "Ripgrep" (+default/search-project))
+  (map! :leader
+        :desc "Dired in project root" :nvm "p d" #'projectile-dired))
 #+end_src
 
 * =Magit=
