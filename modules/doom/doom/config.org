@@ -214,7 +214,7 @@ as it keeps that information in the ~'initial-value~ property of ~doom-font~.
         (kbd "l") #'doom/decrease-font-size
         (kbd "r") #'doom/reset-font-size))
 
-(defhydra hydra-global-zoom (:hint nil :timeout 3)
+(defhydra ~hydra-global-zoom (:hint nil :timeout 3)
   "\n
   [_g_]: [+]     [_s_]: set
   [_l_]: [-]     [_r_]: reset\n
@@ -225,7 +225,7 @@ as it keeps that information in the ~'initial-value~ property of ~doom-font~.
   ("s" ~set-font-size :color blue)
   ("q" nil "exit"))
 
-(map! :leader :desc "Font zoom" :g "z" #'hydra-global-zoom/body)
+(map! :leader :desc "Font zoom" :g "z" #'~hydra-global-zoom/body)
 #+end_src
 
 ** Color theme(s)
@@ -375,7 +375,7 @@ disables all other enabled themes."
    (intern
     (seq-random-elt (~available-themes)))))
 
-(defhydra hydra-random-theme (:hint nil)
+(defhydra ~hydra-random-theme (:hint nil)
   "\n
   Choose a random theme
 
@@ -657,7 +657,7 @@ things to my liking.
           haskell-goto-first-error
           haskell-goto-next-error
           haskell-goto-prev-error
-          hydra-haskell-error-navigation/body
+          ~hydra-haskell-error-navigation/body
           ~haskell-add-import
           ~haskell-add-ghc-option
           ~haskell-add-language-extension))
@@ -1634,7 +1634,7 @@ As always, =hydra= is highly capable of simplifying all sorts of navigational se
 of commands.
 
 #+begin_src emacs-lisp
-(defhydra hydra-haskell-error-navigation (:hint nil)
+(defhydra ~hydra-haskell-error-navigation (:hint nil)
   "\n
   Navigate Haskell compilation errors\n
   [_f_]: first   [_n_]: next   [_p_]: previous"
