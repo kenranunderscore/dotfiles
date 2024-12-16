@@ -4,7 +4,8 @@
 ;;; Color themes
 
 (package! emacs-naga-theme
-  :recipe (:host github :repo "kenranunderscore/emacs-naga-theme"
+  :recipe (:host github
+           :repo "kenranunderscore/emacs-naga-theme"
            :files ("naga-theme.el" "naga-dimmed-theme.el" "naga-base.el")))
 (package! modus-themes)
 (package! gruber-darker-theme)
