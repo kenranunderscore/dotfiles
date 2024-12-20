@@ -1,4 +1,4 @@
-font-family = JetBrains Mono
+font-family = Source Code Pro
 font-size = 18
 
 palette = 0=#707370
@@ -22,7 +22,7 @@ foreground = #0ac30a
 selection-background = #01018a
 selection-foreground = #0eb40e
 
-background-opacity = 0.8
+background-opacity = 1
 
 cursor-color = #e01500
 cursor-style = block
