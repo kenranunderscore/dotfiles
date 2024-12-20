@@ -27,7 +27,7 @@ in
     i3 = {
       enable = true;
       withGaps = false;
-      terminal = "kitty";
+      terminal = "nixGL ghostty";
       workspaces = [
         {
           name = "1:main";
