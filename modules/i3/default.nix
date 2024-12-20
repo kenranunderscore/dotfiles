@@ -117,7 +117,7 @@ in
             statusCommand = "${lib.getExe pkgs.i3status}";
             workspaceButtons = true;
             fonts = {
-              names = [ "JetBrains Mono" ];
+              names = [ "Source Code Pro" ];
               size = 15.0;
             };
             colors = rec {

@@ -1,6 +1,6 @@
 {
   font = {
-    name = "JetBrains Mono";
+    name = "Source Code Pro";
     size = 16;
   };
 }
