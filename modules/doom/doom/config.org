@@ -967,11 +967,9 @@ enabling it with a simple command.
 
 #+begin_src emacs-lisp
 (defun ~home-manager-switch ()
-  "Switch to a new home-manager generation using `vterm'."
+  "Switch to a new home-manager generation in the background."
   (interactive)
-  (+vterm/toggle t)
-  (vterm-send-string "home-manager switch --flake ~/dotfiles --impure")
-  (vterm-send-return))
+  (async-shell-command "home-manager switch --flake ~/dotfiles --impure"))
 #+end_src
 
 * E-mail configuration
