@@ -125,6 +125,7 @@ in
     remmina
     rustup
     sieve-connect
+    steam
     subversion
     thunderbird
     twitch-cli
