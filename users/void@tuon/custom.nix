@@ -1,6 +1,6 @@
 {
   font = {
-    name = "Source Code Pro";
-    size = 16;
+    name = "TX-02";
+    size = 17;
   };
 }

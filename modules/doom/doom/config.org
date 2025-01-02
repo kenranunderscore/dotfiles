@@ -139,6 +139,7 @@ usually created by a call to `~define-font'.")
 (~define-font "Unifont" :default-height 200)
 (~define-font "Geist Mono")
 (~define-font "Berkeley Mono")
+(~define-font "TX-02")
 (~define-font "Ubuntu Sans Mono")
 (~define-font "Fixedsys Excelsior 3.01")
 (~define-font "PT Mono")
@@ -147,7 +148,7 @@ usually created by a call to `~define-font'.")
 #+end_src
 
 #+begin_src emacs-lisp
-(setq ~current-font-family "JetBrains Mono")
+(setq ~current-font-family "TX-02")
 (setq doom-font
       (apply #'font-spec
              (plist-put
