@@ -21,9 +21,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
     ghostty = {
-      url = "git+ssh://git@github.com/ghostty-org/ghostty";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
+      url = "github:ghostty-org/ghostty";
     };
     zsh-autopair = {
       url = "github:hlissner/zsh-autopair";

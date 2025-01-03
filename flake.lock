@@ -75,26 +75,22 @@
     "ghostty": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "nixpkgs-stable": [
-          "nixpkgs"
-        ],
-        "nixpkgs-unstable": [
-          "nixpkgs"
-        ],
+        "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "zig": "zig"
       },
       "locked": {
         "lastModified": 1735875799,
         "narHash": "sha256-EI6C+CRmfHqkjnp0aJxYb/pTImwb5FZOu1HWHnnZsOc=",
-        "ref": "refs/heads/main",
+        "owner": "ghostty-org",
+        "repo": "ghostty",
         "rev": "e2f9eb6a6f4dc2108f91293938374c0ed314dcb8",
-        "revCount": 8834,
-        "type": "git",
-        "url": "ssh://git@github.com/ghostty-org/ghostty"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/ghostty-org/ghostty"
+        "owner": "ghostty-org",
+        "repo": "ghostty",
+        "type": "github"
       }
     },
     "home-manager": {
@@ -139,6 +135,38 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1735685343,
+        "narHash": "sha256-h1CpBzdJDNtSUb5QMyfFHKHocTTky+4McgQEBQBM+xA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "81934660d6e9ea54d2f0cdee821e8533b10c221a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1735888288,
+        "narHash": "sha256-ANyKb2ZAjfsl1pSurVAAiWGVO7znq56ymsYS7bPPBeI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "55838504cdfec15822c1ad5d2caf3f403c960243",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "release-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1735685343,
         "narHash": "sha256-h1CpBzdJDNtSUb5QMyfFHKHocTTky+4McgQEBQBM+xA=",
