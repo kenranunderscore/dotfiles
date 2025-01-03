@@ -667,7 +667,8 @@ things to my liking.
   ;; U for `redo' is easier to type than C-r for me
   (map! :desc "Redo" :n "U" #'evil-redo
         :map evil-window-map
-        :g "C-d" #'evil-window-delete))
+        :g "C-d" #'evil-window-delete
+        :g "o" #'delete-other-windows))
 #+end_src
 
 * Window management
