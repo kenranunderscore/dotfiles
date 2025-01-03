@@ -818,7 +818,9 @@ time, though not in any extent close to full. This only defines some basic
 bindings that Doom doesn't use by default.
 
 #+begin_src emacs-lisp
-(map! :g "M-g o" #'consult-outline)
+(map!
+ :after vertico
+ :g "M-g o" #'consult-outline)
 #+end_src
 
 *** =Embark=
@@ -1743,12 +1745,12 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
 ** Rust
 
 #+begin_src emacs-lisp
-(after! rust-mode
-  (map!
-   :map rust-mode-map
-   :localleader
-   :desc "Format buffer"
-   :nmv "f" #'rust-format-buffer))
+(map!
+ :after rust-mode
+ :map rust-mode-map
+ :localleader
+ :desc "Format buffer"
+ :nmv "f" #'rust-format-buffer)
 #+end_src
 
 ** Nix
