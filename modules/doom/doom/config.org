@@ -1485,7 +1485,7 @@ important once again, because why not leech off of someone else's keybinding
 work :)
 
 #+begin_src emacs-lisp
-(setq which-key-idle-delay 0.2)
+(setq which-key-idle-delay 0.25)
 #+end_src
 
 ** TODO check out =embark-prefix-help-command=
