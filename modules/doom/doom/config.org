@@ -1750,6 +1750,21 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
    :nmv "f" #'rust-format-buffer))
 #+end_src
 
+** Nix
+
+#+begin_src emacs-lisp
+(after! nix-mode
+  (reformatter-define ~nixfmt-format
+    :program "nixfmt"
+    :lighter " ~nixfmt"
+    :interactive-modes (nix-mode))
+  (map!
+   :map nix-mode-map
+   :localleader
+   :desc "Format buffer" :n "f" #'~nixfmt-format-buffer
+   "p" nil))
+#+end_src
+
 ** Python
 
 Sorting imports with ~isort~:
