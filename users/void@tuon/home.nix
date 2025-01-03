@@ -106,6 +106,10 @@ in
     emacs.enable = false;
     nyxt.enable = false;
     git.email = "johannes.maier@mailbox.org";
+    mercurial = {
+      enable = true;
+      email = "johannes.maier@mailbox.org";
+    };
     wezterm = {
       enable = true;
       withPackage = false;

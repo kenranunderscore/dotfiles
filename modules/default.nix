@@ -21,6 +21,7 @@
     ./herbstluftwm
     ./i3
     ./kitty
+    ./mercurial.nix
     ./neovim
     ./nyxt
     ./pass.nix
