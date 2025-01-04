@@ -1768,6 +1768,128 @@ REPL support, etc., similar to what =haskell-mode= does for Haskell.
    "p" nil))
 #+end_src
 
+** Common Lisp
+
+[[https://github.com/joaotavora/sly][SLY]] seems to be a bit more actively developed and modern than [[https://slime.common-lisp.dev/][SLIME]].
+
+#+begin_src emacs-lisp
+(after! sly
+  (setq inferior-lisp-program "sbcl")
+  (add-hook 'sly-macroexpansion-minor-mode-hook #'turn-off-evil-mode)
+  (add-to-list 'evil-emacs-state-modes 'sly-mrepl-mode)
+  (add-to-list 'evil-emacs-state-modes 'sly-db-mode)
+  (add-to-list 'evil-emacs-state-modes 'sly-inspector-mode)
+  (add-to-list 'evil-emacs-state-modes 'sly-xref-mode)
+  ;; Doom automatically starts up a SLY session when opening a LISP buffer, but
+  ;; I want more refined behavior (see below).
+  (remove-hook 'sly-mode-hook #'+common-lisp-init-sly-h)
+  (map!
+   :localleader
+   :map lisp-mode-map
+   "q" #'sly-quit-lisp))
+#+end_src
+
+#+begin_src emacs-lisp
+#+end_src
+
+I don't like that SLY immediately jumps inside its REPL buffer (and window) it
+creates. The following works well, at least in the situation where you don't
+want to connect to an existing SLY session/REPL.
+
+#+begin_src emacs-lisp
+(defun ~sly (&optional command coding-system interactive callback)
+  (interactive (list nil nil t nil) lisp-mode)
+  (let ((buf (buffer-name (current-buffer))))
+    (add-hook 'sly-mrepl-hook
+              (defun ~sly-jump-back ()
+                (pop-to-buffer buf)
+                (remove-hook 'sly-mrepl-hook #'~sly-jump-back)
+                (when callback (funcall callback))))
+    (sly command coding-system interactive)))
+#+end_src
+
+When developing one of my Common Lisp projects, the normal "startup" workflow
+would be as follows:
+
+- Open the ASDF file
+- Start SLY (with ~M-x sly~ for instance)
+- Use ~sly-compile-and-load-file~ to load the file, making the system definitions
+  known to quicklisp
+- Load the system with ~sly-asdf-load-system~
+- Inside the REPL, set the current package via ~sly-mrepl-set-package~
+
+The following utility function ~+sly-load-project~ simplifies the above process by
+only needing to be inside the ASDF file when invoking it. The rest is done
+automatically.
+
+#+begin_src emacs-lisp
+(defun ~sly-set-repl-package (successp notes buffer loadp)
+  "Pop to the current MREPL buffer and call `sly-mrepl-set-package'."
+  (if successp
+      (progn
+        (pop-to-buffer (sly-mrepl--find-buffer))
+        (sly-mrepl-set-package)
+        (remove-hook 'sly-compilation-finished-hook #'~sly-set-repl-package))
+    (warn "Compilation has failed. Can't set REPL package.")))
+
+(defun ~sly-load-project ()
+  "From within an ASDF file, load it as well as the contained package(s),
+then switch the current REPL package."
+  (interactive nil lisp-mode)
+  (~sly nil nil nil
+        (lambda ()
+          (sly-load-file (buffer-file-name))
+          (let ((system (sly-asdf-find-current-system)))
+            (add-hook 'sly-compilation-finished-hook #'~sly-set-repl-package)
+            (sly-asdf-load-system system)))))
+#+end_src
+
+To have easier access to these functions when inside ASDF buffers, let's create
+a specific minor mode (and, implicitly, keymap, to hold bindings for our
+functions).
+
+#+begin_src emacs-lisp
+(define-minor-mode ~asdf-mode
+  "A minor mode to signify ASDF's files."
+  :init-value nil
+  :global nil
+  :keymap (make-sparse-keymap)
+  :lighter " ~asdf")
+#+end_src
+
+To enable ~~asdf-mode~ in =.asd= files, we hook into ~lisp-mode~; note that this is
+easier for major modes, which can make use of ~auto-mode-alist~.
+
+#+begin_src emacs-lisp
+(defun ~possibly-enable-~asdf-mode ()
+  "Enable `~asdf-mode' if the current file has the 'asd' extension, and the
+buffer's major mode is `lisp-mode'."
+  (when (and buffer-file-name
+             (string= "asd"
+                      (file-name-extension buffer-file-name)))
+    (~asdf-mode 1)))
+
+(add-hook 'lisp-mode-hook #'~possibly-enable-~asdf-mode)
+#+end_src
+
+To finally set the keybinding in ~~asdf-mode~, we need to circumvent [[https://github.com/noctuid/general.el#why-dont-some-evil-keybindings-work-immediately][a known ~evil~
+problem]]. Note that the keymap below isn't really a keymap (actually, we don't
+even create one for ~+asdf-mode~), but rather the mode's symbol itself. In
+conjunction with ~:definer 'minor-mode~ this creates a binding that immediately
+works.
+
+#+begin_src emacs-lisp
+(map!
+ :map ~asdf-mode-map
+ :localleader
+ :desc "Load project" "l" #'~sly-load-project)
+
+;; (local-leader
+;;   :definer 'minor-mode
+;;   :keymaps '+asdf-mode
+;;   "l" #'+sly-load-project)
+#+end_src
+
 ** Python
 
 Sorting imports with ~isort~:
