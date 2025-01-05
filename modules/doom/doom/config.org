@@ -439,8 +439,7 @@ line."
   "Return `minor-mode-alist', but with certain modes I don't want to
 see filtered out."
   (let ((hidden-modes
-         '(
-           abbrev-mode
+         '(abbrev-mode
            auto-fill-function
            auto-revert-mode
            better-jumper-mode
@@ -449,6 +448,7 @@ see filtered out."
            company-box-mode
            company-mode
            dot-mode
+           dtrt-indent-mode
            editorconfig-mode
            eldoc-mode
            evil-collection-unimpaired-mode
@@ -460,6 +460,7 @@ see filtered out."
            flymake-mode
            gcmh-mode
            global-company-mode
+           interactive-haskell-mode
            lsp-lens-mode
            org-indent-mode
            projectile-mode
