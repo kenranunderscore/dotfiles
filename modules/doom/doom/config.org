@@ -1708,6 +1708,7 @@ well as some of the above utilities into a local keymap for easy access.
 (add-hook! haskell-mode #'interactive-haskell-mode)
 
 (after! haskell-mode
+  (remove-hook 'haskell-mode-hook #'haskell-collapse-mode)
   (setq haskell-process-type 'cabal-repl
         haskell-interactive-popup-errors nil
         haskell-process-args-cabal-repl '("--repl-options=-ferror-spans"))
@@ -1719,7 +1720,9 @@ well as some of the above utilities into a local keymap for easy access.
         :desc "Add import" :n "i" #'~haskell-add-import
         :localleader
         :desc "Kill session" :n "k" #'haskell-session-kill
-        :desc "Format with fourmolu" :n "f" #'~fourmolu-format-buffer))
+        :desc "Format with fourmolu" :n "f" #'~fourmolu-format-buffer
+        "h" nil
+        "H" nil))
 #+end_src
 
 ** OCaml
