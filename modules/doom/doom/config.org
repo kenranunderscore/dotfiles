@@ -1685,7 +1685,7 @@ basis to enable the fitting mode there.
 **** Cabal files
 
 #+begin_src emacs-lisp
-(after! haskell-mode
+(after! haskell-cabal
   (reformatter-define ~cabal-fmt-format
     :program "cabal-fmt"
     :args (list "-i" input-file)
