@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.ghostty = {
-    enable = lib.mkEnableOption "ghostt";
+    enable = lib.mkEnableOption "ghostty";
     withPackage = lib.mkOption {
       default = true;
       type = lib.types.bool;
