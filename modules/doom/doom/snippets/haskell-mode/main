@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: main
+# key: ma
+# --
+main :: IO ()
+main = do
+ $0
