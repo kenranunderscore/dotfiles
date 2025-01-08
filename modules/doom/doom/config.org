@@ -809,7 +809,7 @@ candidates."
         (vertico--goto index)
         (vertico-exit))))
   (map! :map vertico-map
-        :desc "Select randomly" "C-," #'~vertico-select-randomly))
+        :desc "Select randomly" "C-;" #'~vertico-select-randomly))
 #+end_src
 
 *** =Consult=
@@ -830,7 +830,15 @@ I haven't really grokked [[https://github.com/oantolin/embark][Embark]] yet. It 
 mostly use it for at the moment is its =embark-act= command in conjunction with
 =embark-export=. With this I often push the results of some =grep=-like command into
 a separate buffer, where I can then utilize =wgrep= to bulk-modify the original
-buffers.
+buffers. For this, I prefer the more easily accessible (on my layout) [[kbd:][C-,]]
+binding, though.
+
+#+begin_src emacs-lisp
+(map!
+ :map minibuffer-mode-map
+ "C-," #'embark-act
+ "C-;" nil)
+#+end_src
 
 *** =Orderless=
 
