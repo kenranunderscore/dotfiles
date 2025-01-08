@@ -26,7 +26,14 @@
           pkgs = import nixpkgs { inherit system; };
         in
         {
-          devShells.default = pkgs.mkShell { };
+          devShells.default =
+            let
+              libraries = [ ];
+            in
+            pkgs.mkShell {
+              buildInputs = libraries;
+              LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath libraries;
+            };
         };
     };
 }
