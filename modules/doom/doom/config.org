@@ -373,17 +373,26 @@ disables all other enabled themes."
 (defun ~enable-random-theme ()
   "Randomly choose and enable a theme."
   (interactive)
+  (setq ~previous-theme (car custom-enabled-themes))
   (~switch-theme
    (intern
     (seq-random-elt (~available-themes)))))
+
+(defun ~enable-previously-selected-theme ()
+  "Switch to the theme that was active before the currently enabled
+one."
+  (interactive)
+  (~switch-theme ~previous-theme))
 
 (defhydra ~hydra-random-theme (:hint nil)
   "\n
   Choose a random theme
 
-  [_n_]: next    [_q_]: exit\n
+  [_n_]: next    [_p_]: previous\n
+  [_q_]: quit\n
   "
   ("n" ~enable-random-theme)
+  ("p" ~enable-previously-selected-theme)
   ("q" nil))
 #+end_src
 
