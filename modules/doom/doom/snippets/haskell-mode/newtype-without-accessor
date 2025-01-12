@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: newtype-without-accessor
+# key: sn
+# --
+newtype ${1:Name} = $1 ${3:Type}
+$0
