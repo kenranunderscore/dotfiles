@@ -43,7 +43,6 @@ in
 
           # Programs needed at runtime or for straight to build packages
           cmake
-          gcc
           libtool
           meson
           ninja

@@ -50,7 +50,6 @@ in
           # Programs needed at runtime
           cmake
           fd
-          gcc
           libtool
           meson
           ninja
