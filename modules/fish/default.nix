@@ -26,6 +26,7 @@ in
         bind \cv open_file_in_emacs
 
         fish_add_path --path $HOME/.config/emacs/bin
+        fish_add_path --path $HOME/.local/bin
       '';
       shellAliases = {
         ls = "eza";
