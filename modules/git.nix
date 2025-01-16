@@ -74,6 +74,9 @@ in
           "git@github.com:kenranunderscore/" = {
             insteadOf = "gh:/";
           };
+          "git@github.com:" = {
+            insteadOf = "ghssh:";
+          };
           "https://gitlab.com/" = {
             insteadOf = "gl:";
           };
