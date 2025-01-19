@@ -1742,6 +1742,16 @@ well as some of the above utilities into a local keymap for easy access.
         "H" nil))
 #+end_src
 
+*** LSP integration
+
+There's a problem with ~lsp-rename~ in the Haskell backend for ~lsp-mode~, [[https://github.com/emacs-lsp/lsp-haskell/issues/192][as
+described in this issue]]. This is the workaround:
+
+#+begin_src emacs-lisp
+(after! lsp-haskell
+  (setq lsp-rename-use-prepare nil))
+#+end_src
+
 ** OCaml
 
 [[https://github.com/ocaml/tuareg][tuareg]] is the standard mode for OCaml editing, providing syntax highlighting,
