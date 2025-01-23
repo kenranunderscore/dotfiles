@@ -119,6 +119,7 @@ in
   home.packages = with pkgs; [
     cloc
     dmenu
+    element-desktop
     gcli
     keepass
     keepassxc
