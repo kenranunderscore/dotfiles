@@ -117,6 +117,7 @@ in
   };
 
   home.packages = with pkgs; [
+    ansible
     cloc
     dmenu
     element-desktop
