@@ -1510,6 +1510,14 @@ work :)
 #+end_src
 
 ** TODO check out =embark-prefix-help-command=
+
+* LSP
+
+#+begin_src emacs-lisp
+(after! lsp-mode
+  (setq lsp-disabled-clients '(copilot-ls)))
+#+end_src
+
 * Programming languages
 ** Haskell
 *** Insert language extensions and GHC options
