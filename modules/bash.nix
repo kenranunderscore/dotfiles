@@ -25,6 +25,9 @@ in
         "ignoredups"
         "erasedups"
       ];
+      profileExtra = ''
+        export PATH="''$HOME/.local/bin:''$PATH"
+      '';
     };
   };
 }
