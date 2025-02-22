@@ -17,6 +17,7 @@ in
 
   modules = {
     base.gpgKey = "9AC78C1A48681583";
+    bash.enable = true;
     brave = {
       enable = true;
       wrapWithNixGL = false;
