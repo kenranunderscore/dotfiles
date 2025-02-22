@@ -22,12 +22,12 @@ in
       wrapWithNixGL = false;
     };
     dwarfFortress.enable = false;
-    ghostty.enable = true;
+    ghostty.enable = false;
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
       withGaps = false;
-      terminal = "nixGL ghostty";
+      terminal = "nixGL wezterm";
       workspaces = [
         {
           name = "1:main";
