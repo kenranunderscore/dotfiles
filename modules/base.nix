@@ -110,7 +110,6 @@ in
           openssl.dev
           pciutils
           perl
-          pkgconf
           ripgrep
           rlwrap
           rsync
