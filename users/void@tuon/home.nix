@@ -131,6 +131,7 @@ in
     pavucontrol
     remmina
     rustup
+    sbt
     sieve-connect
     steam
     subversion
