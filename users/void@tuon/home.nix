@@ -120,11 +120,13 @@ in
   home.packages = with pkgs; [
     ansible
     cloc
+    clojure
     dmenu
     element-desktop
     gcli
     keepass
     keepassxc
+    leiningen
     nixgl.auto.nixGLDefault
     nixVersions.latest
     opam
