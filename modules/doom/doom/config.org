@@ -1950,5 +1950,8 @@ Sorting imports with ~isort~:
     :stdout nil
     :input-file (reformatter-temp-file-in-current-directory)
     :lighter " ~isort"
-    :interactive-modes (python-mode)))
+    :interactive-modes (python-mode))
+  (map! :map python-mode-map
+        :localleader
+        :desc "Format with black" "f" #'~black-format-buffer))
 #+end_src
