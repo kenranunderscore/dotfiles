@@ -60,16 +60,21 @@ in
         key = "~/.ssh/id_ed25519.pub";
       };
       extraConfig = {
-        core.askPass = "";
-        column.sort = "auto";
         branch.sort = "-committerdate";
-        tag.sort = "version:refname";
+        column.sort = "auto";
+        core.askPass = "";
+        diff = {
+          algorithm = "histogram";
+          mnemonicPrefix = true;
+          renames = true;
+        };
         gpg.format = "ssh";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         pull.rebase = "true";
         push.autoSetupRemote = "true";
         submodule.recurse = "true";
+        tag.sort = "version:refname";
         url = {
           "https://github.com/" = {
             insteadOf = "gh:";
