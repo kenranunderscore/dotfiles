@@ -61,6 +61,9 @@ in
       };
       extraConfig = {
         core.askPass = "";
+        column.sort = "auto";
+        branch.sort = "-committerdate";
+        tag.sort = "version:refname";
         gpg.format = "ssh";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
