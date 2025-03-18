@@ -87,6 +87,7 @@ in
           ALTERNATE_EDITOR = "";
           KENRAN_IRC_CERTS = "${privateDir}/irc";
           OPENSSL_DIR = "${pkgs.openssl.dev}";
+          GOBIN = "$HOME/.local/bin";
         };
 
         packages = with pkgs; [
