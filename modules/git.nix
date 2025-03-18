@@ -78,6 +78,11 @@ in
         merge.conflictstyle = "zdiff3";
         pull.rebase = "true";
         push.autoSetupRemote = "true";
+        rebase = {
+          autoSquash = true;
+          autoStash = true;
+          updateRefs = true;
+        };
         submodule.recurse = "true";
         tag.sort = "version:refname";
         url = {
