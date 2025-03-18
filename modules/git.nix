@@ -68,6 +68,11 @@ in
           mnemonicPrefix = true;
           renames = true;
         };
+        fetch = {
+          prune = true;
+          pruneTags = true;
+          all = true;
+        };
         gpg.format = "ssh";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
