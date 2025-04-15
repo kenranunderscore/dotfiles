@@ -93,7 +93,6 @@
           // self.lib.mkHomeConfiguration {
             inherit
               dir
-              system
               inputs
               pkgs
               ;

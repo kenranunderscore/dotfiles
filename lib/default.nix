@@ -45,7 +45,6 @@
   mkHomeConfiguration =
     {
       dir,
-      system,
       inputs,
       pkgs,
     }:
