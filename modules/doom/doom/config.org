@@ -865,6 +865,16 @@ potentially usable for ELisp variables and functions.
   (assq-delete-all ?\~ orderless-affix-dispatch-alist))
 #+end_src
 
+** =Company=
+
+The default prefix length of =company-mode= in Doom is 2, which leads to lots of
+noise, and annoys me when trying to enter quick, short snippets.
+
+#+begin_src emacs-lisp
+(after! company
+  (setq company-minimum-prefix-length 3))
+#+end_src
+
 * TODO Jumping around with =avy=
 * TODO Org mode
 ** Tweaks to the default configuration
