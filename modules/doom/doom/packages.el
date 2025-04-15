@@ -32,7 +32,4 @@
 (package! doom-snippets :ignore t)
 
 ;;; Formatter definitions the right way
-(package! reformatter
-  :recipe (:host github
-           :repo "kenranunderscore/emacs-reformatter"
-           :branch "add-mode-specific-commands"))
+(package! reformatter)
