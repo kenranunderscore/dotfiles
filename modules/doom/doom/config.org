@@ -1966,3 +1966,8 @@ Sorting imports with ~isort~:
         :localleader
         :desc "Format with black" "f" #'~black-format-buffer))
 #+end_src
+** Asciidoc
+
+#+begin_src emacs-lisp
+(use-package! adoc-mode)
+#+end_src
