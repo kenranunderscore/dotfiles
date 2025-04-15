@@ -29,6 +29,7 @@
     ./polybar
     ./rofi
     ./sbcl
+    ./shell-utils
     ./ssh.nix
     ./tmux.nix
     ./vim.nix
