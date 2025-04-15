@@ -33,3 +33,6 @@
 
 ;;; Formatter definitions the right way
 (package! reformatter)
+
+(package! adoc-mode)
+(package! fish-mode)
