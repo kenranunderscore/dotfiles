@@ -2,10 +2,6 @@
 
 use strict;
 use warnings;
-use File::Basename;
-use Cwd qw(realpath);
-use File::Spec;
-use File::Find;
 
 my @project_dirs = (
     "$ENV{HOME}/projects",
