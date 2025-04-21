@@ -12,6 +12,7 @@ point) I manage this way:
 
 - [[file:nixos/atuan/][atuan]]: my home PC running NixOS
 - [[file:users/void@tuon/][tuon]]: Void Linux on my current work laptop
+- [[file:users/kenran@gentoo/][gentoo]]: Gentoo Linux on my current work laptop (dual boot with Void above)
 - [[file:nixos/angband/][angband]]: a tiny notebook (64 GB of disk space only) I use when
   traveling
 - [[file:nixos/paln/][paln]]: a tiny [[https://www.hetzner.com/cloud][Hetzner Cloud]] VM I use for synchronization and small
