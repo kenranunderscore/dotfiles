@@ -124,6 +124,7 @@ in
     dmenu
     element-desktop
     gcli
+    jfrog-cli
     keepass
     keepassxc
     leiningen
