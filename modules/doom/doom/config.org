@@ -1527,7 +1527,8 @@ work :)
 
 #+begin_src emacs-lisp
 (after! lsp-mode
-  (setq lsp-disabled-clients '(copilot-ls)))
+  (setq lsp-disabled-clients '(copilot-ls))
+  (setq lsp-headerline-breadcrumb-enable t))
 #+end_src
 
 * Programming languages
