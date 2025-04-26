@@ -1,6 +1,6 @@
 {
   font = {
-    name = "TX-02";
+    name = "Hack";
     size = 17;
   };
 }

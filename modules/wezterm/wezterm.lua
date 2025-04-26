@@ -3,10 +3,15 @@ local wezterm = require 'wezterm'
 local config = {}
 
 config.enable_tab_bar = false
-config.font = wezterm.font 'TX-02'
-config.font_size = 16.0
+config.font = wezterm.font 'Hack'
+config.font_size = 14.0
 config.audible_bell = "Disabled"
-config.default_cursor_style = "SteadyBlock"
+
+-- Cursor
+config.default_cursor_style = "SteadyUnderline"
+config.cursor_thickness = 2
+config.cursor_blink_rate = 600
+
 config.default_prog = { 'fish', '-l' }
 
 config.colors = {

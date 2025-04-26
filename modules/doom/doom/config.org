@@ -149,12 +149,12 @@ usually created by a call to `~define-font'.")
 #+end_src
 
 #+begin_src emacs-lisp
-(setq ~current-font-family "TX-02")
+(setq ~current-font-family "Hack")
 (setq doom-font
       (apply #'font-spec
              (plist-put
               (~get-font ~current-font-family)
-              :size 23)))
+              :size 20)))
 #+end_src
 
 The default text scaling increment produces jumps in font size that are way too
@@ -336,7 +336,7 @@ buffers). Let's use one of those for now until everything else is up and
 running. =Gruvbox= is always a good choice, anywhere.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'naga)
+(setq doom-theme 'base16-gruvbox-dark-hard)
 #+end_src
 
 *** Switching themes
