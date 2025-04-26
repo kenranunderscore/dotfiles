@@ -117,7 +117,7 @@ usually created by a call to `~define-font'.")
       family))
    ~fonts))
 
-(~define-font "Pragmata Pro Mono")
+(~define-font "PragmataPro Mono")
 (~define-font "MxPlus IBM VGA 8x14" :default-height 200)
 (~define-font "MxPlus IBM VGA 9x16" :default-height 200)
 (~define-font "Mx437 DOS/V TWN16" :default-height 200)
