@@ -76,7 +76,7 @@ for my $root (@project_dirs) {
 }
 
 my $choices = join("\n", map { $_->{label} } @projects);
-my $selection = `printf "$choices" | fzf --ansi --prompt="Navigate to project: "`;
+my $selection = `printf "$choices" | fzf --prompt="Navigate to project: "`;
 chomp($selection);
 
 if ($selection ne '') {
