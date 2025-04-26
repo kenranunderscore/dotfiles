@@ -3,6 +3,6 @@ function navigate_to_project \
     set target (select_project.pl)
     if test $status -eq 0
         cd "$target"
-        commandline -f repaint
     end
+    commandline -f repaint
 end
