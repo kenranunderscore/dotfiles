@@ -1968,6 +1968,20 @@ Sorting imports with ~isort~:
         :localleader
         :desc "Format with black" "f" #'~black-format-buffer))
 #+end_src
+
+** Go
+
+#+begin_src emacs-lisp
+(after! go-mode
+  (reformatter-define ~gofmt-format
+    :program "gofmt"
+    :args (list "-e" "-s" input-file)
+    :stdin nil
+    :stdout t
+    :lighter " ~gofmt"
+    :interactive-modes (go-mode)))
+#+end_src
+
 ** Asciidoc
 
 #+begin_src emacs-lisp
