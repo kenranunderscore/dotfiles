@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: return-without-error
+# key: rr
+# --
+return $0, nil

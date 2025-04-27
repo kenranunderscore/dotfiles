@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: on-error
+# key: e
+# --
+if err != nil {
+ $0
+}
