@@ -106,6 +106,7 @@ in
           htop
           jq
           man-pages
+          ncdu
           nixfmt-rfc-style
           nixpkgs-review
           openssl.dev
