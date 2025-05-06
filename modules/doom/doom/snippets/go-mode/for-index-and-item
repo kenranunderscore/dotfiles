@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for-index-and-item
+# key: ff
+# --
+for ${3:i}, ${2:item} := range ${1:items} {
+ $0
+}

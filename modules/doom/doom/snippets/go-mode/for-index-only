@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for-range-n
+# key: fi
+# --
+for i := range ${1:until} {
+ $0
+}

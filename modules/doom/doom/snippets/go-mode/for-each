@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for-each
+# key: fe
+# --
+for _, ${2:item} := range ${1:items} {
+ $0
+}
