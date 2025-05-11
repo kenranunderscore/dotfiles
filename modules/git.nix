@@ -54,6 +54,9 @@ in
         "\\#*\\#"
         ".\\#*"
         ".dir-locals.el"
+
+        # JetBrains IDEs
+        ".idea/"
       ];
       signing = {
         signByDefault = true;
