@@ -118,6 +118,7 @@ in
           scrot
           shellcheck
           shfmt
+          time
           timer
           tree
           unixtools.nettools
