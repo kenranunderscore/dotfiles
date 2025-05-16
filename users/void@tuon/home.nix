@@ -121,6 +121,7 @@ in
     ansible
     cloc
     clojure
+    deno
     dmenu
     element-desktop
     gcli
@@ -130,6 +131,7 @@ in
     leiningen
     nixgl.auto.nixGLDefault
     nixVersions.latest
+    nodejs_latest
     opam
     pavucontrol
     remmina
