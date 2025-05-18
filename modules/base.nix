@@ -105,6 +105,7 @@ in
           gnumake
           htop
           jq
+          just
           man-pages
           ncdu
           nixfmt-rfc-style
