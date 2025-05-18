@@ -16,6 +16,11 @@ sub is_git_repo {
     return -d "$dir/.git" || -f "$dir/.git";
 }
 
+sub is_svn_repo {
+    my ($dir) = @_;
+    return -d "$dir/.svn";
+}
+
 sub rel_to_home {
     my ($abs) = @_;
     $abs =~ s{^$ENV{HOME}/?}{};
@@ -30,9 +35,14 @@ sub with_prefix {
     return $prefix . ' ' x $indent . $text;
 }
 
-sub as_repo {
+sub as_git_repo {
     my ($p) = @_;
     return with_prefix("R", $p);
+}
+
+sub as_svn_repo {
+    my ($p) = @_;
+    return with_prefix("S", $p);
 }
 
 sub as_worktree {
@@ -41,7 +51,7 @@ sub as_worktree {
 }
 
 push @projects, {
-    label => as_repo("dotfiles"),
+    label => as_git_repo("dotfiles"),
     path => "$ENV{HOME}/dotfiles",
 };
 
@@ -54,7 +64,12 @@ for my $root (@project_dirs) {
 
         if (is_git_repo($sub)) {
             push @projects, {
-                label => as_repo(rel_to_home($sub)),
+                label => as_git_repo(rel_to_home($sub)),
+                path => $sub,
+            };
+        } elsif (is_svn_repo($sub)) {
+            push @projects, {
+                label => as_svn_repo(rel_to_home($sub)),
                 path => $sub,
             };
         } else {
