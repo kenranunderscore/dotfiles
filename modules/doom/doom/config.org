@@ -1982,6 +1982,17 @@ Sorting imports with ~isort~:
     :interactive-modes (go-mode)))
 #+end_src
 
+** JavaScript
+
+#+begin_src emacs-lisp
+(after! rjsx-mode
+  (reformatter-define ~prettier-format
+    :program "prettier"
+    :lighter " ~prettier"
+    :args (list "-w" "--stdin-filepath" (or (buffer-file-name) input-file))
+    :interactive-modes (rjsx-mode javascript-mode json-mode typescript-mode)))
+#+end_src
+
 ** Asciidoc
 
 #+begin_src emacs-lisp
