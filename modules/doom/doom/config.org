@@ -1721,6 +1721,17 @@ basis to enable the fitting mode there.
     :interactive-modes (haskell-mode)))
 #+end_src
 
+**** Ormolu
+
+#+begin_src emacs-lisp
+(after! haskell-mode
+  (reformatter-define ~ormolu-format
+    :program "ormolu"
+    :args (list "--stdin-input-file" (or (buffer-file-name) input-file))
+    :lighter " ~ormolu"
+    :interactive-modes (haskell-mode)))
+#+end_src
+
 **** Cabal files
 
 #+begin_src emacs-lisp
