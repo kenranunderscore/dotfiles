@@ -2001,7 +2001,7 @@ Sorting imports with ~isort~:
     :program "prettier"
     :lighter " ~prettier"
     :args (list "-w" "--stdin-filepath" (or (buffer-file-name) input-file))
-    :interactive-modes (rjsx-mode javascript-mode json-mode typescript-mode)))
+    :interactive-modes (rjsx-mode javascript-mode json-mode typescript-mode web-mode)))
 #+end_src
 
 ** Asciidoc
