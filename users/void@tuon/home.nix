@@ -119,6 +119,7 @@ in
 
   home.packages = with pkgs; [
     ansible
+    bun
     cloc
     clojure
     deno
