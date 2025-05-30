@@ -122,7 +122,6 @@ in
     bun
     cloc
     clojure
-    deno
     dmenu
     element-desktop
     gcli
