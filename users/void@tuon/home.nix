@@ -132,6 +132,7 @@ in
     leiningen
     nixgl.auto.nixGLDefault
     nixVersions.latest
+    nixos-rebuild
     nodejs_latest
     opam
     pavucontrol
