@@ -122,6 +122,7 @@ in
     bun
     cloc
     clojure
+    dbeaver-bin
     dmenu
     element-desktop
     gcli
