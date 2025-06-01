@@ -124,24 +124,17 @@ in
 
   home.packages = with pkgs; [
     ansible
+    bun
     cloc
     dmenu
-    #element-desktop
-    #gcli
+    gcli
     keepass
     keepassxc
     nixgl.auto.nixGLDefault
-    #nixVersions.latest
-    #opam
+    nodejs_latest
     pavucontrol
-    #remmina
-    rustup
-    #sieve-connect
-    #steam
     subversion
     thunderbird
-    #twitch-cli
-    #xst
   ];
 
   home.stateVersion = "23.11";
