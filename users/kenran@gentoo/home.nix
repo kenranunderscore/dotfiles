@@ -57,7 +57,7 @@ in
     };
     wezterm = {
       enable = true;
-      withPackage = false;
+      withPackage = true;
     };
     i3 = {
       enable = true;
