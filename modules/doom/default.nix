@@ -10,7 +10,13 @@ let
   types = lib.types;
 in
 {
-  options.modules.doom.enable = lib.mkEnableOption "doom";
+  options.modules.doom = {
+    enable = lib.mkEnableOption "doom";
+    includePkg = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     home = {
@@ -44,7 +50,7 @@ in
           ]);
         in
         with pkgs;
-        [
+        lib.optionals cfg.includePkg [
           myEmacs
 
           # Programs needed at runtime
