@@ -1997,7 +1997,7 @@ Sorting imports with ~isort~:
 ** JavaScript
 
 #+begin_src emacs-lisp
-(after! rjsx-mode
+(after! (:or rjsx-mode json-mode jsonc-mode javascript-mode typescript-mode web-mode)
   (reformatter-define ~prettier-format
     :program "prettier"
     :lighter " ~prettier"
