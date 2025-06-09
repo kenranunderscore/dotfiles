@@ -44,27 +44,20 @@ in
           fantasque-sans-mono
           fira-code
           fixedsys-excelsior
-          font-awesome_6
-          go-font
           hack-font
-          hasklig
           ibm-plex
           inconsolata
           iosevka-bin
           jetbrains-mono
           julia-mono
+          maple-mono.truetype
           noto-fonts
           paratype-pt-mono
           roboto-mono
           source-code-pro
           ubuntu-sans-mono
           unifont
-          victor-mono
           vistafonts
-
-          # Anne/Japanese
-          ipafont
-          source-han-sans
         ]);
     };
   };
