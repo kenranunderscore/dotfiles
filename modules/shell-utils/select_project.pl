@@ -21,6 +21,11 @@ sub is_svn_repo {
     return -d "$dir/.svn";
 }
 
+sub is_flake {
+    my ($dir) = @_;
+    return -f "$dir/flake.nix";
+}
+
 sub rel_to_home {
     my ($abs) = @_;
     $abs =~ s{^$ENV{HOME}/?}{};
@@ -43,6 +48,11 @@ sub as_git_repo {
 sub as_svn_repo {
     my ($p) = @_;
     return with_prefix("S", $p);
+}
+
+sub as_flake {
+    my ($p) = @_;
+    return with_prefix("F", $p);
 }
 
 sub as_worktree {
@@ -70,6 +80,11 @@ for my $root (@project_dirs) {
         } elsif (is_svn_repo($sub)) {
             push @projects, {
                 label => as_svn_repo(rel_to_home($sub)),
+                path => $sub,
+            };
+        } elsif (is_flake($sub)) {
+            push @projects, {
+                label => as_flake(rel_to_home($sub)),
                 path => $sub,
             };
         } else {
