@@ -108,6 +108,7 @@ in
           just
           man-pages
           ncdu
+          nil
           nixfmt-rfc-style
           nixpkgs-review
           openssl.dev
