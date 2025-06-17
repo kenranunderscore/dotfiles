@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.fish;
+  cfg = config.my.fish;
 in
 {
-  options.modules.fish.enable = lib.mkEnableOption "fish";
+  options.my.fish.enable = lib.mkEnableOption "fish";
 
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.eza ];

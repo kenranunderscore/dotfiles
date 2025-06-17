@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.fzf;
+  cfg = config.my.fzf;
 in
 {
-  options.modules.fzf.enable = lib.mkEnableOption "fzf";
+  options.my.fzf.enable = lib.mkEnableOption "fzf";
 
   config = lib.mkIf cfg.enable {
     home = {

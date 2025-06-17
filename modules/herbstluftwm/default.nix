@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.herbstluftwm;
+  cfg = config.my.herbstluftwm;
 in
 {
-  options.modules.herbstluftwm.enable = lib.mkEnableOption "herbstluftwm";
+  options.my.herbstluftwm.enable = lib.mkEnableOption "herbstluftwm";
 
   config = lib.mkIf cfg.enable {
     xsession.windowManager.herbstluftwm =

@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.emacs;
+  cfg = config.my.emacs;
   types = lib.types;
 in
 {
-  options.modules.emacs = {
+  options.my.emacs = {
     enable = lib.mkEnableOption "emacs";
     includePkg = lib.mkOption {
       type = lib.types.bool;

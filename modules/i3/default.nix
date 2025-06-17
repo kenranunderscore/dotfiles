@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.i3;
+  cfg = config.my.i3;
 in
 {
-  options.modules.i3 = {
+  options.my.i3 = {
     enable = lib.mkEnableOption "i3";
 
     terminal = lib.mkOption {

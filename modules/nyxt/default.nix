@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.nyxt;
+  cfg = config.my.nyxt;
 in
 {
-  options.modules.nyxt.enable = lib.mkEnableOption "nyxt";
+  options.my.nyxt.enable = lib.mkEnableOption "nyxt";
 
   config = lib.mkIf cfg.enable {
     home = {

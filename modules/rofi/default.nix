@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.rofi;
+  cfg = config.my.rofi;
 in
 {
-  options.modules.rofi.enable = lib.mkEnableOption "rofi";
+  options.my.rofi.enable = lib.mkEnableOption "rofi";
 
   config = lib.mkIf cfg.enable {
     programs = {

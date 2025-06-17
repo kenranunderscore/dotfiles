@@ -1,7 +1,5 @@
 {
   custom,
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -10,7 +8,7 @@
   imports = [ ../../modules ];
 
   config = {
-    modules = {
+    my = {
       bash.enable = true;
       email = {
         enable = true;

@@ -1,21 +1,12 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
-let
-  email = "johannes.maier@active-group.de";
-in
 {
   imports = [
     ../../modules/base.nix
     ../../modules
   ];
 
-  modules = {
+  my = {
     base.gpgKey = "9AC78C1A48681583";
     bash.enable = true;
     brave = {

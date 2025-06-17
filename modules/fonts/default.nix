@@ -9,10 +9,10 @@
 
 let
   inherit (pkgs) callPackage;
-  cfg = config.modules.fonts;
+  cfg = config.my.fonts;
 in
 {
-  options.modules.fonts = {
+  options.my.fonts = {
     enable = lib.mkEnableOption "fonts";
 
     withCustomBuilds = lib.mkOption {

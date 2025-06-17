@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.zsh;
+  cfg = config.my.zsh;
 in
 {
-  options.modules.zsh.enable = lib.mkEnableOption "zsh";
+  options.my.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
     # Packages that I want aliases to use, like 'eza' as 'ls'

@@ -8,11 +8,11 @@
 }:
 
 let
-  cfg = config.modules.base;
+  cfg = config.my.base;
   privateDir = "${inputs.privateConfig}";
 in
 {
-  options.modules.base = {
+  options.my.base = {
     gpgKey = lib.mkOption {
       type = lib.types.str;
       default = null;
@@ -35,7 +35,7 @@ in
       };
     };
 
-    modules = {
+    my = {
       alacritty.enable = false;
       firefox.enable = true;
       kitty.enable = false;

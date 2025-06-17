@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.alacritty;
+  cfg = config.my.alacritty;
 in
 {
-  options.modules.alacritty = {
+  options.my.alacritty = {
     enable = lib.mkEnableOption "alacritty";
   };
 

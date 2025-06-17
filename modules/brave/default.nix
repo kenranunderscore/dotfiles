@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.brave;
+  cfg = config.my.brave;
 in
 {
-  options.modules.brave = {
+  options.my.brave = {
     enable = lib.mkEnableOption "brave";
 
     wrapWithNixGL = lib.mkOption {

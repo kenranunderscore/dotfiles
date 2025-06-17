@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.git;
+  cfg = config.my.git;
   types = lib.types;
 in
 {
-  options.modules.git = {
+  options.my.git = {
     email = lib.mkOption {
       type = types.str;
       default = "";

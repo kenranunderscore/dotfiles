@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.bat;
+  cfg = config.my.bat;
 in
 {
-  options.modules.bat.enable = lib.mkEnableOption "bat";
+  options.my.bat.enable = lib.mkEnableOption "bat";
 
   config = lib.mkIf cfg.enable {
     programs.bat = {

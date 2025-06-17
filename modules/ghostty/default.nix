@@ -7,11 +7,11 @@
 }:
 
 let
-  cfg = config.modules.ghostty;
+  cfg = config.my.ghostty;
   types = lib.types;
 in
 {
-  options.modules.ghostty = {
+  options.my.ghostty = {
     enable = lib.mkEnableOption "ghostty";
     withPackage = lib.mkOption {
       default = true;

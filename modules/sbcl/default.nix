@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.sbcl;
+  cfg = config.my.sbcl;
 in
 {
-  options.modules.sbcl = {
+  options.my.sbcl = {
     enable = lib.mkEnableOption "sbcl";
 
     withPackage = lib.mkOption {

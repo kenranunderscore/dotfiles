@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.bash;
+  cfg = config.my.bash;
 in
 {
-  options.modules.bash.enable = lib.mkEnableOption "bash";
+  options.my.bash.enable = lib.mkEnableOption "bash";
 
   config = lib.mkIf cfg.enable {
     programs.bash = {

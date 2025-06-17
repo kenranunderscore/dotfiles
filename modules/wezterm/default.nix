@@ -7,11 +7,11 @@
 }:
 
 let
-  cfg = config.modules.wezterm;
+  cfg = config.my.wezterm;
   types = lib.types;
 in
 {
-  options.modules.wezterm = {
+  options.my.wezterm = {
     enable = lib.mkEnableOption "wezterm";
     withPackage = lib.mkOption {
       default = true;

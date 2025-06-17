@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.tmux;
+  cfg = config.my.tmux;
   types = lib.types;
 in
 {
-  options.modules.tmux = {
+  options.my.tmux = {
     enable = lib.mkEnableOption "tmux";
   };
 

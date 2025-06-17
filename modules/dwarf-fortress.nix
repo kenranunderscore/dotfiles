@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.dwarfFortress;
+  cfg = config.my.dwarfFortress;
 in
 {
-  options.modules.dwarfFortress = {
+  options.my.dwarfFortress = {
     enable = lib.mkEnableOption "dwarfFortress";
   };
 

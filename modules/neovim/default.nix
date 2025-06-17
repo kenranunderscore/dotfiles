@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.neovim;
+  cfg = config.my.neovim;
 in
 {
-  options.modules.neovim.enable = lib.mkEnableOption "neovim";
+  options.my.neovim.enable = lib.mkEnableOption "neovim";
 
   config = lib.mkIf cfg.enable {
     home = {

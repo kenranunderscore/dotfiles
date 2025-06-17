@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.spectrwm;
+  cfg = config.my.spectrwm;
 in
 {
-  options.modules.spectrwm = {
+  options.my.spectrwm = {
     enable = lib.mkEnableOption "spectrwm";
 
     terminal = lib.mkOption {

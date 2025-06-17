@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.ssh;
+  cfg = config.my.ssh;
 in
 {
-  options.modules.ssh.enable = lib.mkEnableOption "ssh";
+  options.my.ssh.enable = lib.mkEnableOption "ssh";
 
   config = {
     programs.ssh = {

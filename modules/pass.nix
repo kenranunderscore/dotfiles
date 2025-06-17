@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.pass;
+  cfg = config.my.pass;
   types = lib.types;
 in
 {
-  options.modules.pass = {
+  options.my.pass = {
     enable = lib.mkEnableOption "pass module";
 
     gpgKey = lib.mkOption {

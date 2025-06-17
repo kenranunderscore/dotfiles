@@ -7,10 +7,10 @@
 }:
 
 let
-  cfg = config.modules.polybar;
+  cfg = config.my.polybar;
 in
 {
-  options.modules.polybar = {
+  options.my.polybar = {
     enable = lib.mkEnableOption "polybar";
 
     withBattery = lib.mkOption {

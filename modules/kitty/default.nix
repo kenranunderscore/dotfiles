@@ -8,10 +8,10 @@
 }:
 
 let
-  cfg = config.modules.kitty;
+  cfg = config.my.kitty;
 in
 {
-  options.modules.kitty = {
+  options.my.kitty = {
     enable = lib.mkEnableOption "kitty";
 
     wrapWithNixGL = lib.mkOption {

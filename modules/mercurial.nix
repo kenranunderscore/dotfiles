@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.mercurial;
+  cfg = config.my.mercurial;
 in
 {
-  options.modules.mercurial = {
+  options.my.mercurial = {
     enable = lib.mkEnableOption "mercurial";
 
     email = lib.mkOption {

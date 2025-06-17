@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.doom;
+  cfg = config.my.doom;
   types = lib.types;
 in
 {
-  options.modules.doom = {
+  options.my.doom = {
     enable = lib.mkEnableOption "doom";
     includePkg = lib.mkOption {
       type = lib.types.bool;

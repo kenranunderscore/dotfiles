@@ -9,11 +9,11 @@
 let
   types = lib.types;
   realName = "Johannes Maier";
-  cfg = config.modules.email;
+  cfg = config.my.email;
   isSyncRoot = custom.hostname == "paln";
 in
 {
-  options.modules.email = {
+  options.my.email = {
     enable = lib.mkEnableOption "email module";
 
     maildir = lib.mkOption {

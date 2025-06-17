@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.picom;
+  cfg = config.my.picom;
 in
 {
-  options.modules.picom = {
+  options.my.picom = {
     enable = lib.mkEnableOption "picom";
   };
 

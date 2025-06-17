@@ -6,10 +6,10 @@
 }:
 
 let
-  cfg = config.modules.fish;
+  cfg = config.my.fish;
 in
 {
-  options.modules.dcss.enable = lib.mkEnableOption "dcss";
+  options.my.dcss.enable = lib.mkEnableOption "dcss";
 
   config = lib.mkIf cfg.enable {
     home = {
