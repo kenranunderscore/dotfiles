@@ -142,7 +142,6 @@ in
     sieve-connect
     steam
     subversion
-    texlive.combined.scheme-full
     thunderbird
     twitch-cli
     xst
