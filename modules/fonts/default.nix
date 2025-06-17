@@ -30,7 +30,7 @@ in
       packages =
         lib.optionals cfg.withCustomBuilds [
           (callPackage ./lucida-console.nix { })
-          (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
+          # (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
           (callPackage ./termingus.nix { })
           (callPackage ./oldschool.nix { })
         ]
