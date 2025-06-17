@@ -26,6 +26,7 @@
       "${hostname}" = inputs.nixpkgs.lib.nixosSystem {
         inherit system pkgs specialArgs;
         modules = [
+          ./symlink-config
           (dir + /configuration.nix)
           inputs.home-manager.nixosModules.home-manager
           {
@@ -63,7 +64,10 @@
         extraSpecialArgs = {
           inherit inputs custom;
         };
-        modules = [ (dir + /home.nix) ];
+        modules = [
+          ./symlink-config
+          (dir + /home.nix)
+        ];
       };
     };
 

@@ -5,29 +5,22 @@
   ...
 }:
 
-let
-  cfg = config.my.neovim;
-in
 {
   options.my.neovim.enable = lib.mkEnableOption "neovim";
 
-  config = lib.mkIf cfg.enable {
-    home = {
-      packages = with pkgs; [
-        neovim
-        sumneko-lua-language-server
-        stylua
-        xclip
-      ];
+  config = lib.mkIf config.my.neovim.enable {
+    symlink-config.files = [
+      {
+        source = ./nvim;
+        destination = "$XDG_CONFIG_HOME/nvim";
+      }
+    ];
 
-      activation = {
-        symlinkNeovimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          if [ ! -h $HOME/.config/nvim ]; then
-              $DRY_RUN_CMD mkdir -p $HOME/.config
-              $DRY_RUN_CMD ln -snf $HOME/dotfiles/modules/neovim/nvim $HOME/.config/nvim
-          fi
-        '';
-      };
-    };
+    home.packages = with pkgs; [
+      neovim
+      sumneko-lua-language-server
+      stylua
+      xclip
+    ];
   };
 }
