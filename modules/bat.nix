@@ -1,17 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 
-let
-  cfg = config.my.bat;
-in
 {
   options.my.bat.enable = lib.mkEnableOption "bat";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.my.bat.enable {
     programs.bat = {
       enable = true;
       config.theme = "ansi";

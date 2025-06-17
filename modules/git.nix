@@ -7,12 +7,11 @@
 
 let
   cfg = config.my.git;
-  types = lib.types;
 in
 {
   options.my.git = {
     email = lib.mkOption {
-      type = types.str;
+      type = lib.types.str;
       default = "";
     };
   };

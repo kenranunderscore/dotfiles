@@ -1,18 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 
-let
-  cfg = config.my.ssh;
-in
 {
   options.my.ssh.enable = lib.mkEnableOption "ssh";
 
   config = {
-    programs.ssh = {
+    programs.ssh = lib.mkIf config.my.ssh.enable {
       enable = true;
       compression = true;
       addKeysToAgent = "yes";

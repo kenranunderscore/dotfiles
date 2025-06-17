@@ -1,5 +1,4 @@
 {
-  custom,
   config,
   lib,
   pkgs,
@@ -8,7 +7,6 @@
 
 let
   cfg = config.my.ghostty;
-  types = lib.types;
 in
 {
   options.my.ghostty = {

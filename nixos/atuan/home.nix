@@ -1,10 +1,4 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -12,7 +6,7 @@
     ../../modules
   ];
 
-  modules = {
+  my = {
     bash.enable = true;
     base.gpgKey = "0BAD1500D7D4282C433BC0BC9AC78C1A48681583";
     rofi.enable = true;
@@ -25,7 +19,6 @@
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    dwarfFortress.enable = false;
     nyxt.enable = false;
     sbcl.enable = false;
     git.email = "johannes.maier@mailbox.org";

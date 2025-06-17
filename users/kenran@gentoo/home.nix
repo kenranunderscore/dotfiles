@@ -12,7 +12,6 @@
       enable = true;
       wrapWithNixGL = false;
     };
-    dwarfFortress.enable = false;
     ghostty.enable = false;
     herbstluftwm.enable = false;
     kitty.enable = false;

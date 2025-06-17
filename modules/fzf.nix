@@ -5,13 +5,10 @@
   ...
 }:
 
-let
-  cfg = config.my.fzf;
-in
 {
   options.my.fzf.enable = lib.mkEnableOption "fzf";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.my.fzf.enable {
     home = {
       packages = [ pkgs.fzf ];
       sessionVariables = {

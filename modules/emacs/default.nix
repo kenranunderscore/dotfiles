@@ -7,7 +7,6 @@
 
 let
   cfg = config.my.emacs;
-  types = lib.types;
 in
 {
   options.my.emacs = {

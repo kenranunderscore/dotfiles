@@ -5,15 +5,12 @@
   ...
 }:
 
-let
-  cfg = config.my.dwarfFortress;
-in
 {
-  options.my.dwarfFortress = {
-    enable = lib.mkEnableOption "dwarfFortress";
+  options.my.dwarf-fortress = {
+    enable = lib.mkEnableOption "dwarf-fortress";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.my.dwarf-fortress.enable {
     home.packages =
       let
         df = pkgs.dwarf-fortress-packages.dwarf-fortress-full.override { theme = null; };

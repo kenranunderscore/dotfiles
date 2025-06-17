@@ -1,16 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  custom,
-  ...
-}:
+{ config, lib, ... }:
 
 let
   types = lib.types;
   realName = "Johannes Maier";
   cfg = config.my.email;
-  isSyncRoot = custom.hostname == "paln";
 in
 {
   options.my.email = {

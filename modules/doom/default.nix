@@ -7,7 +7,6 @@
 
 let
   cfg = config.my.doom;
-  types = lib.types;
 in
 {
   options.my.doom = {
