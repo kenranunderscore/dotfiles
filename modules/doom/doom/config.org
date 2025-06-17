@@ -878,7 +878,7 @@ noise, and annoys me when trying to enter quick, short snippets.
 #+end_src
 
 * TODO Jumping around with =avy=
-* TODO Org mode
+* Org mode
 ** Tweaks to the default configuration
 
 When writing text with =org=, =auto-fill-mode= should be enabled to automatically
@@ -945,6 +945,34 @@ position of point to automatically show surrounding markup.
         org-appear-autoentities t
         org-appear-autokeywords t
         org-appear-trigger 'always))
+#+end_src
+
+** Tiny presentations with =org-present=
+
+Sometimes I need to showcase some stuff, often code, in a quick and textual
+manner. This is where =org-present= comes in handy, as it can present Org mode
+files/headers with a huge font size, looking a bit like slides.
+
+#+begin_src emacs-lisp
+(use-package! org-present
+  :hook
+  ((org-present-mode
+    . (lambda ()
+        (org-present-big)
+        (org-display-inline-images)
+        (org-present-read-only)))
+   (org-present-mode-quit
+    . (lambda ()
+        (org-present-small)
+        (org-remove-inline-images)
+        (org-present-read-write))))
+  :config
+  (map!
+    :map org-present-mode-keymap
+    :localleader
+    :desc "next" :nv "n" #'org-present-next
+    :desc "previous" :nv "p" #'org-present-prev
+    :desc "quit" :nv "q" #'org-present-quit))
 #+end_src
 
 * On-the-fly syntax checking (and other things): =Flymake= / =Flycheck=
