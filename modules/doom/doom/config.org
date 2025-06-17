@@ -130,8 +130,8 @@ usually created by a call to `~define-font'.")
 (~define-font "Cascadia Code")
 (~define-font "Source Code Pro")
 (~define-font "Consolas")
-(~define-font "Fira Code" :org-height 0.8 :weight 'medium)
-(~define-font "JetBrains Mono" :org-height 0.8 :weight 'semibold)
+(~define-font "Fira Code" :org-height 0.8)
+(~define-font "JetBrains Mono" :org-height 0.8)
 (~define-font "Julia Mono")
 (~define-font "Courier Prime" :org-height 0.95)
 (~define-font "Fantasque Sans Mono")
@@ -139,7 +139,7 @@ usually created by a call to `~define-font'.")
 (~define-font "Inconsolata")
 (~define-font "Maple Mono")
 (~define-font "Unifont" :default-height 200)
-(~define-font "Geist Mono" :weight 'medium)
+(~define-font "Geist Mono")
 (~define-font "Berkeley Mono")
 (~define-font "TX-02")
 (~define-font "Ubuntu Sans Mono" :weight 'medium)
@@ -150,7 +150,7 @@ usually created by a call to `~define-font'.")
 #+end_src
 
 #+begin_src emacs-lisp
-(setq ~current-font-family "Hack")
+(setq ~current-font-family "Maple Mono")
 (setq doom-font
       (apply #'font-spec
              (plist-put
