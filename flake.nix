@@ -109,5 +109,7 @@
           description = "A template for a simple, single-package Haskell project using cabal-install";
         };
       };
+
+      nixosModules.symlink-config = ./lib/symlink-config;
     };
 }
