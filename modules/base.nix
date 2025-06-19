@@ -60,12 +60,6 @@ in
       home-manager.enable = true;
       # TODO(Johannes): Customize colors?
       jq.enable = true;
-      nix-index = {
-        enable = true;
-        enableFishIntegration = true;
-        enableZshIntegration = true;
-        enableBashIntegration = true;
-      };
     };
 
     xdg = {
