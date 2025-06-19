@@ -1,0 +1,28 @@
+[font]
+size = 24.0
+
+[font.bold]
+family = "Julia Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Julia Mono"
+
+[font.italic]
+family = "Julia Mono"
+style = "Italic"
+
+[font.normal]
+family = "Julia Mono"
+style = "Regular"
+
+[scrolling]
+history = 20000
+
+[window]
+decorations = "none"
+dynamic_padding = false
+
+[window.padding]
+x = 0
+y = 0

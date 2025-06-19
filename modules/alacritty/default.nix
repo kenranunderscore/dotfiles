@@ -5,16 +5,16 @@
   ...
 }:
 
-let
-  cfg = config.my.alacritty;
-in
 {
-  options.my.alacritty = {
-    enable = lib.mkEnableOption "alacritty";
-  };
+  options.my.alacritty.enable = lib.mkEnableOption "alacritty";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.my.alacritty.enable {
+    symlink-config.files = [
+      {
+        source = ./alacritty.toml;
+        destination = "$XDG_CONFIG_HOME/alacritty/alacritty.toml";
+      }
+    ];
     home.packages = [ pkgs.alacritty ];
-    xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
   };
 }
