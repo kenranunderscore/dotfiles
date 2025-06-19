@@ -1,10 +1,12 @@
 { pkgs, ... }:
 
 {
-  home = {
-    packages = [ pkgs.perl ];
-    file = {
-      ".local/bin/select_project.pl".source = ./select_project.pl;
-    };
-  };
+  symlink-config.files = [
+    {
+      source = ./select_project.pl;
+      destination = ".local/bin/select_project.pl";
+    }
+  ];
+
+  home.packages = [ pkgs.perl ];
 }
