@@ -21,7 +21,7 @@ in
     symlink-config.files = [
       {
         source = ./wezterm.lua;
-        destination = "/wezterm/wezterm.lua";
+        destination = "wezterm/wezterm.lua";
         xdg = true;
       }
     ];

@@ -43,6 +43,7 @@ in
         destination,
         xdg,
       }:
+      assert lib.assertMsg (builtins.pathExists source) "source path '${source}' does not exist";
       ''
         ${./symlink.sh} \
           "${cfg.dotfileDir}" \

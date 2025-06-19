@@ -19,9 +19,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home = {
-      file.".sbclrc".source = ./sbclrc;
-      packages = lib.optional cfg.withPackage pkgs.sbcl;
-    };
+    symlink-config.files = [
+      {
+        source = ./sbclrc;
+        destination = ".sbclrc";
+      }
+    ];
+    home.packages = lib.optional cfg.withPackage pkgs.sbcl;
   };
 }
