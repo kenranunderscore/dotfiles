@@ -36,12 +36,12 @@ in
       };
     };
 
-    # Manage functions manually
-    xdg.configFile = {
-      "fish/functions" = {
+    symlink-config.files = [
+      {
         source = ./functions;
-        recursive = true;
-      };
-    };
+        destination = "fish/functions";
+        xdg = true;
+      }
+    ];
   };
 }
