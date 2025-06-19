@@ -21,7 +21,8 @@ in
     symlink-config.files = [
       {
         source = ./emacs.d;
-        destination = "$XDG_CONFIG_HOME/emacs";
+        destination = "emacs";
+        xdg = true;
       }
     ];
 

@@ -21,7 +21,8 @@ in
     symlink-config.files = [
       {
         source = ./doom;
-        destination = "$XDG_CONFIG_HOME/doom";
+        destination = "doom";
+        xdg = true;
       }
     ];
 

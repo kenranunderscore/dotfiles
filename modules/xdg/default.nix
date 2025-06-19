@@ -8,11 +8,13 @@ in
   symlink-config.files = [
     {
       source = ./fourmolu.yaml;
-      destination = "${configHome}/fourmolu/fourmolu.yaml";
+      destination = "fourmolu/fourmolu.yaml";
+      xdg = true;
     }
     {
       source = ./npm_config;
-      destination = "${configHome}/npm/config";
+      destination = "npm/config";
+      xdg = true;
     }
   ];
 

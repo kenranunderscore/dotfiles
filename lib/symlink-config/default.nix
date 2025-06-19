@@ -21,7 +21,12 @@ in
             };
             destination = lib.mkOption {
               type = types.str;
-              description = "Absolute destination path (will be shell-expanded)";
+              description = "Destination path relative to $HOME";
+            };
+            xdg = lib.mkOption {
+              type = types.bool;
+              description = "Interpret destination path as relative to $XDG_CONFIG_HOME";
+              default = false;
             };
           };
         }
@@ -33,8 +38,18 @@ in
 
   config.home.activation.symlinkCustomConfigFiles = lib.hm.dag.entryAfter [ "writeBoundary" ] (
     lib.concatMapStringsSep "\n" (
-      { source, destination }:
-      ''${./symlink.sh} "${cfg.dotfileDir}" "${builtins.toString source}" "${destination}"''
+      {
+        source,
+        destination,
+        xdg,
+      }:
+      ''
+        ${./symlink.sh} \
+          "${cfg.dotfileDir}" \
+          "${builtins.toString source}" \
+          "${destination}" \
+          ${if xdg then config.xdg.configHome else "$HOME"}
+      ''
     ) cfg.files
   );
 }

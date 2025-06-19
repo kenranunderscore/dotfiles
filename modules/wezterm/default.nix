@@ -21,7 +21,8 @@ in
     symlink-config.files = [
       {
         source = ./wezterm.lua;
-        destination = "$XDG_CONFIG_HOME/wezterm/wezterm.lua";
+        destination = "/wezterm/wezterm.lua";
+        xdg = true;
       }
     ];
     home.packages = lib.optional cfg.withPackage pkgs.wezterm;

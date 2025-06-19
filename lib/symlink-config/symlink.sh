@@ -4,7 +4,7 @@ set -e
 
 dotfile_dir="$1"
 source="$dotfile_dir/$(cut -d'/' -f5- <<<"$2")"
-destination="$3"
+destination="$4/$3"
 
 if [ ! -d "$dotfile_dir" ]; then
     echo "✗ '$dotfile_dir' does not exist"

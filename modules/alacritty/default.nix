@@ -12,7 +12,8 @@
     symlink-config.files = [
       {
         source = ./alacritty.toml;
-        destination = "$XDG_CONFIG_HOME/alacritty/alacritty.toml";
+        destination = "alacritty/alacritty.toml";
+        xdg = true;
       }
     ];
     home.packages = [ pkgs.alacritty ];

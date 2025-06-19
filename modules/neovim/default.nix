@@ -12,7 +12,8 @@
     symlink-config.files = [
       {
         source = ./nvim;
-        destination = "$XDG_CONFIG_HOME/nvim";
+        destination = "nvim";
+        xdg = true;
       }
     ];
 
