@@ -28,4 +28,4 @@ else
     $DRY_RUN_CMD ln -s "$source" "$destination"
 fi
 
-echo "✓ $destination"
+echo "✓ $destination: created"
