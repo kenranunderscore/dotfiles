@@ -1,3 +1,8 @@
 {
-  home.file.".Xresources".source = ./Xresources;
+  symlink-config.files = [
+    {
+      source = ./Xresources;
+      destination = ".Xresources";
+    }
+  ];
 }
