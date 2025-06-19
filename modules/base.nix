@@ -36,9 +36,7 @@ in
     };
 
     my = {
-      alacritty.enable = false;
       firefox.enable = true;
-      kitty.enable = false;
       bat.enable = true;
       direnv.enable = true;
       email.enable = true;
