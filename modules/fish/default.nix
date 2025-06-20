@@ -10,8 +10,11 @@
 
   config = lib.mkIf config.my.fish.enable {
     home = {
-      packages = [ pkgs.eza ];
-      file.".config/fish/auto/hm-session-vars.fish".source =
+      packages = [
+        pkgs.fish
+        pkgs.eza
+      ];
+      file.".config/fish/conf.d/hm-session-vars.fish".source =
         pkgs.runCommand "create-fish-session-vars" { }
           ''
             ${lib.getExe pkgs.babelfish} \
@@ -20,29 +23,12 @@
           '';
     };
 
-    programs.fish = {
-      enable = true;
-      plugins = [ ];
-      shellAbbrs = import ../shell-aliases.nix { inherit pkgs; };
-      interactiveShellInit = ''
-        set fish_greeting
-        bind \cp navigate_to_project
-        bind \cr command_history_search
-        bind \cv open_file_in_emacs
-
-        fish_add_path --path $HOME/.config/emacs/bin
-        fish_add_path --path $HOME/.local/bin
-      '';
-      shellAliases = {
-        ls = "eza";
-        l = "eza -lbF --group-directories-first --icons";
-        ll = "eza -lbGF --group-directories-first --icons";
-        la = "eza -labF --group-directories-first --icons";
-        lla = "eza -labGF --group-directories-first --icons";
-      };
-    };
-
     symlink-config.files = [
+      {
+        source = ./config.fish;
+        destination = "fish/config.fish";
+        xdg = true;
+      }
       {
         source = ./functions;
         destination = "fish/functions";
