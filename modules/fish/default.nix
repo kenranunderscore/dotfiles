@@ -13,20 +13,24 @@
       packages = [
         pkgs.fish
         pkgs.eza
+        (pkgs.runCommand "create-fish-session-vars" { } ''
+          mkdir -p $out/share/fish
+          ${lib.getExe pkgs.babelfish} \
+            < ${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh \
+            > $out/share/fish/hm-session-vars.fish
+        '')
       ];
-      file.".config/fish/conf.d/hm-session-vars.fish".source =
-        pkgs.runCommand "create-fish-session-vars" { }
-          ''
-            ${lib.getExe pkgs.babelfish} \
-              < ${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh \
-              > $out
-          '';
     };
 
     symlink-config.files = [
       {
         source = ./config.fish;
         destination = "fish/config.fish";
+        xdg = true;
+      }
+      {
+        source = ./conf.d;
+        destination = "fish/conf.d";
         xdg = true;
       }
       {
