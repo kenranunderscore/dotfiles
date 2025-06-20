@@ -5,14 +5,20 @@
   ...
 }:
 
-let
-  cfg = config.my.fish;
-in
 {
   options.my.fish.enable = lib.mkEnableOption "fish";
 
-  config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.eza ];
+  config = lib.mkIf config.my.fish.enable {
+    home = {
+      packages = [ pkgs.eza ];
+      file.".config/fish/auto/hm-session-vars.fish".source =
+        pkgs.runCommand "create-fish-session-vars" { }
+          ''
+            ${lib.getExe pkgs.babelfish} \
+              < ${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh \
+              > $out
+          '';
+    };
 
     programs.fish = {
       enable = true;
