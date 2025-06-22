@@ -9,7 +9,7 @@ abbr --add single-monitor xrandr --output HDMI-0 --off
 abbr --add v nvim
 abbr --add d cd ~/dotfiles
 abbr --add doom ~/.config/emacs/bin/doom
-abbr --add dual-monitor xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0
+abbr --add dual-monitor "xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0"
 abbr --add md mkdir -p
 abbr --add sy systemctl
 abbr --add syu systemctl --user
@@ -50,6 +50,7 @@ abbr --add nrt --set-cursor nix run this#%
 abbr --add nr. --set-cursor nix run .#%
 abbr --add nrb nixos-rebuild boot --use-remote-sudo --flake ~/dotfiles/
 abbr --add nrs nixos-rebuild switch --use-remote-sudo --flake ~/dotfiles/
+abbr --add hs home-manager switch --flake ~/dotfiles/ --impure
 abbr --add ns nix shell
 abbr --add nst --set-cursor nix shell this#% -c fish
 
