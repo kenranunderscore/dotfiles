@@ -16,7 +16,13 @@ echo "fisher: installing..."
 curl -sL --silent https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
 echo "fisher: ✓"
 
-fisher install jorgebucaran/fisher
-fisher install jorgebucaran/autopair.fish
+set packages \
+    jorgebucaran/fisher \
+    jorgebucaran/autopair.fish \
+    meaningful-ooo/sponge
+
+for pkg in packages
+    fisher install $pkg
+end
 
 set -e fisher_install_lock
