@@ -104,6 +104,7 @@ in
           nixfmt-rfc-style
           nixpkgs-review
           openssl.dev
+          parallel
           pciutils
           perl
           ripgrep
