@@ -1,1 +1,0 @@
-require("kenran.naga").colorscheme()
