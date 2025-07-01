@@ -34,6 +34,7 @@
     ./wezterm
     ./x-configuration
     ./xdg
+    ./zellij
     ./zsh
   ];
 }

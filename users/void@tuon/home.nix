@@ -105,6 +105,7 @@
       enable = true;
       withPackage = false;
     };
+    zellij.enable = true;
   };
 
   home.packages = with pkgs; [
