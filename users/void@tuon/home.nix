@@ -123,8 +123,7 @@
     nixgl.auto.nixGLDefault
     nixVersions.latest
     nixos-rebuild
-    nodejs_latest
-    opam
+    nodejs
     pavucontrol
     remmina
     rustup
