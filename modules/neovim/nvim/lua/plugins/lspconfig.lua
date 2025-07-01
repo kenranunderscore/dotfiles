@@ -1,9 +1,16 @@
 return {
   "neovim/nvim-lspconfig",
   config = function()
-    vim.lsp.enable("lua_ls")
+    local lsp = vim.lsp
+    lsp.enable("lua_ls")
 
-    vim.lsp.enable("elixirls")
-    vim.lsp.config("elixirls", { cmd = { "elixir-ls" } })
+    lsp.enable("elixirls")
+    lsp.config("elixirls", { cmd = { "elixir-ls" } })
+
+    lsp.enable("nil_ls")
+    lsp.config("nil_ls", {
+        autostart = true,
+        cmd = { "nil" },
+    })
   end,
 }
