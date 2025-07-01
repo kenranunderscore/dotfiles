@@ -1,0 +1,6 @@
+local map = vim.keymap.set
+
+map("n", "<esc>", "<cmd>noh<cr>")
+
+map({ "n", "i" }, "<C-l>", "<C-w><C-w>")
+map("n", "<C-w><C-d>", "<C-w>q")

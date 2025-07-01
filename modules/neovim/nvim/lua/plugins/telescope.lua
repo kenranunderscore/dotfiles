@@ -23,6 +23,9 @@ return {
       },
     })
     require("telescope").load_extension("fzf")
-    require("plugins.config.telescope")
   end,
+  keys = {
+    { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "find file in project" },
+    { "<leader>bb", "<cmd>Telescope buffers<cr>", desc = "switch buffer" },
+  },
 }
