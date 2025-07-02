@@ -18,3 +18,6 @@ opt.signcolumn = "yes"
 
 opt.list = true
 opt.listchars = "tab:» ,nbsp:+"
+
+opt.smartcase = true
+opt.ignorecase = true
