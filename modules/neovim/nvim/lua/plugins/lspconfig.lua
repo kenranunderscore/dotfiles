@@ -1,16 +1,40 @@
 return {
   "neovim/nvim-lspconfig",
+  lazy = false,
+  dependencies = {
+    { "ms-jpq/coq_nvim", branch = "coq" },
+    { "ms-jpq/coq.artifacts", branch = "artifacts" },
+  },
+  init = function()
+    vim.g.coq_settings = {
+      auto_start = false,
+    }
+  end,
   config = function()
+    local coq = require("coq")
     local lsp = vim.lsp
+
+    -- Lua
+    lsp.config("lua_ls", coq.lsp_ensure_capabilities({}))
     lsp.enable("lua_ls")
 
+    -- Elixir
+    lsp.config(
+      "elixirls",
+      coq.lsp_ensure_capabilities({
+        cmd = { "elixir-ls" },
+      })
+    )
     lsp.enable("elixirls")
-    lsp.config("elixirls", { cmd = { "elixir-ls" } })
 
-    lsp.enable("nil_ls")
-    lsp.config("nil_ls", {
+    -- Nix
+    lsp.config(
+      "nil_ls",
+      coq.lsp_ensure_capabilities({
         autostart = true,
         cmd = { "nil" },
-    })
+      })
+    )
+    lsp.enable("nil_ls")
   end,
 }
