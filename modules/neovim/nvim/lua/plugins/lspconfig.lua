@@ -4,6 +4,7 @@ return {
   dependencies = {
     { "ms-jpq/coq_nvim", branch = "coq" },
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
+    { "maan2003/lsp_lines.nvim" },
     {
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files
@@ -22,10 +23,19 @@ return {
     }
   end,
   config = function()
+    require("lsp_lines").setup()
     vim.diagnostic.config({
       virtual_text = true,
       virtual_lines = false,
     })
+    vim.keymap.set("n", "<leader>ll", function()
+      local cfg = vim.diagnostic.config() or {}
+      if cfg.virtual_text then
+        vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+      else
+        vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+      end
+    end, { desc = "toggle lsp_lines" })
 
     local coq = require("coq")
     local lsp = vim.lsp
