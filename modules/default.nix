@@ -16,6 +16,7 @@
     ./fzf.nix
     ./ghostty
     ./git.nix
+    ./golang.nix
     ./herbstluftwm
     ./i3
     ./kitty
