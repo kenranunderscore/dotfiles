@@ -58,5 +58,9 @@ return {
       })
     )
     lsp.enable("nil_ls")
+
+    -- Rust
+    lsp.config("rust_analyzer", coq.lsp_ensure_capabilities({}))
+    lsp.enable("rust_analyzer")
   end,
 }
