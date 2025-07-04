@@ -44,16 +44,6 @@ return {
     lsp.config("lua_ls", coq.lsp_ensure_capabilities({}))
     lsp.enable("lua_ls")
 
-    -- Elixir
-    lsp.config(
-      "elixirls",
-      coq.lsp_ensure_capabilities({
-        autostart = true,
-        cmd = { "elixir-ls" },
-      })
-    )
-    lsp.enable("elixirls")
-
     -- Nix
     lsp.config(
       "nil_ls",
