@@ -82,8 +82,6 @@ in
         };
 
         packages = with pkgs; [
-          autoconf
-          automake
           binutils
           cacert
           cmake
