@@ -20,9 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
     zsh-autopair = {
       url = "github:hlissner/zsh-autopair";
       flake = false;
@@ -53,13 +50,11 @@
       overlays = [
         inputs.emacs-overlay.overlays.default
         inputs.nixgl.overlays.default
-        (final: prev: { inherit (inputs.ghostty.packages.${system}) ghostty; })
       ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
         inherit overlays system;
       };
-      inherit (pkgs) lib;
     in
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;

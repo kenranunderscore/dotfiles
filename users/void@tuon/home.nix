@@ -13,7 +13,7 @@
       enable = true;
       wrapWithNixGL = false;
     };
-    ghostty.enable = false;
+    ghostty.enable = true;
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
