@@ -74,7 +74,7 @@ in
         homeDirectory = "/home/${username}";
 
         sessionVariables = rec {
-          EDITOR = "emacsclient -c";
+          EDITOR = "nvim";
           VISUAL = EDITOR;
           ALTERNATE_EDITOR = "";
           KENRAN_IRC_CERTS = "${privateDir}/irc";
