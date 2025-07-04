@@ -17,8 +17,8 @@
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
-      withGaps = false;
       terminal = "nixGL wezterm";
+      withGaps = true;
       workspaces = [
         {
           name = "1:main";

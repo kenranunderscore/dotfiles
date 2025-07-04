@@ -186,7 +186,7 @@ in
         };
         gaps =
           let
-            val = 50;
+            val = 40;
           in
           lib.mkIf cfg.withGaps {
             inner = val;
