@@ -37,6 +37,11 @@ return {
       end
     end, { desc = "toggle lsp_lines" })
 
+    vim.lsp.inlay_hint.enable(true)
+    vim.keymap.set("n", "<leader>li", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+    end)
+
     local coq = require("coq")
     local lsp = vim.lsp
 
