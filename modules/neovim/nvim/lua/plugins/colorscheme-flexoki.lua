@@ -1,0 +1,3 @@
+return {
+  "kepano/flexoki-neovim",
+}
