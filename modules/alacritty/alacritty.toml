@@ -1,28 +1,37 @@
 [font]
-size = 24.0
+size = 15.0
 
 [font.bold]
-family = "Julia Mono"
+family = "Geist Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "Julia Mono"
+family = "Geist Mono"
 
 [font.italic]
-family = "Julia Mono"
+family = "Geist Mono"
 style = "Italic"
 
 [font.normal]
-family = "Julia Mono"
+family = "Geist Mono"
 style = "Regular"
 
 [scrolling]
 history = 20000
 
 [window]
-decorations = "none"
+decorations = "Full"
 dynamic_padding = false
 
 [window.padding]
 x = 0
 y = 0
+
+[terminal]
+shell = "fish"
+
+[selection]
+save_to_clipboard = true
+
+[general]
+import = [ "~/.config/alacritty/themes/themes/autumn.toml" ]
