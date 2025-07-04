@@ -15,6 +15,11 @@ return {
         borderchars = borderchars,
         layout_strategy = "horizontal",
       },
+      pickers = {
+        find_files = { previewer = false, layout_config = { height = 0.4 } },
+        git_files = { previewer = false, layout_config = { height = 0.4 } },
+        buffers = { previewer = false, layout_config = { height = 0.4 } },
+      },
       extensions = {
         fzf = {
           fuzzy = false,
@@ -22,7 +27,11 @@ return {
           override_file_sorter = true,
           case_mode = "smart_case",
         },
-        ["ui-select"] = {},
+        ["ui-select"] = {
+          require("telescope.themes").get_cursor({
+            borderchars = borderchars,
+          }),
+        },
       },
     })
     require("telescope").load_extension("fzf")
