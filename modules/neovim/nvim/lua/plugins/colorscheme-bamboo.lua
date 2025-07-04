@@ -3,7 +3,7 @@ return {
   lazy = false,
   config = function()
     require("bamboo").setup({
-      style = "multiplex",
+      style = "vulgaris",
     })
     require("bamboo").load()
   end,
