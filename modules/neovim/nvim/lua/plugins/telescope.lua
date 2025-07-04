@@ -5,6 +5,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-ui-select.nvim" },
   },
   config = function()
     local borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
@@ -21,9 +22,11 @@ return {
           override_file_sorter = true,
           case_mode = "smart_case",
         },
+        ["ui-select"] = {},
       },
     })
     require("telescope").load_extension("fzf")
+    require("telescope").load_extension("ui-select")
   end,
   keys = {
     { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "find file in project" },
