@@ -5,7 +5,7 @@ end
 set fish_greeting
 bind \cp navigate_to_project
 bind \cr command_history_search
-bind \cv open_file_in_emacs
+bind \cv open_file_in_editor
 
 fish_add_path --path $HOME/.config/emacs/bin
 fish_add_path --path $HOME/.local/bin
