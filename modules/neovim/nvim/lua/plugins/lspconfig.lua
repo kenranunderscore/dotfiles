@@ -22,6 +22,11 @@ return {
     }
   end,
   config = function()
+    vim.diagnostic.config({
+      virtual_text = true,
+      virtual_lines = false,
+    })
+
     local coq = require("coq")
     local lsp = vim.lsp
 
@@ -33,6 +38,7 @@ return {
     lsp.config(
       "elixirls",
       coq.lsp_ensure_capabilities({
+        autostart = true,
         cmd = { "elixir-ls" },
       })
     )
