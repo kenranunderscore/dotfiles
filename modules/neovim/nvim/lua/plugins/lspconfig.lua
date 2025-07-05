@@ -62,5 +62,14 @@ return {
     -- Rust
     lsp.config("rust_analyzer", coq.lsp_ensure_capabilities({}))
     lsp.enable("rust_analyzer")
+
+    -- HTML/Emmet
+    lsp.config(
+      "emmet-language-server",
+      coq.lsp_ensure_capabilities({
+        cmd = { "emmet-language-server", "--stdio" },
+      })
+    )
+    lsp.enable("emmet-language-server")
   end,
 }

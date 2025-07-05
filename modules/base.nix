@@ -86,6 +86,7 @@ in
           cacert
           cmake
           curl
+          emmet-language-server
           fd
           feh
           file
