@@ -51,6 +51,7 @@ in
         assigns = builtins.foldl' (
           acc: w: if builtins.hasAttr "assigns" w then acc // { "${w.name}" = w.assigns; } else acc
         ) { } cfg.workspaces;
+        bars = [ ];
         keybindings =
           let
             workspaceKeybindings = builtins.foldl' (
@@ -110,43 +111,6 @@ in
           inherit (w) output;
           workspace = w.name;
         }) (builtins.filter (builtins.hasAttr "output") cfg.workspaces);
-        bars = [
-          {
-            mode = "dock";
-            position = "bottom";
-            statusCommand = "${lib.getExe pkgs.i3status}";
-            workspaceButtons = true;
-            fonts = {
-              names = [ "Hack" ];
-              size = 15.0;
-            };
-            colors = rec {
-              background = "#060606";
-              focusedBackground = background;
-              statusline = "#088e08";
-              focusedStatusline = statusline;
-              bindingMode = rec {
-                inherit background;
-                border = "#00afa0";
-                text = border;
-              };
-              focusedWorkspace = {
-                background = "#041a04";
-                border = "#088e08";
-                text = "#088e08";
-              };
-              activeWorkspace = {
-                inherit background;
-                inherit (focusedWorkspace) text border;
-              };
-              inactiveWorkspace = rec {
-                inherit background;
-                border = "#707370";
-                text = border;
-              };
-            };
-          }
-        ];
         colors = {
           focused = {
             background = "#041a04";

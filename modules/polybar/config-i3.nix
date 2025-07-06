@@ -77,7 +77,7 @@ in
     margin-top = 0;
   };
 
-  "bar/main" = mkBar true "i3" "" (
+  "bar/main" = mkBar false "i3" "" (
     "distro-icon cpu memory"
     + (pkgs.lib.optionalString withBattery " battery " + "wlan1 wlan2 wlan3 wlan4 audio date")
   );

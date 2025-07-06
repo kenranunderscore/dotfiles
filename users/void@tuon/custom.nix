@@ -1,6 +1,6 @@
 {
   font = {
-    name = "Hack";
-    size = 17;
+    name = "PragmataPro Mono";
+    size = 15;
   };
 }

@@ -23,7 +23,7 @@
 
 window {
     location:   center;
-    width:      35%;
+    width:      50%;
 
     border:     5;
     background-color:   @bg0;
@@ -51,7 +51,7 @@ textbox {
 
 listview {
     padding:    4px 0;
-    lines:      8;
+    lines:      12;
     columns:    1;
 
     fixed-height:   false;

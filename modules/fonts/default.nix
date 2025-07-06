@@ -44,6 +44,7 @@ in
           fantasque-sans-mono
           fira-code
           fixedsys-excelsior
+          font-awesome_6
           hack-font
           ibm-plex
           inconsolata

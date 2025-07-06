@@ -20,7 +20,7 @@ in
         font = "${custom.font.name} ${toString custom.font.size}";
         location = "center";
         terminal = "${lib.getExe pkgs.kitty}";
-        theme = ./naga.rasi;
+        theme = ./everforest.rasi;
         extraConfig = {
           modi = "run,drun,ssh,window";
         };

@@ -20,6 +20,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    symlink-config.files = [
+      {
+        source = ./polybar.sh;
+        destination = "polybar/polybar.sh";
+        xdg = true;
+      }
+    ];
+
     services.polybar =
       let
         myPolybar = pkgs.polybar.override {

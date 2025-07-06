@@ -65,6 +65,11 @@
           notification = false;
         }
         {
+          command = "~/.config/polybar/polybar.sh";
+          always = false;
+          notification = false;
+        }
+        {
           command = ''
             xrandr --output HDMI-0 --off \
             && xrandr --auto \
@@ -84,7 +89,7 @@
       withPackage = false;
     };
     polybar = {
-      enable = false;
+      enable = true;
       withBattery = true;
     };
     picom.enable = false;
