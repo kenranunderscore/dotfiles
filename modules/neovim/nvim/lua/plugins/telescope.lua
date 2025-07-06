@@ -8,11 +8,9 @@ return {
     { "nvim-telescope/telescope-ui-select.nvim" },
   },
   config = function()
-    local borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
     require("telescope").setup({
       defaults = {
         border = true,
-        borderchars = borderchars,
         layout_strategy = "horizontal",
       },
       pickers = {
@@ -26,11 +24,6 @@ return {
           override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = "smart_case",
-        },
-        ["ui-select"] = {
-          require("telescope.themes").get_cursor({
-            borderchars = borderchars,
-          }),
         },
       },
     })
