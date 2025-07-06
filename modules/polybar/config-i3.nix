@@ -6,19 +6,12 @@
 
 let
   colors = {
-    foreground = "#d3c6aa";
-    accent = "#a7c080";
-    background = "#2b3339";
-    highlight-background = "#1b1f22";
-    transparent = "#2b3339";
-    urgent = "#e67e80";
-  };
-  mkLayoutTextModule = content: {
-    inherit content;
-    content-background = "${colors.transparent}";
-    content-foreground = "${colors.background}";
-    type = "custom/text";
-    content-font = 2;
+    foreground = "#d7c483";
+    accent = "#78824b";
+    background = "#222222";
+    highlight-background = "#2c2f2c";
+    transparent = "#222222";
+    urgent = "#b36d43";
   };
   mkBar = bottom: modules-left: modules-center: modules-right: {
     inherit
@@ -77,7 +70,7 @@ in
     margin-top = 0;
   };
 
-  "bar/main" = mkBar false "i3" "" (
+  "bar/main" = mkBar true "i3" "" (
     "distro-icon cpu memory"
     + (pkgs.lib.optionalString withBattery " battery " + "wlan1 wlan2 wlan3 wlan4 audio date")
   );

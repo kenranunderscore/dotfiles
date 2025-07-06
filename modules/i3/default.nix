@@ -114,10 +114,10 @@ in
         colors = {
           focused = {
             background = "#041a04";
-            border = "#088e08";
-            childBorder = "#088e08";
-            indicator = "#088e08";
-            text = "#088e08";
+            border = "#b36d43";
+            childBorder = "#b36d43";
+            indicator = "#b36d43";
+            text = "#b36d43";
           };
           focusedInactive = {
             background = "#5f676a";
@@ -142,7 +142,7 @@ in
           };
           urgent = {
             background = "#040504";
-            border = "#088e08";
+            border = "#b36d43";
             childBorder = "#700000";
             indicator = "#700000";
             text = "#f03500";
