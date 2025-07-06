@@ -20,6 +20,8 @@ return {
         ["<c-f>"] = cmp.mapping.scroll_docs(4),
         ["<c-b>"] = cmp.mapping.scroll_docs(-4),
         ["<c-space>"] = cmp.mapping.complete(),
+        ["<tab>"] = cmp.mapping.select_next_item(),
+        ["<s-tab>"] = cmp.mapping.select_prev_item(),
         ["<cr>"] = cmp.mapping.confirm({ select = true }),
       }),
       window = {
