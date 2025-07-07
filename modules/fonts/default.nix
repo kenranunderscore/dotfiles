@@ -33,6 +33,7 @@ in
           # (callPackage (import ./pp.nix "${inputs.privateConfig}") { })
           (callPackage ./termingus.nix { })
           (callPackage ./oldschool.nix { })
+          (callPackage ./sf-mono.nix { inherit (inputs) sf-mono; })
         ]
         ++ (with pkgs; [
           anonymousPro

@@ -36,6 +36,10 @@
       url = "github:zsh-users/zsh-syntax-highlighting";
       flake = false;
     };
+    sf-mono = {
+      url = "github:supercomputra/sf-mono-font";
+      flake = false;
+    };
   };
 
   outputs =
