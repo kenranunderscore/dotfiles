@@ -6,10 +6,10 @@ return {
 
     local ls = require("luasnip")
     local map = vim.keymap.set
-    map("i", "<tab>", function()
+    map({ "i", "s" }, "<tab>", function()
       ls.jump(1)
     end, { silent = true })
-    map("i", "<s-tab>", function()
+    map({ "s", "i" }, "<s-tab>", function()
       ls.jump(-1)
     end, { silent = true })
   end,
