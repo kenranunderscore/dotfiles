@@ -3,7 +3,6 @@ return {
   lazy = false,
   dependencies = {
     { "hrsh7th/nvim-cmp" },
-    { "maan2003/lsp_lines.nvim" },
     {
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files
@@ -17,7 +16,6 @@ return {
     },
   },
   config = function()
-    require("lsp_lines").setup()
     vim.diagnostic.config({
       virtual_text = true,
       virtual_lines = false,
