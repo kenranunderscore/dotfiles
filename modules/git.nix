@@ -56,6 +56,9 @@ in
 
         # JetBrains IDEs
         ".idea/"
+
+        # Any LSP client
+        ".lsp/"
       ];
       signing = {
         signByDefault = true;
