@@ -14,11 +14,12 @@
       wrapWithNixGL = false;
     };
     ghostty.enable = true;
+    kermit.enable = true;
     herbstluftwm.enable = false;
     i3 = {
       enable = true;
       withGaps = true;
-      terminal = "nixGL ghostty";
+      terminal = "kermit -e fish";
       workspaces = [
         {
           name = "1:main";

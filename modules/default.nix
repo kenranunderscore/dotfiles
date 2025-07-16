@@ -19,6 +19,7 @@
     ./golang.nix
     ./herbstluftwm
     ./i3
+    ./kermit
     ./kitty
     ./mercurial.nix
     ./neovim
