@@ -34,7 +34,7 @@ window {
 
 inputbar {
     spacing:    8px;
-    padding:    8px;
+    padding:    4px;
 
     background-color:   @bg1;
 }
@@ -48,7 +48,7 @@ prompt {
 }
 
 textbox {
-    padding:            8px;
+    padding:            4px;
     background-color:   @bg1;
 }
 
@@ -61,7 +61,7 @@ listview {
 }
 
 element {
-    padding:    8px;
+    padding:    4px;
     spacing:    8px;
 }
 

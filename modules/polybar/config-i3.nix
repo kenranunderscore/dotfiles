@@ -6,12 +6,12 @@
 
 let
   colors = {
-    foreground = "#d7c483";
-    accent = "#78824b";
+    foreground = "#78824b";
+    accent = "#c9a554";
     background = "#222222";
     highlight-background = "#2c2f2c";
     transparent = "#222222";
-    urgent = "#b36d43";
+    urgent = "#685742";
   };
   mkBar = bottom: modules-left: modules-center: modules-right: {
     inherit
