@@ -12,6 +12,7 @@ return {
       defaults = {
         border = true,
         layout_strategy = "horizontal",
+        file_ignore_patterns = { "^%.git/" },
       },
       pickers = {
         find_files = { previewer = false, layout_config = { height = 0.4 } },
@@ -31,7 +32,8 @@ return {
     require("telescope").load_extension("ui-select")
   end,
   keys = {
-    { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "find file in project" },
+    { "<leader>pf", "<cmd>Telescope find_files hidden=true<cr>", desc = "find file in project" },
+    { "<leader>ps", "<cmd>Telescope live_grep<cr>", desc = "grep in project" },
     { "<leader>bb", "<cmd>Telescope buffers<cr>", desc = "switch buffer" },
   },
 }
