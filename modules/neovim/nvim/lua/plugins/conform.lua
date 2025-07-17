@@ -11,6 +11,7 @@ return {
       python = { "isort", "black" },
       rust = { "rustfmt", lsp_format = "fallback" },
       zig = { "zigfmt" },
+      clojure = { "cljfmt" },
     },
     format_on_save = {
       timeout_ms = 500,
