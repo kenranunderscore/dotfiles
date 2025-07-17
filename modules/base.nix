@@ -114,7 +114,7 @@ in
           time
           timer
           tree
-          unixtools.nettools
+          nettools
           unzip
           usbutils
           watchexec
