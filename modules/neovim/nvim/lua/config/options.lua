@@ -21,3 +21,5 @@ opt.listchars = "tab:» ,nbsp:+"
 
 opt.smartcase = true
 opt.ignorecase = true
+
+opt.guicursor = "n-v-c:block-nCursor,i:block-Cursor"
