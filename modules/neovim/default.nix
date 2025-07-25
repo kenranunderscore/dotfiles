@@ -18,7 +18,7 @@
     ];
 
     home.packages = with pkgs; [
-      neovim
+      neovim-nightly
       sumneko-lua-language-server
       stylua
       xclip

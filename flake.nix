@@ -40,6 +40,10 @@
       url = "github:supercomputra/sf-mono-font";
       flake = false;
     };
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -54,6 +58,7 @@
       overlays = [
         inputs.emacs-overlay.overlays.default
         inputs.nixgl.overlays.default
+        (_: _: { neovim-nightly = inputs.neovim-nightly.packages.${system}.default; })
       ];
       pkgs = import nixpkgs {
         config.allowUnfree = true;
