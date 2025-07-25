@@ -84,7 +84,10 @@
     };
     kitty.wrapWithNixGL = true;
     rofi.enable = true;
-    neovim.enable = true;
+    neovim = {
+      enable = true;
+      includePkg = false;
+    };
     sbcl = {
       enable = true;
       withPackage = false;
