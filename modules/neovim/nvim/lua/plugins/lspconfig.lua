@@ -52,5 +52,9 @@ return {
     -- HTML/Emmet
     lsp.config("emmet-language-server", { capabilities = capabilities })
     lsp.enable("emmet-language-server")
+
+    -- Python
+    lsp.config("pylsp", { capabilities = capabilities })
+    lsp.enable("pylsp")
   end,
 }
