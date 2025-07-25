@@ -1,4 +1,7 @@
 return {
   "miikanissi/modus-themes.nvim",
-  event = "VeryLazy",
+  lazy = false,
+  config = function()
+    vim.cmd("colorscheme modus_vivendi")
+  end,
 }
