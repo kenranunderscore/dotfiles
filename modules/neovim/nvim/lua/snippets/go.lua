@@ -1,6 +1,6 @@
-require("luasnip.session.snippet_collection").clear_snippets("go")
+require("luasnip.session.snippet_collection").clear_snippets "go"
 
-local luasnip = require("luasnip")
+local luasnip = require "luasnip"
 local s = luasnip.s
 local t = luasnip.t
 local i = luasnip.i
@@ -8,69 +8,69 @@ local i = luasnip.i
 luasnip.add_snippets("go", {
   -- struct
   s("t", {
-    t("type "),
+    t "type ",
     i(1, "name"),
-    t(" struct {"),
-    t({ "", "\t" }),
+    t " struct {",
+    t { "", "\t" },
     i(0),
-    t({ "", "}" }),
+    t { "", "}" },
   }),
 
   -- return without error
   s("rr", {
-    t("return "),
+    t "return ",
     i(0),
-    t(", nil"),
+    t ", nil",
   }),
 
   -- for (index and item)
   s("ff", {
-    t("for "),
+    t "for ",
     i(3, "i"),
-    t(", "),
+    t ", ",
     i(2, "item"),
-    t(" := range "),
+    t " := range ",
     i(1, "items"),
-    t({ " {", "\t" }),
+    t { " {", "\t" },
     i(0),
-    t({ "", "}" }),
+    t { "", "}" },
   }),
 
   -- for (index only)
   s("fi", {
-    t("for i := range "),
+    t "for i := range ",
     i(1, "until"),
-    t({ " {", "\t" }),
+    t { " {", "\t" },
     i(0),
-    t({ "", "}" }),
+    t { "", "}" },
   }),
 
   -- for each
   s("fe", {
-    t("for _, "),
+    t "for _, ",
     i(2, "item"),
-    t(" := range "),
+    t " := range ",
     i(1, "items"),
-    t({ " {", "\t" }),
+    t { " {", "\t" },
     i(0),
-    t({ "", "}" }),
+    t { "", "}" },
   }),
 
   -- if (err != nil)
   s("e", {
-    t({ "if err != nil {", "" }),
+    t { "if err != nil {", "" },
     i(0),
-    t({ "", "}" }),
+    t { "", "}" },
   }),
 
   -- switch
   s("sw", {
-    t("switch "),
+    t "switch ",
     i(1, "thing"),
-    t({ " {", "case " }),
+    t { " {", "case " },
     i(2, "foo"),
-    t({ ":", "\t" }),
+    t { ":", "\t" },
     i(0),
-    t({ "", "}" }),
+    t { "", "}" },
   }),
 })
