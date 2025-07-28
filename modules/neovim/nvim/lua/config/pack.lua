@@ -2,6 +2,7 @@ vim.pack.add {
   -- Utilities and other dependencies
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/echasnovski/mini.icons",
+  "https://github.com/nvim-tree/nvim-web-devicons",
 
   -- Telescope
   "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
@@ -27,6 +28,7 @@ vim.pack.add {
   "https://github.com/mbbill/undotree",
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/folke/which-key.nvim",
+  "https://github.com/nvim-lualine/lualine.nvim",
 
   -- Themes
   "https://github.com/miikanissi/modus-themes.nvim",
