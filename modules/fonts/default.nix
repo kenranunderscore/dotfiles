@@ -50,6 +50,28 @@ in
           ibm-plex
           inconsolata
           iosevka-bin
+          iosevka-comfy.comfy
+          (pkgs.iosevka.override {
+            set = "custom";
+            privateBuildPlan = ''
+              [buildPlans.IosevkaCustom]
+              family = "Iosevka Custom"
+              spacing = "normal"
+              serifs = "slab"
+              noCvSs = true
+              exportGlyphNames = false
+
+              [buildPlans.IosevkaCustom.weights.Regular]
+              shape = 400
+              menu = 400
+              css = 400
+
+              [buildPlans.IosevkaCustom.weights.Bold]
+              shape = 700
+              menu = 700
+              css = 700
+            '';
+          })
           jetbrains-mono
           julia-mono
           maple-mono.truetype
