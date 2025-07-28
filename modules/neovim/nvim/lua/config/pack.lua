@@ -38,5 +38,3 @@ vim.pack.add {
   -- Elixir
   "https://github.com/elixir-tools/elixir-tools.nvim",
 }
-
-vim.cmd "colorscheme modus_vivendi"
