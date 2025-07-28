@@ -1102,6 +1102,7 @@ rather belong to built-in functionality, but they fit here very well.
 (setq user-mail-address "johannes.maier@mailbox.org")
 
 (after! notmuch
+  (require 'org)
   ;; msmtp is registered as sendmail
   (setq message-send-mail-function 'message-send-mail-with-sendmail)
   (setq message-kill-buffer-on-exit t)
