@@ -13,4 +13,12 @@ require("lualine").setup {
     lualine_y = {},
     lualine_z = { "filetype" },
   },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = { "filename" },
+    lualine_c = { "location" },
+    lualine_x = { "encoding", "fileformat" },
+    lualine_y = {},
+    lualine_z = { "filetype" },
+  },
 }
