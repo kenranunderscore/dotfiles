@@ -52,7 +52,7 @@ in
           iosevka-bin
           iosevka-comfy.comfy
           (pkgs.iosevka.override {
-            set = "custom";
+            set = "Custom";
             privateBuildPlan = ''
               [buildPlans.IosevkaCustom]
               family = "Iosevka Custom"
