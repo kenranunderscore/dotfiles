@@ -44,3 +44,7 @@ lsp.enable "emmet-language-server"
 -- Python
 lsp.config("pylsp", { capabilities = capabilities })
 lsp.enable "pylsp"
+
+-- Clojure
+lsp.config("clojure_lsp", { capabilities = capabilities })
+lsp.enable "clojure_lsp"
