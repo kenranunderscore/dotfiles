@@ -2,12 +2,14 @@ require("telescope").setup {
   defaults = {
     border = true,
     layout_strategy = "horizontal",
+    layout_config = { width = 0.5 },
     file_ignore_patterns = { "^%.git/" },
   },
   pickers = {
     find_files = { previewer = false, layout_config = { height = 0.4 } },
     git_files = { previewer = false, layout_config = { height = 0.4 } },
     buffers = { previewer = false, layout_config = { height = 0.4 } },
+    live_grep = { layout_config = { width = 0.8 } },
   },
   extensions = {
     fzf = {
