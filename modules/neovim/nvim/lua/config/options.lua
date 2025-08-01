@@ -23,3 +23,5 @@ opt.smartcase = true
 opt.ignorecase = true
 
 opt.guicursor = "n-v-c:block-nCursor,i:block-Cursor"
+
+vim.g["conjure#filetypes"] = { "clojure" }
