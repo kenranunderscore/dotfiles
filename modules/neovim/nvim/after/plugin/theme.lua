@@ -1,1 +1,3 @@
-vim.cmd "colorscheme modus_vivendi"
+require("onedark").setup { style = "deep" }
+require("eldritch").setup {}
+vim.cmd "colorscheme onedark"

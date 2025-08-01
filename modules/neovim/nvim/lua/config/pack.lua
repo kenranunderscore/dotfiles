@@ -32,6 +32,9 @@ vim.pack.add {
 
   -- Themes
   "https://github.com/miikanissi/modus-themes.nvim",
+  "https://github.com/navarasu/onedark.nvim",
+  "https://github.com/shaunsingh/moonlight.nvim",
+  "https://github.com/eldritch-theme/eldritch.nvim",
 
   -- Clojure
   "https://github.com/paterjason/cmp-conjure",
