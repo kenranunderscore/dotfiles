@@ -86,7 +86,7 @@
     rofi.enable = true;
     neovim = {
       enable = true;
-      includePkg = false;
+      includePkg = true;
     };
     sbcl = {
       enable = true;
