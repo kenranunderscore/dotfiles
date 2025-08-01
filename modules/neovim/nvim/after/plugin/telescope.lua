@@ -27,4 +27,4 @@ require("telescope").load_extension "ui-select"
 
 vim.keymap.set({ "n", "v" }, "<leader>pf", "<cmd>Telescope find_files hidden=true<cr>")
 vim.keymap.set({ "n", "v" }, "<leader>ps", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set({ "n", "v" }, "<leader>bb", "<cmd>Telescope buffers<cr>")
+vim.keymap.set({ "n", "v" }, "<leader>b", "<cmd>Telescope buffers<cr>")
