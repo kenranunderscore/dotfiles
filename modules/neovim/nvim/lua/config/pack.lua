@@ -27,7 +27,6 @@ vim.pack.add {
   "https://github.com/gpanders/nvim-parinfer",
   "https://github.com/mbbill/undotree",
   "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/folke/which-key.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
 
   -- Themes
