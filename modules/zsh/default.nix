@@ -19,7 +19,7 @@ in
 
     programs.zsh = {
       enable = true;
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       # I enable completion myself after the relevant fpath mutations.
       enableCompletion = false;
       # I choose to manage most of the plugins myself, by pinning the
@@ -42,40 +42,42 @@ in
           "pkill *"
         ];
       };
-      # I know autocd is an option in programs.zsh but -- as with
-      # plugins and variables -- I don't like mixing methods.
-      initExtraFirst = ''
-        setopt auto_cd
-        setopt prompt_subst
-      '';
-      initExtra = ''
-        source ${inputs.zsh-autopair}/autopair.zsh
-        autopair-init
-        source ${inputs.zsh-autosuggestions}/zsh-autosuggestions.zsh
-        source ${inputs.zsh-syntax-highlighting}/zsh-syntax-highlighting.zsh
-        # Needs to be sourced _after_ z-sy-h
-        source ${inputs.zsh-history-substring-search}/zsh-history-substring-search.zsh
+      initContent = lib.mkMerge [
+        # I know autocd is an option in programs.zsh but -- as with
+        # plugins and variables -- I don't like mixing methods.
+        (lib.mkBefore ''
+          setopt auto_cd
+          setopt prompt_subst
+        '')
+        ''
+          source ${inputs.zsh-autopair}/autopair.zsh
+          autopair-init
+          source ${inputs.zsh-autosuggestions}/zsh-autosuggestions.zsh
+          source ${inputs.zsh-syntax-highlighting}/zsh-syntax-highlighting.zsh
+          # Needs to be sourced _after_ z-sy-h
+          source ${inputs.zsh-history-substring-search}/zsh-history-substring-search.zsh
 
-        # Autoload custom functions
-        fpath+=$ZDOTDIR/functions
-        autoload -Uz $ZDOTDIR/functions/*(:t)
+          # Autoload custom functions
+          fpath+=$ZDOTDIR/functions
+          autoload -Uz $ZDOTDIR/functions/*(:t)
 
-        # Case-insensitive and in-word completion, for instance, complete
-        # "cd ~/own<TAB>" to "cd ~/Downloads"
-        zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*' 'm:{a-zA-Z}={A-Za-z}'
+          # Case-insensitive and in-word completion, for instance, complete
+          # "cd ~/own<TAB>" to "cd ~/Downloads"
+          zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*' 'm:{a-zA-Z}={A-Za-z}'
 
-        # Highlight current selection when completing
-        zstyle ':completion:*' menu select
+          # Highlight current selection when completing
+          zstyle ':completion:*' menu select
 
-        # Enable completion now that fpath is set
-        autoload -Uz compinit && compinit
+          # Enable completion now that fpath is set
+          autoload -Uz compinit && compinit
 
-        # Key bindings
-        bindkey '^[[A' history-substring-search-up
-        bindkey '^[[B' history-substring-search-down
+          # Key bindings
+          bindkey '^[[A' history-substring-search-up
+          bindkey '^[[B' history-substring-search-down
 
-        source ${./prompt.zsh}
-      '';
+          source ${./prompt.zsh}
+        ''
+      ];
       localVariables = {
         # The one thing that's not as nice as in bash (but I don't have
         # it in fish either): I cannot really distinguish between
