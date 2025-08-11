@@ -24,4 +24,6 @@ opt.ignorecase = true
 
 opt.guicursor = "n-v-c:block-nCursor,i:block-Cursor"
 
+opt.mousemodel = "extend"
+
 vim.g["conjure#filetypes"] = { "clojure" }
