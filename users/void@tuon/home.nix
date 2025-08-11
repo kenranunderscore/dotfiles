@@ -136,7 +136,6 @@
     nodejs
     pavucontrol
     remmina
-    rustup
     sbt
     sieve-connect
     steam
