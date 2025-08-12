@@ -96,6 +96,7 @@ in
           htop
           jq
           just
+          kdePackages.konsole
           man-pages
           ncdu
           nil

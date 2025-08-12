@@ -19,7 +19,7 @@
     i3 = {
       enable = true;
       withGaps = true;
-      terminal = "kermit -e fish";
+      terminal = "konsole";
       workspaces = [
         {
           name = "1:main";
