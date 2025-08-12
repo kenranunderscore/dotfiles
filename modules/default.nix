@@ -31,7 +31,7 @@
     ./sbcl
     ./shell-utils
     ./ssh.nix
-    ./tmux.nix
+    ./tmux
     ./vim.nix
     ./wezterm
     ./x-configuration
