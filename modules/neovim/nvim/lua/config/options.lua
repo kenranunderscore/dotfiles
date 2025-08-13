@@ -27,3 +27,7 @@ opt.guicursor = "n-v-c:block-nCursor,i:block-Cursor"
 opt.mousemodel = "extend"
 
 vim.g["conjure#filetypes"] = { "clojure" }
+
+-- have the statusline at the *very* bottom
+opt.cmdheight = 0
+opt.laststatus = 3
