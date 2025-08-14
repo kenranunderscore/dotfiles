@@ -337,7 +337,7 @@ buffers). Let's use one of those for now until everything else is up and
 running. =Gruvbox= is always a good choice, anywhere.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'base16-gruvbox-dark-hard)
+(setq doom-theme 'modus-vivendi)
 #+end_src
 
 *** Switching themes
