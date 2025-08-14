@@ -30,4 +30,4 @@ vim.g["conjure#filetypes"] = { "clojure" }
 
 -- have the statusline at the *very* bottom
 opt.cmdheight = 0
-opt.laststatus = 3
+opt.laststatus = 2
