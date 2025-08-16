@@ -22,7 +22,7 @@ abbr --add ec "emacsclient --alternate-editor '' --no-wait"
 abbr --add eg "emacsclient --alternate-editor '' --create-frame --eval '(magit-status)'"
 abbr --add ekill "env -u ALTERNATE_EDITOR emacsclient --eval '(kill-emacs)' 2>/dev/null"
 abbr --add et "emacsclient --alternate-editor '' --tty"
-abbr --add email "emacs -nw --eval '(progn (=notmuch) (notmuch-poll-and-refresh-this-buffer))'"
+abbr --add email "emacsclient --alternate-editor '' -nw --eval '(progn (=notmuch) (notmuch-poll-and-refresh-this-buffer))'"
 
 # Direnv
 abbr --add dea direnv allow
