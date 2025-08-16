@@ -5,8 +5,8 @@ local config = {}
 -- config.front_end = "Software"
 
 config.enable_tab_bar = false
-config.font = wezterm.font("Fira Code")
-config.font_size = 15.0
+config.font = wezterm.font("Termingus")
+config.font_size = 18.0
 config.audible_bell = "Disabled"
 
 -- Cursor

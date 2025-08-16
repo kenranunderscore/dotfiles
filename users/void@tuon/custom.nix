@@ -1,6 +1,6 @@
 {
   font = {
-    name = "PragmataPro Mono";
-    size = 15;
+    name = "Termingus";
+    size = 17;
   };
 }

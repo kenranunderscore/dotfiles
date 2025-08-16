@@ -24,8 +24,8 @@ let
     background = "${colors.transparent}";
     foreground = "${colors.foreground}";
     fixed-center = true;
-    font-0 = "${font.name}:size=15;4";
-    font-1 = "${font.name}:style=Bold:size=15;4";
+    font-0 = "${font.name}:size=18;3";
+    font-1 = "${font.name}:style=Bold:size=18;3";
     # TODO: maybe Material is a better fit?
     font-2 = "Font Awesome 6 Free:size=17;5";
     font-3 = "Font Awesome 6 Free Solid:style=Solid:size=17;5";
