@@ -6,7 +6,6 @@ abbr --add rr rm -rf
 abbr --add s sudo
 abbr --add serve-this python3 -m http.server
 abbr --add single-monitor xrandr --output HDMI-0 --off
-abbr --add v nvim
 abbr --add d cd ~/dotfiles
 abbr --add doom ~/.config/emacs/bin/doom
 abbr --add dual-monitor "xrandr --output HDMI-0 --off && xrandr --auto && xrandr --output HDMI-0 --primary --output eDP-1-1 --mode 1920x1080 --right-of HDMI-0"
@@ -15,6 +14,11 @@ abbr --add sy systemctl
 abbr --add syu systemctl --user
 abbr --add jo journalctl -u
 abbr --add jou journalctl --user -u
+
+# nvim, tmux etc.
+abbr --add v nvim
+abbr --add t tmux
+abbr --add tn tmux new -t
 
 # Emacs
 abbr --add e "emacsclient --alternate-editor '' --create-frame --no-wait"
