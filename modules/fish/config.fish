@@ -9,6 +9,7 @@ bind \cv open_file_in_editor
 
 fish_add_path --path $HOME/.config/emacs/bin
 fish_add_path --path $HOME/.local/bin
+test -f $XDG_DATA_HOME/cargo/env.fish && source $XDG_DATA_HOME/cargo/env.fish
 
 set -l joined (string join " " $fish_complete_path)
 set -l prev_joined (string replace --regex "[^\s]*generated_completions.*" "" $joined)
