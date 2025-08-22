@@ -129,6 +129,7 @@
     dbeaver-bin
     dmenu
     element-desktop
+    fontforge-gtk
     gcli
     jfrog-cli
     keepass
