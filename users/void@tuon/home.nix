@@ -13,6 +13,7 @@
       enable = true;
       wrapWithNixGL = false;
     };
+    alacritty.enable = true;
     ghostty.enable = true;
     kermit.enable = true;
     herbstluftwm.enable = false;
@@ -82,7 +83,10 @@
         }
       ];
     };
-    kitty.wrapWithNixGL = true;
+    kitty = {
+      enable = true;
+      wrapWithNixGL = true;
+    };
     rofi.enable = true;
     neovim = {
       enable = true;
