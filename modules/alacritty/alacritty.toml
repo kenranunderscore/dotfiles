@@ -1,19 +1,19 @@
 [font]
-size = 15.0
+size = 17.0
 
 [font.bold]
-family = "Geist Mono"
+family = "Termingus"
 style = "Bold"
 
 [font.bold_italic]
-family = "Geist Mono"
+family = "Termingus"
 
 [font.italic]
-family = "Geist Mono"
+family = "Termingus"
 style = "Italic"
 
 [font.normal]
-family = "Geist Mono"
+family = "Termingus"
 style = "Regular"
 
 [scrolling]
