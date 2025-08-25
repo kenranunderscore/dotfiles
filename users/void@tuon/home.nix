@@ -143,6 +143,7 @@
     remmina
     sbt
     sieve-connect
+    signal-desktop-bin
     steam
     subversion
     thunderbird
