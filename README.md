@@ -1,6 +1,4 @@
-# My user environment
-
-## Overview
+# Overview
 
 This repository represents the state of the environment(s) I'm currently using
 for development, learning and, to some degree, entertainment. Currently there
@@ -28,8 +26,8 @@ are actually managed by the underlying system anymore. (If you're interested,
 you should look up how to create a `homeConfigurations.<username>` output in your
 `flake.nix`, replacing the `nixosConfigurations.<hostname>` one.)
 
-### Repository and flake structure
-#### NixOS systems
+## Repository and flake structure
+### NixOS systems
 
 The [nixos](./nixos) directory contains the machine/host-specific pieces of configuration.
 Every subdirectory will lead to a flake output under `nixosConfigurations`, with
@@ -45,13 +43,13 @@ The directories itself follow a fixed convention:
   manager modules as arguments; usually this (only) means things that should be
   known everywhere, like my username
 
-#### Modules
+### Modules
 
 The [modules](./modules) directory contains the home manager NixOS modules that
 all my configurations share (but might choose to disable or enable on a
 per-machine basis).
 
-#### Home-manager on non-NixOS
+### Home-manager on non-NixOS
 
 The [users](./users) directory contains `home-manager`-only configurations for my non-NixOS
 machines. At the moment my work laptop runs both NixOS and Void Linux, and on
@@ -68,7 +66,7 @@ applications using OpenGL (or similar) often fail on startup;
 [nixGL](https://github.com/nix-community/nixGL) helps with this problem, but
 installing it requires this parameter).
 
-### Building/switching to a new generation
+## Building/switching to a new generation
 
 I usually use an alias (or `fish` abbreviation in my case) in my shell to
 switch to the next generation after changing things in my configuration. The
@@ -107,7 +105,7 @@ nix shell "~/dotfiles/#nixosConfigurations.$(hostname).config.home-manager.users
 Note, however, that without creating a new system generation these changes will
 not be "activated" upon next boot.
 
-## Emacs configuration
+# Emacs configuration
 
 A special case of a program with a relatively huge accompanying configuration
 is GNU Emacs. My literate Emacs configurations (very much always a
@@ -122,7 +120,7 @@ allows me to more quickly change my config, try out new packages on the fly
 without cluttering anything, and even debug packages. In the case of Doom Emacs
 I just follow the pinned versions of Doom's packages.
 
-## Neovim configuration
+# Neovim configuration
 
 I've recently switched (back) to mainly Neovim (I basically switch between
 Emacs and Neovim once every 1-2 years). The configuration can be found
