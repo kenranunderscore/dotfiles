@@ -89,6 +89,7 @@ in
           emmet-language-server
           fd
           feh
+          fennel
           file
           fontconfig.dev
           gh
