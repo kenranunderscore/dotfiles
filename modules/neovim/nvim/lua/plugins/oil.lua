@@ -18,6 +18,10 @@ return {
         return name == ".."
       end,
     },
+    win_options = {
+      number = false,
+      relativenumber = false,
+    },
     float = {
       padding = 10,
       max_width = 0.5,
