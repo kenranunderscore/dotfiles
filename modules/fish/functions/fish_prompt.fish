@@ -8,6 +8,7 @@ function fish_prompt --description 'Write out the prompt'
     set -g __fish_git_prompt_showupstream informative
     set -g __fish_git_prompt_hide_untrackedfiles 1
 
+    set -g __fish_git_prompt_char_cleanstate ""
     set -g __fish_git_prompt_char_stateseparator " "
     set -g __fish_git_prompt_char_dirtystate "*"
     set -g __fish_git_prompt_char_invalidstate "#"
