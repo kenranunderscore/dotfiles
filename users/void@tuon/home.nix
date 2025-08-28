@@ -135,6 +135,7 @@
     keepass
     keepassxc
     leiningen
+    neovide
     nixgl.auto.nixGLDefault
     nixVersions.latest
     nixos-rebuild
