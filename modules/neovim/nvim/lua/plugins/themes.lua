@@ -2,7 +2,7 @@ return {
   { "miikanissi/modus-themes.nvim", lazy = false, event = "VeryLazy" },
   { "navarasu/onedark.nvim", lazy = false, event = "VeryLazy", opts = { style = "deep" } },
   { "shaunsingh/solarized.nvim", lazy = false, event = "VeryLazy" },
-  { "eldritch-theme/eldritch.nvim", lazy = false, event = "VeryLazy" },
+  { "eldritch-theme/eldritch.nvim", lazy = false, event = "VeryLazy", opts = {} },
   {
     "bluz71/vim-moonfly-colors",
     lazy = false,
