@@ -141,6 +141,7 @@
     nixos-rebuild
     nodejs
     pavucontrol
+    pijul
     remmina
     sbt
     sieve-connect
