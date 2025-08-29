@@ -1,19 +1,19 @@
 [font]
-size = 17.0
+size = 15.0
 
 [font.bold]
-family = "Termingus"
+family = "JetBrains Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "Termingus"
+family = "JetBrains Mono"
 
 [font.italic]
-family = "Termingus"
+family = "JetBrains Mono"
 style = "Italic"
 
 [font.normal]
-family = "Termingus"
+family = "JetBrains Mono"
 style = "Regular"
 
 [scrolling]
