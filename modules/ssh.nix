@@ -6,13 +6,17 @@
   config = {
     programs.ssh = lib.mkIf config.my.ssh.enable {
       enable = true;
-      compression = true;
-      addKeysToAgent = "yes";
+      enableDefaultConfig = false;
       extraConfig = ''
         IdentityFile ~/.ssh/id_ed25519
       '';
 
       matchBlocks = {
+        "*" = {
+          compression = true;
+          addKeysToAgent = "yes";
+        };
+
         "sync" = {
           host = "sync";
           hostname = "157.90.159.76";
