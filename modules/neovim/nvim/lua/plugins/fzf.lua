@@ -18,6 +18,12 @@ return {
         height = 0.4,
         row = 0.5,
         col = 0.5,
+        preview = {
+          winopts = {
+            number = false,
+            relativenumber = false,
+          },
+        },
       },
       files = {
         previewer = false,
