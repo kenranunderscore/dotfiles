@@ -6,7 +6,8 @@ return {
     local small_window = {
       width = 0.5,
     }
-    require("fzf-lua").setup {
+    local fzf = require "fzf-lua"
+    fzf.setup {
       fzf_opts = {
         -- Override some values that are otherwise inherited from
         -- my shell's $FZF_DEFAULT_OPTS
@@ -49,6 +50,7 @@ return {
         },
       },
     }
+    fzf.register_ui_select()
   end,
   keys = {
     { "<leader>pf", "<cmd>FzfLua files<cr>", desc = "Find file" },
