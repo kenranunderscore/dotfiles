@@ -56,5 +56,7 @@ return {
     { "<leader>pf", "<cmd>FzfLua files<cr>", desc = "Find file" },
     { "<leader>b", "<cmd>FzfLua buffers<cr>", desc = "Select buffer" },
     { "<leader>ps", "<cmd>FzfLua live_grep_native<cr>", desc = "Find file" },
+    { "<leader>dd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Find file" },
+    { "<leader>dw", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Find file" },
   },
 }
