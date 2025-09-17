@@ -22,7 +22,7 @@ return {
         ["<c-space>"] = cmp.mapping.complete(),
         ["<tab>"] = cmp.mapping.select_next_item(),
         ["<s-tab>"] = cmp.mapping.select_prev_item(),
-        ["<cr>"] = cmp.mapping.confirm { select = true },
+        ["<cr>"] = cmp.mapping.confirm { select = false },
       },
       window = {
         completion = cmp.config.window.bordered(),
