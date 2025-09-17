@@ -25,7 +25,6 @@ copy-on-select = true
 shell-integration = none
 
 gtk-titlebar = false
-gtk-adwaita = false
 
 term = xterm-256color
 theme = ENCOM
