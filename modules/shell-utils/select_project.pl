@@ -16,6 +16,11 @@ sub is_git_repo {
     return -d "$dir/.git" || -f "$dir/.git";
 }
 
+sub is_pijul_repo {
+    my ($dir) = @_;
+    return -d "$dir/.pijul";
+}
+
 sub is_svn_repo {
     my ($dir) = @_;
     return -d "$dir/.svn";
@@ -43,6 +48,11 @@ sub with_prefix {
 sub as_git_repo {
     my ($p) = @_;
     return with_prefix("R", $p);
+}
+
+sub as_pijul_repo {
+    my ($p) = @_;
+    return with_prefix("P", $p);
 }
 
 sub as_svn_repo {
@@ -80,6 +90,11 @@ for my $root (@project_dirs) {
         } elsif (is_svn_repo($sub)) {
             push @projects, {
                 label => as_svn_repo(rel_to_home($sub)),
+                path => $sub,
+            };
+        } elsif (is_pijul_repo($sub)) {
+            push @projects, {
+                label => as_pijul_repo(rel_to_home($sub)),
                 path => $sub,
             };
         } elsif (is_flake($sub)) {
