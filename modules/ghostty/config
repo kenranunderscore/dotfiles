@@ -27,6 +27,7 @@ shell-integration = none
 gtk-titlebar = false
 
 term = xterm-256color
-theme = ENCOM
+theme = Pnevma
+
 window-inherit-working-directory = false
 working-directory = home
