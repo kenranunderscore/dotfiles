@@ -92,3 +92,8 @@ abbr --add gsw git switch
 abbr --add gw git worktree
 abbr --add gwa git worktree add
 abbr --add gwl git worktree list
+
+# Pijul
+abbr --add p pijul
+abbr --add pd pijul diff --short
+abbr --add pd pijul diff --short
