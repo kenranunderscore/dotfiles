@@ -28,3 +28,5 @@ gtk-titlebar = false
 
 term = xterm-256color
 theme = ENCOM
+window-inherit-working-directory = false
+working-directory = home
