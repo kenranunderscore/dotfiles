@@ -103,7 +103,7 @@ in
               "${modifier}+t" = "exec ${terminal}";
               "${modifier}+space" = lib.mkForce "exec ${menu}";
               "${modifier}+d" = lib.mkForce "exec rofi -disable-history -show-icons -show drun";
-              "${modifier}+e" = "exec emacsclient -a '' --create-frame --no-wait";
+              "${modifier}+e" = "exec nixGL neovide";
             }
             // workspaceKeybindings
           );
