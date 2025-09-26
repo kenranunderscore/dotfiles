@@ -2,7 +2,6 @@ return {
   "neovim/nvim-lspconfig",
   lazy = false,
   dependencies = {
-    { "hrsh7th/nvim-cmp" },
     {
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files
@@ -35,35 +34,33 @@ return {
     end)
 
     local lsp = vim.lsp
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     -- Lua
-    lsp.config("lua_ls", { capabilities = capabilities })
+    lsp.config("lua_ls", {})
     lsp.enable "lua_ls"
 
     -- Nix
-    lsp.config("nil_ls", { capabilities = capabilities })
+    lsp.config("nil_ls", {})
     lsp.enable "nil_ls"
 
     -- Rust
-    lsp.config(
-      "rust_analyzer",
-      { capabilities = capabilities, settings = { ["rust-analyzer"] = {
+    lsp.config("rust_analyzer", {
+      settings = { ["rust-analyzer"] = {
         cargo = { allFeatures = true },
-      } } }
-    )
+      } },
+    })
     lsp.enable "rust_analyzer"
 
     -- HTML/Emmet
-    lsp.config("emmet-language-server", { capabilities = capabilities })
+    lsp.config("emmet-language-server", {})
     lsp.enable "emmet-language-server"
 
     -- Python
-    lsp.config("pylsp", { capabilities = capabilities })
+    lsp.config("pylsp", {})
     lsp.enable "pylsp"
 
     -- Clojure
-    lsp.config("clojure_lsp", { capabilities = capabilities })
+    lsp.config("clojure_lsp", {})
     lsp.enable "clojure_lsp"
   end,
 }
