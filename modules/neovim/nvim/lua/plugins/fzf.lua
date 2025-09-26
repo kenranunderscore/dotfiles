@@ -39,6 +39,9 @@ return {
           },
         },
       },
+      helptags = {
+        previewer = false,
+      },
     }
     fzf.register_ui_select()
   end,
