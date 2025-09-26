@@ -4,6 +4,7 @@ return {
   dependencies = {
     {
       "folke/lazydev.nvim",
+      "nvim-mini/mini.nvim",
       ft = "lua", -- only load on lua files
       opts = {
         library = {
@@ -34,17 +35,19 @@ return {
     end)
 
     local lsp = vim.lsp
+    local capabilities = require("mini.completion").get_lsp_capabilities {}
 
     -- Lua
-    lsp.config("lua_ls", {})
+    lsp.config("lua_ls", { capabilities = capabilities })
     lsp.enable "lua_ls"
 
     -- Nix
-    lsp.config("nil_ls", {})
+    lsp.config("nil_ls", { capabilities = capabilities })
     lsp.enable "nil_ls"
 
     -- Rust
     lsp.config("rust_analyzer", {
+      capabilities = capabilities,
       settings = { ["rust-analyzer"] = {
         cargo = { allFeatures = true },
       } },
@@ -52,15 +55,15 @@ return {
     lsp.enable "rust_analyzer"
 
     -- HTML/Emmet
-    lsp.config("emmet-language-server", {})
+    lsp.config("emmet-language-server", { capabilities = capabilities })
     lsp.enable "emmet-language-server"
 
     -- Python
-    lsp.config("pylsp", {})
+    lsp.config("pylsp", { capabilities = capabilities })
     lsp.enable "pylsp"
 
     -- Clojure
-    lsp.config("clojure_lsp", {})
+    lsp.config("clojure_lsp", { capabilities = capabilities })
     lsp.enable "clojure_lsp"
   end,
 }
