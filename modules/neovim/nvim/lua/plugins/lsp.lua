@@ -46,7 +46,12 @@ return {
     lsp.enable "nil_ls"
 
     -- Rust
-    lsp.config("rust_analyzer", { capabilities = capabilities })
+    lsp.config(
+      "rust_analyzer",
+      { capabilities = capabilities, settings = { ["rust-analyzer"] = {
+        cargo = { allFeatures = true },
+      } } }
+    )
     lsp.enable "rust_analyzer"
 
     -- HTML/Emmet
