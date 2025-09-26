@@ -3,22 +3,18 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = "FzfLua",
   config = function()
-    local small_window = {
-      width = 0.5,
-    }
     local fzf = require "fzf-lua"
     fzf.setup {
+      "ivy",
       fzf_opts = {
         -- Override some values that are otherwise inherited from
         -- my shell's $FZF_DEFAULT_OPTS
         ["--no-select-1"] = true,
         ["--no-exit-0"] = true,
-        ["--layout"] = "default",
+        ["--layout"] = "reverse",
       },
       winopts = {
-        height = 0.4,
-        row = 0.5,
-        col = 0.5,
+        height = 0.2,
         preview = {
           winopts = {
             number = false,
@@ -28,22 +24,16 @@ return {
       },
       files = {
         previewer = false,
-        winopts = small_window,
       },
       oldfiles = {
         previewer = false,
-        winopts = small_window,
       },
       buffers = {
         previewer = false,
-        winopts = small_window,
       },
       grep = {
         winopts = {
-          width = 0.9,
-          height = 0.6,
-          row = 0.5,
-          col = 0.5,
+          height = 0.7,
           preview = {
             horizontal = "right:40%",
           },
