@@ -36,18 +36,20 @@ return {
 
     local lsp = vim.lsp
     local capabilities = require("mini.completion").get_lsp_capabilities {}
+    local default_opts = { capabilities = capabilities, autostart = false }
 
     -- Lua
-    lsp.config("lua_ls", { capabilities = capabilities })
+    lsp.config("lua_ls", default_opts)
     lsp.enable "lua_ls"
 
     -- Nix
-    lsp.config("nil_ls", { capabilities = capabilities })
+    lsp.config("nil_ls", default_opts)
     lsp.enable "nil_ls"
 
     -- Rust
     lsp.config("rust_analyzer", {
       capabilities = capabilities,
+      autostart = false,
       settings = { ["rust-analyzer"] = {
         cargo = { allFeatures = true },
       } },
@@ -55,15 +57,15 @@ return {
     lsp.enable "rust_analyzer"
 
     -- HTML/Emmet
-    lsp.config("emmet-language-server", { capabilities = capabilities })
+    lsp.config("emmet-language-server", default_opts)
     lsp.enable "emmet-language-server"
 
     -- Python
-    lsp.config("pylsp", { capabilities = capabilities })
+    lsp.config("pylsp", default_opts)
     lsp.enable "pylsp"
 
     -- Clojure
-    lsp.config("clojure_lsp", { capabilities = capabilities })
+    lsp.config("clojure_lsp", default_opts)
     lsp.enable "clojure_lsp"
   end,
 }
