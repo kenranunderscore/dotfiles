@@ -4,8 +4,8 @@ vim.g.maplocalleader = ","
 local opt = vim.opt
 
 -- use relative line numbers
-opt.nu = true
-opt.relativenumber = true
+opt.nu = false
+opt.relativenumber = false
 
 -- indentation
 opt.tabstop = 4
