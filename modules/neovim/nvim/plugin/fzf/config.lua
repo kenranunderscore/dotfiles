@@ -76,33 +76,33 @@ local function find_all_projects()
   return projects
 end
 
+local home = vim.fn.getenv "HOME" .. "/"
+
 local function display(project)
   local prefix
   if project.type == "git" then
-    prefix = "G"
+    prefix = "⎇"
   elseif project.type == "pijul" then
-    prefix = "P"
+    prefix = "⚗"
   elseif project.type == "subversion" then
-    prefix = "S"
+    prefix = "◆"
   elseif project.type == "flake" then
-    prefix = "F"
+    prefix = "❄"
   elseif project.type == "worktree" then
-    prefix = "T"
+    prefix = "⋔"
   end
-  local home = vim.fn.getenv "HOME" .. "/"
   local path = vim.fn.substitute(project.path, home, "", "")
-  return "[" .. prefix .. "]  " .. path
+  return prefix .. "   " .. path
 end
 
 local function switch_project(_)
   local projects = find_all_projects()
+  local lookup = {}
   local entries = {}
   for _, project in ipairs(projects) do
-    table.insert(entries, display(project))
-  end
-
-  if #entries == 0 then
-    vim.notify("No projects found", vim.log.levels.WARN)
+    local text = display(project)
+    table.insert(entries, text)
+    lookup[text] = project.path
   end
 
   require("fzf-lua").fzf_exec(entries, {
@@ -110,12 +110,8 @@ local function switch_project(_)
     actions = {
       ["default"] = function(selected)
         if selected and #selected > 0 then
-          for _, project in ipairs(projects) do
-            if display(project) == selected[1] then
-              vim.cmd("cd " .. vim.fn.fnameescape(project.path))
-              vim.notify("Switched project to " .. project.path)
-            end
-          end
+          vim.cmd("cd " .. vim.fn.fnameescape(lookup[selected[1]]))
+          vim.notify("Switched project to " .. lookup[selected[1]])
         end
       end,
     },
