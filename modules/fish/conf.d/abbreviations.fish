@@ -55,7 +55,7 @@ abbr --add nrt --set-cursor nix run this#%
 abbr --add nr. --set-cursor nix run .#%
 abbr --add nrb nixos-rebuild boot --use-remote-sudo --flake ~/dotfiles/
 abbr --add nrs nixos-rebuild switch --use-remote-sudo --flake ~/dotfiles/
-abbr --add hs home-manager switch --flake ~/dotfiles/ --impure
+abbr --add hs home-manager switch --flake ~/dotfiles/ --impure -j auto
 abbr --add ns nix shell
 abbr --add nst --set-cursor nix shell this#% -c fish
 
