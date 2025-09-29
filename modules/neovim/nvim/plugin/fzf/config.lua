@@ -1,11 +1,32 @@
-local function as_project(path)
+local function as_projects(path)
   if vim.uv.fs_stat(path .. "/.git") then
-    return { path = path, type = "git" }
+    return { { path = path, type = "git" } }
   elseif vim.uv.fs_stat(path .. "/.pijul") then
-    return { path = path, type = "pijul" }
-  end
+    return { { path = path, type = "pijul" } }
+  elseif vim.uv.fs_stat(path .. "/.svn") then
+    return { { path = path, type = "subversion" } }
+  elseif vim.uv.fs_stat(path .. "/flake.nix") then
+    return { { path = path, type = "flake" } }
+  else
+    local worktrees = {}
+    local handle = vim.uv.fs_scandir(path)
+    if handle then
+      while true do
+        local name, type = vim.uv.fs_scandir_next(handle)
+        if not name then
+          break
+        end
 
-  return nil
+        if type == "directory" then
+          local wt = path .. "/" .. name
+          if vim.uv.fs_stat(wt .. "/.git") then
+            table.insert(worktrees, { path = wt, type = "worktree" })
+          end
+        end
+      end
+    end
+    return worktrees
+  end
 end
 
 local function find_projects_in(base_dir)
@@ -26,8 +47,7 @@ local function find_projects_in(base_dir)
 
       if type == "directory" then
         local full_path = expanded_dir .. "/" .. name
-        local project = as_project(full_path)
-        if project then
+        for _, project in ipairs(as_projects(full_path)) do
           table.insert(projects, project)
         end
       end
@@ -46,6 +66,7 @@ local function find_all_projects()
   end
 
   add "~/projects"
+  add "~/ag"
   add "~/tmpdev"
 
   table.sort(projects, function(a, b)
@@ -61,8 +82,16 @@ local function display(project)
     prefix = "G"
   elseif project.type == "pijul" then
     prefix = "P"
+  elseif project.type == "subversion" then
+    prefix = "S"
+  elseif project.type == "flake" then
+    prefix = "F"
+  elseif project.type == "worktree" then
+    prefix = "T"
   end
-  return "[" .. prefix .. "]  " .. project.path
+  local home = vim.fn.getenv "HOME" .. "/"
+  local path = vim.fn.substitute(project.path, home, "", "")
+  return "[" .. prefix .. "]  " .. path
 end
 
 local function switch_project(_)
