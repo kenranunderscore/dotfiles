@@ -1,10 +1,11 @@
-local function is_project(path)
-  local git_path = path .. "/.git"
-  if vim.uv.fs_stat(git_path) then
-    return true
+local function as_project(path)
+  if vim.uv.fs_stat(path .. "/.git") then
+    return { path = path, type = "git" }
+  elseif vim.uv.fs_stat(path .. "/.pijul") then
+    return { path = path, type = "pijul" }
   end
 
-  return false
+  return nil
 end
 
 local function find_projects_in(base_dir)
@@ -25,12 +26,9 @@ local function find_projects_in(base_dir)
 
       if type == "directory" then
         local full_path = expanded_dir .. "/" .. name
-        if is_project(full_path) then
-          table.insert(projects, {
-            name = name,
-            path = full_path,
-            display = name .. " (" .. base_dir .. ")",
-          })
+        local project = as_project(full_path)
+        if project then
+          table.insert(projects, project)
         end
       end
     end
@@ -40,7 +38,7 @@ local function find_projects_in(base_dir)
 end
 
 local function find_all_projects()
-  local projects = { { name = "dotfiles", path = "~/dotfiles", display = "dotfiles" } }
+  local projects = { { path = vim.fn.expand "~/dotfiles", type = "git" } }
   local function add(dir)
     for _, project in ipairs(find_projects_in(dir)) do
       table.insert(projects, project)
@@ -51,17 +49,27 @@ local function find_all_projects()
   add "~/tmpdev"
 
   table.sort(projects, function(a, b)
-    return a.name < b.name
+    return a.path < b.path
   end)
 
   return projects
+end
+
+local function display(project)
+  local prefix
+  if project.type == "git" then
+    prefix = "G"
+  elseif project.type == "pijul" then
+    prefix = "P"
+  end
+  return "[" .. prefix .. "]  " .. project.path
 end
 
 local function switch_project(_)
   local projects = find_all_projects()
   local entries = {}
   for _, project in ipairs(projects) do
-    table.insert(entries, project.display)
+    table.insert(entries, display(project))
   end
 
   if #entries == 0 then
@@ -74,7 +82,7 @@ local function switch_project(_)
       ["default"] = function(selected)
         if selected and #selected > 0 then
           for _, project in ipairs(projects) do
-            if project.display == selected[1] then
+            if display(project) == selected[1] then
               vim.cmd("cd " .. vim.fn.fnameescape(project.path))
               vim.notify("Switched project to " .. project.path)
             end
