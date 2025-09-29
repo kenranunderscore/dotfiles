@@ -1,0 +1,6 @@
+vim.keymap.set({ "n", "v" }, "<leader>pp", "<cmd>SwitchProject<cr>", { desc = "Switch project" })
+vim.keymap.set({ "n", "v" }, "<leader>pf", "<cmd>FzfLua files<cr>", { desc = "Find file" })
+vim.keymap.set({ "n", "v" }, "<leader>ps", "<cmd>FzfLua live_grep_native<cr>", { desc = "Live grep" })
+vim.keymap.set({ "n", "v" }, "<leader>dd", "<cmd>FzfLua diagnostics_document<cr>", { desc = "Diagnostics" })
+vim.keymap.set({ "n", "v" }, "<leader>dw", "<cmd>FzfLua diagnostics_workspace<cr>", { desc = "Global diagnostics" })
+vim.keymap.set({ "n", "v" }, "<leader>b", "<cmd>FzfLua buffers<cr>", { desc = "Switch buffer" })
