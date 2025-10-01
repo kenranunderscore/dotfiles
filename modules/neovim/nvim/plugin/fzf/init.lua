@@ -27,6 +27,7 @@ fzf.setup {
     previewer = false,
   },
   grep = {
+    fzf_opts = { ["--history"] = vim.fn.stdpath "data" .. "/fzf-grep-history" },
     winopts = {
       height = 0.7,
       preview = {
