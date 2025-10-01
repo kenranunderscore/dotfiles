@@ -9,6 +9,7 @@ local current_size = default_size
 local function update_guifont()
   vim.o.guifont = make_guifont(current_font, current_size)
 end
+update_guifont()
 
 local function set_font_size(maybe_size)
   if maybe_size then
@@ -39,6 +40,7 @@ local fonts = {
   "Julia Mono",
   "Lucida Console",
   "Maple Mono",
+  "PragmataPro Mono",
   "Source Code Pro",
   "TX-02",
   "Ubuntu Sans Mono",
