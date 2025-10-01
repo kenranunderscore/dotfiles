@@ -7,20 +7,25 @@ local function make_guifont(font, size)
 end
 
 local current_font = "PragmataPro Mono"
+local default_size = 17
+local current_size = default_size
 
-vim.o.guifont = make_guifont(current_font, 17)
+local function update_guifont()
+  vim.o.guifont = make_guifont(current_font, current_size)
+end
 
 local function set_font_size(maybe_size)
   if maybe_size then
     local size = tonumber(maybe_size)
     if size then
-      vim.opt.guifont = make_guifont(current_font, size)
+      current_size = size
     else
-      vim.notify("Invalid size", vim.log.levels.ERROR, {})
+      current_size = default_size
     end
+    update_guifont()
   end
 end
 
 vim.api.nvim_create_user_command("SetFontSize", function(opts)
   set_font_size(opts.args)
-end, { nargs = 1 })
+end, { nargs = "?" })
