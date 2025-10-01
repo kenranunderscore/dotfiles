@@ -1,7 +1,3 @@
-vim.g.neovide_cursor_vfx_mode = "railgun"
-vim.g.neovide_cursor_vfx_particle_lifetime = 1.0
-vim.g.neovide_cursor_vfx_particle_density = 1.0
-
 local function make_guifont(font, size)
   return font .. ":h" .. size
 end
@@ -29,7 +25,6 @@ end
 vim.api.nvim_create_user_command("SetFontSize", function(opts)
   set_font_size(opts.args)
 end, { nargs = "?" })
-
 local fonts = {
   "Cascadia Code",
   "Consolas",
