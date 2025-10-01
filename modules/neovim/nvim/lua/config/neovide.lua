@@ -29,3 +29,36 @@ end
 vim.api.nvim_create_user_command("SetFontSize", function(opts)
   set_font_size(opts.args)
 end, { nargs = "?" })
+
+local fonts = {
+  "Cascadia Code",
+  "Consolas",
+  "Courier Prime",
+  "DejaVu Sans Mono",
+  "Fantasque Sans Mono",
+  "Fira Code",
+  "Fixedsys Excelsior 3.01",
+  "Iosevka Comfy",
+  "Iosevka",
+  "JetBrains Mono",
+  "Julia Mono",
+  "Lucida Console",
+  "Maple Mono",
+  "Source Code Pro",
+  "TX-02",
+  "Ubuntu Sans Mono",
+}
+
+vim.api.nvim_create_user_command("SwitchFont", function(_)
+  require("fzf-lua").fzf_exec(fonts, {
+    prompt = "Font: ",
+    actions = {
+      ["default"] = function(selected)
+        if selected and #selected > 0 then
+          current_font = selected[1]
+          update_guifont()
+        end
+      end,
+    },
+  })
+end, {})
