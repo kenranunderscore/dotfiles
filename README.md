@@ -124,7 +124,5 @@ I just follow the pinned versions of Doom's packages.
 
 I've recently switched (back) to mainly Neovim (I basically switch between
 Emacs and Neovim once every 1-2 years). The configuration can be found
-[here](./modules/neovim/nvim). I'm using the [neovim nightly
-overlay](https://github.com/nix-community/neovim-nightly-overlay) to get a
-bleeding-edge version of Neovim via Nix. Dependencies are managed with
-`mini.deps` from [mini.nvim](https://github.com/nvim-mini/mini.nvim/).
+[here](./modules/neovim/nvim). Dependencies are managed with `mini.deps` from
+[mini.nvim](https://github.com/nvim-mini/mini.nvim/).

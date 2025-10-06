@@ -29,6 +29,6 @@
         stylua
         xclip
       ])
-      ++ lib.optional config.my.neovim.includePkg pkgs.neovim-nightly;
+      ++ lib.optional config.my.neovim.includePkg pkgs.neovim;
   };
 }
