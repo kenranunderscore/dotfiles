@@ -19,16 +19,10 @@ require("mini.deps").setup { path = { package = path_package } }
 
 local add = MiniDeps.add
 
-add {
-  source = "ibhagwan/fzf-lua",
-  -- TODO: mini.icons
-  depends = { "nvim-tree/nvim-web-devicons" },
-}
+-- Extendable (fuzzy) finding and search interface
+add { source = "ibhagwan/fzf-lua" }
 
-add {
-  source = "stevearc/oil.nvim",
-  depends = { "nvim-mini/mini.icons" },
-}
+add { source = "stevearc/oil.nvim" }
 
 add {
   source = "stevearc/conform.nvim",
@@ -36,13 +30,11 @@ add {
 
 add { source = "folke/flash.nvim" }
 
-add { source = "folke/flash.nvim" }
-
 add { source = "tpope/vim-fugitive" }
 
 add {
   source = "neovim/nvim-lspconfig",
-  depends = { "nvim-mini/mini.nvim", "folke/lazydev.nvim" },
+  depends = { "folke/lazydev.nvim" },
 }
 
 add { source = "gpanders/nvim-parinfer" }
