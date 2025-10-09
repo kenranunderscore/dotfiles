@@ -4,3 +4,5 @@ vim.keymap.set({ "n", "v" }, "<leader>ps", "<cmd>FzfLua live_grep_native<cr>", {
 vim.keymap.set({ "n", "v" }, "<leader>dd", "<cmd>FzfLua diagnostics_document<cr>", { desc = "Diagnostics" })
 vim.keymap.set({ "n", "v" }, "<leader>dw", "<cmd>FzfLua diagnostics_workspace<cr>", { desc = "Global diagnostics" })
 vim.keymap.set({ "n", "v" }, "<leader>b", "<cmd>FzfLua buffers<cr>", { desc = "Switch buffer" })
+vim.keymap.set({ "n", "v" }, "<leader>hh", "<cmd>FzfLua helptags<cr>", { desc = "Help" })
+vim.keymap.set({ "n", "v" }, "<leader>ht", "<cmd>FzfLua colorschemes<cr>", { desc = "Change colorscheme" })
