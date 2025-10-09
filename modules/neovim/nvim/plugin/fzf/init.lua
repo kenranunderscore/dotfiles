@@ -38,6 +38,10 @@ fzf.setup {
   helptags = {
     previewer = false,
   },
+  on_create = function()
+    vim.keymap.set("i", "<c-n>", "<down>", { silent = true, buffer = true })
+    vim.keymap.set("i", "<c-p>", "<up>", { silent = true, buffer = true })
+  end,
 }
 
 fzf.register_ui_select()
