@@ -152,6 +152,7 @@
     subversion
     thunderbird
     twitch-cli
+    vivaldi
     xst
   ];
 
