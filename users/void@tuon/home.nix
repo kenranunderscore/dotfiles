@@ -131,6 +131,9 @@
     fontforge-gtk
     gcli
     jfrog-cli
+    kakoune
+    kak-lsp
+    kak-tree-sitter
     keepass
     keepassxc
     leiningen
