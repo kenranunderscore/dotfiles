@@ -152,7 +152,7 @@
     subversion
     thunderbird
     twitch-cli
-    vivaldi
+    (vivaldi.override { proprietaryCodecs = true; })
     xst
   ];
 
