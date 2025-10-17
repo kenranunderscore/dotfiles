@@ -34,4 +34,4 @@ shell = "fish"
 save_to_clipboard = true
 
 [general]
-import = [ "~/.config/alacritty/themes/themes/autumn.toml" ]
+import = [ "~/.config/alacritty/themes/themes/everforest_dark.toml" ]
