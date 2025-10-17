@@ -1,0 +1,30 @@
+eval %sh{ kak-tree-sitter -dks --init $kak_session }
+colorscheme everforest-dark-hard
+eval %sh{ kak-lsp }
+lsp-enable
+
+map -docstring "next" global prompt "<c-n>" "<tab>"
+map -docstring "prev" global prompt "<c-p>" "<s-tab>"
+
+source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
+bundle-noload kak-bundle https://codeberg.org/jdugan6240/kak-bundle
+
+bundle parinfer-rust https://github.com/eraserhd/parinfer-rust %{
+    hook global WinSetOption filetype=(clojure|lisp|racket|scheme) %{
+        parinfer-enable-window -smart
+    }
+}
+bundle-install-hook parinfer-rust %{
+    cargo install --force --path .
+}
+
+bundle fzf-kak https://github.com/andreyorst/fzf.kak %{
+    evaluate-commands %{
+        find -L "~/.config/kak/bundle/fzf-kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
+    }
+}
+
+define-command tmux-switch-pane %{nop %sh{
+    tmux select-pane -t :.+
+} }
+map global normal <c-l> ':tmux-switch-pane<ret>'

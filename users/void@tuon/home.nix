@@ -88,6 +88,7 @@
       wrapWithNixGL = true;
     };
     rofi.enable = true;
+    kakoune.enable = true;
     neovim = {
       enable = true;
       includePkg = true;
@@ -131,9 +132,6 @@
     fontforge-gtk
     gcli
     jfrog-cli
-    kakoune
-    kak-lsp
-    kak-tree-sitter
     keepass
     keepassxc
     leiningen
