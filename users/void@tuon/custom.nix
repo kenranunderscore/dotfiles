@@ -1,6 +1,6 @@
 {
   font = {
-    name = "Termingus";
-    size = 17;
+    name = "Source Code Pro";
+    size = 15;
   };
 }

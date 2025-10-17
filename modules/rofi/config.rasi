@@ -1,6 +1,6 @@
 configuration {
   cycle: true;
-  font: "JetBrains Mono 15";
+  font: "Source Code Pro 15";
   location: 0;
   modi: "run,drun,ssh,window";
   terminal: "/nix/store/18834s94kgmrm2xn1f3pi75b4frx8sq1-kitty-0.42.1/bin/kitty";
