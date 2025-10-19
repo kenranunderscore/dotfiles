@@ -28,3 +28,15 @@ define-command tmux-switch-pane %{nop %sh{
     tmux select-pane -t :.+
 } }
 map global normal <c-l> ':tmux-switch-pane<ret>'
+
+define-command new-hsplit -docstring 'horizontal split' -params .. %{
+    tmux-terminal-horizontal kak -c %val{session} -e "%arg{@}"
+}
+define-command new-vsplit -docstring 'vertical split' -params .. %{
+    tmux-terminal-vertical kak -c %val{session} -e "%arg{@}"
+}
+
+declare-user-mode window
+map global normal <c-w> ':enter-user-mode window<ret>'
+map global window v ':new-hsplit<ret>'
+map global window s ':new-vsplit<ret>'
