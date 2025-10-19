@@ -17,10 +17,21 @@
       }
     ];
 
-    home.packages = [
-      pkgs.kakoune
-      pkgs.kak-lsp
-      pkgs.kak-tree-sitter
-    ];
+    home.packages =
+      let
+        k = pkgs.writeShellScriptBin "k" ''
+          if [ -z "$TMUX" ]; then
+            exec tmux new -As kak kak "$@"
+          else
+            exec kak "$@"
+          fi
+        '';
+      in
+      [
+        k
+        pkgs.kakoune
+        pkgs.kak-lsp
+        pkgs.kak-tree-sitter
+      ];
   };
 }
