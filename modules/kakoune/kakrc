@@ -18,11 +18,8 @@ bundle-install-hook parinfer-rust %{
     cargo install --force --path .
 }
 
-bundle fzf-kak https://github.com/andreyorst/fzf.kak %{
-    evaluate-commands %{
-        find -L "~/.config/kak/bundle/fzf-kak/rc/modules/" -type f -name '*.kak' -exec printf 'source "%s"\n' {} \;
-    }
-}
+bundle fzf-kak https://github.com/andreyorst/fzf.kak %{}
+require-module fzf
 
 define-command tmux-switch-pane %{nop %sh{
     tmux select-pane -t :.+
@@ -40,3 +37,7 @@ declare-user-mode window
 map global normal <c-w> ':enter-user-mode window<ret>'
 map global window v ':new-hsplit<ret>'
 map global window s ':new-vsplit<ret>'
+
+declare-user-mode project
+map global user p -docstring 'project management' ':enter-user-mode project<ret>'
+map global project f -docstring 'find file' ':fzf -fzf-args "--exact" -kak-cmd "e" -items-cmd "fd --type file"<ret>'
