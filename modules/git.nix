@@ -18,14 +18,8 @@ in
 
   config = {
     programs.git = {
-      package = pkgs.gitAndTools.gitFull;
       enable = true;
-      userName = "Johannes Maier";
-      userEmail = cfg.email;
-      aliases = {
-        co = "checkout";
-        pushf = "push --force-with-lease";
-      };
+      package = pkgs.gitAndTools.gitFull;
       includes = [
         {
           condition = "gitdir:~/ag/";
@@ -64,7 +58,15 @@ in
         signByDefault = true;
         key = "~/.ssh/id_ed25519.pub";
       };
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Johannes Maier";
+          inherit (cfg) email;
+        };
+        alias = {
+          co = "checkout";
+          pushf = "push --force-with-lease";
+        };
         branch.sort = "-committerdate";
         column.sort = "auto";
         core.askPass = "";
