@@ -35,6 +35,7 @@ in
           (callPackage ./sf-mono.nix { inherit (inputs) sf-mono; })
         ]
         ++ (with pkgs; [
+          agave
           anonymousPro
           cantarell-fonts
           cascadia-code
