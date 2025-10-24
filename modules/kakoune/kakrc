@@ -43,3 +43,14 @@ map global user p -docstring 'project management' ':enter-user-mode project<ret>
 map global project f -docstring 'find file' ':fzf -fzf-args "--exact" -kak-cmd "e" -items-cmd "fd --type file"<ret>'
 
 map global user l -docstring 'lsp' ':enter-user-mode lsp<ret>'
+
+hook global BufSetOption filetype=nix %{
+    set buffer formatcmd 'nixfmt'
+}
+hook global BufWritePre .* %{
+    evaluate-commands %sh{
+        if [ -n "$kak_opt_formatcmd" ]; then
+            echo format
+        fi
+    }
+}
