@@ -1,5 +1,7 @@
 eval %sh{ kak-tree-sitter -dks --init $kak_session }
+
 colorscheme everforest-dark-hard
+
 eval %sh{ kak-lsp }
 lsp-enable
 
@@ -43,6 +45,50 @@ map global user p -docstring 'project management' ':enter-user-mode project<ret>
 map global project f -docstring 'find file' ':fzf -fzf-args "--exact" -kak-cmd "e" -items-cmd "fd --type file"<ret>'
 
 map global user l -docstring 'lsp' ':enter-user-mode lsp<ret>'
+
+define-command myfzf %{
+    evaluate-commands %sh{
+        find_cmd="fd --type f --follow 2>/dev/null"
+        fzf_cmd="fzf --exact --height 100%"
+        result="/tmp/kak_fzf_${kak_session}_result"
+        pid="/tmp/kak_fzf_${kak_session}.pid"
+        touch "$pid"
+        cmd="echo \$\$ >$pid; $find_cmd | $fzf_cmd >$result; rm $pid"
+        echo "$cmd">/tmp/debug
+        printf "tmux-terminal-vertical bash -c '%s'\n" "$cmd"
+
+        ( while [ -f "$pid" ]; do sleep 0.05; done
+          if [ -s "$result" ]; then
+              res=$(cat "$result")
+              echo "evaluate-commands -client $kak_client %{ edit '$res' }" | kak -p "$kak_session"
+          fi
+          rm -f "$result" "$pid"
+        ) >/dev/null 2>&1 </dev/null &
+    }
+}
+
+define-command mybuffers %{
+    evaluate-commands %sh{
+        fzf_cmd="fzf --exact --height 100%"
+        eval "set -- ${kak_quoted_buflist:?}"
+        result="/tmp/kak_fzf_${kak_session}_result"
+        pid="/tmp/kak_fzf_${kak_session}.pid"
+        touch "$pid"
+        buffers=$(printf "%s\n" "$@")
+        echo "$buffers">/tmp/debugbuf
+        cmd="echo \$\$ >$pid; echo \"$buffers\" | $fzf_cmd >$result; rm $pid"
+        # echo "$cmd">/tmp/debug
+        printf "tmux-terminal-vertical bash -c '%s'\n" "$cmd"
+
+        ( while [ -f "$pid" ]; do sleep 0.05; done
+          if [ -s "$result" ]; then
+              res=$(cat "$result")
+              echo "evaluate-commands -client $kak_client %{ buffer '$res' }" | kak -p "$kak_session"
+          fi
+          rm -f "$result" "$pid"
+        ) >/dev/null 2>&1 </dev/null &
+    }
+}
 
 hook global BufSetOption filetype=nix %{
     set buffer formatcmd 'nixfmt'
