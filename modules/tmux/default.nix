@@ -19,6 +19,20 @@
       }
     ];
 
-    home.packages = [ pkgs.tmux ];
+    home = {
+      activation = {
+        installTmuxPluginManager = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          dest="$XDG_CONFIG_HOME/tmux/plugins/tpm"
+          if [ ! -d "$dest" ]; then
+            $DRY_RUN_CMD \
+              ${lib.getExe pkgs.gitMinimal} clone \
+              https://github.com/tmux-plugins/tpm \
+              "$dest"
+          fi
+        '';
+      };
+
+      packages = [ pkgs.tmux ];
+    };
   };
 }
