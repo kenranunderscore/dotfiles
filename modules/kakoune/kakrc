@@ -43,6 +43,12 @@ map global project f -docstring 'find file' ': fzf-project-file<ret>'
 
 map global user l -docstring 'lsp' ': enter-user-mode lsp<ret>'
 
+define-command tmuxv -hidden -params .. %{
+    evaluate-commands %sh{
+        tmux splitw -v -l 30% "$@"
+    }
+}
+
 define-command fzf -shell-script-completion %{printf "%s\n" -input-cmd -exec} -params .. %{
     evaluate-commands %sh{
         while [ $# -gt 0 ]; do
@@ -65,7 +71,7 @@ define-command fzf -shell-script-completion %{printf "%s\n" -input-cmd -exec} -p
         touch "$pid"
         cmd="echo \$\$ >$pid; $input_cmd | $fzf_cmd >$result; rm $pid"
         echo "$cmd">/tmp/debug
-        printf "tmux-terminal-vertical bash -c '%s'\n" "$cmd"
+        printf "tmuxv bash -c '%s'\n" "$cmd"
 
         ( while [ -f "$pid" ]; do sleep 0.05; done
           if [ -s "$result" ]; then
