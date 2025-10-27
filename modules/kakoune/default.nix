@@ -15,19 +15,34 @@
         destination = "kak/kakrc";
         xdg = true;
       }
+      {
+        source = ./autoload;
+        destination = "kak/autoload";
+        xdg = true;
+      }
     ];
 
     home = {
-      activation.installKakounePlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        $DRY_RUN_CMD mkdir -p "$XDG_CONFIG_HOME/kak/bundle"
-        dest="$XDG_CONFIG_HOME/kak/bundle/kak-bundle"
-        if [ ! -d "$dest" ]; then
-          $DRY_RUN_CMD \
-            ${lib.getExe pkgs.gitMinimal} clone \
-            https://github.com/jdugan6240/kak-bundle \
-            "$dest"
-        fi
-      '';
+      activation = {
+        installKakounePluginManager = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          $DRY_RUN_CMD mkdir -p "$XDG_CONFIG_HOME/kak/bundle"
+          dest="$XDG_CONFIG_HOME/kak/bundle/kak-bundle"
+          if [ ! -d "$dest" ]; then
+            $DRY_RUN_CMD \
+              ${lib.getExe pkgs.gitMinimal} clone \
+              https://github.com/jdugan6240/kak-bundle \
+              "$dest"
+          fi
+        '';
+
+        symlinkKakouneAutoloadDir = lib.hm.dag.entryAfter [ "symlinkCustomConfigFiles" ] ''
+          dest="$XDG_CONFIG_HOME/kak/autoload/autoload"
+          if [ ! -e "$dest" ]; then
+            $DRY_RUN_CMD ln -s ~/.nix-profile/share/kak/autoload "$dest"
+          fi
+        '';
+      };
+
       packages =
         let
           k = pkgs.writeShellScriptBin "k" ''
