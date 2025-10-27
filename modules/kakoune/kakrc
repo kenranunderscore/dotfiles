@@ -94,8 +94,12 @@ define-command fzf-project-file %{
 define-command fzf-switch-buffer %{
     evaluate-commands %sh{
         eval "set -- ${kak_quoted_buflist:?}"
-        buffers=$(printf "%s\n" "$@")
-        echo "fzf -input-cmd 'echo \"$buffers\"' -exec buffer"
+        buffers="$kak_bufname"
+        for buf in "$@"; do
+            [ "$buf" = "$kak_bufname" ] && continue
+            buffers="${buffers}\n$buf"
+        done
+        echo "fzf -input-cmd 'echo \"$buffers\"' -exec buffer -fzf-extra-args \"--header-lines 1\""
     }
 }
 map global user b ': fzf-switch-buffer<ret>'
