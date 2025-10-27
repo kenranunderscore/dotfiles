@@ -49,7 +49,7 @@ define-command tmuxv -hidden -params .. %{
     }
 }
 
-define-command fzf -shell-script-completion %{printf "%s\n" -input-cmd -exec} -params .. %{
+define-command fzf -shell-script-completion %{printf "%s\n" -input-cmd -exec -fzf-extra-args} -params .. %{
     evaluate-commands %sh{
         while [ $# -gt 0 ]; do
             case "$1" in
@@ -61,15 +61,19 @@ define-command fzf -shell-script-completion %{printf "%s\n" -input-cmd -exec} -p
                     shift
                     exec_cmd="$1"
                     ;;
+                (-fzf-extra-args)
+                    shift
+                    fzf_extra_args="$1"
+                    ;;
             esac
             shift
         done
 
-        fzf_cmd="fzf --exact --height 100%"
+        fzf_cmd="fzf --exact --height 100% $fzf_extra_args"
         result="/tmp/kak_fzf_${kak_session}_result"
         pid="/tmp/kak_fzf_${kak_session}.pid"
         touch "$pid"
-        cmd="echo \$\$ >$pid; $input_cmd | $fzf_cmd >$result; rm $pid"
+        cmd="export FZF_DEFAULT_OPTS=\"\${FZF_DEFAULT_OPTS/--select-1}\"; echo \$\$ >$pid; $input_cmd | $fzf_cmd >$result; rm $pid"
         echo "$cmd">/tmp/debug
         printf "tmuxv bash -c '%s'\n" "$cmd"
 
