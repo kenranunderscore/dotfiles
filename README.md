@@ -6,8 +6,9 @@ are mostly Linux machines (one WSL2 environment that I need to include at some
 point) I manage this way:
 
 - [atuan](./nixos/atuan): my home PC running NixOS
-- [tuon](./users/void@tuon): Void Linux on my current work laptop
-- [gentoo](./users/kenran@gentoo): Gentoo Linux on my current work laptop (dual boot with Void above)
+- [tortall](./users/kenran@tortall): Void Linux on my new work laptop
+- [tuon](./users/void@tuon): Void Linux on my current/old work laptop
+- [gentoo](./users/kenran@gentoo): Gentoo Linux on my current/old work laptop (dual boot with Void above)
 - [angband](./nixos/angband): a tiny notebook (64 GB of disk space only) I use when
   traveling
 - [paln](./nixos/paln): a tiny [Hetzner Cloud](https://www.hetzner.com/cloud)
