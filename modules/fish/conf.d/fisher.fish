@@ -22,7 +22,7 @@ set packages \
     meaningful-ooo/sponge \
     decors/fish-colored-man
 
-for pkg in packages
+for pkg in $packages
     fisher install $pkg
 end
 
