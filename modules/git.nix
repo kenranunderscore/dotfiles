@@ -19,7 +19,7 @@ in
   config = {
     programs.git = {
       enable = true;
-      package = pkgs.gitAndTools.gitFull;
+      package = pkgs.gitFull;
       includes = [
         {
           condition = "gitdir:~/ag/";

@@ -89,7 +89,7 @@ in
           emmet-language-server
           fd
           feh
-          fennel
+          luaPackages.fennel
           file
           fontconfig.dev
           gh

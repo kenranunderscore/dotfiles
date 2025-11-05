@@ -56,7 +56,7 @@
         [
           k
           pkgs.kakoune
-          pkgs.kak-lsp
+          pkgs.kakoune-lsp
           pkgs.kak-tree-sitter
         ];
     };

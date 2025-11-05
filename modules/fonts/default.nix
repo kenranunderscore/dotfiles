@@ -81,7 +81,7 @@ in
           source-code-pro
           ubuntu-sans-mono
           unifont
-          vistafonts
+          vista-fonts
         ]);
     };
   };
