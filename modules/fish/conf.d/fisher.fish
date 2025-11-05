@@ -19,7 +19,6 @@ echo "fisher: ✓"
 set packages \
     jorgebucaran/fisher \
     jorgebucaran/autopair.fish \
-    meaningful-ooo/sponge \
     decors/fish-colored-man
 
 for pkg in $packages
