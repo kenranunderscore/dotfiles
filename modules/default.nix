@@ -24,6 +24,7 @@
     ./kitty
     ./mercurial.nix
     ./neovim
+    ./niri
     ./nyxt
     ./pass.nix
     ./picom.nix

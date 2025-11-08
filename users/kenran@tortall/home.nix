@@ -28,6 +28,10 @@
       enable = true;
       includePkg = true;
     };
+    niri = {
+      enable = true;
+      configFile = ../../modules/niri/config.kdl;
+    };
     sbcl = {
       enable = true;
       withPackage = false;
