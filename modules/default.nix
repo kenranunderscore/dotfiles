@@ -13,6 +13,7 @@
     ./firefox.nix
     ./fish
     ./fonts
+    ./foot
     ./fzf.nix
     ./ghostty
     ./git.nix

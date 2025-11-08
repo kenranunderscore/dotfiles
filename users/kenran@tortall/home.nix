@@ -14,10 +14,14 @@
       wrapWithNixGL = false;
     };
     alacritty.enable = true;
+    foot = {
+      enable = true;
+      includePkg = false;
+    };
     ghostty.enable = false;
-    kermit.enable = true;
     herbstluftwm.enable = false;
     i3.enable = false;
+    kermit.enable = false;
     kitty = {
       enable = false;
       wrapWithNixGL = true;
