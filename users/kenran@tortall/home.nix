@@ -57,31 +57,36 @@
     };
   };
 
-  home.packages = with pkgs; [
-    ansible
-    cloc
-    clojure
-    dmenu
-    element-desktop
-    fontforge-gtk
-    gcli
-    jfrog-cli
-    keepass
-    keepassxc
-    leiningen
-    neovide
-    nixgl.auto.nixGLDefault
-    nixVersions.latest
-    nixos-rebuild
-    nodejs
-    pavucontrol
-    pijul
-    sieve-connect
-    signal-desktop-bin
-    subversion
-    thunderbird
-    (vivaldi.override { proprietaryCodecs = true; })
-  ];
+  home.packages =
+    let
+      signal = pkgs.signal-desktop;
+    in
+    with pkgs;
+    [
+      ansible
+      cloc
+      clojure
+      dmenu
+      element-desktop
+      fontforge-gtk
+      gcli
+      jfrog-cli
+      keepass
+      keepassxc
+      leiningen
+      neovide
+      nixgl.auto.nixGLDefault
+      nixVersions.latest
+      nixos-rebuild
+      nodejs
+      pavucontrol
+      pijul
+      sieve-connect
+      signal-desktop
+      subversion
+      thunderbird
+      (vivaldi.override { proprietaryCodecs = true; })
+    ];
 
   home.stateVersion = "23.11";
 }
