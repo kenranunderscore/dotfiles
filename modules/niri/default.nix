@@ -11,7 +11,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     symlink-config.files = [
       {
         source = cfg.configFile;
