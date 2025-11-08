@@ -34,6 +34,7 @@
     ./sbcl
     ./shell-utils
     ./ssh.nix
+    ./sway
     ./tmux
     ./vim.nix
     ./wezterm

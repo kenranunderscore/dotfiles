@@ -20,7 +20,6 @@
     };
     ghostty.enable = false;
     herbstluftwm.enable = false;
-    i3.enable = false;
     kermit.enable = false;
     kitty = {
       enable = false;
@@ -39,6 +38,10 @@
     sbcl = {
       enable = true;
       withPackage = false;
+    };
+    sway = {
+      enable = true;
+      configFile = ../../modules/sway/config;
     };
     polybar.enable = false;
     picom.enable = false;
