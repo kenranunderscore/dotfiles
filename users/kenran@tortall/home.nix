@@ -41,7 +41,7 @@
     };
     sway = {
       enable = true;
-      configFile = ../../modules/sway/config;
+      configFile = ./sway/config;
     };
     polybar.enable = false;
     picom.enable = false;
