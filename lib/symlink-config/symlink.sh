@@ -12,8 +12,13 @@ if [ ! -d "$dotfile_dir" ]; then
 fi
 
 if [ -L "$destination" ]; then
-    echo "✓ $destination: nothing to do"
-    exit 0
+    if [ $(readlink "$destination") = "$source" ]; then
+        echo "✓ $destination: nothing to do"
+        exit 0
+    else
+        echo "✗ $destination: clash with existing symlink"
+        exit 1
+    fi
 fi
 
 if [ -e "$destination" ]; then
