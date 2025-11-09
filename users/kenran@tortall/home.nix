@@ -33,7 +33,7 @@
     };
     niri = {
       enable = true;
-      configFile = ../../modules/niri/config.kdl;
+      configFile = ./niri/config.kdl;
     };
     sbcl = {
       enable = true;
