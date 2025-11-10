@@ -13,7 +13,10 @@
       enable = false;
       wrapWithNixGL = false;
     };
-    alacritty.enable = true;
+    alacritty = {
+      enable = true;
+      wrapWithNixGL = true;
+    };
     foot = {
       enable = true;
       includePkg = false;
