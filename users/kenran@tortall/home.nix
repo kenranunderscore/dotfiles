@@ -62,6 +62,10 @@
       enable = false;
       withPackage = false;
     };
+    vivaldi = {
+      enable = true;
+      wrapWithNixGL = true;
+    };
   };
 
   home.packages = with pkgs; [
@@ -87,7 +91,6 @@
     signal-desktop
     subversion
     thunderbird
-    (vivaldi.override { proprietaryCodecs = true; })
   ];
 
   home.stateVersion = "23.11";

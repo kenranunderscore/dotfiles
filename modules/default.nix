@@ -37,6 +37,7 @@
     ./sway
     ./tmux
     ./vim.nix
+    ./vivaldi.nix
     ./wezterm
     ./x-configuration
     ./xdg
