@@ -105,7 +105,7 @@ in
           "https://gitlab.com/" = {
             insteadOf = "gl:";
           };
-          "ssh://git@gitlab.active-group.de:1022/ag/" = {
+          "ssh://git@gitlab.active-group.de/ag/" = {
             insteadOf = "ag:";
           };
           "git@github.com:active-group/" = {
