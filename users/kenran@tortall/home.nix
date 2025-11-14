@@ -90,6 +90,7 @@
     nodejs
     pavucontrol
     pijul
+    prismlauncher
     sieve-connect
     signal-desktop
     subversion
