@@ -17,7 +17,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.brightnessctl ];
+    home.packages = [
+      pkgs.brightnessctl
+      pkgs.swaybg
+    ];
 
     symlink-config.files = [
       {
