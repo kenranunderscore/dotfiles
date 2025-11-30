@@ -329,6 +329,11 @@ window-rule {
     draw-border-with-background false
 }
 
+window-rule {
+    match app-id=r"^foot$"
+    opacity 0.9
+}
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
