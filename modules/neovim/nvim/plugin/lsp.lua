@@ -49,3 +49,6 @@ lsp.enable "pylsp"
 -- Clojure
 lsp.config("clojure_lsp", default_opts)
 lsp.enable "clojure_lsp"
+
+-- Nickel
+lsp.enable "nickel_ls"
