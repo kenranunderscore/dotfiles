@@ -43,6 +43,8 @@ add { source = "actionshrimp/direnv.nvim" }
 
 add { source = "olical/conjure" }
 
+add { source = "nickel-lang/vim-nickel" }
+
 add {
   source = "nvim-treesitter/nvim-treesitter",
   hooks = {
