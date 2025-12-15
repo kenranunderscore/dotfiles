@@ -7,10 +7,10 @@
     programs.ssh = lib.mkIf config.my.ssh.enable {
       enable = true;
       enableDefaultConfig = false;
+      includes = [ "~/ag/bosch-vpn/ssh-config.d/*.conf" ];
       extraConfig = ''
         IdentityFile ~/.ssh/id_ed25519
       '';
-
       matchBlocks = {
         "*" = {
           compression = true;
@@ -53,11 +53,8 @@
           compression = true;
         };
 
-        "trevor" = {
-          host = "trevor";
-          hostname = "trevor-x";
-          user = "root";
-          proxyCommand = "ssh root@leibniz.active-group.de -W %h:%p";
+        "bosch-vpn" = {
+          identityFile = "~/ag/bosch-vpn/docker/fl33rt@rt0vm670";
         };
       };
     };
