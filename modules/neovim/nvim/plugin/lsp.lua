@@ -11,12 +11,12 @@ vim.keymap.set("n", "<leader>ll", function()
   end
 end, { desc = "toggle lsp_lines" })
 
-vim.lsp.inlay_hint.enable(true)
+local lsp = vim.lsp
+lsp.inlay_hint.enable(false)
 vim.keymap.set("n", "<leader>li", function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
+  lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
 end)
 
-local lsp = vim.lsp
 local capabilities = require("mini.completion").get_lsp_capabilities {}
 local default_opts = { capabilities = capabilities, autostart = false }
 
