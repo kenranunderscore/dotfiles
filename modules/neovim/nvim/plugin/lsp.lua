@@ -52,3 +52,6 @@ lsp.enable "clojure_lsp"
 
 -- Nickel
 lsp.enable "nickel_ls"
+
+-- Zig
+lsp.enable "zls"
