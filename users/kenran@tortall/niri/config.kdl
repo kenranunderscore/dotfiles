@@ -128,7 +128,7 @@ output "DP-2" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 32
+    gaps 100
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -331,7 +331,7 @@ window-rule {
 
 window-rule {
     match app-id=r"^foot$"
-    opacity 0.9
+    opacity 0.95
 }
 
 // Work around WezTerm's initial configure bug
