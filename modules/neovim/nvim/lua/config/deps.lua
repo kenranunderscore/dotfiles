@@ -63,10 +63,9 @@ add {
 
 -- Themes
 add { source = "miikanissi/modus-themes.nvim" }
-add { source = "olimorris/onedarkpro.nvim" }
-add { source = "shaunsingh/solarized.nvim" }
-add { source = "eldritch-theme/eldritch.nvim" }
-add { source = "ptdewey/darkearth-nvim" }
-add { source = "bluz71/vim-moonfly-colors" }
+add { source = "blazkowolf/gruber-darker.nvim" }
+add { source = "neanias/everforest-nvim" }
+add { source = "ellisonleao/gruvbox.nvim" }
+add { source = "uhs-robert/oasis.nvim" }
 
 add { source = "folke/noice.nvim", depends = { "MunifTanjim/nui.nvim" } }
