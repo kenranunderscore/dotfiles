@@ -97,3 +97,10 @@ abbr --add gwl git worktree list
 abbr --add p pijul
 abbr --add pd pijul diff --short
 abbr --add pd pijul diff --short
+
+# Zig
+abbr --add z zig
+abbr --add zt zig test
+abbr --add zb zig build
+abbr --add zbr zig build run
+abbr --add zbt zig build test
