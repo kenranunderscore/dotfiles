@@ -25,6 +25,11 @@ function fish_prompt --description 'Write out the prompt'
     set -g __fish_git_prompt_color_invalidstate red
     set -g __fish_git_prompt_color_cleanstate green --bold
 
+    # Virtualenv (any)
+    if set -q MY_VENV
+        printf '%s ' "(venv)"
+    end
+
     set -l color_cwd
     set -l suffix
     if functions -q fish_is_root_user; and fish_is_root_user
