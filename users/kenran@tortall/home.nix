@@ -93,6 +93,7 @@
     pavucontrol
     pijul
     prismlauncher
+    remmina
     sieve-connect
     signal-desktop
     subversion
