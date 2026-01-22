@@ -82,6 +82,7 @@
     jfrog-cli
     keepass
     keepassxc
+    lazygit
     leiningen
     neovide
     nixgl.auto.nixGLDefault
