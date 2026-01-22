@@ -80,6 +80,7 @@
     fontforge-gtk
     gcli
     jfrog-cli
+    jujutsu
     keepass
     keepassxc
     lazygit
