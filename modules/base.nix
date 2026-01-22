@@ -101,7 +101,7 @@ in
           man-pages
           ncdu
           nil
-          nixfmt-rfc-style
+          nixfmt
           nixpkgs-review
           openssl.dev
           parallel
