@@ -184,7 +184,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        active-color "#0ac30a"
 
         // Color of the ring on inactive monitors.
         //
@@ -331,7 +331,7 @@ window-rule {
 
 window-rule {
     match app-id=r"^foot$"
-    opacity 0.95
+    opacity 1.0
 }
 
 // Work around WezTerm's initial configure bug
@@ -389,7 +389,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot"; }
-    Mod+Space hotkey-overlay-title="Run an Application: wmenu" { spawn "wmenu-run" "-f" "JetBrains Mono 16" "-p" "run:" "-l" "10"; }
+    Mod+Space hotkey-overlay-title="Run an Application: wmenu" { spawn "wmenu-run" "-f" "JetBrains Mono 16" "-p" "run:" "-l" "10" "-N" "#121412" "-n" "#0ac30a" "-m" "#121412" "-M" "#078807" "-S" "#078807" "-s" "#070807"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
