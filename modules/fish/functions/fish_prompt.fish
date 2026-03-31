@@ -19,7 +19,7 @@ function fish_prompt --description 'Write out the prompt'
     set -g __fish_git_prompt_char_upstream_behind "<"
     set -g __fish_git_prompt_char_upstream_diverged "<>"
 
-    set -g __fish_git_prompt_color_branch green --bold
+    set -g __fish_git_prompt_color_branch magenta
     set -g __fish_git_prompt_color_dirtystate blue
     set -g __fish_git_prompt_color_stagedstate yellow
     set -g __fish_git_prompt_color_invalidstate red
@@ -40,7 +40,7 @@ function fish_prompt --description 'Write out the prompt'
         end
         set suffix '#'
     else
-        set color_cwd magenta
+        set color_cwd green --bold
         set suffix '$'
     end
   
