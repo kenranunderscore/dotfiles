@@ -53,7 +53,7 @@
       primaryAccount = "mailbox";
     };
     fonts.enable = true;
-    doom.enable = true;
+    doom.enable = false;
     emacs.enable = false;
     nyxt.enable = false;
     git.email = "johannes.maier@mailbox.org";
