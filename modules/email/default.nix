@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   types = lib.types;
@@ -54,8 +59,8 @@ in
               "syslog" = "LOG_USER";
             };
           };
-          notmuch.enable = true;
-          mu.enable = false;
+          notmuch.enable = false;
+          mu.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@mailbox.org";
           imap = {
@@ -90,8 +95,8 @@ in
               "syslog" = "LOG_USER";
             };
           };
-          notmuch.enable = true;
-          mu.enable = false;
+          notmuch.enable = false;
+          mu.enable = true;
           inherit realName;
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
@@ -110,12 +115,14 @@ in
       };
     };
 
+    home.packages = [ pkgs.mu.mu4e ];
+
     programs = {
       mbsync.enable = true;
       msmtp.enable = true;
-      mu.enable = false;
+      mu.enable = true;
       notmuch = {
-        enable = true;
+        enable = false;
         hooks.preNew = "mbsync -a";
         maildir.synchronizeFlags = true;
         new.tags = [ ];
