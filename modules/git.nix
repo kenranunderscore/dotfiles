@@ -99,6 +99,9 @@ in
           "git@github.com:kenranunderscore/" = {
             insteadOf = "gh:/";
           };
+          "ssh://git@codeberg.org/kenranunderscore/" = {
+            insteadOf = "cb:/";
+          };
           "git@github.com:" = {
             insteadOf = "ghssh:";
           };
