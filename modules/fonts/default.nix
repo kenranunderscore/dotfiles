@@ -51,7 +51,7 @@ in
           ibm-plex
           inconsolata
           iosevka-bin
-          iosevka-comfy.comfy
+          aporetic-bin
           jetbrains-mono
           julia-mono
           maple-mono.truetype
@@ -59,6 +59,7 @@ in
           paratype-pt-mono
           roboto-mono
           source-code-pro
+          terminus_font
           ubuntu-sans-mono
           unifont
           vista-fonts
