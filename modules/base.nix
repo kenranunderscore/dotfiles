@@ -88,7 +88,6 @@ in
           curl
           emmet-language-server
           fd
-          feh
           luaPackages.fennel
           file
           fontconfig.dev
@@ -97,7 +96,6 @@ in
           htop
           jq
           just
-          kdePackages.konsole
           man-pages
           ncdu
           nil
