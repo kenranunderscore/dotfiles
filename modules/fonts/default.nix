@@ -40,6 +40,7 @@ in
           cantarell-fonts
           cascadia-code
           comic-mono
+          nerd-fonts.recursive-mono
           corefonts
           courier-prime
           geist-font
