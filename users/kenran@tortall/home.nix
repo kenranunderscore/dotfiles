@@ -28,8 +28,8 @@
       enable = false;
       wrapWithNixGL = true;
     };
-    rofi.enable = true;
-    kakoune.enable = true;
+    rofi.enable = false;
+    kakoune.enable = false;
     neovim = {
       enable = true;
       includePkg = true;
@@ -85,7 +85,6 @@
     keepassxc
     lazygit
     leiningen
-    neovide
     nixgl.auto.nixGLDefault
     nixVersions.latest
     nixos-rebuild
