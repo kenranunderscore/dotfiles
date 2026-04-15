@@ -78,8 +78,17 @@
     let
       inherit (pkgs.lib) getExe;
       name = drv.meta.mainProgram or drv.pname;
+      exe = getExe drv;
+      wrapper = name + "-nixgl-wrapper";
     in
-    pkgs.writeShellScriptBin name ''
-      exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${getExe drv} $@
-    '';
+    pkgs.symlinkJoin {
+      inherit name;
+      paths = [
+        drv
+        (pkgs.writeShellScriptBin wrapper ''
+          exec ${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${exe} $@
+        '')
+      ];
+      postBuild = "mv $out/bin/${wrapper} $out/bin/${baseNameOf exe}";
+    };
 }
