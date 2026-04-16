@@ -36,7 +36,7 @@ in
     };
 
     my = {
-      firefox.enable = true;
+      firefox.enable = false;
       bat.enable = true;
       direnv.enable = true;
       email.enable = true;
@@ -48,7 +48,7 @@ in
       };
       ssh.enable = true;
       tmux.enable = true;
-      zsh.enable = true;
+      zsh.enable = false;
     };
 
     fonts.fontconfig.enable = lib.mkForce true;
