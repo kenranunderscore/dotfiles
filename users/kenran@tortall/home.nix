@@ -66,7 +66,7 @@
       withPackage = false;
     };
     vivaldi = {
-      enable = true;
+      enable = false;
       wrapWithNixGL = true;
     };
   };
