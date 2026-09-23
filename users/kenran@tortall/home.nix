@@ -80,6 +80,7 @@
     element-desktop
     fontforge-gtk
     gcli
+    guile
     jfrog-cli
     jujutsu
     keepass
