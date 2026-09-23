@@ -119,6 +119,7 @@ in
           usbutils
           watchexec
           wget
+          wl-clipboard
         ];
 
         activation = {
