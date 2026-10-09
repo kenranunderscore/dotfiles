@@ -98,22 +98,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1790238896,
-        "narHash": "sha256-ym4BG18Pu2awiJIehla1Lo9xiB2QYRcCzW3SB74gEBY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "34ca302a9572963c02e385c056be37c85ff51b77",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "privateConfig": {
       "flake": false,
       "locked": {
@@ -142,8 +126,7 @@
         "zsh-autopair": "zsh-autopair",
         "zsh-autosuggestions": "zsh-autosuggestions",
         "zsh-history-substring-search": "zsh-history-substring-search",
-        "zsh-syntax-highlighting": "zsh-syntax-highlighting",
-        "zwift": "zwift"
+        "zsh-syntax-highlighting": "zsh-syntax-highlighting"
       }
     },
     "sf-mono": {
@@ -238,24 +221,6 @@
       "original": {
         "owner": "zsh-users",
         "repo": "zsh-syntax-highlighting",
-        "type": "github"
-      }
-    },
-    "zwift": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1790594019,
-        "narHash": "sha256-Tr7TRjNpvAeuZ/ZkfIHIS9Fh5xLnIFLsfbbUMcxJgdg=",
-        "owner": "netbrain",
-        "repo": "zwift",
-        "rev": "f130623b0c94e50e99813c757c151e9fa58ab749",
-        "type": "github"
-      },
-      "original": {
-        "owner": "netbrain",
-        "repo": "zwift",
         "type": "github"
       }
     }

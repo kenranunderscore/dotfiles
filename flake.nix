@@ -40,7 +40,6 @@
       url = "github:supercomputra/sf-mono-font";
       flake = false;
     };
-    zwift.url = "github:netbrain/zwift";
   };
 
   outputs =

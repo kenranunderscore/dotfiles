@@ -99,8 +99,6 @@
     signal-desktop
     subversion
     thunderbird
-
-    inputs.zwift.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.stateVersion = "23.11";
