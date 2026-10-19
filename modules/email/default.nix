@@ -101,15 +101,16 @@ in
           passwordCommand = "pass show email/johannes.maier@active-group.de";
           imap = {
             host = "mail.active-group.de";
-            port = null;
+            port = 993;
             tls = {
               enable = true;
-              useStartTls = true;
+              useStartTls = false;
             };
           };
           smtp = {
             host = "mail.active-group.de";
-            port = null;
+            tls.enable = true;
+            port = 465;
           };
         };
       };
