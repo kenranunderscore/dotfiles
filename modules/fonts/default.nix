@@ -41,6 +41,7 @@ in
           cascadia-code
           comic-mono
           nerd-fonts.recursive-mono
+          nerd-fonts.jetbrains-mono
           corefonts
           courier-prime
           geist-font
