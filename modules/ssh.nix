@@ -11,50 +11,45 @@
       extraConfig = ''
         IdentityFile ~/.ssh/id_ed25519
       '';
-      matchBlocks = {
+      settings = {
         "*" = {
-          compression = true;
-          addKeysToAgent = "yes";
+          Compression = true;
+          AddKeysToAgent = "yes";
         };
 
         "sync" = {
-          host = "sync";
-          hostname = "157.90.159.76";
-          user = "kenran";
-          compression = true;
+          HostName = "157.90.159.76";
+          User = "kenran";
+          Compression = true;
         };
 
         "cxc" = {
-          host = "cxc";
-          hostname = "crawl.xtahua.com";
-          user = "crawl";
-          compression = true;
+          HostName = "crawl.xtahua.com";
+          User = "crawl";
+          Compression = true;
         };
 
         "cdo" = {
-          host = "cdo";
-          hostname = "crawl.develz.org";
-          user = "crawl";
-          compression = true;
+          HostName = "crawl.develz.org";
+          User = "crawl";
+          Compression = true;
         };
 
         "cao" = {
-          host = "cao";
-          hostname = "crawl.akrasiac.org";
-          user = "joshua";
-          compression = true;
+          HostName = "crawl.akrasiac.org";
+          User = "joshua";
+          Compression = true;
         };
 
         "cue" = {
-          host = "cue";
-          hostname = "underhound.eu";
-          port = 23;
-          user = "terminal";
-          compression = true;
+          HostName = "underhound.eu";
+          Port = 23;
+          User = "terminal";
+          Compression = true;
         };
 
         "bosch-vpn" = {
-          identityFile = "~/ag/bosch-vpn/docker/fl33rt@rt0vm670";
+          IdentityFile = "~/ag/bosch-vpn/docker/fl33rt@rt0vm670";
         };
       };
     };
