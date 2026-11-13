@@ -14,7 +14,7 @@
       wrapWithNixGL = false;
     };
     alacritty = {
-      enable = true;
+      enable = false;
       wrapWithNixGL = true;
     };
     foot = {
