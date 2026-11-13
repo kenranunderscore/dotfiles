@@ -11,10 +11,7 @@
       url = "git+ssh://git@github.com/kenranunderscore/private-config?ref=master";
       flake = false;
     };
-    nixgl = {
-      url = "github:nix-community/nixgl";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixgl.url = "github:nix-community/nixgl";
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
