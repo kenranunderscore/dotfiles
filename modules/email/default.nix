@@ -123,10 +123,12 @@ in
       msmtp.enable = true;
       mu.enable = true;
       notmuch = {
+        settings = {
+          new.tags = [ ];
+          maildir.synchronizeFlags = true;
+        };
         enable = false;
         hooks.preNew = "mbsync -a";
-        maildir.synchronizeFlags = true;
-        new.tags = [ ];
       };
     };
   };
