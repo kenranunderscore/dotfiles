@@ -72,7 +72,6 @@
   };
 
   home.packages = with pkgs; [
-    (pkgs.angband.override { enableSdl2 = true; })
     ansible
     cloc
     clojure
