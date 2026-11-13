@@ -24,7 +24,10 @@ in
         {
           condition = "gitdir:~/ag/";
           contents = {
-            user.email = "johannes.maier@active-group.de";
+            user = {
+              name = "Johannes Maier";
+              email = "johannes.maier@active-group.de";
+            };
           };
         }
       ];
@@ -60,7 +63,7 @@ in
       };
       settings = {
         user = {
-          name = "Johannes Maier";
+          name = "kenranunderscore";
           inherit (cfg) email;
         };
         alias = {
